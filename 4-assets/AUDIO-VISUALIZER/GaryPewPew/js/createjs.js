@@ -1,6 +1,5 @@
 this.createjs = this.createjs || {};
 
-
 //##############################################################################
 // extend.js
 //##############################################################################
@@ -27,14 +26,14 @@ this.createjs = this.createjs || {};
  * @param {Function} superclass The superclass to extend.
  * @return {Function} Returns the subclass's new prototype.
  */
-createjs.extend = function ( subclass, superclass ) {
+createjs.extend = function (subclass, superclass) {
   "use strict";
 
   function o() {
     this.constructor = subclass;
   }
   o.prototype = superclass.prototype;
-  return ( subclass.prototype = new o() );
+  return (subclass.prototype = new o());
 };
 
 //##############################################################################
@@ -82,16 +81,17 @@ createjs.extend = function ( subclass, superclass ) {
  * @param {String} prefix The prefix to add to the promoted method names. Usually the name of the superclass.
  * @return {Function} Returns the subclass.
  */
-createjs.promote = function ( subclass, prefix ) {
+createjs.promote = function (subclass, prefix) {
   "use strict";
 
   var subP = subclass.prototype,
-    supP = ( Object.getPrototypeOf && Object.getPrototypeOf( subP ) ) || subP.__proto__;
-  if ( supP ) {
-    subP[ ( prefix += "_" ) + "constructor" ] = supP.constructor; // constructor is not always innumerable
-    for ( var n in supP ) {
-      if ( subP.hasOwnProperty( n ) && ( typeof supP[ n ] == "function" ) ) {
-        subP[ prefix + n ] = supP[ n ];
+    supP =
+      (Object.getPrototypeOf && Object.getPrototypeOf(subP)) || subP.__proto__;
+  if (supP) {
+    subP[(prefix += "_") + "constructor"] = supP.constructor; // constructor is not always innumerable
+    for (var n in supP) {
+      if (subP.hasOwnProperty(n) && typeof supP[n] == "function") {
+        subP[prefix + n] = supP[n];
       }
     }
   }
@@ -117,11 +117,11 @@ createjs.promote = function ( subclass, prefix ) {
  * @param searchElement Element to find in array.
  * @return {Number} The first index of searchElement in array.
  */
-createjs.indexOf = function ( array, searchElement ) {
+createjs.indexOf = function (array, searchElement) {
   "use strict";
 
-  for ( var i = 0, l = array.length; i < l; i++ ) {
-    if ( searchElement === array[ i ] ) {
+  for (var i = 0, l = array.length; i < l; i++) {
+    if (searchElement === array[i]) {
       return i;
     }
   }
@@ -132,9 +132,8 @@ createjs.indexOf = function ( array, searchElement ) {
 // UID.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -147,7 +146,6 @@ createjs.indexOf = function ( array, searchElement ) {
     throw "UID cannot be instantiated";
   }
 
-
   // private static properties:
   /**
    * @property _nextID
@@ -155,7 +153,6 @@ createjs.indexOf = function ( array, searchElement ) {
    * @protected
    **/
   UID._nextID = 0;
-
 
   // public static methods:
   /**
@@ -168,9 +165,8 @@ createjs.indexOf = function ( array, searchElement ) {
     return UID._nextID++;
   };
 
-
   createjs.UID = UID;
-}() );
+})();
 
 //##############################################################################
 // deprecate.js
@@ -203,27 +199,28 @@ createjs.indexOf = function ( array, searchElement ) {
  * @return {Function} If a fallbackMethod is supplied, returns a closure that will call the fallback method after
  * logging the warning in the console.
  */
-createjs.deprecate = function ( fallbackMethod, name ) {
+createjs.deprecate = function (fallbackMethod, name) {
   "use strict";
   return function () {
-    var msg = "Deprecated property or method '" + name + "'. See docs for info.";
-    console && ( console.warn ? console.warn( msg ) : console.log( msg ) );
-    return fallbackMethod && fallbackMethod.apply( this, arguments );
-  }
+    var msg =
+      "Deprecated property or method '" + name + "'. See docs for info.";
+    console && (console.warn ? console.warn(msg) : console.log(msg));
+    return fallbackMethod && fallbackMethod.apply(this, arguments);
+  };
 };
 
 //##############################################################################
 // Event.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   // constructor:
   /**
    * Contains properties and methods shared by all events for use with
    * {{#crossLink "EventDispatcher"}}{{/crossLink}}.
-   * 
+   *
    * Note that Event objects are often reused, so you should never
    * rely on an event object's state outside of the call stack it was received in.
    * @class Event
@@ -232,9 +229,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Boolean} cancelable Indicates whether the default behaviour of this event can be cancelled.
    * @constructor
    **/
-  function Event( type, bubbles, cancelable ) {
-
-
+  function Event(type, bubbles, cancelable) {
     // public properties:
     /**
      * The type of event.
@@ -303,7 +298,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @default 0
      * @readonly
      */
-    this.timeStamp = ( new Date() ).getTime();
+    this.timeStamp = new Date().getTime();
 
     /**
      * Indicates if {{#crossLink "Event/preventDefault"}}{{/crossLink}} has been called
@@ -378,12 +373,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 
   /**
    * Causes the active listener to be removed via removeEventListener();
-   * 
+   *
    * 		myBtn.addEventListener("click", function(evt) {
    * 			// do stuff...
    * 			evt.remove(); // removes this listener.
    * 		});
-   * 
+   *
    * @method remove
    **/
   p.remove = function () {
@@ -396,7 +391,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Event} a clone of the Event instance.
    **/
   p.clone = function () {
-    return new Event( this.type, this.bubbles, this.cancelable );
+    return new Event(this.type, this.bubbles, this.cancelable);
   };
 
   /**
@@ -407,9 +402,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Event} Returns the instance the method is called on (useful for chaining calls.)
    * @chainable
    */
-  p.set = function ( props ) {
-    for ( var n in props ) {
-      this[ n ] = props[ n ];
+  p.set = function (props) {
+    for (var n in props) {
+      this[n] = props[n];
     }
     return this;
   };
@@ -424,15 +419,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   };
 
   createjs.Event = Event;
-}() );
+})();
 
 //##############################################################################
 // EventDispatcher.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -440,18 +434,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    *
    * You can either extend EventDispatcher or mix its methods into an existing prototype or instance by using the
    * EventDispatcher {{#crossLink "EventDispatcher/initialize"}}{{/crossLink}} method.
-   * 
+   *
    * Together with the CreateJS Event class, EventDispatcher provides an extended event model that is based on the
    * DOM Level 2 event model, including addEventListener, removeEventListener, and dispatchEvent. It supports
    * bubbling / capture, preventDefault, stopPropagation, stopImmediatePropagation, and handleEvent.
-   * 
+   *
    * EventDispatcher also exposes a {{#crossLink "EventDispatcher/on"}}{{/crossLink}} method, which makes it easier
-   * to create scoped listeners, listeners that only run once, and listeners with associated arbitrary data. The 
+   * to create scoped listeners, listeners that only run once, and listeners with associated arbitrary data. The
    * {{#crossLink "EventDispatcher/off"}}{{/crossLink}} method is merely an alias to
    * {{#crossLink "EventDispatcher/removeEventListener"}}{{/crossLink}}.
-   * 
+   *
    * Another addition to the DOM Level 2 model is the {{#crossLink "EventDispatcher/removeAllEventListeners"}}{{/crossLink}}
-   * method, which can be used to listeners for all events, or listeners for a specific event. The Event object also 
+   * method, which can be used to listeners for all events, or listeners for a specific event. The Event object also
    * includes a {{#crossLink "Event/remove"}}{{/crossLink}} method which removes the active listener.
    *
    * <h4>Example</h4>
@@ -473,25 +467,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    *      instance.addEventListener("click", function(event) {
    *          console.log(instance == this); // false, scope is ambiguous.
    *      });
-   *      
+   *
    *      instance.on("click", function(event) {
    *          console.log(instance == this); // true, "on" uses dispatcher scope by default.
    *      });
-   * 
+   *
    * If you want to use addEventListener instead, you may want to use function.bind() or a similar proxy to manage
    * scope.
    *
    * <b>Browser support</b>
    * The event model in CreateJS can be used separately from the suite in any project, however the inheritance model
    * requires modern browsers (IE9+).
-   *      
+   *
    *
    * @class EventDispatcher
    * @constructor
    **/
   function EventDispatcher() {
-
-
     // private properties:
     /**
      * @protected
@@ -512,16 +504,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   // static public methods:
   /**
    * Static initializer to mix EventDispatcher methods into a target object or prototype.
-   * 
+   *
    * 		EventDispatcher.initialize(MyClass.prototype); // add to the prototype of the class
    * 		EventDispatcher.initialize(myObject); // add to a specific instance
-   * 
+   *
    * @method initialize
    * @static
    * @param {Object} target The target object to inject EventDispatcher methods into. This can be an instance or a
    * prototype.
    **/
-  EventDispatcher.initialize = function ( target ) {
+  EventDispatcher.initialize = function (target) {
     target.addEventListener = p.addEventListener;
     target.on = p.on;
     target.removeEventListener = target.off = p.removeEventListener;
@@ -531,7 +523,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     target._dispatchEvent = p._dispatchEvent;
     target.willTrigger = p.willTrigger;
   };
-
 
   // public methods:
   /**
@@ -552,22 +543,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Boolean} [useCapture] For events that bubble, indicates whether to listen for the event in the capture or bubbling/target phase.
    * @return {Function | Object} Returns the listener for chaining or assignment.
    **/
-  p.addEventListener = function ( type, listener, useCapture ) {
+  p.addEventListener = function (type, listener, useCapture) {
     var listeners;
-    if ( useCapture ) {
+    if (useCapture) {
       listeners = this._captureListeners = this._captureListeners || {};
     } else {
       listeners = this._listeners = this._listeners || {};
     }
-    var arr = listeners[ type ];
-    if ( arr ) {
-      this.removeEventListener( type, listener, useCapture );
+    var arr = listeners[type];
+    if (arr) {
+      this.removeEventListener(type, listener, useCapture);
     }
-    arr = listeners[ type ]; // remove may have deleted the array
-    if ( !arr ) {
-      listeners[ type ] = [ listener ];
+    arr = listeners[type]; // remove may have deleted the array
+    if (!arr) {
+      listeners[type] = [listener];
     } else {
-      arr.push( listener );
+      arr.push(listener);
     }
     return listener;
   };
@@ -575,16 +566,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   /**
    * A shortcut method for using addEventListener that makes it easier to specify an execution scope, have a listener
    * only run once, associate arbitrary data with the listener, and remove the listener.
-   * 
+   *
    * This method works by creating an anonymous wrapper function and subscribing it with addEventListener.
    * The wrapper function is returned for use with `removeEventListener` (or `off`).
-   * 
+   *
    * <b>IMPORTANT:</b> To remove a listener added with `on`, you must pass in the returned wrapper function as the listener, or use
    * {{#crossLink "Event/remove"}}{{/crossLink}}. Likewise, each time you call `on` a NEW wrapper function is subscribed, so multiple calls
    * to `on` with the same params will create multiple listeners.
-   * 
+   *
    * <h4>Example</h4>
-   * 
+   *
    * 		var listener = myBtn.on("click", handleClick, null, false, {count:3});
    * 		function handleClick(evt, data) {
    * 			data.count -= 1;
@@ -595,7 +586,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * 				// alternately: evt.remove();
    * 			}
    * 		}
-   * 
+   *
    * @method on
    * @param {String} type The string type of the event.
    * @param {Function | Object} listener An object with a handleEvent method, or a function that will be called when
@@ -606,16 +597,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Boolean} [useCapture=false] For events that bubble, indicates whether to listen for the event in the capture or bubbling/target phase.
    * @return {Function} Returns the anonymous function that was created and assigned as the listener. This is needed to remove the listener later using .removeEventListener.
    **/
-  p.on = function ( type, listener, scope, once, data, useCapture ) {
-    if ( listener.handleEvent ) {
+  p.on = function (type, listener, scope, once, data, useCapture) {
+    if (listener.handleEvent) {
       scope = scope || listener;
       listener = listener.handleEvent;
     }
     scope = scope || this;
-    return this.addEventListener( type, function ( evt ) {
-      listener.call( scope, evt, data );
-      once && evt.remove();
-    }, useCapture );
+    return this.addEventListener(
+      type,
+      function (evt) {
+        listener.call(scope, evt, data);
+        once && evt.remove();
+      },
+      useCapture
+    );
   };
 
   /**
@@ -634,22 +629,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Function | Object} listener The listener function or object.
    * @param {Boolean} [useCapture] For events that bubble, indicates whether to listen for the event in the capture or bubbling/target phase.
    **/
-  p.removeEventListener = function ( type, listener, useCapture ) {
+  p.removeEventListener = function (type, listener, useCapture) {
     var listeners = useCapture ? this._captureListeners : this._listeners;
-    if ( !listeners ) {
+    if (!listeners) {
       return;
     }
-    var arr = listeners[ type ];
-    if ( !arr ) {
+    var arr = listeners[type];
+    if (!arr) {
       return;
     }
-    for ( var i = 0, l = arr.length; i < l; i++ ) {
-      if ( arr[ i ] == listener ) {
-        if ( l == 1 ) {
-          delete( listeners[ type ] );
+    for (var i = 0, l = arr.length; i < l; i++) {
+      if (arr[i] == listener) {
+        if (l == 1) {
+          delete listeners[type];
         } // allows for faster checks.
         else {
-          arr.splice( i, 1 );
+          arr.splice(i, 1);
         }
         break;
       }
@@ -659,8 +654,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   /**
    * A shortcut to the removeEventListener method, with the same parameters and return value. This is a companion to the
    * .on method.
-   * 
-   * <b>IMPORTANT:</b> To remove a listener added with `on`, you must pass in the returned wrapper function as the listener. See 
+   *
+   * <b>IMPORTANT:</b> To remove a listener added with `on`, you must pass in the returned wrapper function as the listener. See
    * {{#crossLink "EventDispatcher/on"}}{{/crossLink}} for an example.
    *
    * @method off
@@ -684,15 +679,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method removeAllEventListeners
    * @param {String} [type] The string type of the event. If omitted, all listeners for all types will be removed.
    **/
-  p.removeAllEventListeners = function ( type ) {
-    if ( !type ) {
+  p.removeAllEventListeners = function (type) {
+    if (!type) {
       this._listeners = this._captureListeners = null;
     } else {
-      if ( this._listeners ) {
-        delete( this._listeners[ type ] );
+      if (this._listeners) {
+        delete this._listeners[type];
       }
-      if ( this._captureListeners ) {
-        delete( this._captureListeners[ type ] );
+      if (this._captureListeners) {
+        delete this._captureListeners[type];
       }
     }
   };
@@ -718,15 +713,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Boolean} [cancelable] Specifies the `cancelable` value when a string was passed to eventObj.
    * @return {Boolean} Returns false if `preventDefault()` was called on a cancelable event, true otherwise.
    **/
-  p.dispatchEvent = function ( eventObj, bubbles, cancelable ) {
-    if ( typeof eventObj == "string" ) {
+  p.dispatchEvent = function (eventObj, bubbles, cancelable) {
+    if (typeof eventObj == "string") {
       // skip everything if there's no listeners and it doesn't bubble:
       var listeners = this._listeners;
-      if ( !bubbles && ( !listeners || !listeners[ eventObj ] ) ) {
+      if (!bubbles && (!listeners || !listeners[eventObj])) {
         return true;
       }
-      eventObj = new createjs.Event( eventObj, bubbles, cancelable );
-    } else if ( eventObj.target && eventObj.clone ) {
+      eventObj = new createjs.Event(eventObj, bubbles, cancelable);
+    } else if (eventObj.target && eventObj.clone) {
       // redispatching an active event object, so clone it:
       eventObj = eventObj.clone();
     }
@@ -734,25 +729,26 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     // TODO: it would be nice to eliminate this. Maybe in favour of evtObj instanceof Event? Or !!evtObj.createEvent
     try {
       eventObj.target = this;
-    } catch ( e ) {} // try/catch allows redispatching of native events
+    } catch (e) {} // try/catch allows redispatching of native events
 
-    if ( !eventObj.bubbles || !this.parent ) {
-      this._dispatchEvent( eventObj, 2 );
+    if (!eventObj.bubbles || !this.parent) {
+      this._dispatchEvent(eventObj, 2);
     } else {
       var top = this,
-        list = [ top ];
-      while ( top.parent ) {
-        list.push( top = top.parent );
+        list = [top];
+      while (top.parent) {
+        list.push((top = top.parent));
       }
-      var i, l = list.length;
+      var i,
+        l = list.length;
 
       // capture & atTarget
-      for ( i = l - 1; i >= 0 && !eventObj.propagationStopped; i-- ) {
-        list[ i ]._dispatchEvent( eventObj, 1 + ( i == 0 ) );
+      for (i = l - 1; i >= 0 && !eventObj.propagationStopped; i--) {
+        list[i]._dispatchEvent(eventObj, 1 + (i == 0));
       }
       // bubbling
-      for ( i = 1; i < l && !eventObj.propagationStopped; i++ ) {
-        list[ i ]._dispatchEvent( eventObj, 3 );
+      for (i = 1; i < l && !eventObj.propagationStopped; i++) {
+        list[i]._dispatchEvent(eventObj, 3);
       }
     }
     return !eventObj.defaultPrevented;
@@ -764,27 +760,30 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String} type The string type of the event.
    * @return {Boolean} Returns true if there is at least one listener for the specified event.
    **/
-  p.hasEventListener = function ( type ) {
+  p.hasEventListener = function (type) {
     var listeners = this._listeners,
       captureListeners = this._captureListeners;
-    return !!( ( listeners && listeners[ type ] ) || ( captureListeners && captureListeners[ type ] ) );
+    return !!(
+      (listeners && listeners[type]) ||
+      (captureListeners && captureListeners[type])
+    );
   };
 
   /**
    * Indicates whether there is at least one listener for the specified event type on this object or any of its
    * ancestors (parent, parent's parent, etc). A return value of true indicates that if a bubbling event of the
    * specified type is dispatched from this object, it will trigger at least one listener.
-   * 
+   *
    * This is similar to {{#crossLink "EventDispatcher/hasEventListener"}}{{/crossLink}}, but it searches the entire
    * event flow for a listener, not just this object.
    * @method willTrigger
    * @param {String} type The string type of the event.
    * @return {Boolean} Returns `true` if there is at least one listener for the specified event.
    **/
-  p.willTrigger = function ( type ) {
+  p.willTrigger = function (type) {
     var o = this;
-    while ( o ) {
-      if ( o.hasEventListener( type ) ) {
+    while (o) {
+      if (o.hasEventListener(type)) {
         return true;
       }
       o = o.parent;
@@ -800,7 +799,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return "[EventDispatcher]";
   };
 
-
   // private methods:
   /**
    * @method _dispatchEvent
@@ -808,47 +806,52 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} eventPhase
    * @protected
    **/
-  p._dispatchEvent = function ( eventObj, eventPhase ) {
-    var l, arr, listeners = ( eventPhase <= 2 ) ? this._captureListeners : this._listeners;
-    if ( eventObj && listeners && ( arr = listeners[ eventObj.type ] ) && ( l = arr.length ) ) {
+  p._dispatchEvent = function (eventObj, eventPhase) {
+    var l,
+      arr,
+      listeners = eventPhase <= 2 ? this._captureListeners : this._listeners;
+    if (
+      eventObj &&
+      listeners &&
+      (arr = listeners[eventObj.type]) &&
+      (l = arr.length)
+    ) {
       try {
         eventObj.currentTarget = this;
-      } catch ( e ) {}
+      } catch (e) {}
       try {
         eventObj.eventPhase = eventPhase | 0;
-      } catch ( e ) {}
+      } catch (e) {}
       eventObj.removed = false;
 
       arr = arr.slice(); // to avoid issues with items being removed or added during the dispatch
-      for ( var i = 0; i < l && !eventObj.immediatePropagationStopped; i++ ) {
-        var o = arr[ i ];
-        if ( o.handleEvent ) {
-          o.handleEvent( eventObj );
+      for (var i = 0; i < l && !eventObj.immediatePropagationStopped; i++) {
+        var o = arr[i];
+        if (o.handleEvent) {
+          o.handleEvent(eventObj);
         } else {
-          o( eventObj );
+          o(eventObj);
         }
-        if ( eventObj.removed ) {
-          this.off( eventObj.type, o, eventPhase == 1 );
+        if (eventObj.removed) {
+          this.off(eventObj.type, o, eventPhase == 1);
           eventObj.removed = false;
         }
       }
     }
-    if ( eventPhase === 2 ) {
-      this._dispatchEvent( eventObj, 2.1 );
+    if (eventPhase === 2) {
+      this._dispatchEvent(eventObj, 2.1);
     }
   };
 
-
   createjs.EventDispatcher = EventDispatcher;
-}() );
+})();
 
 //##############################################################################
 // Ticker.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -876,7 +879,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   function Ticker() {
     throw "Ticker cannot be instantiated.";
   }
-
 
   // constants:
   /**
@@ -928,7 +930,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
   Ticker.TIMEOUT = "timeout";
 
-
   // static events:
   /**
    * Dispatched each tick. The event will be dispatched to each listener even when the Ticker has been paused using
@@ -952,7 +953,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @since 0.6.0
    */
 
-
   // public static properties:
   /**
    * Specifies the timing api (setTimeout or requestAnimationFrame) and mode to use. See
@@ -970,10 +970,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * based animations and systems to prevent issues caused by large time gaps caused by background tabs, system sleep,
    * alert dialogs, or other blocking routines. Double the expected frame duration is often an effective value
    * (ex. maxDelta=50 when running at 40fps).
-   * 
+   *
    * This does not impact any other values (ex. time, runTime, etc), so you may experience issues if you enable maxDelta
    * when using both delta and other values.
-   * 
+   *
    * If 0, there is no maximum.
    * @property maxDelta
    * @static
@@ -1005,7 +1005,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
   Ticker.paused = false;
 
-
   // mix-ins:
   // EventDispatcher methods:
   Ticker.removeEventListener = null;
@@ -1013,13 +1012,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   Ticker.dispatchEvent = null;
   Ticker.hasEventListener = null;
   Ticker._listeners = null;
-  createjs.EventDispatcher.initialize( Ticker ); // inject EventDispatcher methods.
+  createjs.EventDispatcher.initialize(Ticker); // inject EventDispatcher methods.
   Ticker._addEventListener = Ticker.addEventListener;
   Ticker.addEventListener = function () {
     !Ticker._inited && Ticker.init();
-    return Ticker._addEventListener.apply( Ticker, arguments );
+    return Ticker._addEventListener.apply(Ticker, arguments);
   };
-
 
   // private static properties:
   /**
@@ -1115,7 +1113,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
   Ticker._raf = true;
 
-
   // static getter / setters:
   /**
    * Use the {{#crossLink "Ticker/interval:property"}}{{/crossLink}} property instead.
@@ -1124,15 +1121,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @param {Number} interval
    **/
-  Ticker._setInterval = function ( interval ) {
+  Ticker._setInterval = function (interval) {
     Ticker._interval = interval;
-    if ( !Ticker._inited ) {
+    if (!Ticker._inited) {
       return;
     }
     Ticker._setupTick();
   };
   // Ticker.setInterval is @deprecated. Remove for 1.1+
-  Ticker.setInterval = createjs.deprecate( Ticker._setInterval, "Ticker.setInterval" );
+  Ticker.setInterval = createjs.deprecate(
+    Ticker._setInterval,
+    "Ticker.setInterval"
+  );
 
   /**
    * Use the {{#crossLink "Ticker/interval:property"}}{{/crossLink}} property instead.
@@ -1145,7 +1145,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return Ticker._interval;
   };
   // Ticker.getInterval is @deprecated. Remove for 1.1+
-  Ticker.getInterval = createjs.deprecate( Ticker._getInterval, "Ticker.getInterval" );
+  Ticker.getInterval = createjs.deprecate(
+    Ticker._getInterval,
+    "Ticker.getInterval"
+  );
 
   /**
    * Use the {{#crossLink "Ticker/framerate:property"}}{{/crossLink}} property instead.
@@ -1154,11 +1157,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @param {Number} value
    **/
-  Ticker._setFPS = function ( value ) {
-    Ticker._setInterval( 1000 / value );
+  Ticker._setFPS = function (value) {
+    Ticker._setInterval(1000 / value);
   };
   // Ticker.setFPS is @deprecated. Remove for 1.1+
-  Ticker.setFPS = createjs.deprecate( Ticker._setFPS, "Ticker.setFPS" );
+  Ticker.setFPS = createjs.deprecate(Ticker._setFPS, "Ticker.setFPS");
 
   /**
    * Use the {{#crossLink "Ticker/framerate:property"}}{{/crossLink}} property instead.
@@ -1171,7 +1174,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return 1000 / Ticker._interval;
   };
   // Ticker.getFPS is @deprecated. Remove for 1.1+
-  Ticker.getFPS = createjs.deprecate( Ticker._getFPS, "Ticker.getFPS" );
+  Ticker.getFPS = createjs.deprecate(Ticker._getFPS, "Ticker.getFPS");
 
   /**
    * Indicates the target time (in milliseconds) between ticks. Default is 50 (20 FPS).
@@ -1190,20 +1193,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @type {Number}
    **/
   try {
-    Object.defineProperties( Ticker, {
+    Object.defineProperties(Ticker, {
       interval: {
         get: Ticker._getInterval,
-        set: Ticker._setInterval
+        set: Ticker._setInterval,
       },
       framerate: {
         get: Ticker._getFPS,
-        set: Ticker._setFPS
-      }
-    } );
-  } catch ( e ) {
-    console.log( e );
+        set: Ticker._setFPS,
+      },
+    });
+  } catch (e) {
+    console.log(e);
   }
-
 
   // public static methods:
   /**
@@ -1212,14 +1214,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    **/
   Ticker.init = function () {
-    if ( Ticker._inited ) {
+    if (Ticker._inited) {
       return;
     }
     Ticker._inited = true;
     Ticker._times = [];
     Ticker._tickTimes = [];
     Ticker._startTime = Ticker._getTime();
-    Ticker._times.push( Ticker._lastTime = 0 );
+    Ticker._times.push((Ticker._lastTime = 0));
     Ticker.interval = Ticker._interval;
   };
 
@@ -1229,24 +1231,33 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    **/
   Ticker.reset = function () {
-    if ( Ticker._raf ) {
-      var f = window.cancelAnimationFrame || window.webkitCancelAnimationFrame || window.mozCancelAnimationFrame || window.oCancelAnimationFrame || window.msCancelAnimationFrame;
-      f && f( Ticker._timerId );
+    if (Ticker._raf) {
+      var f =
+        window.cancelAnimationFrame ||
+        window.webkitCancelAnimationFrame ||
+        window.mozCancelAnimationFrame ||
+        window.oCancelAnimationFrame ||
+        window.msCancelAnimationFrame;
+      f && f(Ticker._timerId);
     } else {
-      clearTimeout( Ticker._timerId );
+      clearTimeout(Ticker._timerId);
     }
-    Ticker.removeAllEventListeners( "tick" );
+    Ticker.removeAllEventListeners("tick");
     Ticker._timerId = Ticker._times = Ticker._tickTimes = null;
-    Ticker._startTime = Ticker._lastTime = Ticker._ticks = Ticker._pausedTime = 0;
+    Ticker._startTime =
+      Ticker._lastTime =
+      Ticker._ticks =
+      Ticker._pausedTime =
+        0;
     Ticker._inited = false;
   };
 
   /**
    * Returns the average time spent within a tick. This can vary significantly from the value provided by getMeasuredFPS
-   * because it only measures the time spent within the tick execution stack. 
-   * 
-   * Example 1: With a target FPS of 20, getMeasuredFPS() returns 20fps, which indicates an average of 50ms between 
-   * the end of one tick and the end of the next. However, getMeasuredTickTime() returns 15ms. This indicates that 
+   * because it only measures the time spent within the tick execution stack.
+   *
+   * Example 1: With a target FPS of 20, getMeasuredFPS() returns 20fps, which indicates an average of 50ms between
+   * the end of one tick and the end of the next. However, getMeasuredTickTime() returns 15ms. This indicates that
    * there may be up to 35ms of "idle" time between the end of one tick and the start of the next.
    *
    * Example 2: With a target FPS of 30, {{#crossLink "Ticker/framerate:property"}}{{/crossLink}} returns 10fps, which
@@ -1259,17 +1270,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * Defaults to the number of ticks per second. To get only the last tick's time, pass in 1.
    * @return {Number} The average time spent in a tick in milliseconds.
    **/
-  Ticker.getMeasuredTickTime = function ( ticks ) {
+  Ticker.getMeasuredTickTime = function (ticks) {
     var ttl = 0,
       times = Ticker._tickTimes;
-    if ( !times || times.length < 1 ) {
+    if (!times || times.length < 1) {
       return -1;
     }
 
     // by default, calculate average for the past ~1 second:
-    ticks = Math.min( times.length, ticks || ( Ticker._getFPS() | 0 ) );
-    for ( var i = 0; i < ticks; i++ ) {
-      ttl += times[ i ];
+    ticks = Math.min(times.length, ticks || Ticker._getFPS() | 0);
+    for (var i = 0; i < ticks; i++) {
+      ttl += times[i];
     }
     return ttl / ticks;
   };
@@ -1283,15 +1294,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Number} The actual frames / ticks per second. Depending on performance, this may differ
    * from the target frames per second.
    **/
-  Ticker.getMeasuredFPS = function ( ticks ) {
+  Ticker.getMeasuredFPS = function (ticks) {
     var times = Ticker._times;
-    if ( !times || times.length < 2 ) {
+    if (!times || times.length < 2) {
       return -1;
     }
 
     // by default, calculate fps for the past ~1 second:
-    ticks = Math.min( times.length - 1, ticks || ( Ticker._getFPS() | 0 ) );
-    return 1000 / ( ( times[ 0 ] - times[ ticks ] ) / ticks );
+    ticks = Math.min(times.length - 1, ticks || Ticker._getFPS() | 0);
+    return 1000 / ((times[0] - times[ticks]) / ticks);
   };
 
   /**
@@ -1304,8 +1315,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * If false, the value returned will be total time elapsed since the first tick event listener was added.
    * @return {Number} Number of milliseconds that have elapsed since Ticker was initialized or -1.
    **/
-  Ticker.getTime = function ( runTime ) {
-    return Ticker._startTime ? Ticker._getTime() - ( runTime ? Ticker._pausedTime : 0 ) : -1;
+  Ticker.getTime = function (runTime) {
+    return Ticker._startTime
+      ? Ticker._getTime() - (runTime ? Ticker._pausedTime : 0)
+      : -1;
   };
 
   /**
@@ -1316,8 +1329,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param runTime {Boolean} [runTime=false] If true, the runTime property will be returned instead of time.
    * @returns {number} The time or runTime property from the most recent tick event or -1.
    */
-  Ticker.getEventTime = function ( runTime ) {
-    return Ticker._startTime ? ( Ticker._lastTime || Ticker._startTime ) - ( runTime ? Ticker._pausedTime : 0 ) : -1;
+  Ticker.getEventTime = function (runTime) {
+    return Ticker._startTime
+      ? (Ticker._lastTime || Ticker._startTime) -
+          (runTime ? Ticker._pausedTime : 0)
+      : -1;
   };
 
   /**
@@ -1330,10 +1346,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * value. The default value is false.
    * @return {Number} of ticks that have been broadcast.
    **/
-  Ticker.getTicks = function ( pauseable ) {
-    return Ticker._ticks - ( pauseable ? Ticker._pausedTicks : 0 );
+  Ticker.getTicks = function (pauseable) {
+    return Ticker._ticks - (pauseable ? Ticker._pausedTicks : 0);
   };
-
 
   // private static methods:
   /**
@@ -1346,7 +1361,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     Ticker._setupTick();
 
     // run if enough time has elapsed, with a little bit of flexibility to be early:
-    if ( Ticker._getTime() - Ticker._lastTime >= ( Ticker._interval - 1 ) * 0.97 ) {
+    if (Ticker._getTime() - Ticker._lastTime >= (Ticker._interval - 1) * 0.97) {
       Ticker._tick();
     }
   };
@@ -1379,21 +1394,28 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @private
    **/
   Ticker._setupTick = function () {
-    if ( Ticker._timerId != null ) {
+    if (Ticker._timerId != null) {
       return;
     } // avoid duplicates
 
     var mode = Ticker.timingMode;
-    if ( mode == Ticker.RAF_SYNCHED || mode == Ticker.RAF ) {
-      var f = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame;
-      if ( f ) {
-        Ticker._timerId = f( mode == Ticker.RAF ? Ticker._handleRAF : Ticker._handleSynch );
+    if (mode == Ticker.RAF_SYNCHED || mode == Ticker.RAF) {
+      var f =
+        window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame;
+      if (f) {
+        Ticker._timerId = f(
+          mode == Ticker.RAF ? Ticker._handleRAF : Ticker._handleSynch
+        );
         Ticker._raf = true;
         return;
       }
     }
     Ticker._raf = false;
-    Ticker._timerId = setTimeout( Ticker._handleTimeout, Ticker._interval );
+    Ticker._timerId = setTimeout(Ticker._handleTimeout, Ticker._interval);
   };
 
   /**
@@ -1408,28 +1430,28 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     Ticker._lastTime = time;
     Ticker._ticks++;
 
-    if ( paused ) {
+    if (paused) {
       Ticker._pausedTicks++;
       Ticker._pausedTime += elapsedTime;
     }
 
-    if ( Ticker.hasEventListener( "tick" ) ) {
-      var event = new createjs.Event( "tick" );
+    if (Ticker.hasEventListener("tick")) {
+      var event = new createjs.Event("tick");
       var maxDelta = Ticker.maxDelta;
-      event.delta = ( maxDelta && elapsedTime > maxDelta ) ? maxDelta : elapsedTime;
+      event.delta = maxDelta && elapsedTime > maxDelta ? maxDelta : elapsedTime;
       event.paused = paused;
       event.time = time;
       event.runTime = time - Ticker._pausedTime;
-      Ticker.dispatchEvent( event );
+      Ticker.dispatchEvent(event);
     }
 
-    Ticker._tickTimes.unshift( Ticker._getTime() - time );
-    while ( Ticker._tickTimes.length > 100 ) {
+    Ticker._tickTimes.unshift(Ticker._getTime() - time);
+    while (Ticker._tickTimes.length > 100) {
       Ticker._tickTimes.pop();
     }
 
-    Ticker._times.unshift( time );
-    while ( Ticker._times.length > 100 ) {
+    Ticker._times.unshift(time);
+    while (Ticker._times.length > 100) {
       Ticker._times.pop();
     }
   };
@@ -1440,38 +1462,43 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @private
    **/
   var w = window,
-    now = w.performance.now || w.performance.mozNow || w.performance.msNow || w.performance.oNow || w.performance.webkitNow;
+    now =
+      w.performance.now ||
+      w.performance.mozNow ||
+      w.performance.msNow ||
+      w.performance.oNow ||
+      w.performance.webkitNow;
   Ticker._getTime = function () {
-    return ( ( now && now.call( w.performance ) ) || ( new Date().getTime() ) ) - Ticker._startTime;
+    return (
+      ((now && now.call(w.performance)) || new Date().getTime()) -
+      Ticker._startTime
+    );
   };
 
-
   createjs.Ticker = Ticker;
-}() );
+})();
 
 //##############################################################################
 // VideoBuffer.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
    * When an HTML video seeks, including when looping, there is an indeterminate period before a new frame is available.
    * This can result in the video blinking or flashing when it is drawn to a canvas. The VideoBuffer class resolves
    * this issue by drawing each frame to an off-screen canvas and preserving the prior frame during a seek.
-   * 
+   *
    * 	var myBuffer = new createjs.VideoBuffer(myVideo);
    * 	var myBitmap = new Bitmap(myBuffer);
-   * 
+   *
    * @class VideoBuffer
    * @param {HTMLVideoElement} video The HTML video element to buffer.
    * @constructor
    **/
-  function VideoBuffer( video ) {
-
+  function VideoBuffer(video) {
     // private properties:
     /**
      * Used by Bitmap to determine when the video buffer is ready to be drawn. Not intended for general use.
@@ -1506,12 +1533,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      **/
     this._lastTime = -1;
 
-    if ( this.readyState < 2 ) {
-      video.addEventListener( "canplaythrough", this._videoReady.bind( this ) );
+    if (this.readyState < 2) {
+      video.addEventListener("canplaythrough", this._videoReady.bind(this));
     } //once:true isn't supported everywhere, but its a non-critical optimization here.
   }
   var p = VideoBuffer.prototype;
-
 
   // public methods:
   /**
@@ -1520,20 +1546,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method getImage
    **/
   p.getImage = function () {
-    if ( this.readyState < 2 ) {
+    if (this.readyState < 2) {
       return;
     }
     var canvas = this._canvas,
       video = this._video;
-    if ( !canvas ) {
-      canvas = this._canvas = createjs.createCanvas ? createjs.createCanvas() : document.createElement( "canvas" );
+    if (!canvas) {
+      canvas = this._canvas = createjs.createCanvas
+        ? createjs.createCanvas()
+        : document.createElement("canvas");
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
     }
-    if ( video.readyState >= 2 && video.currentTime !== this._lastTime ) {
-      var ctx = canvas.getContext( "2d" );
-      ctx.clearRect( 0, 0, canvas.width, canvas.height );
-      ctx.drawImage( video, 0, 0, canvas.width, canvas.height );
+    if (video.readyState >= 2 && video.currentTime !== this._lastTime) {
+      var ctx = canvas.getContext("2d");
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
       this._lastTime = video.currentTime;
     }
     return canvas;
@@ -1548,17 +1576,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     this.readyState = 2;
   };
 
-
   createjs.VideoBuffer = VideoBuffer;
-}() );
+})();
 
 //##############################################################################
 // MouseEvent.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -1579,9 +1605,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends Event
    * @constructor
    **/
-  function MouseEvent( type, bubbles, cancelable, stageX, stageY, nativeEvent, pointerID, primary, rawX, rawY, relatedTarget ) {
-    this.Event_constructor( type, bubbles, cancelable );
-
+  function MouseEvent(
+    type,
+    bubbles,
+    cancelable,
+    stageX,
+    stageY,
+    nativeEvent,
+    pointerID,
+    primary,
+    rawX,
+    rawY,
+    relatedTarget
+  ) {
+    this.Event_constructor(type, bubbles, cancelable);
 
     // public properties:
     /**
@@ -1604,7 +1641,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @property rawX
      * @type Number
      */
-    this.rawX = ( rawX == null ) ? stageX : rawX;
+    this.rawX = rawX == null ? stageX : rawX;
 
     /**
      * The raw y position relative to the stage. Normally this will be the same as the stageY value, unless
@@ -1612,7 +1649,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @property rawY
      * @type Number
      */
-    this.rawY = ( rawY == null ) ? stageY : rawY;
+    this.rawY = rawY == null ? stageY : rawY;
 
     /**
      * The native MouseEvent generated by the browser. The properties and API for this
@@ -1644,18 +1681,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * The secondary target for the event, if applicable. This is used for mouseout/rollout
      * events to indicate the object that the mouse entered from, mouseover/rollover for the object the mouse exited,
      * and stagemousedown/stagemouseup events for the object that was the under the cursor, if any.
-     * 
+     *
      * Only valid interaction targets will be returned (ie. objects with mouse listeners or a cursor set).
      * @property relatedTarget
      * @type {DisplayObject}
      */
     this.relatedTarget = relatedTarget;
   }
-  var p = createjs.extend( MouseEvent, createjs.Event );
+  var p = createjs.extend(MouseEvent, createjs.Event);
 
   // TODO: deprecated
   // p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
-
 
   // getter / setters:
   /**
@@ -1665,7 +1701,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @readonly
    */
   p._get_localX = function () {
-    return this.currentTarget.globalToLocal( this.rawX, this.rawY ).x;
+    return this.currentTarget.globalToLocal(this.rawX, this.rawY).x;
   };
 
   /**
@@ -1675,7 +1711,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @readonly
    */
   p._get_localY = function () {
-    return this.currentTarget.globalToLocal( this.rawX, this.rawY ).y;
+    return this.currentTarget.globalToLocal(this.rawX, this.rawY).y;
   };
 
   /**
@@ -1688,21 +1724,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return this.pointerID !== -1;
   };
 
-
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       localX: {
-        get: p._get_localX
+        get: p._get_localX,
       },
       localY: {
-        get: p._get_localY
+        get: p._get_localY,
       },
       isTouch: {
-        get: p._get_isTouch
-      }
-    } );
-  } catch ( e ) {} // TODO: use Log
-
+        get: p._get_isTouch,
+      },
+    });
+  } catch (e) {} // TODO: use Log
 
   // public methods:
   /**
@@ -1711,7 +1745,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {MouseEvent} a clone of the MouseEvent instance.
    **/
   p.clone = function () {
-    return new MouseEvent( this.type, this.bubbles, this.cancelable, this.stageX, this.stageY, this.nativeEvent, this.pointerID, this.primary, this.rawX, this.rawY );
+    return new MouseEvent(
+      this.type,
+      this.bubbles,
+      this.cancelable,
+      this.stageX,
+      this.stageY,
+      this.nativeEvent,
+      this.pointerID,
+      this.primary,
+      this.rawX,
+      this.rawY
+    );
   };
 
   /**
@@ -1720,20 +1765,26 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {String} a string representation of the instance.
    **/
   p.toString = function () {
-    return "[MouseEvent (type=" + this.type + " stageX=" + this.stageX + " stageY=" + this.stageY + ")]";
+    return (
+      "[MouseEvent (type=" +
+      this.type +
+      " stageX=" +
+      this.stageX +
+      " stageY=" +
+      this.stageY +
+      ")]"
+    );
   };
 
-
-  createjs.MouseEvent = createjs.promote( MouseEvent, "Event" );
-}() );
+  createjs.MouseEvent = createjs.promote(MouseEvent, "Event");
+})();
 
 //##############################################################################
 // Matrix2D.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -1756,8 +1807,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} [ty=0] Specifies the ty property for the new matrix.
    * @constructor
    **/
-  function Matrix2D( a, b, c, d, tx, ty ) {
-    this.setValues( a, b, c, d, tx, ty );
+  function Matrix2D(a, b, c, d, tx, ty) {
+    this.setValues(a, b, c, d, tx, ty);
 
     // public properties:
     // assigned in the setValues method.
@@ -1810,7 +1861,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
   Matrix2D.DEG_TO_RAD = Math.PI / 180;
 
-
   // static public properties:
   /**
    * An identity matrix, representing a null transformation.
@@ -1821,10 +1871,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
   Matrix2D.identity = null; // set at bottom of class definition.
 
-
   // public methods:
   /**
-   * Sets the specified values on this instance. 
+   * Sets the specified values on this instance.
    * @method setValues
    * @param {Number} [a=1] Specifies the a property for the new matrix.
    * @param {Number} [b=0] Specifies the b property for the new matrix.
@@ -1834,12 +1883,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} [ty=0] Specifies the ty property for the new matrix.
    * @return {Matrix2D} This instance. Useful for chaining method calls.
    */
-  p.setValues = function ( a, b, c, d, tx, ty ) {
+  p.setValues = function (a, b, c, d, tx, ty) {
     // don't forget to update docs in the constructor if these change:
-    this.a = ( a == null ) ? 1 : a;
+    this.a = a == null ? 1 : a;
     this.b = b || 0;
     this.c = c || 0;
-    this.d = ( d == null ) ? 1 : d;
+    this.d = d == null ? 1 : d;
     this.tx = tx || 0;
     this.ty = ty || 0;
     return this;
@@ -1857,12 +1906,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} ty
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    **/
-  p.append = function ( a, b, c, d, tx, ty ) {
+  p.append = function (a, b, c, d, tx, ty) {
     var a1 = this.a;
     var b1 = this.b;
     var c1 = this.c;
     var d1 = this.d;
-    if ( a != 1 || b != 0 || c != 0 || d != 1 ) {
+    if (a != 1 || b != 0 || c != 0 || d != 1) {
       this.a = a1 * a + c1 * b;
       this.b = b1 * a + d1 * b;
       this.c = a1 * c + c1 * d;
@@ -1886,7 +1935,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} ty
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    **/
-  p.prepend = function ( a, b, c, d, tx, ty ) {
+  p.prepend = function (a, b, c, d, tx, ty) {
     var a1 = this.a;
     var c1 = this.c;
     var tx1 = this.tx;
@@ -1907,15 +1956,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Matrix2D} matrix
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    **/
-  p.appendMatrix = function ( matrix ) {
-    return this.append( matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty );
+  p.appendMatrix = function (matrix) {
+    return this.append(
+      matrix.a,
+      matrix.b,
+      matrix.c,
+      matrix.d,
+      matrix.tx,
+      matrix.ty
+    );
   };
 
   /**
    * Prepends the specified matrix to this matrix.
    * This is the equivalent of multiplying `(specified matrix) * (this matrix)`.
    * For example, you could calculate the combined transformation for a child object using:
-   * 
+   *
    * 	var o = myDisplayObject;
    * 	var mtx = o.getMatrix();
    * 	while (o = o.parent) {
@@ -1926,14 +1982,21 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Matrix2D} matrix
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    **/
-  p.prependMatrix = function ( matrix ) {
-    return this.prepend( matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty );
+  p.prependMatrix = function (matrix) {
+    return this.prepend(
+      matrix.a,
+      matrix.b,
+      matrix.c,
+      matrix.d,
+      matrix.tx,
+      matrix.ty
+    );
   };
 
   /**
    * Generates matrix properties from the specified display object transform properties, and appends them to this matrix.
    * For example, you can use this to generate a matrix representing the transformations of a display object:
-   * 
+   *
    * 	var mtx = new createjs.Matrix2D();
    * 	mtx.appendTransform(o.x, o.y, o.scaleX, o.scaleY, o.rotation);
    * @method appendTransform
@@ -1948,27 +2011,58 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} regY Optional.
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    **/
-  p.appendTransform = function ( x, y, scaleX, scaleY, rotation, skewX, skewY, regX, regY ) {
-    if ( rotation % 360 ) {
+  p.appendTransform = function (
+    x,
+    y,
+    scaleX,
+    scaleY,
+    rotation,
+    skewX,
+    skewY,
+    regX,
+    regY
+  ) {
+    if (rotation % 360) {
       var r = rotation * Matrix2D.DEG_TO_RAD;
-      var cos = Math.cos( r );
-      var sin = Math.sin( r );
+      var cos = Math.cos(r);
+      var sin = Math.sin(r);
     } else {
       cos = 1;
       sin = 0;
     }
 
-    if ( skewX || skewY ) {
+    if (skewX || skewY) {
       // TODO: can this be combined into a single append operation?
       skewX *= Matrix2D.DEG_TO_RAD;
       skewY *= Matrix2D.DEG_TO_RAD;
-      this.append( Math.cos( skewY ), Math.sin( skewY ), -Math.sin( skewX ), Math.cos( skewX ), x, y );
-      this.append( cos * scaleX, sin * scaleX, -sin * scaleY, cos * scaleY, 0, 0 );
+      this.append(
+        Math.cos(skewY),
+        Math.sin(skewY),
+        -Math.sin(skewX),
+        Math.cos(skewX),
+        x,
+        y
+      );
+      this.append(
+        cos * scaleX,
+        sin * scaleX,
+        -sin * scaleY,
+        cos * scaleY,
+        0,
+        0
+      );
     } else {
-      this.append( cos * scaleX, sin * scaleX, -sin * scaleY, cos * scaleY, x, y );
+      this.append(
+        cos * scaleX,
+        sin * scaleX,
+        -sin * scaleY,
+        cos * scaleY,
+        x,
+        y
+      );
     }
 
-    if ( regX || regY ) {
+    if (regX || regY) {
       // append the registration offset:
       this.tx -= regX * this.a + regY * this.c;
       this.ty -= regX * this.b + regY * this.d;
@@ -1979,14 +2073,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   /**
    * Generates matrix properties from the specified display object transform properties, and prepends them to this matrix.
    * For example, you could calculate the combined transformation for a child object using:
-   * 
+   *
    * 	var o = myDisplayObject;
    * 	var mtx = new createjs.Matrix2D();
    * 	do  {
    * 		// prepend each parent's transformation in turn:
    * 		mtx.prependTransform(o.x, o.y, o.scaleX, o.scaleY, o.rotation, o.skewX, o.skewY, o.regX, o.regY);
    * 	} while (o = o.parent);
-   * 	
+   *
    * 	Note that the above example would not account for {{#crossLink "DisplayObject/transformMatrix:property"}}{{/crossLink}}
    * 	values. See {{#crossLink "Matrix2D/prependMatrix"}}{{/crossLink}} for an example that does.
    * @method prependTransform
@@ -2001,29 +2095,60 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} regY Optional.
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    **/
-  p.prependTransform = function ( x, y, scaleX, scaleY, rotation, skewX, skewY, regX, regY ) {
-    if ( rotation % 360 ) {
+  p.prependTransform = function (
+    x,
+    y,
+    scaleX,
+    scaleY,
+    rotation,
+    skewX,
+    skewY,
+    regX,
+    regY
+  ) {
+    if (rotation % 360) {
       var r = rotation * Matrix2D.DEG_TO_RAD;
-      var cos = Math.cos( r );
-      var sin = Math.sin( r );
+      var cos = Math.cos(r);
+      var sin = Math.sin(r);
     } else {
       cos = 1;
       sin = 0;
     }
 
-    if ( regX || regY ) {
+    if (regX || regY) {
       // prepend the registration offset:
       this.tx -= regX;
       this.ty -= regY;
     }
-    if ( skewX || skewY ) {
+    if (skewX || skewY) {
       // TODO: can this be combined into a single prepend operation?
       skewX *= Matrix2D.DEG_TO_RAD;
       skewY *= Matrix2D.DEG_TO_RAD;
-      this.prepend( cos * scaleX, sin * scaleX, -sin * scaleY, cos * scaleY, 0, 0 );
-      this.prepend( Math.cos( skewY ), Math.sin( skewY ), -Math.sin( skewX ), Math.cos( skewX ), x, y );
+      this.prepend(
+        cos * scaleX,
+        sin * scaleX,
+        -sin * scaleY,
+        cos * scaleY,
+        0,
+        0
+      );
+      this.prepend(
+        Math.cos(skewY),
+        Math.sin(skewY),
+        -Math.sin(skewX),
+        Math.cos(skewX),
+        x,
+        y
+      );
     } else {
-      this.prepend( cos * scaleX, sin * scaleX, -sin * scaleY, cos * scaleY, x, y );
+      this.prepend(
+        cos * scaleX,
+        sin * scaleX,
+        -sin * scaleY,
+        cos * scaleY,
+        x,
+        y
+      );
     }
     return this;
   };
@@ -2034,10 +2159,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} angle The angle to rotate by, in degrees. To use a value in radians, multiply it by `180/Math.PI`.
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    **/
-  p.rotate = function ( angle ) {
+  p.rotate = function (angle) {
     angle = angle * Matrix2D.DEG_TO_RAD;
-    var cos = Math.cos( angle );
-    var sin = Math.sin( angle );
+    var cos = Math.cos(angle);
+    var sin = Math.sin(angle);
 
     var a1 = this.a;
     var b1 = this.b;
@@ -2056,10 +2181,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} skewY The amount to skew vertically in degrees.
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    */
-  p.skew = function ( skewX, skewY ) {
+  p.skew = function (skewX, skewY) {
     skewX = skewX * Matrix2D.DEG_TO_RAD;
     skewY = skewY * Matrix2D.DEG_TO_RAD;
-    this.append( Math.cos( skewY ), Math.sin( skewY ), -Math.sin( skewX ), Math.cos( skewX ), 0, 0 );
+    this.append(
+      Math.cos(skewY),
+      Math.sin(skewY),
+      -Math.sin(skewX),
+      Math.cos(skewX),
+      0,
+      0
+    );
     return this;
   };
 
@@ -2070,7 +2202,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} y The amount to scale vertically.
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    **/
-  p.scale = function ( x, y ) {
+  p.scale = function (x, y) {
     this.a *= x;
     this.b *= x;
     this.c *= y;
@@ -2087,7 +2219,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} y
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    **/
-  p.translate = function ( x, y ) {
+  p.translate = function (x, y) {
     this.tx += this.a * x + this.c * y;
     this.ty += this.b * x + this.d * y;
     return this;
@@ -2121,8 +2253,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     this.b = -b1 / n;
     this.c = -c1 / n;
     this.d = a1 / n;
-    this.tx = ( c1 * this.ty - d1 * tx1 ) / n;
-    this.ty = -( a1 * this.ty - b1 * tx1 ) / n;
+    this.tx = (c1 * this.ty - d1 * tx1) / n;
+    this.ty = -(a1 * this.ty - b1 * tx1) / n;
     return this;
   };
 
@@ -2132,7 +2264,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean}
    **/
   p.isIdentity = function () {
-    return this.tx === 0 && this.ty === 0 && this.a === 1 && this.b === 0 && this.c === 0 && this.d === 1;
+    return (
+      this.tx === 0 &&
+      this.ty === 0 &&
+      this.a === 1 &&
+      this.b === 0 &&
+      this.c === 0 &&
+      this.d === 1
+    );
   };
 
   /**
@@ -2141,8 +2280,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Matrix2D} matrix The matrix to compare.
    * @return {Boolean}
    **/
-  p.equals = function ( matrix ) {
-    return this.tx === matrix.tx && this.ty === matrix.ty && this.a === matrix.a && this.b === matrix.b && this.c === matrix.c && this.d === matrix.d;
+  p.equals = function (matrix) {
+    return (
+      this.tx === matrix.tx &&
+      this.ty === matrix.ty &&
+      this.a === matrix.a &&
+      this.b === matrix.b &&
+      this.c === matrix.c &&
+      this.d === matrix.d
+    );
   };
 
   /**
@@ -2153,7 +2299,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Point | Object} [pt] An object to copy the result into. If omitted a generic object with x/y properties will be returned.
    * @return {Point} This matrix. Useful for chaining method calls.
    **/
-  p.transformPoint = function ( x, y, pt ) {
+  p.transformPoint = function (x, y, pt) {
     pt = pt || {};
     pt.x = x * this.a + y * this.c + this.tx;
     pt.y = x * this.b + y * this.d + this.ty;
@@ -2168,24 +2314,25 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} target The object to apply the transform properties to. If null, then a new object will be returned.
    * @return {Object} The target, or a new generic object with the transform properties applied.
    */
-  p.decompose = function ( target ) {
+  p.decompose = function (target) {
     // TODO: it would be nice to be able to solve for whether the matrix can be decomposed into only scale/rotation even when scale is negative
-    if ( target == null ) {
+    if (target == null) {
       target = {};
     }
     target.x = this.tx;
     target.y = this.ty;
-    target.scaleX = Math.sqrt( this.a * this.a + this.b * this.b );
-    target.scaleY = Math.sqrt( this.c * this.c + this.d * this.d );
+    target.scaleX = Math.sqrt(this.a * this.a + this.b * this.b);
+    target.scaleY = Math.sqrt(this.c * this.c + this.d * this.d);
 
-    var skewX = Math.atan2( -this.c, this.d );
-    var skewY = Math.atan2( this.b, this.a );
+    var skewX = Math.atan2(-this.c, this.d);
+    var skewY = Math.atan2(this.b, this.a);
 
-    var delta = Math.abs( 1 - skewX / skewY );
-    if ( delta < 0.00001 ) { // effectively identical, can use rotation:
+    var delta = Math.abs(1 - skewX / skewY);
+    if (delta < 0.00001) {
+      // effectively identical, can use rotation:
       target.rotation = skewY / Matrix2D.DEG_TO_RAD;
-      if ( this.a < 0 && this.d >= 0 ) {
-        target.rotation += ( target.rotation <= 0 ) ? 180 : -180;
+      if (this.a < 0 && this.d >= 0) {
+        target.rotation += target.rotation <= 0 ? 180 : -180;
       }
       target.skewX = target.skewY = 0;
     } else {
@@ -2201,8 +2348,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Matrix2D} matrix The matrix to copy properties from.
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    */
-  p.copy = function ( matrix ) {
-    return this.setValues( matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty );
+  p.copy = function (matrix) {
+    return this.setValues(
+      matrix.a,
+      matrix.b,
+      matrix.c,
+      matrix.d,
+      matrix.tx,
+      matrix.ty
+    );
   };
 
   /**
@@ -2211,7 +2365,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Matrix2D} a clone of the Matrix2D instance.
    **/
   p.clone = function () {
-    return new Matrix2D( this.a, this.b, this.c, this.d, this.tx, this.ty );
+    return new Matrix2D(this.a, this.b, this.c, this.d, this.tx, this.ty);
   };
 
   /**
@@ -2220,21 +2374,34 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {String} a string representation of the instance.
    **/
   p.toString = function () {
-    return "[Matrix2D (a=" + this.a + " b=" + this.b + " c=" + this.c + " d=" + this.d + " tx=" + this.tx + " ty=" + this.ty + ")]";
+    return (
+      "[Matrix2D (a=" +
+      this.a +
+      " b=" +
+      this.b +
+      " c=" +
+      this.c +
+      " d=" +
+      this.d +
+      " tx=" +
+      this.tx +
+      " ty=" +
+      this.ty +
+      ")]"
+    );
   };
 
   // this has to be populated after the class is defined:
   Matrix2D.identity = new Matrix2D();
 
-
   createjs.Matrix2D = Matrix2D;
-}() );
+})();
 
 //##############################################################################
 // DisplayProps.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   /**
@@ -2247,8 +2414,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} [matrix] A transformation matrix. Defaults to a new identity matrix.
    * @constructor
    **/
-  function DisplayProps( visible, alpha, shadow, compositeOperation, matrix ) {
-    this.setValues( visible, alpha, shadow, compositeOperation, matrix );
+  function DisplayProps(visible, alpha, shadow, compositeOperation, matrix) {
+    this.setValues(visible, alpha, shadow, compositeOperation, matrix);
 
     // public properties:
     // assigned in the setValues method.
@@ -2298,12 +2465,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {DisplayProps} This instance. Useful for chaining method calls.
    * @chainable
    */
-  p.setValues = function ( visible, alpha, shadow, compositeOperation, matrix ) {
+  p.setValues = function (visible, alpha, shadow, compositeOperation, matrix) {
     this.visible = visible == null ? true : !!visible;
     this.alpha = alpha == null ? 1 : alpha;
     this.shadow = shadow;
     this.compositeOperation = compositeOperation;
-    this.matrix = matrix || ( this.matrix && this.matrix.identity() ) || new createjs.Matrix2D();
+    this.matrix =
+      matrix ||
+      (this.matrix && this.matrix.identity()) ||
+      new createjs.Matrix2D();
     return this;
   };
 
@@ -2319,26 +2489,26 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {DisplayProps} This instance. Useful for chaining method calls.
    * @chainable
    */
-  p.append = function ( visible, alpha, shadow, compositeOperation, matrix ) {
+  p.append = function (visible, alpha, shadow, compositeOperation, matrix) {
     this.alpha *= alpha;
     this.shadow = shadow || this.shadow;
     this.compositeOperation = compositeOperation || this.compositeOperation;
     this.visible = this.visible && visible;
-    matrix && this.matrix.appendMatrix( matrix );
+    matrix && this.matrix.appendMatrix(matrix);
     return this;
   };
 
   /**
    * Prepends the specified display properties. This is generally used to apply a parent's properties to a child's.
    * For example, to get the combined display properties that would be applied to a child, you could use:
-   * 
+   *
    * 	var o = myDisplayObject;
    * 	var props = new createjs.DisplayProps();
    * 	do {
    * 		// prepend each parent's props in turn:
    * 		props.prepend(o.visible, o.alpha, o.shadow, o.compositeOperation, o.getMatrix());
    * 	} while (o = o.parent);
-   * 	
+   *
    * @method prepend
    * @param {Boolean} visible desired visible value
    * @param {Number} alpha desired alpha value
@@ -2348,12 +2518,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {DisplayProps} This instance. Useful for chaining method calls.
    * @chainable
    */
-  p.prepend = function ( visible, alpha, shadow, compositeOperation, matrix ) {
+  p.prepend = function (visible, alpha, shadow, compositeOperation, matrix) {
     this.alpha *= alpha;
     this.shadow = this.shadow || shadow;
     this.compositeOperation = this.compositeOperation || compositeOperation;
     this.visible = this.visible && visible;
-    matrix && this.matrix.prependMatrix( matrix );
+    matrix && this.matrix.prependMatrix(matrix);
     return this;
   };
 
@@ -2377,38 +2547,42 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {DisplayProps} a clone of the DisplayProps instance.
    **/
   p.clone = function () {
-    return new DisplayProps( this.alpha, this.shadow, this.compositeOperation, this.visible, this.matrix.clone() );
+    return new DisplayProps(
+      this.alpha,
+      this.shadow,
+      this.compositeOperation,
+      this.visible,
+      this.matrix.clone()
+    );
   };
 
   // private methods:
 
   createjs.DisplayProps = DisplayProps;
-} )();
+})();
 
 //##############################################################################
 // Point.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
    * Represents a point on a 2 dimensional x / y coordinate system.
    *
    * <h4>Example</h4>
-   * 
+   *
    *      var point = new createjs.Point(0, 100);
-   * 
+   *
    * @class Point
    * @param {Number} [x=0] X position.
    * @param {Number} [y=0] Y position.
    * @constructor
    **/
-  function Point( x, y ) {
-    this.setValues( x, y );
-
+  function Point(x, y) {
+    this.setValues(x, y);
 
     // public properties:
     // assigned in the setValues method.
@@ -2427,7 +2601,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   var p = Point.prototype;
 
   // public methods:
-  /** 
+  /**
    * Sets the specified values on this instance.
    * @method setValues
    * @param {Number} [x=0] X position.
@@ -2435,7 +2609,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Point} This instance. Useful for chaining method calls.
    * @chainable
    */
-  p.setValues = function ( x, y ) {
+  p.setValues = function (x, y) {
     this.x = x || 0;
     this.y = y || 0;
     return this;
@@ -2448,7 +2622,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Point} This point. Useful for chaining method calls.
    * @chainable
    */
-  p.copy = function ( point ) {
+  p.copy = function (point) {
     this.x = point.x;
     this.y = point.y;
     return this;
@@ -2460,7 +2634,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Point} a clone of the Point instance.
    **/
   p.clone = function () {
-    return new Point( this.x, this.y );
+    return new Point(this.x, this.y);
   };
 
   /**
@@ -2472,17 +2646,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return "[Point (x=" + this.x + " y=" + this.y + ")]";
   };
 
-
   createjs.Point = Point;
-}() );
+})();
 
 //##############################################################################
 // Rectangle.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -2499,9 +2671,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} [height=0] The height of the Rectangle.
    * @constructor
    **/
-  function Rectangle( x, y, width, height ) {
-    this.setValues( x, y, width, height );
-
+  function Rectangle(x, y, width, height) {
+    this.setValues(x, y, width, height);
 
     // public properties:
     // assigned in the setValues method.
@@ -2532,7 +2703,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   var p = Rectangle.prototype;
 
   // public methods:
-  /** 
+  /**
    * Sets the specified values on this instance.
    * @method setValues
    * @param {Number} [x=0] X position.
@@ -2542,7 +2713,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Rectangle} This instance. Useful for chaining method calls.
    * @chainable
    */
-  p.setValues = function ( x, y, width, height ) {
+  p.setValues = function (x, y, width, height) {
     // don't forget to update docs in the constructor if these change:
     this.x = x || 0;
     this.y = y || 0;
@@ -2551,7 +2722,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return this;
   };
 
-  /** 
+  /**
    * Extends the rectangle's bounds to include the described point or rectangle.
    * @method extend
    * @param {Number} x X position of the point or rectangle.
@@ -2561,27 +2732,27 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Rectangle} This instance. Useful for chaining method calls.
    * @chainable
    */
-  p.extend = function ( x, y, width, height ) {
+  p.extend = function (x, y, width, height) {
     width = width || 0;
     height = height || 0;
-    if ( x + width > this.x + this.width ) {
+    if (x + width > this.x + this.width) {
       this.width = x + width - this.x;
     }
-    if ( y + height > this.y + this.height ) {
+    if (y + height > this.y + this.height) {
       this.height = y + height - this.y;
     }
-    if ( x < this.x ) {
+    if (x < this.x) {
       this.width += this.x - x;
       this.x = x;
     }
-    if ( y < this.y ) {
+    if (y < this.y) {
       this.height += this.y - y;
       this.y = y;
     }
     return this;
   };
 
-  /** 
+  /**
    * Adds the specified padding to the rectangle's bounds.
    * @method pad
    * @param {Number} top
@@ -2591,7 +2762,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Rectangle} This instance. Useful for chaining method calls.
    * @chainable
    */
-  p.pad = function ( top, left, bottom, right ) {
+  p.pad = function (top, left, bottom, right) {
     this.x -= left;
     this.y -= top;
     this.width += left + right;
@@ -2606,11 +2777,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Rectangle} This rectangle. Useful for chaining method calls.
    * @chainable
    */
-  p.copy = function ( rectangle ) {
-    return this.setValues( rectangle.x, rectangle.y, rectangle.width, rectangle.height );
+  p.copy = function (rectangle) {
+    return this.setValues(
+      rectangle.x,
+      rectangle.y,
+      rectangle.width,
+      rectangle.height
+    );
   };
 
-  /** 
+  /**
    * Returns true if this rectangle fully encloses the described point or rectangle.
    * @method contains
    * @param {Number} x X position of the point or rectangle.
@@ -2619,60 +2795,72 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} [height=0] The height of the rectangle.
    * @return {Boolean} True if the described point or rectangle is contained within this rectangle.
    */
-  p.contains = function ( x, y, width, height ) {
+  p.contains = function (x, y, width, height) {
     width = width || 0;
     height = height || 0;
-    return ( x >= this.x && x + width <= this.x + this.width && y >= this.y && y + height <= this.y + this.height );
+    return (
+      x >= this.x &&
+      x + width <= this.x + this.width &&
+      y >= this.y &&
+      y + height <= this.y + this.height
+    );
   };
 
-  /** 
+  /**
    * Returns a new rectangle which contains this rectangle and the specified rectangle.
    * @method union
    * @param {Rectangle} rect The rectangle to calculate a union with.
    * @return {Rectangle} A new rectangle describing the union.
    */
-  p.union = function ( rect ) {
-    return this.clone().extend( rect.x, rect.y, rect.width, rect.height );
+  p.union = function (rect) {
+    return this.clone().extend(rect.x, rect.y, rect.width, rect.height);
   };
 
-  /** 
+  /**
    * Returns a new rectangle which describes the intersection (overlap) of this rectangle and the specified rectangle,
    * or null if they do not intersect.
    * @method intersection
    * @param {Rectangle} rect The rectangle to calculate an intersection with.
    * @return {Rectangle} A new rectangle describing the intersection or null.
    */
-  p.intersection = function ( rect ) {
+  p.intersection = function (rect) {
     var x1 = rect.x,
       y1 = rect.y,
       x2 = x1 + rect.width,
       y2 = y1 + rect.height;
-    if ( this.x > x1 ) {
+    if (this.x > x1) {
       x1 = this.x;
     }
-    if ( this.y > y1 ) {
+    if (this.y > y1) {
       y1 = this.y;
     }
-    if ( this.x + this.width < x2 ) {
+    if (this.x + this.width < x2) {
       x2 = this.x + this.width;
     }
-    if ( this.y + this.height < y2 ) {
+    if (this.y + this.height < y2) {
       y2 = this.y + this.height;
     }
-    return ( x2 <= x1 || y2 <= y1 ) ? null : new Rectangle( x1, y1, x2 - x1, y2 - y1 );
+    return x2 <= x1 || y2 <= y1
+      ? null
+      : new Rectangle(x1, y1, x2 - x1, y2 - y1);
   };
 
-  /** 
+  /**
    * Returns true if the specified rectangle intersects (has any overlap) with this rectangle.
    * @method intersects
    * @param {Rectangle} rect The rectangle to compare.
    * @return {Boolean} True if the rectangles intersect.
    */
-  p.intersects = function ( rect ) {
-    return ( rect.x <= this.x + this.width && this.x <= rect.x + rect.width && rect.y <= this.y + this.height && this.y <= rect.y + rect.height );
+  p.intersects = function (rect) {
+    return (
+      rect.x <= this.x + this.width &&
+      this.x <= rect.x + rect.width &&
+      rect.y <= this.y + this.height &&
+      this.y <= rect.y + rect.height
+    );
   };
 
-  /** 
+  /**
    * Returns true if the width or height are equal or less than 0.
    * @method isEmpty
    * @return {Boolean} True if the rectangle is empty.
@@ -2687,7 +2875,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Rectangle} a clone of the Rectangle instance.
    **/
   p.clone = function () {
-    return new Rectangle( this.x, this.y, this.width, this.height );
+    return new Rectangle(this.x, this.y, this.width, this.height);
   };
 
   /**
@@ -2696,20 +2884,28 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {String} a string representation of the instance.
    **/
   p.toString = function () {
-    return "[Rectangle (x=" + this.x + " y=" + this.y + " width=" + this.width + " height=" + this.height + ")]";
+    return (
+      "[Rectangle (x=" +
+      this.x +
+      " y=" +
+      this.y +
+      " width=" +
+      this.width +
+      " height=" +
+      this.height +
+      ")]"
+    );
   };
 
-
   createjs.Rectangle = Rectangle;
-}() );
+})();
 
 //##############################################################################
 // ButtonHelper.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -2720,7 +2916,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    *
    * The ButtonHelper instance does not need to be added to the stage, but a reference should be maintained to prevent
    * garbage collection.
-   * 
+   *
    * Note that over states will not work unless you call {{#crossLink "Stage/enableMouseOver"}}{{/crossLink}}.
    *
    * <h4>Example</h4>
@@ -2745,11 +2941,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * null, then the default state of the hitArea will be used. *
    * @constructor
    */
-  function ButtonHelper( target, outLabel, overLabel, downLabel, play, hitArea, hitLabel ) {
-    if ( !target.addEventListener ) {
+  function ButtonHelper(
+    target,
+    outLabel,
+    overLabel,
+    downLabel,
+    play,
+    hitArea,
+    hitLabel
+  ) {
+    if (!target.addEventListener) {
       return;
     }
-
 
     // public properties:
     /**
@@ -2789,7 +2992,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      **/
     this.play = play;
 
-
     //  private properties
     /**
      * @property _isPressed
@@ -2815,11 +3017,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     // setup:
     target.mouseChildren = false; // prevents issues when children are removed from the display list when state changes.
     this.enabled = true;
-    this.handleEvent( {} );
-    if ( hitArea ) {
-      if ( hitLabel ) {
+    this.handleEvent({});
+    if (hitArea) {
+      if (hitLabel) {
         hitArea.actionsEnabled = false;
-        hitArea.gotoAndStop && hitArea.gotoAndStop( hitLabel );
+        hitArea.gotoAndStop && hitArea.gotoAndStop(hitLabel);
       }
       target.hitArea = hitArea;
     }
@@ -2834,36 +3036,36 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @[rptected
    * @protected
    **/
-  p._setEnabled = function ( value ) {
-    if ( value == this._enabled ) {
+  p._setEnabled = function (value) {
+    if (value == this._enabled) {
       return;
     }
     var o = this.target;
     this._enabled = value;
-    if ( value ) {
+    if (value) {
       o.cursor = "pointer";
-      o.addEventListener( "rollover", this );
-      o.addEventListener( "rollout", this );
-      o.addEventListener( "mousedown", this );
-      o.addEventListener( "pressup", this );
-      if ( o._reset ) {
+      o.addEventListener("rollover", this);
+      o.addEventListener("rollout", this);
+      o.addEventListener("mousedown", this);
+      o.addEventListener("pressup", this);
+      if (o._reset) {
         o.__reset = o._reset;
         o._reset = this._reset;
       }
     } else {
       o.cursor = null;
-      o.removeEventListener( "rollover", this );
-      o.removeEventListener( "rollout", this );
-      o.removeEventListener( "mousedown", this );
-      o.removeEventListener( "pressup", this );
-      if ( o.__reset ) {
+      o.removeEventListener("rollover", this);
+      o.removeEventListener("rollout", this);
+      o.removeEventListener("mousedown", this);
+      o.removeEventListener("pressup", this);
+      if (o.__reset) {
         o._reset = o.__reset;
-        delete( o.__reset );
+        delete o.__reset;
       }
     }
   };
   // ButtonHelper.setEnabled is @deprecated. Remove for 1.1+
-  p.setEnabled = createjs.deprecate( p._setEnabled, "ButtonHelper.setEnabled" );
+  p.setEnabled = createjs.deprecate(p._setEnabled, "ButtonHelper.setEnabled");
 
   /**
    * Use the {{#crossLink "ButtonHelper/enabled:property"}}{{/crossLink}} property instead.
@@ -2875,7 +3077,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return this._enabled;
   };
   // ButtonHelper.getEnabled is @deprecated. Remove for 1.1+
-  p.getEnabled = createjs.deprecate( p._getEnabled, "ButtonHelper.getEnabled" );
+  p.getEnabled = createjs.deprecate(p._getEnabled, "ButtonHelper.getEnabled");
 
   /**
    * Enables or disables the button functionality on the target.
@@ -2883,14 +3085,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @type {Boolean}
    **/
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       enabled: {
         get: p._getEnabled,
-        set: p._setEnabled
-      }
-    } );
-  } catch ( e ) {} // TODO: use Log
-
+        set: p._setEnabled,
+      },
+    });
+  } catch (e) {} // TODO: use Log
 
   // public methods:
   /**
@@ -2902,33 +3103,34 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return "[ButtonHelper]";
   };
 
-
   // private methods:
   /**
    * @method handleEvent
    * @param {Object} evt The mouse event to handle.
    * @protected
    **/
-  p.handleEvent = function ( evt ) {
-    var label, t = this.target,
+  p.handleEvent = function (evt) {
+    var label,
+      t = this.target,
       type = evt.type;
-    if ( type == "mousedown" ) {
+    if (type == "mousedown") {
       this._isPressed = true;
       label = this.downLabel;
-    } else if ( type == "pressup" ) {
+    } else if (type == "pressup") {
       this._isPressed = false;
       label = this._isOver ? this.overLabel : this.outLabel;
-    } else if ( type == "rollover" ) {
+    } else if (type == "rollover") {
       this._isOver = true;
       label = this._isPressed ? this.downLabel : this.overLabel;
-    } else { // rollout and default
+    } else {
+      // rollout and default
       this._isOver = false;
       label = this._isPressed ? this.overLabel : this.outLabel;
     }
-    if ( this.play ) {
-      t.gotoAndPlay && t.gotoAndPlay( label );
+    if (this.play) {
+      t.gotoAndPlay && t.gotoAndPlay(label);
     } else {
-      t.gotoAndStop && t.gotoAndStop( label );
+      t.gotoAndStop && t.gotoAndStop(label);
     }
   };
 
@@ -2944,17 +3146,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     this.paused = p;
   };
 
-
   createjs.ButtonHelper = ButtonHelper;
-}() );
+})();
 
 //##############################################################################
 // Shadow.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -2972,11 +3172,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} offsetY The y offset of the shadow in pixels.
    * @param {Number} blur The size of the blurring effect.
    **/
-  function Shadow( color, offsetX, offsetY, blur ) {
-
-
+  function Shadow(color, offsetX, offsetY, blur) {
     // public properties:
-    /** 
+    /**
      * The color of the shadow. This can be any valid CSS color value.
      * @property color
      * @type String
@@ -3016,8 +3214,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @final
    * @readonly
    **/
-  Shadow.identity = new Shadow( "transparent", 0, 0, 0 );
-
+  Shadow.identity = new Shadow("transparent", 0, 0, 0);
 
   // public methods:
   /**
@@ -3035,20 +3232,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Shadow} A clone of the current Shadow instance.
    **/
   p.clone = function () {
-    return new Shadow( this.color, this.offsetX, this.offsetY, this.blur );
+    return new Shadow(this.color, this.offsetX, this.offsetY, this.blur);
   };
 
-
   createjs.Shadow = Shadow;
-}() );
+})();
 
 //##############################################################################
 // SpriteSheet.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -3219,9 +3414,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} data An object describing the SpriteSheet data.
    * @extends EventDispatcher
    **/
-  function SpriteSheet( data ) {
+  function SpriteSheet(data) {
     this.EventDispatcher_constructor();
-
 
     // public properties:
     /**
@@ -3239,7 +3433,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @type Number
      **/
     this.framerate = 0;
-
 
     // private properties:
     /**
@@ -3328,13 +3521,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     this._margin = 0;
 
     // setup:
-    this._parseData( data );
+    this._parseData(data);
   }
-  var p = createjs.extend( SpriteSheet, createjs.EventDispatcher );
+  var p = createjs.extend(SpriteSheet, createjs.EventDispatcher);
 
   // TODO: deprecated
   // p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
-
 
   // events:
   /**
@@ -3371,7 +3563,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @since 0.8.2
    */
 
-
   // getter / setters:
   /**
    * Use the {{#crossLink "SpriteSheet/animations:property"}}{{/crossLink}} property instead.
@@ -3383,7 +3574,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return this._animations.slice();
   };
   // SpriteSheet.getAnimations is @deprecated. Remove for 1.1+
-  p.getAnimations = createjs.deprecate( p._getAnimations, "SpriteSheet.getAnimations" );
+  p.getAnimations = createjs.deprecate(
+    p._getAnimations,
+    "SpriteSheet.getAnimations"
+  );
 
   /**
    * Returns an array of all available animation names available on this sprite sheet as strings.
@@ -3392,13 +3586,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @readonly
    **/
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       animations: {
-        get: p._getAnimations
-      }
-    } );
-  } catch ( e ) {}
-
+        get: p._getAnimations,
+      },
+    });
+  } catch (e) {}
 
   // public methods:
   /**
@@ -3409,12 +3602,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String} animation The name of the animation to get a frame count for.
    * @return {Number} The number of frames in the animation, or in the entire sprite sheet if the animation param is omitted.
    */
-  p.getNumFrames = function ( animation ) {
-    if ( animation == null ) {
+  p.getNumFrames = function (animation) {
+    if (animation == null) {
       return this._frames ? this._frames.length : this._numFrames || 0;
     } else {
-      var data = this._data[ animation ];
-      if ( data == null ) {
+      var data = this._data[animation];
+      if (data == null) {
         return 0;
       } else {
         return data.frames.length;
@@ -3434,8 +3627,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String} name The name of the animation to get.
    * @return {Object} a generic object with frames, speed, name, and next properties.
    **/
-  p.getAnimation = function ( name ) {
-    return this._data[ name ];
+  p.getAnimation = function (name) {
+    return this._data[name];
   };
 
   /**
@@ -3449,9 +3642,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} frameIndex The index of the frame.
    * @return {Object} a generic object with image and rect properties. Returns null if the frame does not exist.
    **/
-  p.getFrame = function ( frameIndex ) {
+  p.getFrame = function (frameIndex) {
     var frame;
-    if ( this._frames && ( frame = this._frames[ frameIndex ] ) ) {
+    if (this._frames && (frame = this._frames[frameIndex])) {
       return frame;
     }
     return null;
@@ -3468,9 +3661,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Rectangle} [rectangle] A Rectangle instance to copy the values into. By default a new instance is created.
    * @return {Rectangle} A Rectangle instance. Returns null if the frame does not exist, or the image is not fully loaded.
    **/
-  p.getFrameBounds = function ( frameIndex, rectangle ) {
-    var frame = this.getFrame( frameIndex );
-    return frame ? ( rectangle || new createjs.Rectangle() ).setValues( -frame.regX, -frame.regY, frame.rect.width, frame.rect.height ) : null;
+  p.getFrameBounds = function (frameIndex, rectangle) {
+    var frame = this.getFrame(frameIndex);
+    return frame
+      ? (rectangle || new createjs.Rectangle()).setValues(
+          -frame.regX,
+          -frame.regY,
+          frame.rect.width,
+          frame.rect.height
+        )
+      : null;
   };
 
   /**
@@ -3487,7 +3687,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method clone
    **/
   p.clone = function () {
-    throw ( "SpriteSheet cannot be cloned." )
+    throw "SpriteSheet cannot be cloned.";
   };
 
   // private methods:
@@ -3496,55 +3696,56 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} data An object describing the SpriteSheet data.
    * @protected
    **/
-  p._parseData = function ( data ) {
+  p._parseData = function (data) {
     var i, l, o, a;
-    if ( data == null ) {
+    if (data == null) {
       return;
     }
 
     this.framerate = data.framerate || 0;
 
     // parse images:
-    if ( data.images && ( l = data.images.length ) > 0 ) {
+    if (data.images && (l = data.images.length) > 0) {
       a = this._images = [];
-      for ( i = 0; i < l; i++ ) {
-        var img = data.images[ i ];
-        if ( typeof img == "string" ) {
+      for (i = 0; i < l; i++) {
+        var img = data.images[i];
+        if (typeof img == "string") {
           var src = img;
-          img = document.createElement( "img" );
+          img = document.createElement("img");
           img.src = src;
         }
-        a.push( img );
-        if ( !img.getContext && !img.naturalWidth ) {
+        a.push(img);
+        if (!img.getContext && !img.naturalWidth) {
           this._loadCount++;
           this.complete = false;
-          ( function ( o, src ) {
+          (function (o, src) {
             img.onload = function () {
-              o._handleImageLoad( src );
-            }
-          } )( this, src );
-          ( function ( o, src ) {
+              o._handleImageLoad(src);
+            };
+          })(this, src);
+          (function (o, src) {
             img.onerror = function () {
-              o._handleImageError( src );
-            }
-          } )( this, src );
+              o._handleImageError(src);
+            };
+          })(this, src);
         }
       }
     }
 
     // parse frames:
-    if ( data.frames == null ) { // nothing
-    } else if ( Array.isArray( data.frames ) ) {
+    if (data.frames == null) {
+      // nothing
+    } else if (Array.isArray(data.frames)) {
       this._frames = [];
       a = data.frames;
-      for ( i = 0, l = a.length; i < l; i++ ) {
-        var arr = a[ i ];
-        this._frames.push( {
-          image: this._images[ arr[ 4 ] ? arr[ 4 ] : 0 ],
-          rect: new createjs.Rectangle( arr[ 0 ], arr[ 1 ], arr[ 2 ], arr[ 3 ] ),
-          regX: arr[ 5 ] || 0,
-          regY: arr[ 6 ] || 0
-        } );
+      for (i = 0, l = a.length; i < l; i++) {
+        var arr = a[i];
+        this._frames.push({
+          image: this._images[arr[4] ? arr[4] : 0],
+          rect: new createjs.Rectangle(arr[0], arr[1], arr[2], arr[3]),
+          regX: arr[5] || 0,
+          regY: arr[6] || 0,
+        });
       }
     } else {
       o = data.frames;
@@ -3555,51 +3756,55 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       this._spacing = o.spacing || 0;
       this._margin = o.margin || 0;
       this._numFrames = o.count;
-      if ( this._loadCount == 0 ) {
+      if (this._loadCount == 0) {
         this._calculateFrames();
       }
     }
 
     // parse animations:
     this._animations = [];
-    if ( ( o = data.animations ) != null ) {
+    if ((o = data.animations) != null) {
       this._data = {};
       var name;
-      for ( name in o ) {
+      for (name in o) {
         var anim = {
-          name: name
+          name: name,
         };
-        var obj = o[ name ];
-        if ( typeof obj == "number" ) { // single frame
-          a = anim.frames = [ obj ];
-        } else if ( Array.isArray( obj ) ) { // simple
-          if ( obj.length == 1 ) {
-            anim.frames = [ obj[ 0 ] ];
+        var obj = o[name];
+        if (typeof obj == "number") {
+          // single frame
+          a = anim.frames = [obj];
+        } else if (Array.isArray(obj)) {
+          // simple
+          if (obj.length == 1) {
+            anim.frames = [obj[0]];
           } else {
-            anim.speed = obj[ 3 ];
-            anim.next = obj[ 2 ];
+            anim.speed = obj[3];
+            anim.next = obj[2];
             a = anim.frames = [];
-            for ( i = obj[ 0 ]; i <= obj[ 1 ]; i++ ) {
-              a.push( i );
+            for (i = obj[0]; i <= obj[1]; i++) {
+              a.push(i);
             }
           }
-        } else { // complex
+        } else {
+          // complex
           anim.speed = obj.speed;
           anim.next = obj.next;
           var frames = obj.frames;
-          a = anim.frames = ( typeof frames == "number" ) ? [ frames ] : frames.slice( 0 );
+          a = anim.frames =
+            typeof frames == "number" ? [frames] : frames.slice(0);
         }
-        if ( anim.next === true || anim.next === undefined ) {
+        if (anim.next === true || anim.next === undefined) {
           anim.next = name;
         } // loop
-        if ( anim.next === false || ( a.length < 2 && anim.next == name ) ) {
+        if (anim.next === false || (a.length < 2 && anim.next == name)) {
           anim.next = null;
         } // stop
-        if ( !anim.speed ) {
+        if (!anim.speed) {
           anim.speed = 1;
         }
-        this._animations.push( name );
-        this._data[ name ] = anim;
+        this._animations.push(name);
+        this._data[name] = anim;
       }
     }
   };
@@ -3608,11 +3813,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method _handleImageLoad
    * @protected
    **/
-  p._handleImageLoad = function ( src ) {
-    if ( --this._loadCount == 0 ) {
+  p._handleImageLoad = function (src) {
+    if (--this._loadCount == 0) {
       this._calculateFrames();
       this.complete = true;
-      this.dispatchEvent( "complete" );
+      this.dispatchEvent("complete");
     }
   };
 
@@ -3620,14 +3825,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method _handleImageError
    * @protected
    */
-  p._handleImageError = function ( src ) {
-    var errorEvent = new createjs.Event( "error" );
+  p._handleImageError = function (src) {
+    var errorEvent = new createjs.Event("error");
     errorEvent.src = src;
-    this.dispatchEvent( errorEvent );
+    this.dispatchEvent(errorEvent);
 
     // Complete is still dispatched.
-    if ( --this._loadCount == 0 ) {
-      this.dispatchEvent( "complete" );
+    if (--this._loadCount == 0) {
+      this.dispatchEvent("complete");
     }
   };
 
@@ -3636,7 +3841,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    **/
   p._calculateFrames = function () {
-    if ( this._frames || this._frameWidth == 0 ) {
+    if (this._frames || this._frameWidth == 0) {
       return;
     }
 
@@ -3649,45 +3854,42 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     var spacing = this._spacing,
       margin = this._margin;
 
-    imgLoop:
-      for ( var i = 0, imgs = this._images; i < imgs.length; i++ ) {
-        var img = imgs[ i ],
-          imgW = ( img.width || img.naturalWidth ),
-          imgH = ( img.height || img.naturalHeight );
+    imgLoop: for (var i = 0, imgs = this._images; i < imgs.length; i++) {
+      var img = imgs[i],
+        imgW = img.width || img.naturalWidth,
+        imgH = img.height || img.naturalHeight;
 
-        var y = margin;
-        while ( y <= imgH - margin - frameHeight ) {
-          var x = margin;
-          while ( x <= imgW - margin - frameWidth ) {
-            if ( frameCount >= maxFrames ) {
-              break imgLoop;
-            }
-            frameCount++;
-            this._frames.push( {
-              image: img,
-              rect: new createjs.Rectangle( x, y, frameWidth, frameHeight ),
-              regX: this._regX,
-              regY: this._regY
-            } );
-            x += frameWidth + spacing;
+      var y = margin;
+      while (y <= imgH - margin - frameHeight) {
+        var x = margin;
+        while (x <= imgW - margin - frameWidth) {
+          if (frameCount >= maxFrames) {
+            break imgLoop;
           }
-          y += frameHeight + spacing;
+          frameCount++;
+          this._frames.push({
+            image: img,
+            rect: new createjs.Rectangle(x, y, frameWidth, frameHeight),
+            regX: this._regX,
+            regY: this._regY,
+          });
+          x += frameWidth + spacing;
         }
+        y += frameHeight + spacing;
       }
+    }
     this._numFrames = frameCount;
   };
 
-
-  createjs.SpriteSheet = createjs.promote( SpriteSheet, "EventDispatcher" );
-}() );
+  createjs.SpriteSheet = createjs.promote(SpriteSheet, "EventDispatcher");
+})();
 
 //##############################################################################
 // Graphics.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -3786,8 +3988,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @constructor
    **/
   function Graphics() {
-
-
     // public properties
     /**
      * Holds a reference to the last command that was created or appended. For example, you could retain a reference
@@ -3801,7 +4001,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @type Object
      **/
     this.command = null;
-
 
     // private properties
     /**
@@ -3923,14 +4122,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {String} A CSS compatible color string based on the specified RGB numeric color values in the format
    * "rgba(255,255,255,1.0)", or if alpha is null then in the format "rgb(255,255,255)".
    **/
-  Graphics.getRGB = function ( r, g, b, alpha ) {
-    if ( r != null && b == null ) {
+  Graphics.getRGB = function (r, g, b, alpha) {
+    if (r != null && b == null) {
       alpha = g;
-      b = r & 0xFF;
-      g = r >> 8 & 0xFF;
-      r = r >> 16 & 0xFF;
+      b = r & 0xff;
+      g = (r >> 8) & 0xff;
+      r = (r >> 16) & 0xff;
     }
-    if ( alpha == null ) {
+    if (alpha == null) {
       return "rgb(" + r + "," + g + "," + b + ")";
     } else {
       return "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
@@ -3953,14 +4152,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {String} A CSS compatible color string based on the specified HSL numeric color values in the format
    * "hsla(360,100,100,1.0)", or if alpha is null then in the format "hsl(360,100,100)".
    **/
-  Graphics.getHSL = function ( hue, saturation, lightness, alpha ) {
-    if ( alpha == null ) {
-      return "hsl(" + ( hue % 360 ) + "," + saturation + "%," + lightness + "%)";
+  Graphics.getHSL = function (hue, saturation, lightness, alpha) {
+    if (alpha == null) {
+      return "hsl(" + (hue % 360) + "," + saturation + "%," + lightness + "%)";
     } else {
-      return "hsla(" + ( hue % 360 ) + "," + saturation + "%," + lightness + "%," + alpha + ")";
+      return (
+        "hsla(" +
+        (hue % 360) +
+        "," +
+        saturation +
+        "%," +
+        lightness +
+        "%," +
+        alpha +
+        ")"
+      );
     }
   };
-
 
   // static properties:
   /**
@@ -3981,70 +4189,70 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @type {Object}
    **/
   Graphics.BASE_64 = {
-    "A": 0,
-    "B": 1,
-    "C": 2,
-    "D": 3,
-    "E": 4,
-    "F": 5,
-    "G": 6,
-    "H": 7,
-    "I": 8,
-    "J": 9,
-    "K": 10,
-    "L": 11,
-    "M": 12,
-    "N": 13,
-    "O": 14,
-    "P": 15,
-    "Q": 16,
-    "R": 17,
-    "S": 18,
-    "T": 19,
-    "U": 20,
-    "V": 21,
-    "W": 22,
-    "X": 23,
-    "Y": 24,
-    "Z": 25,
-    "a": 26,
-    "b": 27,
-    "c": 28,
-    "d": 29,
-    "e": 30,
-    "f": 31,
-    "g": 32,
-    "h": 33,
-    "i": 34,
-    "j": 35,
-    "k": 36,
-    "l": 37,
-    "m": 38,
-    "n": 39,
-    "o": 40,
-    "p": 41,
-    "q": 42,
-    "r": 43,
-    "s": 44,
-    "t": 45,
-    "u": 46,
-    "v": 47,
-    "w": 48,
-    "x": 49,
-    "y": 50,
-    "z": 51,
-    "0": 52,
-    "1": 53,
-    "2": 54,
-    "3": 55,
-    "4": 56,
-    "5": 57,
-    "6": 58,
-    "7": 59,
-    "8": 60,
-    "9": 61,
+    A: 0,
+    B: 1,
+    C: 2,
+    D: 3,
+    E: 4,
+    F: 5,
+    G: 6,
+    H: 7,
+    I: 8,
+    J: 9,
+    K: 10,
+    L: 11,
+    M: 12,
+    N: 13,
+    O: 14,
+    P: 15,
+    Q: 16,
+    R: 17,
+    S: 18,
+    T: 19,
+    U: 20,
+    V: 21,
+    W: 22,
+    X: 23,
+    Y: 24,
+    Z: 25,
+    a: 26,
+    b: 27,
+    c: 28,
+    d: 29,
+    e: 30,
+    f: 31,
+    g: 32,
+    h: 33,
+    i: 34,
+    j: 35,
+    k: 36,
+    l: 37,
+    m: 38,
+    n: 39,
+    o: 40,
+    p: 41,
+    q: 42,
+    r: 43,
+    s: 44,
+    t: 45,
+    u: 46,
+    v: 47,
+    w: 48,
+    x: 49,
+    y: 50,
+    z: 51,
+    0: 52,
+    1: 53,
+    2: 54,
+    3: 55,
+    4: 56,
+    5: 57,
+    6: 58,
+    7: 59,
+    8: 60,
+    9: 61,
     "+": 62,
-    "/": 63
+    "/": 63,
   };
 
   /**
@@ -4061,7 +4269,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @readonly
    * @type {Array}
    **/
-  Graphics.STROKE_CAPS_MAP = [ "butt", "round", "square" ];
+  Graphics.STROKE_CAPS_MAP = ["butt", "round", "square"];
 
   /**
    * Maps numeric values for the joints parameter of {{#crossLink "Graphics/setStrokeStyle"}}{{/crossLink}} to
@@ -4077,7 +4285,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @readonly
    * @type {Array}
    **/
-  Graphics.STROKE_JOINTS_MAP = [ "miter", "round", "bevel" ];
+  Graphics.STROKE_JOINTS_MAP = ["miter", "round", "bevel"];
 
   /**
    * @property _ctx
@@ -4085,12 +4293,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @type {CanvasRenderingContext2D}
    **/
-  var canvas = ( createjs.createCanvas ? createjs.createCanvas() : document.createElement( "canvas" ) );
-  if ( canvas.getContext ) {
-    Graphics._ctx = canvas.getContext( "2d" );
+  var canvas = createjs.createCanvas
+    ? createjs.createCanvas()
+    : document.createElement("canvas");
+  if (canvas.getContext) {
+    Graphics._ctx = canvas.getContext("2d");
     canvas.width = canvas.height = 1;
   }
-
 
   // getter / setters:
   /**
@@ -4104,7 +4313,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return this._instructions;
   };
   // Graphics.getInstructions is @deprecated. Remove for 1.1+
-  p.getInstructions = createjs.deprecate( p._getInstructions, "Graphics.getInstructions" );
+  p.getInstructions = createjs.deprecate(
+    p._getInstructions,
+    "Graphics.getInstructions"
+  );
 
   /**
    * Returns the graphics instructions array. Each entry is a graphics command object (ex. Graphics.Fill, Graphics.Rect)
@@ -4116,13 +4328,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @readonly
    **/
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       instructions: {
-        get: p._getInstructions
-      }
-    } );
-  } catch ( e ) {}
-
+        get: p._getInstructions,
+      },
+    });
+  } catch (e) {}
 
   // public methods:
   /**
@@ -4131,7 +4342,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} Returns true if this Graphics instance has no drawing commands.
    **/
   p.isEmpty = function () {
-    return !( this._instructions.length || this._activeInstructions.length );
+    return !(this._instructions.length || this._activeInstructions.length);
   };
 
   /**
@@ -4143,11 +4354,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {CanvasRenderingContext2D} ctx The canvas 2D context object to draw into.
    * @param {Object} data Optional data that is passed to graphics command exec methods. When called from a Shape instance, the shape passes itself as the data parameter. This can be used by custom graphic commands to insert contextual data.
    **/
-  p.draw = function ( ctx, data ) {
+  p.draw = function (ctx, data) {
     this._updateInstructions();
     var instr = this._instructions;
-    for ( var i = this._storeIndex, l = instr.length; i < l; i++ ) {
-      instr[ i ].exec( ctx, data );
+    for (var i = this._storeIndex, l = instr.length; i < l; i++) {
+      instr[i].exec(ctx, data);
     }
   };
 
@@ -4159,17 +4370,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method drawAsPath
    * @param {CanvasRenderingContext2D} ctx The canvas 2D context object to draw into.
    **/
-  p.drawAsPath = function ( ctx ) {
+  p.drawAsPath = function (ctx) {
     this._updateInstructions();
-    var instr, instrs = this._instructions;
-    for ( var i = this._storeIndex, l = instrs.length; i < l; i++ ) {
+    var instr,
+      instrs = this._instructions;
+    for (var i = this._storeIndex, l = instrs.length; i < l; i++) {
       // the first command is always a beginPath command.
-      if ( ( instr = instrs[ i ] ).path !== false ) {
-        instr.exec( ctx );
+      if ((instr = instrs[i]).path !== false) {
+        instr.exec(ctx);
       }
     }
   };
-
 
   // public methods that map directly to context 2D calls:
   /**
@@ -4180,8 +4391,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls).
    * @chainable
    **/
-  p.moveTo = function ( x, y ) {
-    return this.append( new G.MoveTo( x, y ), true );
+  p.moveTo = function (x, y) {
+    return this.append(new G.MoveTo(x, y), true);
   };
 
   /**
@@ -4198,8 +4409,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.lineTo = function ( x, y ) {
-    return this.append( new G.LineTo( x, y ) );
+  p.lineTo = function (x, y) {
+    return this.append(new G.LineTo(x, y));
   };
 
   /**
@@ -4215,8 +4426,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.arcTo = function ( x1, y1, x2, y2, radius ) {
-    return this.append( new G.ArcTo( x1, y1, x2, y2, radius ) );
+  p.arcTo = function (x1, y1, x2, y2, radius) {
+    return this.append(new G.ArcTo(x1, y1, x2, y2, radius));
   };
 
   /**
@@ -4238,8 +4449,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.arc = function ( x, y, radius, startAngle, endAngle, anticlockwise ) {
-    return this.append( new G.Arc( x, y, radius, startAngle, endAngle, anticlockwise ) );
+  p.arc = function (x, y, radius, startAngle, endAngle, anticlockwise) {
+    return this.append(
+      new G.Arc(x, y, radius, startAngle, endAngle, anticlockwise)
+    );
   };
 
   /**
@@ -4254,8 +4467,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.quadraticCurveTo = function ( cpx, cpy, x, y ) {
-    return this.append( new G.QuadraticCurveTo( cpx, cpy, x, y ) );
+  p.quadraticCurveTo = function (cpx, cpy, x, y) {
+    return this.append(new G.QuadraticCurveTo(cpx, cpy, x, y));
   };
 
   /**
@@ -4273,8 +4486,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.bezierCurveTo = function ( cp1x, cp1y, cp2x, cp2y, x, y ) {
-    return this.append( new G.BezierCurveTo( cp1x, cp1y, cp2x, cp2y, x, y ) );
+  p.bezierCurveTo = function (cp1x, cp1y, cp2x, cp2y, x, y) {
+    return this.append(new G.BezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y));
   };
 
   /**
@@ -4290,8 +4503,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.rect = function ( x, y, w, h ) {
-    return this.append( new G.Rect( x, y, w, h ) );
+  p.rect = function (x, y, w, h) {
+    return this.append(new G.Rect(x, y, w, h));
   };
 
   /**
@@ -4302,9 +4515,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @chainable
    **/
   p.closePath = function () {
-    return this._activeInstructions.length ? this.append( new G.ClosePath() ) : this;
+    return this._activeInstructions.length
+      ? this.append(new G.ClosePath())
+      : this;
   };
-
 
   // public methods that roughly map to Adobe Flash/Animate graphics APIs:
   /**
@@ -4315,8 +4529,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @chainable
    **/
   p.clear = function () {
-    this._instructions.length = this._activeInstructions.length = this._commitIndex = 0;
-    this._strokeStyle = this._oldStrokeStyle = this._stroke = this._fill = this._strokeDash = this._oldStrokeDash = null;
+    this._instructions.length =
+      this._activeInstructions.length =
+      this._commitIndex =
+        0;
+    this._strokeStyle =
+      this._oldStrokeStyle =
+      this._stroke =
+      this._fill =
+      this._strokeDash =
+      this._oldStrokeDash =
+        null;
     this._dirty = this._strokeIgnoreScale = false;
     return this;
   };
@@ -4329,8 +4552,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.beginFill = function ( color ) {
-    return this._setFill( color ? new G.Fill( color ) : null );
+  p.beginFill = function (color) {
+    return this._setFill(color ? new G.Fill(color) : null);
   };
 
   /**
@@ -4353,8 +4576,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.beginLinearGradientFill = function ( colors, ratios, x0, y0, x1, y1 ) {
-    return this._setFill( new G.Fill().linearGradient( colors, ratios, x0, y0, x1, y1 ) );
+  p.beginLinearGradientFill = function (colors, ratios, x0, y0, x1, y1) {
+    return this._setFill(
+      new G.Fill().linearGradient(colors, ratios, x0, y0, x1, y1)
+    );
   };
 
   /**
@@ -4378,8 +4603,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.beginRadialGradientFill = function ( colors, ratios, x0, y0, r0, x1, y1, r1 ) {
-    return this._setFill( new G.Fill().radialGradient( colors, ratios, x0, y0, r0, x1, y1, r1 ) );
+  p.beginRadialGradientFill = function (
+    colors,
+    ratios,
+    x0,
+    y0,
+    r0,
+    x1,
+    y1,
+    r1
+  ) {
+    return this._setFill(
+      new G.Fill().radialGradient(colors, ratios, x0, y0, r0, x1, y1, r1)
+    );
   };
 
   /**
@@ -4396,8 +4632,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.beginBitmapFill = function ( image, repetition, matrix ) {
-    return this._setFill( new G.Fill( null, matrix ).bitmap( image, repetition ) );
+  p.beginBitmapFill = function (image, repetition, matrix) {
+    return this._setFill(new G.Fill(null, matrix).bitmap(image, repetition));
   };
 
   /**
@@ -4433,12 +4669,24 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.setStrokeStyle = function ( thickness, caps, joints, miterLimit, ignoreScale ) {
-    this._updateInstructions( true );
-    this._strokeStyle = this.command = new G.StrokeStyle( thickness, caps, joints, miterLimit, ignoreScale );
+  p.setStrokeStyle = function (
+    thickness,
+    caps,
+    joints,
+    miterLimit,
+    ignoreScale
+  ) {
+    this._updateInstructions(true);
+    this._strokeStyle = this.command = new G.StrokeStyle(
+      thickness,
+      caps,
+      joints,
+      miterLimit,
+      ignoreScale
+    );
 
     // ignoreScale lives on Stroke, not StrokeStyle, so we do a little trickery:
-    if ( this._stroke ) {
+    if (this._stroke) {
       this._stroke.ignoreScale = ignoreScale;
     }
     this._strokeIgnoreScale = ignoreScale;
@@ -4459,9 +4707,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.setStrokeDash = function ( segments, offset ) {
-    this._updateInstructions( true );
-    this._strokeDash = this.command = new G.StrokeDash( segments, offset );
+  p.setStrokeDash = function (segments, offset) {
+    this._updateInstructions(true);
+    this._strokeDash = this.command = new G.StrokeDash(segments, offset);
     return this;
   };
 
@@ -4473,8 +4721,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.beginStroke = function ( color ) {
-    return this._setStroke( color ? new G.Stroke( color ) : null );
+  p.beginStroke = function (color) {
+    return this._setStroke(color ? new G.Stroke(color) : null);
   };
 
   /**
@@ -4498,8 +4746,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.beginLinearGradientStroke = function ( colors, ratios, x0, y0, x1, y1 ) {
-    return this._setStroke( new G.Stroke().linearGradient( colors, ratios, x0, y0, x1, y1 ) );
+  p.beginLinearGradientStroke = function (colors, ratios, x0, y0, x1, y1) {
+    return this._setStroke(
+      new G.Stroke().linearGradient(colors, ratios, x0, y0, x1, y1)
+    );
   };
 
   /**
@@ -4526,8 +4776,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.beginRadialGradientStroke = function ( colors, ratios, x0, y0, r0, x1, y1, r1 ) {
-    return this._setStroke( new G.Stroke().radialGradient( colors, ratios, x0, y0, r0, x1, y1, r1 ) );
+  p.beginRadialGradientStroke = function (
+    colors,
+    ratios,
+    x0,
+    y0,
+    r0,
+    x1,
+    y1,
+    r1
+  ) {
+    return this._setStroke(
+      new G.Stroke().radialGradient(colors, ratios, x0, y0, r0, x1, y1, r1)
+    );
   };
 
   /**
@@ -4542,9 +4803,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.beginBitmapStroke = function ( image, repetition ) {
+  p.beginBitmapStroke = function (image, repetition) {
     // NOTE: matrix is not supported for stroke because transforms on strokes also affect the drawn stroke width.
-    return this._setStroke( new G.Stroke().bitmap( image, repetition ) );
+    return this._setStroke(new G.Stroke().bitmap(image, repetition));
   };
 
   /**
@@ -4596,8 +4857,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.drawRoundRect = function ( x, y, w, h, radius ) {
-    return this.drawRoundRectComplex( x, y, w, h, radius, radius, radius, radius );
+  p.drawRoundRect = function (x, y, w, h, radius) {
+    return this.drawRoundRectComplex(
+      x,
+      y,
+      w,
+      h,
+      radius,
+      radius,
+      radius,
+      radius
+    );
   };
 
   /**
@@ -4615,8 +4885,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.drawRoundRectComplex = function ( x, y, w, h, radiusTL, radiusTR, radiusBR, radiusBL ) {
-    return this.append( new G.RoundRect( x, y, w, h, radiusTL, radiusTR, radiusBR, radiusBL ) );
+  p.drawRoundRectComplex = function (
+    x,
+    y,
+    w,
+    h,
+    radiusTL,
+    radiusTR,
+    radiusBR,
+    radiusBL
+  ) {
+    return this.append(
+      new G.RoundRect(x, y, w, h, radiusTL, radiusTR, radiusBR, radiusBL)
+    );
   };
 
   /**
@@ -4643,8 +4924,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.drawCircle = function ( x, y, radius ) {
-    return this.append( new G.Circle( x, y, radius ) );
+  p.drawCircle = function (x, y, radius) {
+    return this.append(new G.Circle(x, y, radius));
   };
 
   /**
@@ -4661,8 +4942,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.drawEllipse = function ( x, y, w, h ) {
-    return this.append( new G.Ellipse( x, y, w, h ) );
+  p.drawEllipse = function (x, y, w, h) {
+    return this.append(new G.Ellipse(x, y, w, h));
   };
 
   /**
@@ -4687,8 +4968,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.drawPolyStar = function ( x, y, radius, sides, pointSize, angle ) {
-    return this.append( new G.PolyStar( x, y, radius, sides, pointSize, angle ) );
+  p.drawPolyStar = function (x, y, radius, sides, pointSize, angle) {
+    return this.append(new G.PolyStar(x, y, radius, sides, pointSize, angle));
   };
 
   /**
@@ -4718,10 +4999,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.append = function ( command, clean ) {
-    this._activeInstructions.push( command );
+  p.append = function (command, clean) {
+    this._activeInstructions.push(command);
     this.command = command;
-    if ( !clean ) {
+    if (!clean) {
       this._dirty = true;
     }
     return this;
@@ -4763,9 +5044,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.decodePath = function ( str ) {
-    var instructions = [ this.moveTo, this.lineTo, this.quadraticCurveTo, this.bezierCurveTo, this.closePath ];
-    var paramCount = [ 2, 2, 4, 6, 0 ];
+  p.decodePath = function (str) {
+    var instructions = [
+      this.moveTo,
+      this.lineTo,
+      this.quadraticCurveTo,
+      this.bezierCurveTo,
+      this.closePath,
+    ];
+    var paramCount = [2, 2, 4, 6, 0];
     var i = 0,
       l = str.length;
     var params = [];
@@ -4773,39 +5060,39 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       y = 0;
     var base64 = Graphics.BASE_64;
 
-    while ( i < l ) {
-      var c = str.charAt( i );
-      var n = base64[ c ];
+    while (i < l) {
+      var c = str.charAt(i);
+      var n = base64[c];
       var fi = n >> 3; // highest order bits 1-3 code for operation.
-      var f = instructions[ fi ];
+      var f = instructions[fi];
       // check that we have a valid instruction & that the unused bits are empty:
-      if ( !f || ( n & 3 ) ) {
-        throw ( "bad path data (@" + i + "): " + c );
+      if (!f || n & 3) {
+        throw "bad path data (@" + i + "): " + c;
       }
-      var pl = paramCount[ fi ];
-      if ( !fi ) {
+      var pl = paramCount[fi];
+      if (!fi) {
         x = y = 0;
       } // move operations reset the position.
       params.length = 0;
       i++;
-      var charCount = ( n >> 2 & 1 ) + 2; // 4th header bit indicates number size for this operation.
-      for ( var p = 0; p < pl; p++ ) {
-        var num = base64[ str.charAt( i ) ];
-        var sign = ( num >> 5 ) ? -1 : 1;
-        num = ( ( num & 31 ) << 6 ) | ( base64[ str.charAt( i + 1 ) ] );
-        if ( charCount == 3 ) {
-          num = ( num << 6 ) | ( base64[ str.charAt( i + 2 ) ] );
+      var charCount = ((n >> 2) & 1) + 2; // 4th header bit indicates number size for this operation.
+      for (var p = 0; p < pl; p++) {
+        var num = base64[str.charAt(i)];
+        var sign = num >> 5 ? -1 : 1;
+        num = ((num & 31) << 6) | base64[str.charAt(i + 1)];
+        if (charCount == 3) {
+          num = (num << 6) | base64[str.charAt(i + 2)];
         }
-        num = sign * num / 10;
-        if ( p % 2 ) {
-          x = ( num += x );
+        num = (sign * num) / 10;
+        if (p % 2) {
+          x = num += x;
         } else {
-          y = ( num += y );
+          y = num += y;
         }
-        params[ p ] = num;
+        params[p] = num;
         i += charCount;
       }
-      f.apply( this, params );
+      f.apply(this, params);
     }
     return this;
   };
@@ -4848,7 +5135,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @chainable
    **/
   p.store = function () {
-    this._updateInstructions( true );
+    this._updateInstructions(true);
     this._storeIndex = this._instructions.length;
     return this;
   };
@@ -4895,7 +5182,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   p.toString = function () {
     return "[Graphics]";
   };
-
 
   // tiny API:
   /**
@@ -5281,51 +5567,50 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
   p.p = p.decodePath;
 
-
   // private methods:
   /**
    * @method _updateInstructions
    * @param commit
    * @protected
    **/
-  p._updateInstructions = function ( commit ) {
+  p._updateInstructions = function (commit) {
     var instr = this._instructions,
       active = this._activeInstructions,
       commitIndex = this._commitIndex;
 
-    if ( this._dirty && active.length ) {
+    if (this._dirty && active.length) {
       instr.length = commitIndex; // remove old, uncommitted commands
-      instr.push( Graphics.beginCmd );
+      instr.push(Graphics.beginCmd);
 
       var l = active.length,
         ll = instr.length;
       instr.length = ll + l;
-      for ( var i = 0; i < l; i++ ) {
-        instr[ i + ll ] = active[ i ];
+      for (var i = 0; i < l; i++) {
+        instr[i + ll] = active[i];
       }
 
-      if ( this._fill ) {
-        instr.push( this._fill );
+      if (this._fill) {
+        instr.push(this._fill);
       }
-      if ( this._stroke ) {
+      if (this._stroke) {
         // doesn't need to be re-applied if it hasn't changed.
-        if ( this._strokeDash !== this._oldStrokeDash ) {
-          instr.push( this._strokeDash );
+        if (this._strokeDash !== this._oldStrokeDash) {
+          instr.push(this._strokeDash);
         }
-        if ( this._strokeStyle !== this._oldStrokeStyle ) {
-          instr.push( this._strokeStyle );
+        if (this._strokeStyle !== this._oldStrokeStyle) {
+          instr.push(this._strokeStyle);
         }
-        if ( commit ) {
+        if (commit) {
           this._oldStrokeStyle = this._strokeStyle;
           this._oldStrokeDash = this._strokeDash;
         }
-        instr.push( this._stroke );
+        instr.push(this._stroke);
       }
 
       this._dirty = false;
     }
 
-    if ( commit ) {
+    if (commit) {
       active.length = 0;
       this._commitIndex = instr.length;
     }
@@ -5336,8 +5621,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param fill
    * @protected
    **/
-  p._setFill = function ( fill ) {
-    this._updateInstructions( true );
+  p._setFill = function (fill) {
+    this._updateInstructions(true);
     this.command = this._fill = fill;
     return this;
   };
@@ -5347,9 +5632,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param stroke
    * @protected
    **/
-  p._setStroke = function ( stroke ) {
-    this._updateInstructions( true );
-    if ( this.command = this._stroke = stroke ) {
+  p._setStroke = function (stroke) {
+    this._updateInstructions(true);
+    if ((this.command = this._stroke = stroke)) {
       stroke.ignoreScale = this._strokeIgnoreScale;
     }
     return this;
@@ -5379,11 +5664,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.LineTo = function ( x, y ) {
-    this.x = x;
-    this.y = y;
-  } ).prototype.exec = function ( ctx ) {
-    ctx.lineTo( this.x, this.y );
+  (
+    G.LineTo = function (x, y) {
+      this.x = x;
+      this.y = y;
+    }
+  ).prototype.exec = function (ctx) {
+    ctx.lineTo(this.x, this.y);
   };
 
   /**
@@ -5405,13 +5692,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method exec
    * @param {CanvasRenderingContext2D} ctx
    */
-  ( G.MoveTo = function ( x, y ) {
-    this.x = x;
-    this.y = y;
-  } ).prototype.exec = function ( ctx ) {
-    ctx.moveTo( this.x, this.y );
+  (
+    G.MoveTo = function (x, y) {
+      this.x = x;
+      this.y = y;
+    }
+  ).prototype.exec = function (ctx) {
+    ctx.moveTo(this.x, this.y);
   };
-
 
   /**
    * Graphics command object. See {{#crossLink "Graphics/arcTo"}}{{/crossLink}} and {{#crossLink "Graphics/append"}}{{/crossLink}} for more information.
@@ -5448,14 +5736,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.ArcTo = function ( x1, y1, x2, y2, radius ) {
-    this.x1 = x1;
-    this.y1 = y1;
-    this.x2 = x2;
-    this.y2 = y2;
-    this.radius = radius;
-  } ).prototype.exec = function ( ctx ) {
-    ctx.arcTo( this.x1, this.y1, this.x2, this.y2, this.radius );
+  (
+    G.ArcTo = function (x1, y1, x2, y2, radius) {
+      this.x1 = x1;
+      this.y1 = y1;
+      this.x2 = x2;
+      this.y2 = y2;
+      this.radius = radius;
+    }
+  ).prototype.exec = function (ctx) {
+    ctx.arcTo(this.x1, this.y1, this.x2, this.y2, this.radius);
   };
 
   /**
@@ -5498,15 +5788,24 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.Arc = function ( x, y, radius, startAngle, endAngle, anticlockwise ) {
-    this.x = x;
-    this.y = y;
-    this.radius = radius;
-    this.startAngle = startAngle;
-    this.endAngle = endAngle;
-    this.anticlockwise = !!anticlockwise;
-  } ).prototype.exec = function ( ctx ) {
-    ctx.arc( this.x, this.y, this.radius, this.startAngle, this.endAngle, this.anticlockwise );
+  (
+    G.Arc = function (x, y, radius, startAngle, endAngle, anticlockwise) {
+      this.x = x;
+      this.y = y;
+      this.radius = radius;
+      this.startAngle = startAngle;
+      this.endAngle = endAngle;
+      this.anticlockwise = !!anticlockwise;
+    }
+  ).prototype.exec = function (ctx) {
+    ctx.arc(
+      this.x,
+      this.y,
+      this.radius,
+      this.startAngle,
+      this.endAngle,
+      this.anticlockwise
+    );
   };
 
   /**
@@ -5539,13 +5838,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.QuadraticCurveTo = function ( cpx, cpy, x, y ) {
-    this.cpx = cpx;
-    this.cpy = cpy;
-    this.x = x;
-    this.y = y;
-  } ).prototype.exec = function ( ctx ) {
-    ctx.quadraticCurveTo( this.cpx, this.cpy, this.x, this.y );
+  (
+    G.QuadraticCurveTo = function (cpx, cpy, x, y) {
+      this.cpx = cpx;
+      this.cpy = cpy;
+      this.x = x;
+      this.y = y;
+    }
+  ).prototype.exec = function (ctx) {
+    ctx.quadraticCurveTo(this.cpx, this.cpy, this.x, this.y);
   };
 
   /**
@@ -5588,15 +5889,24 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.BezierCurveTo = function ( cp1x, cp1y, cp2x, cp2y, x, y ) {
-    this.cp1x = cp1x;
-    this.cp1y = cp1y;
-    this.cp2x = cp2x;
-    this.cp2y = cp2y;
-    this.x = x;
-    this.y = y;
-  } ).prototype.exec = function ( ctx ) {
-    ctx.bezierCurveTo( this.cp1x, this.cp1y, this.cp2x, this.cp2y, this.x, this.y );
+  (
+    G.BezierCurveTo = function (cp1x, cp1y, cp2x, cp2y, x, y) {
+      this.cp1x = cp1x;
+      this.cp1y = cp1y;
+      this.cp2x = cp2x;
+      this.cp2y = cp2y;
+      this.x = x;
+      this.y = y;
+    }
+  ).prototype.exec = function (ctx) {
+    ctx.bezierCurveTo(
+      this.cp1x,
+      this.cp1y,
+      this.cp2x,
+      this.cp2y,
+      this.x,
+      this.y
+    );
   };
 
   /**
@@ -5629,13 +5939,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.Rect = function ( x, y, w, h ) {
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-  } ).prototype.exec = function ( ctx ) {
-    ctx.rect( this.x, this.y, this.w, this.h );
+  (
+    G.Rect = function (x, y, w, h) {
+      this.x = x;
+      this.y = y;
+      this.w = w;
+      this.h = h;
+    }
+  ).prototype.exec = function (ctx) {
+    ctx.rect(this.x, this.y, this.w, this.h);
   };
 
   /**
@@ -5648,7 +5960,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.ClosePath = function () {} ).prototype.exec = function ( ctx ) {
+  (G.ClosePath = function () {}).prototype.exec = function (ctx) {
     ctx.closePath();
   };
 
@@ -5662,7 +5974,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.BeginPath = function () {} ).prototype.exec = function ( ctx ) {
+  (G.BeginPath = function () {}).prototype.exec = function (ctx) {
     ctx.beginPath();
   };
 
@@ -5687,22 +5999,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  p = ( G.Fill = function ( style, matrix ) {
+  p = (G.Fill = function (style, matrix) {
     this.style = style;
     this.matrix = matrix;
-  } ).prototype;
-  p.exec = function ( ctx ) {
-    if ( !this.style ) {
+  }).prototype;
+  p.exec = function (ctx) {
+    if (!this.style) {
       return;
     }
     ctx.fillStyle = this.style;
     var mtx = this.matrix;
-    if ( mtx ) {
+    if (mtx) {
       ctx.save();
-      ctx.transform( mtx.a, mtx.b, mtx.c, mtx.d, mtx.tx, mtx.ty );
+      ctx.transform(mtx.a, mtx.b, mtx.c, mtx.d, mtx.tx, mtx.ty);
     }
     ctx.fill();
-    if ( mtx ) {
+    if (mtx) {
       ctx.restore();
     }
   };
@@ -5719,10 +6031,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} y1
    * @return {Fill} Returns this Fill object for chaining or assignment.
    */
-  p.linearGradient = function ( colors, ratios, x0, y0, x1, y1 ) {
-    var o = this.style = Graphics._ctx.createLinearGradient( x0, y0, x1, y1 );
-    for ( var i = 0, l = colors.length; i < l; i++ ) {
-      o.addColorStop( ratios[ i ], colors[ i ] );
+  p.linearGradient = function (colors, ratios, x0, y0, x1, y1) {
+    var o = (this.style = Graphics._ctx.createLinearGradient(x0, y0, x1, y1));
+    for (var i = 0, l = colors.length; i < l; i++) {
+      o.addColorStop(ratios[i], colors[i]);
     }
     o.props = {
       colors: colors,
@@ -5731,7 +6043,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       y0: y0,
       x1: x1,
       y1: y1,
-      type: "linear"
+      type: "linear",
     };
     return this;
   };
@@ -5749,10 +6061,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} r1
    * @return {Fill} Returns this Fill object for chaining or assignment.
    */
-  p.radialGradient = function ( colors, ratios, x0, y0, r0, x1, y1, r1 ) {
-    var o = this.style = Graphics._ctx.createRadialGradient( x0, y0, r0, x1, y1, r1 );
-    for ( var i = 0, l = colors.length; i < l; i++ ) {
-      o.addColorStop( ratios[ i ], colors[ i ] );
+  p.radialGradient = function (colors, ratios, x0, y0, r0, x1, y1, r1) {
+    var o = (this.style = Graphics._ctx.createRadialGradient(
+      x0,
+      y0,
+      r0,
+      x1,
+      y1,
+      r1
+    ));
+    for (var i = 0, l = colors.length; i < l; i++) {
+      o.addColorStop(ratios[i], colors[i]);
     }
     o.props = {
       colors: colors,
@@ -5763,7 +6082,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       x1: x1,
       y1: y1,
       r1: r1,
-      type: "radial"
+      type: "radial",
     };
     return this;
   };
@@ -5775,13 +6094,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String} [repetition] One of: repeat, repeat-x, repeat-y, or no-repeat.
    * @return {Fill} Returns this Fill object for chaining or assignment.
    */
-  p.bitmap = function ( image, repetition ) {
-    if ( image.naturalWidth || image.getContext || image.readyState >= 2 ) {
-      var o = this.style = Graphics._ctx.createPattern( image, repetition || "" );
+  p.bitmap = function (image, repetition) {
+    if (image.naturalWidth || image.getContext || image.readyState >= 2) {
+      var o = (this.style = Graphics._ctx.createPattern(
+        image,
+        repetition || ""
+      ));
       o.props = {
         image: image,
         repetition: repetition,
-        type: "bitmap"
+        type: "bitmap",
       };
     }
     return this;
@@ -5809,21 +6131,21 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  p = ( G.Stroke = function ( style, ignoreScale ) {
+  p = (G.Stroke = function (style, ignoreScale) {
     this.style = style;
     this.ignoreScale = ignoreScale;
-  } ).prototype;
-  p.exec = function ( ctx ) {
-    if ( !this.style ) {
+  }).prototype;
+  p.exec = function (ctx) {
+    if (!this.style) {
       return;
     }
     ctx.strokeStyle = this.style;
-    if ( this.ignoreScale ) {
+    if (this.ignoreScale) {
       ctx.save();
-      ctx.setTransform( 1, 0, 0, 1, 0, 0 );
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
     }
     ctx.stroke();
-    if ( this.ignoreScale ) {
+    if (this.ignoreScale) {
       ctx.restore();
     }
   };
@@ -5899,19 +6221,29 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  p = ( G.StrokeStyle = function ( width, caps, joints, miterLimit, ignoreScale ) {
+  p = (G.StrokeStyle = function (width, caps, joints, miterLimit, ignoreScale) {
     this.width = width;
     this.caps = caps;
     this.joints = joints;
     this.miterLimit = miterLimit;
     this.ignoreScale = ignoreScale;
-  } ).prototype;
-  p.exec = function ( ctx ) {
-    ctx.lineWidth = ( this.width == null ? "1" : this.width );
-    ctx.lineCap = ( this.caps == null ? "butt" : ( isNaN( this.caps ) ? this.caps : Graphics.STROKE_CAPS_MAP[ this.caps ] ) );
-    ctx.lineJoin = ( this.joints == null ? "miter" : ( isNaN( this.joints ) ? this.joints : Graphics.STROKE_JOINTS_MAP[ this.joints ] ) );
-    ctx.miterLimit = ( this.miterLimit == null ? "10" : this.miterLimit );
-    ctx.ignoreScale = ( this.ignoreScale == null ? false : this.ignoreScale );
+  }).prototype;
+  p.exec = function (ctx) {
+    ctx.lineWidth = this.width == null ? "1" : this.width;
+    ctx.lineCap =
+      this.caps == null
+        ? "butt"
+        : isNaN(this.caps)
+        ? this.caps
+        : Graphics.STROKE_CAPS_MAP[this.caps];
+    ctx.lineJoin =
+      this.joints == null
+        ? "miter"
+        : isNaN(this.joints)
+        ? this.joints
+        : Graphics.STROKE_JOINTS_MAP[this.joints];
+    ctx.miterLimit = this.miterLimit == null ? "10" : this.miterLimit;
+    ctx.ignoreScale = this.ignoreScale == null ? false : this.ignoreScale;
   };
   p.path = false;
 
@@ -5935,12 +6267,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.StrokeDash = function ( segments, offset ) {
-    this.segments = segments;
-    this.offset = offset || 0;
-  } ).prototype.exec = function ( ctx ) {
-    if ( ctx.setLineDash ) { // feature detection.
-      ctx.setLineDash( this.segments || G.StrokeDash.EMPTY_SEGMENTS ); // instead of [] to reduce churn.
+  (
+    G.StrokeDash = function (segments, offset) {
+      this.segments = segments;
+      this.offset = offset || 0;
+    }
+  ).prototype.exec = function (ctx) {
+    if (ctx.setLineDash) {
+      // feature detection.
+      ctx.setLineDash(this.segments || G.StrokeDash.EMPTY_SEGMENTS); // instead of [] to reduce churn.
       ctx.lineDashOffset = this.offset || 0;
     }
   };
@@ -6005,17 +6340,28 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.RoundRect = function ( x, y, w, h, radiusTL, radiusTR, radiusBR, radiusBL ) {
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-    this.radiusTL = radiusTL;
-    this.radiusTR = radiusTR;
-    this.radiusBR = radiusBR;
-    this.radiusBL = radiusBL;
-  } ).prototype.exec = function ( ctx ) {
-    var max = ( w < h ? w : h ) / 2;
+  (
+    G.RoundRect = function (
+      x,
+      y,
+      w,
+      h,
+      radiusTL,
+      radiusTR,
+      radiusBR,
+      radiusBL
+    ) {
+      this.x = x;
+      this.y = y;
+      this.w = w;
+      this.h = h;
+      this.radiusTL = radiusTL;
+      this.radiusTR = radiusTR;
+      this.radiusBR = radiusBR;
+      this.radiusBL = radiusBL;
+    }
+  ).prototype.exec = function (ctx) {
+    var max = (w < h ? w : h) / 2;
     var mTL = 0,
       mTR = 0,
       mBR = 0,
@@ -6029,39 +6375,39 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       rBR = this.radiusBR,
       rBL = this.radiusBL;
 
-    if ( rTL < 0 ) {
-      rTL *= ( mTL = -1 );
+    if (rTL < 0) {
+      rTL *= mTL = -1;
     }
-    if ( rTL > max ) {
+    if (rTL > max) {
       rTL = max;
     }
-    if ( rTR < 0 ) {
-      rTR *= ( mTR = -1 );
+    if (rTR < 0) {
+      rTR *= mTR = -1;
     }
-    if ( rTR > max ) {
+    if (rTR > max) {
       rTR = max;
     }
-    if ( rBR < 0 ) {
-      rBR *= ( mBR = -1 );
+    if (rBR < 0) {
+      rBR *= mBR = -1;
     }
-    if ( rBR > max ) {
+    if (rBR > max) {
       rBR = max;
     }
-    if ( rBL < 0 ) {
-      rBL *= ( mBL = -1 );
+    if (rBL < 0) {
+      rBL *= mBL = -1;
     }
-    if ( rBL > max ) {
+    if (rBL > max) {
       rBL = max;
     }
 
-    ctx.moveTo( x + w - rTR, y );
-    ctx.arcTo( x + w + rTR * mTR, y - rTR * mTR, x + w, y + rTR, rTR );
-    ctx.lineTo( x + w, y + h - rBR );
-    ctx.arcTo( x + w + rBR * mBR, y + h + rBR * mBR, x + w - rBR, y + h, rBR );
-    ctx.lineTo( x + rBL, y + h );
-    ctx.arcTo( x - rBL * mBL, y + h + rBL * mBL, x, y + h - rBL, rBL );
-    ctx.lineTo( x, y + rTL );
-    ctx.arcTo( x - rTL * mTL, y - rTL * mTL, x + rTL, y, rTL );
+    ctx.moveTo(x + w - rTR, y);
+    ctx.arcTo(x + w + rTR * mTR, y - rTR * mTR, x + w, y + rTR, rTR);
+    ctx.lineTo(x + w, y + h - rBR);
+    ctx.arcTo(x + w + rBR * mBR, y + h + rBR * mBR, x + w - rBR, y + h, rBR);
+    ctx.lineTo(x + rBL, y + h);
+    ctx.arcTo(x - rBL * mBL, y + h + rBL * mBL, x, y + h - rBL, rBL);
+    ctx.lineTo(x, y + rTL);
+    ctx.arcTo(x - rTL * mTL, y - rTL * mTL, x + rTL, y, rTL);
     ctx.closePath();
   };
 
@@ -6090,12 +6436,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.Circle = function ( x, y, radius ) {
-    this.x = x;
-    this.y = y;
-    this.radius = radius;
-  } ).prototype.exec = function ( ctx ) {
-    ctx.arc( this.x, this.y, this.radius, 0, Math.PI * 2 );
+  (
+    G.Circle = function (x, y, radius) {
+      this.x = x;
+      this.y = y;
+      this.radius = radius;
+    }
+  ).prototype.exec = function (ctx) {
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
   };
 
   /**
@@ -6128,30 +6476,32 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.Ellipse = function ( x, y, w, h ) {
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-  } ).prototype.exec = function ( ctx ) {
+  (
+    G.Ellipse = function (x, y, w, h) {
+      this.x = x;
+      this.y = y;
+      this.w = w;
+      this.h = h;
+    }
+  ).prototype.exec = function (ctx) {
     var x = this.x,
       y = this.y;
     var w = this.w,
       h = this.h;
 
     var k = 0.5522848;
-    var ox = ( w / 2 ) * k;
-    var oy = ( h / 2 ) * k;
+    var ox = (w / 2) * k;
+    var oy = (h / 2) * k;
     var xe = x + w;
     var ye = y + h;
     var xm = x + w / 2;
     var ym = y + h / 2;
 
-    ctx.moveTo( x, ym );
-    ctx.bezierCurveTo( x, ym - oy, xm - ox, y, xm, y );
-    ctx.bezierCurveTo( xm + ox, y, xe, ym - oy, xe, ym );
-    ctx.bezierCurveTo( xe, ym + oy, xm + ox, ye, xm, ye );
-    ctx.bezierCurveTo( xm - ox, ye, x, ym + oy, x, ym );
+    ctx.moveTo(x, ym);
+    ctx.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y);
+    ctx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym);
+    ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
+    ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
   };
 
   /**
@@ -6194,30 +6544,35 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.PolyStar = function ( x, y, radius, sides, pointSize, angle ) {
-    this.x = x;
-    this.y = y;
-    this.radius = radius;
-    this.sides = sides;
-    this.pointSize = pointSize;
-    this.angle = angle;
-  } ).prototype.exec = function ( ctx ) {
+  (
+    G.PolyStar = function (x, y, radius, sides, pointSize, angle) {
+      this.x = x;
+      this.y = y;
+      this.radius = radius;
+      this.sides = sides;
+      this.pointSize = pointSize;
+      this.angle = angle;
+    }
+  ).prototype.exec = function (ctx) {
     var x = this.x,
       y = this.y;
     var radius = this.radius;
-    var angle = ( this.angle || 0 ) / 180 * Math.PI;
+    var angle = ((this.angle || 0) / 180) * Math.PI;
     var sides = this.sides;
-    var ps = 1 - ( this.pointSize || 0 );
+    var ps = 1 - (this.pointSize || 0);
     var a = Math.PI / sides;
 
-    ctx.moveTo( x + Math.cos( angle ) * radius, y + Math.sin( angle ) * radius );
-    for ( var i = 0; i < sides; i++ ) {
+    ctx.moveTo(x + Math.cos(angle) * radius, y + Math.sin(angle) * radius);
+    for (var i = 0; i < sides; i++) {
       angle += a;
-      if ( ps != 1 ) {
-        ctx.lineTo( x + Math.cos( angle ) * radius * ps, y + Math.sin( angle ) * radius * ps );
+      if (ps != 1) {
+        ctx.lineTo(
+          x + Math.cos(angle) * radius * ps,
+          y + Math.sin(angle) * radius * ps
+        );
       }
       angle += a;
-      ctx.lineTo( x + Math.cos( angle ) * radius, y + Math.sin( angle ) * radius );
+      ctx.lineTo(x + Math.cos(angle) * radius, y + Math.sin(angle) * radius);
     }
     ctx.closePath();
   };
@@ -6225,17 +6580,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   // docced above.
   Graphics.beginCmd = new G.BeginPath(); // so we don't have to instantiate multiple instances.
 
-
   createjs.Graphics = Graphics;
-}() );
+})();
 
 //##############################################################################
 // DisplayObject.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -6250,7 +6603,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
   function DisplayObject() {
     this.EventDispatcher_constructor();
-
 
     // public properties:
     /**
@@ -6486,7 +6838,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * the hit test object were a child of this display object and relative to its regX/Y). The hitArea will be tested
      * using only its own `alpha` value regardless of the alpha value on the target display object, or the target's
      * ancestors (parents).
-     * 
+     *
      * If set on a {{#crossLink "Container"}}{{/crossLink}}, children of the Container will not receive mouse events.
      * This is similar to setting {{#crossLink "mouseChildren"}}{{/crossLink}} to false.
      *
@@ -6506,7 +6858,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @default null
      */
     this.cursor = null;
-
 
     // private properties:
     /**
@@ -6570,7 +6921,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      */
     this._webGLRenderStyle = DisplayObject._StageGL_NONE;
   }
-  var p = createjs.extend( DisplayObject, createjs.EventDispatcher );
+  var p = createjs.extend(DisplayObject, createjs.EventDispatcher);
 
   // static properties:
   /**
@@ -6580,7 +6931,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @type {Array}
    **/
-  DisplayObject._MOUSE_EVENTS = [ "click", "dblclick", "mousedown", "mouseout", "mouseover", "pressmove", "pressup", "rollout", "rollover" ];
+  DisplayObject._MOUSE_EVENTS = [
+    "click",
+    "dblclick",
+    "mousedown",
+    "mouseout",
+    "mouseover",
+    "pressmove",
+    "pressup",
+    "rollout",
+    "rollover",
+  ];
 
   /**
    * Suppresses errors generated when using features like hitTest, mouse events, and {{#crossLink "getObjectsUnderPoint"}}{{/crossLink}}
@@ -6640,16 +7001,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @protected
    **/
-  var canvas = createjs.createCanvas ? createjs.createCanvas() : document.createElement( "canvas" ); // prevent errors on load in browsers without canvas.
-  if ( canvas.getContext ) {
+  var canvas = createjs.createCanvas
+    ? createjs.createCanvas()
+    : document.createElement("canvas"); // prevent errors on load in browsers without canvas.
+  if (canvas.getContext) {
     DisplayObject._hitTestCanvas = canvas;
-    DisplayObject._hitTestContext = canvas.getContext( "2d" );
+    DisplayObject._hitTestContext = canvas.getContext("2d");
     canvas.width = canvas.height = 1;
   }
 
   // events:
   /**
-   * Dispatched when the user presses their left mouse button over the display object. See the 
+   * Dispatched when the user presses their left mouse button over the display object. See the
    * {{#crossLink "MouseEvent"}}{{/crossLink}} class for a listing of event properties.
    * @event mousedown
    * @since 0.6.0
@@ -6670,7 +7033,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
 
   /**
-   * Dispatched when the user's mouse enters this display object. This event must be enabled using 
+   * Dispatched when the user's mouse enters this display object. This event must be enabled using
    * {{#crossLink "Stage/enableMouseOver"}}{{/crossLink}}. See also {{#crossLink "DisplayObject/rollover:event"}}{{/crossLink}}.
    * See the {{#crossLink "MouseEvent"}}{{/crossLink}} class for a listing of event properties.
    * @event mouseover
@@ -6678,7 +7041,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
 
   /**
-   * Dispatched when the user's mouse leaves this display object. This event must be enabled using 
+   * Dispatched when the user's mouse leaves this display object. This event must be enabled using
    * {{#crossLink "Stage/enableMouseOver"}}{{/crossLink}}. See also {{#crossLink "DisplayObject/rollout:event"}}{{/crossLink}}.
    * See the {{#crossLink "MouseEvent"}}{{/crossLink}} class for a listing of event properties.
    * @event mouseout
@@ -6689,7 +7052,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * This event is similar to {{#crossLink "DisplayObject/mouseover:event"}}{{/crossLink}}, with the following
    * differences: it does not bubble, and it considers {{#crossLink "Container"}}{{/crossLink}} instances as an
    * aggregate of their content.
-   * 
+   *
    * For example, myContainer contains two overlapping children: shapeA and shapeB. The user moves their mouse over
    * shapeA and then directly on to shapeB. With a listener for {{#crossLink "mouseover:event"}}{{/crossLink}} on
    * myContainer, two events would be received, each targeting a child element:<OL>
@@ -6698,7 +7061,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * </OL>
    * However, with a listener for "rollover" instead, only a single event is received when the mouse first enters
    * the aggregate myContainer content (target=myContainer).
-   * 
+   *
    * This event must be enabled using {{#crossLink "Stage/enableMouseOver"}}{{/crossLink}}.
    * See the {{#crossLink "MouseEvent"}}{{/crossLink}} class for a listing of event properties.
    * @event rollover
@@ -6709,7 +7072,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * This event is similar to {{#crossLink "DisplayObject/mouseout:event"}}{{/crossLink}}, with the following
    * differences: it does not bubble, and it considers {{#crossLink "Container"}}{{/crossLink}} instances as an
    * aggregate of their content.
-   * 
+   *
    * For example, myContainer contains two overlapping children: shapeA and shapeB. The user moves their mouse over
    * shapeA, then directly on to shapeB, then off both. With a listener for {{#crossLink "mouseout:event"}}{{/crossLink}}
    * on myContainer, two events would be received, each targeting a child element:<OL>
@@ -6718,7 +7081,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * </OL>
    * However, with a listener for "rollout" instead, only a single event is received when the mouse leaves
    * the aggregate myContainer content (target=myContainer).
-   * 
+   *
    * This event must be enabled using {{#crossLink "Stage/enableMouseOver"}}{{/crossLink}}.
    * See the {{#crossLink "MouseEvent"}}{{/crossLink}} class for a listing of event properties.
    * @event rollout
@@ -6779,7 +7142,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @since 0.6.0
    */
 
-
   // getter / setters:
   /**
    * Use the {{#crossLink "DisplayObject/stage:property"}}{{/crossLink}} property instead.
@@ -6790,17 +7152,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   p._getStage = function () {
     // uses dynamic access to avoid circular dependencies;
     var o = this,
-      _Stage = createjs[ "Stage" ];
-    while ( o.parent ) {
+      _Stage = createjs["Stage"];
+    while (o.parent) {
       o = o.parent;
     }
-    if ( o instanceof _Stage ) {
+    if (o instanceof _Stage) {
       return o;
     }
     return null;
   };
   // DisplayObject.getStage is @deprecated. Remove for 1.1+
-  p.getStage = createjs.deprecate( p._getStage, "DisplayObject.getStage" );
+  p.getStage = createjs.deprecate(p._getStage, "DisplayObject.getStage");
 
   /**
    * Returns the Stage instance that this display object will be rendered on, or null if it has not been added to one.
@@ -6828,29 +7190,28 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @default 1
    */
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       stage: {
-        get: p._getStage
+        get: p._getStage,
       },
       cacheID: {
         get: function () {
-          return this.bitmapCache && this.bitmapCache.cacheID
+          return this.bitmapCache && this.bitmapCache.cacheID;
         },
-        set: function ( a ) {
-          this.bitmapCache && ( this.bitmapCache.cacheID = a )
-        }
+        set: function (a) {
+          this.bitmapCache && (this.bitmapCache.cacheID = a);
+        },
       },
       scale: {
         get: function () {
           return this.scaleX;
         },
-        set: function ( scale ) {
+        set: function (scale) {
           this.scaleX = this.scaleY = scale;
         },
-      }
-    } );
-  } catch ( e ) {}
-
+      },
+    });
+  } catch (e) {}
 
   // public methods:
   /**
@@ -6862,7 +7223,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} Boolean indicating whether the display object would be visible if drawn to a canvas
    **/
   p.isVisible = function () {
-    return !!( this.visible && this.alpha > 0 && this.scaleX != 0 && this.scaleY != 0 );
+    return !!(
+      this.visible &&
+      this.alpha > 0 &&
+      this.scaleX != 0 &&
+      this.scaleY != 0
+    );
   };
 
   /**
@@ -6876,10 +7242,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * used for drawing the cache (to prevent it from simply drawing an existing cache back into itself).
    * @return {Boolean}
    **/
-  p.draw = function ( ctx, ignoreCache ) {
+  p.draw = function (ctx, ignoreCache) {
     var cache = this.bitmapCache;
-    if ( cache && !ignoreCache ) {
-      return cache.draw( ctx );
+    if (cache && !ignoreCache) {
+      return cache.draw(ctx);
     }
     return false;
   };
@@ -6890,36 +7256,36 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method updateContext
    * @param {CanvasRenderingContext2D} ctx The canvas 2D to update.
    **/
-  p.updateContext = function ( ctx ) {
+  p.updateContext = function (ctx) {
     var o = this,
       mask = o.mask,
       mtx = o._props.matrix;
 
-    if ( mask && mask.graphics && !mask.graphics.isEmpty() ) {
-      mask.getMatrix( mtx );
-      ctx.transform( mtx.a, mtx.b, mtx.c, mtx.d, mtx.tx, mtx.ty );
+    if (mask && mask.graphics && !mask.graphics.isEmpty()) {
+      mask.getMatrix(mtx);
+      ctx.transform(mtx.a, mtx.b, mtx.c, mtx.d, mtx.tx, mtx.ty);
 
-      mask.graphics.drawAsPath( ctx );
+      mask.graphics.drawAsPath(ctx);
       ctx.clip();
 
       mtx.invert();
-      ctx.transform( mtx.a, mtx.b, mtx.c, mtx.d, mtx.tx, mtx.ty );
+      ctx.transform(mtx.a, mtx.b, mtx.c, mtx.d, mtx.tx, mtx.ty);
     }
 
-    this.getMatrix( mtx );
+    this.getMatrix(mtx);
     var tx = mtx.tx,
       ty = mtx.ty;
-    if ( DisplayObject._snapToPixelEnabled && o.snapToPixel ) {
-      tx = tx + ( tx < 0 ? -0.5 : 0.5 ) | 0;
-      ty = ty + ( ty < 0 ? -0.5 : 0.5 ) | 0;
+    if (DisplayObject._snapToPixelEnabled && o.snapToPixel) {
+      tx = (tx + (tx < 0 ? -0.5 : 0.5)) | 0;
+      ty = (ty + (ty < 0 ? -0.5 : 0.5)) | 0;
     }
-    ctx.transform( mtx.a, mtx.b, mtx.c, mtx.d, tx, ty );
+    ctx.transform(mtx.a, mtx.b, mtx.c, mtx.d, tx, ty);
     ctx.globalAlpha *= o.alpha;
-    if ( o.compositeOperation ) {
+    if (o.compositeOperation) {
       ctx.globalCompositeOperation = o.compositeOperation;
     }
-    if ( o.shadow ) {
-      this._applyShadow( ctx, o.shadow );
+    if (o.shadow) {
+      this._applyShadow(ctx, o.shadow);
     }
   };
 
@@ -6941,7 +7307,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * Note that filters need to be defined <em>before</em> the cache is applied or you will have to call updateCache after
    * application. Check out the {{#crossLink "Filter"}}{{/crossLink}} class for more information. Some filters
    * (ex. BlurFilter) may not work as expected in conjunction with the scale param.
-   * 
+   *
    * Usually, the resulting cacheCanvas will have the dimensions width * scale, height * scale, however some filters (ex. BlurFilter)
    * will add padding to the canvas dimensions.
    *
@@ -6959,11 +7325,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * 	cached elements with greater fidelity. Default is 1.
    * @param {Object} [options=undefined] Specify additional parameters for the cache logic
    **/
-  p.cache = function ( x, y, width, height, scale, options ) {
-    if ( !this.bitmapCache ) {
+  p.cache = function (x, y, width, height, scale, options) {
+    if (!this.bitmapCache) {
       this.bitmapCache = new createjs.BitmapCache();
     }
-    this.bitmapCache.define( this, x, y, width, height, scale, options );
+    this.bitmapCache.define(this, x, y, width, height, scale, options);
   };
 
   /**
@@ -6988,11 +7354,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * <a href="https://html.spec.whatwg.org/multipage/scripting.html#dom-context-2d-globalcompositeoperation">
    * whatwg spec on compositing</a>.
    **/
-  p.updateCache = function ( compositeOperation ) {
-    if ( !this.bitmapCache ) {
+  p.updateCache = function (compositeOperation) {
+    if (!this.bitmapCache) {
       throw "cache() must be called before updateCache()";
     }
-    this.bitmapCache.update( compositeOperation );
+    this.bitmapCache.update(compositeOperation);
   };
 
   /**
@@ -7000,7 +7366,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method uncache
    **/
   p.uncache = function () {
-    if ( this.bitmapCache ) {
+    if (this.bitmapCache) {
       this.bitmapCache.release();
       this.bitmapCache = undefined;
     }
@@ -7033,12 +7399,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method localToGlobal
    * @param {Number} x The x position in the source display object to transform.
    * @param {Number} y The y position in the source display object to transform.
-   * @param {Point | Object} [pt] An object to copy the result into. If omitted a new Point object with x/y properties will be returned. 
+   * @param {Point | Object} [pt] An object to copy the result into. If omitted a new Point object with x/y properties will be returned.
    * @return {Point} A Point instance with x and y properties correlating to the transformed coordinates
    * on the stage.
    **/
-  p.localToGlobal = function ( x, y, pt ) {
-    return this.getConcatenatedMatrix( this._props.matrix ).transformPoint( x, y, pt || new createjs.Point() );
+  p.localToGlobal = function (x, y, pt) {
+    return this.getConcatenatedMatrix(this._props.matrix).transformPoint(
+      x,
+      y,
+      pt || new createjs.Point()
+    );
   };
 
   /**
@@ -7058,12 +7428,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method globalToLocal
    * @param {Number} x The x position on the stage to transform.
    * @param {Number} y The y position on the stage to transform.
-   * @param {Point | Object} [pt] An object to copy the result into. If omitted a new Point object with x/y properties will be returned. 
+   * @param {Point | Object} [pt] An object to copy the result into. If omitted a new Point object with x/y properties will be returned.
    * @return {Point} A Point instance with x and y properties correlating to the transformed position in the
    * display object's coordinate space.
    **/
-  p.globalToLocal = function ( x, y, pt ) {
-    return this.getConcatenatedMatrix( this._props.matrix ).invert().transformPoint( x, y, pt || new createjs.Point() );
+  p.globalToLocal = function (x, y, pt) {
+    return this.getConcatenatedMatrix(this._props.matrix)
+      .invert()
+      .transformPoint(x, y, pt || new createjs.Point());
   };
 
   /**
@@ -7079,13 +7451,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} x The x position in the source display object to transform.
    * @param {Number} y The y position on the source display object to transform.
    * @param {DisplayObject} target The target display object to which the coordinates will be transformed.
-   * @param {Point | Object} [pt] An object to copy the result into. If omitted a new Point object with x/y properties will be returned. 
+   * @param {Point | Object} [pt] An object to copy the result into. If omitted a new Point object with x/y properties will be returned.
    * @return {Point} Returns a Point instance with x and y properties correlating to the transformed position
    * in the target's coordinate space.
    **/
-  p.localToLocal = function ( x, y, target, pt ) {
-    pt = this.localToGlobal( x, y, pt );
-    return target.globalToLocal( pt.x, pt.y, pt );
+  p.localToLocal = function (x, y, target, pt) {
+    pt = this.localToGlobal(x, y, pt);
+    return target.globalToLocal(pt.x, pt.y, pt);
   };
 
   /**
@@ -7109,7 +7481,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {DisplayObject} Returns this instance. Useful for chaining commands.
    * @chainable
    */
-  p.setTransform = function ( x, y, scaleX, scaleY, rotation, skewX, skewY, regX, regY ) {
+  p.setTransform = function (
+    x,
+    y,
+    scaleX,
+    scaleY,
+    rotation,
+    skewX,
+    skewY,
+    regX,
+    regY
+  ) {
     this.x = x || 0;
     this.y = y || 0;
     this.scaleX = scaleX == null ? 1 : scaleX;
@@ -7129,10 +7511,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * Matrix object is returned.
    * @return {Matrix2D} A matrix representing this display object's transform.
    **/
-  p.getMatrix = function ( matrix ) {
+  p.getMatrix = function (matrix) {
     var o = this,
-      mtx = matrix && matrix.identity() || new createjs.Matrix2D();
-    return o.transformMatrix ? mtx.copy( o.transformMatrix ) : mtx.appendTransform( o.x, o.y, o.scaleX, o.scaleY, o.rotation, o.skewX, o.skewY, o.regX, o.regY );
+      mtx = (matrix && matrix.identity()) || new createjs.Matrix2D();
+    return o.transformMatrix
+      ? mtx.copy(o.transformMatrix)
+      : mtx.appendTransform(
+          o.x,
+          o.y,
+          o.scaleX,
+          o.scaleY,
+          o.rotation,
+          o.skewX,
+          o.skewY,
+          o.regX,
+          o.regY
+        );
   };
 
   /**
@@ -7145,11 +7539,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * If null, a new Matrix2D object is returned.
    * @return {Matrix2D} The combined matrix.
    **/
-  p.getConcatenatedMatrix = function ( matrix ) {
+  p.getConcatenatedMatrix = function (matrix) {
     var o = this,
-      mtx = this.getMatrix( matrix );
-    while ( o = o.parent ) {
-      mtx.prependMatrix( o.getMatrix( o._props.matrix ) );
+      mtx = this.getMatrix(matrix);
+    while ((o = o.parent)) {
+      mtx.prependMatrix(o.getMatrix(o._props.matrix));
     }
     return mtx;
   };
@@ -7162,19 +7556,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * If null, a new DisplayProps object is returned.
    * @return {DisplayProps} The combined display properties.
    **/
-  p.getConcatenatedDisplayProps = function ( props ) {
+  p.getConcatenatedDisplayProps = function (props) {
     props = props ? props.identity() : new createjs.DisplayProps();
     var o = this,
-      mtx = o.getMatrix( props.matrix );
+      mtx = o.getMatrix(props.matrix);
     do {
-      props.prepend( o.visible, o.alpha, o.shadow, o.compositeOperation );
+      props.prepend(o.visible, o.alpha, o.shadow, o.compositeOperation);
 
       // we do this to avoid problems with the matrix being used for both operations when o._props.matrix is passed in as the props param.
       // this could be simplified (ie. just done as part of the prepend above) if we switched to using a pool.
-      if ( o != this ) {
-        mtx.prependMatrix( o.getMatrix( o._props.matrix ) );
+      if (o != this) {
+        mtx.prependMatrix(o.getMatrix(o._props.matrix));
       }
-    } while ( o = o.parent );
+    } while ((o = o.parent));
     return props;
   };
 
@@ -7196,14 +7590,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} A Boolean indicating whether a visible portion of the DisplayObject intersect the specified
    * local Point.
    */
-  p.hitTest = function ( x, y ) {
+  p.hitTest = function (x, y) {
     var ctx = DisplayObject._hitTestContext;
-    ctx.setTransform( 1, 0, 0, 1, -x, -y );
-    this.draw( ctx );
+    ctx.setTransform(1, 0, 0, 1, -x, -y);
+    this.draw(ctx);
 
-    var hit = this._testHit( ctx );
-    ctx.setTransform( 1, 0, 0, 1, 0, 0 );
-    ctx.clearRect( 0, 0, 2, 2 );
+    var hit = this._testHit(ctx);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, 2, 2);
     return hit;
   };
 
@@ -7220,9 +7614,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {DisplayObject} Returns the instance the method is called on (useful for chaining calls.)
    * @chainable
    */
-  p.set = function ( props ) {
-    for ( var n in props ) {
-      this[ n ] = props[ n ];
+  p.set = function (props) {
+    for (var n in props) {
+      this[n] = props[n];
     }
     return this;
   };
@@ -7230,11 +7624,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   /**
    * Returns a rectangle representing this object's bounds in its local coordinate system (ie. with no transformation).
    * Objects that have been cached will return the bounds of the cache.
-   * 
-   * Not all display objects can calculate their own bounds (ex. Shape). For these objects, you can use 
+   *
+   * Not all display objects can calculate their own bounds (ex. Shape). For these objects, you can use
    * {{#crossLink "DisplayObject/setBounds"}}{{/crossLink}} so that they are included when calculating Container
    * bounds.
-   * 
+   *
    * <table>
    * 	<tr><td><b>All</b></td><td>
    * 		All display objects support setting bounds manually using setBounds(). Likewise, display objects that
@@ -7263,34 +7657,39 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * 		to (x=0,y=0).
    * 	</td></tr>
    * </table>
-   * 
+   *
    * Bounds can be expensive to calculate for some objects (ex. text, or containers with many children), and
    * are recalculated each time you call getBounds(). You can prevent recalculation on static objects by setting the
    * bounds explicitly:
-   * 
+   *
    * 	var bounds = obj.getBounds();
    * 	obj.setBounds(bounds.x, bounds.y, bounds.width, bounds.height);
    * 	// getBounds will now use the set values, instead of recalculating
-   * 
+   *
    * To reduce memory impact, the returned Rectangle instance may be reused internally; clone the instance or copy its
    * values if you need to retain it.
-   * 
+   *
    * 	var myBounds = obj.getBounds().clone();
    * 	// OR:
    * 	myRect.copy(obj.getBounds());
-   * 
+   *
    * @method getBounds
    * @return {Rectangle} A Rectangle instance representing the bounds, or null if bounds are not available for this
    * object.
    **/
   p.getBounds = function () {
-    if ( this._bounds ) {
-      return this._rectangle.copy( this._bounds );
+    if (this._bounds) {
+      return this._rectangle.copy(this._bounds);
     }
     var cacheCanvas = this.cacheCanvas;
-    if ( cacheCanvas ) {
+    if (cacheCanvas) {
       var scale = this._cacheScale;
-      return this._rectangle.setValues( this._cacheOffsetX, this._cacheOffsetY, cacheCanvas.width / scale, cacheCanvas.height / scale );
+      return this._rectangle.setValues(
+        this._cacheOffsetX,
+        this._cacheOffsetY,
+        cacheCanvas.width / scale,
+        cacheCanvas.height / scale
+      );
     }
     return null;
   };
@@ -7298,14 +7697,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   /**
    * Returns a rectangle representing this object's bounds in its parent's coordinate system (ie. with transformations applied).
    * Objects that have been cached will return the transformed bounds of the cache.
-   * 
-   * Not all display objects can calculate their own bounds (ex. Shape). For these objects, you can use 
+   *
+   * Not all display objects can calculate their own bounds (ex. Shape). For these objects, you can use
    * {{#crossLink "DisplayObject/setBounds"}}{{/crossLink}} so that they are included when calculating Container
    * bounds.
-   * 
+   *
    * To reduce memory impact, the returned Rectangle instance may be reused internally; clone the instance or copy its
    * values if you need to retain it.
-   * 
+   *
    * Container instances calculate aggregate bounds for all children that return bounds via getBounds.
    * @method getTransformedBounds
    * @return {Rectangle} A Rectangle instance representing the bounds, or null if bounds are not available for this object.
@@ -7318,7 +7717,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * Allows you to manually specify the bounds of an object that either cannot calculate their own bounds (ex. Shape &
    * Text) for future reference, or so the object can be included in Container bounds. Manually set bounds will always
    * override calculated bounds.
-   * 
+   *
    * The bounds should be specified in the object's local (untransformed) coordinates. For example, a Shape instance
    * with a 25px radius circle centered at 0,0 would have bounds of (-25, -25, 50, 50).
    * @method setBounds
@@ -7327,12 +7726,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} width The width of the bounds.
    * @param {Number} height The height of the bounds.
    **/
-  p.setBounds = function ( x, y, width, height ) {
-    if ( x == null ) {
+  p.setBounds = function (x, y, width, height) {
+    if (x == null) {
       this._bounds = x;
       return;
     }
-    this._bounds = ( this._bounds || new createjs.Rectangle() ).setValues( x, y, width, height );
+    this._bounds = (this._bounds || new createjs.Rectangle()).setValues(
+      x,
+      y,
+      width,
+      height
+    );
   };
 
   /**
@@ -7343,7 +7747,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {DisplayObject} A clone of the current DisplayObject instance.
    **/
   p.clone = function () {
-    return this._cloneProps( new DisplayObject() );
+    return this._cloneProps(new DisplayObject());
   };
 
   /**
@@ -7354,7 +7758,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   p.toString = function () {
     return "[DisplayObject (name=" + this.name + ")]";
   };
-
 
   // private methods:
   /**
@@ -7378,7 +7781,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {DisplayObject} o
    * @protected
    **/
-  p._cloneProps = function ( o ) {
+  p._cloneProps = function (o) {
     o.alpha = this.alpha;
     o.mouseEnabled = this.mouseEnabled;
     o.tickEnabled = this.tickEnabled;
@@ -7396,7 +7799,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     o.y = this.y;
     o.compositeOperation = this.compositeOperation;
     o.snapToPixel = this.snapToPixel;
-    o.filters = this.filters == null ? null : this.filters.slice( 0 );
+    o.filters = this.filters == null ? null : this.filters.slice(0);
     o.mask = this.mask;
     o.hitArea = this.hitArea;
     o.cursor = this.cursor;
@@ -7410,7 +7813,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {CanvasRenderingContext2D} ctx
    * @param {Shadow} shadow
    **/
-  p._applyShadow = function ( ctx, shadow ) {
+  p._applyShadow = function (ctx, shadow) {
     shadow = shadow || Shadow.identity;
     ctx.shadowColor = shadow.color;
     ctx.shadowOffsetX = shadow.offsetX;
@@ -7423,14 +7826,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} evtObj An event object that will be dispatched to all tick listeners. This object is reused between dispatchers to reduce construction & GC costs.
    * @protected
    **/
-  p._tick = function ( evtObj ) {
+  p._tick = function (evtObj) {
     // because tick can be really performance sensitive, check for listeners before calling dispatchEvent.
     var ls = this._listeners;
-    if ( ls && ls[ "tick" ] ) {
+    if (ls && ls["tick"]) {
       // reset & reuse the event object to avoid construction / GC costs:
       evtObj.target = null;
       evtObj.propagationStopped = evtObj.immediatePropagationStopped = false;
-      this.dispatchEvent( evtObj );
+      this.dispatchEvent(evtObj);
     }
   };
 
@@ -7440,11 +7843,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {CanvasRenderingContext2D} ctx
    * @return {Boolean}
    **/
-  p._testHit = function ( ctx ) {
+  p._testHit = function (ctx) {
     try {
-      var hit = ctx.getImageData( 0, 0, 1, 1 ).data[ 3 ] > 1;
-    } catch ( e ) {
-      if ( !DisplayObject.suppressCrossDomainErrors ) {
+      var hit = ctx.getImageData(0, 0, 1, 1).data[3] > 1;
+    } catch (e) {
+      if (!DisplayObject.suppressCrossDomainErrors) {
         throw "An error has occurred. This is most likely due to security restrictions on reading canvas pixel data with local or cross-domain images.";
       }
     }
@@ -7458,8 +7861,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Rectangle}
    * @protected
    **/
-  p._getBounds = function ( matrix, ignoreTransform ) {
-    return this._transformBounds( this.getBounds(), matrix, ignoreTransform );
+  p._getBounds = function (matrix, ignoreTransform) {
+    return this._transformBounds(this.getBounds(), matrix, ignoreTransform);
   };
 
   /**
@@ -7470,8 +7873,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Rectangle}
    * @protected
    **/
-  p._transformBounds = function ( bounds, matrix, ignoreTransform ) {
-    if ( !bounds ) {
+  p._transformBounds = function (bounds, matrix, ignoreTransform) {
+    if (!bounds) {
       return bounds;
     }
     var x = bounds.x,
@@ -7479,13 +7882,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       width = bounds.width,
       height = bounds.height,
       mtx = this._props.matrix;
-    mtx = ignoreTransform ? mtx.identity() : this.getMatrix( mtx );
+    mtx = ignoreTransform ? mtx.identity() : this.getMatrix(mtx);
 
-    if ( x || y ) {
-      mtx.appendTransform( 0, 0, 1, 1, 0, 0, 0, -x, -y );
+    if (x || y) {
+      mtx.appendTransform(0, 0, 1, 1, 0, 0, 0, -x, -y);
     } // TODO: simplify this.
-    if ( matrix ) {
-      mtx.prependMatrix( matrix );
+    if (matrix) {
+      mtx.prependMatrix(matrix);
     }
 
     var x_a = width * mtx.a,
@@ -7500,39 +7903,39 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       minY = ty,
       maxY = ty;
 
-    if ( ( x = x_a + tx ) < minX ) {
+    if ((x = x_a + tx) < minX) {
       minX = x;
-    } else if ( x > maxX ) {
+    } else if (x > maxX) {
       maxX = x;
     }
-    if ( ( x = x_a + y_c + tx ) < minX ) {
+    if ((x = x_a + y_c + tx) < minX) {
       minX = x;
-    } else if ( x > maxX ) {
+    } else if (x > maxX) {
       maxX = x;
     }
-    if ( ( x = y_c + tx ) < minX ) {
+    if ((x = y_c + tx) < minX) {
       minX = x;
-    } else if ( x > maxX ) {
+    } else if (x > maxX) {
       maxX = x;
     }
 
-    if ( ( y = x_b + ty ) < minY ) {
+    if ((y = x_b + ty) < minY) {
       minY = y;
-    } else if ( y > maxY ) {
+    } else if (y > maxY) {
       maxY = y;
     }
-    if ( ( y = x_b + y_d + ty ) < minY ) {
+    if ((y = x_b + y_d + ty) < minY) {
       minY = y;
-    } else if ( y > maxY ) {
+    } else if (y > maxY) {
       maxY = y;
     }
-    if ( ( y = y_d + ty ) < minY ) {
+    if ((y = y_d + ty) < minY) {
       minY = y;
-    } else if ( y > maxY ) {
+    } else if (y > maxY) {
       maxY = y;
     }
 
-    return bounds.setValues( minX, minY, maxX - minX, maxY - minY );
+    return bounds.setValues(minX, minY, maxX - minX, maxY - minY);
   };
 
   /**
@@ -7543,24 +7946,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
   p._hasMouseEventListener = function () {
     var evts = DisplayObject._MOUSE_EVENTS;
-    for ( var i = 0, l = evts.length; i < l; i++ ) {
-      if ( this.hasEventListener( evts[ i ] ) ) {
+    for (var i = 0, l = evts.length; i < l; i++) {
+      if (this.hasEventListener(evts[i])) {
         return true;
       }
     }
     return !!this.cursor;
   };
 
-  createjs.DisplayObject = createjs.promote( DisplayObject, "EventDispatcher" );
-}() );
+  createjs.DisplayObject = createjs.promote(DisplayObject, "EventDispatcher");
+})();
 
 //##############################################################################
 // Container.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -7619,8 +8021,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      **/
     this.tickChildren = true;
   }
-  var p = createjs.extend( Container, createjs.DisplayObject );
-
+  var p = createjs.extend(Container, createjs.DisplayObject);
 
   // getter / setters:
   /**
@@ -7633,7 +8034,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return this.children.length;
   };
   // Container.getNumChildren is @deprecated. Remove for 1.1+
-  p.getNumChildren = createjs.deprecate( p._getNumChildren, "Container.getNumChildren" );
+  p.getNumChildren = createjs.deprecate(
+    p._getNumChildren,
+    "Container.getNumChildren"
+  );
 
   /**
    * Returns the number of children in the container.
@@ -7642,13 +8046,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @readonly
    **/
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       numChildren: {
-        get: p._getNumChildren
-      }
-    } );
-  } catch ( e ) {}
-
+        get: p._getNumChildren,
+      },
+    });
+  } catch (e) {}
 
   // public methods:
   /**
@@ -7669,7 +8072,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
   p.isVisible = function () {
     var hasContent = this.cacheCanvas || this.children.length;
-    return !!( this.visible && this.alpha > 0 && this.scaleX != 0 && this.scaleY != 0 && hasContent );
+    return !!(
+      this.visible &&
+      this.alpha > 0 &&
+      this.scaleX != 0 &&
+      this.scaleY != 0 &&
+      hasContent
+    );
   };
 
   /**
@@ -7683,23 +8092,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * For example, used for drawing the cache (to prevent it from simply drawing an existing cache back
    * into itself).
    **/
-  p.draw = function ( ctx, ignoreCache ) {
-    if ( this.DisplayObject_draw( ctx, ignoreCache ) ) {
+  p.draw = function (ctx, ignoreCache) {
+    if (this.DisplayObject_draw(ctx, ignoreCache)) {
       return true;
     }
 
     // this ensures we don't have issues with display list changes that occur during a draw:
     var list = this.children.slice();
-    for ( var i = 0, l = list.length; i < l; i++ ) {
-      var child = list[ i ];
-      if ( !child.isVisible() ) {
+    for (var i = 0, l = list.length; i < l; i++) {
+      var child = list[i];
+      if (!child.isVisible()) {
         continue;
       }
 
       // draw the child:
       ctx.save();
-      child.updateContext( ctx );
-      child.draw( ctx );
+      child.updateContext(ctx);
+      child.draw(ctx);
       ctx.restore();
     }
     return true;
@@ -7720,25 +8129,25 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {DisplayObject} child The display object to add.
    * @return {DisplayObject} The child that was added, or the last child if multiple children were added.
    **/
-  p.addChild = function ( child ) {
-    if ( child == null ) {
+  p.addChild = function (child) {
+    if (child == null) {
       return child;
     }
     var l = arguments.length;
-    if ( l > 1 ) {
-      for ( var i = 0; i < l; i++ ) {
-        this.addChild( arguments[ i ] );
+    if (l > 1) {
+      for (var i = 0; i < l; i++) {
+        this.addChild(arguments[i]);
       }
-      return arguments[ l - 1 ];
+      return arguments[l - 1];
     }
     // Note: a lot of duplication with addChildAt, but push is WAY faster than splice.
     var par = child.parent,
       silent = par === this;
-    par && par._removeChildAt( createjs.indexOf( par.children, child ), silent );
+    par && par._removeChildAt(createjs.indexOf(par.children, child), silent);
     child.parent = this;
-    this.children.push( child );
-    if ( !silent ) {
-      child.dispatchEvent( "added" );
+    this.children.push(child);
+    if (!silent) {
+      child.dispatchEvent("added");
     }
     return child;
   };
@@ -7767,25 +8176,25 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} index The index to add the child at.
    * @return {DisplayObject} Returns the last child that was added, or the last child if multiple children were added.
    **/
-  p.addChildAt = function ( child, index ) {
+  p.addChildAt = function (child, index) {
     var l = arguments.length;
-    var indx = arguments[ l - 1 ]; // can't use the same name as the index param or it replaces arguments[1]
-    if ( indx < 0 || indx > this.children.length ) {
-      return arguments[ l - 2 ];
+    var indx = arguments[l - 1]; // can't use the same name as the index param or it replaces arguments[1]
+    if (indx < 0 || indx > this.children.length) {
+      return arguments[l - 2];
     }
-    if ( l > 2 ) {
-      for ( var i = 0; i < l - 1; i++ ) {
-        this.addChildAt( arguments[ i ], indx + i );
+    if (l > 2) {
+      for (var i = 0; i < l - 1; i++) {
+        this.addChildAt(arguments[i], indx + i);
       }
-      return arguments[ l - 2 ];
+      return arguments[l - 2];
     }
     var par = child.parent,
       silent = par === this;
-    par && par._removeChildAt( createjs.indexOf( par.children, child ), silent );
+    par && par._removeChildAt(createjs.indexOf(par.children, child), silent);
     child.parent = this;
-    this.children.splice( index, 0, child );
-    if ( !silent ) {
-      child.dispatchEvent( "added" );
+    this.children.splice(index, 0, child);
+    if (!silent) {
+      child.dispatchEvent("added");
     }
     return child;
   };
@@ -7807,16 +8216,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {DisplayObject} child The child to remove.
    * @return {Boolean} true if the child (or children) was removed, or false if it was not in the display list.
    **/
-  p.removeChild = function ( child ) {
+  p.removeChild = function (child) {
     var l = arguments.length;
-    if ( l > 1 ) {
+    if (l > 1) {
       var good = true;
-      for ( var i = 0; i < l; i++ ) {
-        good = good && this.removeChild( arguments[ i ] );
+      for (var i = 0; i < l; i++) {
+        good = good && this.removeChild(arguments[i]);
       }
       return good;
     }
-    return this._removeChildAt( createjs.indexOf( this.children, child ) );
+    return this._removeChildAt(createjs.indexOf(this.children, child));
   };
 
   /**
@@ -7835,23 +8244,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} index The index of the child to remove.
    * @return {Boolean} true if the child (or children) was removed, or false if any index was out of range.
    **/
-  p.removeChildAt = function ( index ) {
+  p.removeChildAt = function (index) {
     var l = arguments.length;
-    if ( l > 1 ) {
+    if (l > 1) {
       var a = [];
-      for ( var i = 0; i < l; i++ ) {
-        a[ i ] = arguments[ i ];
+      for (var i = 0; i < l; i++) {
+        a[i] = arguments[i];
       }
-      a.sort( function ( a, b ) {
+      a.sort(function (a, b) {
         return b - a;
-      } );
+      });
       var good = true;
-      for ( var i = 0; i < l; i++ ) {
-        good = good && this._removeChildAt( a[ i ] );
+      for (var i = 0; i < l; i++) {
+        good = good && this._removeChildAt(a[i]);
       }
       return good;
     }
-    return this._removeChildAt( index );
+    return this._removeChildAt(index);
   };
 
   /**
@@ -7865,8 +8274,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
   p.removeAllChildren = function () {
     var kids = this.children;
-    while ( kids.length ) {
-      this._removeChildAt( 0 );
+    while (kids.length) {
+      this._removeChildAt(0);
     }
   };
 
@@ -7881,8 +8290,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} index The index of the child to return.
    * @return {DisplayObject} The child at the specified index. Returns null if there is no child at the index.
    **/
-  p.getChildAt = function ( index ) {
-    return this.children[ index ];
+  p.getChildAt = function (index) {
+    return this.children[index];
   };
 
   /**
@@ -7891,11 +8300,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String} name The name of the child to return.
    * @return {DisplayObject} The child with the specified name.
    **/
-  p.getChildByName = function ( name ) {
+  p.getChildByName = function (name) {
     var kids = this.children;
-    for ( var i = 0, l = kids.length; i < l; i++ ) {
-      if ( kids[ i ].name == name ) {
-        return kids[ i ];
+    for (var i = 0, l = kids.length; i < l; i++) {
+      if (kids[i].name == name) {
+        return kids[i];
       }
     }
     return null;
@@ -7905,7 +8314,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * Performs an array sort operation on the child list.
    *
    * <h4>Example: Display children with a higher y in front.</h4>
-   * 
+   *
    *      var sortFunction = function(obj1, obj2, options) {
    *          if (obj1.y > obj2.y) { return 1; }
    *          if (obj1.y < obj2.y) { return -1; }
@@ -7917,8 +8326,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Function} sortFunction the function to use to sort the child list. See JavaScript's <code>Array.sort</code>
    * documentation for details.
    **/
-  p.sortChildren = function ( sortFunction ) {
-    this.children.sort( sortFunction );
+  p.sortChildren = function (sortFunction) {
+    this.children.sort(sortFunction);
   };
 
   /**
@@ -7932,8 +8341,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {DisplayObject} child The child to return the index of.
    * @return {Number} The index of the specified child. -1 if the child is not found.
    **/
-  p.getChildIndex = function ( child ) {
-    return createjs.indexOf( this.children, child );
+  p.getChildIndex = function (child) {
+    return createjs.indexOf(this.children, child);
   };
 
   /**
@@ -7942,15 +8351,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} index1
    * @param {Number} index2
    **/
-  p.swapChildrenAt = function ( index1, index2 ) {
+  p.swapChildrenAt = function (index1, index2) {
     var kids = this.children;
-    var o1 = kids[ index1 ];
-    var o2 = kids[ index2 ];
-    if ( !o1 || !o2 ) {
+    var o1 = kids[index1];
+    var o2 = kids[index2];
+    if (!o1 || !o2) {
       return;
     }
-    kids[ index1 ] = o2;
-    kids[ index2 ] = o1;
+    kids[index1] = o2;
+    kids[index2] = o1;
   };
 
   /**
@@ -7960,49 +8369,49 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {DisplayObject} child1
    * @param {DisplayObject} child2
    **/
-  p.swapChildren = function ( child1, child2 ) {
+  p.swapChildren = function (child1, child2) {
     var kids = this.children;
     var index1, index2;
-    for ( var i = 0, l = kids.length; i < l; i++ ) {
-      if ( kids[ i ] == child1 ) {
+    for (var i = 0, l = kids.length; i < l; i++) {
+      if (kids[i] == child1) {
         index1 = i;
       }
-      if ( kids[ i ] == child2 ) {
+      if (kids[i] == child2) {
         index2 = i;
       }
-      if ( index1 != null && index2 != null ) {
+      if (index1 != null && index2 != null) {
         break;
       }
     }
-    if ( i == l ) {
+    if (i == l) {
       return;
     } // TODO: throw error?
-    kids[ index1 ] = child2;
-    kids[ index2 ] = child1;
+    kids[index1] = child2;
+    kids[index2] = child1;
   };
 
   /**
    * Changes the depth of the specified child. Fails silently if the child is not a child of this container, or the index is out of range.
    * @param {DisplayObject} child
-   * @param {Number} index  
+   * @param {Number} index
    * @method setChildIndex
    **/
-  p.setChildIndex = function ( child, index ) {
+  p.setChildIndex = function (child, index) {
     var kids = this.children,
       l = kids.length;
-    if ( child.parent != this || index < 0 || index >= l ) {
+    if (child.parent != this || index < 0 || index >= l) {
       return;
     }
-    for ( var i = 0; i < l; i++ ) {
-      if ( kids[ i ] == child ) {
+    for (var i = 0; i < l; i++) {
+      if (kids[i] == child) {
         break;
       }
     }
-    if ( i == l || i == index ) {
+    if (i == l || i == index) {
       return;
     }
-    kids.splice( i, 1 );
-    kids.splice( index, 0, child );
+    kids.splice(i, 1);
+    kids.splice(index, 0, child);
   };
 
   /**
@@ -8012,9 +8421,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {DisplayObject} child The DisplayObject to be checked.
    * @return {Boolean} true if the specified display object either is this container or is a descendent.
    **/
-  p.contains = function ( child ) {
-    while ( child ) {
-      if ( child == this ) {
+  p.contains = function (child) {
+    while (child) {
+      if (child == this) {
         return true;
       }
       child = child.parent;
@@ -8032,9 +8441,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} A Boolean indicating whether there is a visible section of a DisplayObject that overlaps the specified
    * coordinates.
    **/
-  p.hitTest = function ( x, y ) {
+  p.hitTest = function (x, y) {
     // TODO: optimize to use the fast cache check where possible.
-    return ( this.getObjectUnderPoint( x, y ) != null );
+    return this.getObjectUnderPoint(x, y) != null;
   };
 
   /**
@@ -8044,7 +8453,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * This uses shape based hit detection, and can be an expensive operation to run, so it is best to use it carefully.
    * For example, if testing for objects under the mouse, test on tick (instead of on {{#crossLink "DisplayObject/mousemove:event"}}{{/crossLink}}),
    * and only if the mouse's position has changed.
-   * 
+   *
    * <ul>
    *     <li>By default (mode=0) this method evaluates all display objects.</li>
    *     <li>By setting the `mode` parameter to `1`, the {{#crossLink "DisplayObject/mouseEnabled:property"}}{{/crossLink}}
@@ -8054,7 +8463,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * 	   	that would normally intercept mouse interaction will be included. This can significantly improve performance
    * 	   	in some cases by reducing the number of display objects that need to be tested.</li>
    * </li>
-   * 
+   *
    * This method accounts for both {{#crossLink "DisplayObject/hitArea:property"}}{{/crossLink}} and {{#crossLink "DisplayObject/mask:property"}}{{/crossLink}}.
    * @method getObjectsUnderPoint
    * @param {Number} x The x position in the container to test.
@@ -8062,10 +8471,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} [mode=0] The mode to use to determine which display objects to include. 0-all, 1-respect mouseEnabled/mouseChildren, 2-only mouse opaque objects.
    * @return {Array} An Array of DisplayObjects under the specified coordinates.
    **/
-  p.getObjectsUnderPoint = function ( x, y, mode ) {
+  p.getObjectsUnderPoint = function (x, y, mode) {
     var arr = [];
-    var pt = this.localToGlobal( x, y );
-    this._getObjectsUnderPoint( pt.x, pt.y, arr, mode > 0, mode == 1 );
+    var pt = this.localToGlobal(x, y);
+    this._getObjectsUnderPoint(pt.x, pt.y, arr, mode > 0, mode == 1);
     return arr;
   };
 
@@ -8079,18 +8488,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} mode The mode to use to determine which display objects to include.  0-all, 1-respect mouseEnabled/mouseChildren, 2-only mouse opaque objects.
    * @return {DisplayObject} The top-most display object under the specified coordinates.
    **/
-  p.getObjectUnderPoint = function ( x, y, mode ) {
-    var pt = this.localToGlobal( x, y );
-    return this._getObjectsUnderPoint( pt.x, pt.y, null, mode > 0, mode == 1 );
+  p.getObjectUnderPoint = function (x, y, mode) {
+    var pt = this.localToGlobal(x, y);
+    return this._getObjectsUnderPoint(pt.x, pt.y, null, mode > 0, mode == 1);
   };
 
   /**
    * Docced in superclass.
    */
   p.getBounds = function () {
-    return this._getBounds( null, true );
+    return this._getBounds(null, true);
   };
-
 
   /**
    * Docced in superclass.
@@ -8107,10 +8515,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * properties of the container will be cloned, but the new instance will not have any children.
    * @return {Container} A clone of the current Container instance.
    **/
-  p.clone = function ( recursive ) {
-    var o = this._cloneProps( new Container() );
-    if ( recursive ) {
-      this._cloneChildren( o );
+  p.clone = function (recursive) {
+    var o = this._cloneProps(new Container());
+    if (recursive) {
+      this._cloneChildren(o);
     }
     return o;
   };
@@ -8124,23 +8532,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return "[Container (name=" + this.name + ")]";
   };
 
-
   // private methods:
   /**
    * @method _tick
    * @param {Object} evtObj An event object that will be dispatched to all tick listeners. This object is reused between dispatchers to reduce construction & GC costs.
    * @protected
    **/
-  p._tick = function ( evtObj ) {
-    if ( this.tickChildren ) {
-      for ( var i = this.children.length - 1; i >= 0; i-- ) {
-        var child = this.children[ i ];
-        if ( child.tickEnabled && child._tick ) {
-          child._tick( evtObj );
+  p._tick = function (evtObj) {
+    if (this.tickChildren) {
+      for (var i = this.children.length - 1; i >= 0; i--) {
+        var child = this.children[i];
+        if (child.tickEnabled && child._tick) {
+          child._tick(evtObj);
         }
       }
     }
-    this.DisplayObject__tick( evtObj );
+    this.DisplayObject__tick(evtObj);
   };
 
   /**
@@ -8149,15 +8556,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @param {Container} o The target container.
    **/
-  p._cloneChildren = function ( o ) {
-    if ( o.children.length ) {
+  p._cloneChildren = function (o) {
+    if (o.children.length) {
       o.removeAllChildren();
     }
     var arr = o.children;
-    for ( var i = 0, l = this.children.length; i < l; i++ ) {
-      var clone = this.children[ i ].clone( true );
+    for (var i = 0, l = this.children.length; i < l; i++) {
+      var clone = this.children[i].clone(true);
       clone.parent = o;
-      arr.push( clone );
+      arr.push(clone);
     }
   };
 
@@ -8170,17 +8577,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Boolean} [silent] Prevents dispatch of `removed` event if true.
    * @return {Boolean} true if the child (or children) was removed, or false if any index was out of range.
    **/
-  p._removeChildAt = function ( index, silent ) {
-    if ( index < 0 || index > this.children.length - 1 ) {
+  p._removeChildAt = function (index, silent) {
+    if (index < 0 || index > this.children.length - 1) {
       return false;
     }
-    var child = this.children[ index ];
-    if ( child ) {
+    var child = this.children[index];
+    if (child) {
       child.parent = null;
     }
-    this.children.splice( index, 1 );
-    if ( !silent ) {
-      child.dispatchEvent( "removed" );
+    this.children.splice(index, 1);
+    if (!silent) {
+      child.dispatchEvent("removed");
     }
     return true;
   };
@@ -8196,59 +8603,78 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {DisplayObject}
    * @protected
    **/
-  p._getObjectsUnderPoint = function ( x, y, arr, mouse, activeListener, currentDepth ) {
+  p._getObjectsUnderPoint = function (
+    x,
+    y,
+    arr,
+    mouse,
+    activeListener,
+    currentDepth
+  ) {
     currentDepth = currentDepth || 0;
-    if ( !currentDepth && !this._testMask( this, x, y ) ) {
+    if (!currentDepth && !this._testMask(this, x, y)) {
       return null;
     }
-    var mtx, ctx = createjs.DisplayObject._hitTestContext;
-    activeListener = activeListener || ( mouse && this._hasMouseEventListener() );
+    var mtx,
+      ctx = createjs.DisplayObject._hitTestContext;
+    activeListener = activeListener || (mouse && this._hasMouseEventListener());
 
     // draw children one at a time, and check if we get a hit:
     var children = this.children,
       l = children.length;
-    for ( var i = l - 1; i >= 0; i-- ) {
-      var child = children[ i ];
+    for (var i = l - 1; i >= 0; i--) {
+      var child = children[i];
       var hitArea = child.hitArea;
-      if ( !child.visible || ( !hitArea && !child.isVisible() ) || ( mouse && !child.mouseEnabled ) ) {
+      if (
+        !child.visible ||
+        (!hitArea && !child.isVisible()) ||
+        (mouse && !child.mouseEnabled)
+      ) {
         continue;
       }
-      if ( !hitArea && !this._testMask( child, x, y ) ) {
+      if (!hitArea && !this._testMask(child, x, y)) {
         continue;
       }
 
       // if a child container has a hitArea then we only need to check its hitAre2a, so we can treat it as a normal DO:
-      if ( !hitArea && child instanceof Container ) {
-        var result = child._getObjectsUnderPoint( x, y, arr, mouse, activeListener, currentDepth + 1 );
-        if ( !arr && result ) {
-          return ( mouse && !this.mouseChildren ) ? this : result;
+      if (!hitArea && child instanceof Container) {
+        var result = child._getObjectsUnderPoint(
+          x,
+          y,
+          arr,
+          mouse,
+          activeListener,
+          currentDepth + 1
+        );
+        if (!arr && result) {
+          return mouse && !this.mouseChildren ? this : result;
         }
       } else {
-        if ( mouse && !activeListener && !child._hasMouseEventListener() ) {
+        if (mouse && !activeListener && !child._hasMouseEventListener()) {
           continue;
         }
 
         // TODO: can we pass displayProps forward, to avoid having to calculate this backwards every time? It's kind of a mixed bag. When we're only hunting for DOs with event listeners, it may not make sense.
-        var props = child.getConcatenatedDisplayProps( child._props );
+        var props = child.getConcatenatedDisplayProps(child._props);
         mtx = props.matrix;
 
-        if ( hitArea ) {
-          mtx.appendMatrix( hitArea.getMatrix( hitArea._props.matrix ) );
+        if (hitArea) {
+          mtx.appendMatrix(hitArea.getMatrix(hitArea._props.matrix));
           props.alpha = hitArea.alpha;
         }
 
         ctx.globalAlpha = props.alpha;
-        ctx.setTransform( mtx.a, mtx.b, mtx.c, mtx.d, mtx.tx - x, mtx.ty - y );
-        ( hitArea || child ).draw( ctx );
-        if ( !this._testHit( ctx ) ) {
+        ctx.setTransform(mtx.a, mtx.b, mtx.c, mtx.d, mtx.tx - x, mtx.ty - y);
+        (hitArea || child).draw(ctx);
+        if (!this._testHit(ctx)) {
           continue;
         }
-        ctx.setTransform( 1, 0, 0, 1, 0, 0 );
-        ctx.clearRect( 0, 0, 2, 2 );
-        if ( arr ) {
-          arr.push( child );
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.clearRect(0, 0, 2, 2);
+        if (arr) {
+          arr.push(child);
         } else {
-          return ( mouse && !this.mouseChildren ) ? this : child;
+          return mouse && !this.mouseChildren ? this : child;
         }
       }
     }
@@ -8263,30 +8689,30 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} Indicates whether the x/y is within the masked region.
    * @protected
    **/
-  p._testMask = function ( target, x, y ) {
+  p._testMask = function (target, x, y) {
     var mask = target.mask;
-    if ( !mask || !mask.graphics || mask.graphics.isEmpty() ) {
+    if (!mask || !mask.graphics || mask.graphics.isEmpty()) {
       return true;
     }
 
     var mtx = this._props.matrix,
       parent = target.parent;
-    mtx = parent ? parent.getConcatenatedMatrix( mtx ) : mtx.identity();
-    mtx = mask.getMatrix( mask._props.matrix ).prependMatrix( mtx );
+    mtx = parent ? parent.getConcatenatedMatrix(mtx) : mtx.identity();
+    mtx = mask.getMatrix(mask._props.matrix).prependMatrix(mtx);
 
     var ctx = createjs.DisplayObject._hitTestContext;
-    ctx.setTransform( mtx.a, mtx.b, mtx.c, mtx.d, mtx.tx - x, mtx.ty - y );
+    ctx.setTransform(mtx.a, mtx.b, mtx.c, mtx.d, mtx.tx - x, mtx.ty - y);
 
     // draw the mask as a solid fill:
-    mask.graphics.drawAsPath( ctx );
+    mask.graphics.drawAsPath(ctx);
     ctx.fillStyle = "#000";
     ctx.fill();
 
-    if ( !this._testHit( ctx ) ) {
+    if (!this._testHit(ctx)) {
       return false;
     }
-    ctx.setTransform( 1, 0, 0, 1, 0, 0 );
-    ctx.clearRect( 0, 0, 2, 2 );
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, 2, 2);
 
     return true;
   };
@@ -8298,27 +8724,27 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Rectangle}
    * @protected
    **/
-  p._getBounds = function ( matrix, ignoreTransform ) {
+  p._getBounds = function (matrix, ignoreTransform) {
     var bounds = this.DisplayObject_getBounds();
-    if ( bounds ) {
-      return this._transformBounds( bounds, matrix, ignoreTransform );
+    if (bounds) {
+      return this._transformBounds(bounds, matrix, ignoreTransform);
     }
 
     var mtx = this._props.matrix;
-    mtx = ignoreTransform ? mtx.identity() : this.getMatrix( mtx );
-    if ( matrix ) {
-      mtx.prependMatrix( matrix );
+    mtx = ignoreTransform ? mtx.identity() : this.getMatrix(mtx);
+    if (matrix) {
+      mtx.prependMatrix(matrix);
     }
 
     var l = this.children.length,
       rect = null;
-    for ( var i = 0; i < l; i++ ) {
-      var child = this.children[ i ];
-      if ( !child.visible || !( bounds = child._getBounds( mtx ) ) ) {
+    for (var i = 0; i < l; i++) {
+      var child = this.children[i];
+      if (!child.visible || !(bounds = child._getBounds(mtx))) {
         continue;
       }
-      if ( rect ) {
-        rect.extend( bounds.x, bounds.y, bounds.width, bounds.height );
+      if (rect) {
+        rect.extend(bounds.x, bounds.y, bounds.width, bounds.height);
       } else {
         rect = bounds.clone();
       }
@@ -8326,17 +8752,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return rect;
   };
 
-
-  createjs.Container = createjs.promote( Container, "DisplayObject" );
-}() );
+  createjs.Container = createjs.promote(Container, "DisplayObject");
+})();
 
 //##############################################################################
 // Stage.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -8362,9 +8786,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {HTMLCanvasElement | String | Object} canvas A canvas object that the Stage will render to, or the string id
    * of a canvas object in the current document.
    **/
-  function Stage( canvas ) {
+  function Stage(canvas) {
     this.Container_constructor();
-
 
     // public properties:
     /**
@@ -8397,7 +8820,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @property canvas
      * @type HTMLCanvasElement | Object
      **/
-    this.canvas = ( typeof canvas == "string" ) ? document.getElementById( canvas ) : canvas;
+    this.canvas =
+      typeof canvas == "string" ? document.getElementById(canvas) : canvas;
 
     /**
      * The current mouse X position on the canvas. If the mouse leaves the canvas, this will indicate the most recent
@@ -8461,7 +8885,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      **/
     this.mouseMoveOutside = false;
 
-
     /**
      * Prevents selection of other elements in the html page if the user clicks and drags, or double clicks on the canvas.
      * This works by calling `preventDefault()` on any mousedown events (or touch equivalent) originating on the canvas.
@@ -8477,7 +8900,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @type {DisplayObject}
      * @default null
      */
-
 
     // private properties:
     /**
@@ -8526,11 +8948,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      **/
     this._prevStage = null;
 
-
     // initialize:
-    this.enableDOMEvents( true );
+    this.enableDOMEvents(true);
   }
-  var p = createjs.extend( Stage, createjs.Container );
+  var p = createjs.extend(Stage, createjs.Container);
 
   // events:
   /**
@@ -8598,7 +9019,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @since 0.7.0
    */
 
-
   // getter / setters:
   /**
    * Specifies a target stage that will have mouse / touch interactions relayed to it after this stage handles them.
@@ -8608,7 +9028,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    *      topStage.nextStage = bottomStage;
    *
    * To disable relaying, set nextStage to null.
-   * 
+   *
    * MouseOver, MouseOut, RollOver, and RollOut interactions are also passed through using the mouse over settings
    * of the top-most stage, but are only processed if the target stage has mouse over interactions enabled.
    * Considerations when using roll over in relay targets:<OL>
@@ -8621,37 +9041,36 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * 	topStage.nextStage = targetStage;
    * 	topStage.enableMouseOver(10);
    * 	targetStage.enableMouseOver(30);
-   * 
+   *
    * If the target stage's canvas is completely covered by this stage's canvas, you may also want to disable its
    * DOM events using:
-   * 
+   *
    *	targetStage.enableDOMEvents(false);
-   * 
+   *
    * @property nextStage
    * @type {Stage}
    **/
   p._get_nextStage = function () {
     return this._nextStage;
   };
-  p._set_nextStage = function ( value ) {
-    if ( this._nextStage ) {
+  p._set_nextStage = function (value) {
+    if (this._nextStage) {
       this._nextStage._prevStage = null;
     }
-    if ( value ) {
+    if (value) {
       value._prevStage = this;
     }
     this._nextStage = value;
   };
 
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       nextStage: {
         get: p._get_nextStage,
-        set: p._set_nextStage
-      }
-    } );
-  } catch ( e ) {} // TODO: use Log
-
+        set: p._set_nextStage,
+      },
+    });
+  } catch (e) {} // TODO: use Log
 
   // public methods:
   /**
@@ -8662,37 +9081,37 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method update
    * @param {Object} [props] Props object to pass to `tick()`. Should usually be a {{#crossLink "Ticker"}}{{/crossLink}} event object, or similar object with a delta property.
    **/
-  p.update = function ( props ) {
-    if ( !this.canvas ) {
+  p.update = function (props) {
+    if (!this.canvas) {
       return;
     }
-    if ( this.tickOnUpdate ) {
-      this.tick( props );
+    if (this.tickOnUpdate) {
+      this.tick(props);
     }
-    if ( this.dispatchEvent( "drawstart", false, true ) === false ) {
+    if (this.dispatchEvent("drawstart", false, true) === false) {
       return;
     }
     createjs.DisplayObject._snapToPixelEnabled = this.snapToPixelEnabled;
     var r = this.drawRect,
-      ctx = this.canvas.getContext( "2d" );
-    ctx.setTransform( 1, 0, 0, 1, 0, 0 );
-    if ( this.autoClear ) {
-      if ( r ) {
-        ctx.clearRect( r.x, r.y, r.width, r.height );
+      ctx = this.canvas.getContext("2d");
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    if (this.autoClear) {
+      if (r) {
+        ctx.clearRect(r.x, r.y, r.width, r.height);
       } else {
-        ctx.clearRect( 0, 0, this.canvas.width + 1, this.canvas.height + 1 );
+        ctx.clearRect(0, 0, this.canvas.width + 1, this.canvas.height + 1);
       }
     }
     ctx.save();
-    if ( this.drawRect ) {
+    if (this.drawRect) {
       ctx.beginPath();
-      ctx.rect( r.x, r.y, r.width, r.height );
+      ctx.rect(r.x, r.y, r.width, r.height);
       ctx.clip();
     }
-    this.updateContext( ctx );
-    this.draw( ctx, false );
+    this.updateContext(ctx);
+    this.draw(ctx, false);
     ctx.restore();
-    this.dispatchEvent( "drawend" );
+    this.dispatchEvent("drawend");
   };
 
   /**
@@ -8710,35 +9129,38 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * 	function handleTick(evtObj) {
    * 		// clone the event object from Ticker, and add some custom data to it:
    * 		var evt = evtObj.clone().set({greeting:"hello", name:"world"});
-   * 		
+   *
    * 		// pass it to stage.update():
    * 		myStage.update(evt); // subsequently calls tick() with the same param
    * 	}
-   * 	
+   *
    * 	// ...
    * 	myDisplayObject.on("tick", handleDisplayObjectTick);
    * 	function handleDisplayObjectTick(evt) {
    * 		console.log(evt.delta); // the delta property from the Ticker tick event object
    * 		console.log(evt.greeting, evt.name); // custom data: "hello world"
    * 	}
-   * 
+   *
    * @method tick
    * @param {Object} [props] An object with properties that should be copied to the event object. Should usually be a Ticker event object, or similar object with a delta property.
    **/
-  p.tick = function ( props ) {
-    if ( !this.tickEnabled || this.dispatchEvent( "tickstart", false, true ) === false ) {
+  p.tick = function (props) {
+    if (
+      !this.tickEnabled ||
+      this.dispatchEvent("tickstart", false, true) === false
+    ) {
       return;
     }
-    var evtObj = new createjs.Event( "tick" );
-    if ( props ) {
-      for ( var n in props ) {
-        if ( props.hasOwnProperty( n ) ) {
-          evtObj[ n ] = props[ n ];
+    var evtObj = new createjs.Event("tick");
+    if (props) {
+      for (var n in props) {
+        if (props.hasOwnProperty(n)) {
+          evtObj[n] = props[n];
         }
       }
     }
-    this._tick( evtObj );
-    this.dispatchEvent( "tickend" );
+    this._tick(evtObj);
+    this.dispatchEvent("tickend");
   };
 
   /**
@@ -8753,9 +9175,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @property handleEvent
    * @type Function
    **/
-  p.handleEvent = function ( evt ) {
-    if ( evt.type == "tick" ) {
-      this.update( evt );
+  p.handleEvent = function (evt) {
+    if (evt.type == "tick") {
+      this.update(evt);
     }
   };
 
@@ -8764,12 +9186,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method clear
    **/
   p.clear = function () {
-    if ( !this.canvas ) {
+    if (!this.canvas) {
       return;
     }
-    var ctx = this.canvas.getContext( "2d" );
-    ctx.setTransform( 1, 0, 0, 1, 0, 0 );
-    ctx.clearRect( 0, 0, this.canvas.width + 1, this.canvas.height + 1 );
+    var ctx = this.canvas.getContext("2d");
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, this.canvas.width + 1, this.canvas.height + 1);
   };
 
   /**
@@ -8782,24 +9204,25 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * is passed in, or if the browser does not support the specified MIME type, the default value will be used.
    * @return {String} a Base64 encoded image.
    **/
-  p.toDataURL = function ( backgroundColor, mimeType ) {
-    var data, ctx = this.canvas.getContext( '2d' ),
+  p.toDataURL = function (backgroundColor, mimeType) {
+    var data,
+      ctx = this.canvas.getContext("2d"),
       w = this.canvas.width,
       h = this.canvas.height;
 
-    if ( backgroundColor ) {
-      data = ctx.getImageData( 0, 0, w, h );
+    if (backgroundColor) {
+      data = ctx.getImageData(0, 0, w, h);
       var compositeOperation = ctx.globalCompositeOperation;
       ctx.globalCompositeOperation = "destination-over";
 
       ctx.fillStyle = backgroundColor;
-      ctx.fillRect( 0, 0, w, h );
+      ctx.fillRect(0, 0, w, h);
     }
 
-    var dataURL = this.canvas.toDataURL( mimeType || "image/png" );
+    var dataURL = this.canvas.toDataURL(mimeType || "image/png");
 
-    if ( backgroundColor ) {
-      ctx.putImageData( data, 0, 0 );
+    if (backgroundColor) {
+      ctx.putImageData(data, 0, 0);
       ctx.globalCompositeOperation = compositeOperation;
     }
 
@@ -8823,23 +9246,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * mouse over/out events. Set to 0 to disable mouse over events completely. Maximum is 50. A lower frequency is less
    * responsive, but uses less CPU.
    **/
-  p.enableMouseOver = function ( frequency ) {
-    if ( this._mouseOverIntervalID ) {
-      clearInterval( this._mouseOverIntervalID );
+  p.enableMouseOver = function (frequency) {
+    if (this._mouseOverIntervalID) {
+      clearInterval(this._mouseOverIntervalID);
       this._mouseOverIntervalID = null;
-      if ( frequency == 0 ) {
-        this._testMouseOver( true );
+      if (frequency == 0) {
+        this._testMouseOver(true);
       }
     }
-    if ( frequency == null ) {
+    if (frequency == null) {
       frequency = 20;
-    } else if ( frequency <= 0 ) {
+    } else if (frequency <= 0) {
       return;
     }
     var o = this;
-    this._mouseOverIntervalID = setInterval( function () {
+    this._mouseOverIntervalID = setInterval(function () {
       o._testMouseOver();
-    }, 1000 / Math.min( 50, frequency ) );
+    }, 1000 / Math.min(50, frequency));
   };
 
   /**
@@ -8857,49 +9280,51 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method enableDOMEvents
    * @param {Boolean} [enable=true] Indicates whether to enable or disable the events. Default is true.
    **/
-  p.enableDOMEvents = function ( enable ) {
-    if ( enable == null ) {
+  p.enableDOMEvents = function (enable) {
+    if (enable == null) {
       enable = true;
     }
-    var n, o, ls = this._eventListeners;
-    if ( !enable && ls ) {
-      for ( n in ls ) {
-        o = ls[ n ];
-        o.t.removeEventListener( n, o.f, false );
+    var n,
+      o,
+      ls = this._eventListeners;
+    if (!enable && ls) {
+      for (n in ls) {
+        o = ls[n];
+        o.t.removeEventListener(n, o.f, false);
       }
       this._eventListeners = null;
-    } else if ( enable && !ls && this.canvas ) {
+    } else if (enable && !ls && this.canvas) {
       var t = window.addEventListener ? window : document;
       var _this = this;
       ls = this._eventListeners = {};
-      ls[ "mouseup" ] = {
+      ls["mouseup"] = {
         t: t,
-        f: function ( e ) {
-          _this._handleMouseUp( e )
-        }
+        f: function (e) {
+          _this._handleMouseUp(e);
+        },
       };
-      ls[ "mousemove" ] = {
+      ls["mousemove"] = {
         t: t,
-        f: function ( e ) {
-          _this._handleMouseMove( e )
-        }
+        f: function (e) {
+          _this._handleMouseMove(e);
+        },
       };
-      ls[ "dblclick" ] = {
+      ls["dblclick"] = {
         t: this.canvas,
-        f: function ( e ) {
-          _this._handleDoubleClick( e )
-        }
+        f: function (e) {
+          _this._handleDoubleClick(e);
+        },
       };
-      ls[ "mousedown" ] = {
+      ls["mousedown"] = {
         t: this.canvas,
-        f: function ( e ) {
-          _this._handleMouseDown( e )
-        }
+        f: function (e) {
+          _this._handleMouseDown(e);
+        },
       };
 
-      for ( n in ls ) {
-        o = ls[ n ];
-        o.t.addEventListener( n, o.f, false );
+      for (n in ls) {
+        o = ls[n];
+        o.t.addEventListener(n, o.f, false);
       }
     }
   };
@@ -8909,7 +9334,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method clone
    **/
   p.clone = function () {
-    throw ( "Stage cannot be cloned." );
+    throw "Stage cannot be cloned.";
   };
 
   /**
@@ -8921,43 +9346,50 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return "[Stage (name=" + this.name + ")]";
   };
 
-
   // private methods:
   /**
    * @method _getElementRect
    * @protected
    * @param {HTMLElement} e
    **/
-  p._getElementRect = function ( e ) {
+  p._getElementRect = function (e) {
     var bounds;
     try {
       bounds = e.getBoundingClientRect();
-    } // this can fail on disconnected DOM elements in IE9
-    catch ( err ) {
+    } catch (err) {
+      // this can fail on disconnected DOM elements in IE9
       bounds = {
         top: e.offsetTop,
         left: e.offsetLeft,
         width: e.offsetWidth,
-        height: e.offsetHeight
+        height: e.offsetHeight,
       };
     }
 
-    var offX = ( window.pageXOffset || document.scrollLeft || 0 ) - ( document.clientLeft || document.body.clientLeft || 0 );
-    var offY = ( window.pageYOffset || document.scrollTop || 0 ) - ( document.clientTop || document.body.clientTop || 0 );
+    var offX =
+      (window.pageXOffset || document.scrollLeft || 0) -
+      (document.clientLeft || document.body.clientLeft || 0);
+    var offY =
+      (window.pageYOffset || document.scrollTop || 0) -
+      (document.clientTop || document.body.clientTop || 0);
 
-    var styles = window.getComputedStyle ? getComputedStyle( e, null ) : e.currentStyle; // IE <9 compatibility.
-    var padL = parseInt( styles.paddingLeft ) + parseInt( styles.borderLeftWidth );
-    var padT = parseInt( styles.paddingTop ) + parseInt( styles.borderTopWidth );
-    var padR = parseInt( styles.paddingRight ) + parseInt( styles.borderRightWidth );
-    var padB = parseInt( styles.paddingBottom ) + parseInt( styles.borderBottomWidth );
+    var styles = window.getComputedStyle
+      ? getComputedStyle(e, null)
+      : e.currentStyle; // IE <9 compatibility.
+    var padL = parseInt(styles.paddingLeft) + parseInt(styles.borderLeftWidth);
+    var padT = parseInt(styles.paddingTop) + parseInt(styles.borderTopWidth);
+    var padR =
+      parseInt(styles.paddingRight) + parseInt(styles.borderRightWidth);
+    var padB =
+      parseInt(styles.paddingBottom) + parseInt(styles.borderBottomWidth);
 
     // note: in some browsers bounds properties are read only.
     return {
       left: bounds.left + offX + padL,
       right: bounds.right + offX - padR,
       top: bounds.top + offY + padT,
-      bottom: bounds.bottom + offY - padB
-    }
+      bottom: bounds.bottom + offY - padB,
+    };
   };
 
   /**
@@ -8965,12 +9397,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @param {Number} id
    **/
-  p._getPointerData = function ( id ) {
-    var data = this._pointerData[ id ];
-    if ( !data ) {
-      data = this._pointerData[ id ] = {
+  p._getPointerData = function (id) {
+    var data = this._pointerData[id];
+    if (!data) {
+      data = this._pointerData[id] = {
         x: 0,
-        y: 0
+        y: 0,
       };
     }
     return data;
@@ -8981,11 +9413,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @param {MouseEvent} e
    **/
-  p._handleMouseMove = function ( e ) {
-    if ( !e ) {
+  p._handleMouseMove = function (e) {
+    if (!e) {
       e = window.event;
     }
-    this._handlePointerMove( -1, e, e.pageX, e.pageY );
+    this._handlePointerMove(-1, e, e.pageX, e.pageY);
   };
 
   /**
@@ -8997,28 +9429,35 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} pageY
    * @param {Stage} owner Indicates that the event has already been captured & handled by the indicated stage.
    **/
-  p._handlePointerMove = function ( id, e, pageX, pageY, owner ) {
-    if ( this._prevStage && owner === undefined ) {
+  p._handlePointerMove = function (id, e, pageX, pageY, owner) {
+    if (this._prevStage && owner === undefined) {
       return;
     } // redundant listener.
-    if ( !this.canvas ) {
+    if (!this.canvas) {
       return;
     }
     var nextStage = this._nextStage,
-      o = this._getPointerData( id );
+      o = this._getPointerData(id);
 
     var inBounds = o.inBounds;
-    this._updatePointerPosition( id, e, pageX, pageY );
-    if ( inBounds || o.inBounds || this.mouseMoveOutside ) {
-      if ( id === -1 && o.inBounds == !inBounds ) {
-        this._dispatchMouseEvent( this, ( inBounds ? "mouseleave" : "mouseenter" ), false, id, o, e );
+    this._updatePointerPosition(id, e, pageX, pageY);
+    if (inBounds || o.inBounds || this.mouseMoveOutside) {
+      if (id === -1 && o.inBounds == !inBounds) {
+        this._dispatchMouseEvent(
+          this,
+          inBounds ? "mouseleave" : "mouseenter",
+          false,
+          id,
+          o,
+          e
+        );
       }
 
-      this._dispatchMouseEvent( this, "stagemousemove", false, id, o, e );
-      this._dispatchMouseEvent( o.target, "pressmove", true, id, o, e );
+      this._dispatchMouseEvent(this, "stagemousemove", false, id, o, e);
+      this._dispatchMouseEvent(o.target, "pressmove", true, id, o, e);
     }
 
-    nextStage && nextStage._handlePointerMove( id, e, pageX, pageY, null );
+    nextStage && nextStage._handlePointerMove(id, e, pageX, pageY, null);
   };
 
   /**
@@ -9029,29 +9468,32 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} pageX
    * @param {Number} pageY
    **/
-  p._updatePointerPosition = function ( id, e, pageX, pageY ) {
-    var rect = this._getElementRect( this.canvas );
+  p._updatePointerPosition = function (id, e, pageX, pageY) {
+    var rect = this._getElementRect(this.canvas);
     pageX -= rect.left;
     pageY -= rect.top;
 
     var w = this.canvas.width;
     var h = this.canvas.height;
-    pageX /= ( rect.right - rect.left ) / w;
-    pageY /= ( rect.bottom - rect.top ) / h;
-    var o = this._getPointerData( id );
-    if ( o.inBounds = ( pageX >= 0 && pageY >= 0 && pageX <= w - 1 && pageY <= h - 1 ) ) {
+    pageX /= (rect.right - rect.left) / w;
+    pageY /= (rect.bottom - rect.top) / h;
+    var o = this._getPointerData(id);
+    if (
+      (o.inBounds =
+        pageX >= 0 && pageY >= 0 && pageX <= w - 1 && pageY <= h - 1)
+    ) {
       o.x = pageX;
       o.y = pageY;
-    } else if ( this.mouseMoveOutside ) {
-      o.x = pageX < 0 ? 0 : ( pageX > w - 1 ? w - 1 : pageX );
-      o.y = pageY < 0 ? 0 : ( pageY > h - 1 ? h - 1 : pageY );
+    } else if (this.mouseMoveOutside) {
+      o.x = pageX < 0 ? 0 : pageX > w - 1 ? w - 1 : pageX;
+      o.y = pageY < 0 ? 0 : pageY > h - 1 ? h - 1 : pageY;
     }
 
     o.posEvtObj = e;
     o.rawX = pageX;
     o.rawY = pageY;
 
-    if ( id === this._primaryPointerID || id === -1 ) {
+    if (id === this._primaryPointerID || id === -1) {
       this.mouseX = o.x;
       this.mouseY = o.y;
       this.mouseInBounds = o.inBounds;
@@ -9063,8 +9505,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @param {MouseEvent} e
    **/
-  p._handleMouseUp = function ( e ) {
-    this._handlePointerUp( -1, e, false );
+  p._handleMouseUp = function (e) {
+    this._handlePointerUp(-1, e, false);
   };
 
   /**
@@ -9075,39 +9517,40 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Boolean} clear
    * @param {Stage} owner Indicates that the event has already been captured & handled by the indicated stage.
    **/
-  p._handlePointerUp = function ( id, e, clear, owner ) {
+  p._handlePointerUp = function (id, e, clear, owner) {
     var nextStage = this._nextStage,
-      o = this._getPointerData( id );
-    if ( this._prevStage && owner === undefined ) {
+      o = this._getPointerData(id);
+    if (this._prevStage && owner === undefined) {
       return;
     } // redundant listener.
 
     var target = null,
       oTarget = o.target;
-    if ( !owner && ( oTarget || nextStage ) ) {
-      target = this._getObjectsUnderPoint( o.x, o.y, null, true );
+    if (!owner && (oTarget || nextStage)) {
+      target = this._getObjectsUnderPoint(o.x, o.y, null, true);
     }
 
-    if ( o.down ) {
-      this._dispatchMouseEvent( this, "stagemouseup", false, id, o, e, target );
+    if (o.down) {
+      this._dispatchMouseEvent(this, "stagemouseup", false, id, o, e, target);
       o.down = false;
     }
 
-    if ( target == oTarget ) {
-      this._dispatchMouseEvent( oTarget, "click", true, id, o, e );
+    if (target == oTarget) {
+      this._dispatchMouseEvent(oTarget, "click", true, id, o, e);
     }
-    this._dispatchMouseEvent( oTarget, "pressup", true, id, o, e );
+    this._dispatchMouseEvent(oTarget, "pressup", true, id, o, e);
 
-    if ( clear ) {
-      if ( id == this._primaryPointerID ) {
+    if (clear) {
+      if (id == this._primaryPointerID) {
         this._primaryPointerID = null;
       }
-      delete( this._pointerData[ id ] );
+      delete this._pointerData[id];
     } else {
       o.target = null;
     }
 
-    nextStage && nextStage._handlePointerUp( id, e, clear, owner || target && this );
+    nextStage &&
+      nextStage._handlePointerUp(id, e, clear, owner || (target && this));
   };
 
   /**
@@ -9115,8 +9558,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @param {MouseEvent} e
    **/
-  p._handleMouseDown = function ( e ) {
-    this._handlePointerDown( -1, e, e.pageX, e.pageY );
+  p._handleMouseDown = function (e) {
+    this._handlePointerDown(-1, e, e.pageX, e.pageY);
   };
 
   /**
@@ -9128,31 +9571,38 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} pageY
    * @param {Stage} owner Indicates that the event has already been captured & handled by the indicated stage.
    **/
-  p._handlePointerDown = function ( id, e, pageX, pageY, owner ) {
-    if ( this.preventSelection ) {
+  p._handlePointerDown = function (id, e, pageX, pageY, owner) {
+    if (this.preventSelection) {
       e.preventDefault();
     }
-    if ( this._primaryPointerID == null || id === -1 ) {
+    if (this._primaryPointerID == null || id === -1) {
       this._primaryPointerID = id;
     } // mouse always takes over.
 
-    if ( pageY != null ) {
-      this._updatePointerPosition( id, e, pageX, pageY );
+    if (pageY != null) {
+      this._updatePointerPosition(id, e, pageX, pageY);
     }
     var target = null,
       nextStage = this._nextStage,
-      o = this._getPointerData( id );
-    if ( !owner ) {
-      target = o.target = this._getObjectsUnderPoint( o.x, o.y, null, true );
+      o = this._getPointerData(id);
+    if (!owner) {
+      target = o.target = this._getObjectsUnderPoint(o.x, o.y, null, true);
     }
 
-    if ( o.inBounds ) {
-      this._dispatchMouseEvent( this, "stagemousedown", false, id, o, e, target );
+    if (o.inBounds) {
+      this._dispatchMouseEvent(this, "stagemousedown", false, id, o, e, target);
       o.down = true;
     }
-    this._dispatchMouseEvent( target, "mousedown", true, id, o, e );
+    this._dispatchMouseEvent(target, "mousedown", true, id, o, e);
 
-    nextStage && nextStage._handlePointerDown( id, e, pageX, pageY, owner || target && this );
+    nextStage &&
+      nextStage._handlePointerDown(
+        id,
+        e,
+        pageX,
+        pageY,
+        owner || (target && this)
+      );
   };
 
   /**
@@ -9162,79 +9612,92 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Stage} eventTarget The stage that the cursor is actively over.
    * @protected
    **/
-  p._testMouseOver = function ( clear, owner, eventTarget ) {
-    if ( this._prevStage && owner === undefined ) {
+  p._testMouseOver = function (clear, owner, eventTarget) {
+    if (this._prevStage && owner === undefined) {
       return;
     } // redundant listener.
 
     var nextStage = this._nextStage;
-    if ( !this._mouseOverIntervalID ) {
+    if (!this._mouseOverIntervalID) {
       // not enabled for mouseover, but should still relay the event.
-      nextStage && nextStage._testMouseOver( clear, owner, eventTarget );
+      nextStage && nextStage._testMouseOver(clear, owner, eventTarget);
       return;
     }
-    var o = this._getPointerData( -1 );
+    var o = this._getPointerData(-1);
     // only update if the mouse position has changed. This provides a lot of optimization, but has some trade-offs.
-    if ( !o || ( !clear && this.mouseX == this._mouseOverX && this.mouseY == this._mouseOverY && this.mouseInBounds ) ) {
+    if (
+      !o ||
+      (!clear &&
+        this.mouseX == this._mouseOverX &&
+        this.mouseY == this._mouseOverY &&
+        this.mouseInBounds)
+    ) {
       return;
     }
 
     var e = o.posEvtObj;
-    var isEventTarget = eventTarget || e && ( e.target == this.canvas );
+    var isEventTarget = eventTarget || (e && e.target == this.canvas);
     var target = null,
       common = -1,
       cursor = "",
-      t, i, l;
+      t,
+      i,
+      l;
 
-    if ( !owner && ( clear || this.mouseInBounds && isEventTarget ) ) {
-      target = this._getObjectsUnderPoint( this.mouseX, this.mouseY, null, true );
+    if (!owner && (clear || (this.mouseInBounds && isEventTarget))) {
+      target = this._getObjectsUnderPoint(this.mouseX, this.mouseY, null, true);
       this._mouseOverX = this.mouseX;
       this._mouseOverY = this.mouseY;
     }
 
     var oldList = this._mouseOverTarget || [];
-    var oldTarget = oldList[ oldList.length - 1 ];
-    var list = this._mouseOverTarget = [];
+    var oldTarget = oldList[oldList.length - 1];
+    var list = (this._mouseOverTarget = []);
 
     // generate ancestor list and check for cursor:
     t = target;
-    while ( t ) {
-      list.unshift( t );
-      if ( !cursor ) {
+    while (t) {
+      list.unshift(t);
+      if (!cursor) {
         cursor = t.cursor;
       }
       t = t.parent;
     }
     this.canvas.style.cursor = cursor;
-    if ( !owner && eventTarget ) {
+    if (!owner && eventTarget) {
       eventTarget.canvas.style.cursor = cursor;
     }
 
     // find common ancestor:
-    for ( i = 0, l = list.length; i < l; i++ ) {
-      if ( list[ i ] != oldList[ i ] ) {
+    for (i = 0, l = list.length; i < l; i++) {
+      if (list[i] != oldList[i]) {
         break;
       }
       common = i;
     }
 
-    if ( oldTarget != target ) {
-      this._dispatchMouseEvent( oldTarget, "mouseout", true, -1, o, e, target );
+    if (oldTarget != target) {
+      this._dispatchMouseEvent(oldTarget, "mouseout", true, -1, o, e, target);
     }
 
-    for ( i = oldList.length - 1; i > common; i-- ) {
-      this._dispatchMouseEvent( oldList[ i ], "rollout", false, -1, o, e, target );
+    for (i = oldList.length - 1; i > common; i--) {
+      this._dispatchMouseEvent(oldList[i], "rollout", false, -1, o, e, target);
     }
 
-    for ( i = list.length - 1; i > common; i-- ) {
-      this._dispatchMouseEvent( list[ i ], "rollover", false, -1, o, e, oldTarget );
+    for (i = list.length - 1; i > common; i--) {
+      this._dispatchMouseEvent(list[i], "rollover", false, -1, o, e, oldTarget);
     }
 
-    if ( oldTarget != target ) {
-      this._dispatchMouseEvent( target, "mouseover", true, -1, o, e, oldTarget );
+    if (oldTarget != target) {
+      this._dispatchMouseEvent(target, "mouseover", true, -1, o, e, oldTarget);
     }
 
-    nextStage && nextStage._testMouseOver( clear, owner || target && this, eventTarget || isEventTarget && this );
+    nextStage &&
+      nextStage._testMouseOver(
+        clear,
+        owner || (target && this),
+        eventTarget || (isEventTarget && this)
+      );
   };
 
   /**
@@ -9243,15 +9706,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {MouseEvent} e
    * @param {Stage} owner Indicates that the event has already been captured & handled by the indicated stage.
    **/
-  p._handleDoubleClick = function ( e, owner ) {
+  p._handleDoubleClick = function (e, owner) {
     var target = null,
       nextStage = this._nextStage,
-      o = this._getPointerData( -1 );
-    if ( !owner ) {
-      target = this._getObjectsUnderPoint( o.x, o.y, null, true );
-      this._dispatchMouseEvent( target, "dblclick", true, -1, o, e );
+      o = this._getPointerData(-1);
+    if (!owner) {
+      target = this._getObjectsUnderPoint(o.x, o.y, null, true);
+      this._dispatchMouseEvent(target, "dblclick", true, -1, o, e);
     }
-    nextStage && nextStage._handleDoubleClick( e, owner || target && this );
+    nextStage && nextStage._handleDoubleClick(e, owner || (target && this));
   };
 
   /**
@@ -9265,9 +9728,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {MouseEvent} [nativeEvent]
    * @param {DisplayObject} [relatedTarget]
    **/
-  p._dispatchMouseEvent = function ( target, type, bubbles, pointerId, o, nativeEvent, relatedTarget ) {
+  p._dispatchMouseEvent = function (
+    target,
+    type,
+    bubbles,
+    pointerId,
+    o,
+    nativeEvent,
+    relatedTarget
+  ) {
     // TODO: might be worth either reusing MouseEvent instances, or adding a willTrigger method to avoid GC.
-    if ( !target || ( !bubbles && !target.hasEventListener( type ) ) ) {
+    if (!target || (!bubbles && !target.hasEventListener(type))) {
       return;
     }
     /*
@@ -9276,13 +9747,24 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     var pt = this._mtx.transformPoint(o.x, o.y);
     var evt = new createjs.MouseEvent(type, bubbles, false, pt.x, pt.y, nativeEvent, pointerId, pointerId==this._primaryPointerID || pointerId==-1, o.rawX, o.rawY);
     */
-    var evt = new createjs.MouseEvent( type, bubbles, false, o.x, o.y, nativeEvent, pointerId, pointerId === this._primaryPointerID || pointerId === -1, o.rawX, o.rawY, relatedTarget );
-    target.dispatchEvent( evt );
+    var evt = new createjs.MouseEvent(
+      type,
+      bubbles,
+      false,
+      o.x,
+      o.y,
+      nativeEvent,
+      pointerId,
+      pointerId === this._primaryPointerID || pointerId === -1,
+      o.rawX,
+      o.rawY,
+      relatedTarget
+    );
+    target.dispatchEvent(evt);
   };
 
-
-  createjs.Stage = createjs.promote( Stage, "Container" );
-}() );
+  createjs.Stage = createjs.promote(Stage, "Container");
+})();
 
 //##############################################################################
 // StageGL.js
@@ -9306,7 +9788,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
  * Slot: A space on the GPU into which textures can be loaded for use in a batch, using "ActiveTexture" switches texture slot.
  */
 
-( function () {
+(function () {
   "use strict";
 
   /**
@@ -9323,11 +9805,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * 	are not rendered when added to the display list.
    * - To display something StageGL cannot render, {{#crossLink "displayObject/cache"}}{{/crossLink}} the object.
    *	Caches can be rendered regardless of source.
-   * - Images are wrapped as a webGL "Texture". Each graphics card has a limit to its concurrent Textures, too many 
+   * - Images are wrapped as a webGL "Texture". Each graphics card has a limit to its concurrent Textures, too many
    * Textures will noticeably slow performance.
-   * - Each cache counts as an individual Texture. As such {{#crossLink "SpriteSheet"}}{{/crossLink}} and 
+   * - Each cache counts as an individual Texture. As such {{#crossLink "SpriteSheet"}}{{/crossLink}} and
    * {{#crossLink "SpriteSheetBuilder"}}{{/crossLink}} are recommended practices to help keep texture counts low.
-   * - To use any image node (DOM Image/Canvas Element) between multiple StageGL instances it must be a 
+   * - To use any image node (DOM Image/Canvas Element) between multiple StageGL instances it must be a
    * {{#crossLink "Bitmap/clone"}}{{/crossLink}}, otherwise the GPU texture loading and tracking will get confused.
    * - to avoid an up/down scaled render you must call {{#crossLink "StageGL/updateViewport"}}{{/crossLink}} if you
    * resize your canvas after making a StageGL instance, this will properly size the WebGL context stored in memory.
@@ -9375,12 +9857,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * `purgeTextures(autoPurge)` every `autoPurge/2` draws. See {{#crossLink "StageGL/purgeTextures"}}{{/crossLink}} for more
    * information.
    */
-  function StageGL( canvas, options ) {
-    this.Stage_constructor( canvas );
+  function StageGL(canvas, options) {
+    this.Stage_constructor(canvas);
 
-    if ( options !== undefined ) {
-      if ( typeof options !== "object" ) {
-        throw ( "Invalid options object" );
+    if (options !== undefined) {
+      if (typeof options !== "object") {
+        throw "Invalid options object";
       }
       var premultiply = options.premultiply;
       var transparent = options.transparent;
@@ -9493,10 +9975,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @default {r: 0.50, g: 0.50, b: 0.50, a: 0.00}
      */
     this._clearColor = {
-      r: 0.50,
-      g: 0.50,
-      b: 0.50,
-      a: 0.00
+      r: 0.5,
+      g: 0.5,
+      b: 0.5,
+      a: 0.0,
     };
 
     /**
@@ -9718,7 +10200,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     // and begin
     this._initializeWebGL();
   }
-  var p = createjs.extend( StageGL, createjs.Stage );
+  var p = createjs.extend(StageGL, createjs.Stage);
 
   // static methods:
   /**
@@ -9740,22 +10222,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Object} the target frame if supplied and present or a generic frame {t, l, b, r}
    */
-  StageGL.buildUVRects = function ( spritesheet, target, onlyTarget ) {
-    if ( !spritesheet || !spritesheet._frames ) {
+  StageGL.buildUVRects = function (spritesheet, target, onlyTarget) {
+    if (!spritesheet || !spritesheet._frames) {
       return null;
     }
-    if ( target === undefined ) {
+    if (target === undefined) {
       target = -1;
     }
-    if ( onlyTarget === undefined ) {
+    if (onlyTarget === undefined) {
       onlyTarget = false;
     }
 
-    var start = ( target != -1 && onlyTarget ) ? ( target ) : ( 0 );
-    var end = ( target != -1 && onlyTarget ) ? ( target + 1 ) : ( spritesheet._frames.length );
-    for ( var i = start; i < end; i++ ) {
-      var f = spritesheet._frames[ i ];
-      if ( f.uvRect || f.image.width <= 0 || f.image.height <= 0 ) {
+    var start = target != -1 && onlyTarget ? target : 0;
+    var end =
+      target != -1 && onlyTarget ? target + 1 : spritesheet._frames.length;
+    for (var i = start; i < end; i++) {
+      var f = spritesheet._frames[i];
+      if (f.uvRect || f.image.width <= 0 || f.image.height <= 0) {
         continue;
       }
 
@@ -9763,17 +10246,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       f.uvRect = {
         t: r.y / f.image.height,
         l: r.x / f.image.width,
-        b: ( r.y + r.height ) / f.image.height,
-        r: ( r.x + r.width ) / f.image.width
+        b: (r.y + r.height) / f.image.height,
+        r: (r.x + r.width) / f.image.width,
       };
     }
 
-    return spritesheet._frames[ ( target != -1 ) ? target : 0 ].uvRect || {
-      t: 0,
-      l: 0,
-      b: 1,
-      r: 1
-    };
+    return (
+      spritesheet._frames[target != -1 ? target : 0].uvRect || {
+        t: 0,
+        l: 0,
+        b: 1,
+        r: 1,
+      }
+    );
   };
 
   /**
@@ -9783,10 +10268,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Boolean} Whether WebGL is enabled
    */
-  StageGL.isWebGLActive = function ( ctx ) {
-    return ctx &&
+  StageGL.isWebGLActive = function (ctx) {
+    return (
+      ctx &&
       ctx instanceof WebGLRenderingContext &&
-      typeof WebGLRenderingContext !== 'undefined';
+      typeof WebGLRenderingContext !== "undefined"
+    );
   };
 
   // static properties:
@@ -9834,7 +10321,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @default 65536
    * @readonly
    */
-  StageGL.WEBGL_MAX_INDEX_NUM = Math.pow( 2, 16 );
+  StageGL.WEBGL_MAX_INDEX_NUM = Math.pow(2, 16);
 
   /**
    * Default U/V rect for dealing with full coverage from an image source.
@@ -9849,7 +10336,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     t: 0,
     l: 0,
     b: 1,
-    r: 1
+    r: 1,
   };
 
   try {
@@ -9861,14 +10348,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @type {Float32Array}
      * @readonly
      */
-    StageGL.COVER_VERT = new Float32Array( [
-      -1, 1, //TL
-      1, 1, //TR
-      -1, -1, //BL
-      1, 1, //TR
-      1, -1, //BR
-      -1, -1 //BL
-    ] );
+    StageGL.COVER_VERT = new Float32Array([
+      -1,
+      1, //TL
+      1,
+      1, //TR
+      -1,
+      -1, //BL
+      1,
+      1, //TR
+      1,
+      -1, //BR
+      -1,
+      -1, //BL
+    ]);
 
     /**
      * U/V for {{#crossLink "StageGL/COVER_VERT:property"}}{{/crossLink}}.
@@ -9878,14 +10371,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @type {Float32Array}
      * @readonly
      */
-    StageGL.COVER_UV = new Float32Array( [
-      0, 0, //TL
-      1, 0, //TR
-      0, 1, //BL
-      1, 0, //TR
-      1, 1, //BR
-      0, 1 //BL
-    ] );
+    StageGL.COVER_UV = new Float32Array([
+      0,
+      0, //TL
+      1,
+      0, //TR
+      0,
+      1, //BL
+      1,
+      0, //TR
+      1,
+      1, //BR
+      0,
+      1, //BL
+    ]);
 
     /**
      * Flipped U/V for {{#crossLink "StageGL:COVER_VERT:property"}}{{/crossLink}}.
@@ -9895,16 +10394,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @type {Float32Array}
      * @readonly
      */
-    StageGL.COVER_UV_FLIP = new Float32Array( [
-      0, 1, //TL
-      1, 1, //TR
-      0, 0, //BL
-      1, 1, //TR
-      1, 0, //BR
-      0, 0 //BL
-    ] );
-  } catch ( e ) {
-    /* Breaking in older browsers, but those browsers wont run StageGL so no recovery or warning needed */ }
+    StageGL.COVER_UV_FLIP = new Float32Array([
+      0,
+      1, //TL
+      1,
+      1, //TR
+      0,
+      0, //BL
+      1,
+      1, //TR
+      1,
+      0, //BR
+      0,
+      0, //BL
+    ]);
+  } catch (e) {
+    /* Breaking in older browsers, but those browsers wont run StageGL so no recovery or warning needed */
+  }
 
   /**
    * Portion of the shader that contains the "varying" properties required in both vertex and fragment shaders. The
@@ -9916,12 +10422,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @type {String}
    * @readonly
    */
-  StageGL.REGULAR_VARYING_HEADER = (
+  StageGL.REGULAR_VARYING_HEADER =
     "precision mediump float;" +
     "varying vec2 vTextureCoord;" +
     "varying lowp float indexPicker;" +
-    "varying lowp float alphaValue;"
-  );
+    "varying lowp float alphaValue;";
 
   /**
    * Actual full header for the vertex shader. Includes the varying header. The regular shader is designed to render
@@ -9932,14 +10437,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @type {String}
    * @readonly
    */
-  StageGL.REGULAR_VERTEX_HEADER = (
+  StageGL.REGULAR_VERTEX_HEADER =
     StageGL.REGULAR_VARYING_HEADER +
     "attribute vec2 vertexPosition;" +
     "attribute vec2 uvPosition;" +
     "attribute lowp float textureIndex;" +
     "attribute lowp float objectAlpha;" +
-    "uniform mat4 pMatrix;"
-  );
+    "uniform mat4 pMatrix;";
 
   /**
    * Actual full header for the fragment shader. Includes the varying header. The regular shader is designed to render
@@ -9950,10 +10454,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @type {String}
    * @readonly
    */
-  StageGL.REGULAR_FRAGMENT_HEADER = (
-    StageGL.REGULAR_VARYING_HEADER +
-    "uniform sampler2D uSampler[{{count}}];"
-  );
+  StageGL.REGULAR_FRAGMENT_HEADER =
+    StageGL.REGULAR_VARYING_HEADER + "uniform sampler2D uSampler[{{count}}];";
 
   /**
    * Body of the vertex shader. The regular shader is designed to render all expected objects. Shader code may contain
@@ -9964,7 +10466,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @type {String}
    * @readonly
    */
-  StageGL.REGULAR_VERTEX_BODY = (
+  StageGL.REGULAR_VERTEX_BODY =
     "void main(void) {" +
     //DHG TODO: This doesn't work. Must be something wrong with the hand built matrix see js... bypass for now
     //vertexPosition, round if flag
@@ -9978,8 +10480,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     "alphaValue = objectAlpha;" +
     "indexPicker = textureIndex;" +
     "vTextureCoord = uvPosition;" +
-    "}"
-  );
+    "}";
 
   /**
    * Body of the fragment shader. The regular shader is designed to render all expected objects. Shader code may
@@ -9990,28 +10491,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @type {String}
    * @readonly
    */
-  StageGL.REGULAR_FRAGMENT_BODY = (
+  StageGL.REGULAR_FRAGMENT_BODY =
     "void main(void) {" +
     "vec4 color = vec4(1.0, 0.0, 0.0, 1.0);" +
-
     "if (indexPicker <= 0.5) {" +
     "color = texture2D(uSampler[0], vTextureCoord);" +
     "{{alternates}}" +
     "}" +
-
     "{{fragColor}}" +
-    "}"
-  );
-  StageGL.REGULAR_FRAG_COLOR_NORMAL = (
-    "gl_FragColor = vec4(color.rgb, color.a * alphaValue);"
-  );
-  StageGL.REGULAR_FRAG_COLOR_PREMULTIPLY = (
+    "}";
+  StageGL.REGULAR_FRAG_COLOR_NORMAL =
+    "gl_FragColor = vec4(color.rgb, color.a * alphaValue);";
+  StageGL.REGULAR_FRAG_COLOR_PREMULTIPLY =
     "if(color.a > 0.0035) {" + // 1/255 = 0.0039, so ignore any value below 1 because it's probably noise
     "gl_FragColor = vec4(color.rgb/color.a, color.a * alphaValue);" +
     "} else {" +
     "gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);" +
-    "}"
-  );
+    "}";
 
   //TODO: DHG: a real particle shader
   /**
@@ -10022,9 +10518,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @type {String}
    * @readonly
    */
-  StageGL.PARTICLE_VERTEX_BODY = (
-    StageGL.REGULAR_VERTEX_BODY
-  );
+  StageGL.PARTICLE_VERTEX_BODY = StageGL.REGULAR_VERTEX_BODY;
   /**
    * @property PARTICLE_FRAGMENT_BODY
    * @todo
@@ -10033,9 +10527,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @type {String}
    * @readonly
    */
-  StageGL.PARTICLE_FRAGMENT_BODY = (
-    StageGL.REGULAR_FRAGMENT_BODY
-  );
+  StageGL.PARTICLE_FRAGMENT_BODY = StageGL.REGULAR_FRAGMENT_BODY;
 
   /**
    * Portion of the shader that contains the "varying" properties required in both vertex and fragment shaders. The
@@ -10047,12 +10539,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @type {String}
    * @readonly
    */
-  StageGL.COVER_VARYING_HEADER = (
+  StageGL.COVER_VARYING_HEADER =
     "precision mediump float;" +
-
     "varying highp vec2 vRenderCoord;" +
-    "varying highp vec2 vTextureCoord;"
-  );
+    "varying highp vec2 vTextureCoord;";
 
   /**
    * Actual full header for the vertex shader. Includes the varying header. The cover shader is designed to be a
@@ -10064,12 +10554,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @type {String}
    * @readonly
    */
-  StageGL.COVER_VERTEX_HEADER = (
+  StageGL.COVER_VERTEX_HEADER =
     StageGL.COVER_VARYING_HEADER +
     "attribute vec2 vertexPosition;" +
     "attribute vec2 uvPosition;" +
-    "uniform float uUpright;"
-  );
+    "uniform float uUpright;";
 
   /**
    * Actual full header for the fragment shader. Includes the varying header. The cover shader is designed to be a
@@ -10081,10 +10570,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @type {String}
    * @readonly
    */
-  StageGL.COVER_FRAGMENT_HEADER = (
-    StageGL.COVER_VARYING_HEADER +
-    "uniform sampler2D uSampler;"
-  );
+  StageGL.COVER_FRAGMENT_HEADER =
+    StageGL.COVER_VARYING_HEADER + "uniform sampler2D uSampler;";
 
   /**
    * Body of the vertex shader. The cover shader is designed to be a simple vertex/uv only texture render that covers
@@ -10095,13 +10582,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @type {String}
    * @readonly
    */
-  StageGL.COVER_VERTEX_BODY = (
+  StageGL.COVER_VERTEX_BODY =
     "void main(void) {" +
     "gl_Position = vec4(vertexPosition.x, vertexPosition.y, 0.0, 1.0);" +
     "vRenderCoord = uvPosition;" +
     "vTextureCoord = vec2(uvPosition.x, abs(uUpright - uvPosition.y));" +
-    "}"
-  );
+    "}";
 
   /**
    * Body of the fragment shader. The cover shader is designed to be a simple vertex/uv only texture render that
@@ -10112,12 +10598,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @type {String}
    * @readonly
    */
-  StageGL.COVER_FRAGMENT_BODY = (
+  StageGL.COVER_FRAGMENT_BODY =
     "void main(void) {" +
     "vec4 color = texture2D(uSampler, vRenderCoord);" +
     "gl_FragColor = color;" +
-    "}"
-  );
+    "}";
 
   // events:
   /**
@@ -10136,19 +10621,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return !!this._webGLContext;
   };
 
-  p._set_autoPurge = function ( value ) {
-    value = isNaN( value ) ? 1200 : value;
-    if ( value != -1 ) {
+  p._set_autoPurge = function (value) {
+    value = isNaN(value) ? 1200 : value;
+    if (value != -1) {
       value = value < 10 ? 10 : value;
     }
     this._autoPurge = value;
   };
   p._get_autoPurge = function () {
-    return Number( this._autoPurge );
+    return Number(this._autoPurge);
   };
 
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       /**
        * Indicates whether WebGL is being used for rendering. For example, this would be `false` if WebGL is not
        * supported in the browser.
@@ -10157,7 +10642,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
        * @readonly
        */
       isWebGL: {
-        get: p._get_isWebGL
+        get: p._get_isWebGL,
       },
 
       /**
@@ -10170,11 +10655,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
        */
       autoPurge: {
         get: p._get_autoPurge,
-        set: p._set_autoPurge
-      }
-    } );
-  } catch ( e ) {} // TODO: use Log
-
+        set: p._set_autoPurge,
+      },
+    });
+  } catch (e) {} // TODO: use Log
 
   // constructor methods:
   /**
@@ -10184,8 +10668,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {WebGLRenderingContext}
    */
   p._initializeWebGL = function () {
-    if ( this.canvas ) {
-      if ( !this._webGLContext || this._webGLContext.canvas !== this.canvas ) {
+    if (this.canvas) {
+      if (!this._webGLContext || this._webGLContext.canvas !== this.canvas) {
         // A context hasn't been defined yet,
         // OR the defined context belongs to a different canvas, so reinitialize.
 
@@ -10196,27 +10680,47 @@ createjs.deprecate = function ( fallbackMethod, name ) {
           stencil: true,
           antialias: this._antialias,
           premultipliedAlpha: this._premultiply, // Assume the drawing buffer contains colors with premultiplied alpha.
-          preserveDrawingBuffer: this._preserveBuffer
+          preserveDrawingBuffer: this._preserveBuffer,
         };
 
-        var gl = this._webGLContext = this._fetchWebGLContext( this.canvas, options );
-        if ( !gl ) {
+        var gl = (this._webGLContext = this._fetchWebGLContext(
+          this.canvas,
+          options
+        ));
+        if (!gl) {
           return null;
         }
 
-        this.updateSimultaneousTextureCount( gl.getParameter( gl.MAX_TEXTURE_IMAGE_UNITS ) );
-        this._maxTextureSlots = gl.getParameter( gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS );
-        this._createBuffers( gl );
-        this._initTextures( gl );
+        this.updateSimultaneousTextureCount(
+          gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS)
+        );
+        this._maxTextureSlots = gl.getParameter(
+          gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS
+        );
+        this._createBuffers(gl);
+        this._initTextures(gl);
 
-        gl.disable( gl.DEPTH_TEST );
-        gl.enable( gl.BLEND );
-        gl.blendFuncSeparate( gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA );
-        gl.pixelStorei( gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this._premultiply );
+        gl.disable(gl.DEPTH_TEST);
+        gl.enable(gl.BLEND);
+        gl.blendFuncSeparate(
+          gl.SRC_ALPHA,
+          gl.ONE_MINUS_SRC_ALPHA,
+          gl.ONE,
+          gl.ONE_MINUS_SRC_ALPHA
+        );
+        gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this._premultiply);
         //gl.pixelStorei(gl.UNPACK_COLORSPACE_CONVERSION_WEBGL, gl.NONE);
 
-        this._webGLContext.clearColor( this._clearColor.r, this._clearColor.g, this._clearColor.b, this._clearColor.a );
-        this.updateViewport( this._viewportWidth || this.canvas.width, this._viewportHeight || this.canvas.height );
+        this._webGLContext.clearColor(
+          this._clearColor.r,
+          this._clearColor.g,
+          this._clearColor.b,
+          this._clearColor.a
+        );
+        this.updateViewport(
+          this._viewportWidth || this.canvas.width,
+          this._viewportHeight || this.canvas.height
+        );
       }
     } else {
       this._webGLContext = null;
@@ -10228,50 +10732,58 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   /**
    * Docced in superclass
    */
-  p.update = function ( props ) {
-    if ( !this.canvas ) {
+  p.update = function (props) {
+    if (!this.canvas) {
       return;
     }
-    if ( this.tickOnUpdate ) {
-      this.tick( props );
+    if (this.tickOnUpdate) {
+      this.tick(props);
     }
-    this.dispatchEvent( "drawstart" );
-    if ( this.autoClear ) {
+    this.dispatchEvent("drawstart");
+    if (this.autoClear) {
       this.clear();
     }
 
-    if ( this._webGLContext ) {
+    if (this._webGLContext) {
       // Use WebGL.
-      this._batchDraw( this, this._webGLContext );
-      if ( this._autoPurge != -1 && !( this._drawID % ( ( this._autoPurge / 2 ) | 0 ) ) ) {
-        this.purgeTextures( this._autoPurge );
+      this._batchDraw(this, this._webGLContext);
+      if (
+        this._autoPurge != -1 &&
+        !(this._drawID % ((this._autoPurge / 2) | 0))
+      ) {
+        this.purgeTextures(this._autoPurge);
       }
     } else {
       // Use 2D.
-      var ctx = this.canvas.getContext( "2d" );
+      var ctx = this.canvas.getContext("2d");
       ctx.save();
-      this.updateContext( ctx );
-      this.draw( ctx, false );
+      this.updateContext(ctx);
+      this.draw(ctx, false);
       ctx.restore();
     }
-    this.dispatchEvent( "drawend" );
+    this.dispatchEvent("drawend");
   };
 
   /**
    * Docced in superclass
    */
   p.clear = function () {
-    if ( !this.canvas ) {
+    if (!this.canvas) {
       return;
     }
-    if ( StageGL.isWebGLActive( this._webGLContext ) ) {
+    if (StageGL.isWebGLActive(this._webGLContext)) {
       var gl = this._webGLContext;
       var cc = this._clearColor;
       var adjust = this._transparent ? cc.a : 1.0;
       // Use WebGL settings; adjust for pre multiplied alpha appropriate to scenario
-      this._webGLContext.clearColor( cc.r * adjust, cc.g * adjust, cc.b * adjust, adjust );
-      gl.clear( gl.COLOR_BUFFER_BIT );
-      this._webGLContext.clearColor( cc.r, cc.g, cc.b, cc.a );
+      this._webGLContext.clearColor(
+        cc.r * adjust,
+        cc.g * adjust,
+        cc.b * adjust,
+        adjust
+      );
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      this._webGLContext.clearColor(cc.r, cc.g, cc.b, cc.a);
     } else {
       // Use 2D.
       this.Stage_clear();
@@ -10290,13 +10802,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    *  example, used for drawing the cache (to prevent it from simply drawing an existing cache back into itself).
    * @return {Boolean} If the draw was handled by this function
    */
-  p.draw = function ( context, ignoreCache ) {
-    if ( context === this._webGLContext && StageGL.isWebGLActive( this._webGLContext ) ) {
+  p.draw = function (context, ignoreCache) {
+    if (
+      context === this._webGLContext &&
+      StageGL.isWebGLActive(this._webGLContext)
+    ) {
       var gl = this._webGLContext;
-      this._batchDraw( this, gl, ignoreCache );
+      this._batchDraw(this, gl, ignoreCache);
       return true;
     } else {
-      return this.Stage_draw( context, ignoreCache );
+      return this.Stage_draw(context, ignoreCache);
     }
   };
 
@@ -10311,10 +10826,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {BitmapCache} manager The BitmapCache instance looking after the cache
    * @return {Boolean} If the draw was handled by this function
    */
-  p.cacheDraw = function ( target, filters, manager ) {
-    if ( StageGL.isWebGLActive( this._webGLContext ) ) {
+  p.cacheDraw = function (target, filters, manager) {
+    if (StageGL.isWebGLActive(this._webGLContext)) {
       var gl = this._webGLContext;
-      this._cacheDraw( gl, target, filters, manager );
+      this._cacheDraw(gl, target, filters, manager);
       return true;
     } else {
       return false;
@@ -10333,11 +10848,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param  {Number} id The slot to be affected
    * @param  {Boolean} [lock=false] Whether this slot is the one being locked.
    */
-  p.protectTextureSlot = function ( id, lock ) {
-    if ( id > this._maxTextureSlots || id < 0 ) {
+  p.protectTextureSlot = function (id, lock) {
+    if (id > this._maxTextureSlots || id < 0) {
       throw "Slot outside of acceptable range";
     }
-    this._slotBlacklist[ id ] = !!lock;
+    this._slotBlacklist[id] = !!lock;
   };
 
   /**
@@ -10352,34 +10867,35 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Objet}
    * @todo fill in return type
    */
-  p.getTargetRenderTexture = function ( target, w, h ) {
-    var result, toggle = false;
+  p.getTargetRenderTexture = function (target, w, h) {
+    var result,
+      toggle = false;
     var gl = this._webGLContext;
-    if ( target.__lastRT !== undefined && target.__lastRT === target.__rtA ) {
+    if (target.__lastRT !== undefined && target.__lastRT === target.__rtA) {
       toggle = true;
     }
-    if ( !toggle ) {
-      if ( target.__rtA === undefined ) {
-        target.__rtA = this.getRenderBufferTexture( w, h );
+    if (!toggle) {
+      if (target.__rtA === undefined) {
+        target.__rtA = this.getRenderBufferTexture(w, h);
       } else {
-        if ( w != target.__rtA._width || h != target.__rtA._height ) {
-          this.resizeTexture( target.__rtA, w, h );
+        if (w != target.__rtA._width || h != target.__rtA._height) {
+          this.resizeTexture(target.__rtA, w, h);
         }
-        this.setTextureParams( gl );
+        this.setTextureParams(gl);
       }
       result = target.__rtA;
     } else {
-      if ( target.__rtB === undefined ) {
-        target.__rtB = this.getRenderBufferTexture( w, h );
+      if (target.__rtB === undefined) {
+        target.__rtB = this.getRenderBufferTexture(w, h);
       } else {
-        if ( w != target.__rtB._width || h != target.__rtB._height ) {
-          this.resizeTexture( target.__rtB, w, h );
+        if (w != target.__rtB._width || h != target.__rtB._height) {
+          this.resizeTexture(target.__rtB, w, h);
         }
-        this.setTextureParams( gl );
+        this.setTextureParams(gl);
       }
       result = target.__rtB;
     }
-    if ( !result ) {
+    if (!result) {
       throw "Problems creating render textures, known causes include using too much VRAM by not releasing WebGL texture instances";
     }
     target.__lastRT = result;
@@ -10387,12 +10903,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   };
 
   /**
-   * For every image encountered StageGL registers and tracks it automatically. This tracking can cause memory leaks 
+   * For every image encountered StageGL registers and tracks it automatically. This tracking can cause memory leaks
    * if not purged. StageGL, by default, automatically purges them. This does have a cost and may unfortunately find
    * false positives. This function is for manual management of this memory instead of the automatic system controlled
    * by the {{#crossLink "StageGL/autoPurge:property"}}{{/crossLink}} property.
    *
-   * This function will recursively remove all textures found on the object, its children, cache, etc. It will uncache 
+   * This function will recursively remove all textures found on the object, its children, cache, etc. It will uncache
    * objects and remove any texture it finds REGARDLESS of whether it is currently in use elsewhere. It is up to the
    * developer to ensure that a texture in use is not removed.
    *
@@ -10401,56 +10917,56 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method releaseTexture
    * @param  {DisplayObject | Texture | Image | Canvas} item An object that used the texture to be discarded.
    */
-  p.releaseTexture = function ( item ) {
+  p.releaseTexture = function (item) {
     var i, l;
-    if ( !item ) {
+    if (!item) {
       return;
     }
 
     // this is a container object
-    if ( item.children ) {
-      for ( i = 0, l = item.children.length; i < l; i++ ) {
-        this.releaseTexture( item.children[ i ] );
+    if (item.children) {
+      for (i = 0, l = item.children.length; i < l; i++) {
+        this.releaseTexture(item.children[i]);
       }
     }
 
     // this has a cache canvas
-    if ( item.cacheCanvas ) {
+    if (item.cacheCanvas) {
       item.uncache();
     }
 
     var foundImage = undefined;
-    if ( item._storeID !== undefined ) {
+    if (item._storeID !== undefined) {
       // this is a texture itself
-      if ( item === this._textureDictionary[ item._storeID ] ) {
-        this._killTextureObject( item );
+      if (item === this._textureDictionary[item._storeID]) {
+        this._killTextureObject(item);
         item._storeID = undefined;
         return;
       }
 
       // this is an image or canvas
       foundImage = item;
-    } else if ( item._webGLRenderStyle === 2 ) {
+    } else if (item._webGLRenderStyle === 2) {
       // this is a Bitmap class
       foundImage = item.image;
-    } else if ( item._webGLRenderStyle === 1 ) {
+    } else if (item._webGLRenderStyle === 1) {
       // this is a SpriteSheet, we can't tell which image we used from the list easily so remove them all!
-      for ( i = 0, l = item.spriteSheet._images.length; i < l; i++ ) {
-        this.releaseTexture( item.spriteSheet._images[ i ] );
+      for (i = 0, l = item.spriteSheet._images.length; i < l; i++) {
+        this.releaseTexture(item.spriteSheet._images[i]);
       }
       return;
     }
 
     // did we find anything
-    if ( foundImage === undefined ) {
-      if ( this.vocalDebug ) {
-        console.log( "No associated texture found on release" );
+    if (foundImage === undefined) {
+      if (this.vocalDebug) {
+        console.log("No associated texture found on release");
       }
       return;
     }
 
     // remove it
-    this._killTextureObject( this._textureDictionary[ foundImage._storeID ] );
+    this._killTextureObject(this._textureDictionary[foundImage._storeID]);
     foundImage._storeID = undefined;
   };
 
@@ -10464,20 +10980,21 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method purgeTextures
    * @param {Number} [count=100] How many renders ago the texture was last used
    */
-  p.purgeTextures = function ( count ) {
-    if ( count == undefined ) {
+  p.purgeTextures = function (count) {
+    if (count == undefined) {
       count = 100;
     }
 
     var dict = this._textureDictionary;
     var l = dict.length;
-    for ( var i = 0; i < l; i++ ) {
-      var item = dict[ i ];
-      if ( !item ) {
+    for (var i = 0; i < l; i++) {
+      var item = dict[i];
+      if (!item) {
         continue;
       }
-      if ( item._drawID + count <= this._drawID ) { // use draw not batch as draw is more indicative of time
-        this._killTextureObject( item );
+      if (item._drawID + count <= this._drawID) {
+        // use draw not batch as draw is more indicative of time
+        this._killTextureObject(item);
       }
     }
   };
@@ -10492,32 +11009,35 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method updateSimultaneousTextureCount
    * @param {Number} [count=1] The number of textures intended for simultaneous loading.
    */
-  p.updateSimultaneousTextureCount = function ( count ) {
+  p.updateSimultaneousTextureCount = function (count) {
     // TODO: DHG: make sure API works in all instances, may be some issues with buffers etc I haven't foreseen
     var gl = this._webGLContext;
     var success = false;
 
-    if ( count < 1 || isNaN( count ) ) {
+    if (count < 1 || isNaN(count)) {
       count = 1;
     }
     this._batchTextureCount = count;
 
-    while ( !success ) {
+    while (!success) {
       try {
-        this._activeShader = this._fetchShaderProgram( gl );
+        this._activeShader = this._fetchShaderProgram(gl);
         success = true;
-      } catch ( e ) {
-        if ( this._batchTextureCount == 1 ) {
+      } catch (e) {
+        if (this._batchTextureCount == 1) {
           throw "Cannot compile shader " + e;
         }
 
         this._batchTextureCount -= 4;
-        if ( this._batchTextureCount < 1 ) {
+        if (this._batchTextureCount < 1) {
           this._batchTextureCount = 1;
         }
 
-        if ( this.vocalDebug ) {
-          console.log( "Reducing desired texture count due to errors: " + this._batchTextureCount );
+        if (this.vocalDebug) {
+          console.log(
+            "Reducing desired texture count due to errors: " +
+              this._batchTextureCount
+          );
         }
       }
     }
@@ -10531,29 +11051,43 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Integer} width The width of the render surface in pixels.
    * @param {Integer} height The height of the render surface in pixels.
    */
-  p.updateViewport = function ( width, height ) {
+  p.updateViewport = function (width, height) {
     this._viewportWidth = width | 0;
     this._viewportHeight = height | 0;
     var gl = this._webGLContext;
 
-    if ( gl ) {
-      gl.viewport( 0, 0, this._viewportWidth, this._viewportHeight );
+    if (gl) {
+      gl.viewport(0, 0, this._viewportWidth, this._viewportHeight);
 
       // WebGL works with a -1,1 space on its screen. It also follows Y-Up
       // we need to flip the y, scale and then translate the co-ordinates to match this
       // additionally we offset into they Y so the polygons are inside the camera's "clipping" plane
-      this._projectionMatrix = new Float32Array( [
-        2 / this._viewportWidth, 0, 0, 0,
-        0, -2 / this._viewportHeight, 1, 0,
-        0, 0, 1, 0,
-        -1, 1, 0.1, 0
-      ] );
+      this._projectionMatrix = new Float32Array([
+        2 / this._viewportWidth,
+        0,
+        0,
+        0,
+        0,
+        -2 / this._viewportHeight,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -1,
+        1,
+        0.1,
+        0,
+      ]);
       // create the flipped version for use with render texture flipping
       // DHG: this would be a slice/clone but some platforms don't offer them for Float32Array
-      this._projectionMatrixFlip = new Float32Array( [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ] );
-      this._projectionMatrixFlip.set( this._projectionMatrix );
-      this._projectionMatrixFlip[ 5 ] *= -1;
-      this._projectionMatrixFlip[ 13 ] *= -1;
+      this._projectionMatrixFlip = new Float32Array([
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      ]);
+      this._projectionMatrixFlip.set(this._projectionMatrix);
+      this._projectionMatrixFlip[5] *= -1;
+      this._projectionMatrixFlip[13] *= -1;
     }
   };
 
@@ -10564,31 +11098,33 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param  {Filter|Object} filter The object which will provide the information needed to construct the filter shader.
    * @return {WebGLProgram}
    */
-  p.getFilterShader = function ( filter ) {
-    if ( !filter ) {
+  p.getFilterShader = function (filter) {
+    if (!filter) {
       filter = this;
     }
 
     var gl = this._webGLContext;
     var targetShader = this._activeShader;
 
-    if ( filter._builtShader ) {
+    if (filter._builtShader) {
       targetShader = filter._builtShader;
-      if ( filter.shaderParamSetup ) {
-        gl.useProgram( targetShader );
-        filter.shaderParamSetup( gl, this, targetShader );
+      if (filter.shaderParamSetup) {
+        gl.useProgram(targetShader);
+        filter.shaderParamSetup(gl, this, targetShader);
       }
     } else {
       try {
         targetShader = this._fetchShaderProgram(
-          gl, "filter",
-          filter.VTX_SHADER_BODY, filter.FRAG_SHADER_BODY,
-          filter.shaderParamSetup && filter.shaderParamSetup.bind( filter )
+          gl,
+          "filter",
+          filter.VTX_SHADER_BODY,
+          filter.FRAG_SHADER_BODY,
+          filter.shaderParamSetup && filter.shaderParamSetup.bind(filter)
         );
         filter._builtShader = targetShader;
         targetShader._name = filter.toString();
-      } catch ( e ) {
-        console && console.log( "SHADER SWITCH FAILURE", e );
+      } catch (e) {
+        console && console.log("SHADER SWITCH FAILURE", e);
       }
     }
     return targetShader;
@@ -10601,14 +11137,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param  {uint} [w=1] The width of the texture in pixels, defaults to 1
    * @param  {uint} [h=1] The height of the texture in pixels, defaults to 1
    */
-  p.getBaseTexture = function ( w, h ) {
-    var width = Math.ceil( w > 0 ? w : 1 ) || 1;
-    var height = Math.ceil( h > 0 ? h : 1 ) || 1;
+  p.getBaseTexture = function (w, h) {
+    var width = Math.ceil(w > 0 ? w : 1) || 1;
+    var height = Math.ceil(h > 0 ? h : 1) || 1;
 
     var gl = this._webGLContext;
     var texture = gl.createTexture();
-    this.resizeTexture( texture, width, height );
-    this.setTextureParams( gl, false );
+    this.resizeTexture(texture, width, height);
+    this.setTextureParams(gl, false);
 
     return texture;
   };
@@ -10627,14 +11163,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param  {uint} [width=1] The width of the texture in pixels, defaults to 1
    * @param  {uint} [height=1] The height of the texture in pixels, defaults to 1
    */
-  p.resizeTexture = function ( texture, width, height ) {
+  p.resizeTexture = function (texture, width, height) {
     var gl = this._webGLContext;
-    gl.bindTexture( gl.TEXTURE_2D, texture );
+    gl.bindTexture(gl.TEXTURE_2D, texture);
     gl.texImage2D(
       gl.TEXTURE_2D, // target
       0, // level of detail
       gl.RGBA, // internal format
-      width, height, 0, // width, height, border (only for array/null sourced textures)
+      width,
+      height,
+      0, // width, height, border (only for array/null sourced textures)
       gl.RGBA, // format (match internal format)
       gl.UNSIGNED_BYTE, // type of texture(pixel color depth)
       null // image data, we can do null because we're doing array data
@@ -10652,18 +11190,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param  {Number} h The height of the texture in pixels.
    * @return {Texture} the basic texture instance with a render buffer property.
    */
-  p.getRenderBufferTexture = function ( w, h ) {
+  p.getRenderBufferTexture = function (w, h) {
     var gl = this._webGLContext;
 
     // get the texture
-    var renderTexture = this.getBaseTexture( w, h );
-    if ( !renderTexture ) {
+    var renderTexture = this.getBaseTexture(w, h);
+    if (!renderTexture) {
       return null;
     }
 
     // get the frame buffer
     var frameBuffer = gl.createFramebuffer();
-    if ( !frameBuffer ) {
+    if (!frameBuffer) {
       return null;
     }
 
@@ -10672,16 +11210,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     renderTexture.height = h;
 
     // attach frame buffer to texture and provide cross links to look up each other
-    gl.bindFramebuffer( gl.FRAMEBUFFER, frameBuffer );
-    gl.framebufferTexture2D( gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, renderTexture, 0 );
+    gl.bindFramebuffer(gl.FRAMEBUFFER, frameBuffer);
+    gl.framebufferTexture2D(
+      gl.FRAMEBUFFER,
+      gl.COLOR_ATTACHMENT0,
+      gl.TEXTURE_2D,
+      renderTexture,
+      0
+    );
     frameBuffer._renderTexture = renderTexture;
     renderTexture._frameBuffer = frameBuffer;
 
     // these keep track of themselves simply to reduce complexity of some lookup code
     renderTexture._storeID = this._textureDictionary.length;
-    this._textureDictionary[ renderTexture._storeID ] = renderTexture;
+    this._textureDictionary[renderTexture._storeID] = renderTexture;
 
-    gl.bindFramebuffer( gl.FRAMEBUFFER, null );
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     return renderTexture;
   };
 
@@ -10691,17 +11235,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param  {WebGLRenderingContext} gl The canvas WebGL context object to draw into.
    * @param  {Boolean} [isPOT=false] Marks whether the texture is "Power of Two", this may allow better quality AA.
    */
-  p.setTextureParams = function ( gl, isPOT ) {
-    if ( isPOT && this._antialias ) {
+  p.setTextureParams = function (gl, isPOT) {
+    if (isPOT && this._antialias) {
       //non POT linear works in some devices, but performance is NOT good, investigate
-      gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR );
-      gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR );
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     } else {
-      gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST );
-      gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST );
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
     }
-    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE );
-    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE );
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
   };
 
   /**
@@ -10722,30 +11266,38 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method setClearColor
    * @param {String|int} [color=0x00000000] The new color to use as the background
    */
-  p.setClearColor = function ( color ) {
+  p.setClearColor = function (color) {
     var r, g, b, a, output;
 
-    if ( typeof color == "string" ) {
-      if ( color.indexOf( "#" ) == 0 ) {
-        if ( color.length == 4 ) {
-          color = "#" + color.charAt( 1 ) + color.charAt( 1 ) + color.charAt( 2 ) + color.charAt( 2 ) + color.charAt( 3 ) + color.charAt( 3 )
+    if (typeof color == "string") {
+      if (color.indexOf("#") == 0) {
+        if (color.length == 4) {
+          color =
+            "#" +
+            color.charAt(1) +
+            color.charAt(1) +
+            color.charAt(2) +
+            color.charAt(2) +
+            color.charAt(3) +
+            color.charAt(3);
         }
-        r = Number( "0x" + color.slice( 1, 3 ) ) / 255;
-        g = Number( "0x" + color.slice( 3, 5 ) ) / 255;
-        b = Number( "0x" + color.slice( 5, 7 ) ) / 255;
-        a = Number( "0x" + color.slice( 7, 9 ) ) / 255;
-      } else if ( color.indexOf( "rgba(" ) == 0 ) {
-        output = color.slice( 5, -1 ).split( "," );
-        r = Number( output[ 0 ] ) / 255;
-        g = Number( output[ 1 ] ) / 255;
-        b = Number( output[ 2 ] ) / 255;
-        a = Number( output[ 3 ] );
+        r = Number("0x" + color.slice(1, 3)) / 255;
+        g = Number("0x" + color.slice(3, 5)) / 255;
+        b = Number("0x" + color.slice(5, 7)) / 255;
+        a = Number("0x" + color.slice(7, 9)) / 255;
+      } else if (color.indexOf("rgba(") == 0) {
+        output = color.slice(5, -1).split(",");
+        r = Number(output[0]) / 255;
+        g = Number(output[1]) / 255;
+        b = Number(output[2]) / 255;
+        a = Number(output[3]);
       }
-    } else { // >>> is an unsigned shift which is what we want as 0x80000000 and up are negative values
-      r = ( ( color & 0xFF000000 ) >>> 24 ) / 255;
-      g = ( ( color & 0x00FF0000 ) >>> 16 ) / 255;
-      b = ( ( color & 0x0000FF00 ) >>> 8 ) / 255;
-      a = ( color & 0x000000FF ) / 255;
+    } else {
+      // >>> is an unsigned shift which is what we want as 0x80000000 and up are negative values
+      r = ((color & 0xff000000) >>> 24) / 255;
+      g = ((color & 0x00ff0000) >>> 16) / 255;
+      b = ((color & 0x0000ff00) >>> 8) / 255;
+      a = (color & 0x000000ff) / 255;
     }
 
     this._clearColor.r = r || 0;
@@ -10753,10 +11305,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     this._clearColor.b = b || 0;
     this._clearColor.a = a || 0;
 
-    if ( !this._webGLContext ) {
+    if (!this._webGLContext) {
       return;
     }
-    this._webGLContext.clearColor( this._clearColor.r, this._clearColor.g, this._clearColor.b, this._clearColor.a );
+    this._webGLContext.clearColor(
+      this._clearColor.r,
+      this._clearColor.g,
+      this._clearColor.b,
+      this._clearColor.a
+    );
   };
 
   /**
@@ -10768,7 +11325,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 
   // private methods:
   /**
-   * Sets up and returns the WebGL context for the canvas. May return undefined in error scenarios. These can include 
+   * Sets up and returns the WebGL context for the canvas. May return undefined in error scenarios. These can include
    * situations where the canvas element already has a context, 2D or GL.
    * @param  {Canvas} canvas The DOM canvas element to attach to
    * @param  {Object} options The options to be handed into the WebGL object, see WebGL spec
@@ -10776,18 +11333,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @return {WebGLRenderingContext} The WebGL context, may return undefined in error scenarios
    */
-  p._fetchWebGLContext = function ( canvas, options ) {
+  p._fetchWebGLContext = function (canvas, options) {
     var gl;
 
     try {
-      gl = canvas.getContext( "webgl", options ) || canvas.getContext( "experimental-webgl", options );
-    } catch ( e ) {
+      gl =
+        canvas.getContext("webgl", options) ||
+        canvas.getContext("experimental-webgl", options);
+    } catch (e) {
       // don't do anything in catch, null check will handle it
     }
 
-    if ( !gl ) {
+    if (!gl) {
       var msg = "Could not initialize WebGL";
-      console.error ? console.error( msg ) : console.log( msg );
+      console.error ? console.error(msg) : console.log(msg);
     } else {
       gl.viewportWidth = canvas.width;
       gl.viewportHeight = canvas.height;
@@ -10804,77 +11363,106 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param  {WebGLRenderingContext} gl The canvas WebGL context object to draw into.
    * @param  {String} [shaderName="regular"] Working values: "regular", "override", and "filter". Which type of shader to build.
    * Filter and override both accept the custom params. Regular and override have all features. Filter is a special case reduced feature shader meant to be over-ridden.
-   * @param  {String} [customVTX] Extra vertex shader information to replace a regular draw, see 
+   * @param  {String} [customVTX] Extra vertex shader information to replace a regular draw, see
    * {{#crossLink "StageGL/COVER_VERTEX_BODY"}}{{/crossLink}} for default and {{#crossLink "Filter"}}{{/crossLink}} for examples.
-   * @param  {String} [customFRAG] Extra fragment shader information to replace a regular draw, see 
+   * @param  {String} [customFRAG] Extra fragment shader information to replace a regular draw, see
    * {{#crossLink "StageGL/COVER_FRAGMENT_BODY"}}{{/crossLink}} for default and {{#crossLink "Filter"}}{{/crossLink}} for examples.
    * @param  {Function} [shaderParamSetup] Function to run so custom shader parameters can get applied for the render.
    * @protected
    * @return {WebGLProgram} The compiled and linked shader
    */
-  p._fetchShaderProgram = function ( gl, shaderName, customVTX, customFRAG, shaderParamSetup ) {
-    gl.useProgram( null ); // safety to avoid collisions
+  p._fetchShaderProgram = function (
+    gl,
+    shaderName,
+    customVTX,
+    customFRAG,
+    shaderParamSetup
+  ) {
+    gl.useProgram(null); // safety to avoid collisions
 
     // build the correct shader string out of the right headers and bodies
     var targetFrag, targetVtx;
-    switch ( shaderName ) {
+    switch (shaderName) {
       case "filter":
-        targetVtx = StageGL.COVER_VERTEX_HEADER + ( customVTX || StageGL.COVER_VERTEX_BODY );
-        targetFrag = StageGL.COVER_FRAGMENT_HEADER + ( customFRAG || StageGL.COVER_FRAGMENT_BODY );
+        targetVtx =
+          StageGL.COVER_VERTEX_HEADER +
+          (customVTX || StageGL.COVER_VERTEX_BODY);
+        targetFrag =
+          StageGL.COVER_FRAGMENT_HEADER +
+          (customFRAG || StageGL.COVER_FRAGMENT_BODY);
         break;
       case "particle": //TODO
-        targetVtx = StageGL.REGULAR_VERTEX_HEADER + StageGL.PARTICLE_VERTEX_BODY;
-        targetFrag = StageGL.REGULAR_FRAGMENT_HEADER + StageGL.PARTICLE_FRAGMENT_BODY;
+        targetVtx =
+          StageGL.REGULAR_VERTEX_HEADER + StageGL.PARTICLE_VERTEX_BODY;
+        targetFrag =
+          StageGL.REGULAR_FRAGMENT_HEADER + StageGL.PARTICLE_FRAGMENT_BODY;
         break;
       case "override":
-        targetVtx = StageGL.REGULAR_VERTEX_HEADER + ( customVTX || StageGL.REGULAR_VERTEX_BODY );
-        targetFrag = StageGL.REGULAR_FRAGMENT_HEADER + ( customFRAG || StageGL.REGULAR_FRAGMENT_BODY );
+        targetVtx =
+          StageGL.REGULAR_VERTEX_HEADER +
+          (customVTX || StageGL.REGULAR_VERTEX_BODY);
+        targetFrag =
+          StageGL.REGULAR_FRAGMENT_HEADER +
+          (customFRAG || StageGL.REGULAR_FRAGMENT_BODY);
         break;
       case "regular":
       default:
         targetVtx = StageGL.REGULAR_VERTEX_HEADER + StageGL.REGULAR_VERTEX_BODY;
-        targetFrag = StageGL.REGULAR_FRAGMENT_HEADER + StageGL.REGULAR_FRAGMENT_BODY;
+        targetFrag =
+          StageGL.REGULAR_FRAGMENT_HEADER + StageGL.REGULAR_FRAGMENT_BODY;
         break;
     }
 
     // create the separate vars
-    var vertexShader = this._createShader( gl, gl.VERTEX_SHADER, targetVtx );
-    var fragmentShader = this._createShader( gl, gl.FRAGMENT_SHADER, targetFrag );
+    var vertexShader = this._createShader(gl, gl.VERTEX_SHADER, targetVtx);
+    var fragmentShader = this._createShader(gl, gl.FRAGMENT_SHADER, targetFrag);
 
     // link them together
     var shaderProgram = gl.createProgram();
-    gl.attachShader( shaderProgram, vertexShader );
-    gl.attachShader( shaderProgram, fragmentShader );
-    gl.linkProgram( shaderProgram );
+    gl.attachShader(shaderProgram, vertexShader);
+    gl.attachShader(shaderProgram, fragmentShader);
+    gl.linkProgram(shaderProgram);
     shaderProgram._type = shaderName;
 
     // check compile status
-    if ( !gl.getProgramParameter( shaderProgram, gl.LINK_STATUS ) ) {
-      gl.useProgram( this._activeShader );
-      throw gl.getProgramInfoLog( shaderProgram );
+    if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
+      gl.useProgram(this._activeShader);
+      throw gl.getProgramInfoLog(shaderProgram);
     }
 
     // set up the parameters on the shader
-    gl.useProgram( shaderProgram );
-    switch ( shaderName ) {
+    gl.useProgram(shaderProgram);
+    switch (shaderName) {
       case "filter":
         // get the places in memory the shader is stored so we can feed information into them
         // then save it off on the shader because it's so tied to the shader itself
-        shaderProgram.vertexPositionAttribute = gl.getAttribLocation( shaderProgram, "vertexPosition" );
-        gl.enableVertexAttribArray( shaderProgram.vertexPositionAttribute );
+        shaderProgram.vertexPositionAttribute = gl.getAttribLocation(
+          shaderProgram,
+          "vertexPosition"
+        );
+        gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
 
-        shaderProgram.uvPositionAttribute = gl.getAttribLocation( shaderProgram, "uvPosition" );
-        gl.enableVertexAttribArray( shaderProgram.uvPositionAttribute );
+        shaderProgram.uvPositionAttribute = gl.getAttribLocation(
+          shaderProgram,
+          "uvPosition"
+        );
+        gl.enableVertexAttribArray(shaderProgram.uvPositionAttribute);
 
-        shaderProgram.samplerUniform = gl.getUniformLocation( shaderProgram, "uSampler" );
-        gl.uniform1i( shaderProgram.samplerUniform, 0 );
+        shaderProgram.samplerUniform = gl.getUniformLocation(
+          shaderProgram,
+          "uSampler"
+        );
+        gl.uniform1i(shaderProgram.samplerUniform, 0);
 
-        shaderProgram.uprightUniform = gl.getUniformLocation( shaderProgram, "uUpright" );
-        gl.uniform1f( shaderProgram.uprightUniform, 0 );
+        shaderProgram.uprightUniform = gl.getUniformLocation(
+          shaderProgram,
+          "uUpright"
+        );
+        gl.uniform1f(shaderProgram.uprightUniform, 0);
 
         // if there's some custom attributes be sure to hook them up
-        if ( shaderParamSetup ) {
-          shaderParamSetup( gl, this, shaderProgram );
+        if (shaderParamSetup) {
+          shaderParamSetup(gl, this, shaderProgram);
         }
         break;
       case "override":
@@ -10883,32 +11471,50 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       default:
         // get the places in memory the shader is stored so we can feed information into them
         // then save it off on the shader because it's so tied to the shader itself
-        shaderProgram.vertexPositionAttribute = gl.getAttribLocation( shaderProgram, "vertexPosition" );
-        gl.enableVertexAttribArray( shaderProgram.vertexPositionAttribute );
+        shaderProgram.vertexPositionAttribute = gl.getAttribLocation(
+          shaderProgram,
+          "vertexPosition"
+        );
+        gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
 
-        shaderProgram.uvPositionAttribute = gl.getAttribLocation( shaderProgram, "uvPosition" );
-        gl.enableVertexAttribArray( shaderProgram.uvPositionAttribute );
+        shaderProgram.uvPositionAttribute = gl.getAttribLocation(
+          shaderProgram,
+          "uvPosition"
+        );
+        gl.enableVertexAttribArray(shaderProgram.uvPositionAttribute);
 
-        shaderProgram.textureIndexAttribute = gl.getAttribLocation( shaderProgram, "textureIndex" );
-        gl.enableVertexAttribArray( shaderProgram.textureIndexAttribute );
+        shaderProgram.textureIndexAttribute = gl.getAttribLocation(
+          shaderProgram,
+          "textureIndex"
+        );
+        gl.enableVertexAttribArray(shaderProgram.textureIndexAttribute);
 
-        shaderProgram.alphaAttribute = gl.getAttribLocation( shaderProgram, "objectAlpha" );
-        gl.enableVertexAttribArray( shaderProgram.alphaAttribute );
+        shaderProgram.alphaAttribute = gl.getAttribLocation(
+          shaderProgram,
+          "objectAlpha"
+        );
+        gl.enableVertexAttribArray(shaderProgram.alphaAttribute);
 
         var samplers = [];
-        for ( var i = 0; i < this._batchTextureCount; i++ ) {
-          samplers[ i ] = i;
+        for (var i = 0; i < this._batchTextureCount; i++) {
+          samplers[i] = i;
         }
 
         shaderProgram.samplerData = samplers;
-        shaderProgram.samplerUniform = gl.getUniformLocation( shaderProgram, "uSampler" );
-        gl.uniform1iv( shaderProgram.samplerUniform, samplers );
+        shaderProgram.samplerUniform = gl.getUniformLocation(
+          shaderProgram,
+          "uSampler"
+        );
+        gl.uniform1iv(shaderProgram.samplerUniform, samplers);
 
-        shaderProgram.pMatrixUniform = gl.getUniformLocation( shaderProgram, "pMatrix" );
+        shaderProgram.pMatrixUniform = gl.getUniformLocation(
+          shaderProgram,
+          "pMatrix"
+        );
         break;
     }
 
-    gl.useProgram( this._activeShader );
+    gl.useProgram(this._activeShader);
     return shaderProgram;
   };
 
@@ -10921,27 +11527,37 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {WebGLShader}
    * @protected
    */
-  p._createShader = function ( gl, type, str ) {
+  p._createShader = function (gl, type, str) {
     // inject the static number
-    str = str.replace( /{{count}}/g, this._batchTextureCount );
+    str = str.replace(/{{count}}/g, this._batchTextureCount);
 
     // resolve issue with no dynamic samplers by creating correct samplers in if else chain
     // TODO: WebGL 2.0 does not need this support
     var insert = "";
-    for ( var i = 1; i < this._batchTextureCount; i++ ) {
-      insert += "} else if (indexPicker <= " + i + ".5) { color = texture2D(uSampler[" + i + "], vTextureCoord);";
+    for (var i = 1; i < this._batchTextureCount; i++) {
+      insert +=
+        "} else if (indexPicker <= " +
+        i +
+        ".5) { color = texture2D(uSampler[" +
+        i +
+        "], vTextureCoord);";
     }
-    str = str.replace( /{{alternates}}/g, insert );
-    str = str.replace( /{{fragColor}}/g, this._premultiply ? StageGL.REGULAR_FRAG_COLOR_PREMULTIPLY : StageGL.REGULAR_FRAG_COLOR_NORMAL );
+    str = str.replace(/{{alternates}}/g, insert);
+    str = str.replace(
+      /{{fragColor}}/g,
+      this._premultiply
+        ? StageGL.REGULAR_FRAG_COLOR_PREMULTIPLY
+        : StageGL.REGULAR_FRAG_COLOR_NORMAL
+    );
 
     // actually compile the shader
-    var shader = gl.createShader( type );
-    gl.shaderSource( shader, str );
-    gl.compileShader( shader );
+    var shader = gl.createShader(type);
+    gl.shaderSource(shader, str);
+    gl.compileShader(shader);
 
     // check compile status
-    if ( !gl.getShaderParameter( shader, gl.COMPILE_STATUS ) ) {
-      throw gl.getShaderInfoLog( shader );
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+      throw gl.getShaderInfoLog(shader);
     }
 
     return shader;
@@ -10953,7 +11569,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {WebGLRenderingContext} gl
    * @protected
    */
-  p._createBuffers = function ( gl ) {
+  p._createBuffers = function (gl) {
     var groupCount = this._maxCardsPerBatch * StageGL.INDICIES_PER_CARD;
     var groupSize, i, l;
 
@@ -10985,50 +11601,50 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     // TODO bechmark and test using unified buffer
 
     // the actual position information
-    var vertexPositionBuffer = this._vertexPositionBuffer = gl.createBuffer();
-    gl.bindBuffer( gl.ARRAY_BUFFER, vertexPositionBuffer );
+    var vertexPositionBuffer = (this._vertexPositionBuffer = gl.createBuffer());
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexPositionBuffer);
     groupSize = 2;
-    var vertices = this._vertices = new Float32Array( groupCount * groupSize );
-    for ( i = 0, l = vertices.length; i < l; i += groupSize ) {
-      vertices[ i ] = vertices[ i + 1 ] = 0;
+    var vertices = (this._vertices = new Float32Array(groupCount * groupSize));
+    for (i = 0, l = vertices.length; i < l; i += groupSize) {
+      vertices[i] = vertices[i + 1] = 0;
     }
-    gl.bufferData( gl.ARRAY_BUFFER, vertices, gl.DYNAMIC_DRAW );
+    gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.DYNAMIC_DRAW);
     vertexPositionBuffer.itemSize = groupSize;
     vertexPositionBuffer.numItems = groupCount;
 
     // where on the texture it gets its information
-    var uvPositionBuffer = this._uvPositionBuffer = gl.createBuffer();
-    gl.bindBuffer( gl.ARRAY_BUFFER, uvPositionBuffer );
+    var uvPositionBuffer = (this._uvPositionBuffer = gl.createBuffer());
+    gl.bindBuffer(gl.ARRAY_BUFFER, uvPositionBuffer);
     groupSize = 2;
-    var uvs = this._uvs = new Float32Array( groupCount * groupSize );
-    for ( i = 0, l = uvs.length; i < l; i += groupSize ) {
-      uvs[ i ] = uvs[ i + 1 ] = 0;
+    var uvs = (this._uvs = new Float32Array(groupCount * groupSize));
+    for (i = 0, l = uvs.length; i < l; i += groupSize) {
+      uvs[i] = uvs[i + 1] = 0;
     }
-    gl.bufferData( gl.ARRAY_BUFFER, uvs, gl.DYNAMIC_DRAW );
+    gl.bufferData(gl.ARRAY_BUFFER, uvs, gl.DYNAMIC_DRAW);
     uvPositionBuffer.itemSize = groupSize;
     uvPositionBuffer.numItems = groupCount;
 
     // what texture it should use
-    var textureIndexBuffer = this._textureIndexBuffer = gl.createBuffer();
-    gl.bindBuffer( gl.ARRAY_BUFFER, textureIndexBuffer );
+    var textureIndexBuffer = (this._textureIndexBuffer = gl.createBuffer());
+    gl.bindBuffer(gl.ARRAY_BUFFER, textureIndexBuffer);
     groupSize = 1;
-    var indices = this._indices = new Float32Array( groupCount * groupSize );
-    for ( i = 0, l = indices.length; i < l; i++ ) {
-      indices[ i ] = 0;
+    var indices = (this._indices = new Float32Array(groupCount * groupSize));
+    for (i = 0, l = indices.length; i < l; i++) {
+      indices[i] = 0;
     }
-    gl.bufferData( gl.ARRAY_BUFFER, indices, gl.DYNAMIC_DRAW );
+    gl.bufferData(gl.ARRAY_BUFFER, indices, gl.DYNAMIC_DRAW);
     textureIndexBuffer.itemSize = groupSize;
     textureIndexBuffer.numItems = groupCount;
 
     // what alpha it should have
-    var alphaBuffer = this._alphaBuffer = gl.createBuffer();
-    gl.bindBuffer( gl.ARRAY_BUFFER, alphaBuffer );
+    var alphaBuffer = (this._alphaBuffer = gl.createBuffer());
+    gl.bindBuffer(gl.ARRAY_BUFFER, alphaBuffer);
     groupSize = 1;
-    var alphas = this._alphas = new Float32Array( groupCount * groupSize );
-    for ( i = 0, l = alphas.length; i < l; i++ ) {
-      alphas[ i ] = 1;
+    var alphas = (this._alphas = new Float32Array(groupCount * groupSize));
+    for (i = 0, l = alphas.length; i < l; i++) {
+      alphas[i] = 1;
     }
-    gl.bufferData( gl.ARRAY_BUFFER, alphas, gl.DYNAMIC_DRAW );
+    gl.bufferData(gl.ARRAY_BUFFER, alphas, gl.DYNAMIC_DRAW);
     alphaBuffer.itemSize = groupSize;
     alphaBuffer.numItems = groupCount;
   };
@@ -11051,10 +11667,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     this._batchTextures = [];
 
     // fill in blanks as it helps the renderer be stable while textures are loading and reduces need for safety code
-    for ( var i = 0; i < this._batchTextureCount; i++ ) {
+    for (var i = 0; i < this._batchTextureCount; i++) {
       var tex = this.getBaseTexture();
-      this._baseTextures[ i ] = this._batchTextures[ i ] = tex;
-      if ( !tex ) {
+      this._baseTextures[i] = this._batchTextures[i] = tex;
+      if (!tex) {
         throw "Problems creating basic textures, known causes include using too much VRAM by not releasing WebGL texture instances";
       }
     }
@@ -11068,50 +11684,55 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {WebGLTexture} The resulting Texture object
    * @protected
    */
-  p._loadTextureImage = function ( gl, image ) {
+  p._loadTextureImage = function (gl, image) {
     var src = image.src;
 
-    if ( !src ) {
+    if (!src) {
       // one time canvas property setup
       image._isCanvas = true;
       src = image.src = "canvas_" + this._lastTrackedCanvas++;
     }
 
     // put the texture into our storage system
-    var storeID = this._textureIDs[ src ];
-    if ( storeID === undefined ) {
-      storeID = this._textureIDs[ src ] = this._textureDictionary.length;
+    var storeID = this._textureIDs[src];
+    if (storeID === undefined) {
+      storeID = this._textureIDs[src] = this._textureDictionary.length;
     }
-    if ( this._textureDictionary[ storeID ] === undefined ) {
-      this._textureDictionary[ storeID ] = this.getBaseTexture();
+    if (this._textureDictionary[storeID] === undefined) {
+      this._textureDictionary[storeID] = this.getBaseTexture();
     }
 
-    var texture = this._textureDictionary[ storeID ];
+    var texture = this._textureDictionary[storeID];
 
-    if ( texture ) {
+    if (texture) {
       // get texture params all set up
       texture._batchID = this._batchID;
       texture._storeID = storeID;
       texture._imageData = image;
-      this._insertTextureInBatch( gl, texture );
+      this._insertTextureInBatch(gl, texture);
 
       // get the data into the texture or wait for it to load
       image._storeID = storeID;
-      if ( image.complete || image.naturalWidth || image._isCanvas ) { // is it already loaded
-        this._updateTextureImageData( gl, image );
+      if (image.complete || image.naturalWidth || image._isCanvas) {
+        // is it already loaded
+        this._updateTextureImageData(gl, image);
       } else {
-        image.addEventListener( "load", this._updateTextureImageData.bind( this, gl, image ) );
+        image.addEventListener(
+          "load",
+          this._updateTextureImageData.bind(this, gl, image)
+        );
       }
     } else {
       // we really really should have a texture, try to recover the error by using a saved empty texture so we don't crash
-      var msg = "Problem creating desired texture, known causes include using too much VRAM by not releasing WebGL texture instances";
-      ( console.error && console.error( msg ) ) || console.log( msg );
+      var msg =
+        "Problem creating desired texture, known causes include using too much VRAM by not releasing WebGL texture instances";
+      (console.error && console.error(msg)) || console.log(msg);
 
-      texture = this._baseTextures[ 0 ];
+      texture = this._baseTextures[0];
       texture._batchID = this._batchID;
       texture._storeID = -1;
       texture._imageData = texture;
-      this._insertTextureInBatch( gl, texture );
+      this._insertTextureInBatch(gl, texture);
     }
 
     return texture;
@@ -11125,28 +11746,37 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Image | Canvas} image The image data to be uploaded
    * @protected
    */
-  p._updateTextureImageData = function ( gl, image ) {
+  p._updateTextureImageData = function (gl, image) {
     // the bitwise & is intentional, cheap exponent 2 check
-    var isNPOT = ( image.width & image.width - 1 ) || ( image.height & image.height - 1 );
-    var texture = this._textureDictionary[ image._storeID ];
+    var isNPOT =
+      image.width & (image.width - 1) || image.height & (image.height - 1);
+    var texture = this._textureDictionary[image._storeID];
 
-    gl.activeTexture( gl.TEXTURE0 + texture._activeIndex );
-    gl.bindTexture( gl.TEXTURE_2D, texture );
+    gl.activeTexture(gl.TEXTURE0 + texture._activeIndex);
+    gl.bindTexture(gl.TEXTURE_2D, texture);
 
     texture.isPOT = !isNPOT;
-    this.setTextureParams( gl, texture.isPOT );
+    this.setTextureParams(gl, texture.isPOT);
 
     try {
-      gl.texImage2D( gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image );
-    } catch ( e ) {
-      var errString = "\nAn error has occurred. This is most likely due to security restrictions on WebGL images with local or cross-domain origins";
-      if ( console.error ) {
+      gl.texImage2D(
+        gl.TEXTURE_2D,
+        0,
+        gl.RGBA,
+        gl.RGBA,
+        gl.UNSIGNED_BYTE,
+        image
+      );
+    } catch (e) {
+      var errString =
+        "\nAn error has occurred. This is most likely due to security restrictions on WebGL images with local or cross-domain origins";
+      if (console.error) {
         //TODO: LM: I recommend putting this into a log function internally, since you do it so often, and each is implemented differently.
-        console.error( errString );
-        console.error( e );
-      } else if ( console ) {
-        console.log( errString );
-        console.log( e );
+        console.error(errString);
+        console.error(e);
+      } else if (console) {
+        console.log(errString);
+        console.log(e);
       }
     }
 
@@ -11155,12 +11785,24 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     texture._w = image.width;
     texture._h = image.height;
 
-    if ( this.vocalDebug ) {
-      if ( isNPOT ) {
-        console.warn( "NPOT(Non Power of Two) Texture: " + image.src );
+    if (this.vocalDebug) {
+      if (isNPOT) {
+        console.warn("NPOT(Non Power of Two) Texture: " + image.src);
       }
-      if ( image.width > gl.MAX_TEXTURE_SIZE || image.height > gl.MAX_TEXTURE_SIZE ) {
-        console && console.error( "Oversized Texture: " + image.width + "x" + image.height + " vs " + gl.MAX_TEXTURE_SIZE + "max" );
+      if (
+        image.width > gl.MAX_TEXTURE_SIZE ||
+        image.height > gl.MAX_TEXTURE_SIZE
+      ) {
+        console &&
+          console.error(
+            "Oversized Texture: " +
+              image.width +
+              "x" +
+              image.height +
+              " vs " +
+              gl.MAX_TEXTURE_SIZE +
+              "max"
+          );
       }
     }
   };
@@ -11172,45 +11814,48 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {WebGLTexture} texture The texture to be inserted.
    * @protected
    */
-  p._insertTextureInBatch = function ( gl, texture ) {
+  p._insertTextureInBatch = function (gl, texture) {
     // if it wasn't used last batch
-    if ( this._batchTextures[ texture._activeIndex ] !== texture ) {
+    if (this._batchTextures[texture._activeIndex] !== texture) {
       // we've got to find it a a spot.
       var found = -1;
-      var start = ( this._lastTextureInsert + 1 ) % this._batchTextureCount;
+      var start = (this._lastTextureInsert + 1) % this._batchTextureCount;
       var look = start;
       do {
-        if ( this._batchTextures[ look ]._batchID != this._batchID && !this._slotBlacklist[ look ] ) {
+        if (
+          this._batchTextures[look]._batchID != this._batchID &&
+          !this._slotBlacklist[look]
+        ) {
           found = look;
           break;
         }
-        look = ( look + 1 ) % this._batchTextureCount;
-      } while ( look !== start );
+        look = (look + 1) % this._batchTextureCount;
+      } while (look !== start);
 
       // we couldn't find anywhere for it go, meaning we're maxed out
-      if ( found === -1 ) {
+      if (found === -1) {
         this.batchReason = "textureOverflow";
-        this._drawBuffers( gl ); // <------------------------------------------------------------------------
+        this._drawBuffers(gl); // <------------------------------------------------------------------------
         this.batchCardCount = 0;
         found = start;
       }
 
       // lets put it into that spot
-      this._batchTextures[ found ] = texture;
+      this._batchTextures[found] = texture;
       texture._activeIndex = found;
       var image = texture._imageData;
-      if ( image && image._invalid && texture._drawID !== undefined ) {
-        this._updateTextureImageData( gl, image );
+      if (image && image._invalid && texture._drawID !== undefined) {
+        this._updateTextureImageData(gl, image);
       } else {
-        gl.activeTexture( gl.TEXTURE0 + found );
-        gl.bindTexture( gl.TEXTURE_2D, texture );
-        this.setTextureParams( gl );
+        gl.activeTexture(gl.TEXTURE0 + found);
+        gl.bindTexture(gl.TEXTURE_2D, texture);
+        this.setTextureParams(gl);
       }
       this._lastTextureInsert = found;
     } else {
       var image = texture._imageData;
-      if ( texture._storeID != undefined && image && image._invalid ) {
-        this._updateTextureImageData( gl, image );
+      if (texture._storeID != undefined && image && image._invalid) {
+        this._updateTextureImageData(gl, image);
       }
     }
 
@@ -11219,58 +11864,62 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   };
 
   /**
-   * Remove and clean the texture, expects a texture and is inflexible. Mostly for internal use, recommended to call 
+   * Remove and clean the texture, expects a texture and is inflexible. Mostly for internal use, recommended to call
    * {{#crossLink "StageGL/releaseTexture"}}{{/crossLink}} instead as it will call this with the correct texture object(s).
    * Note: Testing shows this may not happen immediately, have to wait frames for WebGL to have actually adjust memory.
    * @method _killTextureObject
    * @param {Texture} tex The texture to be cleaned out
    * @protected
    */
-  p._killTextureObject = function ( tex ) {
-    if ( !tex ) {
+  p._killTextureObject = function (tex) {
+    if (!tex) {
       return;
     }
     var gl = this._webGLContext;
 
     // remove linkage
-    if ( tex._storeID !== undefined && tex._storeID >= 0 ) {
-      this._textureDictionary[ tex._storeID ] = undefined;
-      for ( var n in this._textureIDs ) {
-        if ( this._textureIDs[ n ] == tex._storeID ) {
-          delete this._textureIDs[ n ];
+    if (tex._storeID !== undefined && tex._storeID >= 0) {
+      this._textureDictionary[tex._storeID] = undefined;
+      for (var n in this._textureIDs) {
+        if (this._textureIDs[n] == tex._storeID) {
+          delete this._textureIDs[n];
         }
       }
-      if ( tex._imageData ) {
+      if (tex._imageData) {
         tex._imageData._storeID = undefined;
       }
       tex._imageData = tex._storeID = undefined;
     }
 
     // make sure to drop it out of an active slot
-    if ( tex._activeIndex !== undefined && this._batchTextures[ tex._activeIndex ] === tex ) {
-      this._batchTextures[ tex._activeIndex ] = this._baseTextures[ tex._activeIndex ];
+    if (
+      tex._activeIndex !== undefined &&
+      this._batchTextures[tex._activeIndex] === tex
+    ) {
+      this._batchTextures[tex._activeIndex] =
+        this._baseTextures[tex._activeIndex];
     }
 
     // remove buffers if present
     try {
-      if ( tex._frameBuffer ) {
-        gl.deleteFramebuffer( tex._frameBuffer );
+      if (tex._frameBuffer) {
+        gl.deleteFramebuffer(tex._frameBuffer);
       }
       tex._frameBuffer = undefined;
-    } catch ( e ) {
+    } catch (e) {
       /* suppress delete errors because it's already gone or didn't need deleting probably */
-      if ( this.vocalDebug ) {
-        console.log( e );
+      if (this.vocalDebug) {
+        console.log(e);
       }
     }
 
     // remove entry
     try {
-      gl.deleteTexture( tex );
-    } catch ( e ) {
+      gl.deleteTexture(tex);
+    } catch (e) {
       /* suppress delete errors because it's already gone or didn't need deleting probably */
-      if ( this.vocalDebug ) {
-        console.log( e );
+      if (this.vocalDebug) {
+        console.log(e);
       }
     }
   };
@@ -11282,29 +11931,29 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Array} [target=this._backupTextures] Where to perform the backup, defaults to internal backup.
    * @protected
    */
-  p._backupBatchTextures = function ( restore, target ) {
+  p._backupBatchTextures = function (restore, target) {
     var gl = this._webGLContext;
 
-    if ( !this._backupTextures ) {
+    if (!this._backupTextures) {
       this._backupTextures = [];
     }
-    if ( target === undefined ) {
+    if (target === undefined) {
       target = this._backupTextures;
     }
 
-    for ( var i = 0; i < this._batchTextureCount; i++ ) {
-      gl.activeTexture( gl.TEXTURE0 + i );
-      if ( restore ) {
-        this._batchTextures[ i ] = target[ i ];
+    for (var i = 0; i < this._batchTextureCount; i++) {
+      gl.activeTexture(gl.TEXTURE0 + i);
+      if (restore) {
+        this._batchTextures[i] = target[i];
       } else {
-        target[ i ] = this._batchTextures[ i ];
-        this._batchTextures[ i ] = this._baseTextures[ i ];
+        target[i] = this._batchTextures[i];
+        this._batchTextures[i] = this._baseTextures[i];
       }
-      gl.bindTexture( gl.TEXTURE_2D, this._batchTextures[ i ] );
-      this.setTextureParams( gl, this._batchTextures[ i ].isPOT );
+      gl.bindTexture(gl.TEXTURE_2D, this._batchTextures[i]);
+      this.setTextureParams(gl, this._batchTextures[i].isPOT);
     }
 
-    if ( restore && target === this._backupTextures ) {
+    if (restore && target === this._backupTextures) {
       this._backupTextures = [];
     }
   };
@@ -11317,9 +11966,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Boolean} ignoreCache
    * @protected
    */
-  p._batchDraw = function ( sceneGraph, gl, ignoreCache ) {
-    if ( this._isDrawing > 0 ) {
-      this._drawBuffers( gl );
+  p._batchDraw = function (sceneGraph, gl, ignoreCache) {
+    if (this._isDrawing > 0) {
+      this._drawBuffers(gl);
     }
     this._isDrawing++;
     this._drawID++;
@@ -11327,10 +11976,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     this.batchCardCount = 0;
     this.depth = 0;
 
-    this._appendToBatchGroup( sceneGraph, gl, new createjs.Matrix2D(), this.alpha, ignoreCache );
+    this._appendToBatchGroup(
+      sceneGraph,
+      gl,
+      new createjs.Matrix2D(),
+      this.alpha,
+      ignoreCache
+    );
 
     this.batchReason = "drawFinish";
-    this._drawBuffers( gl ); // <--------------------------------------------------------
+    this._drawBuffers(gl); // <--------------------------------------------------------
     this._isDrawing--;
   };
 
@@ -11343,7 +11998,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {BitmapCache} manager The BitmapCache instance looking after the cache
    * @protected
    */
-  p._cacheDraw = function ( gl, target, filters, manager ) {
+  p._cacheDraw = function (gl, target, filters, manager) {
     /*
     Implicitly there are 4 modes to this function: filtered-sameContext, filtered-uniqueContext, sameContext, uniqueContext.
     Each situation must be handled slightly differently as 'sameContext' or 'uniqueContext' define how the output works,
@@ -11361,48 +12016,55 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       hBackup = this._viewportHeight;
 
     // protect the last slot so that we have somewhere to bind the renderTextures so it doesn't get upset
-    this.protectTextureSlot( lastTextureSlot, true );
+    this.protectTextureSlot(lastTextureSlot, true);
 
     // create offset container for drawing item
     var mtx = target.getMatrix();
     mtx = mtx.clone();
-    mtx.scale( 1 / manager.scale, 1 / manager.scale );
+    mtx.scale(1 / manager.scale, 1 / manager.scale);
     mtx = mtx.invert();
-    mtx.translate( -manager.offX / manager.scale * target.scaleX, -manager.offY / manager.scale * target.scaleY );
+    mtx.translate(
+      (-manager.offX / manager.scale) * target.scaleX,
+      (-manager.offY / manager.scale) * target.scaleY
+    );
     var container = this._cacheContainer;
-    container.children = [ target ];
+    container.children = [target];
     container.transformMatrix = mtx;
 
-    this._backupBatchTextures( false );
+    this._backupBatchTextures(false);
 
-    if ( filters && filters.length ) {
-      this._drawFilters( target, filters, manager );
+    if (filters && filters.length) {
+      this._drawFilters(target, filters, manager);
     } else {
       // is this for another stage or mine?
-      if ( this.isCacheControlled ) {
+      if (this.isCacheControlled) {
         // draw item to canvas				I -> C
-        gl.clear( gl.COLOR_BUFFER_BIT );
-        this._batchDraw( container, gl, true );
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        this._batchDraw(container, gl, true);
       } else {
-        gl.activeTexture( gl.TEXTURE0 + lastTextureSlot );
-        target.cacheCanvas = this.getTargetRenderTexture( target, manager._drawWidth, manager._drawHeight );
+        gl.activeTexture(gl.TEXTURE0 + lastTextureSlot);
+        target.cacheCanvas = this.getTargetRenderTexture(
+          target,
+          manager._drawWidth,
+          manager._drawHeight
+        );
         renderTexture = target.cacheCanvas;
 
         // draw item to render texture		I -> T
-        gl.bindFramebuffer( gl.FRAMEBUFFER, renderTexture._frameBuffer );
-        this.updateViewport( manager._drawWidth, manager._drawHeight );
+        gl.bindFramebuffer(gl.FRAMEBUFFER, renderTexture._frameBuffer);
+        this.updateViewport(manager._drawWidth, manager._drawHeight);
         this._projectionMatrix = this._projectionMatrixFlip;
-        gl.clear( gl.COLOR_BUFFER_BIT );
-        this._batchDraw( container, gl, true );
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        this._batchDraw(container, gl, true);
 
-        gl.bindFramebuffer( gl.FRAMEBUFFER, null );
-        this.updateViewport( wBackup, hBackup );
+        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+        this.updateViewport(wBackup, hBackup);
       }
     }
 
-    this._backupBatchTextures( true );
+    this._backupBatchTextures(true);
 
-    this.protectTextureSlot( lastTextureSlot, false );
+    this.protectTextureSlot(lastTextureSlot, false);
     this._activeShader = shaderBackup;
     this._slotBlacklist = blackListBackup;
   };
@@ -11414,7 +12076,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Array} filters The filters we're drawing into cache.
    * @param {BitmapCache} manager The BitmapCache instance looking after the cache
    */
-  p._drawFilters = function ( target, filters, manager ) {
+  p._drawFilters = function (target, filters, manager) {
     var gl = this._webGLContext;
     var renderTexture;
     var lastTextureSlot = this._maxTextureSlots - 1;
@@ -11426,79 +12088,92 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 
     // we don't know which texture slot we're dealing with previously and we need one out of the way
     // once we're using that slot activate it so when we make and bind our RenderTexture it's safe there
-    gl.activeTexture( gl.TEXTURE0 + lastTextureSlot );
-    renderTexture = this.getTargetRenderTexture( target, manager._drawWidth, manager._drawHeight );
+    gl.activeTexture(gl.TEXTURE0 + lastTextureSlot);
+    renderTexture = this.getTargetRenderTexture(
+      target,
+      manager._drawWidth,
+      manager._drawHeight
+    );
 
     // draw item to render texture		I -> T
-    gl.bindFramebuffer( gl.FRAMEBUFFER, renderTexture._frameBuffer );
-    this.updateViewport( manager._drawWidth, manager._drawHeight );
-    gl.clear( gl.COLOR_BUFFER_BIT );
-    this._batchDraw( container, gl, true );
+    gl.bindFramebuffer(gl.FRAMEBUFFER, renderTexture._frameBuffer);
+    this.updateViewport(manager._drawWidth, manager._drawHeight);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    this._batchDraw(container, gl, true);
 
     // bind the result texture to slot 0 as all filters and cover draws assume original content is in slot 0
-    gl.activeTexture( gl.TEXTURE0 );
-    gl.bindTexture( gl.TEXTURE_2D, renderTexture );
-    this.setTextureParams( gl );
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, renderTexture);
+    this.setTextureParams(gl);
 
     var flipY = false;
     var i = 0,
-      filter = filters[ i ];
-    do { // this is safe because we wouldn't be in apply filters without a filter count of at least 1
+      filter = filters[i];
+    do {
+      // this is safe because we wouldn't be in apply filters without a filter count of at least 1
 
       // swap to correct shader
-      this._activeShader = this.getFilterShader( filter );
-      if ( !this._activeShader ) {
+      this._activeShader = this.getFilterShader(filter);
+      if (!this._activeShader) {
         continue;
       }
 
       // now the old result is stored in slot 0, make a new render texture
-      gl.activeTexture( gl.TEXTURE0 + lastTextureSlot );
-      renderTexture = this.getTargetRenderTexture( target, manager._drawWidth, manager._drawHeight );
-      gl.bindFramebuffer( gl.FRAMEBUFFER, renderTexture._frameBuffer );
+      gl.activeTexture(gl.TEXTURE0 + lastTextureSlot);
+      renderTexture = this.getTargetRenderTexture(
+        target,
+        manager._drawWidth,
+        manager._drawHeight
+      );
+      gl.bindFramebuffer(gl.FRAMEBUFFER, renderTexture._frameBuffer);
 
       // draw result to render texture	R -> T
-      gl.viewport( 0, 0, manager._drawWidth, manager._drawHeight );
-      gl.clear( gl.COLOR_BUFFER_BIT );
-      this._drawCover( gl, flipY );
+      gl.viewport(0, 0, manager._drawWidth, manager._drawHeight);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      this._drawCover(gl, flipY);
 
       // bind the result texture to slot 0 as all filters and cover draws assume original content is in slot 0
-      gl.activeTexture( gl.TEXTURE0 );
-      gl.bindTexture( gl.TEXTURE_2D, renderTexture );
-      this.setTextureParams( gl );
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, renderTexture);
+      this.setTextureParams(gl);
 
       // use flipping to keep things upright, things already cancel out on a single filter
       // this needs to be here as multiPass is not accurate to _this_ frame until after shader acquisition
-      if ( filterCount > 1 || filters[ 0 ]._multiPass ) {
+      if (filterCount > 1 || filters[0]._multiPass) {
         flipY = !flipY;
       }
 
       // work through the multipass if it's there, otherwise move on
-      filter = filter._multiPass !== null ? filter._multiPass : filters[ ++i ];
-    } while ( filter );
+      filter = filter._multiPass !== null ? filter._multiPass : filters[++i];
+    } while (filter);
 
     // is this for another stage or mine
-    if ( this.isCacheControlled ) {
-      gl.bindFramebuffer( gl.FRAMEBUFFER, null );
-      this.updateViewport( wBackup, hBackup );
+    if (this.isCacheControlled) {
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      this.updateViewport(wBackup, hBackup);
 
       // draw result to canvas			R -> C
-      this._activeShader = this.getFilterShader( this );
-      gl.clear( gl.COLOR_BUFFER_BIT );
-      this._drawCover( gl, flipY );
+      this._activeShader = this.getFilterShader(this);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      this._drawCover(gl, flipY);
     } else {
       //TODO: DHG: this is less than ideal. A flipped initial render for this circumstance might help. Adjust the perspective matrix?
-      if ( flipY ) {
-        gl.activeTexture( gl.TEXTURE0 + lastTextureSlot );
-        renderTexture = this.getTargetRenderTexture( target, manager._drawWidth, manager._drawHeight );
-        gl.bindFramebuffer( gl.FRAMEBUFFER, renderTexture._frameBuffer );
+      if (flipY) {
+        gl.activeTexture(gl.TEXTURE0 + lastTextureSlot);
+        renderTexture = this.getTargetRenderTexture(
+          target,
+          manager._drawWidth,
+          manager._drawHeight
+        );
+        gl.bindFramebuffer(gl.FRAMEBUFFER, renderTexture._frameBuffer);
 
-        this._activeShader = this.getFilterShader( this );
-        gl.viewport( 0, 0, manager._drawWidth, manager._drawHeight );
-        gl.clear( gl.COLOR_BUFFER_BIT );
-        this._drawCover( gl, !flipY );
+        this._activeShader = this.getFilterShader(this);
+        gl.viewport(0, 0, manager._drawWidth, manager._drawHeight);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        this._drawCover(gl, !flipY);
       }
-      gl.bindFramebuffer( gl.FRAMEBUFFER, null );
-      this.updateViewport( wBackup, hBackup );
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      this.updateViewport(wBackup, hBackup);
 
       // make sure the last texture is the active thing to draw
       target.cacheCanvas = renderTexture;
@@ -11516,21 +12191,32 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Boolean} ignoreCache Don't use an element's cache during this draw
    * @protected
    */
-  p._appendToBatchGroup = function ( container, gl, concatMtx, concatAlpha, ignoreCache ) {
+  p._appendToBatchGroup = function (
+    container,
+    gl,
+    concatMtx,
+    concatAlpha,
+    ignoreCache
+  ) {
     // sort out shared properties
-    if ( !container._glMtx ) {
+    if (!container._glMtx) {
       container._glMtx = new createjs.Matrix2D();
     }
     var cMtx = container._glMtx;
-    cMtx.copy( concatMtx );
-    if ( container.transformMatrix ) {
-      cMtx.appendMatrix( container.transformMatrix );
+    cMtx.copy(concatMtx);
+    if (container.transformMatrix) {
+      cMtx.appendMatrix(container.transformMatrix);
     } else {
       cMtx.appendTransform(
-        container.x, container.y,
-        container.scaleX, container.scaleY,
-        container.rotation, container.skewX, container.skewY,
-        container.regX, container.regY
+        container.x,
+        container.y,
+        container.scaleX,
+        container.scaleY,
+        container.rotation,
+        container.skewX,
+        container.skewY,
+        container.regX,
+        container.regY
       );
     }
 
@@ -11539,59 +12225,67 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 
     // actually apply its data to the buffers
     var l = container.children.length;
-    for ( var i = 0; i < l; i++ ) {
-      var item = container.children[ i ];
+    for (var i = 0; i < l; i++) {
+      var item = container.children[i];
 
-      if ( !( item.visible && concatAlpha ) ) {
+      if (!(item.visible && concatAlpha)) {
         continue;
       }
-      if ( !item.cacheCanvas || ignoreCache ) {
-        if ( item._updateState ) {
+      if (!item.cacheCanvas || ignoreCache) {
+        if (item._updateState) {
           item._updateState();
         }
-        if ( item.children ) {
-          this._appendToBatchGroup( item, gl, cMtx, item.alpha * concatAlpha );
+        if (item.children) {
+          this._appendToBatchGroup(item, gl, cMtx, item.alpha * concatAlpha);
           continue;
         }
       }
 
       // check for overflowing batch, if yes then force a render
       // TODO: DHG: consider making this polygon count dependant for things like vector draws
-      if ( this.batchCardCount + 1 > this._maxCardsPerBatch ) {
+      if (this.batchCardCount + 1 > this._maxCardsPerBatch) {
         this.batchReason = "vertexOverflow";
-        this._drawBuffers( gl ); // <------------------------------------------------------------
+        this._drawBuffers(gl); // <------------------------------------------------------------
         this.batchCardCount = 0;
       }
 
       // keep track of concatenated position
-      if ( !item._glMtx ) {
+      if (!item._glMtx) {
         item._glMtx = new createjs.Matrix2D();
       }
       var iMtx = item._glMtx;
-      iMtx.copy( cMtx );
-      if ( item.transformMatrix ) {
-        iMtx.appendMatrix( item.transformMatrix );
+      iMtx.copy(cMtx);
+      if (item.transformMatrix) {
+        iMtx.appendMatrix(item.transformMatrix);
       } else {
         iMtx.appendTransform(
-          item.x, item.y,
-          item.scaleX, item.scaleY,
-          item.rotation, item.skewX, item.skewY,
-          item.regX, item.regY
+          item.x,
+          item.y,
+          item.scaleX,
+          item.scaleY,
+          item.rotation,
+          item.skewX,
+          item.skewY,
+          item.regX,
+          item.regY
         );
       }
 
       var uvRect, texIndex, image, frame, texture, src;
       var useCache = item.cacheCanvas && !ignoreCache;
 
-      if ( item._webGLRenderStyle === 2 || useCache ) { // BITMAP / Cached Canvas
-        image = ( ignoreCache ? false : item.cacheCanvas ) || item.image;
-      } else if ( item._webGLRenderStyle === 1 ) { // SPRITE
-        frame = item.spriteSheet.getFrame( item.currentFrame ); //TODO: Faster way?
-        if ( frame === null ) {
+      if (item._webGLRenderStyle === 2 || useCache) {
+        // BITMAP / Cached Canvas
+        image = (ignoreCache ? false : item.cacheCanvas) || item.image;
+      } else if (item._webGLRenderStyle === 1) {
+        // SPRITE
+        frame = item.spriteSheet.getFrame(item.currentFrame); //TODO: Faster way?
+        if (frame === null) {
           continue;
         }
         image = frame.image;
-      } else { // MISC (DOM objects render themselves later)
+      } else {
+        // MISC (DOM objects render themselves later)
         continue;
       }
 
@@ -11601,42 +12295,45 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       var alphas = this._alphas;
 
       // calculate texture
-      if ( !image ) {
+      if (!image) {
         continue;
       }
-      if ( image._storeID === undefined ) {
+      if (image._storeID === undefined) {
         // this texture is new to us so load it and add it to the batch
-        texture = this._loadTextureImage( gl, image );
-        this._insertTextureInBatch( gl, texture );
+        texture = this._loadTextureImage(gl, image);
+        this._insertTextureInBatch(gl, texture);
       } else {
         // fetch the texture (render textures know how to look themselves up to simplify this logic)
-        texture = this._textureDictionary[ image._storeID ];
-        if ( !texture ) {
-          if ( this.vocalDebug ) {
-            console.log( "Texture should not be looked up while not being stored." );
+        texture = this._textureDictionary[image._storeID];
+        if (!texture) {
+          if (this.vocalDebug) {
+            console.log(
+              "Texture should not be looked up while not being stored."
+            );
           }
           continue;
         }
 
         // put it in the batch if needed
-        if ( texture._batchID !== this._batchID ) {
-          this._insertTextureInBatch( gl, texture );
+        if (texture._batchID !== this._batchID) {
+          this._insertTextureInBatch(gl, texture);
         }
       }
       texIndex = texture._activeIndex;
 
-      if ( item._webGLRenderStyle === 2 || useCache ) { // BITMAP / Cached Canvas
-        if ( !useCache && item.sourceRect ) {
+      if (item._webGLRenderStyle === 2 || useCache) {
+        // BITMAP / Cached Canvas
+        if (!useCache && item.sourceRect) {
           // calculate uvs
-          if ( !item._uvRect ) {
+          if (!item._uvRect) {
             item._uvRect = {};
           }
           src = item.sourceRect;
           uvRect = item._uvRect;
-          uvRect.t = ( src.y ) / image.height;
-          uvRect.l = ( src.x ) / image.width;
-          uvRect.b = ( src.y + src.height ) / image.height;
-          uvRect.r = ( src.x + src.width ) / image.width;
+          uvRect.t = src.y / image.height;
+          uvRect.l = src.x / image.width;
+          uvRect.b = (src.y + src.height) / image.height;
+          uvRect.r = (src.x + src.width) / image.width;
 
           // calculate vertices
           subL = 0;
@@ -11647,12 +12344,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
           // calculate uvs
           uvRect = StageGL.UV_RECT;
           // calculate vertices
-          if ( useCache ) {
+          if (useCache) {
             src = item.bitmapCache;
-            subL = src.x + ( src._filterOffX / src.scale );
-            subT = src.y + ( src._filterOffY / src.scale );
-            subR = ( src._drawWidth / src.scale ) + subL;
-            subB = ( src._drawHeight / src.scale ) + subT;
+            subL = src.x + src._filterOffX / src.scale;
+            subT = src.y + src._filterOffY / src.scale;
+            subR = src._drawWidth / src.scale + subL;
+            subB = src._drawHeight / src.scale + subT;
           } else {
             subL = 0;
             subT = 0;
@@ -11660,13 +12357,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
             subB = image.height + subT;
           }
         }
-      } else if ( item._webGLRenderStyle === 1 ) { // SPRITE
+      } else if (item._webGLRenderStyle === 1) {
+        // SPRITE
         var rect = frame.rect;
 
         // calculate uvs
         uvRect = frame.uvRect;
-        if ( !uvRect ) {
-          uvRect = StageGL.buildUVRects( item.spriteSheet, item.currentFrame, false );
+        if (!uvRect) {
+          uvRect = StageGL.buildUVRects(
+            item.spriteSheet,
+            item.currentFrame,
+            false
+          );
         }
 
         // calculate vertices
@@ -11682,38 +12384,50 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 
       //DHG: See Matrix2D.transformPoint for why this math specifically
       // apply vertices
-      vertices[ offV2 ] = subL * iMtx.a + subT * iMtx.c + iMtx.tx;
-      vertices[ offV2 + 1 ] = subL * iMtx.b + subT * iMtx.d + iMtx.ty;
-      vertices[ offV2 + 2 ] = subL * iMtx.a + subB * iMtx.c + iMtx.tx;
-      vertices[ offV2 + 3 ] = subL * iMtx.b + subB * iMtx.d + iMtx.ty;
-      vertices[ offV2 + 4 ] = subR * iMtx.a + subT * iMtx.c + iMtx.tx;
-      vertices[ offV2 + 5 ] = subR * iMtx.b + subT * iMtx.d + iMtx.ty;
-      vertices[ offV2 + 6 ] = vertices[ offV2 + 2 ];
-      vertices[ offV2 + 7 ] = vertices[ offV2 + 3 ];
-      vertices[ offV2 + 8 ] = vertices[ offV2 + 4 ];
-      vertices[ offV2 + 9 ] = vertices[ offV2 + 5 ];
-      vertices[ offV2 + 10 ] = subR * iMtx.a + subB * iMtx.c + iMtx.tx;
-      vertices[ offV2 + 11 ] = subR * iMtx.b + subB * iMtx.d + iMtx.ty;
+      vertices[offV2] = subL * iMtx.a + subT * iMtx.c + iMtx.tx;
+      vertices[offV2 + 1] = subL * iMtx.b + subT * iMtx.d + iMtx.ty;
+      vertices[offV2 + 2] = subL * iMtx.a + subB * iMtx.c + iMtx.tx;
+      vertices[offV2 + 3] = subL * iMtx.b + subB * iMtx.d + iMtx.ty;
+      vertices[offV2 + 4] = subR * iMtx.a + subT * iMtx.c + iMtx.tx;
+      vertices[offV2 + 5] = subR * iMtx.b + subT * iMtx.d + iMtx.ty;
+      vertices[offV2 + 6] = vertices[offV2 + 2];
+      vertices[offV2 + 7] = vertices[offV2 + 3];
+      vertices[offV2 + 8] = vertices[offV2 + 4];
+      vertices[offV2 + 9] = vertices[offV2 + 5];
+      vertices[offV2 + 10] = subR * iMtx.a + subB * iMtx.c + iMtx.tx;
+      vertices[offV2 + 11] = subR * iMtx.b + subB * iMtx.d + iMtx.ty;
 
       // apply uvs
-      uvs[ offV2 ] = uvRect.l;
-      uvs[ offV2 + 1 ] = uvRect.t;
-      uvs[ offV2 + 2 ] = uvRect.l;
-      uvs[ offV2 + 3 ] = uvRect.b;
-      uvs[ offV2 + 4 ] = uvRect.r;
-      uvs[ offV2 + 5 ] = uvRect.t;
-      uvs[ offV2 + 6 ] = uvRect.l;
-      uvs[ offV2 + 7 ] = uvRect.b;
-      uvs[ offV2 + 8 ] = uvRect.r;
-      uvs[ offV2 + 9 ] = uvRect.t;
-      uvs[ offV2 + 10 ] = uvRect.r;
-      uvs[ offV2 + 11 ] = uvRect.b;
+      uvs[offV2] = uvRect.l;
+      uvs[offV2 + 1] = uvRect.t;
+      uvs[offV2 + 2] = uvRect.l;
+      uvs[offV2 + 3] = uvRect.b;
+      uvs[offV2 + 4] = uvRect.r;
+      uvs[offV2 + 5] = uvRect.t;
+      uvs[offV2 + 6] = uvRect.l;
+      uvs[offV2 + 7] = uvRect.b;
+      uvs[offV2 + 8] = uvRect.r;
+      uvs[offV2 + 9] = uvRect.t;
+      uvs[offV2 + 10] = uvRect.r;
+      uvs[offV2 + 11] = uvRect.b;
 
       // apply texture
-      texI[ offV1 ] = texI[ offV1 + 1 ] = texI[ offV1 + 2 ] = texI[ offV1 + 3 ] = texI[ offV1 + 4 ] = texI[ offV1 + 5 ] = texIndex;
+      texI[offV1] =
+        texI[offV1 + 1] =
+        texI[offV1 + 2] =
+        texI[offV1 + 3] =
+        texI[offV1 + 4] =
+        texI[offV1 + 5] =
+          texIndex;
 
       // apply alpha
-      alphas[ offV1 ] = alphas[ offV1 + 1 ] = alphas[ offV1 + 2 ] = alphas[ offV1 + 3 ] = alphas[ offV1 + 4 ] = alphas[ offV1 + 5 ] = item.alpha * concatAlpha;
+      alphas[offV1] =
+        alphas[offV1 + 1] =
+        alphas[offV1 + 2] =
+        alphas[offV1 + 3] =
+        alphas[offV1 + 4] =
+        alphas[offV1 + 5] =
+          item.alpha * concatAlpha;
 
       this.batchCardCount++;
     }
@@ -11725,13 +12439,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {WebGLRenderingContext} gl The canvas WebGL context object to draw into.
    * @protected
    */
-  p._drawBuffers = function ( gl ) {
-    if ( this.batchCardCount <= 0 ) {
+  p._drawBuffers = function (gl) {
+    if (this.batchCardCount <= 0) {
       return;
     } // prevents error logs on stages filled with un-renederable content.
 
-    if ( this.vocalDebug ) {
-      console.log( "Draw[" + this._drawID + ":" + this._batchID + "] : " + this.batchReason );
+    if (this.vocalDebug) {
+      console.log(
+        "Draw[" + this._drawID + ":" + this._batchID + "] : " + this.batchReason
+      );
     }
     var shaderProgram = this._activeShader;
     var vertexPositionBuffer = this._vertexPositionBuffer;
@@ -11739,34 +12455,70 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     var uvPositionBuffer = this._uvPositionBuffer;
     var alphaBuffer = this._alphaBuffer;
 
-    gl.useProgram( shaderProgram );
+    gl.useProgram(shaderProgram);
 
-    gl.bindBuffer( gl.ARRAY_BUFFER, vertexPositionBuffer );
-    gl.vertexAttribPointer( shaderProgram.vertexPositionAttribute, vertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0 );
-    gl.bufferSubData( gl.ARRAY_BUFFER, 0, this._vertices );
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexPositionBuffer);
+    gl.vertexAttribPointer(
+      shaderProgram.vertexPositionAttribute,
+      vertexPositionBuffer.itemSize,
+      gl.FLOAT,
+      false,
+      0,
+      0
+    );
+    gl.bufferSubData(gl.ARRAY_BUFFER, 0, this._vertices);
 
-    gl.bindBuffer( gl.ARRAY_BUFFER, textureIndexBuffer );
-    gl.vertexAttribPointer( shaderProgram.textureIndexAttribute, textureIndexBuffer.itemSize, gl.FLOAT, false, 0, 0 );
-    gl.bufferSubData( gl.ARRAY_BUFFER, 0, this._indices );
+    gl.bindBuffer(gl.ARRAY_BUFFER, textureIndexBuffer);
+    gl.vertexAttribPointer(
+      shaderProgram.textureIndexAttribute,
+      textureIndexBuffer.itemSize,
+      gl.FLOAT,
+      false,
+      0,
+      0
+    );
+    gl.bufferSubData(gl.ARRAY_BUFFER, 0, this._indices);
 
-    gl.bindBuffer( gl.ARRAY_BUFFER, uvPositionBuffer );
-    gl.vertexAttribPointer( shaderProgram.uvPositionAttribute, uvPositionBuffer.itemSize, gl.FLOAT, false, 0, 0 );
-    gl.bufferSubData( gl.ARRAY_BUFFER, 0, this._uvs );
+    gl.bindBuffer(gl.ARRAY_BUFFER, uvPositionBuffer);
+    gl.vertexAttribPointer(
+      shaderProgram.uvPositionAttribute,
+      uvPositionBuffer.itemSize,
+      gl.FLOAT,
+      false,
+      0,
+      0
+    );
+    gl.bufferSubData(gl.ARRAY_BUFFER, 0, this._uvs);
 
-    gl.bindBuffer( gl.ARRAY_BUFFER, alphaBuffer );
-    gl.vertexAttribPointer( shaderProgram.alphaAttribute, alphaBuffer.itemSize, gl.FLOAT, false, 0, 0 );
-    gl.bufferSubData( gl.ARRAY_BUFFER, 0, this._alphas );
+    gl.bindBuffer(gl.ARRAY_BUFFER, alphaBuffer);
+    gl.vertexAttribPointer(
+      shaderProgram.alphaAttribute,
+      alphaBuffer.itemSize,
+      gl.FLOAT,
+      false,
+      0,
+      0
+    );
+    gl.bufferSubData(gl.ARRAY_BUFFER, 0, this._alphas);
 
-    gl.uniformMatrix4fv( shaderProgram.pMatrixUniform, gl.FALSE, this._projectionMatrix );
+    gl.uniformMatrix4fv(
+      shaderProgram.pMatrixUniform,
+      gl.FALSE,
+      this._projectionMatrix
+    );
 
-    for ( var i = 0; i < this._batchTextureCount; i++ ) {
-      var texture = this._batchTextures[ i ];
-      gl.activeTexture( gl.TEXTURE0 + i );
-      gl.bindTexture( gl.TEXTURE_2D, texture );
-      this.setTextureParams( gl, texture.isPOT );
+    for (var i = 0; i < this._batchTextureCount; i++) {
+      var texture = this._batchTextures[i];
+      gl.activeTexture(gl.TEXTURE0 + i);
+      gl.bindTexture(gl.TEXTURE_2D, texture);
+      this.setTextureParams(gl, texture.isPOT);
     }
 
-    gl.drawArrays( gl.TRIANGLES, 0, this.batchCardCount * StageGL.INDICIES_PER_CARD );
+    gl.drawArrays(
+      gl.TRIANGLES,
+      0,
+      this.batchCardCount * StageGL.INDICIES_PER_CARD
+    );
     this._batchID++;
   };
 
@@ -11778,43 +12530,62 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * end up meaning the `y` space sometimes requires flipping in the render.
    * @protected
    */
-  p._drawCover = function ( gl, flipY ) {
-    if ( this._isDrawing > 0 ) {
-      this._drawBuffers( gl );
+  p._drawCover = function (gl, flipY) {
+    if (this._isDrawing > 0) {
+      this._drawBuffers(gl);
     }
 
-    if ( this.vocalDebug ) {
-      console.log( "Draw[" + this._drawID + ":" + this._batchID + "] : " + "Cover" );
+    if (this.vocalDebug) {
+      console.log(
+        "Draw[" + this._drawID + ":" + this._batchID + "] : " + "Cover"
+      );
     }
     var shaderProgram = this._activeShader;
     var vertexPositionBuffer = this._vertexPositionBuffer;
     var uvPositionBuffer = this._uvPositionBuffer;
 
-    gl.clear( gl.COLOR_BUFFER_BIT );
-    gl.useProgram( shaderProgram );
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.useProgram(shaderProgram);
 
-    gl.bindBuffer( gl.ARRAY_BUFFER, vertexPositionBuffer );
-    gl.vertexAttribPointer( shaderProgram.vertexPositionAttribute, vertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0 );
-    gl.bufferSubData( gl.ARRAY_BUFFER, 0, StageGL.COVER_VERT );
-    gl.bindBuffer( gl.ARRAY_BUFFER, uvPositionBuffer );
-    gl.vertexAttribPointer( shaderProgram.uvPositionAttribute, uvPositionBuffer.itemSize, gl.FLOAT, false, 0, 0 );
-    gl.bufferSubData( gl.ARRAY_BUFFER, 0, flipY ? StageGL.COVER_UV_FLIP : StageGL.COVER_UV );
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexPositionBuffer);
+    gl.vertexAttribPointer(
+      shaderProgram.vertexPositionAttribute,
+      vertexPositionBuffer.itemSize,
+      gl.FLOAT,
+      false,
+      0,
+      0
+    );
+    gl.bufferSubData(gl.ARRAY_BUFFER, 0, StageGL.COVER_VERT);
+    gl.bindBuffer(gl.ARRAY_BUFFER, uvPositionBuffer);
+    gl.vertexAttribPointer(
+      shaderProgram.uvPositionAttribute,
+      uvPositionBuffer.itemSize,
+      gl.FLOAT,
+      false,
+      0,
+      0
+    );
+    gl.bufferSubData(
+      gl.ARRAY_BUFFER,
+      0,
+      flipY ? StageGL.COVER_UV_FLIP : StageGL.COVER_UV
+    );
 
-    gl.uniform1i( shaderProgram.samplerUniform, 0 );
-    gl.uniform1f( shaderProgram.uprightUniform, flipY ? 0 : 1 );
+    gl.uniform1i(shaderProgram.samplerUniform, 0);
+    gl.uniform1f(shaderProgram.uprightUniform, flipY ? 0 : 1);
 
-    gl.drawArrays( gl.TRIANGLES, 0, StageGL.INDICIES_PER_CARD );
+    gl.drawArrays(gl.TRIANGLES, 0, StageGL.INDICIES_PER_CARD);
   };
 
-  createjs.StageGL = createjs.promote( StageGL, "Stage" );
-}() );
+  createjs.StageGL = createjs.promote(StageGL, "Stage");
+})();
 
 //##############################################################################
 // Bitmap.js
 //##############################################################################
 
-( function () {
-
+(function () {
   /**
    * A Bitmap represents an Image, Canvas, or Video in the display list. A Bitmap can be instantiated using an existing
    * HTML element, or a string.
@@ -11845,9 +12616,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * (image, video, canvas), an object with a `getImage` method that returns a CanvasImageSource, or a string URL to an image.
    * If the latter, a new Image instance with the URL as its src will be used.
    **/
-  function Bitmap( imageOrUri ) {
+  function Bitmap(imageOrUri) {
     this.DisplayObject_constructor();
-
 
     // public properties:
     /**
@@ -11857,8 +12627,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @property image
      * @type CanvasImageSource | Object
      **/
-    if ( typeof imageOrUri == "string" ) {
-      this.image = document.createElement( "img" );
+    if (typeof imageOrUri == "string") {
+      this.image = document.createElement("img");
       this.image.src = imageOrUri;
     } else {
       this.image = imageOrUri;
@@ -11883,8 +12653,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      */
     this._webGLRenderStyle = createjs.DisplayObject._StageGL_BITMAP;
   }
-  var p = createjs.extend( Bitmap, createjs.DisplayObject );
-
+  var p = createjs.extend(Bitmap, createjs.DisplayObject);
 
   // public methods:
   /**
@@ -11905,8 +12674,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
   p.isVisible = function () {
     var image = this.image;
-    var hasContent = this.cacheCanvas || ( image && ( image.naturalWidth || image.getContext || image.readyState >= 2 ) );
-    return !!( this.visible && this.alpha > 0 && this.scaleX != 0 && this.scaleY != 0 && hasContent );
+    var hasContent =
+      this.cacheCanvas ||
+      (image &&
+        (image.naturalWidth || image.getContext || image.readyState >= 2));
+    return !!(
+      this.visible &&
+      this.alpha > 0 &&
+      this.scaleX != 0 &&
+      this.scaleY != 0 &&
+      hasContent
+    );
   };
 
   /**
@@ -11921,19 +12699,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * into itself).
    * @return {Boolean}
    **/
-  p.draw = function ( ctx, ignoreCache ) {
-    if ( this.DisplayObject_draw( ctx, ignoreCache ) ) {
+  p.draw = function (ctx, ignoreCache) {
+    if (this.DisplayObject_draw(ctx, ignoreCache)) {
       return true;
     }
     var img = this.image,
       rect = this.sourceRect;
-    if ( img.getImage ) {
+    if (img.getImage) {
       img = img.getImage();
     }
-    if ( !img ) {
+    if (!img) {
       return true;
     }
-    if ( rect ) {
+    if (rect) {
       // some browsers choke on out of bound values, so we'll fix them:
       var x1 = rect.x,
         y1 = rect.y,
@@ -11943,23 +12721,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
         y = 0,
         w = img.width,
         h = img.height;
-      if ( x1 < 0 ) {
+      if (x1 < 0) {
         x -= x1;
         x1 = 0;
       }
-      if ( x2 > w ) {
+      if (x2 > w) {
         x2 = w;
       }
-      if ( y1 < 0 ) {
+      if (y1 < 0) {
         y -= y1;
         y1 = 0;
       }
-      if ( y2 > h ) {
+      if (y2 > h) {
         y2 = h;
       }
-      ctx.drawImage( img, x1, y1, x2 - x1, y2 - y1, x, y, x2 - x1, y2 - y1 );
+      ctx.drawImage(img, x1, y1, x2 - x1, y2 - y1, x, y, x2 - x1, y2 - y1);
     } else {
-      ctx.drawImage( img, 0, 0 );
+      ctx.drawImage(img, 0, 0);
     }
     return true;
   };
@@ -12002,13 +12780,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   p.getBounds = function () {
     var rect = this.DisplayObject_getBounds();
-    if ( rect ) {
+    if (rect) {
       return rect;
     }
     var image = this.image,
       o = this.sourceRect || image;
-    var hasContent = ( image && ( image.naturalWidth || image.getContext || image.readyState >= 2 ) );
-    return hasContent ? this._rectangle.setValues( 0, 0, o.width, o.height ) : null;
+    var hasContent =
+      image &&
+      (image.naturalWidth || image.getContext || image.readyState >= 2);
+    return hasContent
+      ? this._rectangle.setValues(0, 0, o.width, o.height)
+      : null;
   };
 
   /**
@@ -12017,16 +12799,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Boolean} node Whether the underlying dom element should be cloned as well.
    * @return {Bitmap} a clone of the Bitmap instance.
    **/
-  p.clone = function ( node ) {
+  p.clone = function (node) {
     var image = this.image;
-    if ( image && node ) {
+    if (image && node) {
       image = image.cloneNode();
     }
-    var o = new Bitmap( image );
-    if ( this.sourceRect ) {
+    var o = new Bitmap(image);
+    if (this.sourceRect) {
       o.sourceRect = this.sourceRect.clone();
     }
-    this._cloneProps( o );
+    this._cloneProps(o);
     return o;
   };
 
@@ -12039,17 +12821,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return "[Bitmap (name=" + this.name + ")]";
   };
 
-
-  createjs.Bitmap = createjs.promote( Bitmap, "DisplayObject" );
-}() );
+  createjs.Bitmap = createjs.promote(Bitmap, "DisplayObject");
+})();
 
 //##############################################################################
 // Sprite.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -12075,9 +12855,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * dimensions, and frame data. See {{#crossLink "SpriteSheet"}}{{/crossLink}} for more information.
    * @param {String|Number} [frameOrAnimation] The frame number or animation to play initially.
    **/
-  function Sprite( spriteSheet, frameOrAnimation ) {
+  function Sprite(spriteSheet, frameOrAnimation) {
     this.DisplayObject_constructor();
-
 
     // public properties:
     /**
@@ -12147,7 +12926,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      **/
     this.framerate = 0;
 
-
     // private properties:
     /**
      * Current animation object.
@@ -12181,11 +12959,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      */
     this._webGLRenderStyle = createjs.DisplayObject._StageGL_SPRITE;
 
-    if ( frameOrAnimation != null ) {
-      this.gotoAndPlay( frameOrAnimation );
+    if (frameOrAnimation != null) {
+      this.gotoAndPlay(frameOrAnimation);
     }
   }
-  var p = createjs.extend( Sprite, createjs.DisplayObject );
+  var p = createjs.extend(Sprite, createjs.DisplayObject);
 
   /**
    * Constructor alias for backwards compatibility. This method will be removed in future versions.
@@ -12194,7 +12972,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @deprecated in favour of `createjs.promote()`
    **/
   p.initialize = Sprite; // TODO: Deprecated. This is for backwards support of Flash/Animate spritesheet export.
-
 
   // events:
   /**
@@ -12215,7 +12992,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String} type The event type.
    */
 
-
   // public methods:
   /**
    * Returns true or false indicating whether the display object would be visible if drawn to a canvas.
@@ -12226,7 +13002,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
   p.isVisible = function () {
     var hasContent = this.cacheCanvas || this.spriteSheet.complete;
-    return !!( this.visible && this.alpha > 0 && this.scaleX != 0 && this.scaleY != 0 && hasContent );
+    return !!(
+      this.visible &&
+      this.alpha > 0 &&
+      this.scaleX != 0 &&
+      this.scaleY != 0 &&
+      hasContent
+    );
   };
 
   /**
@@ -12239,18 +13021,28 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * For example, used for drawing the cache (to prevent it from simply drawing an existing cache back
    * into itself).
    **/
-  p.draw = function ( ctx, ignoreCache ) {
-    if ( this.DisplayObject_draw( ctx, ignoreCache ) ) {
+  p.draw = function (ctx, ignoreCache) {
+    if (this.DisplayObject_draw(ctx, ignoreCache)) {
       return true;
     }
     this._normalizeFrame();
-    var o = this.spriteSheet.getFrame( this._currentFrame | 0 );
-    if ( !o ) {
+    var o = this.spriteSheet.getFrame(this._currentFrame | 0);
+    if (!o) {
       return false;
     }
     var rect = o.rect;
-    if ( rect.width && rect.height ) {
-      ctx.drawImage( o.image, rect.x, rect.y, rect.width, rect.height, -o.regX, -o.regY, rect.width, rect.height );
+    if (rect.width && rect.height) {
+      ctx.drawImage(
+        o.image,
+        rect.x,
+        rect.y,
+        rect.width,
+        rect.height,
+        -o.regX,
+        -o.regY,
+        rect.width,
+        rect.height
+      );
     }
     return true;
   };
@@ -12302,10 +13094,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String|Number} frameOrAnimation The frame number or animation name that the playhead should move to
    * and begin playing.
    **/
-  p.gotoAndPlay = function ( frameOrAnimation ) {
+  p.gotoAndPlay = function (frameOrAnimation) {
     this.paused = false;
     this._skipAdvance = true;
-    this._goto( frameOrAnimation );
+    this._goto(frameOrAnimation);
   };
 
   /**
@@ -12314,9 +13106,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String|Number} frameOrAnimation The frame number or animation name that the playhead should move to
    * and stop.
    **/
-  p.gotoAndStop = function ( frameOrAnimation ) {
+  p.gotoAndStop = function (frameOrAnimation) {
     this.paused = true;
-    this._goto( frameOrAnimation );
+    this._goto(frameOrAnimation);
   };
 
   /**
@@ -12325,10 +13117,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * or its SpriteSheet.
    * @method advance
    */
-  p.advance = function ( time ) {
+  p.advance = function (time) {
     var fps = this.framerate || this.spriteSheet.framerate;
-    var t = ( fps && time != null ) ? time / ( 1000 / fps ) : 1;
-    this._normalizeFrame( t );
+    var t = fps && time != null ? time / (1000 / fps) : 1;
+    this._normalizeFrame(t);
   };
 
   /**
@@ -12343,7 +13135,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
   p.getBounds = function () {
     // TODO: should this normalizeFrame?
-    return this.DisplayObject_getBounds() || this.spriteSheet.getFrameBounds( this.currentFrame, this._rectangle );
+    return (
+      this.DisplayObject_getBounds() ||
+      this.spriteSheet.getFrameBounds(this.currentFrame, this._rectangle)
+    );
   };
 
   /**
@@ -12353,7 +13148,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Sprite} a clone of the Sprite instance.
    **/
   p.clone = function () {
-    return this._cloneProps( new Sprite( this.spriteSheet ) );
+    return this._cloneProps(new Sprite(this.spriteSheet));
   };
 
   /**
@@ -12372,8 +13167,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Sprite} o
    * @protected
    **/
-  p._cloneProps = function ( o ) {
-    this.DisplayObject__cloneProps( o );
+  p._cloneProps = function (o) {
+    this.DisplayObject__cloneProps(o);
     o.currentFrame = this.currentFrame;
     o.currentAnimation = this.currentAnimation;
     o.paused = this.paused;
@@ -12393,41 +13188,40 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @method _tick
    **/
-  p._tick = function ( evtObj ) {
-    if ( !this.paused ) {
-      if ( !this._skipAdvance ) {
-        this.advance( evtObj && evtObj.delta );
+  p._tick = function (evtObj) {
+    if (!this.paused) {
+      if (!this._skipAdvance) {
+        this.advance(evtObj && evtObj.delta);
       }
       this._skipAdvance = false;
     }
-    this.DisplayObject__tick( evtObj );
+    this.DisplayObject__tick(evtObj);
   };
-
 
   /**
    * Normalizes the current frame, advancing animations and dispatching callbacks as appropriate.
    * @protected
    * @method _normalizeFrame
    **/
-  p._normalizeFrame = function ( frameDelta ) {
+  p._normalizeFrame = function (frameDelta) {
     frameDelta = frameDelta || 0;
     var animation = this._animation;
     var paused = this.paused;
     var frame = this._currentFrame;
     var l;
 
-    if ( animation ) {
+    if (animation) {
       var speed = animation.speed || 1;
       var animFrame = this.currentAnimationFrame;
       l = animation.frames.length;
-      if ( animFrame + frameDelta * speed >= l ) {
+      if (animFrame + frameDelta * speed >= l) {
         var next = animation.next;
-        if ( this._dispatchAnimationEnd( animation, frame, paused, next, l - 1 ) ) {
+        if (this._dispatchAnimationEnd(animation, frame, paused, next, l - 1)) {
           // something changed in the event stack, so we shouldn't make any more changes here.
           return;
-        } else if ( next ) {
+        } else if (next) {
           // sequence. Automatically calls _normalizeFrame again with the remaining frames.
-          return this._goto( next, frameDelta - ( l - animFrame ) / speed );
+          return this._goto(next, frameDelta - (l - animFrame) / speed);
         } else {
           // end.
           this.paused = true;
@@ -12437,23 +13231,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
         animFrame += frameDelta * speed;
       }
       this.currentAnimationFrame = animFrame;
-      this._currentFrame = animation.frames[ animFrame | 0 ]
+      this._currentFrame = animation.frames[animFrame | 0];
     } else {
-      frame = ( this._currentFrame += frameDelta );
+      frame = this._currentFrame += frameDelta;
       l = this.spriteSheet.getNumFrames();
-      if ( frame >= l && l > 0 ) {
-        if ( !this._dispatchAnimationEnd( animation, frame, paused, l - 1 ) ) {
+      if (frame >= l && l > 0) {
+        if (!this._dispatchAnimationEnd(animation, frame, paused, l - 1)) {
           // looped.
-          if ( ( this._currentFrame -= l ) >= l ) {
+          if ((this._currentFrame -= l) >= l) {
             return this._normalizeFrame();
           }
         }
       }
     }
     frame = this._currentFrame | 0;
-    if ( this.currentFrame != frame ) {
+    if (this.currentFrame != frame) {
       this.currentFrame = frame;
-      this.dispatchEvent( "change" );
+      this.dispatchEvent("change");
     }
   };
 
@@ -12464,18 +13258,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @private
    * @type {Function}
    **/
-  p._dispatchAnimationEnd = function ( animation, frame, paused, next, end ) {
+  p._dispatchAnimationEnd = function (animation, frame, paused, next, end) {
     var name = animation ? animation.name : null;
-    if ( this.hasEventListener( "animationend" ) ) {
-      var evt = new createjs.Event( "animationend" );
+    if (this.hasEventListener("animationend")) {
+      var evt = new createjs.Event("animationend");
       evt.name = name;
       evt.next = next;
-      this.dispatchEvent( evt );
+      this.dispatchEvent(evt);
     }
     // did the animation get changed in the event stack?:
-    var changed = ( this._animation != animation || this._currentFrame != frame );
+    var changed = this._animation != animation || this._currentFrame != frame;
     // if the animation hasn't changed, but the sprite was paused, then we want to stick to the last frame:
-    if ( !changed && !paused && this.paused ) {
+    if (!changed && !paused && this.paused) {
       this.currentAnimationFrame = end;
       changed = true;
     }
@@ -12489,14 +13283,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Boolean} [frame] The frame of the animation to go to. Defaults to 0.
    * @protected
    **/
-  p._goto = function ( frameOrAnimation, frame ) {
+  p._goto = function (frameOrAnimation, frame) {
     this.currentAnimationFrame = 0;
-    if ( isNaN( frameOrAnimation ) ) {
-      var data = this.spriteSheet.getAnimation( frameOrAnimation );
-      if ( data ) {
+    if (isNaN(frameOrAnimation)) {
+      var data = this.spriteSheet.getAnimation(frameOrAnimation);
+      if (data) {
         this._animation = data;
         this.currentAnimation = frameOrAnimation;
-        this._normalizeFrame( frame );
+        this._normalizeFrame(frame);
       }
     } else {
       this.currentAnimation = this._animation = null;
@@ -12505,17 +13299,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     }
   };
 
-
-  createjs.Sprite = createjs.promote( Sprite, "DisplayObject" );
-}() );
+  createjs.Sprite = createjs.promote(Sprite, "DisplayObject");
+})();
 
 //##############################################################################
 // Shape.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -12541,9 +13333,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @constructor
    * @param {Graphics} graphics Optional. The graphics instance to display. If null, a new Graphics instance will be created.
    **/
-  function Shape( graphics ) {
+  function Shape(graphics) {
     this.DisplayObject_constructor();
-
 
     // public properties:
     /**
@@ -12553,11 +13344,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      **/
     this.graphics = graphics ? graphics : new createjs.Graphics();
   }
-  var p = createjs.extend( Shape, createjs.DisplayObject );
+  var p = createjs.extend(Shape, createjs.DisplayObject);
 
   // TODO: deprecated
   // p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
-
 
   // public methods:
   /**
@@ -12568,8 +13358,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} Boolean indicating whether the Shape would be visible if drawn to a canvas
    **/
   p.isVisible = function () {
-    var hasContent = this.cacheCanvas || ( this.graphics && !this.graphics.isEmpty() );
-    return !!( this.visible && this.alpha > 0 && this.scaleX != 0 && this.scaleY != 0 && hasContent );
+    var hasContent =
+      this.cacheCanvas || (this.graphics && !this.graphics.isEmpty());
+    return !!(
+      this.visible &&
+      this.alpha > 0 &&
+      this.scaleX != 0 &&
+      this.scaleY != 0 &&
+      hasContent
+    );
   };
 
   /**
@@ -12583,11 +13380,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * used for drawing the cache (to prevent it from simply drawing an existing cache back into itself).
    * @return {Boolean}
    **/
-  p.draw = function ( ctx, ignoreCache ) {
-    if ( this.DisplayObject_draw( ctx, ignoreCache ) ) {
+  p.draw = function (ctx, ignoreCache) {
+    if (this.DisplayObject_draw(ctx, ignoreCache)) {
       return true;
     }
-    this.graphics.draw( ctx, this );
+    this.graphics.draw(ctx, this);
     return true;
   };
 
@@ -12598,9 +13395,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Boolean} recursive If true, this Shape's {{#crossLink "Graphics"}}{{/crossLink}} instance will also be
    * cloned. If false, the Graphics instance will be shared with the new Shape.
    **/
-  p.clone = function ( recursive ) {
-    var g = ( recursive && this.graphics ) ? this.graphics.clone() : this.graphics;
-    return this._cloneProps( new Shape( g ) );
+  p.clone = function (recursive) {
+    var g = recursive && this.graphics ? this.graphics.clone() : this.graphics;
+    return this._cloneProps(new Shape(g));
   };
 
   /**
@@ -12612,17 +13409,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return "[Shape (name=" + this.name + ")]";
   };
 
-
-  createjs.Shape = createjs.promote( Shape, "DisplayObject" );
-}() );
+  createjs.Shape = createjs.promote(Shape, "DisplayObject");
+})();
 
 //##############################################################################
 // Text.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -12654,9 +13449,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String} [color] The color to draw the text in. Any valid value for the CSS color attribute is acceptable (ex.
    * "#F00", "red", or "#FF0000").
    **/
-  function Text( text, font, color ) {
+  function Text(text, font, color) {
     this.DisplayObject_constructor();
-
 
     // public properties:
     /**
@@ -12733,11 +13527,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      **/
     this.lineWidth = null;
   }
-  var p = createjs.extend( Text, createjs.DisplayObject );
+  var p = createjs.extend(Text, createjs.DisplayObject);
 
   // TODO: deprecated
   // p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
-
 
   // static properties:
   /**
@@ -12745,12 +13538,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @type CanvasRenderingContext2D
    * @private
    **/
-  var canvas = ( createjs.createCanvas ? createjs.createCanvas() : document.createElement( "canvas" ) );
-  if ( canvas.getContext ) {
-    Text._workingContext = canvas.getContext( "2d" );
+  var canvas = createjs.createCanvas
+    ? createjs.createCanvas()
+    : document.createElement("canvas");
+  if (canvas.getContext) {
+    Text._workingContext = canvas.getContext("2d");
     canvas.width = canvas.height = 1;
   }
-
 
   // constants:
   /**
@@ -12765,7 +13559,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     left: 0,
     center: -0.5,
     end: -1,
-    right: -1
+    right: -1,
   };
 
   /**
@@ -12781,9 +13575,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     middle: -0.4,
     alphabetic: -0.8,
     ideographic: -0.85,
-    bottom: -1
+    bottom: -1,
   };
-
 
   // public methods:
   /**
@@ -12794,8 +13587,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} Whether the display object would be visible if drawn to a canvas
    **/
   p.isVisible = function () {
-    var hasContent = this.cacheCanvas || ( this.text != null && this.text !== "" );
-    return !!( this.visible && this.alpha > 0 && this.scaleX != 0 && this.scaleY != 0 && hasContent );
+    var hasContent =
+      this.cacheCanvas || (this.text != null && this.text !== "");
+    return !!(
+      this.visible &&
+      this.alpha > 0 &&
+      this.scaleX != 0 &&
+      this.scaleY != 0 &&
+      hasContent
+    );
   };
 
   /**
@@ -12808,20 +13608,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * For example, used for drawing the cache (to prevent it from simply drawing an existing cache back
    * into itself).
    **/
-  p.draw = function ( ctx, ignoreCache ) {
-    if ( this.DisplayObject_draw( ctx, ignoreCache ) ) {
+  p.draw = function (ctx, ignoreCache) {
+    if (this.DisplayObject_draw(ctx, ignoreCache)) {
       return true;
     }
 
     var col = this.color || "#000";
-    if ( this.outline ) {
+    if (this.outline) {
       ctx.strokeStyle = col;
       ctx.lineWidth = this.outline * 1;
     } else {
       ctx.fillStyle = col;
     }
 
-    this._drawText( this._prepContext( ctx ) );
+    this._drawText(this._prepContext(ctx));
     return true;
   };
 
@@ -12831,7 +13631,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Number} The measured, untransformed width of the text.
    **/
   p.getMeasuredWidth = function () {
-    return this._getMeasuredWidth( this.text );
+    return this._getMeasuredWidth(this.text);
   };
 
   /**
@@ -12842,7 +13642,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * based on the measured width of a "M" character multiplied by 1.2, which approximates em for most fonts.
    **/
   p.getMeasuredLineHeight = function () {
-    return this._getMeasuredWidth( "M" ) * 1.2;
+    return this._getMeasuredWidth("M") * 1.2;
   };
 
   /**
@@ -12853,7 +13653,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Number} The approximate height of the untransformed multi-line text.
    **/
   p.getMeasuredHeight = function () {
-    return this._drawText( null, {} ).height;
+    return this._drawText(null, {}).height;
   };
 
   /**
@@ -12861,18 +13661,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   p.getBounds = function () {
     var rect = this.DisplayObject_getBounds();
-    if ( rect ) {
+    if (rect) {
       return rect;
     }
-    if ( this.text == null || this.text === "" ) {
+    if (this.text == null || this.text === "") {
       return null;
     }
-    var o = this._drawText( null, {} );
-    var w = ( this.maxWidth && this.maxWidth < o.width ) ? this.maxWidth : o.width;
-    var x = w * Text.H_OFFSETS[ this.textAlign || "left" ];
+    var o = this._drawText(null, {});
+    var w = this.maxWidth && this.maxWidth < o.width ? this.maxWidth : o.width;
+    var x = w * Text.H_OFFSETS[this.textAlign || "left"];
     var lineHeight = this.lineHeight || this.getMeasuredLineHeight();
-    var y = lineHeight * Text.V_OFFSETS[ this.textBaseline || "top" ];
-    return this._rectangle.setValues( x, y, w, o.height );
+    var y = lineHeight * Text.V_OFFSETS[this.textBaseline || "top"];
+    return this._rectangle.setValues(x, y, w, o.height);
   };
 
   /**
@@ -12885,11 +13685,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
   p.getMetrics = function () {
     var o = {
-      lines: []
+      lines: [],
     };
     o.lineHeight = this.lineHeight || this.getMeasuredLineHeight();
-    o.vOffset = o.lineHeight * Text.V_OFFSETS[ this.textBaseline || "top" ];
-    return this._drawText( null, o, o.lines );
+    o.vOffset = o.lineHeight * Text.V_OFFSETS[this.textBaseline || "top"];
+    return this._drawText(null, o, o.lines);
   };
 
   /**
@@ -12898,7 +13698,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Text} a clone of the Text instance.
    **/
   p.clone = function () {
-    return this._cloneProps( new Text( this.text, this.font, this.color ) );
+    return this._cloneProps(new Text(this.text, this.font, this.color));
   };
 
   /**
@@ -12907,9 +13707,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {String} a string representation of the instance.
    **/
   p.toString = function () {
-    return "[Text (text=" + ( this.text.length > 20 ? this.text.substr( 0, 17 ) + "..." : this.text ) + ")]";
+    return (
+      "[Text (text=" +
+      (this.text.length > 20 ? this.text.substr(0, 17) + "..." : this.text) +
+      ")]"
+    );
   };
-
 
   // private methods:
   /**
@@ -12918,8 +13721,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @return {Text} o
    **/
-  p._cloneProps = function ( o ) {
-    this.DisplayObject__cloneProps( o );
+  p._cloneProps = function (o) {
+    this.DisplayObject__cloneProps(o);
     o.textAlign = this.textAlign;
     o.textBaseline = this.textBaseline;
     o.maxWidth = this.maxWidth;
@@ -12935,7 +13738,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {CanvasRenderingContext2D}
    * @protected
    **/
-  p._prepContext = function ( ctx ) {
+  p._prepContext = function (ctx) {
     ctx.font = this.font || "10px sans-serif";
     ctx.textAlign = this.textAlign || "left";
     ctx.textBaseline = this.textBaseline || "top";
@@ -12953,71 +13756,74 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Object}
    * @protected
    **/
-  p._drawText = function ( ctx, o, lines ) {
+  p._drawText = function (ctx, o, lines) {
     var paint = !!ctx;
-    if ( !paint ) {
+    if (!paint) {
       ctx = Text._workingContext;
       ctx.save();
-      this._prepContext( ctx );
+      this._prepContext(ctx);
     }
     var lineHeight = this.lineHeight || this.getMeasuredLineHeight();
 
     var maxW = 0,
       count = 0;
-    var hardLines = String( this.text ).split( /(?:\r\n|\r|\n)/ );
-    for ( var i = 0, l = hardLines.length; i < l; i++ ) {
-      var str = hardLines[ i ];
+    var hardLines = String(this.text).split(/(?:\r\n|\r|\n)/);
+    for (var i = 0, l = hardLines.length; i < l; i++) {
+      var str = hardLines[i];
       var w = null;
 
-      if ( this.lineWidth != null && ( w = ctx.measureText( str ).width ) > this.lineWidth ) {
+      if (
+        this.lineWidth != null &&
+        (w = ctx.measureText(str).width) > this.lineWidth
+      ) {
         // text wrapping:
-        var words = str.split( /(\s)/ );
-        str = words[ 0 ];
-        w = ctx.measureText( str ).width;
+        var words = str.split(/(\s)/);
+        str = words[0];
+        w = ctx.measureText(str).width;
 
-        for ( var j = 1, jl = words.length; j < jl; j += 2 ) {
+        for (var j = 1, jl = words.length; j < jl; j += 2) {
           // Line needs to wrap:
-          var wordW = ctx.measureText( words[ j ] + words[ j + 1 ] ).width;
-          if ( w + wordW > this.lineWidth ) {
-            if ( paint ) {
-              this._drawTextLine( ctx, str, count * lineHeight );
+          var wordW = ctx.measureText(words[j] + words[j + 1]).width;
+          if (w + wordW > this.lineWidth) {
+            if (paint) {
+              this._drawTextLine(ctx, str, count * lineHeight);
             }
-            if ( lines ) {
-              lines.push( str );
+            if (lines) {
+              lines.push(str);
             }
-            if ( w > maxW ) {
+            if (w > maxW) {
               maxW = w;
             }
-            str = words[ j + 1 ];
-            w = ctx.measureText( str ).width;
+            str = words[j + 1];
+            w = ctx.measureText(str).width;
             count++;
           } else {
-            str += words[ j ] + words[ j + 1 ];
+            str += words[j] + words[j + 1];
             w += wordW;
           }
         }
       }
 
-      if ( paint ) {
-        this._drawTextLine( ctx, str, count * lineHeight );
+      if (paint) {
+        this._drawTextLine(ctx, str, count * lineHeight);
       }
-      if ( lines ) {
-        lines.push( str );
+      if (lines) {
+        lines.push(str);
       }
-      if ( o && w == null ) {
-        w = ctx.measureText( str ).width;
+      if (o && w == null) {
+        w = ctx.measureText(str).width;
       }
-      if ( w > maxW ) {
+      if (w > maxW) {
         maxW = w;
       }
       count++;
     }
 
-    if ( o ) {
+    if (o) {
       o.width = maxW;
       o.height = count * lineHeight;
     }
-    if ( !paint ) {
+    if (!paint) {
       ctx.restore();
     }
     return o;
@@ -13030,40 +13836,37 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} y
    * @protected
    **/
-  p._drawTextLine = function ( ctx, text, y ) {
+  p._drawTextLine = function (ctx, text, y) {
     // Chrome 17 will fail to draw the text if the last param is included but null, so we feed it a large value instead:
-    if ( this.outline ) {
-      ctx.strokeText( text, 0, y, this.maxWidth || 0xFFFF );
+    if (this.outline) {
+      ctx.strokeText(text, 0, y, this.maxWidth || 0xffff);
     } else {
-      ctx.fillText( text, 0, y, this.maxWidth || 0xFFFF );
+      ctx.fillText(text, 0, y, this.maxWidth || 0xffff);
     }
   };
-
 
   /**
    * @method _getMeasuredWidth
    * @param {String} text
    * @protected
    **/
-  p._getMeasuredWidth = function ( text ) {
+  p._getMeasuredWidth = function (text) {
     var ctx = Text._workingContext;
     ctx.save();
-    var w = this._prepContext( ctx ).measureText( text ).width;
+    var w = this._prepContext(ctx).measureText(text).width;
     ctx.restore();
     return w;
   };
 
-
-  createjs.Text = createjs.promote( Text, "DisplayObject" );
-}() );
+  createjs.Text = createjs.promote(Text, "DisplayObject");
+})();
 
 //##############################################################################
 // BitmapText.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -13081,9 +13884,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {SpriteSheet} [spriteSheet=null] The spritesheet that defines the character glyphs.
    * @constructor
    **/
-  function BitmapText( text, spriteSheet ) {
+  function BitmapText(text, spriteSheet) {
     this.Container_constructor();
-
 
     // public properties:
     /**
@@ -13103,7 +13905,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      *
      * would indicate that the frame at index 0 of the spritesheet should be drawn for the "A" character. The short form
      * is also acceptable:
-     * 
+     *
      * 		"A": 0
      *
      * Note that if a character in the text is not found in the sprite sheet, it will also
@@ -13147,7 +13949,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      **/
     this.spaceWidth = 0;
 
-
     // private properties:
     /**
      * @property _oldProps
@@ -13159,7 +13960,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       spriteSheet: 0,
       lineHeight: 0,
       letterSpacing: 0,
-      spaceWidth: 0
+      spaceWidth: 0,
     };
 
     /**
@@ -13177,7 +13978,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      */
     this._drawAction = null;
   }
-  var p = createjs.extend( BitmapText, createjs.Container );
+  var p = createjs.extend(BitmapText, createjs.Container);
 
   // static properties:
   /**
@@ -13199,17 +14000,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   BitmapText._spritePool = [];
 
-
   // public methods:
   /**
    * Docced in superclass.
    **/
-  p.draw = function ( ctx, ignoreCache ) {
-    if ( this.DisplayObject_draw( ctx, ignoreCache ) ) {
+  p.draw = function (ctx, ignoreCache) {
+    if (this.DisplayObject_draw(ctx, ignoreCache)) {
       return;
     }
     this._updateState();
-    this.Container_draw( ctx, ignoreCache );
+    this.Container_draw(ctx, ignoreCache);
   };
 
   /**
@@ -13228,12 +14028,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} Boolean indicating whether the display object would be visible if drawn to a canvas
    **/
   p.isVisible = function () {
-    var hasContent = this.cacheCanvas || ( this.spriteSheet && this.spriteSheet.complete && this.text );
-    return !!( this.visible && this.alpha > 0 && this.scaleX !== 0 && this.scaleY !== 0 && hasContent );
+    var hasContent =
+      this.cacheCanvas ||
+      (this.spriteSheet && this.spriteSheet.complete && this.text);
+    return !!(
+      this.visible &&
+      this.alpha > 0 &&
+      this.scaleX !== 0 &&
+      this.scaleY !== 0 &&
+      hasContent
+    );
   };
 
   p.clone = function () {
-    return this._cloneProps( new BitmapText( this.text, this.spriteSheet ) );
+    return this._cloneProps(new BitmapText(this.text, this.spriteSheet));
   };
 
   /**
@@ -13256,8 +14064,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * <strong>Disabled in BitmapText.</strong>
    * @method removeAllChildren
    **/
-  p.addChild = p.addChildAt = p.removeChild = p.removeChildAt = p.removeAllChildren = function () {};
-
+  p.addChild =
+    p.addChildAt =
+    p.removeChild =
+    p.removeChildAt =
+    p.removeAllChildren =
+      function () {};
 
   // private methods:
   /**
@@ -13273,8 +14085,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {BitmapText} o
    * @protected
    **/
-  p._cloneProps = function ( o ) {
-    this.Container__cloneProps( o );
+  p._cloneProps = function (o) {
+    this.Container__cloneProps(o);
     o.lineHeight = this.lineHeight;
     o.letterSpacing = this.letterSpacing;
     o.spaceWidth = this.spaceWidth;
@@ -13288,15 +14100,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Number}
    * @protected
    **/
-  p._getFrameIndex = function ( character, spriteSheet ) {
-    var c, o = spriteSheet.getAnimation( character );
-    if ( !o ) {
-      ( character != ( c = character.toUpperCase() ) ) || ( character != ( c = character.toLowerCase() ) ) || ( c = null );
-      if ( c ) {
-        o = spriteSheet.getAnimation( c );
+  p._getFrameIndex = function (character, spriteSheet) {
+    var c,
+      o = spriteSheet.getAnimation(character);
+    if (!o) {
+      character != (c = character.toUpperCase()) ||
+        character != (c = character.toLowerCase()) ||
+        (c = null);
+      if (c) {
+        o = spriteSheet.getAnimation(c);
       }
     }
-    return o && o.frames[ 0 ];
+    return o && o.frames[0];
   };
 
   /**
@@ -13306,9 +14121,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Object}
    * @protected
    **/
-  p._getFrame = function ( character, spriteSheet ) {
-    var index = this._getFrameIndex( character, spriteSheet );
-    return index == null ? index : spriteSheet.getFrame( index );
+  p._getFrame = function (character, spriteSheet) {
+    var index = this._getFrameIndex(character, spriteSheet);
+    return index == null ? index : spriteSheet.getFrame(index);
   };
 
   /**
@@ -13317,8 +14132,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Number}
    * @protected
    **/
-  p._getLineHeight = function ( ss ) {
-    var frame = this._getFrame( "1", ss ) || this._getFrame( "T", ss ) || this._getFrame( "L", ss ) || ss.getFrame( 0 );
+  p._getLineHeight = function (ss) {
+    var frame =
+      this._getFrame("1", ss) ||
+      this._getFrame("T", ss) ||
+      this._getFrame("L", ss) ||
+      ss.getFrame(0);
     return frame ? frame.rect.height : 1;
   };
 
@@ -13328,8 +14147,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Number}
    * @protected
    **/
-  p._getSpaceWidth = function ( ss ) {
-    var frame = this._getFrame( "1", ss ) || this._getFrame( "l", ss ) || this._getFrame( "e", ss ) || this._getFrame( "a", ss ) || ss.getFrame( 0 );
+  p._getSpaceWidth = function (ss) {
+    var frame =
+      this._getFrame("1", ss) ||
+      this._getFrame("l", ss) ||
+      this._getFrame("e", ss) ||
+      this._getFrame("a", ss) ||
+      ss.getFrame(0);
     return frame ? frame.rect.width : 1;
   };
 
@@ -13351,31 +14175,31 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       numKids = kids.length,
       sprite;
 
-    for ( var n in o ) {
-      if ( o[ n ] != this[ n ] ) {
-        o[ n ] = this[ n ];
+    for (var n in o) {
+      if (o[n] != this[n]) {
+        o[n] = this[n];
         change = true;
       }
     }
-    if ( !change ) {
+    if (!change) {
       return;
     }
 
-    var hasSpace = !!this._getFrame( " ", ss );
-    if ( !hasSpace && !spaceW ) {
-      spaceW = this._getSpaceWidth( ss );
+    var hasSpace = !!this._getFrame(" ", ss);
+    if (!hasSpace && !spaceW) {
+      spaceW = this._getSpaceWidth(ss);
     }
-    if ( !lineH ) {
-      lineH = this._getLineHeight( ss );
+    if (!lineH) {
+      lineH = this._getLineHeight(ss);
     }
 
-    for ( var i = 0, l = this.text.length; i < l; i++ ) {
-      var character = this.text.charAt( i );
-      if ( character == " " && !hasSpace ) {
+    for (var i = 0, l = this.text.length; i < l; i++) {
+      var character = this.text.charAt(i);
+      if (character == " " && !hasSpace) {
         x += spaceW;
         continue;
-      } else if ( character == "\n" || character == "\r" ) {
-        if ( character == "\r" && this.text.charAt( i + 1 ) == "\n" ) {
+      } else if (character == "\n" || character == "\r") {
+        if (character == "\r" && this.text.charAt(i + 1) == "\n") {
           i++;
         } // crlf
         x = 0;
@@ -13383,48 +14207,46 @@ createjs.deprecate = function ( fallbackMethod, name ) {
         continue;
       }
 
-      var index = this._getFrameIndex( character, ss );
-      if ( index == null ) {
+      var index = this._getFrameIndex(character, ss);
+      if (index == null) {
         continue;
       }
 
-      if ( childIndex < numKids ) {
-        sprite = kids[ childIndex ];
+      if (childIndex < numKids) {
+        sprite = kids[childIndex];
       } else {
-        kids.push( sprite = pool.length ? pool.pop() : new createjs.Sprite() );
+        kids.push((sprite = pool.length ? pool.pop() : new createjs.Sprite()));
         sprite.parent = this;
         numKids++;
       }
       sprite.spriteSheet = ss;
-      sprite.gotoAndStop( index );
+      sprite.gotoAndStop(index);
       sprite.x = x;
       sprite.y = y;
       childIndex++;
 
       x += sprite.getBounds().width + this.letterSpacing;
     }
-    while ( numKids > childIndex ) {
+    while (numKids > childIndex) {
       // faster than removeChild.
-      pool.push( sprite = kids.pop() );
+      pool.push((sprite = kids.pop()));
       sprite.parent = null;
       numKids--;
     }
-    if ( pool.length > BitmapText.maxPoolSize ) {
+    if (pool.length > BitmapText.maxPoolSize) {
       pool.length = BitmapText.maxPoolSize;
     }
   };
 
-
-  createjs.BitmapText = createjs.promote( BitmapText, "Container" );
-}() );
+  createjs.BitmapText = createjs.promote(BitmapText, "Container");
+})();
 
 //##############################################################################
 // MovieClip.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -13474,13 +14296,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    *    <LI> `startPosition`</LI>
    *    <LI> `frameBounds`</LI>
    * </UL>
-   * 
+   *
    * This object will also be passed into the Timeline instance associated with this MovieClip. See the documentation
    * for Timeline for a list of supported props (ex. `paused`, `labels`, `loop`, `reversed`, etc.)
    * @extends Container
    * @constructor
    **/
-  function MovieClip( props ) {
+  function MovieClip(props) {
     this.Container_constructor();
     !MovieClip.inited && MovieClip.init(); // static init
 
@@ -13488,27 +14310,26 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 
     // handle old params (mode, startPosition, loop, labels):
     // TODO: deprecated param handling:
-    if ( props instanceof String || arguments.length > 1 ) {
+    if (props instanceof String || arguments.length > 1) {
       mode = props;
-      startPosition = arguments[ 1 ];
-      loop = arguments[ 2 ];
-      labels = arguments[ 3 ];
-      if ( loop == null ) {
+      startPosition = arguments[1];
+      loop = arguments[2];
+      labels = arguments[3];
+      if (loop == null) {
         loop = -1;
       }
       props = null;
-    } else if ( props ) {
+    } else if (props) {
       mode = props.mode;
       startPosition = props.startPosition;
       loop = props.loop;
       labels = props.labels;
     }
-    if ( !props ) {
+    if (!props) {
       props = {
-        labels: labels
+        labels: labels,
       };
     }
-
 
     // public properties:
     /**
@@ -13535,7 +14356,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @type Number
      * @default -1
      */
-    this.loop = loop === true ? -1 : ( loop || 0 );
+    this.loop = loop === true ? -1 : loop || 0;
 
     /**
      * The current frame of the movieclip.
@@ -13628,8 +14449,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @type Timeline
      * @default null
      */
-    this.timeline = new createjs.Timeline( props );
-
+    this.timeline = new createjs.Timeline(props);
 
     // private properties:
     /**
@@ -13653,8 +14473,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @type Function
      * @private
      */
-    this._bound_resolveState = this._resolveState.bind( this );
-
+    this._bound_resolveState = this._resolveState.bind(this);
 
     /**
      * The time remaining from the previous tick, only applicable when .framerate is set.
@@ -13672,8 +14491,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      */
     this._managed = {};
   }
-  var p = createjs.extend( MovieClip, createjs.Container );
-
+  var p = createjs.extend(MovieClip, createjs.Container);
 
   // constants:
   /**
@@ -13708,21 +14526,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
   MovieClip.SYNCHED = "synched";
 
-
   // static properties:
   MovieClip.inited = false;
 
-
   // static methods:
   MovieClip.init = function () {
-    if ( MovieClip.inited ) {
+    if (MovieClip.inited) {
       return;
     }
     // plugins introduce some overhead to Tween, so we only install this if an MC is instantiated.
     MovieClipPlugin.install();
     MovieClip.inited = true;
   };
-
 
   // getter / setters:
   /**
@@ -13735,7 +14550,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return this.timeline.getLabels();
   };
   // MovieClip.getLabels is @deprecated. Remove for 1.1+
-  p.getLabels = createjs.deprecate( p._getLabels, "MovieClip.getLabels" );
+  p.getLabels = createjs.deprecate(p._getLabels, "MovieClip.getLabels");
 
   /**
    * Use the {{#crossLink "MovieClip/currentLabel:property"}}{{/crossLink}} property instead.
@@ -13747,7 +14562,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return this.timeline.currentLabel;
   };
   // MovieClip.getCurrentLabel is @deprecated. Remove for 1.1+
-  p.getCurrentLabel = createjs.deprecate( p._getCurrentLabel, "MovieClip.getCurrentLabel" );
+  p.getCurrentLabel = createjs.deprecate(
+    p._getCurrentLabel,
+    "MovieClip.getCurrentLabel"
+  );
 
   /**
    * Use the {{#crossLink "MovieClip/duration:property"}}{{/crossLink}} property instead.
@@ -13759,7 +14577,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return this.timeline.duration;
   };
   // MovieClip.getDuration is @deprecated. Remove for 1.1+
-  p.getDuration = createjs.deprecate( p._getDuration, "MovieClip.getDuration" );
+  p.getDuration = createjs.deprecate(p._getDuration, "MovieClip.getDuration");
 
   /**
    * Returns an array of objects with label and position (aka frame) properties, sorted by position.
@@ -13789,23 +14607,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @readonly
    **/
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       labels: {
-        get: p._getLabels
+        get: p._getLabels,
       },
       currentLabel: {
-        get: p._getCurrentLabel
+        get: p._getCurrentLabel,
       },
       totalFrames: {
-        get: p._getDuration
+        get: p._getDuration,
       },
       duration: {
-        get: p._getDuration
-      }
+        get: p._getDuration,
+      },
       // TODO: can we just proxy .currentFrame to tl.position as well? Ditto for .loop (or just remove entirely).
-    } );
-  } catch ( e ) {}
-
+    });
+  } catch (e) {}
 
   // public methods:
   /**
@@ -13825,7 +14642,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
   p.isVisible = function () {
     // children are placed in draw, so we can't determine if we have content.
-    return !!( this.visible && this.alpha > 0 && this.scaleX != 0 && this.scaleY != 0 );
+    return !!(
+      this.visible &&
+      this.alpha > 0 &&
+      this.scaleX != 0 &&
+      this.scaleY != 0
+    );
   };
 
   /**
@@ -13838,13 +14660,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * For example, used for drawing the cache (to prevent it from simply drawing an existing cache back
    * into itself).
    **/
-  p.draw = function ( ctx, ignoreCache ) {
+  p.draw = function (ctx, ignoreCache) {
     // draw to cache first:
-    if ( this.DisplayObject_draw( ctx, ignoreCache ) ) {
+    if (this.DisplayObject_draw(ctx, ignoreCache)) {
       return true;
     }
     this._updateState();
-    this.Container_draw( ctx, ignoreCache );
+    this.Container_draw(ctx, ignoreCache);
     return true;
   };
 
@@ -13869,9 +14691,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method gotoAndPlay
    * @param {String|Number} positionOrLabel The animation name or frame number to go to.
    **/
-  p.gotoAndPlay = function ( positionOrLabel ) {
+  p.gotoAndPlay = function (positionOrLabel) {
     this.paused = false;
-    this._goto( positionOrLabel );
+    this._goto(positionOrLabel);
   };
 
   /**
@@ -13879,9 +14701,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method gotoAndStop
    * @param {String|Number} positionOrLabel The animation or frame name to go to.
    **/
-  p.gotoAndStop = function ( positionOrLabel ) {
+  p.gotoAndStop = function (positionOrLabel) {
     this.paused = true;
-    this._goto( positionOrLabel );
+    this._goto(positionOrLabel);
   };
 
   /**
@@ -13889,33 +14711,36 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param [time] {Number} The amount of time in ms to advance by. Only applicable if framerate is set.
    * @method advance
    */
-  p.advance = function ( time ) {
+  p.advance = function (time) {
     var independent = MovieClip.INDEPENDENT;
-    if ( this.mode !== independent ) {
+    if (this.mode !== independent) {
       return;
     } // update happens in draw for synched clips
 
     // if this MC doesn't have a framerate, hunt ancestors for one:
     var o = this,
       fps = o.framerate;
-    while ( ( o = o.parent ) && fps === null ) {
-      if ( o.mode === independent ) {
+    while ((o = o.parent) && fps === null) {
+      if (o.mode === independent) {
         fps = o._framerate;
       }
     }
     this._framerate = fps;
 
-    if ( this.paused ) {
+    if (this.paused) {
       return;
     }
 
     // calculate how many frames to advance:
-    var t = ( fps !== null && fps !== -1 && time !== null ) ? time / ( 1000 / fps ) + this._t : 1;
+    var t =
+      fps !== null && fps !== -1 && time !== null
+        ? time / (1000 / fps) + this._t
+        : 1;
     var frames = t | 0;
     this._t = t - frames; // leftover time, save to add to next advance.
 
-    while ( frames-- ) {
-      this._updateTimeline( this._rawPosition + 1, false );
+    while (frames--) {
+      this._updateTimeline(this._rawPosition + 1, false);
     }
   };
 
@@ -13925,7 +14750,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
   p.clone = function () {
     // TODO: add support for this? Need to clone the Timeline & retarget tweens - pretty complex.
-    throw ( "MovieClip cannot be cloned." );
+    throw "MovieClip cannot be cloned.";
   };
 
   /**
@@ -13937,14 +14762,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return "[MovieClip (name=" + this.name + ")]";
   };
 
-
   // private methods:
   /**
    * Docced in superclass.
    **/
   p._updateState = function () {
-    if ( this._rawPosition === -1 || this.mode !== MovieClip.INDEPENDENT ) {
-      this._updateTimeline( -1 );
+    if (this._rawPosition === -1 || this.mode !== MovieClip.INDEPENDENT) {
+      this._updateTimeline(-1);
     }
   };
 
@@ -13954,9 +14778,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * function.
    * @protected
    **/
-  p._tick = function ( evtObj ) {
-    this.advance( evtObj && evtObj.delta );
-    this.Container__tick( evtObj );
+  p._tick = function (evtObj) {
+    this.advance(evtObj && evtObj.delta);
+    this.Container__tick(evtObj);
   };
 
   /**
@@ -13964,13 +14788,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String|Number} positionOrLabel The animation name or frame number to go to.
    * @protected
    **/
-  p._goto = function ( positionOrLabel ) {
-    var pos = this.timeline.resolve( positionOrLabel );
-    if ( pos == null ) {
+  p._goto = function (positionOrLabel) {
+    var pos = this.timeline.resolve(positionOrLabel);
+    if (pos == null) {
       return;
     }
     this._t = 0;
-    this._updateTimeline( pos, true );
+    this._updateTimeline(pos, true);
   };
 
   /**
@@ -13988,23 +14812,30 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Boolean} jump Indicates whether this update is due to jumping (via gotoAndXX) to a new position.
    * @protected
    **/
-  p._updateTimeline = function ( rawPosition, jump ) {
+  p._updateTimeline = function (rawPosition, jump) {
     var synced = this.mode !== MovieClip.INDEPENDENT,
       tl = this.timeline;
-    if ( synced ) {
-      rawPosition = this.startPosition + ( this.mode === MovieClip.SINGLE_FRAME ? 0 : this._synchOffset );
+    if (synced) {
+      rawPosition =
+        this.startPosition +
+        (this.mode === MovieClip.SINGLE_FRAME ? 0 : this._synchOffset);
     }
-    if ( rawPosition < 0 ) {
+    if (rawPosition < 0) {
       rawPosition = 0;
     }
-    if ( this._rawPosition === rawPosition && !synced ) {
+    if (this._rawPosition === rawPosition && !synced) {
       return;
     }
     this._rawPosition = rawPosition;
 
     // update timeline position, ignoring actions if this is a graphic.
     tl.loop = this.loop; // TODO: should we maintain this on MovieClip, or just have it on timeline?
-    tl.setPosition( rawPosition, synced || !this.actionsEnabled, jump, this._bound_resolveState );
+    tl.setPosition(
+      rawPosition,
+      synced || !this.actionsEnabled,
+      jump,
+      this._bound_resolveState
+    );
   };
 
   /**
@@ -14017,7 +14848,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   p._renderFirstFrame = function () {
     var tl = this.timeline,
       pos = tl.rawPosition;
-    tl.setPosition( 0, true, true, this._bound_resolveState );
+    tl.setPosition(0, true, true, this._bound_resolveState);
     tl.rawPosition = pos;
   };
 
@@ -14030,34 +14861,34 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     var tl = this.timeline;
     this.currentFrame = tl.position;
 
-    for ( var n in this._managed ) {
-      this._managed[ n ] = 1;
+    for (var n in this._managed) {
+      this._managed[n] = 1;
     }
 
     var tweens = tl.tweens;
-    for ( var i = 0, l = tweens.length; i < l; i++ ) {
-      var tween = tweens[ i ],
+    for (var i = 0, l = tweens.length; i < l; i++) {
+      var tween = tweens[i],
         target = tween.target;
-      if ( target === this || tween.passive ) {
+      if (target === this || tween.passive) {
         continue;
       } // TODO: this assumes the actions tween from Animate has `this` as the target. There's likely a better approach.
       var offset = tween._stepPosition;
 
-      if ( target instanceof createjs.DisplayObject ) {
+      if (target instanceof createjs.DisplayObject) {
         // motion tween.
-        this._addManagedChild( target, offset );
+        this._addManagedChild(target, offset);
       } else {
         // state tween.
-        this._setState( target.state, offset );
+        this._setState(target.state, offset);
       }
     }
 
     var kids = this.children;
-    for ( i = kids.length - 1; i >= 0; i-- ) {
-      var id = kids[ i ].id;
-      if ( this._managed[ id ] === 1 ) {
-        this.removeChildAt( i );
-        delete( this._managed[ id ] );
+    for (i = kids.length - 1; i >= 0; i--) {
+      var id = kids[i].id;
+      if (this._managed[id] === 1) {
+        this.removeChildAt(i);
+        delete this._managed[id];
       }
     }
   };
@@ -14068,18 +14899,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} offset
    * @protected
    **/
-  p._setState = function ( state, offset ) {
-    if ( !state ) {
+  p._setState = function (state, offset) {
+    if (!state) {
       return;
     }
-    for ( var i = state.length - 1; i >= 0; i-- ) {
-      var o = state[ i ];
+    for (var i = state.length - 1; i >= 0; i--) {
+      var o = state[i];
       var target = o.t;
       var props = o.p;
-      for ( var n in props ) {
-        target[ n ] = props[ n ];
+      for (var n in props) {
+        target[n] = props[n];
       }
-      this._addManagedChild( target, offset );
+      this._addManagedChild(target, offset);
     }
   };
 
@@ -14090,21 +14921,25 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} offset
    * @private
    **/
-  p._addManagedChild = function ( child, offset ) {
-    if ( child._off ) {
+  p._addManagedChild = function (child, offset) {
+    if (child._off) {
       return;
     }
-    this.addChildAt( child, 0 );
+    this.addChildAt(child, 0);
 
-    if ( child instanceof MovieClip ) {
+    if (child instanceof MovieClip) {
       child._synchOffset = offset;
       // TODO: this does not precisely match Adobe Flash/Animate, which loses track of the clip if it is renamed or removed from the timeline, which causes it to reset.
       // TODO: should also reset when MovieClip loops, though that will be a bit tricky to detect.
-      if ( child.mode === MovieClip.INDEPENDENT && child.autoReset && ( !this._managed[ child.id ] ) ) {
+      if (
+        child.mode === MovieClip.INDEPENDENT &&
+        child.autoReset &&
+        !this._managed[child.id]
+      ) {
         child._reset();
       }
     }
-    this._managed[ child.id ] = 2;
+    this._managed[child.id] = 2;
   };
 
   /**
@@ -14114,23 +14949,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Rectangle}
    * @protected
    **/
-  p._getBounds = function ( matrix, ignoreTransform ) {
+  p._getBounds = function (matrix, ignoreTransform) {
     var bounds = this.DisplayObject_getBounds();
-    if ( !bounds ) {
-      if ( this.frameBounds ) {
-        bounds = this._rectangle.copy( this.frameBounds[ this.currentFrame ] );
+    if (!bounds) {
+      if (this.frameBounds) {
+        bounds = this._rectangle.copy(this.frameBounds[this.currentFrame]);
       }
     }
-    if ( bounds ) {
-      return this._transformBounds( bounds, matrix, ignoreTransform );
+    if (bounds) {
+      return this._transformBounds(bounds, matrix, ignoreTransform);
     }
-    return this.Container__getBounds( matrix, ignoreTransform );
+    return this.Container__getBounds(matrix, ignoreTransform);
   };
 
-
-  createjs.MovieClip = createjs.promote( MovieClip, "Container" );
-
-
+  createjs.MovieClip = createjs.promote(MovieClip, "Container");
 
   // MovieClipPlugin for TweenJS:
   /**
@@ -14141,7 +14973,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @constructor
    **/
   function MovieClipPlugin() {
-    throw ( "MovieClipPlugin cannot be instantiated." )
+    throw "MovieClipPlugin cannot be instantiated.";
   }
 
   /**
@@ -14165,7 +14997,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    **/
   MovieClipPlugin.install = function () {
-    createjs.Tween._installPlugin( MovieClipPlugin );
+    createjs.Tween._installPlugin(MovieClipPlugin);
   };
 
   /**
@@ -14175,9 +15007,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {*} value
    * @static
    **/
-  MovieClipPlugin.init = function ( tween, prop, value ) {
-    if ( prop === "startPosition" && tween.target instanceof MovieClip ) {
-      tween._addPlugin( MovieClipPlugin );
+  MovieClipPlugin.init = function (tween, prop, value) {
+    if (prop === "startPosition" && tween.target instanceof MovieClip) {
+      tween._addPlugin(MovieClipPlugin);
     }
   };
 
@@ -14188,7 +15020,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} props
    * @static
    **/
-  MovieClipPlugin.step = function ( tween, step, props ) {};
+  MovieClipPlugin.step = function (tween, step, props) {};
 
   /**
    * @method change
@@ -14200,21 +15032,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {*}
    * @static
    */
-  MovieClipPlugin.change = function ( tween, step, prop, value, ratio, end ) {
-    if ( prop === "startPosition" ) {
-      return ( ratio === 1 ? step.props[ prop ] : step.prev.props[ prop ] );
+  MovieClipPlugin.change = function (tween, step, prop, value, ratio, end) {
+    if (prop === "startPosition") {
+      return ratio === 1 ? step.props[prop] : step.prev.props[prop];
     }
   };
-
-}() );
+})();
 
 //##############################################################################
 // SpriteSheetUtils.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -14229,7 +15059,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     throw "SpriteSheetUtils cannot be instantiated";
   }
 
-
   // private static properties:
   /**
    * @property _workingCanvas
@@ -14243,13 +15072,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @type CanvasRenderingContext2D
    * @protected
    */
-  var canvas = ( createjs.createCanvas ? createjs.createCanvas() : document.createElement( "canvas" ) );
-  if ( canvas.getContext ) {
+  var canvas = createjs.createCanvas
+    ? createjs.createCanvas()
+    : document.createElement("canvas");
+  if (canvas.getContext) {
     SpriteSheetUtils._workingCanvas = canvas;
-    SpriteSheetUtils._workingContext = canvas.getContext( "2d" );
+    SpriteSheetUtils._workingContext = canvas.getContext("2d");
     canvas.width = canvas.height = 1;
   }
-
 
   // public static methods:
   /**
@@ -14269,114 +15099,134 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * name is specified, only the first frame of the animation will be extracted.
    * @return {HTMLImageElement} a single frame of the specified sprite sheet as a new PNG image.
    */
-  SpriteSheetUtils.extractFrame = function ( spriteSheet, frameOrAnimation ) {
-    if ( isNaN( frameOrAnimation ) ) {
-      frameOrAnimation = spriteSheet.getAnimation( frameOrAnimation ).frames[ 0 ];
+  SpriteSheetUtils.extractFrame = function (spriteSheet, frameOrAnimation) {
+    if (isNaN(frameOrAnimation)) {
+      frameOrAnimation = spriteSheet.getAnimation(frameOrAnimation).frames[0];
     }
-    var data = spriteSheet.getFrame( frameOrAnimation );
-    if ( !data ) {
+    var data = spriteSheet.getFrame(frameOrAnimation);
+    if (!data) {
       return null;
     }
     var r = data.rect;
     var canvas = SpriteSheetUtils._workingCanvas;
     canvas.width = r.width;
     canvas.height = r.height;
-    SpriteSheetUtils._workingContext.drawImage( data.image, r.x, r.y, r.width, r.height, 0, 0, r.width, r.height );
-    var img = document.createElement( "img" );
-    img.src = canvas.toDataURL( "image/png" );
+    SpriteSheetUtils._workingContext.drawImage(
+      data.image,
+      r.x,
+      r.y,
+      r.width,
+      r.height,
+      0,
+      0,
+      r.width,
+      r.height
+    );
+    var img = document.createElement("img");
+    img.src = canvas.toDataURL("image/png");
     return img;
   };
 
   // SpriteSheetUtils.addFlippedFrames is @deprecated. Remove for 1.1+
-  SpriteSheetUtils.addFlippedFrames = createjs.deprecate( null, "SpriteSheetUtils.addFlippedFrames" );
+  SpriteSheetUtils.addFlippedFrames = createjs.deprecate(
+    null,
+    "SpriteSheetUtils.addFlippedFrames"
+  );
 
   // SpriteSheetUtils.addFlippedFrames is @deprecated. Remove for 1.1+
-  SpriteSheetUtils.mergeAlpha = createjs.deprecate( null, "SpriteSheetUtils.mergeAlpha" );
-
+  SpriteSheetUtils.mergeAlpha = createjs.deprecate(
+    null,
+    "SpriteSheetUtils.mergeAlpha"
+  );
 
   // private static methods:
-  SpriteSheetUtils._flip = function ( spriteSheet, count, h, v ) {
+  SpriteSheetUtils._flip = function (spriteSheet, count, h, v) {
     var imgs = spriteSheet._images;
     var canvas = SpriteSheetUtils._workingCanvas;
     var ctx = SpriteSheetUtils._workingContext;
     var il = imgs.length / count;
-    for ( var i = 0; i < il; i++ ) {
-      var src = imgs[ i ];
+    for (var i = 0; i < il; i++) {
+      var src = imgs[i];
       src.__tmp = i; // a bit hacky, but faster than doing indexOf below.
-      ctx.setTransform( 1, 0, 0, 1, 0, 0 );
-      ctx.clearRect( 0, 0, canvas.width + 1, canvas.height + 1 );
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, canvas.width + 1, canvas.height + 1);
       canvas.width = src.width;
       canvas.height = src.height;
-      ctx.setTransform( h ? -1 : 1, 0, 0, v ? -1 : 1, h ? src.width : 0, v ? src.height : 0 );
-      ctx.drawImage( src, 0, 0 );
-      var img = document.createElement( "img" );
-      img.src = canvas.toDataURL( "image/png" );
+      ctx.setTransform(
+        h ? -1 : 1,
+        0,
+        0,
+        v ? -1 : 1,
+        h ? src.width : 0,
+        v ? src.height : 0
+      );
+      ctx.drawImage(src, 0, 0);
+      var img = document.createElement("img");
+      img.src = canvas.toDataURL("image/png");
       // work around a strange bug in Safari:
-      img.width = ( src.width || src.naturalWidth );
-      img.height = ( src.height || src.naturalHeight );
-      imgs.push( img );
+      img.width = src.width || src.naturalWidth;
+      img.height = src.height || src.naturalHeight;
+      imgs.push(img);
     }
 
     var frames = spriteSheet._frames;
     var fl = frames.length / count;
-    for ( i = 0; i < fl; i++ ) {
-      src = frames[ i ];
+    for (i = 0; i < fl; i++) {
+      src = frames[i];
       var rect = src.rect.clone();
-      img = imgs[ src.image.__tmp + il * count ];
+      img = imgs[src.image.__tmp + il * count];
 
       var frame = {
         image: img,
         rect: rect,
         regX: src.regX,
-        regY: src.regY
+        regY: src.regY,
       };
-      if ( h ) {
-        rect.x = ( img.width || img.naturalWidth ) - rect.x - rect.width; // update rect
+      if (h) {
+        rect.x = (img.width || img.naturalWidth) - rect.x - rect.width; // update rect
         frame.regX = rect.width - src.regX; // update registration point
       }
-      if ( v ) {
-        rect.y = ( img.height || img.naturalHeight ) - rect.y - rect.height; // update rect
+      if (v) {
+        rect.y = (img.height || img.naturalHeight) - rect.y - rect.height; // update rect
         frame.regY = rect.height - src.regY; // update registration point
       }
-      frames.push( frame );
+      frames.push(frame);
     }
 
-    var sfx = "_" + ( h ? "h" : "" ) + ( v ? "v" : "" );
+    var sfx = "_" + (h ? "h" : "") + (v ? "v" : "");
     var names = spriteSheet._animations;
     var data = spriteSheet._data;
     var al = names.length / count;
-    for ( i = 0; i < al; i++ ) {
-      var name = names[ i ];
-      src = data[ name ];
+    for (i = 0; i < al; i++) {
+      var name = names[i];
+      src = data[name];
       var anim = {
         name: name + sfx,
         speed: src.speed,
         next: src.next,
-        frames: []
+        frames: [],
       };
-      if ( src.next ) {
+      if (src.next) {
         anim.next += sfx;
       }
       frames = src.frames;
-      for ( var j = 0, l = frames.length; j < l; j++ ) {
-        anim.frames.push( frames[ j ] + fl * count );
+      for (var j = 0, l = frames.length; j < l; j++) {
+        anim.frames.push(frames[j] + fl * count);
       }
-      data[ anim.name ] = anim;
-      names.push( anim.name );
+      data[anim.name] = anim;
+      names.push(anim.name);
     }
   };
 
-
   createjs.SpriteSheetUtils = SpriteSheetUtils;
-}() );
+})();
 
 //##############################################################################
 // SpriteSheetBuilder.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -14396,7 +15246,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends EventDispatcher
    * @constructor
    **/
-  function SpriteSheetBuilder( framerate ) {
+  function SpriteSheetBuilder(framerate) {
     this.EventDispatcher_constructor();
 
     // public properties:
@@ -14476,7 +15326,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      */
     this.framerate = framerate || 0;
 
-
     // private properties:
     /**
      * @property _frames
@@ -14527,10 +15376,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      **/
     this._scale = 1;
   }
-  var p = createjs.extend( SpriteSheetBuilder, createjs.EventDispatcher );
+  var p = createjs.extend(SpriteSheetBuilder, createjs.EventDispatcher);
 
   // constants:
-  SpriteSheetBuilder.ERR_DIMENSIONS = "frame dimensions exceed max spritesheet dimensions";
+  SpriteSheetBuilder.ERR_DIMENSIONS =
+    "frame dimensions exceed max spritesheet dimensions";
   SpriteSheetBuilder.ERR_RUNNING = "a build is already running";
 
   // events:
@@ -14550,7 +15400,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} progress The current progress value (0-1).
    * @since 0.6.0
    */
-
 
   // public methods:
   /**
@@ -14572,27 +15421,29 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} [setupData] Arbitrary setup data to pass to setupFunction as the second parameter.
    * @return {Number} The index of the frame that was just added, or null if a sourceRect could not be determined.
    **/
-  p.addFrame = function ( source, sourceRect, scale, setupFunction, setupData ) {
-    if ( this._data ) {
+  p.addFrame = function (source, sourceRect, scale, setupFunction, setupData) {
+    if (this._data) {
       throw SpriteSheetBuilder.ERR_RUNNING;
     }
     var rect = sourceRect || source.bounds || source.nominalBounds;
-    if ( !rect && source.getBounds ) {
+    if (!rect && source.getBounds) {
       rect = source.getBounds();
     }
-    if ( !rect ) {
+    if (!rect) {
       return null;
     }
     scale = scale || 1;
-    return this._frames.push( {
-      source: source,
-      sourceRect: rect,
-      scale: scale,
-      funct: setupFunction,
-      data: setupData,
-      index: this._frames.length,
-      height: rect.height * scale
-    } ) - 1;
+    return (
+      this._frames.push({
+        source: source,
+        sourceRect: rect,
+        scale: scale,
+        funct: setupFunction,
+        data: setupData,
+        index: this._frames.length,
+        height: rect.height * scale,
+      }) - 1
+    );
   };
 
   /**
@@ -14607,14 +15458,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * cause the animation to advance every second tick. Note that earlier versions used `frequency` instead, which had
    * the opposite effect.
    **/
-  p.addAnimation = function ( name, frames, next, speed ) {
-    if ( this._data ) {
+  p.addAnimation = function (name, frames, next, speed) {
+    if (this._data) {
       throw SpriteSheetBuilder.ERR_RUNNING;
     }
-    this._animations[ name ] = {
+    this._animations[name] = {
       frames: frames,
       next: next,
-      speed: speed
+      speed: speed,
     };
   };
 
@@ -14641,56 +15492,65 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * parameters: the label name, the source MovieClip instance, the starting frame index (in the movieclip timeline)
    * and the end index. It must return a new name for the label/animation, or `false` to exclude the label.
    **/
-  p.addMovieClip = function ( source, sourceRect, scale, setupFunction, setupData, labelFunction ) {
-    if ( this._data ) {
+  p.addMovieClip = function (
+    source,
+    sourceRect,
+    scale,
+    setupFunction,
+    setupData,
+    labelFunction
+  ) {
+    if (this._data) {
       throw SpriteSheetBuilder.ERR_RUNNING;
     }
     var rects = source.frameBounds;
     var rect = sourceRect || source.bounds || source.nominalBounds;
-    if ( !rect && source.getBounds ) {
+    if (!rect && source.getBounds) {
       rect = source.getBounds();
     }
-    if ( !rect && !rects ) {
+    if (!rect && !rects) {
       return;
     }
 
-    var i, l, baseFrameIndex = this._frames.length;
+    var i,
+      l,
+      baseFrameIndex = this._frames.length;
     var duration = source.timeline.duration;
-    for ( i = 0; i < duration; i++ ) {
-      var r = ( rects && rects[ i ] ) ? rects[ i ] : rect;
-      this.addFrame( source, r, scale, this._setupMovieClipFrame, {
+    for (i = 0; i < duration; i++) {
+      var r = rects && rects[i] ? rects[i] : rect;
+      this.addFrame(source, r, scale, this._setupMovieClipFrame, {
         i: i,
         f: setupFunction,
-        d: setupData
-      } );
+        d: setupData,
+      });
     }
     var labels = source.timeline._labels;
     var lbls = [];
-    for ( var n in labels ) {
-      lbls.push( {
-        index: labels[ n ],
-        label: n
-      } );
+    for (var n in labels) {
+      lbls.push({
+        index: labels[n],
+        label: n,
+      });
     }
-    if ( lbls.length ) {
-      lbls.sort( function ( a, b ) {
+    if (lbls.length) {
+      lbls.sort(function (a, b) {
         return a.index - b.index;
-      } );
-      for ( i = 0, l = lbls.length; i < l; i++ ) {
-        var label = lbls[ i ].label;
-        var start = baseFrameIndex + lbls[ i ].index;
-        var end = baseFrameIndex + ( ( i == l - 1 ) ? duration : lbls[ i + 1 ].index );
+      });
+      for (i = 0, l = lbls.length; i < l; i++) {
+        var label = lbls[i].label;
+        var start = baseFrameIndex + lbls[i].index;
+        var end = baseFrameIndex + (i == l - 1 ? duration : lbls[i + 1].index);
         var frames = [];
-        for ( var j = start; j < end; j++ ) {
-          frames.push( j );
+        for (var j = start; j < end; j++) {
+          frames.push(j);
         }
-        if ( labelFunction ) {
-          label = labelFunction( label, source, start, end );
-          if ( !label ) {
+        if (labelFunction) {
+          label = labelFunction(label, source, start, end);
+          if (!label) {
             continue;
           }
         }
-        this.addAnimation( label, frames, true ); // for now, this loops all animations.
+        this.addAnimation(label, frames, true); // for now, this loops all animations.
       }
     }
   };
@@ -14702,11 +15562,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * occurred.
    **/
   p.build = function () {
-    if ( this._data ) {
+    if (this._data) {
       throw SpriteSheetBuilder.ERR_RUNNING;
     }
     this._startBuild();
-    while ( this._drawNext() ) {}
+    while (this._drawNext()) {}
     this._endBuild();
     return this.spriteSheet;
   };
@@ -14718,16 +15578,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method buildAsync
    * @param {Number} [timeSlice] Sets the timeSlice property on this instance.
    **/
-  p.buildAsync = function ( timeSlice ) {
-    if ( this._data ) {
+  p.buildAsync = function (timeSlice) {
+    if (this._data) {
       throw SpriteSheetBuilder.ERR_RUNNING;
     }
     this.timeSlice = timeSlice;
     this._startBuild();
     var _this = this;
-    this._timerID = setTimeout( function () {
+    this._timerID = setTimeout(function () {
       _this._run();
-    }, 50 - Math.max( 0.01, Math.min( 0.99, this.timeSlice || 0.3 ) ) * 50 );
+    }, 50 - Math.max(0.01, Math.min(0.99, this.timeSlice || 0.3)) * 50);
   };
 
   /**
@@ -14735,7 +15595,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method stopAsync
    **/
   p.stopAsync = function () {
-    clearTimeout( this._timerID );
+    clearTimeout(this._timerID);
     this._data = null;
   };
 
@@ -14744,7 +15604,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method clone
    **/
   p.clone = function () {
-    throw ( "SpriteSheetBuilder cannot be cloned." );
+    throw "SpriteSheetBuilder cannot be cloned.";
   };
 
   /**
@@ -14755,7 +15615,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   p.toString = function () {
     return "[SpriteSheetBuilder]";
   };
-
 
   // private methods:
   /**
@@ -14773,32 +15632,34 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       images: [],
       frames: dataFrames,
       framerate: this.framerate,
-      animations: this._animations // TODO: should we "clone" _animations in case someone adds more animations after a build?
+      animations: this._animations, // TODO: should we "clone" _animations in case someone adds more animations after a build?
     };
 
     var frames = this._frames.slice();
-    frames.sort( function ( a, b ) {
-      return ( a.height <= b.height ) ? -1 : 1;
-    } );
+    frames.sort(function (a, b) {
+      return a.height <= b.height ? -1 : 1;
+    });
 
-    if ( frames[ frames.length - 1 ].height + pad * 2 > this.maxHeight ) {
+    if (frames[frames.length - 1].height + pad * 2 > this.maxHeight) {
       throw SpriteSheetBuilder.ERR_DIMENSIONS;
     }
     var y = 0,
       x = 0;
     var img = 0;
-    while ( frames.length ) {
-      var o = this._fillRow( frames, y, img, dataFrames, pad );
-      if ( o.w > x ) {
+    while (frames.length) {
+      var o = this._fillRow(frames, y, img, dataFrames, pad);
+      if (o.w > x) {
         x = o.w;
       }
       y += o.h;
-      if ( !o.h || !frames.length ) {
-        var canvas = createjs.createCanvas ? createjs.createCanvas() : document.createElement( "canvas" );
-        canvas.width = this._getSize( x, this.maxWidth );
-        canvas.height = this._getSize( y, this.maxHeight );
-        this._data.images[ img ] = canvas;
-        if ( !o.h ) {
+      if (!o.h || !frames.length) {
+        var canvas = createjs.createCanvas
+          ? createjs.createCanvas()
+          : document.createElement("canvas");
+        canvas.width = this._getSize(x, this.maxWidth);
+        canvas.height = this._getSize(y, this.maxHeight);
+        this._data.images[img] = canvas;
+        if (!o.h) {
           x = y = 0;
           img++;
         }
@@ -14811,12 +15672,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @return {Number} The width & height of the row.
    **/
-  p._setupMovieClipFrame = function ( source, data ) {
+  p._setupMovieClipFrame = function (source, data) {
     var ae = source.actionsEnabled;
     source.actionsEnabled = false;
-    source.gotoAndStop( data.i );
+    source.gotoAndStop(data.i);
     source.actionsEnabled = ae;
-    data.f && data.f( source, data.d, data.i );
+    data.f && data.f(source, data.d, data.i);
   };
 
   /**
@@ -14824,10 +15685,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @return {Number} The width & height of the row.
    **/
-  p._getSize = function ( size, max ) {
+  p._getSize = function (size, max) {
     var pow = 4;
-    while ( Math.pow( 2, ++pow ) < size ) {}
-    return Math.min( max, Math.pow( 2, pow ) );
+    while (Math.pow(2, ++pow) < size) {}
+    return Math.min(max, Math.pow(2, pow));
   };
 
   /**
@@ -14840,38 +15701,46 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @return {Number} The width & height of the row.
    **/
-  p._fillRow = function ( frames, y, img, dataFrames, pad ) {
+  p._fillRow = function (frames, y, img, dataFrames, pad) {
     var w = this.maxWidth;
     var maxH = this.maxHeight;
     y += pad;
     var h = maxH - y;
     var x = pad;
     var height = 0;
-    for ( var i = frames.length - 1; i >= 0; i-- ) {
-      var frame = frames[ i ];
+    for (var i = frames.length - 1; i >= 0; i--) {
+      var frame = frames[i];
       var sc = this._scale * frame.scale;
       var rect = frame.sourceRect;
       var source = frame.source;
-      var rx = Math.floor( sc * rect.x - pad );
-      var ry = Math.floor( sc * rect.y - pad );
-      var rh = Math.ceil( sc * rect.height + pad * 2 );
-      var rw = Math.ceil( sc * rect.width + pad * 2 );
-      if ( rw > w ) {
+      var rx = Math.floor(sc * rect.x - pad);
+      var ry = Math.floor(sc * rect.y - pad);
+      var rh = Math.ceil(sc * rect.height + pad * 2);
+      var rw = Math.ceil(sc * rect.width + pad * 2);
+      if (rw > w) {
         throw SpriteSheetBuilder.ERR_DIMENSIONS;
       }
-      if ( rh > h || x + rw > w ) {
+      if (rh > h || x + rw > w) {
         continue;
       }
       frame.img = img;
-      frame.rect = new createjs.Rectangle( x, y, rw, rh );
+      frame.rect = new createjs.Rectangle(x, y, rw, rh);
       height = height || rh;
-      frames.splice( i, 1 );
-      dataFrames[ frame.index ] = [ x, y, rw, rh, img, Math.round( -rx + sc * source.regX - pad ), Math.round( -ry + sc * source.regY - pad ) ];
+      frames.splice(i, 1);
+      dataFrames[frame.index] = [
+        x,
+        y,
+        rw,
+        rh,
+        img,
+        Math.round(-rx + sc * source.regX - pad),
+        Math.round(-ry + sc * source.regY - pad),
+      ];
       x += rw;
     }
     return {
       w: x,
-      h: height
+      h: height,
     };
   };
 
@@ -14880,10 +15749,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    **/
   p._endBuild = function () {
-    this.spriteSheet = new createjs.SpriteSheet( this._data );
+    this.spriteSheet = new createjs.SpriteSheet(this._data);
     this._data = null;
     this.progress = 1;
-    this.dispatchEvent( "complete" );
+    this.dispatchEvent("complete");
   };
 
   /**
@@ -14891,28 +15760,28 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    **/
   p._run = function () {
-    var ts = Math.max( 0.01, Math.min( 0.99, this.timeSlice || 0.3 ) ) * 50;
-    var t = ( new Date() ).getTime() + ts;
+    var ts = Math.max(0.01, Math.min(0.99, this.timeSlice || 0.3)) * 50;
+    var t = new Date().getTime() + ts;
     var complete = false;
-    while ( t > ( new Date() ).getTime() ) {
-      if ( !this._drawNext() ) {
+    while (t > new Date().getTime()) {
+      if (!this._drawNext()) {
         complete = true;
         break;
       }
     }
-    if ( complete ) {
+    if (complete) {
       this._endBuild();
     } else {
       var _this = this;
-      this._timerID = setTimeout( function () {
+      this._timerID = setTimeout(function () {
         _this._run();
-      }, 50 - ts );
+      }, 50 - ts);
     }
-    var p = this.progress = this._index / this._frames.length;
-    if ( this.hasEventListener( "progress" ) ) {
-      var evt = new createjs.Event( "progress" );
+    var p = (this.progress = this._index / this._frames.length);
+    if (this.hasEventListener("progress")) {
+      var evt = new createjs.Event("progress");
       evt.progress = p;
-      this.dispatchEvent( evt );
+      this.dispatchEvent(evt);
     }
   };
 
@@ -14922,35 +15791,39 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return Boolean Returns false if this is the last draw.
    **/
   p._drawNext = function () {
-    var frame = this._frames[ this._index ];
+    var frame = this._frames[this._index];
     var sc = frame.scale * this._scale;
     var rect = frame.rect;
     var sourceRect = frame.sourceRect;
-    var canvas = this._data.images[ frame.img ];
-    var ctx = canvas.getContext( "2d" );
-    frame.funct && frame.funct( frame.source, frame.data );
+    var canvas = this._data.images[frame.img];
+    var ctx = canvas.getContext("2d");
+    frame.funct && frame.funct(frame.source, frame.data);
     ctx.save();
     ctx.beginPath();
-    ctx.rect( rect.x, rect.y, rect.width, rect.height );
+    ctx.rect(rect.x, rect.y, rect.width, rect.height);
     ctx.clip();
-    ctx.translate( Math.ceil( rect.x - sourceRect.x * sc ), Math.ceil( rect.y - sourceRect.y * sc ) );
-    ctx.scale( sc, sc );
-    frame.source.draw( ctx ); // display object will draw itself.
+    ctx.translate(
+      Math.ceil(rect.x - sourceRect.x * sc),
+      Math.ceil(rect.y - sourceRect.y * sc)
+    );
+    ctx.scale(sc, sc);
+    frame.source.draw(ctx); // display object will draw itself.
     ctx.restore();
-    return ( ++this._index ) < this._frames.length;
+    return ++this._index < this._frames.length;
   };
 
-
-  createjs.SpriteSheetBuilder = createjs.promote( SpriteSheetBuilder, "EventDispatcher" );
-}() );
+  createjs.SpriteSheetBuilder = createjs.promote(
+    SpriteSheetBuilder,
+    "EventDispatcher"
+  );
+})();
 
 //##############################################################################
 // DOMElement.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -14989,18 +15862,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @constructor
    * @param {HTMLElement} htmlElement A reference or id for the DOM element to manage.
    */
-  function DOMElement( htmlElement ) {
+  function DOMElement(htmlElement) {
     this.DisplayObject_constructor();
 
-    if ( typeof ( htmlElement ) == "string" ) {
-      htmlElement = document.getElementById( htmlElement );
+    if (typeof htmlElement == "string") {
+      htmlElement = document.getElementById(htmlElement);
     }
     this.mouseEnabled = false;
 
     var style = htmlElement.style;
     style.position = "absolute";
-    style.transformOrigin = style.WebkitTransformOrigin = style.msTransformOrigin = style.MozTransformOrigin = style.OTransformOrigin = "0% 0%";
-
+    style.transformOrigin =
+      style.WebkitTransformOrigin =
+      style.msTransformOrigin =
+      style.MozTransformOrigin =
+      style.OTransformOrigin =
+        "0% 0%";
 
     // public properties:
     /**
@@ -15009,7 +15886,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @type HTMLElement
      */
     this.htmlElement = htmlElement;
-
 
     // private properties:
     /**
@@ -15034,11 +15910,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      */
     this._drawAction = null;
   }
-  var p = createjs.extend( DOMElement, createjs.DisplayObject );
+  var p = createjs.extend(DOMElement, createjs.DisplayObject);
 
   // TODO: deprecated
   // p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
-
 
   // public methods:
   /**
@@ -15063,7 +15938,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * into itself).
    * @return {Boolean}
    */
-  p.draw = function ( ctx, ignoreCache ) {
+  p.draw = function (ctx, ignoreCache) {
     // this relies on the _tick method because draw isn't called if the parent is not visible.
     // the actual update happens in _handleDrawEnd
     return true;
@@ -15116,7 +15991,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method clone
    */
   p.clone = function () {
-    throw ( "DOMElement cannot be cloned." )
+    throw "DOMElement cannot be cloned.";
   };
 
   /**
@@ -15157,7 +16032,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @event tick
    */
 
-
   // private methods:
   /**
    * @method _tick
@@ -15165,14 +16039,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * function.
    * @protected
    */
-  p._tick = function ( evtObj ) {
+  p._tick = function (evtObj) {
     var stage = this.stage;
-    if ( stage && stage !== this._oldStage ) {
-      this._drawAction && stage.off( "drawend", this._drawAction );
-      this._drawAction = stage.on( "drawend", this._handleDrawEnd, this );
+    if (stage && stage !== this._oldStage) {
+      this._drawAction && stage.off("drawend", this._drawAction);
+      this._drawAction = stage.on("drawend", this._handleDrawEnd, this);
       this._oldStage = stage;
     }
-    this.DisplayObject__tick( evtObj );
+    this.DisplayObject__tick(evtObj);
   };
 
   /**
@@ -15180,21 +16054,21 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Event} evt
    * @protected
    */
-  p._handleDrawEnd = function ( evt ) {
+  p._handleDrawEnd = function (evt) {
     var o = this.htmlElement;
-    if ( !o ) {
+    if (!o) {
       return;
     }
     var style = o.style;
 
-    var props = this.getConcatenatedDisplayProps( this._props ),
+    var props = this.getConcatenatedDisplayProps(this._props),
       mtx = props.matrix;
 
     var visibility = props.visible ? "visible" : "hidden";
-    if ( visibility != style.visibility ) {
+    if (visibility != style.visibility) {
       style.visibility = visibility;
     }
-    if ( !props.visible ) {
+    if (!props.visible) {
       return;
     }
 
@@ -15202,33 +16076,45 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       oldMtx = oldProps && oldProps.matrix;
     var n = 10000; // precision
 
-    if ( !oldMtx || !oldMtx.equals( mtx ) ) {
-      var str = "matrix(" + ( mtx.a * n | 0 ) / n + "," + ( mtx.b * n | 0 ) / n + "," + ( mtx.c * n | 0 ) / n + "," + ( mtx.d * n | 0 ) / n + "," + ( mtx.tx + 0.5 | 0 );
-      style.transform = style.WebkitTransform = style.OTransform = style.msTransform = str + "," + ( mtx.ty + 0.5 | 0 ) + ")";
-      style.MozTransform = str + "px," + ( mtx.ty + 0.5 | 0 ) + "px)";
-      if ( !oldProps ) {
-        oldProps = this._oldProps = new createjs.DisplayProps( true, null );
+    if (!oldMtx || !oldMtx.equals(mtx)) {
+      var str =
+        "matrix(" +
+        ((mtx.a * n) | 0) / n +
+        "," +
+        ((mtx.b * n) | 0) / n +
+        "," +
+        ((mtx.c * n) | 0) / n +
+        "," +
+        ((mtx.d * n) | 0) / n +
+        "," +
+        ((mtx.tx + 0.5) | 0);
+      style.transform =
+        style.WebkitTransform =
+        style.OTransform =
+        style.msTransform =
+          str + "," + ((mtx.ty + 0.5) | 0) + ")";
+      style.MozTransform = str + "px," + ((mtx.ty + 0.5) | 0) + "px)";
+      if (!oldProps) {
+        oldProps = this._oldProps = new createjs.DisplayProps(true, null);
       }
-      oldProps.matrix.copy( mtx );
+      oldProps.matrix.copy(mtx);
     }
 
-    if ( oldProps.alpha != props.alpha ) {
-      style.opacity = "" + ( props.alpha * n | 0 ) / n;
+    if (oldProps.alpha != props.alpha) {
+      style.opacity = "" + ((props.alpha * n) | 0) / n;
       oldProps.alpha = props.alpha;
     }
   };
 
-
-  createjs.DOMElement = createjs.promote( DOMElement, "DisplayObject" );
-}() );
+  createjs.DOMElement = createjs.promote(DOMElement, "DisplayObject");
+})();
 
 //##############################################################################
 // Filter.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -15307,7 +16193,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Rectangle} [rect] If specified, the provided Rectangle instance will be expanded by the padding amounts and returned.
    * @return {Rectangle} If a `rect` param was provided, it is returned. If not, either a new rectangle with the padding values, or null if no padding is required for this filter.
    **/
-  p.getBounds = function ( rect ) {
+  p.getBounds = function (rect) {
     return rect;
   };
 
@@ -15319,7 +16205,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {StageGL} stage The stage instance that will be rendering.
    * @param {ShaderProgram} shaderProgram The compiled shader that is going to be used to perform the render.
    */
-  p.shaderParamSetup = function ( gl, stage, shaderProgram ) {};
+  p.shaderParamSetup = function (gl, stage, shaderProgram) {};
 
   /**
    * Applies the filter to the specified context.
@@ -15334,22 +16220,31 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} [targetY] The y position to draw the result to. Defaults to the value passed to y.
    * @return {Boolean} If the filter was applied successfully.
    **/
-  p.applyFilter = function ( ctx, x, y, width, height, targetCtx, targetX, targetY ) {
+  p.applyFilter = function (
+    ctx,
+    x,
+    y,
+    width,
+    height,
+    targetCtx,
+    targetX,
+    targetY
+  ) {
     // this is the default behaviour because most filters access pixel data. It is overridden when not needed.
     targetCtx = targetCtx || ctx;
-    if ( targetX == null ) {
+    if (targetX == null) {
       targetX = x;
     }
-    if ( targetY == null ) {
+    if (targetY == null) {
       targetY = y;
     }
     try {
-      var imageData = ctx.getImageData( x, y, width, height );
-    } catch ( e ) {
+      var imageData = ctx.getImageData(x, y, width, height);
+    } catch (e) {
       return false;
     }
-    if ( this._applyFilter( imageData ) ) {
-      targetCtx.putImageData( imageData, targetX, targetY );
+    if (this._applyFilter(imageData)) {
+      targetCtx.putImageData(imageData, targetX, targetY);
       return true;
     }
     return false;
@@ -15379,21 +16274,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {ImageData} imageData Target ImageData instance.
    * @return {Boolean}
    **/
-  p._applyFilter = function ( imageData ) {
+  p._applyFilter = function (imageData) {
     return true;
   };
 
-
   createjs.Filter = Filter;
-}() );
+})();
 
 //##############################################################################
 // BitmapCache.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -15403,22 +16296,21 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    *
    * Caching in this context is purely visual, and will render the DisplayObject out into an image to be used instead
    * of the object. The actual cache itself is still stored on the target with the {{#crossLink "DisplayObject/cacheCanvas:property"}}{{/crossLink}}.
-   * Working with a singular image like a {{#crossLink "Bitmap"}}{{/crossLink}} there is little benefit to performing 
-   * a cache as it is already a single image. Caching is best done on containers containing multiple complex parts that 
-   * do not move often, so that rendering the image instead will improve overall rendering speed. A cached object will 
-   * not visually update until explicitly told to do so with a call to update, much like a Stage. If a cache is being 
+   * Working with a singular image like a {{#crossLink "Bitmap"}}{{/crossLink}} there is little benefit to performing
+   * a cache as it is already a single image. Caching is best done on containers containing multiple complex parts that
+   * do not move often, so that rendering the image instead will improve overall rendering speed. A cached object will
+   * not visually update until explicitly told to do so with a call to update, much like a Stage. If a cache is being
    * updated every frame it is likely not improving rendering performance. Cache are best used when updates will be sparse.
    *
-   * Caching is also a co-requisite for applying filters to prevent expensive filters running constantly without need, 
-   * and to physically enable some effects. The BitmapCache is also responsible for applying filters to objects and 
-   * reads each {{#crossLink "Filter"}}{{/crossLink}} due to this relationship. Real-time Filters are not recommended 
-   * performance wise when dealing with a Context2D canvas. For best performance and to still allow for some visual 
+   * Caching is also a co-requisite for applying filters to prevent expensive filters running constantly without need,
+   * and to physically enable some effects. The BitmapCache is also responsible for applying filters to objects and
+   * reads each {{#crossLink "Filter"}}{{/crossLink}} due to this relationship. Real-time Filters are not recommended
+   * performance wise when dealing with a Context2D canvas. For best performance and to still allow for some visual
    * effects use a compositeOperation when possible.
    * @class BitmapCache
    * @constructor
    **/
   function BitmapCache() {
-
     // public:
     /**
      * Width of the cache relative to the target object.
@@ -15562,29 +16454,29 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Rectangle} bounds object representing the bounds with filters.
    * @static
    **/
-  BitmapCache.getFilterBounds = function ( target, output ) {
-    if ( !output ) {
+  BitmapCache.getFilterBounds = function (target, output) {
+    if (!output) {
       output = new createjs.Rectangle();
     }
     var filters = target.filters;
     var filterCount = filters && filters.length;
-    if ( !!filterCount <= 0 ) {
+    if (!!filterCount <= 0) {
       return output;
     }
 
-    for ( var i = 0; i < filterCount; i++ ) {
-      var f = filters[ i ];
-      if ( !f || !f.getBounds ) {
+    for (var i = 0; i < filterCount; i++) {
+      var f = filters[i];
+      if (!f || !f.getBounds) {
         continue;
       }
       var test = f.getBounds();
-      if ( !test ) {
+      if (!test) {
         continue;
       }
-      if ( i == 0 ) {
-        output.setValues( test.x, test.y, test.width, test.height );
+      if (i == 0) {
+        output.setValues(test.x, test.y, test.width, test.height);
       } else {
-        output.extend( test.x, test.y, test.width, test.height );
+        output.extend(test.x, test.y, test.width, test.height);
       }
     }
 
@@ -15662,8 +16554,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * whether to make a new stage instance or use an existing one. See above for extensive details on use.
    * @for BitmapCache
    */
-  p.define = function ( target, x, y, width, height, scale, options ) {
-    if ( !target ) {
+  p.define = function (target, x, y, width, height, scale, options) {
+    if (!target) {
       throw "No symbol to cache";
     }
     this._options = options;
@@ -15686,18 +16578,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method update
    * @param {String} [compositeOperation=null] The DisplayObject this cache is linked to.
    **/
-  p.update = function ( compositeOperation ) {
-    if ( !this.target ) {
+  p.update = function (compositeOperation) {
+    if (!this.target) {
       throw "define() must be called before update()";
     }
 
-    var filterBounds = BitmapCache.getFilterBounds( this.target );
+    var filterBounds = BitmapCache.getFilterBounds(this.target);
     var surface = this.target.cacheCanvas;
 
-    this._drawWidth = Math.ceil( this.width * this.scale ) + filterBounds.width;
-    this._drawHeight = Math.ceil( this.height * this.scale ) + filterBounds.height;
+    this._drawWidth = Math.ceil(this.width * this.scale) + filterBounds.width;
+    this._drawHeight =
+      Math.ceil(this.height * this.scale) + filterBounds.height;
 
-    if ( !surface || this._drawWidth != surface.width || this._drawHeight != surface.height ) {
+    if (
+      !surface ||
+      this._drawWidth != surface.width ||
+      this._drawHeight != surface.height
+    ) {
       this._updateSurface();
     }
 
@@ -15706,7 +16603,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     this.offX = this.x * this.scale + this._filterOffX;
     this.offY = this.y * this.scale + this._filterOffY;
 
-    this._drawToCache( compositeOperation );
+    this._drawToCache(compositeOperation);
 
     this.cacheID = this.cacheID ? this.cacheID + 1 : 1;
   };
@@ -15716,28 +16613,28 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method release
    **/
   p.release = function () {
-    if ( this._webGLCache ) {
+    if (this._webGLCache) {
       // if it isn't cache controlled clean up after yourself
-      if ( !this._webGLCache.isCacheControlled ) {
-        if ( this.__lastRT ) {
+      if (!this._webGLCache.isCacheControlled) {
+        if (this.__lastRT) {
           this.__lastRT = undefined;
         }
-        if ( this.__rtA ) {
-          this._webGLCache._killTextureObject( this.__rtA );
+        if (this.__rtA) {
+          this._webGLCache._killTextureObject(this.__rtA);
         }
-        if ( this.__rtB ) {
-          this._webGLCache._killTextureObject( this.__rtB );
+        if (this.__rtB) {
+          this._webGLCache._killTextureObject(this.__rtB);
         }
-        if ( this.target && this.target.cacheCanvas ) {
-          this._webGLCache._killTextureObject( this.target.cacheCanvas );
+        if (this.target && this.target.cacheCanvas) {
+          this._webGLCache._killTextureObject(this.target.cacheCanvas);
         }
       }
       // set the context to none and let the garbage collector get the rest when the canvas itself gets removed
       this._webGLCache = false;
     } else {
       var stage = this.target.stage;
-      if ( stage instanceof createjs.StageGL ) {
-        stage.releaseTexture( this.target.cacheCanvas );
+      if (stage instanceof createjs.StageGL) {
+        stage.releaseTexture(this.target.cacheCanvas);
       }
     }
 
@@ -15756,12 +16653,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
   p.getCacheDataURL = function () {
     var cacheCanvas = this.target && this.target.cacheCanvas;
-    if ( !cacheCanvas ) {
+    if (!cacheCanvas) {
       return null;
     }
-    if ( this.cacheID != this._cacheDataURLID ) {
+    if (this.cacheID != this._cacheDataURLID) {
       this._cacheDataURLID = this.cacheID;
-      this._cacheDataURL = cacheCanvas.toDataURL ? cacheCanvas.toDataURL() : null; // incase function is
+      this._cacheDataURL = cacheCanvas.toDataURL
+        ? cacheCanvas.toDataURL()
+        : null; // incase function is
     }
     return this._cacheDataURL;
   };
@@ -15772,13 +16671,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {CanvasRenderingContext2D} ctx The context to draw into.
    * @return {Boolean} Whether the draw was handled successfully.
    **/
-  p.draw = function ( ctx ) {
-    if ( !this.target ) {
+  p.draw = function (ctx) {
+    if (!this.target) {
       return false;
     }
-    ctx.drawImage( this.target.cacheCanvas,
-      this.x + ( this._filterOffX / this.scale ), this.y + ( this._filterOffY / this.scale ),
-      this._drawWidth / this.scale, this._drawHeight / this.scale
+    ctx.drawImage(
+      this.target.cacheCanvas,
+      this.x + this._filterOffX / this.scale,
+      this.y + this._filterOffY / this.scale,
+      this._drawWidth / this.scale,
+      this._drawHeight / this.scale
     );
     return true;
   };
@@ -15792,12 +16694,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    **/
   p._updateSurface = function () {
-    if ( !this._options || !this._options.useGL ) {
+    if (!this._options || !this._options.useGL) {
       var surface = this.target.cacheCanvas;
 
       // create it if it's missing
-      if ( !surface ) {
-        surface = this.target.cacheCanvas = createjs.createCanvas ? createjs.createCanvas() : document.createElement( "canvas" );
+      if (!surface) {
+        surface = this.target.cacheCanvas = createjs.createCanvas
+          ? createjs.createCanvas()
+          : document.createElement("canvas");
       }
 
       // now size it
@@ -15807,32 +16711,35 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     }
 
     // create it if it's missing
-    if ( !this._webGLCache ) {
-      if ( this._options.useGL === "stage" ) {
-        if ( !( this.target.stage && this.target.stage.isWebGL ) ) {
-          var error = "Cannot use 'stage' for cache because the object's parent stage is ";
-          error += this.target.stage ? "non WebGL." : "not set, please addChild to the correct stage.";
+    if (!this._webGLCache) {
+      if (this._options.useGL === "stage") {
+        if (!(this.target.stage && this.target.stage.isWebGL)) {
+          var error =
+            "Cannot use 'stage' for cache because the object's parent stage is ";
+          error += this.target.stage
+            ? "non WebGL."
+            : "not set, please addChild to the correct stage.";
           throw error;
         }
         this.target.cacheCanvas = true; // will be replaced with RenderTexture, temporary positive value for old "isCached" checks
         this._webGLCache = this.target.stage;
-
-      } else if ( this._options.useGL === "new" ) {
-        this.target.cacheCanvas = document.createElement( "canvas" ); // we can turn off autopurge because we wont be making textures here
-        this._webGLCache = new createjs.StageGL( this.target.cacheCanvas, {
+      } else if (this._options.useGL === "new") {
+        this.target.cacheCanvas = document.createElement("canvas"); // we can turn off autopurge because we wont be making textures here
+        this._webGLCache = new createjs.StageGL(this.target.cacheCanvas, {
           antialias: true,
           transparent: true,
-          autoPurge: -1
-        } );
+          autoPurge: -1,
+        });
         this._webGLCache.isCacheControlled = true; // use this flag to control stage sizing and final output
-
-      } else if ( this._options.useGL instanceof createjs.StageGL ) {
+      } else if (this._options.useGL instanceof createjs.StageGL) {
         this.target.cacheCanvas = true; // will be replaced with RenderTexture, temporary positive value for old "isCached" checks
         this._webGLCache = this._options.useGL;
         this._webGLCache.isCacheControlled = true; // use this flag to control stage sizing and final output
-
       } else {
-        throw "Invalid option provided to useGL, expected ['stage', 'new', StageGL, undefined], got " + this._options.useGL;
+        throw (
+          "Invalid option provided to useGL, expected ['stage', 'new', StageGL, undefined], got " +
+          this._options.useGL
+        );
       }
     }
 
@@ -15841,19 +16748,31 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     var stageGL = this._webGLCache;
 
     // if we have a dedicated stage we've gotta size it
-    if ( stageGL.isCacheControlled ) {
+    if (stageGL.isCacheControlled) {
       surface.width = this._drawWidth;
       surface.height = this._drawHeight;
-      stageGL.updateViewport( this._drawWidth, this._drawHeight );
+      stageGL.updateViewport(this._drawWidth, this._drawHeight);
     }
-    if ( this.target.filters ) {
+    if (this.target.filters) {
       // with filters we can't tell how many we'll need but the most we'll ever need is two, so make them now
-      stageGL.getTargetRenderTexture( this.target, this._drawWidth, this._drawHeight );
-      stageGL.getTargetRenderTexture( this.target, this._drawWidth, this._drawHeight );
+      stageGL.getTargetRenderTexture(
+        this.target,
+        this._drawWidth,
+        this._drawHeight
+      );
+      stageGL.getTargetRenderTexture(
+        this.target,
+        this._drawWidth,
+        this._drawHeight
+      );
     } else {
       // without filters then we only need one RenderTexture, and that's only if its not a dedicated stage
-      if ( !stageGL.isCacheControlled ) {
-        stageGL.getTargetRenderTexture( this.target, this._drawWidth, this._drawHeight );
+      if (!stageGL.isCacheControlled) {
+        stageGL.getTargetRenderTexture(
+          this.target,
+          this._drawWidth,
+          this._drawHeight
+        );
       }
     }
   };
@@ -15863,14 +16782,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method _drawToCache
    * @protected
    **/
-  p._drawToCache = function ( compositeOperation ) {
+  p._drawToCache = function (compositeOperation) {
     var surface = this.target.cacheCanvas;
     var target = this.target;
     var webGL = this._webGLCache;
 
-    if ( webGL ) {
+    if (webGL) {
       //TODO: auto split blur into an x/y pass
-      webGL.cacheDraw( target, target.filters, this );
+      webGL.cacheDraw(target, target.filters, this);
 
       // we may of swapped around which element the surface is, so we re-fetch it
       surface = this.target.cacheCanvas;
@@ -15878,22 +16797,28 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       surface.width = this._drawWidth;
       surface.height = this._drawHeight;
     } else {
-      var ctx = surface.getContext( "2d" );
+      var ctx = surface.getContext("2d");
 
-      if ( !compositeOperation ) {
-        ctx.clearRect( 0, 0, this._drawWidth + 1, this._drawHeight + 1 );
+      if (!compositeOperation) {
+        ctx.clearRect(0, 0, this._drawWidth + 1, this._drawHeight + 1);
       }
 
       ctx.save();
       ctx.globalCompositeOperation = compositeOperation;
-      ctx.setTransform( this.scale, 0, 0, this.scale, -this._filterOffX, -this._filterOffY );
-      ctx.translate( -this.x, -this.y );
-      target.draw( ctx, true );
+      ctx.setTransform(
+        this.scale,
+        0,
+        0,
+        this.scale,
+        -this._filterOffX,
+        -this._filterOffY
+      );
+      ctx.translate(-this.x, -this.y);
+      target.draw(ctx, true);
       ctx.restore();
 
-
-      if ( target.filters && target.filters.length ) {
-        this._applyFilters( ctx );
+      if (target.filters && target.filters.length) {
+        this._applyFilters(ctx);
       }
     }
     surface._invalid = true;
@@ -15904,7 +16829,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method _applyFilters
    * @protected
    **/
-  p._applyFilters = function ( ctx ) {
+  p._applyFilters = function (ctx) {
     var filters = this.target.filters;
 
     var w = this._drawWidth;
@@ -15913,41 +16838,41 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     var data;
 
     var i = 0,
-      filter = filters[ i ];
-    do { // this is safe because we wouldn't be in apply filters without a filter count of at least 1
-      if ( filter.usesContext ) {
-        if ( data ) {
-          ctx.putImageData( data, 0, 0 );
+      filter = filters[i];
+    do {
+      // this is safe because we wouldn't be in apply filters without a filter count of at least 1
+      if (filter.usesContext) {
+        if (data) {
+          ctx.putImageData(data, 0, 0);
           data = null;
         }
-        filter.applyFilter( ctx, 0, 0, w, h );
+        filter.applyFilter(ctx, 0, 0, w, h);
       } else {
-        if ( !data ) {
-          data = ctx.getImageData( 0, 0, w, h );
+        if (!data) {
+          data = ctx.getImageData(0, 0, w, h);
         }
-        filter._applyFilter( data );
+        filter._applyFilter(data);
       }
 
       // work through the multipass if it's there, otherwise move on
-      filter = filter._multiPass !== null ? filter._multiPass : filters[ ++i ];
-    } while ( filter );
+      filter = filter._multiPass !== null ? filter._multiPass : filters[++i];
+    } while (filter);
 
     //done
-    if ( data ) {
-      ctx.putImageData( data, 0, 0 );
+    if (data) {
+      ctx.putImageData(data, 0, 0);
     }
   };
 
   createjs.BitmapCache = BitmapCache;
-}() );
+})();
 
 //##############################################################################
 // BlurFilter.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -15975,7 +16900,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} [blurY=0] The vertical blur radius in pixels.
    * @param {Number} [quality=1] The number of blur iterations.
    **/
-  function BlurFilter( blurX, blurY, quality ) {
+  function BlurFilter(blurX, blurY, quality) {
     this.Filter_constructor();
 
     // public properties:
@@ -16012,35 +16937,31 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     /**
      * This is a template to generate the shader for {{#crossLink FRAG_SHADER_BODY}}{{/crossLink}}
      */
-    this.FRAG_SHADER_TEMPLATE = (
+    this.FRAG_SHADER_TEMPLATE =
       "uniform float xWeight[{{blurX}}];" +
       "uniform float yWeight[{{blurY}}];" +
       "uniform vec2 textureOffset;" +
       "void main(void) {" +
       "vec4 color = vec4(0.0);" +
-
       "float xAdj = ({{blurX}}.0-1.0)/2.0;" +
       "float yAdj = ({{blurY}}.0-1.0)/2.0;" +
       "vec2 sampleOffset;" +
-
       "for(int i=0; i<{{blurX}}; i++) {" +
       "for(int j=0; j<{{blurY}}; j++) {" +
       "sampleOffset = vRenderCoord + (textureOffset * vec2(float(i)-xAdj, float(j)-yAdj));" +
       "color += texture2D(uSampler, sampleOffset) * (xWeight[i] * yWeight[j]);" +
       "}" +
       "}" +
-
       "gl_FragColor = color.rgba;" +
-      "}"
-    );
+      "}";
 
     // update the filter using the setters
-    if ( isNaN( quality ) || quality < 1 ) {
+    if (isNaN(quality) || quality < 1) {
       quality = 1;
     }
-    this.setQuality( quality | 0 );
+    this.setQuality(quality | 0);
   }
-  var p = createjs.extend( BlurFilter, createjs.Filter );
+  var p = createjs.extend(BlurFilter, createjs.Filter);
 
   // TODO: deprecated
   // p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
@@ -16051,14 +16972,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   p.getBlurY = function () {
     return this._blurY;
   };
-  p.setBlurX = function ( value ) {
-    if ( isNaN( value ) || value < 0 ) {
+  p.setBlurX = function (value) {
+    if (isNaN(value) || value < 0) {
       value = 0;
     }
     this._blurX = value;
   };
-  p.setBlurY = function ( value ) {
-    if ( isNaN( value ) || value < 0 ) {
+  p.setBlurY = function (value) {
+    if (isNaN(value) || value < 0) {
       value = 0;
     }
     this._blurY = value;
@@ -16066,8 +16987,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   p.getQuality = function () {
     return this._quality;
   };
-  p.setQuality = function ( value ) {
-    if ( isNaN( value ) || value < 0 ) {
+  p.setQuality = function (value) {
+    if (isNaN(value) || value < 0) {
       value = 0;
     }
     this._quality = value | 0;
@@ -16076,12 +16997,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     var xChange = this._lastBlurX !== this._blurX;
     var yChange = this._lastBlurY !== this._blurY;
     var qChange = this._lastQuality !== this._quality;
-    if ( xChange || yChange || qChange ) {
-      if ( xChange || qChange ) {
-        this._blurXTable = this._getTable( this._blurX * this._quality );
+    if (xChange || yChange || qChange) {
+      if (xChange || qChange) {
+        this._blurXTable = this._getTable(this._blurX * this._quality);
       }
-      if ( yChange || qChange ) {
-        this._blurYTable = this._getTable( this._blurY * this._quality );
+      if (yChange || qChange) {
+        this._blurYTable = this._getTable(this._blurY * this._quality);
       }
       this._updateShader();
       this._lastBlurX = this._blurX;
@@ -16096,26 +17017,26 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   };
 
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       blurX: {
         get: p.getBlurX,
-        set: p.setBlurX
+        set: p.setBlurX,
       },
       blurY: {
         get: p.getBlurY,
-        set: p.setBlurY
+        set: p.setBlurY,
       },
       quality: {
         get: p.getQuality,
-        set: p.setQuality
+        set: p.setQuality,
       },
       _builtShader: {
         get: p._getShader,
-        set: p._setShader
-      }
-    } );
-  } catch ( e ) {
-    console.log( e );
+        set: p._setShader,
+      },
+    });
+  } catch (e) {
+    console.log(e);
   }
 
   /**
@@ -16124,26 +17045,28 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} spread How many steps in the curve.
    * @return {Array<Number>} An array with Math.ceil(spread*2) entries with appropriately distributed weights.
    */
-  p._getTable = function ( spread ) {
+  p._getTable = function (spread) {
     var EDGE = 4.2;
-    if ( spread <= 1 ) {
-      return [ 1 ];
+    if (spread <= 1) {
+      return [1];
     }
 
     var result = [];
-    var count = Math.ceil( spread * 2 );
-    count += ( count % 2 ) ? 0 : 1;
-    var adjust = ( count / 2 ) | 0;
-    for ( var i = -adjust; i <= adjust; i++ ) {
-      var x = ( i / adjust ) * EDGE;
-      result.push( 1 / Math.sqrt( 2 * Math.PI ) * Math.pow( Math.E, -( Math.pow( x, 2 ) / 4 ) ) );
+    var count = Math.ceil(spread * 2);
+    count += count % 2 ? 0 : 1;
+    var adjust = (count / 2) | 0;
+    for (var i = -adjust; i <= adjust; i++) {
+      var x = (i / adjust) * EDGE;
+      result.push(
+        (1 / Math.sqrt(2 * Math.PI)) * Math.pow(Math.E, -(Math.pow(x, 2) / 4))
+      );
     }
-    var factor = result.reduce( function ( a, b ) {
+    var factor = result.reduce(function (a, b) {
       return a + b;
-    } );
-    return result.map( function ( currentValue, index, array ) {
+    });
+    return result.map(function (currentValue, index, array) {
       return currentValue / factor;
-    } );
+    });
   };
 
   /**
@@ -16151,31 +17074,38 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method _updateShader
    */
   p._updateShader = function () {
-    if ( this._blurX === undefined || this._blurY === undefined ) {
+    if (this._blurX === undefined || this._blurY === undefined) {
       return;
     }
     var result = this.FRAG_SHADER_TEMPLATE;
-    result = result.replace( /\{\{blurX\}\}/g, ( this._blurXTable.length ).toFixed( 0 ) );
-    result = result.replace( /\{\{blurY\}\}/g, ( this._blurYTable.length ).toFixed( 0 ) );
+    result = result.replace(
+      /\{\{blurX\}\}/g,
+      this._blurXTable.length.toFixed(0)
+    );
+    result = result.replace(
+      /\{\{blurY\}\}/g,
+      this._blurYTable.length.toFixed(0)
+    );
     this.FRAG_SHADER_BODY = result;
   };
 
   /** docced in super class **/
-  p.shaderParamSetup = function ( gl, stage, shaderProgram ) {
+  p.shaderParamSetup = function (gl, stage, shaderProgram) {
     // load the normalized gaussian weight tables
     gl.uniform1fv(
-      gl.getUniformLocation( shaderProgram, "xWeight" ),
+      gl.getUniformLocation(shaderProgram, "xWeight"),
       this._blurXTable
     );
     gl.uniform1fv(
-      gl.getUniformLocation( shaderProgram, "yWeight" ),
+      gl.getUniformLocation(shaderProgram, "yWeight"),
       this._blurYTable
     );
 
     // what is the size of a single pixel in -1, 1 (webGL) space
     gl.uniform2f(
-      gl.getUniformLocation( shaderProgram, "textureOffset" ),
-      2 / ( stage._viewportWidth * this._quality ), 2 / ( stage._viewportHeight * this._quality )
+      gl.getUniformLocation(shaderProgram, "textureOffset"),
+      2 / (stage._viewportWidth * this._quality),
+      2 / (stage._viewportHeight * this._quality)
     );
   };
 
@@ -16187,7 +17117,25 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @static
    **/
-  BlurFilter.MUL_TABLE = [ 1, 171, 205, 293, 57, 373, 79, 137, 241, 27, 391, 357, 41, 19, 283, 265, 497, 469, 443, 421, 25, 191, 365, 349, 335, 161, 155, 149, 9, 278, 269, 261, 505, 245, 475, 231, 449, 437, 213, 415, 405, 395, 193, 377, 369, 361, 353, 345, 169, 331, 325, 319, 313, 307, 301, 37, 145, 285, 281, 69, 271, 267, 263, 259, 509, 501, 493, 243, 479, 118, 465, 459, 113, 446, 55, 435, 429, 423, 209, 413, 51, 403, 199, 393, 97, 3, 379, 375, 371, 367, 363, 359, 355, 351, 347, 43, 85, 337, 333, 165, 327, 323, 5, 317, 157, 311, 77, 305, 303, 75, 297, 294, 73, 289, 287, 71, 141, 279, 277, 275, 68, 135, 67, 133, 33, 262, 260, 129, 511, 507, 503, 499, 495, 491, 61, 121, 481, 477, 237, 235, 467, 232, 115, 457, 227, 451, 7, 445, 221, 439, 218, 433, 215, 427, 425, 211, 419, 417, 207, 411, 409, 203, 202, 401, 399, 396, 197, 49, 389, 387, 385, 383, 95, 189, 47, 187, 93, 185, 23, 183, 91, 181, 45, 179, 89, 177, 11, 175, 87, 173, 345, 343, 341, 339, 337, 21, 167, 83, 331, 329, 327, 163, 81, 323, 321, 319, 159, 79, 315, 313, 39, 155, 309, 307, 153, 305, 303, 151, 75, 299, 149, 37, 295, 147, 73, 291, 145, 289, 287, 143, 285, 71, 141, 281, 35, 279, 139, 69, 275, 137, 273, 17, 271, 135, 269, 267, 133, 265, 33, 263, 131, 261, 130, 259, 129, 257, 1 ];
+  BlurFilter.MUL_TABLE = [
+    1, 171, 205, 293, 57, 373, 79, 137, 241, 27, 391, 357, 41, 19, 283, 265,
+    497, 469, 443, 421, 25, 191, 365, 349, 335, 161, 155, 149, 9, 278, 269, 261,
+    505, 245, 475, 231, 449, 437, 213, 415, 405, 395, 193, 377, 369, 361, 353,
+    345, 169, 331, 325, 319, 313, 307, 301, 37, 145, 285, 281, 69, 271, 267,
+    263, 259, 509, 501, 493, 243, 479, 118, 465, 459, 113, 446, 55, 435, 429,
+    423, 209, 413, 51, 403, 199, 393, 97, 3, 379, 375, 371, 367, 363, 359, 355,
+    351, 347, 43, 85, 337, 333, 165, 327, 323, 5, 317, 157, 311, 77, 305, 303,
+    75, 297, 294, 73, 289, 287, 71, 141, 279, 277, 275, 68, 135, 67, 133, 33,
+    262, 260, 129, 511, 507, 503, 499, 495, 491, 61, 121, 481, 477, 237, 235,
+    467, 232, 115, 457, 227, 451, 7, 445, 221, 439, 218, 433, 215, 427, 425,
+    211, 419, 417, 207, 411, 409, 203, 202, 401, 399, 396, 197, 49, 389, 387,
+    385, 383, 95, 189, 47, 187, 93, 185, 23, 183, 91, 181, 45, 179, 89, 177, 11,
+    175, 87, 173, 345, 343, 341, 339, 337, 21, 167, 83, 331, 329, 327, 163, 81,
+    323, 321, 319, 159, 79, 315, 313, 39, 155, 309, 307, 153, 305, 303, 151, 75,
+    299, 149, 37, 295, 147, 73, 291, 145, 289, 287, 143, 285, 71, 141, 281, 35,
+    279, 139, 69, 275, 137, 273, 17, 271, 135, 269, 267, 133, 265, 33, 263, 131,
+    261, 130, 259, 129, 257, 1,
+  ];
 
   /**
    * Array of shift values for blur calculations.
@@ -16196,23 +17144,43 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @static
    **/
-  BlurFilter.SHG_TABLE = [ 0, 9, 10, 11, 9, 12, 10, 11, 12, 9, 13, 13, 10, 9, 13, 13, 14, 14, 14, 14, 10, 13, 14, 14, 14, 13, 13, 13, 9, 14, 14, 14, 15, 14, 15, 14, 15, 15, 14, 15, 15, 15, 14, 15, 15, 15, 15, 15, 14, 15, 15, 15, 15, 15, 15, 12, 14, 15, 15, 13, 15, 15, 15, 15, 16, 16, 16, 15, 16, 14, 16, 16, 14, 16, 13, 16, 16, 16, 15, 16, 13, 16, 15, 16, 14, 9, 16, 16, 16, 16, 16, 16, 16, 16, 16, 13, 14, 16, 16, 15, 16, 16, 10, 16, 15, 16, 14, 16, 16, 14, 16, 16, 14, 16, 16, 14, 15, 16, 16, 16, 14, 15, 14, 15, 13, 16, 16, 15, 17, 17, 17, 17, 17, 17, 14, 15, 17, 17, 16, 16, 17, 16, 15, 17, 16, 17, 11, 17, 16, 17, 16, 17, 16, 17, 17, 16, 17, 17, 16, 17, 17, 16, 16, 17, 17, 17, 16, 14, 17, 17, 17, 17, 15, 16, 14, 16, 15, 16, 13, 16, 15, 16, 14, 16, 15, 16, 12, 16, 15, 16, 17, 17, 17, 17, 17, 13, 16, 15, 17, 17, 17, 16, 15, 17, 17, 17, 16, 15, 17, 17, 14, 16, 17, 17, 16, 17, 17, 16, 15, 17, 16, 14, 17, 16, 15, 17, 16, 17, 17, 16, 17, 15, 16, 17, 14, 17, 16, 15, 17, 16, 17, 13, 17, 16, 17, 17, 16, 17, 14, 17, 16, 17, 16, 17, 16, 17, 9 ];
+  BlurFilter.SHG_TABLE = [
+    0, 9, 10, 11, 9, 12, 10, 11, 12, 9, 13, 13, 10, 9, 13, 13, 14, 14, 14, 14,
+    10, 13, 14, 14, 14, 13, 13, 13, 9, 14, 14, 14, 15, 14, 15, 14, 15, 15, 14,
+    15, 15, 15, 14, 15, 15, 15, 15, 15, 14, 15, 15, 15, 15, 15, 15, 12, 14, 15,
+    15, 13, 15, 15, 15, 15, 16, 16, 16, 15, 16, 14, 16, 16, 14, 16, 13, 16, 16,
+    16, 15, 16, 13, 16, 15, 16, 14, 9, 16, 16, 16, 16, 16, 16, 16, 16, 16, 13,
+    14, 16, 16, 15, 16, 16, 10, 16, 15, 16, 14, 16, 16, 14, 16, 16, 14, 16, 16,
+    14, 15, 16, 16, 16, 14, 15, 14, 15, 13, 16, 16, 15, 17, 17, 17, 17, 17, 17,
+    14, 15, 17, 17, 16, 16, 17, 16, 15, 17, 16, 17, 11, 17, 16, 17, 16, 17, 16,
+    17, 17, 16, 17, 17, 16, 17, 17, 16, 16, 17, 17, 17, 16, 14, 17, 17, 17, 17,
+    15, 16, 14, 16, 15, 16, 13, 16, 15, 16, 14, 16, 15, 16, 12, 16, 15, 16, 17,
+    17, 17, 17, 17, 13, 16, 15, 17, 17, 17, 16, 15, 17, 17, 17, 16, 15, 17, 17,
+    14, 16, 17, 17, 16, 17, 17, 16, 15, 17, 16, 14, 17, 16, 15, 17, 16, 17, 17,
+    16, 17, 15, 16, 17, 14, 17, 16, 15, 17, 16, 17, 13, 17, 16, 17, 17, 16, 17,
+    14, 17, 16, 17, 16, 17, 16, 17, 9,
+  ];
 
   // public methods:
   /** docced in super class **/
-  p.getBounds = function ( rect ) {
+  p.getBounds = function (rect) {
     var x = this.blurX | 0,
       y = this.blurY | 0;
-    if ( x <= 0 && y <= 0 ) {
+    if (x <= 0 && y <= 0) {
       return rect;
     }
-    var q = Math.pow( this.quality, 0.2 );
-    return ( rect || new createjs.Rectangle() ).pad( y * q + 1, x * q + 1, y * q + 1, x * q + 1 );
+    var q = Math.pow(this.quality, 0.2);
+    return (rect || new createjs.Rectangle()).pad(
+      y * q + 1,
+      x * q + 1,
+      y * q + 1,
+      x * q + 1
+    );
   };
 
   /** docced in super class **/
   p.clone = function () {
-    return new BlurFilter( this.blurX, this.blurY, this.quality );
+    return new BlurFilter(this.blurX, this.blurY, this.quality);
   };
 
   /** docced in super class **/
@@ -16220,22 +17188,21 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return "[BlurFilter]";
   };
 
-
   // private methods:
 
   /** docced in super class **/
-  p._applyFilter = function ( imageData ) {
+  p._applyFilter = function (imageData) {
     var radiusX = this._blurX >> 1;
-    if ( isNaN( radiusX ) || radiusX < 0 ) return false;
+    if (isNaN(radiusX) || radiusX < 0) return false;
     var radiusY = this._blurY >> 1;
-    if ( isNaN( radiusY ) || radiusY < 0 ) return false;
-    if ( radiusX == 0 && radiusY == 0 ) return false;
+    if (isNaN(radiusY) || radiusY < 0) return false;
+    if (radiusX == 0 && radiusY == 0) return false;
 
     var iterations = this.quality;
-    if ( isNaN( iterations ) || iterations < 1 ) iterations = 1;
+    if (isNaN(iterations) || iterations < 1) iterations = 1;
     iterations |= 0;
-    if ( iterations > 3 ) iterations = 3;
-    if ( iterations < 1 ) iterations = 1;
+    if (iterations > 3) iterations = 3;
+    if (iterations < 1) iterations = 1;
 
     var px = imageData.data;
     var x = 0,
@@ -16254,29 +17221,29 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       pb = 0,
       pa = 0;
 
-    var divx = ( radiusX + radiusX + 1 ) | 0;
-    var divy = ( radiusY + radiusY + 1 ) | 0;
+    var divx = (radiusX + radiusX + 1) | 0;
+    var divy = (radiusY + radiusY + 1) | 0;
     var w = imageData.width | 0;
     var h = imageData.height | 0;
 
-    var w1 = ( w - 1 ) | 0;
-    var h1 = ( h - 1 ) | 0;
-    var rxp1 = ( radiusX + 1 ) | 0;
-    var ryp1 = ( radiusY + 1 ) | 0;
+    var w1 = (w - 1) | 0;
+    var h1 = (h - 1) | 0;
+    var rxp1 = (radiusX + 1) | 0;
+    var ryp1 = (radiusY + 1) | 0;
 
     var ssx = {
       r: 0,
       b: 0,
       g: 0,
-      a: 0
+      a: 0,
     };
     var sx = ssx;
-    for ( i = 1; i < divx; i++ ) {
+    for (i = 1; i < divx; i++) {
       sx = sx.n = {
         r: 0,
         b: 0,
         g: 0,
-        a: 0
+        a: 0,
       };
     }
     sx.n = ssx;
@@ -16285,41 +17252,39 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       r: 0,
       b: 0,
       g: 0,
-      a: 0
+      a: 0,
     };
     var sy = ssy;
-    for ( i = 1; i < divy; i++ ) {
+    for (i = 1; i < divy; i++) {
       sy = sy.n = {
         r: 0,
         b: 0,
         g: 0,
-        a: 0
+        a: 0,
       };
     }
     sy.n = ssy;
 
     var si = null;
 
+    var mtx = BlurFilter.MUL_TABLE[radiusX] | 0;
+    var stx = BlurFilter.SHG_TABLE[radiusX] | 0;
+    var mty = BlurFilter.MUL_TABLE[radiusY] | 0;
+    var sty = BlurFilter.SHG_TABLE[radiusY] | 0;
 
-    var mtx = BlurFilter.MUL_TABLE[ radiusX ] | 0;
-    var stx = BlurFilter.SHG_TABLE[ radiusX ] | 0;
-    var mty = BlurFilter.MUL_TABLE[ radiusY ] | 0;
-    var sty = BlurFilter.SHG_TABLE[ radiusY ] | 0;
-
-    while ( iterations-- > 0 ) {
-
+    while (iterations-- > 0) {
       yw = yi = 0;
       var ms = mtx;
       var ss = stx;
-      for ( y = h; --y > -1; ) {
-        r = rxp1 * ( pr = px[ ( yi ) | 0 ] );
-        g = rxp1 * ( pg = px[ ( yi + 1 ) | 0 ] );
-        b = rxp1 * ( pb = px[ ( yi + 2 ) | 0 ] );
-        a = rxp1 * ( pa = px[ ( yi + 3 ) | 0 ] );
+      for (y = h; --y > -1; ) {
+        r = rxp1 * (pr = px[yi | 0]);
+        g = rxp1 * (pg = px[(yi + 1) | 0]);
+        b = rxp1 * (pb = px[(yi + 2) | 0]);
+        a = rxp1 * (pa = px[(yi + 3) | 0]);
 
         sx = ssx;
 
-        for ( i = rxp1; --i > -1; ) {
+        for (i = rxp1; --i > -1; ) {
           sx.r = pr;
           sx.g = pg;
           sx.b = pb;
@@ -16327,48 +17292,47 @@ createjs.deprecate = function ( fallbackMethod, name ) {
           sx = sx.n;
         }
 
-        for ( i = 1; i < rxp1; i++ ) {
-          p = ( yi + ( ( w1 < i ? w1 : i ) << 2 ) ) | 0;
-          r += ( sx.r = px[ p ] );
-          g += ( sx.g = px[ p + 1 ] );
-          b += ( sx.b = px[ p + 2 ] );
-          a += ( sx.a = px[ p + 3 ] );
+        for (i = 1; i < rxp1; i++) {
+          p = (yi + ((w1 < i ? w1 : i) << 2)) | 0;
+          r += sx.r = px[p];
+          g += sx.g = px[p + 1];
+          b += sx.b = px[p + 2];
+          a += sx.a = px[p + 3];
 
           sx = sx.n;
         }
 
         si = ssx;
-        for ( x = 0; x < w; x++ ) {
-          px[ yi++ ] = ( r * ms ) >>> ss;
-          px[ yi++ ] = ( g * ms ) >>> ss;
-          px[ yi++ ] = ( b * ms ) >>> ss;
-          px[ yi++ ] = ( a * ms ) >>> ss;
+        for (x = 0; x < w; x++) {
+          px[yi++] = (r * ms) >>> ss;
+          px[yi++] = (g * ms) >>> ss;
+          px[yi++] = (b * ms) >>> ss;
+          px[yi++] = (a * ms) >>> ss;
 
-          p = ( ( yw + ( ( p = x + radiusX + 1 ) < w1 ? p : w1 ) ) << 2 );
+          p = (yw + ((p = x + radiusX + 1) < w1 ? p : w1)) << 2;
 
-          r -= si.r - ( si.r = px[ p ] );
-          g -= si.g - ( si.g = px[ p + 1 ] );
-          b -= si.b - ( si.b = px[ p + 2 ] );
-          a -= si.a - ( si.a = px[ p + 3 ] );
+          r -= si.r - (si.r = px[p]);
+          g -= si.g - (si.g = px[p + 1]);
+          b -= si.b - (si.b = px[p + 2]);
+          a -= si.a - (si.a = px[p + 3]);
 
           si = si.n;
-
         }
         yw += w;
       }
 
       ms = mty;
       ss = sty;
-      for ( x = 0; x < w; x++ ) {
-        yi = ( x << 2 ) | 0;
+      for (x = 0; x < w; x++) {
+        yi = (x << 2) | 0;
 
-        r = ( ryp1 * ( pr = px[ yi ] ) ) | 0;
-        g = ( ryp1 * ( pg = px[ ( yi + 1 ) | 0 ] ) ) | 0;
-        b = ( ryp1 * ( pb = px[ ( yi + 2 ) | 0 ] ) ) | 0;
-        a = ( ryp1 * ( pa = px[ ( yi + 3 ) | 0 ] ) ) | 0;
+        r = (ryp1 * (pr = px[yi])) | 0;
+        g = (ryp1 * (pg = px[(yi + 1) | 0])) | 0;
+        b = (ryp1 * (pb = px[(yi + 2) | 0])) | 0;
+        a = (ryp1 * (pa = px[(yi + 3) | 0])) | 0;
 
         sy = ssy;
-        for ( i = 0; i < ryp1; i++ ) {
+        for (i = 0; i < ryp1; i++) {
           sy.r = pr;
           sy.g = pg;
           sy.b = pb;
@@ -16378,65 +17342,65 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 
         yp = w;
 
-        for ( i = 1; i <= radiusY; i++ ) {
-          yi = ( yp + x ) << 2;
+        for (i = 1; i <= radiusY; i++) {
+          yi = (yp + x) << 2;
 
-          r += ( sy.r = px[ yi ] );
-          g += ( sy.g = px[ yi + 1 ] );
-          b += ( sy.b = px[ yi + 2 ] );
-          a += ( sy.a = px[ yi + 3 ] );
+          r += sy.r = px[yi];
+          g += sy.g = px[yi + 1];
+          b += sy.b = px[yi + 2];
+          a += sy.a = px[yi + 3];
 
           sy = sy.n;
 
-          if ( i < h1 ) {
+          if (i < h1) {
             yp += w;
           }
         }
 
         yi = x;
         si = ssy;
-        if ( iterations > 0 ) {
-          for ( y = 0; y < h; y++ ) {
+        if (iterations > 0) {
+          for (y = 0; y < h; y++) {
             p = yi << 2;
-            px[ p + 3 ] = pa = ( a * ms ) >>> ss;
-            if ( pa > 0 ) {
-              px[ p ] = ( ( r * ms ) >>> ss );
-              px[ p + 1 ] = ( ( g * ms ) >>> ss );
-              px[ p + 2 ] = ( ( b * ms ) >>> ss );
+            px[p + 3] = pa = (a * ms) >>> ss;
+            if (pa > 0) {
+              px[p] = (r * ms) >>> ss;
+              px[p + 1] = (g * ms) >>> ss;
+              px[p + 2] = (b * ms) >>> ss;
             } else {
-              px[ p ] = px[ p + 1 ] = px[ p + 2 ] = 0
+              px[p] = px[p + 1] = px[p + 2] = 0;
             }
 
-            p = ( x + ( ( ( p = y + ryp1 ) < h1 ? p : h1 ) * w ) ) << 2;
+            p = (x + ((p = y + ryp1) < h1 ? p : h1) * w) << 2;
 
-            r -= si.r - ( si.r = px[ p ] );
-            g -= si.g - ( si.g = px[ p + 1 ] );
-            b -= si.b - ( si.b = px[ p + 2 ] );
-            a -= si.a - ( si.a = px[ p + 3 ] );
+            r -= si.r - (si.r = px[p]);
+            g -= si.g - (si.g = px[p + 1]);
+            b -= si.b - (si.b = px[p + 2]);
+            a -= si.a - (si.a = px[p + 3]);
 
             si = si.n;
 
             yi += w;
           }
         } else {
-          for ( y = 0; y < h; y++ ) {
+          for (y = 0; y < h; y++) {
             p = yi << 2;
-            px[ p + 3 ] = pa = ( a * ms ) >>> ss;
-            if ( pa > 0 ) {
+            px[p + 3] = pa = (a * ms) >>> ss;
+            if (pa > 0) {
               pa = 255 / pa;
-              px[ p ] = ( ( r * ms ) >>> ss ) * pa;
-              px[ p + 1 ] = ( ( g * ms ) >>> ss ) * pa;
-              px[ p + 2 ] = ( ( b * ms ) >>> ss ) * pa;
+              px[p] = ((r * ms) >>> ss) * pa;
+              px[p + 1] = ((g * ms) >>> ss) * pa;
+              px[p + 2] = ((b * ms) >>> ss) * pa;
             } else {
-              px[ p ] = px[ p + 1 ] = px[ p + 2 ] = 0
+              px[p] = px[p + 1] = px[p + 2] = 0;
             }
 
-            p = ( x + ( ( ( p = y + ryp1 ) < h1 ? p : h1 ) * w ) ) << 2;
+            p = (x + ((p = y + ryp1) < h1 ? p : h1) * w) << 2;
 
-            r -= si.r - ( si.r = px[ p ] );
-            g -= si.g - ( si.g = px[ p + 1 ] );
-            b -= si.b - ( si.b = px[ p + 2 ] );
-            a -= si.a - ( si.a = px[ p + 3 ] );
+            r -= si.r - (si.r = px[p]);
+            g -= si.g - (si.g = px[p + 1]);
+            b -= si.b - (si.b = px[p + 2]);
+            a -= si.a - (si.a = px[p + 3]);
 
             si = si.n;
 
@@ -16444,21 +17408,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
           }
         }
       }
-
     }
     return true;
   };
 
-  createjs.BlurFilter = createjs.promote( BlurFilter, "Filter" );
-}() );
+  createjs.BlurFilter = createjs.promote(BlurFilter, "Filter");
+})();
 
 //##############################################################################
 // AlphaMapFilter.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -16490,7 +17452,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {HTMLImageElement|HTMLCanvasElement} alphaMap The greyscale image (or canvas) to use as the alpha value for the
    * result. This should be exactly the same dimensions as the target.
    **/
-  function AlphaMapFilter( alphaMap ) {
+  function AlphaMapFilter(alphaMap) {
     this.Filter_constructor();
 
     // public properties:
@@ -16501,7 +17463,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @type HTMLImageElement|HTMLCanvasElement
      **/
     this.alphaMap = alphaMap;
-
 
     // private properties:
     /**
@@ -16519,45 +17480,46 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     this._mapData = null;
     this._mapTexture = null;
 
-    this.FRAG_SHADER_BODY = (
+    this.FRAG_SHADER_BODY =
       "uniform sampler2D uAlphaSampler;" +
-
       "void main(void) {" +
       "vec4 color = texture2D(uSampler, vRenderCoord);" +
       "vec4 alphaMap = texture2D(uAlphaSampler, vTextureCoord);" +
-
       // some image formats can have transparent white rgba(1,1,1, 0) when put on the GPU, this means we need a slight tweak
       // using ceil ensure that the colour will be used so long as it exists but pure transparency will be treated black
       "gl_FragColor = vec4(color.rgb, color.a * (alphaMap.r * ceil(alphaMap.a)));" +
-      "}"
-    );
+      "}";
   }
-  var p = createjs.extend( AlphaMapFilter, createjs.Filter );
+  var p = createjs.extend(AlphaMapFilter, createjs.Filter);
 
   // TODO: deprecated
   // p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
 
   /** docced in super class **/
-  p.shaderParamSetup = function ( gl, stage, shaderProgram ) {
-    if ( !this._mapTexture ) {
+  p.shaderParamSetup = function (gl, stage, shaderProgram) {
+    if (!this._mapTexture) {
       this._mapTexture = gl.createTexture();
     }
 
-    gl.activeTexture( gl.TEXTURE1 );
-    gl.bindTexture( gl.TEXTURE_2D, this._mapTexture );
-    stage.setTextureParams( gl );
-    gl.texImage2D( gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.alphaMap );
-
-    gl.uniform1i(
-      gl.getUniformLocation( shaderProgram, "uAlphaSampler" ),
-      1
+    gl.activeTexture(gl.TEXTURE1);
+    gl.bindTexture(gl.TEXTURE_2D, this._mapTexture);
+    stage.setTextureParams(gl);
+    gl.texImage2D(
+      gl.TEXTURE_2D,
+      0,
+      gl.RGBA,
+      gl.RGBA,
+      gl.UNSIGNED_BYTE,
+      this.alphaMap
     );
+
+    gl.uniform1i(gl.getUniformLocation(shaderProgram, "uAlphaSampler"), 1);
   };
 
   // public methods:
   /** docced in super class **/
   p.clone = function () {
-    var o = new AlphaMapFilter( this.alphaMap );
+    var o = new AlphaMapFilter(this.alphaMap);
     o._alphaMap = this._alphaMap;
     o._mapData = this._mapData;
     return o;
@@ -16568,22 +17530,21 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return "[AlphaMapFilter]";
   };
 
-
   // private methods:
   /** docced in super class **/
-  p._applyFilter = function ( imageData ) {
-    if ( !this.alphaMap ) {
+  p._applyFilter = function (imageData) {
+    if (!this.alphaMap) {
       return true;
     }
-    if ( !this._prepAlphaMap() ) {
+    if (!this._prepAlphaMap()) {
       return false;
     }
 
     // TODO: update to support scenarios where the target has different dimensions.
     var data = imageData.data;
     var map = this._mapData;
-    for ( var i = 0, l = data.length; i < l; i += 4 ) {
-      data[ i + 3 ] = map[ i ] || 0;
+    for (var i = 0, l = data.length; i < l; i += 4) {
+      data[i + 3] = map[i] || 0;
     }
 
     return true;
@@ -16594,30 +17555,32 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    **/
   p._prepAlphaMap = function () {
-    if ( !this.alphaMap ) {
+    if (!this.alphaMap) {
       return false;
     }
-    if ( this.alphaMap == this._alphaMap && this._mapData ) {
+    if (this.alphaMap == this._alphaMap && this._mapData) {
       return true;
     }
 
     this._mapData = null;
-    var map = this._alphaMap = this.alphaMap;
+    var map = (this._alphaMap = this.alphaMap);
     var canvas = map;
     var ctx;
-    if ( map instanceof HTMLCanvasElement ) {
-      ctx = canvas.getContext( "2d" );
+    if (map instanceof HTMLCanvasElement) {
+      ctx = canvas.getContext("2d");
     } else {
-      canvas = createjs.createCanvas ? createjs.createCanvas() : document.createElement( "canvas" );
+      canvas = createjs.createCanvas
+        ? createjs.createCanvas()
+        : document.createElement("canvas");
       canvas.width = map.width;
       canvas.height = map.height;
-      ctx = canvas.getContext( "2d" );
-      ctx.drawImage( map, 0, 0 );
+      ctx = canvas.getContext("2d");
+      ctx.drawImage(map, 0, 0);
     }
 
     try {
-      var imgData = ctx.getImageData( 0, 0, map.width, map.height );
-    } catch ( e ) {
+      var imgData = ctx.getImageData(0, 0, map.width, map.height);
+    } catch (e) {
       //if (!this.suppressCrossDomainErrors) throw new Error("unable to access local image data: " + e);
       return false;
     }
@@ -16626,17 +17589,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return true;
   };
 
-
-  createjs.AlphaMapFilter = createjs.promote( AlphaMapFilter, "Filter" );
-}() );
+  createjs.AlphaMapFilter = createjs.promote(AlphaMapFilter, "Filter");
+})();
 
 //##############################################################################
 // AlphaMaskFilter.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -16667,7 +17628,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @constructor
    * @param {HTMLImageElement|HTMLCanvasElement} mask
    **/
-  function AlphaMaskFilter( mask ) {
+  function AlphaMaskFilter(mask) {
     this.Filter_constructor();
 
     // public properties:
@@ -16681,37 +17642,38 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     /** docced in super class **/
     this.usesContext = true;
 
-    this.FRAG_SHADER_BODY = (
+    this.FRAG_SHADER_BODY =
       "uniform sampler2D uAlphaSampler;" +
-
       "void main(void) {" +
       "vec4 color = texture2D(uSampler, vRenderCoord);" +
       "vec4 alphaMap = texture2D(uAlphaSampler, vTextureCoord);" +
-
       "gl_FragColor = vec4(color.rgb, color.a * alphaMap.a);" +
-      "}"
-    );
+      "}";
   }
-  var p = createjs.extend( AlphaMaskFilter, createjs.Filter );
+  var p = createjs.extend(AlphaMaskFilter, createjs.Filter);
 
   // TODO: deprecated
   // p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
 
   /** docced in super class **/
-  p.shaderParamSetup = function ( gl, stage, shaderProgram ) {
-    if ( !this._mapTexture ) {
+  p.shaderParamSetup = function (gl, stage, shaderProgram) {
+    if (!this._mapTexture) {
       this._mapTexture = gl.createTexture();
     }
 
-    gl.activeTexture( gl.TEXTURE1 );
-    gl.bindTexture( gl.TEXTURE_2D, this._mapTexture );
-    stage.setTextureParams( gl );
-    gl.texImage2D( gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.mask );
-
-    gl.uniform1i(
-      gl.getUniformLocation( shaderProgram, "uAlphaSampler" ),
-      1
+    gl.activeTexture(gl.TEXTURE1);
+    gl.bindTexture(gl.TEXTURE_2D, this._mapTexture);
+    stage.setTextureParams(gl);
+    gl.texImage2D(
+      gl.TEXTURE_2D,
+      0,
+      gl.RGBA,
+      gl.RGBA,
+      gl.UNSIGNED_BYTE,
+      this.mask
     );
+
+    gl.uniform1i(gl.getUniformLocation(shaderProgram, "uAlphaSampler"), 1);
   };
 
   // public methods:
@@ -16731,34 +17693,43 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} [targetY] NOT SUPPORTED IN THIS FILTER. The y position to draw the result to. Defaults to the value passed to y.
    * @return {Boolean} If the filter was applied successfully.
    **/
-  p.applyFilter = function ( ctx, x, y, width, height, targetCtx, targetX, targetY ) {
-    if ( !this.mask ) {
+  p.applyFilter = function (
+    ctx,
+    x,
+    y,
+    width,
+    height,
+    targetCtx,
+    targetX,
+    targetY
+  ) {
+    if (!this.mask) {
       return true;
     }
     targetCtx = targetCtx || ctx;
-    if ( targetX == null ) {
+    if (targetX == null) {
       targetX = x;
     }
-    if ( targetY == null ) {
+    if (targetY == null) {
       targetY = y;
     }
 
     targetCtx.save();
-    if ( ctx != targetCtx ) {
+    if (ctx != targetCtx) {
       // TODO: support targetCtx and targetX/Y
       // clearRect, then draw the ctx in?
       return false;
     }
 
     targetCtx.globalCompositeOperation = "destination-in";
-    targetCtx.drawImage( this.mask, targetX, targetY );
+    targetCtx.drawImage(this.mask, targetX, targetY);
     targetCtx.restore();
     return true;
   };
 
   /** docced in super class **/
   p.clone = function () {
-    return new AlphaMaskFilter( this.mask );
+    return new AlphaMaskFilter(this.mask);
   };
 
   /** docced in super class **/
@@ -16766,17 +17737,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return "[AlphaMaskFilter]";
   };
 
-
-  createjs.AlphaMaskFilter = createjs.promote( AlphaMaskFilter, "Filter" );
-}() );
+  createjs.AlphaMaskFilter = createjs.promote(AlphaMaskFilter, "Filter");
+})();
 
 //##############################################################################
 // ColorFilter.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -16811,7 +17780,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @constructor
    * @extends Filter
    **/
-  function ColorFilter( redMultiplier, greenMultiplier, blueMultiplier, alphaMultiplier, redOffset, greenOffset, blueOffset, alphaOffset ) {
+  function ColorFilter(
+    redMultiplier,
+    greenMultiplier,
+    blueMultiplier,
+    alphaMultiplier,
+    redOffset,
+    greenOffset,
+    blueOffset,
+    alphaOffset
+  ) {
     this.Filter_constructor();
 
     // public properties:
@@ -16871,35 +17849,36 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      **/
     this.alphaOffset = alphaOffset || 0;
 
-    this.FRAG_SHADER_BODY = (
+    this.FRAG_SHADER_BODY =
       "uniform vec4 uColorMultiplier;" +
       "uniform vec4 uColorOffset;" +
-
       "void main(void) {" +
       "vec4 color = texture2D(uSampler, vRenderCoord);" +
-
       "gl_FragColor = (color * uColorMultiplier) + uColorOffset;" +
-      "}"
-    );
-
+      "}";
   }
-  var p = createjs.extend( ColorFilter, createjs.Filter );
+  var p = createjs.extend(ColorFilter, createjs.Filter);
 
   // TODO: deprecated
   // p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
 
-
   // public methods:
   /** docced in super class **/
-  p.shaderParamSetup = function ( gl, stage, shaderProgram ) {
+  p.shaderParamSetup = function (gl, stage, shaderProgram) {
     gl.uniform4f(
-      gl.getUniformLocation( shaderProgram, "uColorMultiplier" ),
-      this.redMultiplier, this.greenMultiplier, this.blueMultiplier, this.alphaMultiplier
+      gl.getUniformLocation(shaderProgram, "uColorMultiplier"),
+      this.redMultiplier,
+      this.greenMultiplier,
+      this.blueMultiplier,
+      this.alphaMultiplier
     );
 
     gl.uniform4f(
-      gl.getUniformLocation( shaderProgram, "uColorOffset" ),
-      this.redOffset / 255, this.greenOffset / 255, this.blueOffset / 255, this.alphaOffset / 255
+      gl.getUniformLocation(shaderProgram, "uColorOffset"),
+      this.redOffset / 255,
+      this.greenOffset / 255,
+      this.blueOffset / 255,
+      this.alphaOffset / 255
     );
   };
 
@@ -16911,36 +17890,40 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   /** docced in super class **/
   p.clone = function () {
     return new ColorFilter(
-      this.redMultiplier, this.greenMultiplier, this.blueMultiplier, this.alphaMultiplier,
-      this.redOffset, this.greenOffset, this.blueOffset, this.alphaOffset
+      this.redMultiplier,
+      this.greenMultiplier,
+      this.blueMultiplier,
+      this.alphaMultiplier,
+      this.redOffset,
+      this.greenOffset,
+      this.blueOffset,
+      this.alphaOffset
     );
   };
 
   // private methods:
   /** docced in super class **/
-  p._applyFilter = function ( imageData ) {
+  p._applyFilter = function (imageData) {
     var data = imageData.data;
     var l = data.length;
-    for ( var i = 0; i < l; i += 4 ) {
-      data[ i ] = data[ i ] * this.redMultiplier + this.redOffset;
-      data[ i + 1 ] = data[ i + 1 ] * this.greenMultiplier + this.greenOffset;
-      data[ i + 2 ] = data[ i + 2 ] * this.blueMultiplier + this.blueOffset;
-      data[ i + 3 ] = data[ i + 3 ] * this.alphaMultiplier + this.alphaOffset;
+    for (var i = 0; i < l; i += 4) {
+      data[i] = data[i] * this.redMultiplier + this.redOffset;
+      data[i + 1] = data[i + 1] * this.greenMultiplier + this.greenOffset;
+      data[i + 2] = data[i + 2] * this.blueMultiplier + this.blueOffset;
+      data[i + 3] = data[i + 3] * this.alphaMultiplier + this.alphaOffset;
     }
     return true;
   };
 
-
-  createjs.ColorFilter = createjs.promote( ColorFilter, "Filter" );
-}() );
+  createjs.ColorFilter = createjs.promote(ColorFilter, "Filter");
+})();
 
 //##############################################################################
 // ColorMatrix.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -16960,8 +17943,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} hue
    * @constructor
    **/
-  function ColorMatrix( brightness, contrast, saturation, hue ) {
-    this.setColor( brightness, contrast, saturation, hue );
+  function ColorMatrix(brightness, contrast, saturation, hue) {
+    this.setColor(brightness, contrast, saturation, hue);
   }
   var p = ColorMatrix.prototype;
 
@@ -16974,17 +17957,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    **/
   ColorMatrix.DELTA_INDEX = [
-    0, 0.01, 0.02, 0.04, 0.05, 0.06, 0.07, 0.08, 0.1, 0.11,
-    0.12, 0.14, 0.15, 0.16, 0.17, 0.18, 0.20, 0.21, 0.22, 0.24,
-    0.25, 0.27, 0.28, 0.30, 0.32, 0.34, 0.36, 0.38, 0.40, 0.42,
-    0.44, 0.46, 0.48, 0.5, 0.53, 0.56, 0.59, 0.62, 0.65, 0.68,
-    0.71, 0.74, 0.77, 0.80, 0.83, 0.86, 0.89, 0.92, 0.95, 0.98,
-    1.0, 1.06, 1.12, 1.18, 1.24, 1.30, 1.36, 1.42, 1.48, 1.54,
-    1.60, 1.66, 1.72, 1.78, 1.84, 1.90, 1.96, 2.0, 2.12, 2.25,
-    2.37, 2.50, 2.62, 2.75, 2.87, 3.0, 3.2, 3.4, 3.6, 3.8,
-    4.0, 4.3, 4.7, 4.9, 5.0, 5.5, 6.0, 6.5, 6.8, 7.0,
-    7.3, 7.5, 7.8, 8.0, 8.4, 8.7, 9.0, 9.4, 9.6, 9.8,
-    10.0
+    0, 0.01, 0.02, 0.04, 0.05, 0.06, 0.07, 0.08, 0.1, 0.11, 0.12, 0.14, 0.15,
+    0.16, 0.17, 0.18, 0.2, 0.21, 0.22, 0.24, 0.25, 0.27, 0.28, 0.3, 0.32, 0.34,
+    0.36, 0.38, 0.4, 0.42, 0.44, 0.46, 0.48, 0.5, 0.53, 0.56, 0.59, 0.62, 0.65,
+    0.68, 0.71, 0.74, 0.77, 0.8, 0.83, 0.86, 0.89, 0.92, 0.95, 0.98, 1.0, 1.06,
+    1.12, 1.18, 1.24, 1.3, 1.36, 1.42, 1.48, 1.54, 1.6, 1.66, 1.72, 1.78, 1.84,
+    1.9, 1.96, 2.0, 2.12, 2.25, 2.37, 2.5, 2.62, 2.75, 2.87, 3.0, 3.2, 3.4, 3.6,
+    3.8, 4.0, 4.3, 4.7, 4.9, 5.0, 5.5, 6.0, 6.5, 6.8, 7.0, 7.3, 7.5, 7.8, 8.0,
+    8.4, 8.7, 9.0, 9.4, 9.6, 9.8, 10.0,
   ];
 
   /**
@@ -16995,11 +17975,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    **/
   ColorMatrix.IDENTITY_MATRIX = [
-    1, 0, 0, 0, 0,
-    0, 1, 0, 0, 0,
-    0, 0, 1, 0, 0,
-    0, 0, 0, 1, 0,
-    0, 0, 0, 0, 1
+    1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1,
   ];
 
   /**
@@ -17010,7 +17986,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    **/
   ColorMatrix.LENGTH = ColorMatrix.IDENTITY_MATRIX.length;
-
 
   // public methods:
   /**
@@ -17023,8 +17998,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {ColorMatrix} The ColorMatrix instance the method is called on (useful for chaining calls.)
    * @chainable
    */
-  p.setColor = function ( brightness, contrast, saturation, hue ) {
-    return this.reset().adjustColor( brightness, contrast, saturation, hue );
+  p.setColor = function (brightness, contrast, saturation, hue) {
+    return this.reset().adjustColor(brightness, contrast, saturation, hue);
   };
 
   /**
@@ -17034,7 +18009,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @chainable
    */
   p.reset = function () {
-    return this.copy( ColorMatrix.IDENTITY_MATRIX );
+    return this.copy(ColorMatrix.IDENTITY_MATRIX);
   };
 
   /**
@@ -17049,11 +18024,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {ColorMatrix} The ColorMatrix instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.adjustColor = function ( brightness, contrast, saturation, hue ) {
-    this.adjustHue( hue );
-    this.adjustContrast( contrast );
-    this.adjustBrightness( brightness );
-    return this.adjustSaturation( saturation );
+  p.adjustColor = function (brightness, contrast, saturation, hue) {
+    this.adjustHue(hue);
+    this.adjustContrast(contrast);
+    this.adjustBrightness(brightness);
+    return this.adjustSaturation(saturation);
   };
 
   /**
@@ -17064,18 +18039,38 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {ColorMatrix} The ColorMatrix instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.adjustBrightness = function ( value ) {
-    if ( value == 0 || isNaN( value ) ) {
+  p.adjustBrightness = function (value) {
+    if (value == 0 || isNaN(value)) {
       return this;
     }
-    value = this._cleanValue( value, 255 );
-    this._multiplyMatrix( [
-      1, 0, 0, 0, value,
-      0, 1, 0, 0, value,
-      0, 0, 1, 0, value,
-      0, 0, 0, 1, 0,
-      0, 0, 0, 0, 1
-    ] );
+    value = this._cleanValue(value, 255);
+    this._multiplyMatrix([
+      1,
+      0,
+      0,
+      0,
+      value,
+      0,
+      1,
+      0,
+      0,
+      value,
+      0,
+      0,
+      1,
+      0,
+      value,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+    ]);
     return this;
   };
 
@@ -17087,30 +18082,52 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {ColorMatrix} The ColorMatrix instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.adjustContrast = function ( value ) {
-    if ( value == 0 || isNaN( value ) ) {
+  p.adjustContrast = function (value) {
+    if (value == 0 || isNaN(value)) {
       return this;
     }
-    value = this._cleanValue( value, 100 );
+    value = this._cleanValue(value, 100);
     var x;
-    if ( value < 0 ) {
-      x = 127 + value / 100 * 127;
+    if (value < 0) {
+      x = 127 + (value / 100) * 127;
     } else {
       x = value % 1;
-      if ( x == 0 ) {
-        x = ColorMatrix.DELTA_INDEX[ value ];
+      if (x == 0) {
+        x = ColorMatrix.DELTA_INDEX[value];
       } else {
-        x = ColorMatrix.DELTA_INDEX[ ( value << 0 ) ] * ( 1 - x ) + ColorMatrix.DELTA_INDEX[ ( value << 0 ) + 1 ] * x; // use linear interpolation for more granularity.
+        x =
+          ColorMatrix.DELTA_INDEX[value << 0] * (1 - x) +
+          ColorMatrix.DELTA_INDEX[(value << 0) + 1] * x; // use linear interpolation for more granularity.
       }
       x = x * 127 + 127;
     }
-    this._multiplyMatrix( [
-      x / 127, 0, 0, 0, 0.5 * ( 127 - x ),
-      0, x / 127, 0, 0, 0.5 * ( 127 - x ),
-      0, 0, x / 127, 0, 0.5 * ( 127 - x ),
-      0, 0, 0, 1, 0,
-      0, 0, 0, 0, 1
-    ] );
+    this._multiplyMatrix([
+      x / 127,
+      0,
+      0,
+      0,
+      0.5 * (127 - x),
+      0,
+      x / 127,
+      0,
+      0,
+      0.5 * (127 - x),
+      0,
+      0,
+      x / 127,
+      0,
+      0.5 * (127 - x),
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+    ]);
     return this;
   };
 
@@ -17122,25 +18139,44 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {ColorMatrix} The ColorMatrix instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.adjustSaturation = function ( value ) {
-    if ( value == 0 || isNaN( value ) ) {
+  p.adjustSaturation = function (value) {
+    if (value == 0 || isNaN(value)) {
       return this;
     }
-    value = this._cleanValue( value, 100 );
-    var x = 1 + ( ( value > 0 ) ? 3 * value / 100 : value / 100 );
+    value = this._cleanValue(value, 100);
+    var x = 1 + (value > 0 ? (3 * value) / 100 : value / 100);
     var lumR = 0.3086;
     var lumG = 0.6094;
-    var lumB = 0.0820;
-    this._multiplyMatrix( [
-      lumR * ( 1 - x ) + x, lumG * ( 1 - x ), lumB * ( 1 - x ), 0, 0,
-      lumR * ( 1 - x ), lumG * ( 1 - x ) + x, lumB * ( 1 - x ), 0, 0,
-      lumR * ( 1 - x ), lumG * ( 1 - x ), lumB * ( 1 - x ) + x, 0, 0,
-      0, 0, 0, 1, 0,
-      0, 0, 0, 0, 1
-    ] );
+    var lumB = 0.082;
+    this._multiplyMatrix([
+      lumR * (1 - x) + x,
+      lumG * (1 - x),
+      lumB * (1 - x),
+      0,
+      0,
+      lumR * (1 - x),
+      lumG * (1 - x) + x,
+      lumB * (1 - x),
+      0,
+      0,
+      lumR * (1 - x),
+      lumG * (1 - x),
+      lumB * (1 - x) + x,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+    ]);
     return this;
   };
-
 
   /**
    * Adjusts the hue of the pixel color.
@@ -17149,23 +18185,43 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {ColorMatrix} The ColorMatrix instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.adjustHue = function ( value ) {
-    if ( value == 0 || isNaN( value ) ) {
+  p.adjustHue = function (value) {
+    if (value == 0 || isNaN(value)) {
       return this;
     }
-    value = this._cleanValue( value, 180 ) / 180 * Math.PI;
-    var cosVal = Math.cos( value );
-    var sinVal = Math.sin( value );
+    value = (this._cleanValue(value, 180) / 180) * Math.PI;
+    var cosVal = Math.cos(value);
+    var sinVal = Math.sin(value);
     var lumR = 0.213;
     var lumG = 0.715;
     var lumB = 0.072;
-    this._multiplyMatrix( [
-      lumR + cosVal * ( 1 - lumR ) + sinVal * ( -lumR ), lumG + cosVal * ( -lumG ) + sinVal * ( -lumG ), lumB + cosVal * ( -lumB ) + sinVal * ( 1 - lumB ), 0, 0,
-      lumR + cosVal * ( -lumR ) + sinVal * ( 0.143 ), lumG + cosVal * ( 1 - lumG ) + sinVal * ( 0.140 ), lumB + cosVal * ( -lumB ) + sinVal * ( -0.283 ), 0, 0,
-      lumR + cosVal * ( -lumR ) + sinVal * ( -( 1 - lumR ) ), lumG + cosVal * ( -lumG ) + sinVal * ( lumG ), lumB + cosVal * ( 1 - lumB ) + sinVal * ( lumB ), 0, 0,
-      0, 0, 0, 1, 0,
-      0, 0, 0, 0, 1
-    ] );
+    this._multiplyMatrix([
+      lumR + cosVal * (1 - lumR) + sinVal * -lumR,
+      lumG + cosVal * -lumG + sinVal * -lumG,
+      lumB + cosVal * -lumB + sinVal * (1 - lumB),
+      0,
+      0,
+      lumR + cosVal * -lumR + sinVal * 0.143,
+      lumG + cosVal * (1 - lumG) + sinVal * 0.14,
+      lumB + cosVal * -lumB + sinVal * -0.283,
+      0,
+      0,
+      lumR + cosVal * -lumR + sinVal * -(1 - lumR),
+      lumG + cosVal * -lumG + sinVal * lumG,
+      lumB + cosVal * (1 - lumB) + sinVal * lumB,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+    ]);
     return this;
   };
 
@@ -17176,12 +18232,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {ColorMatrix} The ColorMatrix instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.concat = function ( matrix ) {
-    matrix = this._fixMatrix( matrix );
-    if ( matrix.length != ColorMatrix.LENGTH ) {
+  p.concat = function (matrix) {
+    matrix = this._fixMatrix(matrix);
+    if (matrix.length != ColorMatrix.LENGTH) {
       return this;
     }
-    this._multiplyMatrix( matrix );
+    this._multiplyMatrix(matrix);
     return this;
   };
 
@@ -17191,7 +18247,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {ColorMatrix} A clone of this ColorMatrix.
    **/
   p.clone = function () {
-    return ( new ColorMatrix() ).copy( this );
+    return new ColorMatrix().copy(this);
   };
 
   /**
@@ -17201,8 +18257,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
   p.toArray = function () {
     var arr = [];
-    for ( var i = 0, l = ColorMatrix.LENGTH; i < l; i++ ) {
-      arr[ i ] = this[ i ];
+    for (var i = 0, l = ColorMatrix.LENGTH; i < l; i++) {
+      arr[i] = this[i];
     }
     return arr;
   };
@@ -17214,10 +18270,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {ColorMatrix} The ColorMatrix instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.copy = function ( matrix ) {
+  p.copy = function (matrix) {
     var l = ColorMatrix.LENGTH;
-    for ( var i = 0; i < l; i++ ) {
-      this[ i ] = matrix[ i ];
+    for (var i = 0; i < l; i++) {
+      this[i] = matrix[i];
     }
     return this;
   };
@@ -17231,26 +18287,28 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return "[ColorMatrix]";
   };
 
-
   // private methods:
   /**
    * @method _multiplyMatrix
    * @param {Array} matrix
    * @protected
    **/
-  p._multiplyMatrix = function ( matrix ) {
-    var i, j, k, col = [];
+  p._multiplyMatrix = function (matrix) {
+    var i,
+      j,
+      k,
+      col = [];
 
-    for ( i = 0; i < 5; i++ ) {
-      for ( j = 0; j < 5; j++ ) {
-        col[ j ] = this[ j + i * 5 ];
+    for (i = 0; i < 5; i++) {
+      for (j = 0; j < 5; j++) {
+        col[j] = this[j + i * 5];
       }
-      for ( j = 0; j < 5; j++ ) {
+      for (j = 0; j < 5; j++) {
         var val = 0;
-        for ( k = 0; k < 5; k++ ) {
-          val += matrix[ j + k * 5 ] * col[ k ];
+        for (k = 0; k < 5; k++) {
+          val += matrix[j + k * 5] * col[k];
         }
-        this[ j + i * 5 ] = val;
+        this[j + i * 5] = val;
       }
     }
   };
@@ -17262,8 +18320,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} limit The maximum that the number can be. The minimum is the limit * -1.
    * @protected
    **/
-  p._cleanValue = function ( value, limit ) {
-    return Math.min( limit, Math.max( -limit, value ) );
+  p._cleanValue = function (value, limit) {
+    return Math.min(limit, Math.max(-limit, value));
   };
 
   /**
@@ -17272,29 +18330,31 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Array} matrix
    * @protected
    **/
-  p._fixMatrix = function ( matrix ) {
-    if ( matrix instanceof ColorMatrix ) {
+  p._fixMatrix = function (matrix) {
+    if (matrix instanceof ColorMatrix) {
       matrix = matrix.toArray();
     }
-    if ( matrix.length < ColorMatrix.LENGTH ) {
-      matrix = matrix.slice( 0, matrix.length ).concat( ColorMatrix.IDENTITY_MATRIX.slice( matrix.length, ColorMatrix.LENGTH ) );
-    } else if ( matrix.length > ColorMatrix.LENGTH ) {
-      matrix = matrix.slice( 0, ColorMatrix.LENGTH );
+    if (matrix.length < ColorMatrix.LENGTH) {
+      matrix = matrix
+        .slice(0, matrix.length)
+        .concat(
+          ColorMatrix.IDENTITY_MATRIX.slice(matrix.length, ColorMatrix.LENGTH)
+        );
+    } else if (matrix.length > ColorMatrix.LENGTH) {
+      matrix = matrix.slice(0, ColorMatrix.LENGTH);
     }
     return matrix;
   };
 
-
   createjs.ColorMatrix = ColorMatrix;
-}() );
+})();
 
 //##############################################################################
 // ColorMatrixFilter.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -17322,7 +18382,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Array | ColorMatrix} matrix A 4x5 matrix describing the color operation to perform. See also the {{#crossLink "ColorMatrix"}}{{/crossLink}}
    * class.
    **/
-  function ColorMatrixFilter( matrix ) {
+  function ColorMatrixFilter(matrix) {
     this.Filter_constructor();
 
     // public properties:
@@ -17333,46 +18393,58 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      **/
     this.matrix = matrix;
 
-    this.FRAG_SHADER_BODY = (
+    this.FRAG_SHADER_BODY =
       "uniform mat4 uColorMatrix;" +
       "uniform vec4 uColorMatrixOffset;" +
-
       "void main(void) {" +
       "vec4 color = texture2D(uSampler, vRenderCoord);" +
-
       "mat4 m = uColorMatrix;" +
       "vec4 newColor = vec4(0,0,0,0);" +
       "newColor.r = color.r*m[0][0] + color.g*m[0][1] + color.b*m[0][2] + color.a*m[0][3];" +
       "newColor.g = color.r*m[1][0] + color.g*m[1][1] + color.b*m[1][2] + color.a*m[1][3];" +
       "newColor.b = color.r*m[2][0] + color.g*m[2][1] + color.b*m[2][2] + color.a*m[2][3];" +
       "newColor.a = color.r*m[3][0] + color.g*m[3][1] + color.b*m[3][2] + color.a*m[3][3];" +
-
       "gl_FragColor = newColor + uColorMatrixOffset;" +
-      "}"
-    );
+      "}";
   }
-  var p = createjs.extend( ColorMatrixFilter, createjs.Filter );
+  var p = createjs.extend(ColorMatrixFilter, createjs.Filter);
 
   // TODO: deprecated
   // p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
 
   /** docced in super class **/
-  p.shaderParamSetup = function ( gl, stage, shaderProgram ) {
+  p.shaderParamSetup = function (gl, stage, shaderProgram) {
     var mat = this.matrix;
-    var colorMatrix = new Float32Array( [
-      mat[ 0 ], mat[ 1 ], mat[ 2 ], mat[ 3 ],
-      mat[ 5 ], mat[ 6 ], mat[ 7 ], mat[ 8 ],
-      mat[ 10 ], mat[ 11 ], mat[ 12 ], mat[ 13 ],
-      mat[ 15 ], mat[ 16 ], mat[ 17 ], mat[ 18 ]
-    ] );
+    var colorMatrix = new Float32Array([
+      mat[0],
+      mat[1],
+      mat[2],
+      mat[3],
+      mat[5],
+      mat[6],
+      mat[7],
+      mat[8],
+      mat[10],
+      mat[11],
+      mat[12],
+      mat[13],
+      mat[15],
+      mat[16],
+      mat[17],
+      mat[18],
+    ]);
 
     gl.uniformMatrix4fv(
-      gl.getUniformLocation( shaderProgram, "uColorMatrix" ),
-      false, colorMatrix
+      gl.getUniformLocation(shaderProgram, "uColorMatrix"),
+      false,
+      colorMatrix
     );
     gl.uniform4f(
-      gl.getUniformLocation( shaderProgram, "uColorMatrixOffset" ),
-      mat[ 4 ] / 255, mat[ 9 ] / 255, mat[ 14 ] / 255, mat[ 19 ] / 255
+      gl.getUniformLocation(shaderProgram, "uColorMatrixOffset"),
+      mat[4] / 255,
+      mat[9] / 255,
+      mat[14] / 255,
+      mat[19] / 255
     );
   };
 
@@ -17384,60 +18456,59 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 
   /** docced in super class **/
   p.clone = function () {
-    return new ColorMatrixFilter( this.matrix );
+    return new ColorMatrixFilter(this.matrix);
   };
 
   // private methods:
   /** docced in super class **/
-  p._applyFilter = function ( imageData ) {
+  p._applyFilter = function (imageData) {
     var data = imageData.data;
     var l = data.length;
     var r, g, b, a;
     var mtx = this.matrix;
-    var m0 = mtx[ 0 ],
-      m1 = mtx[ 1 ],
-      m2 = mtx[ 2 ],
-      m3 = mtx[ 3 ],
-      m4 = mtx[ 4 ];
-    var m5 = mtx[ 5 ],
-      m6 = mtx[ 6 ],
-      m7 = mtx[ 7 ],
-      m8 = mtx[ 8 ],
-      m9 = mtx[ 9 ];
-    var m10 = mtx[ 10 ],
-      m11 = mtx[ 11 ],
-      m12 = mtx[ 12 ],
-      m13 = mtx[ 13 ],
-      m14 = mtx[ 14 ];
-    var m15 = mtx[ 15 ],
-      m16 = mtx[ 16 ],
-      m17 = mtx[ 17 ],
-      m18 = mtx[ 18 ],
-      m19 = mtx[ 19 ];
+    var m0 = mtx[0],
+      m1 = mtx[1],
+      m2 = mtx[2],
+      m3 = mtx[3],
+      m4 = mtx[4];
+    var m5 = mtx[5],
+      m6 = mtx[6],
+      m7 = mtx[7],
+      m8 = mtx[8],
+      m9 = mtx[9];
+    var m10 = mtx[10],
+      m11 = mtx[11],
+      m12 = mtx[12],
+      m13 = mtx[13],
+      m14 = mtx[14];
+    var m15 = mtx[15],
+      m16 = mtx[16],
+      m17 = mtx[17],
+      m18 = mtx[18],
+      m19 = mtx[19];
 
-    for ( var i = 0; i < l; i += 4 ) {
-      r = data[ i ];
-      g = data[ i + 1 ];
-      b = data[ i + 2 ];
-      a = data[ i + 3 ];
-      data[ i ] = r * m0 + g * m1 + b * m2 + a * m3 + m4; // red
-      data[ i + 1 ] = r * m5 + g * m6 + b * m7 + a * m8 + m9; // green
-      data[ i + 2 ] = r * m10 + g * m11 + b * m12 + a * m13 + m14; // blue
-      data[ i + 3 ] = r * m15 + g * m16 + b * m17 + a * m18 + m19; // alpha
+    for (var i = 0; i < l; i += 4) {
+      r = data[i];
+      g = data[i + 1];
+      b = data[i + 2];
+      a = data[i + 3];
+      data[i] = r * m0 + g * m1 + b * m2 + a * m3 + m4; // red
+      data[i + 1] = r * m5 + g * m6 + b * m7 + a * m8 + m9; // green
+      data[i + 2] = r * m10 + g * m11 + b * m12 + a * m13 + m14; // blue
+      data[i + 3] = r * m15 + g * m16 + b * m17 + a * m18 + m19; // alpha
     }
     return true;
   };
 
-  createjs.ColorMatrixFilter = createjs.promote( ColorMatrixFilter, "Filter" );
-}() );
+  createjs.ColorMatrixFilter = createjs.promote(ColorMatrixFilter, "Filter");
+})();
 
 //##############################################################################
 // Touch.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -17463,7 +18534,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     throw "Touch cannot be instantiated";
   }
 
-
   // public static methods:
   /**
    * Returns `true` if touch is supported in the current browser.
@@ -17472,11 +18542,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    **/
   Touch.isSupported = function () {
-    return !!( ( 'ontouchstart' in window ) // iOS & Android
-      ||
-      ( window.navigator[ 'msPointerEnabled' ] && window.navigator[ 'msMaxTouchPoints' ] > 0 ) // IE10
-      ||
-      ( window.navigator[ 'pointerEnabled' ] && window.navigator[ 'maxTouchPoints' ] > 0 ) ); // IE11+
+    return !!(
+      "ontouchstart" in window || // iOS & Android
+      (window.navigator["msPointerEnabled"] &&
+        window.navigator["msMaxTouchPoints"] > 0) || // IE10
+      (window.navigator["pointerEnabled"] &&
+        window.navigator["maxTouchPoints"] > 0)
+    ); // IE11+
   };
 
   /**
@@ -17493,11 +18565,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} Returns `true` if touch was successfully enabled on the target stage.
    * @static
    **/
-  Touch.enable = function ( stage, singleTouch, allowDefault ) {
-    if ( !stage || !stage.canvas || !Touch.isSupported() ) {
+  Touch.enable = function (stage, singleTouch, allowDefault) {
+    if (!stage || !stage.canvas || !Touch.isSupported()) {
       return false;
     }
-    if ( stage.__touch ) {
+    if (stage.__touch) {
       return true;
     }
 
@@ -17506,15 +18578,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       pointers: {},
       multitouch: !singleTouch,
       preventDefault: !allowDefault,
-      count: 0
+      count: 0,
     };
 
     // note that in the future we may need to disable the standard mouse event model before adding
     // these to prevent duplicate calls. It doesn't seem to be an issue with iOS devices though.
-    if ( 'ontouchstart' in window ) {
-      Touch._IOS_enable( stage );
-    } else if ( window.navigator[ 'msPointerEnabled' ] || window.navigator[ "pointerEnabled" ] ) {
-      Touch._IE_enable( stage );
+    if ("ontouchstart" in window) {
+      Touch._IOS_enable(stage);
+    } else if (
+      window.navigator["msPointerEnabled"] ||
+      window.navigator["pointerEnabled"]
+    ) {
+      Touch._IE_enable(stage);
     }
     return true;
   };
@@ -17525,19 +18600,21 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Stage} stage The {{#crossLink "Stage"}}{{/crossLink}} to disable touch on.
    * @static
    **/
-  Touch.disable = function ( stage ) {
-    if ( !stage ) {
+  Touch.disable = function (stage) {
+    if (!stage) {
       return;
     }
-    if ( 'ontouchstart' in window ) {
-      Touch._IOS_disable( stage );
-    } else if ( window.navigator[ 'msPointerEnabled' ] || window.navigator[ "pointerEnabled" ] ) {
-      Touch._IE_disable( stage );
+    if ("ontouchstart" in window) {
+      Touch._IOS_disable(stage);
+    } else if (
+      window.navigator["msPointerEnabled"] ||
+      window.navigator["pointerEnabled"]
+    ) {
+      Touch._IE_disable(stage);
     }
 
     delete stage.__touch;
   };
-
 
   // Private static methods:
   /**
@@ -17546,15 +18623,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Stage} stage
    * @static
    **/
-  Touch._IOS_enable = function ( stage ) {
+  Touch._IOS_enable = function (stage) {
     var canvas = stage.canvas;
-    var f = stage.__touch.f = function ( e ) {
-      Touch._IOS_handleEvent( stage, e );
-    };
-    canvas.addEventListener( "touchstart", f, false );
-    canvas.addEventListener( "touchmove", f, false );
-    canvas.addEventListener( "touchend", f, false );
-    canvas.addEventListener( "touchcancel", f, false );
+    var f = (stage.__touch.f = function (e) {
+      Touch._IOS_handleEvent(stage, e);
+    });
+    canvas.addEventListener("touchstart", f, false);
+    canvas.addEventListener("touchmove", f, false);
+    canvas.addEventListener("touchend", f, false);
+    canvas.addEventListener("touchcancel", f, false);
   };
 
   /**
@@ -17563,16 +18640,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Stage} stage
    * @static
    **/
-  Touch._IOS_disable = function ( stage ) {
+  Touch._IOS_disable = function (stage) {
     var canvas = stage.canvas;
-    if ( !canvas ) {
+    if (!canvas) {
       return;
     }
     var f = stage.__touch.f;
-    canvas.removeEventListener( "touchstart", f, false );
-    canvas.removeEventListener( "touchmove", f, false );
-    canvas.removeEventListener( "touchend", f, false );
-    canvas.removeEventListener( "touchcancel", f, false );
+    canvas.removeEventListener("touchstart", f, false);
+    canvas.removeEventListener("touchmove", f, false);
+    canvas.removeEventListener("touchend", f, false);
+    canvas.removeEventListener("touchcancel", f, false);
   };
 
   /**
@@ -17582,28 +18659,28 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @static
    **/
-  Touch._IOS_handleEvent = function ( stage, e ) {
-    if ( !stage ) {
+  Touch._IOS_handleEvent = function (stage, e) {
+    if (!stage) {
       return;
     }
-    if ( stage.__touch.preventDefault ) {
+    if (stage.__touch.preventDefault) {
       e.preventDefault && e.preventDefault();
     }
     var touches = e.changedTouches;
     var type = e.type;
-    for ( var i = 0, l = touches.length; i < l; i++ ) {
-      var touch = touches[ i ];
+    for (var i = 0, l = touches.length; i < l; i++) {
+      var touch = touches[i];
       var id = touch.identifier;
-      if ( touch.target != stage.canvas ) {
+      if (touch.target != stage.canvas) {
         continue;
       }
 
-      if ( type == "touchstart" ) {
-        this._handleStart( stage, id, e, touch.pageX, touch.pageY );
-      } else if ( type == "touchmove" ) {
-        this._handleMove( stage, id, e, touch.pageX, touch.pageY );
-      } else if ( type == "touchend" || type == "touchcancel" ) {
-        this._handleEnd( stage, id, e );
+      if (type == "touchstart") {
+        this._handleStart(stage, id, e, touch.pageX, touch.pageY);
+      } else if (type == "touchmove") {
+        this._handleMove(stage, id, e, touch.pageX, touch.pageY);
+      } else if (type == "touchend" || type == "touchcancel") {
+        this._handleEnd(stage, id, e);
       }
     }
   };
@@ -17614,29 +18691,28 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Stage} stage
    * @static
    **/
-  Touch._IE_enable = function ( stage ) {
+  Touch._IE_enable = function (stage) {
     var canvas = stage.canvas;
-    var f = stage.__touch.f = function ( e ) {
-      Touch._IE_handleEvent( stage, e );
-    };
+    var f = (stage.__touch.f = function (e) {
+      Touch._IE_handleEvent(stage, e);
+    });
 
-    if ( window.navigator[ "pointerEnabled" ] === undefined ) {
-      canvas.addEventListener( "MSPointerDown", f, false );
-      window.addEventListener( "MSPointerMove", f, false );
-      window.addEventListener( "MSPointerUp", f, false );
-      window.addEventListener( "MSPointerCancel", f, false );
-      if ( stage.__touch.preventDefault ) {
+    if (window.navigator["pointerEnabled"] === undefined) {
+      canvas.addEventListener("MSPointerDown", f, false);
+      window.addEventListener("MSPointerMove", f, false);
+      window.addEventListener("MSPointerUp", f, false);
+      window.addEventListener("MSPointerCancel", f, false);
+      if (stage.__touch.preventDefault) {
         canvas.style.msTouchAction = "none";
       }
     } else {
-      canvas.addEventListener( "pointerdown", f, false );
-      window.addEventListener( "pointermove", f, false );
-      window.addEventListener( "pointerup", f, false );
-      window.addEventListener( "pointercancel", f, false );
-      if ( stage.__touch.preventDefault ) {
+      canvas.addEventListener("pointerdown", f, false);
+      window.addEventListener("pointermove", f, false);
+      window.addEventListener("pointerup", f, false);
+      window.addEventListener("pointercancel", f, false);
+      if (stage.__touch.preventDefault) {
         canvas.style.touchAction = "none";
       }
-
     }
     stage.__touch.activeIDs = {};
   };
@@ -17647,22 +18723,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Stage} stage
    * @static
    **/
-  Touch._IE_disable = function ( stage ) {
+  Touch._IE_disable = function (stage) {
     var f = stage.__touch.f;
 
-    if ( window.navigator[ "pointerEnabled" ] === undefined ) {
-      window.removeEventListener( "MSPointerMove", f, false );
-      window.removeEventListener( "MSPointerUp", f, false );
-      window.removeEventListener( "MSPointerCancel", f, false );
-      if ( stage.canvas ) {
-        stage.canvas.removeEventListener( "MSPointerDown", f, false );
+    if (window.navigator["pointerEnabled"] === undefined) {
+      window.removeEventListener("MSPointerMove", f, false);
+      window.removeEventListener("MSPointerUp", f, false);
+      window.removeEventListener("MSPointerCancel", f, false);
+      if (stage.canvas) {
+        stage.canvas.removeEventListener("MSPointerDown", f, false);
       }
     } else {
-      window.removeEventListener( "pointermove", f, false );
-      window.removeEventListener( "pointerup", f, false );
-      window.removeEventListener( "pointercancel", f, false );
-      if ( stage.canvas ) {
-        stage.canvas.removeEventListener( "pointerdown", f, false );
+      window.removeEventListener("pointermove", f, false);
+      window.removeEventListener("pointerup", f, false);
+      window.removeEventListener("pointercancel", f, false);
+      if (stage.canvas) {
+        stage.canvas.removeEventListener("pointerdown", f, false);
       }
     }
   };
@@ -17674,30 +18750,35 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @static
    **/
-  Touch._IE_handleEvent = function ( stage, e ) {
-    if ( !stage ) {
+  Touch._IE_handleEvent = function (stage, e) {
+    if (!stage) {
       return;
     }
-    if ( stage.__touch.preventDefault ) {
+    if (stage.__touch.preventDefault) {
       e.preventDefault && e.preventDefault();
     }
     var type = e.type;
     var id = e.pointerId;
     var ids = stage.__touch.activeIDs;
 
-    if ( type == "MSPointerDown" || type == "pointerdown" ) {
-      if ( e.srcElement != stage.canvas ) {
+    if (type == "MSPointerDown" || type == "pointerdown") {
+      if (e.srcElement != stage.canvas) {
         return;
       }
-      ids[ id ] = true;
-      this._handleStart( stage, id, e, e.pageX, e.pageY );
-    } else if ( ids[ id ] ) { // it's an id we're watching
-      if ( type == "MSPointerMove" || type == "pointermove" ) {
-        this._handleMove( stage, id, e, e.pageX, e.pageY );
-      } else if ( type == "MSPointerUp" || type == "MSPointerCancel" ||
-        type == "pointerup" || type == "pointercancel" ) {
-        delete( ids[ id ] );
-        this._handleEnd( stage, id, e );
+      ids[id] = true;
+      this._handleStart(stage, id, e, e.pageX, e.pageY);
+    } else if (ids[id]) {
+      // it's an id we're watching
+      if (type == "MSPointerMove" || type == "pointermove") {
+        this._handleMove(stage, id, e, e.pageX, e.pageY);
+      } else if (
+        type == "MSPointerUp" ||
+        type == "MSPointerCancel" ||
+        type == "pointerup" ||
+        type == "pointercancel"
+      ) {
+        delete ids[id];
+        this._handleEnd(stage, id, e);
       }
     }
   };
@@ -17711,18 +18792,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} y
    * @protected
    **/
-  Touch._handleStart = function ( stage, id, e, x, y ) {
+  Touch._handleStart = function (stage, id, e, x, y) {
     var props = stage.__touch;
-    if ( !props.multitouch && props.count ) {
+    if (!props.multitouch && props.count) {
       return;
     }
     var ids = props.pointers;
-    if ( ids[ id ] ) {
+    if (ids[id]) {
       return;
     }
-    ids[ id ] = true;
+    ids[id] = true;
     props.count++;
-    stage._handlePointerDown( id, e, x, y );
+    stage._handlePointerDown(id, e, x, y);
   };
 
   /**
@@ -17734,11 +18815,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} y
    * @protected
    **/
-  Touch._handleMove = function ( stage, id, e, x, y ) {
-    if ( !stage.__touch.pointers[ id ] ) {
+  Touch._handleMove = function (stage, id, e, x, y) {
+    if (!stage.__touch.pointers[id]) {
       return;
     }
-    stage._handlePointerMove( id, e, x, y );
+    stage._handlePointerMove(id, e, x, y);
   };
 
   /**
@@ -17748,27 +18829,26 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} e
    * @protected
    **/
-  Touch._handleEnd = function ( stage, id, e ) {
+  Touch._handleEnd = function (stage, id, e) {
     // TODO: cancel should be handled differently for proper UI (ex. an up would trigger a click, a cancel would more closely resemble an out).
     var props = stage.__touch;
     var ids = props.pointers;
-    if ( !ids[ id ] ) {
+    if (!ids[id]) {
       return;
     }
     props.count--;
-    stage._handlePointerUp( id, e, true );
-    delete( ids[ id ] );
+    stage._handlePointerUp(id, e, true);
+    delete ids[id];
   };
 
-
   createjs.Touch = Touch;
-}() );
+})();
 
 //##############################################################################
 // version.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   /**
@@ -17776,7 +18856,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * the library.
    * @class EaselJS
    **/
-  var s = createjs.EaselJS = createjs.EaselJS || {};
+  var s = (createjs.EaselJS = createjs.EaselJS || {});
 
   /**
    * The version string for this release.
@@ -17793,21 +18873,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    **/
   s.buildDate = /*=date*/ "Thu, 12 Oct 2017 16:34:10 GMT"; // injected by build process
-
-} )();
+})();
 
 //##############################################################################
 // version.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   /**
    * Static class holding library specific information such as the version and buildDate of the library.
    * @class PreloadJS
    **/
-  var s = createjs.PreloadJS = createjs.PreloadJS || {};
+  var s = (createjs.PreloadJS = createjs.PreloadJS || {});
 
   /**
    * The version string for this release.
@@ -17824,8 +18903,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    **/
   s.buildDate = /*=date*/ "Thu, 12 Oct 2017 16:34:05 GMT"; // injected by build process
-
-} )();
+})();
 
 //##############################################################################
 // proxy.js
@@ -17843,7 +18921,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
  * @main Utility Methods
  */
 
-( function () {
+(function () {
   "use strict";
 
   /**
@@ -17868,20 +18946,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @public
    * @static
    */
-  createjs.proxy = function ( method, scope ) {
-    var aArgs = Array.prototype.slice.call( arguments, 2 );
+  createjs.proxy = function (method, scope) {
+    var aArgs = Array.prototype.slice.call(arguments, 2);
     return function () {
-      return method.apply( scope, Array.prototype.slice.call( arguments, 0 ).concat( aArgs ) );
+      return method.apply(
+        scope,
+        Array.prototype.slice.call(arguments, 0).concat(aArgs)
+      );
     };
-  }
-
-}() );
+  };
+})();
 
 //##############################################################################
 // ErrorEvent.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   /**
@@ -17892,8 +18972,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} [data] Additional error data
    * @constructor
    */
-  function ErrorEvent( title, message, data ) {
-    this.Event_constructor( "error" );
+  function ErrorEvent(title, message, data) {
+    this.Event_constructor("error");
 
     /**
      * The short error title, which indicates the type of error that occurred.
@@ -17917,21 +18997,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     this.data = data;
   }
 
-  var p = createjs.extend( ErrorEvent, createjs.Event );
+  var p = createjs.extend(ErrorEvent, createjs.Event);
 
   p.clone = function () {
-    return new createjs.ErrorEvent( this.title, this.message, this.data );
+    return new createjs.ErrorEvent(this.title, this.message, this.data);
   };
 
-  createjs.ErrorEvent = createjs.promote( ErrorEvent, "Event" );
-
-}() );
+  createjs.ErrorEvent = createjs.promote(ErrorEvent, "Event");
+})();
 
 //##############################################################################
 // ProgressEvent.js
 //##############################################################################
 
-( function ( scope ) {
+(function (scope) {
   "use strict";
 
   // constructor
@@ -17944,8 +19023,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @todo Consider having this event be a "fileprogress" event as well
    * @constructor
    */
-  function ProgressEvent( loaded, total ) {
-    this.Event_constructor( "progress" );
+  function ProgressEvent(loaded, total) {
+    this.Event_constructor("progress");
 
     /**
      * The amount that has been loaded (out of a total amount)
@@ -17960,7 +19039,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @type {Number}
      * @default 1
      */
-    this.total = ( total == null ) ? 1 : total;
+    this.total = total == null ? 1 : total;
 
     /**
      * The percentage (out of 1) that the load has been completed. This is calculated using `loaded/total`.
@@ -17968,10 +19047,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @type {Number}
      * @default 0
      */
-    this.progress = ( total == 0 ) ? 0 : this.loaded / this.total;
-  };
+    this.progress = total == 0 ? 0 : this.loaded / this.total;
+  }
 
-  var p = createjs.extend( ProgressEvent, createjs.Event );
+  var p = createjs.extend(ProgressEvent, createjs.Event);
 
   /**
    * Returns a clone of the ProgressEvent instance.
@@ -17979,62 +19058,72 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {ProgressEvent} a clone of the Event instance.
    **/
   p.clone = function () {
-    return new createjs.ProgressEvent( this.loaded, this.total );
+    return new createjs.ProgressEvent(this.loaded, this.total);
   };
 
-  createjs.ProgressEvent = createjs.promote( ProgressEvent, "Event" );
-
-}( window ) );
+  createjs.ProgressEvent = createjs.promote(ProgressEvent, "Event");
+})(window);
 
 //##############################################################################
 // json3.js
 //##############################################################################
 
 /*! JSON v3.3.2 | http://bestiejs.github.io/json3 | Copyright 2012-2014, Kit Cambridge | http://kit.mit-license.org */
-;
-( function () {
+(function () {
   // Detect the `define` function exposed by asynchronous module loaders. The
   // strict `define` check is necessary for compatibility with `r.js`.
   var isLoader = typeof define === "function" && define.amd;
 
   // A set of types used to distinguish objects from primitives.
   var objectTypes = {
-    "function": true,
-    "object": true
+    function: true,
+    object: true,
   };
 
   // Detect the `exports` object exposed by CommonJS implementations.
-  var freeExports = objectTypes[ typeof exports ] && exports && !exports.nodeType && exports;
+  var freeExports =
+    objectTypes[typeof exports] && exports && !exports.nodeType && exports;
 
   // Use the `global` object exposed by Node (including Browserify via
   // `insert-module-globals`), Narwhal, and Ringo as the default context,
   // and the `window` object in browsers. Rhino exports a `global` function
   // instead.
-  var root = objectTypes[ typeof window ] && window || this,
-    freeGlobal = freeExports && objectTypes[ typeof module ] && module && !module.nodeType && typeof global == "object" && global;
+  var root = (objectTypes[typeof window] && window) || this,
+    freeGlobal =
+      freeExports &&
+      objectTypes[typeof module] &&
+      module &&
+      !module.nodeType &&
+      typeof global == "object" &&
+      global;
 
-  if ( freeGlobal && ( freeGlobal[ "global" ] === freeGlobal || freeGlobal[ "window" ] === freeGlobal || freeGlobal[ "self" ] === freeGlobal ) ) {
+  if (
+    freeGlobal &&
+    (freeGlobal["global"] === freeGlobal ||
+      freeGlobal["window"] === freeGlobal ||
+      freeGlobal["self"] === freeGlobal)
+  ) {
     root = freeGlobal;
   }
 
   // Public: Initializes JSON 3 using the given `context` object, attaching the
   // `stringify` and `parse` functions to the specified `exports` object.
-  function runInContext( context, exports ) {
-    context || ( context = root[ "Object" ]() );
-    exports || ( exports = root[ "Object" ]() );
+  function runInContext(context, exports) {
+    context || (context = root["Object"]());
+    exports || (exports = root["Object"]());
 
     // Native constructor aliases.
-    var Number = context[ "Number" ] || root[ "Number" ],
-      String = context[ "String" ] || root[ "String" ],
-      Object = context[ "Object" ] || root[ "Object" ],
-      Date = context[ "Date" ] || root[ "Date" ],
-      SyntaxError = context[ "SyntaxError" ] || root[ "SyntaxError" ],
-      TypeError = context[ "TypeError" ] || root[ "TypeError" ],
-      Math = context[ "Math" ] || root[ "Math" ],
-      nativeJSON = context[ "JSON" ] || root[ "JSON" ];
+    var Number = context["Number"] || root["Number"],
+      String = context["String"] || root["String"],
+      Object = context["Object"] || root["Object"],
+      Date = context["Date"] || root["Date"],
+      SyntaxError = context["SyntaxError"] || root["SyntaxError"],
+      TypeError = context["TypeError"] || root["TypeError"],
+      Math = context["Math"] || root["Math"],
+      nativeJSON = context["JSON"] || root["JSON"];
 
     // Delegate to the native `stringify` and `parse` implementations.
-    if ( typeof nativeJSON == "object" && nativeJSON ) {
+    if (typeof nativeJSON == "object" && nativeJSON) {
       exports.stringify = nativeJSON.stringify;
       exports.parse = nativeJSON.parse;
     }
@@ -18042,64 +19131,73 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     // Convenience aliases.
     var objectProto = Object.prototype,
       getClass = objectProto.toString,
-      isProperty, forEach, undef;
+      isProperty,
+      forEach,
+      undef;
 
     // Test the `Date#getUTC*` methods. Based on work by @Yaffle.
-    var isExtended = new Date( -3509827334573292 );
+    var isExtended = new Date(-3509827334573292);
     try {
       // The `getUTCFullYear`, `Month`, and `Date` methods return nonsensical
       // results for certain dates in Opera >= 10.53.
-      isExtended = isExtended.getUTCFullYear() == -109252 && isExtended.getUTCMonth() === 0 && isExtended.getUTCDate() === 1 &&
+      isExtended =
+        isExtended.getUTCFullYear() == -109252 &&
+        isExtended.getUTCMonth() === 0 &&
+        isExtended.getUTCDate() === 1 &&
         // Safari < 2.0.2 stores the internal millisecond time value correctly,
         // but clips the values returned by the date methods to the range of
         // signed 32-bit integers ([-2 ** 31, 2 ** 31 - 1]).
-        isExtended.getUTCHours() == 10 && isExtended.getUTCMinutes() == 37 && isExtended.getUTCSeconds() == 6 && isExtended.getUTCMilliseconds() == 708;
-    } catch ( exception ) {}
+        isExtended.getUTCHours() == 10 &&
+        isExtended.getUTCMinutes() == 37 &&
+        isExtended.getUTCSeconds() == 6 &&
+        isExtended.getUTCMilliseconds() == 708;
+    } catch (exception) {}
 
     // Internal: Determines whether the native `JSON.stringify` and `parse`
     // implementations are spec-compliant. Based on work by Ken Snyder.
-    function has( name ) {
-      if ( has[ name ] !== undef ) {
+    function has(name) {
+      if (has[name] !== undef) {
         // Return cached feature test result.
-        return has[ name ];
+        return has[name];
       }
       var isSupported;
-      if ( name == "bug-string-char-index" ) {
+      if (name == "bug-string-char-index") {
         // IE <= 7 doesn't support accessing string characters using square
         // bracket notation. IE 8 only supports this for primitives.
-        isSupported = "a" [ 0 ] != "a";
-      } else if ( name == "json" ) {
+        isSupported = "a"[0] != "a";
+      } else if (name == "json") {
         // Indicates whether both `JSON.stringify` and `JSON.parse` are
         // supported.
-        isSupported = has( "json-stringify" ) && has( "json-parse" );
+        isSupported = has("json-stringify") && has("json-parse");
       } else {
-        var value, serialized = '{"a":[1,true,false,null,"\\u0000\\b\\n\\f\\r\\t"]}';
+        var value,
+          serialized = '{"a":[1,true,false,null,"\\u0000\\b\\n\\f\\r\\t"]}';
         // Test `JSON.stringify`.
-        if ( name == "json-stringify" ) {
+        if (name == "json-stringify") {
           var stringify = exports.stringify,
             stringifySupported = typeof stringify == "function" && isExtended;
-          if ( stringifySupported ) {
+          if (stringifySupported) {
             // A test function object with a custom `toJSON` method.
-            ( value = function () {
+            (value = function () {
               return 1;
-            } ).toJSON = value;
+            }).toJSON = value;
             try {
               stringifySupported =
                 // Firefox 3.1b1 and b2 serialize string, number, and boolean
                 // primitives as object literals.
-                stringify( 0 ) === "0" &&
+                stringify(0) === "0" &&
                 // FF 3.1b1, b2, and JSON 2 serialize wrapped primitives as object
                 // literals.
-                stringify( new Number() ) === "0" &&
-                stringify( new String() ) == '""' &&
+                stringify(new Number()) === "0" &&
+                stringify(new String()) == '""' &&
                 // FF 3.1b1, 2 throw an error if the value is `null`, `undefined`, or
                 // does not define a canonical JSON representation (this applies to
                 // objects with `toJSON` properties as well, *unless* they are nested
                 // within an object or array).
-                stringify( getClass ) === undef &&
+                stringify(getClass) === undef &&
                 // IE 8 serializes `undefined` as `"undefined"`. Safari <= 5.1.7 and
                 // FF 3.1b3 pass this test.
-                stringify( undef ) === undef &&
+                stringify(undef) === undef &&
                 // Safari <= 5.1.7 and FF 3.1b3 throw `Error`s and `TypeError`s,
                 // respectively, if the value is omitted entirely.
                 stringify() === undef &&
@@ -18108,89 +19206,93 @@ createjs.deprecate = function ( fallbackMethod, name ) {
                 // objects with custom `toJSON` methods as well, unless they are nested
                 // inside object or array literals. YUI 3.0.0b1 ignores custom `toJSON`
                 // methods entirely.
-                stringify( value ) === "1" &&
-                stringify( [ value ] ) == "[1]" &&
+                stringify(value) === "1" &&
+                stringify([value]) == "[1]" &&
                 // Prototype <= 1.6.1 serializes `[undefined]` as `"[]"` instead of
                 // `"[null]"`.
-                stringify( [ undef ] ) == "[null]" &&
+                stringify([undef]) == "[null]" &&
                 // YUI 3.0.0b1 fails to serialize `null` literals.
-                stringify( null ) == "null" &&
+                stringify(null) == "null" &&
                 // FF 3.1b1, 2 halts serialization if an array contains a function:
                 // `[1, true, getClass, 1]` serializes as "[1,true,],". FF 3.1b3
                 // elides non-JSON values from objects and arrays, unless they
                 // define custom `toJSON` methods.
-                stringify( [ undef, getClass, null ] ) == "[null,null,null]" &&
+                stringify([undef, getClass, null]) == "[null,null,null]" &&
                 // Simple serialization test. FF 3.1b1 uses Unicode escape sequences
                 // where character escape codes are expected (e.g., `\b` => `\u0008`).
-                stringify( {
-                  "a": [ value, true, false, null, "\x00\b\n\f\r\t" ]
-                } ) == serialized &&
+                stringify({
+                  a: [value, true, false, null, "\x00\b\n\f\r\t"],
+                }) == serialized &&
                 // FF 3.1b1 and b2 ignore the `filter` and `width` arguments.
-                stringify( null, value ) === "1" &&
-                stringify( [ 1, 2 ], null, 1 ) == "[\n 1,\n 2\n]" &&
+                stringify(null, value) === "1" &&
+                stringify([1, 2], null, 1) == "[\n 1,\n 2\n]" &&
                 // JSON 2, Prototype <= 1.7, and older WebKit builds incorrectly
                 // serialize extended years.
-                stringify( new Date( -8.64e15 ) ) == '"-271821-04-20T00:00:00.000Z"' &&
+                stringify(new Date(-8.64e15)) ==
+                  '"-271821-04-20T00:00:00.000Z"' &&
                 // The milliseconds are optional in ES 5, but required in 5.1.
-                stringify( new Date( 8.64e15 ) ) == '"+275760-09-13T00:00:00.000Z"' &&
+                stringify(new Date(8.64e15)) ==
+                  '"+275760-09-13T00:00:00.000Z"' &&
                 // Firefox <= 11.0 incorrectly serializes years prior to 0 as negative
                 // four-digit years instead of six-digit years. Credits: @Yaffle.
-                stringify( new Date( -621987552e5 ) ) == '"-000001-01-01T00:00:00.000Z"' &&
+                stringify(new Date(-621987552e5)) ==
+                  '"-000001-01-01T00:00:00.000Z"' &&
                 // Safari <= 5.1.5 and Opera >= 10.53 incorrectly serialize millisecond
                 // values less than 1000. Credits: @Yaffle.
-                stringify( new Date( -1 ) ) == '"1969-12-31T23:59:59.999Z"';
-            } catch ( exception ) {
+                stringify(new Date(-1)) == '"1969-12-31T23:59:59.999Z"';
+            } catch (exception) {
               stringifySupported = false;
             }
           }
           isSupported = stringifySupported;
         }
         // Test `JSON.parse`.
-        if ( name == "json-parse" ) {
+        if (name == "json-parse") {
           var parse = exports.parse;
-          if ( typeof parse == "function" ) {
+          if (typeof parse == "function") {
             try {
               // FF 3.1b1, b2 will throw an exception if a bare literal is provided.
               // Conforming implementations should also coerce the initial argument to
               // a string prior to parsing.
-              if ( parse( "0" ) === 0 && !parse( false ) ) {
+              if (parse("0") === 0 && !parse(false)) {
                 // Simple parsing test.
-                value = parse( serialized );
-                var parseSupported = value[ "a" ].length == 5 && value[ "a" ][ 0 ] === 1;
-                if ( parseSupported ) {
+                value = parse(serialized);
+                var parseSupported =
+                  value["a"].length == 5 && value["a"][0] === 1;
+                if (parseSupported) {
                   try {
                     // Safari <= 5.1.2 and FF 3.1b1 allow unescaped tabs in strings.
-                    parseSupported = !parse( '"\t"' );
-                  } catch ( exception ) {}
-                  if ( parseSupported ) {
+                    parseSupported = !parse('"\t"');
+                  } catch (exception) {}
+                  if (parseSupported) {
                     try {
                       // FF 4.0 and 4.0.1 allow leading `+` signs and leading
                       // decimal points. FF 4.0, 4.0.1, and IE 9-10 also allow
                       // certain octal literals.
-                      parseSupported = parse( "01" ) !== 1;
-                    } catch ( exception ) {}
+                      parseSupported = parse("01") !== 1;
+                    } catch (exception) {}
                   }
-                  if ( parseSupported ) {
+                  if (parseSupported) {
                     try {
                       // FF 4.0, 4.0.1, and Rhino 1.7R3-R4 allow trailing decimal
                       // points. These environments, along with FF 3.1b1 and 2,
                       // also allow trailing commas in JSON objects and arrays.
-                      parseSupported = parse( "1." ) !== 1;
-                    } catch ( exception ) {}
+                      parseSupported = parse("1.") !== 1;
+                    } catch (exception) {}
                   }
                 }
               }
-            } catch ( exception ) {
+            } catch (exception) {
               parseSupported = false;
             }
           }
           isSupported = parseSupported;
         }
       }
-      return has[ name ] = !!isSupported;
+      return (has[name] = !!isSupported);
     }
 
-    if ( !has( "json" ) ) {
+    if (!has("json")) {
       // Common `[[Class]]` name aliases.
       var functionClass = "[object Function]",
         dateClass = "[object Date]",
@@ -18200,40 +19302,50 @@ createjs.deprecate = function ( fallbackMethod, name ) {
         booleanClass = "[object Boolean]";
 
       // Detect incomplete support for accessing string characters by index.
-      var charIndexBuggy = has( "bug-string-char-index" );
+      var charIndexBuggy = has("bug-string-char-index");
 
       // Define additional utility methods if the `Date` methods are buggy.
-      if ( !isExtended ) {
+      if (!isExtended) {
         var floor = Math.floor;
         // A mapping between the months of the year and the number of days between
         // January 1st and the first of the respective month.
-        var Months = [ 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334 ];
+        var Months = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
         // Internal: Calculates the number of days between the Unix epoch and the
         // first day of the given month.
-        var getDay = function ( year, month ) {
-          return Months[ month ] + 365 * ( year - 1970 ) + floor( ( year - 1969 + ( month = +( month > 1 ) ) ) / 4 ) - floor( ( year - 1901 + month ) / 100 ) + floor( ( year - 1601 + month ) / 400 );
+        var getDay = function (year, month) {
+          return (
+            Months[month] +
+            365 * (year - 1970) +
+            floor((year - 1969 + (month = +(month > 1))) / 4) -
+            floor((year - 1901 + month) / 100) +
+            floor((year - 1601 + month) / 400)
+          );
         };
       }
 
       // Internal: Determines if a property is a direct property of the given
       // object. Delegates to the native `Object#hasOwnProperty` method.
-      if ( !( isProperty = objectProto.hasOwnProperty ) ) {
-        isProperty = function ( property ) {
+      if (!(isProperty = objectProto.hasOwnProperty)) {
+        isProperty = function (property) {
           var members = {},
             constructor;
-          if ( ( members.__proto__ = null, members.__proto__ = {
+          if (
+            ((members.__proto__ = null),
+            (members.__proto__ = {
               // The *proto* property cannot be set multiple times in recent
               // versions of Firefox and SeaMonkey.
-              "toString": 1
-            }, members ).toString != getClass ) {
+              toString: 1,
+            }),
+            members).toString != getClass
+          ) {
             // Safari <= 2.0.3 doesn't implement `Object#hasOwnProperty`, but
             // supports the mutable *proto* property.
-            isProperty = function ( property ) {
+            isProperty = function (property) {
               // Capture and break the object's prototype chain (see section 8.6.2
               // of the ES 5.1 spec). The parenthesized expression prevents an
               // unsafe transformation by the Closure Compiler.
               var original = this.__proto__,
-                result = property in ( this.__proto__ = null, this );
+                result = property in ((this.__proto__ = null), this);
               // Restore the original prototype chain.
               this.__proto__ = original;
               return result;
@@ -18243,93 +19355,132 @@ createjs.deprecate = function ( fallbackMethod, name ) {
             constructor = members.constructor;
             // Use the `constructor` property to simulate `Object#hasOwnProperty` in
             // other environments.
-            isProperty = function ( property ) {
-              var parent = ( this.constructor || constructor ).prototype;
-              return property in this && !( property in parent && this[ property ] === parent[ property ] );
+            isProperty = function (property) {
+              var parent = (this.constructor || constructor).prototype;
+              return (
+                property in this &&
+                !(property in parent && this[property] === parent[property])
+              );
             };
           }
           members = null;
-          return isProperty.call( this, property );
+          return isProperty.call(this, property);
         };
       }
 
       // Internal: Normalizes the `for...in` iteration algorithm across
       // environments. Each enumerated key is yielded to a `callback` function.
-      forEach = function ( object, callback ) {
+      forEach = function (object, callback) {
         var size = 0,
-          Properties, members, property;
+          Properties,
+          members,
+          property;
 
         // Tests for bugs in the current environment's `for...in` algorithm. The
         // `valueOf` property inherits the non-enumerable flag from
         // `Object.prototype` in older versions of IE, Netscape, and Mozilla.
-        ( Properties = function () {
+        (Properties = function () {
           this.valueOf = 0;
-        } ).prototype.valueOf = 0;
+        }).prototype.valueOf = 0;
 
         // Iterate over a new instance of the `Properties` class.
         members = new Properties();
-        for ( property in members ) {
+        for (property in members) {
           // Ignore all properties inherited from `Object.prototype`.
-          if ( isProperty.call( members, property ) ) {
+          if (isProperty.call(members, property)) {
             size++;
           }
         }
         Properties = members = null;
 
         // Normalize the iteration algorithm.
-        if ( !size ) {
+        if (!size) {
           // A list of non-enumerable properties inherited from `Object.prototype`.
-          members = [ "valueOf", "toString", "toLocaleString", "propertyIsEnumerable", "isPrototypeOf", "hasOwnProperty", "constructor" ];
+          members = [
+            "valueOf",
+            "toString",
+            "toLocaleString",
+            "propertyIsEnumerable",
+            "isPrototypeOf",
+            "hasOwnProperty",
+            "constructor",
+          ];
           // IE <= 8, Mozilla 1.0, and Netscape 6.2 ignore shadowed non-enumerable
           // properties.
-          forEach = function ( object, callback ) {
-            var isFunction = getClass.call( object ) == functionClass,
-              property, length;
-            var hasProperty = !isFunction && typeof object.constructor != "function" && objectTypes[ typeof object.hasOwnProperty ] && object.hasOwnProperty || isProperty;
-            for ( property in object ) {
+          forEach = function (object, callback) {
+            var isFunction = getClass.call(object) == functionClass,
+              property,
+              length;
+            var hasProperty =
+              (!isFunction &&
+                typeof object.constructor != "function" &&
+                objectTypes[typeof object.hasOwnProperty] &&
+                object.hasOwnProperty) ||
+              isProperty;
+            for (property in object) {
               // Gecko <= 1.0 enumerates the `prototype` property of functions under
               // certain conditions; IE does not.
-              if ( !( isFunction && property == "prototype" ) && hasProperty.call( object, property ) ) {
-                callback( property );
+              if (
+                !(isFunction && property == "prototype") &&
+                hasProperty.call(object, property)
+              ) {
+                callback(property);
               }
             }
             // Manually invoke the callback for each non-enumerable property.
-            for ( length = members.length; property = members[ --length ]; hasProperty.call( object, property ) && callback( property ) );
+            for (
+              length = members.length;
+              (property = members[--length]);
+              hasProperty.call(object, property) && callback(property)
+            );
           };
-        } else if ( size == 2 ) {
+        } else if (size == 2) {
           // Safari <= 2.0.4 enumerates shadowed properties twice.
-          forEach = function ( object, callback ) {
+          forEach = function (object, callback) {
             // Create a set of iterated properties.
             var members = {},
-              isFunction = getClass.call( object ) == functionClass,
+              isFunction = getClass.call(object) == functionClass,
               property;
-            for ( property in object ) {
+            for (property in object) {
               // Store each property name to prevent double enumeration. The
               // `prototype` property of functions is not enumerated due to cross-
               // environment inconsistencies.
-              if ( !( isFunction && property == "prototype" ) && !isProperty.call( members, property ) && ( members[ property ] = 1 ) && isProperty.call( object, property ) ) {
-                callback( property );
+              if (
+                !(isFunction && property == "prototype") &&
+                !isProperty.call(members, property) &&
+                (members[property] = 1) &&
+                isProperty.call(object, property)
+              ) {
+                callback(property);
               }
             }
           };
         } else {
           // No bugs detected; use the standard `for...in` algorithm.
-          forEach = function ( object, callback ) {
-            var isFunction = getClass.call( object ) == functionClass,
-              property, isConstructor;
-            for ( property in object ) {
-              if ( !( isFunction && property == "prototype" ) && isProperty.call( object, property ) && !( isConstructor = property === "constructor" ) ) {
-                callback( property );
+          forEach = function (object, callback) {
+            var isFunction = getClass.call(object) == functionClass,
+              property,
+              isConstructor;
+            for (property in object) {
+              if (
+                !(isFunction && property == "prototype") &&
+                isProperty.call(object, property) &&
+                !(isConstructor = property === "constructor")
+              ) {
+                callback(property);
               }
             }
             // Manually invoke the callback for the `constructor` property due to
             // cross-environment inconsistencies.
-            if ( isConstructor || isProperty.call( object, ( property = "constructor" ) ) ) {
-              callback( property );
+            if (
+              isConstructor ||
+              isProperty.call(object, (property = "constructor"))
+            ) {
+              callback(property);
             }
           };
         }
-        return forEach( object, callback );
+        return forEach(object, callback);
       };
 
       // Public: Serializes a JavaScript `value` as a JSON string. The optional
@@ -18338,7 +19489,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       // indicates which properties should be serialized. The optional `width`
       // argument may be either a string or number that specifies the indentation
       // level of the output.
-      if ( !has( "json-stringify" ) ) {
+      if (!has("json-stringify")) {
         // Internal: A map of control characters and their escaped equivalents.
         var Escapes = {
           92: "\\\\",
@@ -18347,16 +19498,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
           12: "\\f",
           10: "\\n",
           13: "\\r",
-          9: "\\t"
+          9: "\\t",
         };
 
         // Internal: Converts `value` into a zero-padded string such that its
         // length is at least equal to `width`. The `width` must be <= 6.
         var leadingZeroes = "000000";
-        var toPaddedString = function ( width, value ) {
+        var toPaddedString = function (width, value) {
           // The `|| 0` expression is necessary to work around a bug in
           // Opera <= 7.54u2 where `0 == -0`, but `String(-0) !== "0"`.
-          return ( leadingZeroes + ( value || 0 ) ).slice( -width );
+          return (leadingZeroes + (value || 0)).slice(-width);
         };
 
         // Internal: Double-quotes a string `value`, replacing all ASCII control
@@ -18364,17 +19515,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
         // their escaped equivalents. This is an implementation of the
         // `Quote(value)` operation defined in ES 5.1 section 15.12.3.
         var unicodePrefix = "\\u00";
-        var quote = function ( value ) {
+        var quote = function (value) {
           var result = '"',
             index = 0,
             length = value.length,
             useCharIndex = !charIndexBuggy || length > 10;
-          var symbols = useCharIndex && ( charIndexBuggy ? value.split( "" ) : value );
-          for ( ; index < length; index++ ) {
-            var charCode = value.charCodeAt( index );
+          var symbols =
+            useCharIndex && (charIndexBuggy ? value.split("") : value);
+          for (; index < length; index++) {
+            var charCode = value.charCodeAt(index);
             // If the character is a control character, append its Unicode or
             // shorthand escape sequence; otherwise, append the character as-is.
-            switch ( charCode ) {
+            switch (charCode) {
               case 8:
               case 9:
               case 10:
@@ -18382,14 +19534,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
               case 13:
               case 34:
               case 92:
-                result += Escapes[ charCode ];
+                result += Escapes[charCode];
                 break;
               default:
-                if ( charCode < 32 ) {
-                  result += unicodePrefix + toPaddedString( 2, charCode.toString( 16 ) );
+                if (charCode < 32) {
+                  result +=
+                    unicodePrefix + toPaddedString(2, charCode.toString(16));
                   break;
                 }
-                result += useCharIndex ? symbols[ index ] : value.charAt( index );
+                result += useCharIndex ? symbols[index] : value.charAt(index);
             }
           }
           return result + '"';
@@ -18397,37 +19550,68 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 
         // Internal: Recursively serializes an object. Implements the
         // `Str(key, holder)`, `JO(value)`, and `JA(value)` operations.
-        var serialize = function ( property, object, callback, properties, whitespace, indentation, stack ) {
-          var value, className, year, month, date, time, hours, minutes, seconds, milliseconds, results, element, index, length, prefix, result;
+        var serialize = function (
+          property,
+          object,
+          callback,
+          properties,
+          whitespace,
+          indentation,
+          stack
+        ) {
+          var value,
+            className,
+            year,
+            month,
+            date,
+            time,
+            hours,
+            minutes,
+            seconds,
+            milliseconds,
+            results,
+            element,
+            index,
+            length,
+            prefix,
+            result;
           try {
             // Necessary for host object support.
-            value = object[ property ];
-          } catch ( exception ) {}
-          if ( typeof value == "object" && value ) {
-            className = getClass.call( value );
-            if ( className == dateClass && !isProperty.call( value, "toJSON" ) ) {
-              if ( value > -1 / 0 && value < 1 / 0 ) {
+            value = object[property];
+          } catch (exception) {}
+          if (typeof value == "object" && value) {
+            className = getClass.call(value);
+            if (className == dateClass && !isProperty.call(value, "toJSON")) {
+              if (value > -1 / 0 && value < 1 / 0) {
                 // Dates are serialized according to the `Date#toJSON` method
                 // specified in ES 5.1 section 15.9.5.44. See section 15.9.1.15
                 // for the ISO 8601 date time string format.
-                if ( getDay ) {
+                if (getDay) {
                   // Manually compute the year, month, date, hours, minutes,
                   // seconds, and milliseconds if the `getUTC*` methods are
                   // buggy. Adapted from @Yaffle's `date-shim` project.
-                  date = floor( value / 864e5 );
-                  for ( year = floor( date / 365.2425 ) + 1970 - 1; getDay( year + 1, 0 ) <= date; year++ );
-                  for ( month = floor( ( date - getDay( year, 0 ) ) / 30.42 ); getDay( year, month + 1 ) <= date; month++ );
-                  date = 1 + date - getDay( year, month );
+                  date = floor(value / 864e5);
+                  for (
+                    year = floor(date / 365.2425) + 1970 - 1;
+                    getDay(year + 1, 0) <= date;
+                    year++
+                  );
+                  for (
+                    month = floor((date - getDay(year, 0)) / 30.42);
+                    getDay(year, month + 1) <= date;
+                    month++
+                  );
+                  date = 1 + date - getDay(year, month);
                   // The `time` value specifies the time within the day (see ES
                   // 5.1 section 15.9.1.2). The formula `(A % B + B) % B` is used
                   // to compute `A modulo B`, as the `%` operator does not
                   // correspond to the `modulo` operation for negative numbers.
-                  time = ( value % 864e5 + 864e5 ) % 864e5;
+                  time = ((value % 864e5) + 864e5) % 864e5;
                   // The hours, minutes, seconds, and milliseconds are obtained by
                   // decomposing the time within the day. See section 15.9.1.10.
-                  hours = floor( time / 36e5 ) % 24;
-                  minutes = floor( time / 6e4 ) % 60;
-                  seconds = floor( time / 1e3 ) % 60;
+                  hours = floor(time / 36e5) % 24;
+                  minutes = floor(time / 6e4) % 60;
+                  seconds = floor(time / 1e3) % 60;
                   milliseconds = time % 1e3;
                 } else {
                   year = value.getUTCFullYear();
@@ -18439,84 +19623,140 @@ createjs.deprecate = function ( fallbackMethod, name ) {
                   milliseconds = value.getUTCMilliseconds();
                 }
                 // Serialize extended years correctly.
-                value = ( year <= 0 || year >= 1e4 ? ( year < 0 ? "-" : "+" ) + toPaddedString( 6, year < 0 ? -year : year ) : toPaddedString( 4, year ) ) +
-                  "-" + toPaddedString( 2, month + 1 ) + "-" + toPaddedString( 2, date ) +
+                value =
+                  (year <= 0 || year >= 1e4
+                    ? (year < 0 ? "-" : "+") +
+                      toPaddedString(6, year < 0 ? -year : year)
+                    : toPaddedString(4, year)) +
+                  "-" +
+                  toPaddedString(2, month + 1) +
+                  "-" +
+                  toPaddedString(2, date) +
                   // Months, dates, hours, minutes, and seconds should have two
                   // digits; milliseconds should have three.
-                  "T" + toPaddedString( 2, hours ) + ":" + toPaddedString( 2, minutes ) + ":" + toPaddedString( 2, seconds ) +
+                  "T" +
+                  toPaddedString(2, hours) +
+                  ":" +
+                  toPaddedString(2, minutes) +
+                  ":" +
+                  toPaddedString(2, seconds) +
                   // Milliseconds are optional in ES 5.0, but required in 5.1.
-                  "." + toPaddedString( 3, milliseconds ) + "Z";
+                  "." +
+                  toPaddedString(3, milliseconds) +
+                  "Z";
               } else {
                 value = null;
               }
-            } else if ( typeof value.toJSON == "function" && ( ( className != numberClass && className != stringClass && className != arrayClass ) || isProperty.call( value, "toJSON" ) ) ) {
+            } else if (
+              typeof value.toJSON == "function" &&
+              ((className != numberClass &&
+                className != stringClass &&
+                className != arrayClass) ||
+                isProperty.call(value, "toJSON"))
+            ) {
               // Prototype <= 1.6.1 adds non-standard `toJSON` methods to the
               // `Number`, `String`, `Date`, and `Array` prototypes. JSON 3
               // ignores all `toJSON` methods on these objects unless they are
               // defined directly on an instance.
-              value = value.toJSON( property );
+              value = value.toJSON(property);
             }
           }
-          if ( callback ) {
+          if (callback) {
             // If a replacement function was provided, call it to obtain the value
             // for serialization.
-            value = callback.call( object, property, value );
+            value = callback.call(object, property, value);
           }
-          if ( value === null ) {
+          if (value === null) {
             return "null";
           }
-          className = getClass.call( value );
-          if ( className == booleanClass ) {
+          className = getClass.call(value);
+          if (className == booleanClass) {
             // Booleans are represented literally.
             return "" + value;
-          } else if ( className == numberClass ) {
+          } else if (className == numberClass) {
             // JSON numbers must be finite. `Infinity` and `NaN` are serialized as
             // `"null"`.
             return value > -1 / 0 && value < 1 / 0 ? "" + value : "null";
-          } else if ( className == stringClass ) {
+          } else if (className == stringClass) {
             // Strings are double-quoted and escaped.
-            return quote( "" + value );
+            return quote("" + value);
           }
           // Recursively serialize objects and arrays.
-          if ( typeof value == "object" ) {
+          if (typeof value == "object") {
             // Check for cyclic structures. This is a linear search; performance
             // is inversely proportional to the number of unique nested objects.
-            for ( length = stack.length; length--; ) {
-              if ( stack[ length ] === value ) {
+            for (length = stack.length; length--; ) {
+              if (stack[length] === value) {
                 // Cyclic structures cannot be serialized by `JSON.stringify`.
                 throw TypeError();
               }
             }
             // Add the object to the stack of traversed objects.
-            stack.push( value );
+            stack.push(value);
             results = [];
             // Save the current indentation level and indent one additional level.
             prefix = indentation;
             indentation += whitespace;
-            if ( className == arrayClass ) {
+            if (className == arrayClass) {
               // Recursively serialize array elements.
-              for ( index = 0, length = value.length; index < length; index++ ) {
-                element = serialize( index, value, callback, properties, whitespace, indentation, stack );
-                results.push( element === undef ? "null" : element );
+              for (index = 0, length = value.length; index < length; index++) {
+                element = serialize(
+                  index,
+                  value,
+                  callback,
+                  properties,
+                  whitespace,
+                  indentation,
+                  stack
+                );
+                results.push(element === undef ? "null" : element);
               }
-              result = results.length ? ( whitespace ? "[\n" + indentation + results.join( ",\n" + indentation ) + "\n" + prefix + "]" : ( "[" + results.join( "," ) + "]" ) ) : "[]";
+              result = results.length
+                ? whitespace
+                  ? "[\n" +
+                    indentation +
+                    results.join(",\n" + indentation) +
+                    "\n" +
+                    prefix +
+                    "]"
+                  : "[" + results.join(",") + "]"
+                : "[]";
             } else {
               // Recursively serialize object members. Members are selected from
               // either a user-specified list of property names, or the object
               // itself.
-              forEach( properties || value, function ( property ) {
-                var element = serialize( property, value, callback, properties, whitespace, indentation, stack );
-                if ( element !== undef ) {
+              forEach(properties || value, function (property) {
+                var element = serialize(
+                  property,
+                  value,
+                  callback,
+                  properties,
+                  whitespace,
+                  indentation,
+                  stack
+                );
+                if (element !== undef) {
                   // According to ES 5.1 section 15.12.3: "If `gap` {whitespace}
                   // is not the empty string, let `member` {quote(property) + ":"}
                   // be the concatenation of `member` and the `space` character."
                   // The "`space` character" refers to the literal space
                   // character, not the `space` {width} argument provided to
                   // `JSON.stringify`.
-                  results.push( quote( property ) + ":" + ( whitespace ? " " : "" ) + element );
+                  results.push(
+                    quote(property) + ":" + (whitespace ? " " : "") + element
+                  );
                 }
-              } );
-              result = results.length ? ( whitespace ? "{\n" + indentation + results.join( ",\n" + indentation ) + "\n" + prefix + "}" : ( "{" + results.join( "," ) + "}" ) ) : "{}";
+              });
+              result = results.length
+                ? whitespace
+                  ? "{\n" +
+                    indentation +
+                    results.join(",\n" + indentation) +
+                    "\n" +
+                    prefix +
+                    "}"
+                  : "{" + results.join(",") + "}"
+                : "{}";
             }
             // Remove the object from the traversed object stack.
             stack.pop();
@@ -18525,37 +19765,56 @@ createjs.deprecate = function ( fallbackMethod, name ) {
         };
 
         // Public: `JSON.stringify`. See ES 5.1 section 15.12.3.
-        exports.stringify = function ( source, filter, width ) {
+        exports.stringify = function (source, filter, width) {
           var whitespace, callback, properties, className;
-          if ( objectTypes[ typeof filter ] && filter ) {
-            if ( ( className = getClass.call( filter ) ) == functionClass ) {
+          if (objectTypes[typeof filter] && filter) {
+            if ((className = getClass.call(filter)) == functionClass) {
               callback = filter;
-            } else if ( className == arrayClass ) {
+            } else if (className == arrayClass) {
               // Convert the property names array into a makeshift set.
               properties = {};
-              for ( var index = 0, length = filter.length, value; index < length; value = filter[ index++ ], ( ( className = getClass.call( value ) ), className == stringClass || className == numberClass ) && ( properties[ value ] = 1 ) );
+              for (
+                var index = 0, length = filter.length, value;
+                index < length;
+                value = filter[index++],
+                  ((className = getClass.call(value)),
+                  className == stringClass || className == numberClass) &&
+                    (properties[value] = 1)
+              );
             }
           }
-          if ( width ) {
-            if ( ( className = getClass.call( width ) ) == numberClass ) {
+          if (width) {
+            if ((className = getClass.call(width)) == numberClass) {
               // Convert the `width` to an integer and create a string containing
               // `width` number of space characters.
-              if ( ( width -= width % 1 ) > 0 ) {
-                for ( whitespace = "", width > 10 && ( width = 10 ); whitespace.length < width; whitespace += " " );
+              if ((width -= width % 1) > 0) {
+                for (
+                  whitespace = "", width > 10 && (width = 10);
+                  whitespace.length < width;
+                  whitespace += " "
+                );
               }
-            } else if ( className == stringClass ) {
-              whitespace = width.length <= 10 ? width : width.slice( 0, 10 );
+            } else if (className == stringClass) {
+              whitespace = width.length <= 10 ? width : width.slice(0, 10);
             }
           }
           // Opera <= 7.54u2 discards the values associated with empty string keys
           // (`""`) only if they are used directly within an object member list
           // (e.g., `!("" in { "": 1})`).
-          return serialize( "", ( value = {}, value[ "" ] = source, value ), callback, properties, whitespace, "", [] );
+          return serialize(
+            "",
+            ((value = {}), (value[""] = source), value),
+            callback,
+            properties,
+            whitespace,
+            "",
+            []
+          );
         };
       }
 
       // Public: Parses a JSON source string.
-      if ( !has( "json-parse" ) ) {
+      if (!has("json-parse")) {
         var fromCharCode = String.fromCharCode;
 
         // Internal: A map of escaped control characters and their unescaped
@@ -18568,7 +19827,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
           116: "\t",
           110: "\n",
           102: "\f",
-          114: "\r"
+          114: "\r",
         };
 
         // Internal: Stores the parser state.
@@ -18586,10 +19845,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
         var lex = function () {
           var source = Source,
             length = source.length,
-            value, begin, position, isSigned, charCode;
-          while ( Index < length ) {
-            charCode = source.charCodeAt( Index );
-            switch ( charCode ) {
+            value,
+            begin,
+            position,
+            isSigned,
+            charCode;
+          while (Index < length) {
+            charCode = source.charCodeAt(Index);
+            switch (charCode) {
               case 9:
               case 10:
               case 13:
@@ -18606,7 +19869,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
               case 44:
                 // Parse a punctuator token (`{`, `}`, `[`, `]`, `:`, or `,`) at
                 // the current position.
-                value = charIndexBuggy ? source.charAt( Index ) : source[ Index ];
+                value = charIndexBuggy ? source.charAt(Index) : source[Index];
                 Index++;
                 return value;
               case 34:
@@ -18614,18 +19877,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
                 // begin parsing the string. String tokens are prefixed with the
                 // sentinel `@` character to distinguish them from punctuators and
                 // end-of-string tokens.
-                for ( value = "@", Index++; Index < length; ) {
-                  charCode = source.charCodeAt( Index );
-                  if ( charCode < 32 ) {
+                for (value = "@", Index++; Index < length; ) {
+                  charCode = source.charCodeAt(Index);
+                  if (charCode < 32) {
                     // Unescaped ASCII control characters (those with a code unit
                     // less than the space character) are not permitted.
                     abort();
-                  } else if ( charCode == 92 ) {
+                  } else if (charCode == 92) {
                     // A reverse solidus (`\`) marks the beginning of an escaped
                     // control character (including `"`, `\`, and `/`) or Unicode
                     // escape sequence.
-                    charCode = source.charCodeAt( ++Index );
-                    switch ( charCode ) {
+                    charCode = source.charCodeAt(++Index);
+                    switch (charCode) {
                       case 92:
                       case 34:
                       case 47:
@@ -18635,7 +19898,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
                       case 102:
                       case 114:
                         // Revive escaped control characters.
-                        value += Unescapes[ charCode ];
+                        value += Unescapes[charCode];
                         Index++;
                         break;
                       case 117:
@@ -18643,39 +19906,47 @@ createjs.deprecate = function ( fallbackMethod, name ) {
                         // Advance to the first character and validate the
                         // four-digit code point.
                         begin = ++Index;
-                        for ( position = Index + 4; Index < position; Index++ ) {
-                          charCode = source.charCodeAt( Index );
+                        for (position = Index + 4; Index < position; Index++) {
+                          charCode = source.charCodeAt(Index);
                           // A valid sequence comprises four hexdigits (case-
                           // insensitive) that form a single hexadecimal value.
-                          if ( !( charCode >= 48 && charCode <= 57 || charCode >= 97 && charCode <= 102 || charCode >= 65 && charCode <= 70 ) ) {
+                          if (
+                            !(
+                              (charCode >= 48 && charCode <= 57) ||
+                              (charCode >= 97 && charCode <= 102) ||
+                              (charCode >= 65 && charCode <= 70)
+                            )
+                          ) {
                             // Invalid Unicode escape sequence.
                             abort();
                           }
                         }
                         // Revive the escaped character.
-                        value += fromCharCode( "0x" + source.slice( begin, Index ) );
+                        value += fromCharCode(
+                          "0x" + source.slice(begin, Index)
+                        );
                         break;
                       default:
                         // Invalid escape sequence.
                         abort();
                     }
                   } else {
-                    if ( charCode == 34 ) {
+                    if (charCode == 34) {
                       // An unescaped double-quote character marks the end of the
                       // string.
                       break;
                     }
-                    charCode = source.charCodeAt( Index );
+                    charCode = source.charCodeAt(Index);
                     begin = Index;
                     // Optimize for the common case where a string is valid.
-                    while ( charCode >= 32 && charCode != 92 && charCode != 34 ) {
-                      charCode = source.charCodeAt( ++Index );
+                    while (charCode >= 32 && charCode != 92 && charCode != 34) {
+                      charCode = source.charCodeAt(++Index);
                     }
                     // Append the string as-is.
-                    value += source.slice( begin, Index );
+                    value += source.slice(begin, Index);
                   }
                 }
-                if ( source.charCodeAt( Index ) == 34 ) {
+                if (source.charCodeAt(Index) == 34) {
                   // Advance to the next character and return the revived string.
                   Index++;
                   return value;
@@ -18686,27 +19957,43 @@ createjs.deprecate = function ( fallbackMethod, name ) {
                 // Parse numbers and literals.
                 begin = Index;
                 // Advance past the negative sign, if one is specified.
-                if ( charCode == 45 ) {
+                if (charCode == 45) {
                   isSigned = true;
-                  charCode = source.charCodeAt( ++Index );
+                  charCode = source.charCodeAt(++Index);
                 }
                 // Parse an integer or floating-point value.
-                if ( charCode >= 48 && charCode <= 57 ) {
+                if (charCode >= 48 && charCode <= 57) {
                   // Leading zeroes are interpreted as octal literals.
-                  if ( charCode == 48 && ( ( charCode = source.charCodeAt( Index + 1 ) ), charCode >= 48 && charCode <= 57 ) ) {
+                  if (
+                    charCode == 48 &&
+                    ((charCode = source.charCodeAt(Index + 1)),
+                    charCode >= 48 && charCode <= 57)
+                  ) {
                     // Illegal octal literal.
                     abort();
                   }
                   isSigned = false;
                   // Parse the integer component.
-                  for ( ; Index < length && ( ( charCode = source.charCodeAt( Index ) ), charCode >= 48 && charCode <= 57 ); Index++ );
+                  for (
+                    ;
+                    Index < length &&
+                    ((charCode = source.charCodeAt(Index)),
+                    charCode >= 48 && charCode <= 57);
+                    Index++
+                  );
                   // Floats cannot contain a leading decimal point; however, this
                   // case is already accounted for by the parser.
-                  if ( source.charCodeAt( Index ) == 46 ) {
+                  if (source.charCodeAt(Index) == 46) {
                     position = ++Index;
                     // Parse the decimal component.
-                    for ( ; position < length && ( ( charCode = source.charCodeAt( position ) ), charCode >= 48 && charCode <= 57 ); position++ );
-                    if ( position == Index ) {
+                    for (
+                      ;
+                      position < length &&
+                      ((charCode = source.charCodeAt(position)),
+                      charCode >= 48 && charCode <= 57);
+                      position++
+                    );
+                    if (position == Index) {
                       // Illegal trailing decimal.
                       abort();
                     }
@@ -18714,37 +20001,43 @@ createjs.deprecate = function ( fallbackMethod, name ) {
                   }
                   // Parse exponents. The `e` denoting the exponent is
                   // case-insensitive.
-                  charCode = source.charCodeAt( Index );
-                  if ( charCode == 101 || charCode == 69 ) {
-                    charCode = source.charCodeAt( ++Index );
+                  charCode = source.charCodeAt(Index);
+                  if (charCode == 101 || charCode == 69) {
+                    charCode = source.charCodeAt(++Index);
                     // Skip past the sign following the exponent, if one is
                     // specified.
-                    if ( charCode == 43 || charCode == 45 ) {
+                    if (charCode == 43 || charCode == 45) {
                       Index++;
                     }
                     // Parse the exponential component.
-                    for ( position = Index; position < length && ( ( charCode = source.charCodeAt( position ) ), charCode >= 48 && charCode <= 57 ); position++ );
-                    if ( position == Index ) {
+                    for (
+                      position = Index;
+                      position < length &&
+                      ((charCode = source.charCodeAt(position)),
+                      charCode >= 48 && charCode <= 57);
+                      position++
+                    );
+                    if (position == Index) {
                       // Illegal empty exponent.
                       abort();
                     }
                     Index = position;
                   }
                   // Coerce the parsed value to a JavaScript number.
-                  return +source.slice( begin, Index );
+                  return +source.slice(begin, Index);
                 }
                 // A negative sign may only precede numbers.
-                if ( isSigned ) {
+                if (isSigned) {
                   abort();
                 }
                 // `true`, `false`, and `null` literals.
-                if ( source.slice( Index, Index + 4 ) == "true" ) {
+                if (source.slice(Index, Index + 4) == "true") {
                   Index += 4;
                   return true;
-                } else if ( source.slice( Index, Index + 5 ) == "false" ) {
+                } else if (source.slice(Index, Index + 5) == "false") {
                   Index += 5;
                   return false;
-                } else if ( source.slice( Index, Index + 4 ) == "null" ) {
+                } else if (source.slice(Index, Index + 4) == "null") {
                   Index += 4;
                   return null;
                 }
@@ -18758,34 +20051,34 @@ createjs.deprecate = function ( fallbackMethod, name ) {
         };
 
         // Internal: Parses a JSON `value` token.
-        var get = function ( value ) {
+        var get = function (value) {
           var results, hasMembers;
-          if ( value == "$" ) {
+          if (value == "$") {
             // Unexpected end of input.
             abort();
           }
-          if ( typeof value == "string" ) {
-            if ( ( charIndexBuggy ? value.charAt( 0 ) : value[ 0 ] ) == "@" ) {
+          if (typeof value == "string") {
+            if ((charIndexBuggy ? value.charAt(0) : value[0]) == "@") {
               // Remove the sentinel `@` character.
-              return value.slice( 1 );
+              return value.slice(1);
             }
             // Parse object and array literals.
-            if ( value == "[" ) {
+            if (value == "[") {
               // Parses a JSON array, returning a new JavaScript array.
               results = [];
-              for ( ;; hasMembers || ( hasMembers = true ) ) {
+              for (; ; hasMembers || (hasMembers = true)) {
                 value = lex();
                 // A closing square bracket marks the end of the array literal.
-                if ( value == "]" ) {
+                if (value == "]") {
                   break;
                 }
                 // If the array literal contains elements, the current token
                 // should be a comma separating the previous element from the
                 // next.
-                if ( hasMembers ) {
-                  if ( value == "," ) {
+                if (hasMembers) {
+                  if (value == ",") {
                     value = lex();
-                    if ( value == "]" ) {
+                    if (value == "]") {
                       // Unexpected trailing `,` in array literal.
                       abort();
                     }
@@ -18795,27 +20088,27 @@ createjs.deprecate = function ( fallbackMethod, name ) {
                   }
                 }
                 // Elisions and leading commas are not permitted.
-                if ( value == "," ) {
+                if (value == ",") {
                   abort();
                 }
-                results.push( get( value ) );
+                results.push(get(value));
               }
               return results;
-            } else if ( value == "{" ) {
+            } else if (value == "{") {
               // Parses a JSON object, returning a new JavaScript object.
               results = {};
-              for ( ;; hasMembers || ( hasMembers = true ) ) {
+              for (; ; hasMembers || (hasMembers = true)) {
                 value = lex();
                 // A closing curly brace marks the end of the object literal.
-                if ( value == "}" ) {
+                if (value == "}") {
                   break;
                 }
                 // If the object literal contains members, the current token
                 // should be a comma separator.
-                if ( hasMembers ) {
-                  if ( value == "," ) {
+                if (hasMembers) {
+                  if (value == ",") {
                     value = lex();
-                    if ( value == "}" ) {
+                    if (value == "}") {
                       // Unexpected trailing `,` in object literal.
                       abort();
                     }
@@ -18827,10 +20120,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
                 // Leading commas are not permitted, object property names must be
                 // double-quoted strings, and a `:` must separate each property
                 // name and value.
-                if ( value == "," || typeof value != "string" || ( charIndexBuggy ? value.charAt( 0 ) : value[ 0 ] ) != "@" || lex() != ":" ) {
+                if (
+                  value == "," ||
+                  typeof value != "string" ||
+                  (charIndexBuggy ? value.charAt(0) : value[0]) != "@" ||
+                  lex() != ":"
+                ) {
                   abort();
                 }
-                results[ value.slice( 1 ) ] = get( lex() );
+                results[value.slice(1)] = get(lex());
               }
               return results;
             }
@@ -18841,102 +20139,106 @@ createjs.deprecate = function ( fallbackMethod, name ) {
         };
 
         // Internal: Updates a traversed object member.
-        var update = function ( source, property, callback ) {
-          var element = walk( source, property, callback );
-          if ( element === undef ) {
-            delete source[ property ];
+        var update = function (source, property, callback) {
+          var element = walk(source, property, callback);
+          if (element === undef) {
+            delete source[property];
           } else {
-            source[ property ] = element;
+            source[property] = element;
           }
         };
 
         // Internal: Recursively traverses a parsed JSON object, invoking the
         // `callback` function for each value. This is an implementation of the
         // `Walk(holder, name)` operation defined in ES 5.1 section 15.12.2.
-        var walk = function ( source, property, callback ) {
-          var value = source[ property ],
+        var walk = function (source, property, callback) {
+          var value = source[property],
             length;
-          if ( typeof value == "object" && value ) {
+          if (typeof value == "object" && value) {
             // `forEach` can't be used to traverse an array in Opera <= 8.54
             // because its `Object#hasOwnProperty` implementation returns `false`
             // for array indices (e.g., `![1, 2, 3].hasOwnProperty("0")`).
-            if ( getClass.call( value ) == arrayClass ) {
-              for ( length = value.length; length--; ) {
-                update( value, length, callback );
+            if (getClass.call(value) == arrayClass) {
+              for (length = value.length; length--; ) {
+                update(value, length, callback);
               }
             } else {
-              forEach( value, function ( property ) {
-                update( value, property, callback );
-              } );
+              forEach(value, function (property) {
+                update(value, property, callback);
+              });
             }
           }
-          return callback.call( source, property, value );
+          return callback.call(source, property, value);
         };
 
         // Public: `JSON.parse`. See ES 5.1 section 15.12.2.
-        exports.parse = function ( source, callback ) {
+        exports.parse = function (source, callback) {
           var result, value;
           Index = 0;
           Source = "" + source;
-          result = get( lex() );
+          result = get(lex());
           // If a JSON string contains multiple tokens, it is invalid.
-          if ( lex() != "$" ) {
+          if (lex() != "$") {
             abort();
           }
           // Reset the parser state.
           Index = Source = null;
-          return callback && getClass.call( callback ) == functionClass ? walk( ( value = {}, value[ "" ] = result, value ), "", callback ) : result;
+          return callback && getClass.call(callback) == functionClass
+            ? walk(((value = {}), (value[""] = result), value), "", callback)
+            : result;
         };
       }
     }
 
-    exports[ "runInContext" ] = runInContext;
+    exports["runInContext"] = runInContext;
     return exports;
   }
 
-  if ( freeExports && !isLoader ) {
+  if (freeExports && !isLoader) {
     // Export for CommonJS environments.
-    runInContext( root, freeExports );
+    runInContext(root, freeExports);
   } else {
     // Export for web browsers and JavaScript engines.
     var nativeJSON = root.JSON,
-      previousJSON = root[ "JSON3" ],
+      previousJSON = root["JSON3"],
       isRestored = false;
 
-    var JSON3 = runInContext( root, ( root[ "JSON3" ] = {
-      // Public: Restores the original value of the global `JSON` object and
-      // returns a reference to the `JSON3` object.
-      "noConflict": function () {
-        if ( !isRestored ) {
-          isRestored = true;
-          root.JSON = nativeJSON;
-          root[ "JSON3" ] = previousJSON;
-          nativeJSON = previousJSON = null;
-        }
-        return JSON3;
-      }
-    } ) );
+    var JSON3 = runInContext(
+      root,
+      (root["JSON3"] = {
+        // Public: Restores the original value of the global `JSON` object and
+        // returns a reference to the `JSON3` object.
+        noConflict: function () {
+          if (!isRestored) {
+            isRestored = true;
+            root.JSON = nativeJSON;
+            root["JSON3"] = previousJSON;
+            nativeJSON = previousJSON = null;
+          }
+          return JSON3;
+        },
+      })
+    );
 
     root.JSON = {
-      "parse": JSON3.parse,
-      "stringify": JSON3.stringify
+      parse: JSON3.parse,
+      stringify: JSON3.stringify,
     };
   }
 
   // Export for asynchronous module loaders.
-  if ( isLoader ) {
-    define( function () {
+  if (isLoader) {
+    define(function () {
       return JSON3;
-    } );
+    });
   }
-} ).call( this );
+}.call(this));
 
 //##############################################################################
 // Elements.js
 //##############################################################################
 
-( function () {
-
+(function () {
   /**
    * Convenience methods for creating various elements used by PrelaodJS.
    *
@@ -18945,63 +20247,61 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   var s = {};
 
   s.a = function () {
-    return s.el( "a" );
-  }
+    return s.el("a");
+  };
 
   s.svg = function () {
-    return s.el( "svg" );
-  }
+    return s.el("svg");
+  };
 
   s.object = function () {
-    return s.el( "object" );
-  }
+    return s.el("object");
+  };
 
   s.image = function () {
-    return s.el( "image" );
-  }
+    return s.el("image");
+  };
 
   s.img = function () {
-    return s.el( "img" );
-  }
+    return s.el("img");
+  };
 
   s.style = function () {
-    return s.el( "style" );
-  }
+    return s.el("style");
+  };
 
   s.link = function () {
-    return s.el( "link" );
-  }
+    return s.el("link");
+  };
 
   s.script = function () {
-    return s.el( "script" );
-  }
+    return s.el("script");
+  };
 
   s.audio = function () {
-    return s.el( "audio" );
-  }
+    return s.el("audio");
+  };
 
   s.video = function () {
-    return s.el( "video" );
-  }
+    return s.el("video");
+  };
 
-  s.text = function ( value ) {
-    return document.createTextNode( value );
-  }
+  s.text = function (value) {
+    return document.createTextNode(value);
+  };
 
-  s.el = function ( name ) {
-    return document.createElement( name );
-  }
+  s.el = function (name) {
+    return document.createElement(name);
+  };
 
   createjs.Elements = s;
-
-}() );
+})();
 
 //##############################################################################
 // URLUtils.js
 //##############################################################################
 
-( function () {
-
+(function () {
   /**
    * Utilities that assist with parsing load items, and determining file types, etc.
    * @class URLUtils
@@ -19022,7 +20322,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @type {RegExp}
    * @static
    */
-  s.RELATIVE_PATT = ( /^[./]*?\//i );
+  s.RELATIVE_PATT = /^[./]*?\//i;
 
   /**
    * The Regular Expression used to test file URLS for an extension. Note that URIs must already have the query string
@@ -19051,7 +20351,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    *
    * @static
    */
-  s.parseURI = function ( path ) {
+  s.parseURI = function (path) {
     var info = {
       absolute: false,
       relative: false,
@@ -19061,10 +20361,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       pathname: null,
       search: null,
       hash: null,
-      host: null
+      host: null,
     };
 
-    if ( path == null ) {
+    if (path == null) {
       return info;
     }
 
@@ -19072,31 +20372,31 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     var parser = createjs.Elements.a();
     parser.href = path;
 
-    for ( var n in info ) {
-      if ( n in parser ) {
-        info[ n ] = parser[ n ];
+    for (var n in info) {
+      if (n in parser) {
+        info[n] = parser[n];
       }
     }
 
     // Drop the query string
-    var queryIndex = path.indexOf( "?" );
-    if ( queryIndex > -1 ) {
-      path = path.substr( 0, queryIndex );
+    var queryIndex = path.indexOf("?");
+    if (queryIndex > -1) {
+      path = path.substr(0, queryIndex);
     }
 
     // Absolute
     var match;
-    if ( s.ABSOLUTE_PATT.test( path ) ) {
+    if (s.ABSOLUTE_PATT.test(path)) {
       info.absolute = true;
 
       // Relative
-    } else if ( s.RELATIVE_PATT.test( path ) ) {
+    } else if (s.RELATIVE_PATT.test(path)) {
       info.relative = true;
     }
 
     // Extension
-    if ( match = path.match( s.EXTENSION_PATT ) ) {
-      info.extension = match[ 1 ].toLowerCase();
+    if ((match = path.match(s.EXTENSION_PATT))) {
+      info.extension = match[1].toLowerCase();
     }
 
     return info;
@@ -19109,18 +20409,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Array} [query] Existing name/value pairs to append on to this query.
    * @static
    */
-  s.formatQueryString = function ( data, query ) {
-    if ( data == null ) {
-      throw new Error( "You must specify data." );
+  s.formatQueryString = function (data, query) {
+    if (data == null) {
+      throw new Error("You must specify data.");
     }
     var params = [];
-    for ( var n in data ) {
-      params.push( n + "=" + escape( data[ n ] ) );
+    for (var n in data) {
+      params.push(n + "=" + escape(data[n]));
     }
-    if ( query ) {
-      params = params.concat( query );
+    if (query) {
+      params = params.concat(query);
     }
-    return params.join( "&" );
+    return params.join("&");
   };
 
   /**
@@ -19132,23 +20432,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {string} A formatted string that contains the path and the supplied parameters.
    * @static
    */
-  s.buildURI = function ( src, data ) {
-    if ( data == null ) {
+  s.buildURI = function (src, data) {
+    if (data == null) {
       return src;
     }
 
     var query = [];
-    var idx = src.indexOf( "?" );
+    var idx = src.indexOf("?");
 
-    if ( idx != -1 ) {
-      var q = src.slice( idx + 1 );
-      query = query.concat( q.split( "&" ) );
+    if (idx != -1) {
+      var q = src.slice(idx + 1);
+      query = query.concat(q.split("&"));
     }
 
-    if ( idx != -1 ) {
-      return src.slice( 0, idx ) + "?" + this.formatQueryString( data, query );
+    if (idx != -1) {
+      return src.slice(0, idx) + "?" + this.formatQueryString(data, query);
     } else {
-      return src + "?" + this.formatQueryString( data, query );
+      return src + "?" + this.formatQueryString(data, query);
     }
   };
 
@@ -19158,17 +20458,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} If the load item is loading from a different domain than the current location.
    * @static
    */
-  s.isCrossDomain = function ( item ) {
+  s.isCrossDomain = function (item) {
     var target = createjs.Elements.a();
     target.href = item.src;
 
     var host = createjs.Elements.a();
     host.href = location.href;
 
-    var crossdomain = ( target.hostname != "" ) &&
-      ( target.port != host.port ||
+    var crossdomain =
+      target.hostname != "" &&
+      (target.port != host.port ||
         target.protocol != host.protocol ||
-        target.hostname != host.hostname );
+        target.hostname != host.hostname);
     return crossdomain;
   };
 
@@ -19179,62 +20480,64 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * well.
    * @static
    */
-  s.isLocal = function ( item ) {
+  s.isLocal = function (item) {
     var target = createjs.Elements.a();
     target.href = item.src;
     return target.hostname == "" && target.protocol == "file:";
   };
 
   createjs.URLUtils = s;
-
-}() );
+})();
 
 //##############################################################################
 // DomUtils.js
 //##############################################################################
 
-( function () {
-
+(function () {
   /**
    * A few utilities for interacting with the dom.
    * @class DomUtils
    */
   var s = {
-    container: null
+    container: null,
   };
 
-  s.appendToHead = function ( el ) {
-    s.getHead().appendChild( el );
-  }
+  s.appendToHead = function (el) {
+    s.getHead().appendChild(el);
+  };
 
-  s.appendToBody = function ( el ) {
-    if ( s.container == null ) {
-      s.container = document.createElement( "div" );
+  s.appendToBody = function (el) {
+    if (s.container == null) {
+      s.container = document.createElement("div");
       s.container.id = "preloadjs-container";
       var style = s.container.style;
       style.visibility = "hidden";
       style.position = "absolute";
       style.width = s.container.style.height = "10px";
       style.overflow = "hidden";
-      style.transform = style.msTransform = style.webkitTransform = style.oTransform = "translate(-10px, -10px)"; //LM: Not working
-      s.getBody().appendChild( s.container );
+      style.transform =
+        style.msTransform =
+        style.webkitTransform =
+        style.oTransform =
+          "translate(-10px, -10px)"; //LM: Not working
+      s.getBody().appendChild(s.container);
     }
-    s.container.appendChild( el );
-  }
+    s.container.appendChild(el);
+  };
 
   s.getHead = function () {
-    return document.head || document.getElementsByTagName( "head" )[ 0 ];
-  }
+    return document.head || document.getElementsByTagName("head")[0];
+  };
 
   s.getBody = function () {
-    return document.body || document.getElementsByTagName( "body" )[ 0 ];
-  }
+    return document.body || document.getElementsByTagName("body")[0];
+  };
 
-  s.removeChild = function ( el ) {
-    if ( el.parent ) {
-      el.parent.removeChild( el );
+  s.removeChild = function (el) {
+    if (el.parent) {
+      el.parent.removeChild(el);
     }
-  }
+  };
 
   /**
    * Check if item is a valid HTMLImageElement
@@ -19243,7 +20546,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Boolean}
    * @static
    */
-  s.isImageTag = function ( item ) {
+  s.isImageTag = function (item) {
     return item instanceof HTMLImageElement;
   };
 
@@ -19254,8 +20557,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Boolean}
    * @static
    */
-  s.isAudioTag = function ( item ) {
-    if ( window.HTMLAudioElement ) {
+  s.isAudioTag = function (item) {
+    if (window.HTMLAudioElement) {
       return item instanceof HTMLAudioElement;
     } else {
       return false;
@@ -19269,8 +20572,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Boolean}
    * @static
    */
-  s.isVideoTag = function ( item ) {
-    if ( window.HTMLVideoElement ) {
+  s.isVideoTag = function (item) {
+    if (window.HTMLVideoElement) {
       return item instanceof HTMLVideoElement;
     } else {
       return false;
@@ -19278,15 +20581,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   };
 
   createjs.DomUtils = s;
-
-}() );
+})();
 
 //##############################################################################
 // DataUtils.js
 //##############################################################################
 
-( function () {
-
+(function () {
   /**
    * A few data utilities for formatting different data types.
    * @class DataUtils
@@ -19301,26 +20602,26 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {XML} An XML document
    * @static
    */
-  s.parseXML = function ( text ) {
+  s.parseXML = function (text) {
     var xml = null;
     // CocoonJS does not support XML parsing with either method.
 
     // Most browsers will use DOMParser
     // IE fails on certain SVG files, so we have a fallback below.
     try {
-      if ( window.DOMParser ) {
+      if (window.DOMParser) {
         var parser = new DOMParser();
-        xml = parser.parseFromString( text, "text/xml" );
+        xml = parser.parseFromString(text, "text/xml");
       }
-    } catch ( e ) {}
+    } catch (e) {}
 
     // Fallback for IE support.
-    if ( !xml ) {
+    if (!xml) {
       try {
-        xml = new ActiveXObject( "Microsoft.XMLDOM" );
+        xml = new ActiveXObject("Microsoft.XMLDOM");
         xml.async = false;
-        xml.loadXML( text );
-      } catch ( e ) {
+        xml.loadXML(text);
+      } catch (e) {
         xml = null;
       }
     }
@@ -19334,28 +20635,27 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String} value The loaded JSON string
    * @returns {Object} A JavaScript object.
    */
-  s.parseJSON = function ( value ) {
-    if ( value == null ) {
+  s.parseJSON = function (value) {
+    if (value == null) {
       return null;
     }
 
     try {
-      return JSON.parse( value );
-    } catch ( e ) {
+      return JSON.parse(value);
+    } catch (e) {
       // TODO; Handle this with a custom error?
       throw e;
     }
   };
 
   createjs.DataUtils = s;
-
-}() );
+})();
 
 //##############################################################################
 // Types.js
 //##############################################################################
 
-( function () {
+(function () {
   var s = {};
 
   /**
@@ -19528,13 +20828,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   s.XML = "xml";
 
   createjs.Types = s;
-}() );
+})();
 
 //##############################################################################
 // Methods.js
 //##############################################################################
 
-( function () {
+(function () {
   var s = {};
 
   /**
@@ -19556,13 +20856,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   s.GET = "GET";
 
   createjs.Methods = s;
-}() );
+})();
 
 //##############################################################################
 // LoadItem.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   /**
@@ -19692,9 +20992,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @default 8000 (8 seconds)
      */
     this.loadTimeout = s.LOAD_TIMEOUT_DEFAULT;
-  };
+  }
 
-  var p = LoadItem.prototype = {};
+  var p = (LoadItem.prototype = {});
   var s = LoadItem;
 
   /**
@@ -19718,20 +21018,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {LoadItem|Object}
    * @static
    */
-  s.create = function ( value ) {
-    if ( typeof value == "string" ) {
+  s.create = function (value) {
+    if (typeof value == "string") {
       var item = new LoadItem();
       item.src = value;
       return item;
-    } else if ( value instanceof s ) {
+    } else if (value instanceof s) {
       return value;
-    } else if ( value instanceof Object && value.src ) {
-      if ( value.loadTimeout == null ) {
+    } else if (value instanceof Object && value.src) {
+      if (value.loadTimeout == null) {
         value.loadTimeout = s.LOAD_TIMEOUT_DEFAULT;
       }
       return value;
     } else {
-      throw new Error( "Type not recognized." );
+      throw new Error("Type not recognized.");
     }
   };
 
@@ -19746,23 +21046,21 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} props A generic object containing properties to copy to the LoadItem instance.
    * @return {LoadItem} Returns the instance the method is called on (useful for chaining calls.)
    */
-  p.set = function ( props ) {
-    for ( var n in props ) {
-      this[ n ] = props[ n ];
+  p.set = function (props) {
+    for (var n in props) {
+      this[n] = props[n];
     }
     return this;
   };
 
   createjs.LoadItem = s;
-
-}() );
+})();
 
 //##############################################################################
 // RequestUtils.js
 //##############################################################################
 
-( function () {
-
+(function () {
   /**
    * Utilities that assist with parsing load items, and determining file types, etc.
    * @class RequestUtils
@@ -19780,8 +21078,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} If the specified type is binary.
    * @static
    */
-  s.isBinary = function ( type ) {
-    switch ( type ) {
+  s.isBinary = function (type) {
+    switch (type) {
       case createjs.Types.IMAGE:
       case createjs.Types.BINARY:
         return true;
@@ -19797,8 +21095,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} If the specified type is text.
    * @static
    */
-  s.isText = function ( type ) {
-    switch ( type ) {
+  s.isText = function (type) {
+    switch (type) {
       case createjs.Types.TEXT:
       case createjs.Types.JSON:
       case createjs.Types.MANIFEST:
@@ -19822,12 +21120,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * the type can not be determined by the extension.
    * @static
    */
-  s.getTypeByExtension = function ( extension ) {
-    if ( extension == null ) {
+  s.getTypeByExtension = function (extension) {
+    if (extension == null) {
       return createjs.Types.TEXT;
     }
 
-    switch ( extension.toLowerCase() ) {
+    switch (extension.toLowerCase()) {
       case "jpeg":
       case "jpg":
       case "gif":
@@ -19851,7 +21149,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
         return createjs.Types.CSS;
       case "js":
         return createjs.Types.JAVASCRIPT;
-      case 'svg':
+      case "svg":
         return createjs.Types.SVG;
       default:
         return createjs.Types.TEXT;
@@ -19859,14 +21157,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   };
 
   createjs.RequestUtils = s;
-
-}() );
+})();
 
 //##############################################################################
 // AbstractLoader.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   // constructor
@@ -19882,7 +21179,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * such as {{#crossLink "IMAGE:property"}}{{/crossLink}}, {{#crossLink "CSS:property"}}{{/crossLink}}, etc.
    * @extends EventDispatcher
    */
-  function AbstractLoader( loadItem, preferXHR, type ) {
+  function AbstractLoader(loadItem, preferXHR, type) {
     this.EventDispatcher_constructor();
 
     // public properties
@@ -19963,8 +21260,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @type {LoadItem|Object}
      * @private
      */
-    if ( loadItem ) {
-      this._item = createjs.LoadItem.create( loadItem );
+    if (loadItem) {
+      this._item = createjs.LoadItem.create(loadItem);
     } else {
       this._item = null;
     }
@@ -20021,102 +21318,102 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @private
      */
     this._tag = null;
-  };
+  }
 
-  var p = createjs.extend( AbstractLoader, createjs.EventDispatcher );
+  var p = createjs.extend(AbstractLoader, createjs.EventDispatcher);
   var s = AbstractLoader;
 
   // Remove these @deprecated properties after 1.0
   try {
-    Object.defineProperties( s, {
+    Object.defineProperties(s, {
       POST: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Methods.POST;
-        }, "AbstractLoader.POST" )
+        }, "AbstractLoader.POST"),
       },
       GET: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Methods.GET;
-        }, "AbstractLoader.GET" )
+        }, "AbstractLoader.GET"),
       },
 
       BINARY: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.BINARY;
-        }, "AbstractLoader.BINARY" )
+        }, "AbstractLoader.BINARY"),
       },
       CSS: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.CSS;
-        }, "AbstractLoader.CSS" )
+        }, "AbstractLoader.CSS"),
       },
       FONT: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.FONT;
-        }, "AbstractLoader.FONT" )
+        }, "AbstractLoader.FONT"),
       },
       FONTCSS: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.FONTCSS;
-        }, "AbstractLoader.FONTCSS" )
+        }, "AbstractLoader.FONTCSS"),
       },
       IMAGE: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.IMAGE;
-        }, "AbstractLoader.IMAGE" )
+        }, "AbstractLoader.IMAGE"),
       },
       JAVASCRIPT: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.JAVASCRIPT;
-        }, "AbstractLoader.JAVASCRIPT" )
+        }, "AbstractLoader.JAVASCRIPT"),
       },
       JSON: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.JSON;
-        }, "AbstractLoader.JSON" )
+        }, "AbstractLoader.JSON"),
       },
       JSONP: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.JSONP;
-        }, "AbstractLoader.JSONP" )
+        }, "AbstractLoader.JSONP"),
       },
       MANIFEST: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.MANIFEST;
-        }, "AbstractLoader.MANIFEST" )
+        }, "AbstractLoader.MANIFEST"),
       },
       SOUND: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.SOUND;
-        }, "AbstractLoader.SOUND" )
+        }, "AbstractLoader.SOUND"),
       },
       VIDEO: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.VIDEO;
-        }, "AbstractLoader.VIDEO" )
+        }, "AbstractLoader.VIDEO"),
       },
       SPRITESHEET: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.SPRITESHEET;
-        }, "AbstractLoader.SPRITESHEET" )
+        }, "AbstractLoader.SPRITESHEET"),
       },
       SVG: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.SVG;
-        }, "AbstractLoader.SVG" )
+        }, "AbstractLoader.SVG"),
       },
       TEXT: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.TEXT;
-        }, "AbstractLoader.TEXT" )
+        }, "AbstractLoader.TEXT"),
       },
       XML: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.XML;
-        }, "AbstractLoader.XML" )
-      }
-    } );
-  } catch ( e ) {}
+        }, "AbstractLoader.XML"),
+      },
+    });
+  } catch (e) {}
 
   // Events
   /**
@@ -20186,7 +21483,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {AbstractLoader} loader The loader that has been initialized.
    */
 
-
   /**
    * Get a reference to the manifest item that is loaded by this loader. In some cases this will be the value that was
    * passed into {{#crossLink "LoadQueue"}}{{/crossLink}} using {{#crossLink "LoadQueue/loadFile"}}{{/crossLink}} or
@@ -20209,7 +21505,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Object}
    * @since 0.6.0
    */
-  p.getResult = function ( raw ) {
+  p.getResult = function (raw) {
     return raw ? this._rawResult : this._result;
   };
 
@@ -20229,7 +21525,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} tag The tag instance
    * @since 0.6.0
    */
-  p.setTag = function ( tag ) {
+  p.setTag = function (tag) {
     this._tag = tag;
   };
 
@@ -20248,16 +21544,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   p.load = function () {
     this._createRequest();
 
-    this._request.on( "complete", this, this );
-    this._request.on( "progress", this, this );
-    this._request.on( "loadStart", this, this );
-    this._request.on( "abort", this, this );
-    this._request.on( "timeout", this, this );
-    this._request.on( "error", this, this );
+    this._request.on("complete", this, this);
+    this._request.on("progress", this, this);
+    this._request.on("loadStart", this, this);
+    this._request.on("abort", this, this);
+    this._request.on("timeout", this, this);
+    this._request.on("error", this, this);
 
-    var evt = new createjs.Event( "initialize" );
+    var evt = new createjs.Event("initialize");
     evt.loader = this._request;
-    this.dispatchEvent( evt );
+    this.dispatchEvent(evt);
 
     this._request.load();
   };
@@ -20277,7 +21573,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method destroy
    */
   p.destroy = function () {
-    if ( this._request ) {
+    if (this._request) {
       this._request.removeAllEventListeners();
       this._request.destroy();
     }
@@ -20304,7 +21600,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return this._loadedItems;
   };
 
-
   // Private methods
   /**
    * Create an internal request used for loading. By default, an {{#crossLink "XHRRequest"}}{{/crossLink}} or
@@ -20315,10 +21610,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    */
   p._createRequest = function () {
-    if ( !this._preferXHR ) {
-      this._request = new createjs.TagRequest( this._item, this._tag || this._createTag(), this._tagSrcAttribute );
+    if (!this._preferXHR) {
+      this._request = new createjs.TagRequest(
+        this._item,
+        this._tag || this._createTag(),
+        this._tagSrcAttribute
+      );
     } else {
-      this._request = new createjs.XHRRequest( this._item );
+      this._request = new createjs.XHRRequest(this._item);
     }
   };
 
@@ -20330,7 +21629,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {HTMLElement} The tag that was created
    * @protected
    */
-  p._createTag = function ( src ) {
+  p._createTag = function (src) {
     return null;
   };
 
@@ -20341,10 +21640,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    */
   p._sendLoadStart = function () {
-    if ( this._isCanceled() ) {
+    if (this._isCanceled()) {
       return;
     }
-    this.dispatchEvent( "loadstart" );
+    this.dispatchEvent("loadstart");
   };
 
   /**
@@ -20354,23 +21653,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * and <code>total</code> properties.
    * @protected
    */
-  p._sendProgress = function ( value ) {
-    if ( this._isCanceled() ) {
+  p._sendProgress = function (value) {
+    if (this._isCanceled()) {
       return;
     }
     var event = null;
-    if ( typeof ( value ) == "number" ) {
+    if (typeof value == "number") {
       this.progress = value;
-      event = new createjs.ProgressEvent( this.progress );
+      event = new createjs.ProgressEvent(this.progress);
     } else {
       event = value;
       this.progress = value.loaded / value.total;
       event.progress = this.progress;
-      if ( isNaN( this.progress ) || this.progress == Infinity ) {
+      if (isNaN(this.progress) || this.progress == Infinity) {
         this.progress = 0;
       }
     }
-    this.hasEventListener( "progress" ) && this.dispatchEvent( event );
+    this.hasEventListener("progress") && this.dispatchEvent(event);
   };
 
   /**
@@ -20379,20 +21678,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    */
   p._sendComplete = function () {
-    if ( this._isCanceled() ) {
+    if (this._isCanceled()) {
       return;
     }
 
     this.loaded = true;
 
-    var event = new createjs.Event( "complete" );
+    var event = new createjs.Event("complete");
     event.rawResult = this._rawResult;
 
-    if ( this._result != null ) {
+    if (this._result != null) {
       event.result = this._result;
     }
 
-    this.dispatchEvent( event );
+    this.dispatchEvent(event);
   };
 
   /**
@@ -20402,14 +21701,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {ErrorEvent} event The event object containing specific error properties.
    * @protected
    */
-  p._sendError = function ( event ) {
-    if ( this._isCanceled() || !this.hasEventListener( "error" ) ) {
+  p._sendError = function (event) {
+    if (this._isCanceled() || !this.hasEventListener("error")) {
       return;
     }
-    if ( event == null ) {
-      event = new createjs.ErrorEvent( "PRELOAD_ERROR_EMPTY" ); // TODO: Populate error
+    if (event == null) {
+      event = new createjs.ErrorEvent("PRELOAD_ERROR_EMPTY"); // TODO: Populate error
     }
-    this.dispatchEvent( event );
+    this.dispatchEvent(event);
   };
 
   /**
@@ -20420,7 +21719,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    */
   p._isCanceled = function () {
-    if ( window.createjs == null || this.canceled ) {
+    if (window.createjs == null || this.canceled) {
       return true;
     }
     return false;
@@ -20445,16 +21744,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @since 0.6.0
    */
-  p.handleEvent = function ( event ) {
-    switch ( event.type ) {
+  p.handleEvent = function (event) {
+    switch (event.type) {
       case "complete":
         this._rawResult = event.target._response;
-        var result = this.resultFormatter && this.resultFormatter( this );
+        var result = this.resultFormatter && this.resultFormatter(this);
         // The resultFormatter is asynchronous
-        if ( result instanceof Function ) {
-          result.call( this,
-            createjs.proxy( this._resultFormatSuccess, this ),
-            createjs.proxy( this._resultFormatFailed, this )
+        if (result instanceof Function) {
+          result.call(
+            this,
+            createjs.proxy(this._resultFormatSuccess, this),
+            createjs.proxy(this._resultFormatFailed, this)
           );
           // The result formatter is synchronous
         } else {
@@ -20463,18 +21763,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
         }
         break;
       case "progress":
-        this._sendProgress( event );
+        this._sendProgress(event);
         break;
       case "error":
-        this._sendError( event );
+        this._sendError(event);
         break;
       case "loadstart":
         this._sendLoadStart();
         break;
       case "abort":
       case "timeout":
-        if ( !this._isCanceled() ) {
-          this.dispatchEvent( new createjs.ErrorEvent( "PRELOAD_" + event.type.toUpperCase() + "_ERROR" ) );
+        if (!this._isCanceled()) {
+          this.dispatchEvent(
+            new createjs.ErrorEvent(
+              "PRELOAD_" + event.type.toUpperCase() + "_ERROR"
+            )
+          );
         }
         break;
     }
@@ -20487,7 +21791,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} result The formatted result
    * @private
    */
-  p._resultFormatSuccess = function ( result ) {
+  p._resultFormatSuccess = function (result) {
     this._result = result;
     this._sendComplete();
   };
@@ -20499,8 +21803,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} error The error event
    * @private
    */
-  p._resultFormatFailed = function ( event ) {
-    this._sendError( event );
+  p._resultFormatFailed = function (event) {
+    this._sendError(event);
   };
 
   /**
@@ -20511,15 +21815,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return "[PreloadJS AbstractLoader]";
   };
 
-  createjs.AbstractLoader = createjs.promote( AbstractLoader, "EventDispatcher" );
-
-}() );
+  createjs.AbstractLoader = createjs.promote(AbstractLoader, "EventDispatcher");
+})();
 
 //##############################################################################
 // AbstractMediaLoader.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   // constructor
@@ -20533,8 +21836,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends AbstractLoader
    * @constructor
    */
-  function AbstractMediaLoader( loadItem, preferXHR, type ) {
-    this.AbstractLoader_constructor( loadItem, preferXHR, type );
+  function AbstractMediaLoader(loadItem, preferXHR, type) {
+    this.AbstractLoader_constructor(loadItem, preferXHR, type);
 
     // public properties
     this.resultFormatter = this._formatResult;
@@ -20542,17 +21845,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     // protected properties
     this._tagSrcAttribute = "src";
 
-    this.on( "initialize", this._updateXHR, this );
-  };
+    this.on("initialize", this._updateXHR, this);
+  }
 
-  var p = createjs.extend( AbstractMediaLoader, createjs.AbstractLoader );
+  var p = createjs.extend(AbstractMediaLoader, createjs.AbstractLoader);
 
   // static properties
   // public methods
   p.load = function () {
     // TagRequest will handle most of this, but Sound / Video need a few custom properties, so just handle them here.
-    if ( !this._tag ) {
-      this._tag = this._createTag( this._item.src );
+    if (!this._tag) {
+      this._tag = this._createTag(this._item.src);
     }
 
     this._tag.preload = "auto";
@@ -20569,12 +21872,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   p._createTag = function () {};
 
-
   p._createRequest = function () {
-    if ( !this._preferXHR ) {
-      this._request = new createjs.MediaTagRequest( this._item, this._tag || this._createTag(), this._tagSrcAttribute );
+    if (!this._preferXHR) {
+      this._request = new createjs.MediaTagRequest(
+        this._item,
+        this._tag || this._createTag(),
+        this._tagSrcAttribute
+      );
     } else {
-      this._request = new createjs.XHRRequest( this._item );
+      this._request = new createjs.XHRRequest(this._item);
     }
   };
 
@@ -20585,10 +21891,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Event} event
    * @private
    */
-  p._updateXHR = function ( event ) {
+  p._updateXHR = function (event) {
     // Only exists for XHR
-    if ( event.loader.setResponseType ) {
-      event.loader.setResponseType( "blob" );
+    if (event.loader.setResponseType) {
+      event.loader.setResponseType("blob");
     }
   };
 
@@ -20599,27 +21905,30 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {HTMLVideoElement|HTMLAudioElement}
    * @private
    */
-  p._formatResult = function ( loader ) {
-    this._tag.removeEventListener && this._tag.removeEventListener( "canplaythrough", this._loadedHandler );
+  p._formatResult = function (loader) {
+    this._tag.removeEventListener &&
+      this._tag.removeEventListener("canplaythrough", this._loadedHandler);
     this._tag.onstalled = null;
-    if ( this._preferXHR ) {
+    if (this._preferXHR) {
       var URL = window.URL || window.webkitURL;
-      var result = loader.getResult( true );
+      var result = loader.getResult(true);
 
-      loader.getTag().src = URL.createObjectURL( result );
+      loader.getTag().src = URL.createObjectURL(result);
     }
     return loader.getTag();
   };
 
-  createjs.AbstractMediaLoader = createjs.promote( AbstractMediaLoader, "AbstractLoader" );
-
-}() );
+  createjs.AbstractMediaLoader = createjs.promote(
+    AbstractMediaLoader,
+    "AbstractLoader"
+  );
+})();
 
 //##############################################################################
 // AbstractRequest.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   /**
@@ -20630,11 +21939,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {LoadItem} item
    * @constructor
    */
-  var AbstractRequest = function ( item ) {
+  var AbstractRequest = function (item) {
     this._item = item;
   };
 
-  var p = createjs.extend( AbstractRequest, createjs.EventDispatcher );
+  var p = createjs.extend(AbstractRequest, createjs.EventDispatcher);
 
   // public methods
   /**
@@ -20655,15 +21964,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   p.cancel = function () {};
 
-  createjs.AbstractRequest = createjs.promote( AbstractRequest, "EventDispatcher" );
-
-}() );
+  createjs.AbstractRequest = createjs.promote(
+    AbstractRequest,
+    "EventDispatcher"
+  );
+})();
 
 //##############################################################################
 // TagRequest.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   // constructor
@@ -20674,8 +21985,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {HTMLElement} tag
    * @param {String} srcAttribute The tag attribute that specifies the source, such as "src", "href", etc.
    */
-  function TagRequest( loadItem, tag, srcAttribute ) {
-    this.AbstractRequest_constructor( loadItem );
+  function TagRequest(loadItem, tag, srcAttribute) {
+    this.AbstractRequest_constructor(loadItem);
 
     // protected properties
     /**
@@ -20700,7 +22011,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @type {Function}
      * @private
      */
-    this._loadedHandler = createjs.proxy( this._handleTagComplete, this );
+    this._loadedHandler = createjs.proxy(this._handleTagComplete, this);
 
     /**
      * Determines if the element was added to the DOM automatically by PreloadJS, so it can be cleaned up after.
@@ -20709,29 +22020,34 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @private
      */
     this._addedToDOM = false;
+  }
 
-  };
-
-  var p = createjs.extend( TagRequest, createjs.AbstractRequest );
+  var p = createjs.extend(TagRequest, createjs.AbstractRequest);
 
   // public methods
   p.load = function () {
-    this._tag.onload = createjs.proxy( this._handleTagComplete, this );
-    this._tag.onreadystatechange = createjs.proxy( this._handleReadyStateChange, this );
-    this._tag.onerror = createjs.proxy( this._handleError, this );
+    this._tag.onload = createjs.proxy(this._handleTagComplete, this);
+    this._tag.onreadystatechange = createjs.proxy(
+      this._handleReadyStateChange,
+      this
+    );
+    this._tag.onerror = createjs.proxy(this._handleError, this);
 
-    var evt = new createjs.Event( "initialize" );
+    var evt = new createjs.Event("initialize");
     evt.loader = this._tag;
 
-    this.dispatchEvent( evt );
+    this.dispatchEvent(evt);
 
-    this._loadTimeout = setTimeout( createjs.proxy( this._handleTimeout, this ), this._item.loadTimeout );
+    this._loadTimeout = setTimeout(
+      createjs.proxy(this._handleTimeout, this),
+      this._item.loadTimeout
+    );
 
-    this._tag[ this._tagSrcAttribute ] = this._item.src;
+    this._tag[this._tagSrcAttribute] = this._item.src;
 
     // wdg:: Append the tag AFTER setting the src, or SVG loading on iOS will fail.
-    if ( this._tag.parentNode == null ) {
-      createjs.DomUtils.appendToBody( this._tag );
+    if (this._tag.parentNode == null) {
+      createjs.DomUtils.appendToBody(this._tag);
       this._addedToDOM = true;
     }
   };
@@ -20751,12 +22067,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @private
    */
   p._handleReadyStateChange = function () {
-    clearTimeout( this._loadTimeout );
+    clearTimeout(this._loadTimeout);
     // This is strictly for tags in browsers that do not support onload.
     var tag = this._tag;
 
     // Complete is for old IE support.
-    if ( tag.readyState == "loaded" || tag.readyState == "complete" ) {
+    if (tag.readyState == "loaded" || tag.readyState == "complete") {
       this._handleTagComplete();
     }
   };
@@ -20768,7 +22084,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   p._handleError = function () {
     this._clean();
-    this.dispatchEvent( "error" );
+    this.dispatchEvent("error");
   };
 
   /**
@@ -20778,11 +22094,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   p._handleTagComplete = function () {
     this._rawResult = this._tag;
-    this._result = this.resultFormatter && this.resultFormatter( this ) || this._rawResult;
+    this._result =
+      (this.resultFormatter && this.resultFormatter(this)) || this._rawResult;
 
     this._clean();
 
-    this.dispatchEvent( "complete" );
+    this.dispatchEvent("complete");
   };
 
   /**
@@ -20793,7 +22110,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   p._handleTimeout = function () {
     this._clean();
-    this.dispatchEvent( new createjs.Event( "timeout" ) );
+    this.dispatchEvent(new createjs.Event("timeout"));
   };
 
   /**
@@ -20805,10 +22122,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     this._tag.onload = null;
     this._tag.onreadystatechange = null;
     this._tag.onerror = null;
-    if ( this._addedToDOM && this._tag.parentNode != null ) {
-      this._tag.parentNode.removeChild( this._tag );
+    if (this._addedToDOM && this._tag.parentNode != null) {
+      this._tag.parentNode.removeChild(this._tag);
     }
-    clearTimeout( this._loadTimeout );
+    clearTimeout(this._loadTimeout);
   };
 
   /**
@@ -20821,15 +22138,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     //Ignore, let the timeout take care of it. Sometimes its not really stopped.
   };
 
-  createjs.TagRequest = createjs.promote( TagRequest, "AbstractRequest" );
-
-}() );
+  createjs.TagRequest = createjs.promote(TagRequest, "AbstractRequest");
+})();
 
 //##############################################################################
 // MediaTagRequest.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   // constructor
@@ -20841,44 +22157,45 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String} srcAttribute The tag attribute that specifies the source, such as "src", "href", etc.
    * @constructor
    */
-  function MediaTagRequest( loadItem, tag, srcAttribute ) {
-    this.AbstractRequest_constructor( loadItem );
+  function MediaTagRequest(loadItem, tag, srcAttribute) {
+    this.AbstractRequest_constructor(loadItem);
 
     // protected properties
     this._tag = tag;
     this._tagSrcAttribute = srcAttribute;
-    this._loadedHandler = createjs.proxy( this._handleTagComplete, this );
-  };
+    this._loadedHandler = createjs.proxy(this._handleTagComplete, this);
+  }
 
-  var p = createjs.extend( MediaTagRequest, createjs.TagRequest );
+  var p = createjs.extend(MediaTagRequest, createjs.TagRequest);
   var s = MediaTagRequest;
 
   // public methods
   p.load = function () {
-    var sc = createjs.proxy( this._handleStalled, this );
+    var sc = createjs.proxy(this._handleStalled, this);
     this._stalledCallback = sc;
 
-    var pc = createjs.proxy( this._handleProgress, this );
+    var pc = createjs.proxy(this._handleProgress, this);
     this._handleProgress = pc;
 
-    this._tag.addEventListener( "stalled", sc );
-    this._tag.addEventListener( "progress", pc );
+    this._tag.addEventListener("stalled", sc);
+    this._tag.addEventListener("progress", pc);
 
     // This will tell us when audio is buffered enough to play through, but not when its loaded.
     // The tag doesn't keep loading in Chrome once enough has buffered, and we have decided that behaviour is sufficient.
-    this._tag.addEventListener && this._tag.addEventListener( "canplaythrough", this._loadedHandler, false ); // canplaythrough callback doesn't work in Chrome, so we use an event.
+    this._tag.addEventListener &&
+      this._tag.addEventListener("canplaythrough", this._loadedHandler, false); // canplaythrough callback doesn't work in Chrome, so we use an event.
 
     this.TagRequest_load();
   };
 
   // private methods
   p._handleReadyStateChange = function () {
-    clearTimeout( this._loadTimeout );
+    clearTimeout(this._loadTimeout);
     // This is strictly for tags in browsers that do not support onload.
     var tag = this._tag;
 
     // Complete is for old IE support.
-    if ( tag.readyState == "loaded" || tag.readyState == "complete" ) {
+    if (tag.readyState == "loaded" || tag.readyState == "complete") {
       this._handleTagComplete();
     }
   };
@@ -20893,33 +22210,33 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} event The XHR progress event.
    * @private
    */
-  p._handleProgress = function ( event ) {
-    if ( !event || event.loaded > 0 && event.total == 0 ) {
+  p._handleProgress = function (event) {
+    if (!event || (event.loaded > 0 && event.total == 0)) {
       return; // Sometimes we get no "total", so just ignore the progress event.
     }
 
-    var newEvent = new createjs.ProgressEvent( event.loaded, event.total );
-    this.dispatchEvent( newEvent );
+    var newEvent = new createjs.ProgressEvent(event.loaded, event.total);
+    this.dispatchEvent(newEvent);
   };
 
   // protected methods
   p._clean = function () {
-    this._tag.removeEventListener && this._tag.removeEventListener( "canplaythrough", this._loadedHandler );
-    this._tag.removeEventListener( "stalled", this._stalledCallback );
-    this._tag.removeEventListener( "progress", this._progressCallback );
+    this._tag.removeEventListener &&
+      this._tag.removeEventListener("canplaythrough", this._loadedHandler);
+    this._tag.removeEventListener("stalled", this._stalledCallback);
+    this._tag.removeEventListener("progress", this._progressCallback);
 
     this.TagRequest__clean();
   };
 
-  createjs.MediaTagRequest = createjs.promote( MediaTagRequest, "TagRequest" );
-
-}() );
+  createjs.MediaTagRequest = createjs.promote(MediaTagRequest, "TagRequest");
+})();
 
 //##############################################################################
 // XHRRequest.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   // constructor
@@ -20935,8 +22252,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * for an overview of supported file properties.
    * @extends AbstractLoader
    */
-  function XHRRequest( item ) {
-    this.AbstractRequest_constructor( item );
+  function XHRRequest(item) {
+    this.AbstractRequest_constructor(item);
 
     // protected properties
     /**
@@ -20988,20 +22305,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     this._canceled = false;
 
     // Setup our event handlers now.
-    this._handleLoadStartProxy = createjs.proxy( this._handleLoadStart, this );
-    this._handleProgressProxy = createjs.proxy( this._handleProgress, this );
-    this._handleAbortProxy = createjs.proxy( this._handleAbort, this );
-    this._handleErrorProxy = createjs.proxy( this._handleError, this );
-    this._handleTimeoutProxy = createjs.proxy( this._handleTimeout, this );
-    this._handleLoadProxy = createjs.proxy( this._handleLoad, this );
-    this._handleReadyStateChangeProxy = createjs.proxy( this._handleReadyStateChange, this );
+    this._handleLoadStartProxy = createjs.proxy(this._handleLoadStart, this);
+    this._handleProgressProxy = createjs.proxy(this._handleProgress, this);
+    this._handleAbortProxy = createjs.proxy(this._handleAbort, this);
+    this._handleErrorProxy = createjs.proxy(this._handleError, this);
+    this._handleTimeoutProxy = createjs.proxy(this._handleTimeout, this);
+    this._handleLoadProxy = createjs.proxy(this._handleLoad, this);
+    this._handleReadyStateChangeProxy = createjs.proxy(
+      this._handleReadyStateChange,
+      this
+    );
 
-    if ( !this._createXHR( item ) ) {
+    if (!this._createXHR(item)) {
       //TODO: Throw error?
     }
-  };
+  }
 
-  var p = createjs.extend( XHRRequest, createjs.AbstractRequest );
+  var p = createjs.extend(XHRRequest, createjs.AbstractRequest);
 
   // static properties
   /**
@@ -21017,7 +22337,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     "Msxml2.XMLHTTP.4.0",
     "MSXML2.XMLHTTP.3.0",
     "MSXML2.XMLHTTP",
-    "Microsoft.XMLHTTP"
+    "Microsoft.XMLHTTP",
   ];
 
   // Public methods
@@ -21040,8 +22360,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * </ul>
    * Note that if a raw result is requested, but not found, the result will be returned instead.
    */
-  p.getResult = function ( raw ) {
-    if ( raw && this._rawResponse ) {
+  p.getResult = function (raw) {
+    if (raw && this._rawResponse) {
       return this._rawResponse;
     }
     return this._response;
@@ -21056,22 +22376,38 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 
   // Overrides abstract method in AbstractLoader
   p.load = function () {
-    if ( this._request == null ) {
+    if (this._request == null) {
       this._handleError();
       return;
     }
 
     //Events
-    if ( this._request.addEventListener != null ) {
-      this._request.addEventListener( "loadstart", this._handleLoadStartProxy, false );
-      this._request.addEventListener( "progress", this._handleProgressProxy, false );
-      this._request.addEventListener( "abort", this._handleAbortProxy, false );
-      this._request.addEventListener( "error", this._handleErrorProxy, false );
-      this._request.addEventListener( "timeout", this._handleTimeoutProxy, false );
+    if (this._request.addEventListener != null) {
+      this._request.addEventListener(
+        "loadstart",
+        this._handleLoadStartProxy,
+        false
+      );
+      this._request.addEventListener(
+        "progress",
+        this._handleProgressProxy,
+        false
+      );
+      this._request.addEventListener("abort", this._handleAbortProxy, false);
+      this._request.addEventListener("error", this._handleErrorProxy, false);
+      this._request.addEventListener(
+        "timeout",
+        this._handleTimeoutProxy,
+        false
+      );
 
       // Note: We don't get onload in all browsers (earlier FF and IE). onReadyStateChange handles these.
-      this._request.addEventListener( "load", this._handleLoadProxy, false );
-      this._request.addEventListener( "readystatechange", this._handleReadyStateChangeProxy, false );
+      this._request.addEventListener("load", this._handleLoadProxy, false);
+      this._request.addEventListener(
+        "readystatechange",
+        this._handleReadyStateChangeProxy,
+        false
+      );
     } else {
       // IE9 support
       this._request.onloadstart = this._handleLoadStartProxy;
@@ -21086,26 +22422,31 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     }
 
     // Set up a timeout if we don't have XHR2
-    if ( this._xhrLevel == 1 ) {
-      this._loadTimeout = setTimeout( createjs.proxy( this._handleTimeout, this ), this._item.loadTimeout );
+    if (this._xhrLevel == 1) {
+      this._loadTimeout = setTimeout(
+        createjs.proxy(this._handleTimeout, this),
+        this._item.loadTimeout
+      );
     }
 
     // Sometimes we get back 404s immediately, particularly when there is a cross origin request.  // note this does not catch in Chrome
     try {
-      if ( !this._item.values ) {
+      if (!this._item.values) {
         this._request.send();
       } else {
-        this._request.send( createjs.URLUtils.formatQueryString( this._item.values ) );
+        this._request.send(
+          createjs.URLUtils.formatQueryString(this._item.values)
+        );
       }
-    } catch ( error ) {
-      this.dispatchEvent( new createjs.ErrorEvent( "XHR_SEND", null, error ) );
+    } catch (error) {
+      this.dispatchEvent(new createjs.ErrorEvent("XHR_SEND", null, error));
     }
   };
 
-  p.setResponseType = function ( type ) {
+  p.setResponseType = function (type) {
     // Some old browsers doesn't support blob, so we convert arraybuffer to blob after response is downloaded
-    if ( type === 'blob' ) {
-      type = window.URL ? 'blob' : 'arraybuffer';
+    if (type === "blob") {
+      type = window.URL ? "blob" : "arraybuffer";
       this._responseType = type;
     }
     this._request.responseType = type;
@@ -21123,7 +22464,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @since 0.4.1
    */
   p.getAllResponseHeaders = function () {
-    if ( this._request.getAllResponseHeaders instanceof Function ) {
+    if (this._request.getAllResponseHeaders instanceof Function) {
       return this._request.getAllResponseHeaders();
     } else {
       return null;
@@ -21140,9 +22481,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {String}
    * @since 0.4.1
    */
-  p.getResponseHeader = function ( header ) {
-    if ( this._request.getResponseHeader instanceof Function ) {
-      return this._request.getResponseHeader( header );
+  p.getResponseHeader = function (header) {
+    if (this._request.getResponseHeader instanceof Function) {
+      return this._request.getResponseHeader(header);
     } else {
       return null;
     }
@@ -21155,13 +22496,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} event The XHR progress event.
    * @private
    */
-  p._handleProgress = function ( event ) {
-    if ( !event || event.loaded > 0 && event.total == 0 ) {
+  p._handleProgress = function (event) {
+    if (!event || (event.loaded > 0 && event.total == 0)) {
       return; // Sometimes we get no "total", so just ignore the progress event.
     }
 
-    var newEvent = new createjs.ProgressEvent( event.loaded, event.total );
-    this.dispatchEvent( newEvent );
+    var newEvent = new createjs.ProgressEvent(event.loaded, event.total);
+    this.dispatchEvent(newEvent);
   };
 
   /**
@@ -21170,9 +22511,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} event The XHR loadStart event.
    * @private
    */
-  p._handleLoadStart = function ( event ) {
-    clearTimeout( this._loadTimeout );
-    this.dispatchEvent( "loadstart" );
+  p._handleLoadStart = function (event) {
+    clearTimeout(this._loadTimeout);
+    this.dispatchEvent("loadstart");
   };
 
   /**
@@ -21181,9 +22522,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} event The XHR abort event.
    * @private
    */
-  p._handleAbort = function ( event ) {
+  p._handleAbort = function (event) {
     this._clean();
-    this.dispatchEvent( new createjs.ErrorEvent( "XHR_ABORTED", null, event ) );
+    this.dispatchEvent(new createjs.ErrorEvent("XHR_ABORTED", null, event));
   };
 
   /**
@@ -21192,9 +22533,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} event The XHR error event.
    * @private
    */
-  p._handleError = function ( event ) {
+  p._handleError = function (event) {
     this._clean();
-    this.dispatchEvent( new createjs.ErrorEvent( event.message ) );
+    this.dispatchEvent(new createjs.ErrorEvent(event.message));
   };
 
   /**
@@ -21204,8 +22545,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} event The XHR readyStateChange event.
    * @private
    */
-  p._handleReadyStateChange = function ( event ) {
-    if ( this._request.readyState == 4 ) {
+  p._handleReadyStateChange = function (event) {
+    if (this._request.readyState == 4) {
       this._handleLoad();
     }
   };
@@ -21220,37 +22561,41 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} event The XHR load event.
    * @private
    */
-  p._handleLoad = function ( event ) {
-    if ( this.loaded ) {
+  p._handleLoad = function (event) {
+    if (this.loaded) {
       return;
     }
     this.loaded = true;
 
     var error = this._checkError();
-    if ( error ) {
-      this._handleError( error );
+    if (error) {
+      this._handleError(error);
       return;
     }
 
     this._response = this._getResponse();
     // Convert arraybuffer back to blob
-    if ( this._responseType === 'arraybuffer' ) {
+    if (this._responseType === "arraybuffer") {
       try {
-        this._response = new Blob( [ this._response ] );
-      } catch ( e ) {
+        this._response = new Blob([this._response]);
+      } catch (e) {
         // Fallback to use BlobBuilder if Blob constructor is not supported
         // Tested on Android 2.3 ~ 4.2 and iOS5 safari
-        window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder;
-        if ( e.name === 'TypeError' && window.BlobBuilder ) {
+        window.BlobBuilder =
+          window.BlobBuilder ||
+          window.WebKitBlobBuilder ||
+          window.MozBlobBuilder ||
+          window.MSBlobBuilder;
+        if (e.name === "TypeError" && window.BlobBuilder) {
           var builder = new BlobBuilder();
-          builder.append( this._response );
+          builder.append(this._response);
           this._response = builder.getBlob();
         }
       }
     }
     this._clean();
 
-    this.dispatchEvent( new createjs.Event( "complete" ) );
+    this.dispatchEvent(new createjs.Event("complete"));
   };
 
   /**
@@ -21260,9 +22605,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} [event] The XHR timeout event. This is occasionally null when called by the backup setTimeout.
    * @private
    */
-  p._handleTimeout = function ( event ) {
+  p._handleTimeout = function (event) {
     this._clean();
-    this.dispatchEvent( new createjs.ErrorEvent( "PRELOAD_TIMEOUT", null, event ) );
+    this.dispatchEvent(new createjs.ErrorEvent("PRELOAD_TIMEOUT", null, event));
   };
 
   // Protected
@@ -21280,19 +22625,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @private
    */
   p._checkError = function () {
-    var status = parseInt( this._request.status );
-    if ( status >= 400 && status <= 599 ) {
-      return new Error( status );
-    } else if ( status == 0 ) {
-      if ( ( /^https?:/ ).test( location.protocol ) ) {
-        return new Error( 0 );
+    var status = parseInt(this._request.status);
+    if (status >= 400 && status <= 599) {
+      return new Error(status);
+    } else if (status == 0) {
+      if (/^https?:/.test(location.protocol)) {
+        return new Error(0);
       }
       return null; // Likely an embedded app.
     } else {
       return null;
     }
   };
-
 
   /**
    * Validate the response. Different browsers have different approaches, some of which throw errors when accessed
@@ -21301,27 +22645,27 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @private
    */
   p._getResponse = function () {
-    if ( this._response != null ) {
+    if (this._response != null) {
       return this._response;
     }
 
-    if ( this._request.response != null ) {
+    if (this._request.response != null) {
       return this._request.response;
     }
 
     // Android 2.2 uses .responseText
     try {
-      if ( this._request.responseText != null ) {
+      if (this._request.responseText != null) {
         return this._request.responseText;
       }
-    } catch ( e ) {}
+    } catch (e) {}
 
     // When loading XML, IE9 does not return .response, instead it returns responseXML.xml
     try {
-      if ( this._request.responseXML != null ) {
+      if (this._request.responseXML != null) {
         return this._request.responseXML;
       }
-    } catch ( e ) {}
+    } catch (e) {}
 
     return null;
   };
@@ -21339,79 +22683,84 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} If an XHR request or equivalent was successfully created.
    * @private
    */
-  p._createXHR = function ( item ) {
+  p._createXHR = function (item) {
     // Check for cross-domain loads. We can't fully support them, but we can try.
-    var crossdomain = createjs.URLUtils.isCrossDomain( item );
+    var crossdomain = createjs.URLUtils.isCrossDomain(item);
     var headers = {};
 
     // Create the request. Fallback to whatever support we have.
     var req = null;
-    if ( window.XMLHttpRequest ) {
+    if (window.XMLHttpRequest) {
       req = new XMLHttpRequest();
       // This is 8 or 9, so use XDomainRequest instead.
-      if ( crossdomain && req.withCredentials === undefined && window.XDomainRequest ) {
+      if (
+        crossdomain &&
+        req.withCredentials === undefined &&
+        window.XDomainRequest
+      ) {
         req = new XDomainRequest();
       }
-    } else { // Old IE versions use a different approach
-      for ( var i = 0, l = s.ACTIVEX_VERSIONS.length; i < l; i++ ) {
-        var axVersion = s.ACTIVEX_VERSIONS[ i ];
+    } else {
+      // Old IE versions use a different approach
+      for (var i = 0, l = s.ACTIVEX_VERSIONS.length; i < l; i++) {
+        var axVersion = s.ACTIVEX_VERSIONS[i];
         try {
-          req = new ActiveXObject( axVersion );
+          req = new ActiveXObject(axVersion);
           break;
-        } catch ( e ) {}
+        } catch (e) {}
       }
-      if ( req == null ) {
+      if (req == null) {
         return false;
       }
     }
 
     // Default to utf-8 for Text requests.
-    if ( item.mimeType == null && createjs.RequestUtils.isText( item.type ) ) {
+    if (item.mimeType == null && createjs.RequestUtils.isText(item.type)) {
       item.mimeType = "text/plain; charset=utf-8";
     }
 
     // IE9 doesn't support overrideMimeType(), so we need to check for it.
-    if ( item.mimeType && req.overrideMimeType ) {
-      req.overrideMimeType( item.mimeType );
+    if (item.mimeType && req.overrideMimeType) {
+      req.overrideMimeType(item.mimeType);
     }
 
     // Determine the XHR level
-    this._xhrLevel = ( typeof req.responseType === "string" ) ? 2 : 1;
+    this._xhrLevel = typeof req.responseType === "string" ? 2 : 1;
 
     var src = null;
-    if ( item.method == createjs.Methods.GET ) {
-      src = createjs.URLUtils.buildURI( item.src, item.values );
+    if (item.method == createjs.Methods.GET) {
+      src = createjs.URLUtils.buildURI(item.src, item.values);
     } else {
       src = item.src;
     }
 
     // Open the request.  Set cross-domain flags if it is supported (XHR level 1 only)
-    req.open( item.method || createjs.Methods.GET, src, true );
+    req.open(item.method || createjs.Methods.GET, src, true);
 
-    if ( crossdomain && req instanceof XMLHttpRequest && this._xhrLevel == 1 ) {
-      headers[ "Origin" ] = location.origin;
+    if (crossdomain && req instanceof XMLHttpRequest && this._xhrLevel == 1) {
+      headers["Origin"] = location.origin;
     }
 
     // To send data we need to set the Content-type header)
-    if ( item.values && item.method == createjs.Methods.POST ) {
-      headers[ "Content-Type" ] = "application/x-www-form-urlencoded";
+    if (item.values && item.method == createjs.Methods.POST) {
+      headers["Content-Type"] = "application/x-www-form-urlencoded";
     }
 
-    if ( !crossdomain && !headers[ "X-Requested-With" ] ) {
-      headers[ "X-Requested-With" ] = "XMLHttpRequest";
+    if (!crossdomain && !headers["X-Requested-With"]) {
+      headers["X-Requested-With"] = "XMLHttpRequest";
     }
 
-    if ( item.headers ) {
-      for ( var n in item.headers ) {
-        headers[ n ] = item.headers[ n ];
+    if (item.headers) {
+      for (var n in item.headers) {
+        headers[n] = item.headers[n];
       }
     }
 
-    for ( n in headers ) {
-      req.setRequestHeader( n, headers[ n ] )
+    for (n in headers) {
+      req.setRequestHeader(n, headers[n]);
     }
 
-    if ( req instanceof XMLHttpRequest && item.withCredentials !== undefined ) {
+    if (req instanceof XMLHttpRequest && item.withCredentials !== undefined) {
       req.withCredentials = item.withCredentials;
     }
 
@@ -21426,16 +22775,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @private
    */
   p._clean = function () {
-    clearTimeout( this._loadTimeout );
+    clearTimeout(this._loadTimeout);
 
-    if ( this._request.removeEventListener != null ) {
-      this._request.removeEventListener( "loadstart", this._handleLoadStartProxy );
-      this._request.removeEventListener( "progress", this._handleProgressProxy );
-      this._request.removeEventListener( "abort", this._handleAbortProxy );
-      this._request.removeEventListener( "error", this._handleErrorProxy );
-      this._request.removeEventListener( "timeout", this._handleTimeoutProxy );
-      this._request.removeEventListener( "load", this._handleLoadProxy );
-      this._request.removeEventListener( "readystatechange", this._handleReadyStateChangeProxy );
+    if (this._request.removeEventListener != null) {
+      this._request.removeEventListener(
+        "loadstart",
+        this._handleLoadStartProxy
+      );
+      this._request.removeEventListener("progress", this._handleProgressProxy);
+      this._request.removeEventListener("abort", this._handleAbortProxy);
+      this._request.removeEventListener("error", this._handleErrorProxy);
+      this._request.removeEventListener("timeout", this._handleTimeoutProxy);
+      this._request.removeEventListener("load", this._handleLoadProxy);
+      this._request.removeEventListener(
+        "readystatechange",
+        this._handleReadyStateChangeProxy
+      );
     } else {
       this._request.onloadstart = null;
       this._request.onprogress = null;
@@ -21451,9 +22806,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return "[PreloadJS XHRRequest]";
   };
 
-  createjs.XHRRequest = createjs.promote( XHRRequest, "AbstractRequest" );
-
-}() );
+  createjs.XHRRequest = createjs.promote(XHRRequest, "AbstractRequest");
+})();
 
 //##############################################################################
 // LoadQueue.js
@@ -21471,7 +22825,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
  * Reported issues with IE7/8
  */
 
-( function () {
+(function () {
   "use strict";
 
   // constructor
@@ -21635,7 +22989,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @constructor
    * @extends AbstractLoader
    */
-  function LoadQueue( preferXHR, basePath, crossOrigin ) {
+  function LoadQueue(preferXHR, basePath, crossOrigin) {
     this.AbstractLoader_constructor();
 
     /**
@@ -21757,7 +23111,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       createjs.SVGLoader,
       createjs.BinaryLoader,
       createjs.VideoLoader,
-      createjs.TextLoader
+      createjs.TextLoader,
     ];
 
     /**
@@ -21769,103 +23123,103 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      */
     this._defaultLoaderLength = this._availableLoaders.length;
 
-    this.init( preferXHR, basePath, crossOrigin );
+    this.init(preferXHR, basePath, crossOrigin);
   }
 
-  var p = createjs.extend( LoadQueue, createjs.AbstractLoader );
+  var p = createjs.extend(LoadQueue, createjs.AbstractLoader);
   var s = LoadQueue;
 
   // Remove these @deprecated properties after 1.0
   try {
-    Object.defineProperties( s, {
+    Object.defineProperties(s, {
       POST: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Methods.POST;
-        }, "AbstractLoader.POST" )
+        }, "AbstractLoader.POST"),
       },
       GET: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Methods.GET;
-        }, "AbstractLoader.GET" )
+        }, "AbstractLoader.GET"),
       },
 
       BINARY: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.BINARY;
-        }, "AbstractLoader.BINARY" )
+        }, "AbstractLoader.BINARY"),
       },
       CSS: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.CSS;
-        }, "AbstractLoader.CSS" )
+        }, "AbstractLoader.CSS"),
       },
       FONT: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.FONT;
-        }, "AbstractLoader.FONT" )
+        }, "AbstractLoader.FONT"),
       },
       FONTCSS: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.FONTCSS;
-        }, "AbstractLoader.FONTCSS" )
+        }, "AbstractLoader.FONTCSS"),
       },
       IMAGE: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.IMAGE;
-        }, "AbstractLoader.IMAGE" )
+        }, "AbstractLoader.IMAGE"),
       },
       JAVASCRIPT: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.JAVASCRIPT;
-        }, "AbstractLoader.JAVASCRIPT" )
+        }, "AbstractLoader.JAVASCRIPT"),
       },
       JSON: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.JSON;
-        }, "AbstractLoader.JSON" )
+        }, "AbstractLoader.JSON"),
       },
       JSONP: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.JSONP;
-        }, "AbstractLoader.JSONP" )
+        }, "AbstractLoader.JSONP"),
       },
       MANIFEST: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.MANIFEST;
-        }, "AbstractLoader.MANIFEST" )
+        }, "AbstractLoader.MANIFEST"),
       },
       SOUND: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.SOUND;
-        }, "AbstractLoader.SOUND" )
+        }, "AbstractLoader.SOUND"),
       },
       VIDEO: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.VIDEO;
-        }, "AbstractLoader.VIDEO" )
+        }, "AbstractLoader.VIDEO"),
       },
       SPRITESHEET: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.SPRITESHEET;
-        }, "AbstractLoader.SPRITESHEET" )
+        }, "AbstractLoader.SPRITESHEET"),
       },
       SVG: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.SVG;
-        }, "AbstractLoader.SVG" )
+        }, "AbstractLoader.SVG"),
       },
       TEXT: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.TEXT;
-        }, "AbstractLoader.TEXT" )
+        }, "AbstractLoader.TEXT"),
       },
       XML: {
-        get: createjs.deprecate( function () {
+        get: createjs.deprecate(function () {
           return createjs.Types.XML;
-        }, "AbstractLoader.XML" )
-      }
-    } );
-  } catch ( e ) {}
+        }, "AbstractLoader.XML"),
+      },
+    });
+  } catch (e) {}
 
   /**
    * An internal initialization method, which is used for initial set up, but also to reset the LoadQueue.
@@ -21875,8 +23229,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param crossOrigin
    * @private
    */
-  p.init = function ( preferXHR, basePath, crossOrigin ) {
-
+  p.init = function (preferXHR, basePath, crossOrigin) {
     // public properties
 
     /**
@@ -21890,7 +23243,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      */
     this.preferXHR = true; //TODO: Get/Set
     this._preferXHR = true;
-    this.setPreferXHR( preferXHR );
+    this.setPreferXHR(preferXHR);
 
     // protected properties
     /**
@@ -22051,7 +23404,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @since 0.6.0
      */
     this._lastProgress = NaN;
-
   };
 
   // static properties
@@ -22103,14 +23455,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Function|AbstractLoader} loader The AbstractLoader class to add.
    * @since 0.6.0
    */
-  p.registerLoader = function ( loader ) {
-    if ( !loader || !loader.canLoadItem ) {
-      throw new Error( "loader is of an incorrect type." );
-    } else if ( this._availableLoaders.indexOf( loader ) != -1 ) {
-      throw new Error( "loader already exists." ); //LM: Maybe just silently fail here
+  p.registerLoader = function (loader) {
+    if (!loader || !loader.canLoadItem) {
+      throw new Error("loader is of an incorrect type.");
+    } else if (this._availableLoaders.indexOf(loader) != -1) {
+      throw new Error("loader already exists."); //LM: Maybe just silently fail here
     }
 
-    this._availableLoaders.unshift( loader );
+    this._availableLoaders.unshift(loader);
   };
 
   /**
@@ -22119,10 +23471,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method unregisterLoader
    * @param {Function|AbstractLoader} loader The AbstractLoader class to remove
    */
-  p.unregisterLoader = function ( loader ) {
-    var idx = this._availableLoaders.indexOf( loader );
-    if ( idx != -1 && idx < this._defaultLoaderLength - 1 ) {
-      this._availableLoaders.splice( idx, 1 );
+  p.unregisterLoader = function (loader) {
+    var idx = this._availableLoaders.indexOf(loader);
+    if (idx != -1 && idx < this._defaultLoaderLength - 1) {
+      this._availableLoaders.splice(idx, 1);
     }
   };
 
@@ -22134,10 +23486,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Boolean} The value of {{#crossLink "preferXHR"}}{{/crossLink}} that was successfully set.
    * @since 0.6.0
    */
-  p.setPreferXHR = function ( value ) {
+  p.setPreferXHR = function (value) {
     // Determine if we can use XHR. XHR defaults to TRUE, but the browser may not support it.
     //TODO: Should we be checking for the other XHR types? Might have to do a try/catch on the different types similar to createXHR.
-    this.preferXHR = ( value != false && window.XMLHttpRequest != null );
+    this.preferXHR = value != false && window.XMLHttpRequest != null;
     return this.preferXHR;
   };
 
@@ -22171,58 +23523,58 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * items, or multiple items as arguments.
    * @since 0.3.0
    */
-  p.remove = function ( idsOrUrls ) {
+  p.remove = function (idsOrUrls) {
     var args = null;
 
-    if ( idsOrUrls && !Array.isArray( idsOrUrls ) ) {
-      args = [ idsOrUrls ];
-    } else if ( idsOrUrls ) {
+    if (idsOrUrls && !Array.isArray(idsOrUrls)) {
+      args = [idsOrUrls];
+    } else if (idsOrUrls) {
       args = idsOrUrls;
-    } else if ( arguments.length > 0 ) {
+    } else if (arguments.length > 0) {
       return;
     }
 
     var itemsWereRemoved = false;
 
     // Destroy everything
-    if ( !args ) {
+    if (!args) {
       this.close();
-      for ( var n in this._loadItemsById ) {
-        this._disposeItem( this._loadItemsById[ n ] );
+      for (var n in this._loadItemsById) {
+        this._disposeItem(this._loadItemsById[n]);
       }
-      this.init( this.preferXHR, this._basePath );
+      this.init(this.preferXHR, this._basePath);
 
       // Remove specific items
     } else {
-      while ( args.length ) {
+      while (args.length) {
         var item = args.pop();
-        var r = this.getResult( item );
+        var r = this.getResult(item);
 
         //Remove from the main load Queue
-        for ( i = this._loadQueue.length - 1; i >= 0; i-- ) {
-          loadItem = this._loadQueue[ i ].getItem();
-          if ( loadItem.id == item || loadItem.src == item ) {
-            this._loadQueue.splice( i, 1 )[ 0 ].cancel();
+        for (i = this._loadQueue.length - 1; i >= 0; i--) {
+          loadItem = this._loadQueue[i].getItem();
+          if (loadItem.id == item || loadItem.src == item) {
+            this._loadQueue.splice(i, 1)[0].cancel();
             break;
           }
         }
 
         //Remove from the backup queue
-        for ( i = this._loadQueueBackup.length - 1; i >= 0; i-- ) {
-          loadItem = this._loadQueueBackup[ i ].getItem();
-          if ( loadItem.id == item || loadItem.src == item ) {
-            this._loadQueueBackup.splice( i, 1 )[ 0 ].cancel();
+        for (i = this._loadQueueBackup.length - 1; i >= 0; i--) {
+          loadItem = this._loadQueueBackup[i].getItem();
+          if (loadItem.id == item || loadItem.src == item) {
+            this._loadQueueBackup.splice(i, 1)[0].cancel();
             break;
           }
         }
 
-        if ( r ) {
-          this._disposeItem( this.getItem( item ) );
+        if (r) {
+          this._disposeItem(this.getItem(item));
         } else {
-          for ( var i = this._currentLoads.length - 1; i >= 0; i-- ) {
-            var loadItem = this._currentLoads[ i ].getItem();
-            if ( loadItem.id == item || loadItem.src == item ) {
-              this._currentLoads.splice( i, 1 )[ 0 ].cancel();
+          for (var i = this._currentLoads.length - 1; i >= 0; i--) {
+            var loadItem = this._currentLoads[i].getItem();
+            if (loadItem.id == item || loadItem.src == item) {
+              this._currentLoads.splice(i, 1)[0].cancel();
               itemsWereRemoved = true;
               break;
             }
@@ -22231,7 +23583,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       }
 
       // If this was called during a load, try to load the next item.
-      if ( itemsWereRemoved ) {
+      if (itemsWereRemoved) {
         this._loadNext();
       }
     }
@@ -22247,17 +23599,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   p.reset = function () {
     this.close();
-    for ( var n in this._loadItemsById ) {
-      this._disposeItem( this._loadItemsById[ n ] );
+    for (var n in this._loadItemsById) {
+      this._disposeItem(this._loadItemsById[n]);
     }
 
     //Reset the queue to its start state
     var a = [];
-    for ( var i = 0, l = this._loadQueueBackup.length; i < l; i++ ) {
-      a.push( this._loadQueueBackup[ i ].getItem() );
+    for (var i = 0, l = this._loadQueueBackup.length; i < l; i++) {
+      a.push(this._loadQueueBackup[i].getItem());
     }
 
-    this.loadManifest( a, false );
+    this.loadManifest(a, false);
   };
 
   /**
@@ -22278,25 +23630,25 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method installPlugin
    * @param {Function} plugin The plugin class to install.
    */
-  p.installPlugin = function ( plugin ) {
-    if ( plugin == null ) {
+  p.installPlugin = function (plugin) {
+    if (plugin == null) {
       return;
     }
 
-    if ( plugin.getPreloadHandlers != null ) {
-      this._plugins.push( plugin );
+    if (plugin.getPreloadHandlers != null) {
+      this._plugins.push(plugin);
       var map = plugin.getPreloadHandlers();
       map.scope = plugin;
 
-      if ( map.types != null ) {
-        for ( var i = 0, l = map.types.length; i < l; i++ ) {
-          this._typeCallbacks[ map.types[ i ] ] = map;
+      if (map.types != null) {
+        for (var i = 0, l = map.types.length; i < l; i++) {
+          this._typeCallbacks[map.types[i]] = map;
         }
       }
 
-      if ( map.extensions != null ) {
-        for ( i = 0, l = map.extensions.length; i < l; i++ ) {
-          this._extensionCallbacks[ map.extensions[ i ] ] = map;
+      if (map.extensions != null) {
+        for (i = 0, l = map.extensions.length; i < l; i++) {
+          this._extensionCallbacks[map.extensions[i]] = map;
         }
       }
     }
@@ -22317,9 +23669,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} value The number of concurrent loads to allow. By default, only a single connection per LoadQueue
    * is open at any time.
    */
-  p.setMaxConnections = function ( value ) {
+  p.setMaxConnections = function (value) {
     this._maxConnections = value;
-    if ( !this._paused && this._loadQueue.length > 0 ) {
+    if (!this._paused && this._loadQueue.length > 0) {
       this._loadNext();
     }
   };
@@ -22347,18 +23699,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * This parameter will be removed in a future version. Please either use the `basePath` parameter in the LoadQueue
    * constructor, or a `path` property in a manifest definition.
    */
-  p.loadFile = function ( file, loadNow, basePath ) {
-    if ( file == null ) {
-      var event = new createjs.ErrorEvent( "PRELOAD_NO_FILE" );
-      this._sendError( event );
+  p.loadFile = function (file, loadNow, basePath) {
+    if (file == null) {
+      var event = new createjs.ErrorEvent("PRELOAD_NO_FILE");
+      this._sendError(event);
       return;
     }
-    this._addItem( file, null, basePath );
+    this._addItem(file, null, basePath);
 
-    if ( loadNow !== false ) {
-      this.setPaused( false );
+    if (loadNow !== false) {
+      this.setPaused(false);
     } else {
-      this.setPaused( true );
+      this.setPaused(true);
     }
   };
 
@@ -22403,61 +23755,60 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * This parameter will be removed in a future version. Please either use the `basePath` parameter in the LoadQueue
    * constructor, or a `path` property in a manifest definition.
    */
-  p.loadManifest = function ( manifest, loadNow, basePath ) {
+  p.loadManifest = function (manifest, loadNow, basePath) {
     var fileList = null;
     var path = null;
 
     // Array-based list of items
-    if ( Array.isArray( manifest ) ) {
-      if ( manifest.length == 0 ) {
-        var event = new createjs.ErrorEvent( "PRELOAD_MANIFEST_EMPTY" );
-        this._sendError( event );
+    if (Array.isArray(manifest)) {
+      if (manifest.length == 0) {
+        var event = new createjs.ErrorEvent("PRELOAD_MANIFEST_EMPTY");
+        this._sendError(event);
         return;
       }
       fileList = manifest;
 
       // String-based. Only file manifests can be specified this way. Any other types will cause an error when loaded.
-    } else if ( typeof ( manifest ) === "string" ) {
-      fileList = [ {
-        src: manifest,
-        type: s.MANIFEST
-      } ];
-
-    } else if ( typeof ( manifest ) == "object" ) {
-
+    } else if (typeof manifest === "string") {
+      fileList = [
+        {
+          src: manifest,
+          type: s.MANIFEST,
+        },
+      ];
+    } else if (typeof manifest == "object") {
       // An object that defines a manifest path
-      if ( manifest.src !== undefined ) {
-        if ( manifest.type == null ) {
+      if (manifest.src !== undefined) {
+        if (manifest.type == null) {
           manifest.type = s.MANIFEST;
-        } else if ( manifest.type != s.MANIFEST ) {
-          var event = new createjs.ErrorEvent( "PRELOAD_MANIFEST_TYPE" );
-          this._sendError( event );
+        } else if (manifest.type != s.MANIFEST) {
+          var event = new createjs.ErrorEvent("PRELOAD_MANIFEST_TYPE");
+          this._sendError(event);
         }
-        fileList = [ manifest ];
+        fileList = [manifest];
 
         // An object that defines a manifest
-      } else if ( manifest.manifest !== undefined ) {
+      } else if (manifest.manifest !== undefined) {
         fileList = manifest.manifest;
         path = manifest.path;
       }
 
       // Unsupported. This will throw an error.
     } else {
-      var event = new createjs.ErrorEvent( "PRELOAD_MANIFEST_NULL" );
-      this._sendError( event );
+      var event = new createjs.ErrorEvent("PRELOAD_MANIFEST_NULL");
+      this._sendError(event);
       return;
     }
 
-    for ( var i = 0, l = fileList.length; i < l; i++ ) {
-      this._addItem( fileList[ i ], path, basePath );
+    for (var i = 0, l = fileList.length; i < l; i++) {
+      this._addItem(fileList[i], path, basePath);
     }
 
-    if ( loadNow !== false ) {
-      this.setPaused( false );
+    if (loadNow !== false) {
+      this.setPaused(false);
     } else {
-      this.setPaused( true );
+      this.setPaused(true);
     }
-
   };
 
   /**
@@ -22465,7 +23816,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method load
    */
   p.load = function () {
-    this.setPaused( false );
+    this.setPaused(false);
   };
 
   /**
@@ -22478,8 +23829,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * or {{#crossLink "LoadQueue/loadManifest"}}{{/crossLink}}. This object is also returned via the {{#crossLink "LoadQueue/fileload:event"}}{{/crossLink}}
    * event as the `item` parameter.
    */
-  p.getItem = function ( value ) {
-    return this._loadItemsById[ value ] || this._loadItemsBySrc[ value ];
+  p.getItem = function (value) {
+    return this._loadItemsById[value] || this._loadItemsBySrc[value];
   };
 
   /**
@@ -22508,16 +23859,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * This object is also returned via the {{#crossLink "LoadQueue/fileload:event"}}{{/crossLink}} event as the 'item`
    * parameter. Note that if a raw result is requested, but not found, the result will be returned instead.
    */
-  p.getResult = function ( value, rawResult ) {
-    var item = this._loadItemsById[ value ] || this._loadItemsBySrc[ value ];
-    if ( item == null ) {
+  p.getResult = function (value, rawResult) {
+    var item = this._loadItemsById[value] || this._loadItemsBySrc[value];
+    if (item == null) {
       return null;
     }
     var id = item.id;
-    if ( rawResult && this._loadedRawResults[ id ] ) {
-      return this._loadedRawResults[ id ];
+    if (rawResult && this._loadedRawResults[id]) {
+      return this._loadedRawResults[id];
     }
-    return this._loadedResults[ id ];
+    return this._loadedResults[id];
   };
 
   /**
@@ -22529,19 +23880,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * result, and rawResult.
    * @since 0.6.0
    */
-  p.getItems = function ( loaded ) {
+  p.getItems = function (loaded) {
     var arr = [];
-    for ( var n in this._loadItemsById ) {
-      var item = this._loadItemsById[ n ];
-      var result = this.getResult( n );
-      if ( loaded === true && result == null ) {
+    for (var n in this._loadItemsById) {
+      var item = this._loadItemsById[n];
+      var result = this.getResult(n);
+      if (loaded === true && result == null) {
         continue;
       }
-      arr.push( {
+      arr.push({
         item: item,
         result: result,
-        rawResult: this.getResult( n, true )
-      } );
+        rawResult: this.getResult(n, true),
+      });
     }
     return arr;
   };
@@ -22556,9 +23907,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method setPaused
    * @param {Boolean} value Whether the queue should be paused or not.
    */
-  p.setPaused = function ( value ) {
+  p.setPaused = function (value) {
     this._paused = value;
-    if ( !this._paused ) {
+    if (!this._paused) {
       this._loadNext();
     }
   };
@@ -22571,7 +23922,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method close
    */
   p.close = function () {
-    while ( this._currentLoads.length ) {
+    while (this._currentLoads.length) {
       this._currentLoads.pop().cancel();
     }
     this._scriptOrder.length = 0;
@@ -22597,31 +23948,31 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * version.
    * @private
    */
-  p._addItem = function ( value, path, basePath ) {
-    var item = this._createLoadItem( value, path, basePath ); // basePath and manifest path are added to the src.
-    if ( item == null ) {
+  p._addItem = function (value, path, basePath) {
+    var item = this._createLoadItem(value, path, basePath); // basePath and manifest path are added to the src.
+    if (item == null) {
       return;
     } // Sometimes plugins or types should be skipped.
-    var loader = this._createLoader( item );
-    if ( loader != null ) {
-      if ( "plugins" in loader ) {
+    var loader = this._createLoader(item);
+    if (loader != null) {
+      if ("plugins" in loader) {
         loader.plugins = this._plugins;
       }
       item._loader = loader;
-      this._loadQueue.push( loader );
-      this._loadQueueBackup.push( loader );
+      this._loadQueue.push(loader);
+      this._loadQueueBackup.push(loader);
 
       this._numItems++;
       this._updateProgress();
 
       // Only worry about script order when using XHR to load scripts. Tags are only loading one at a time.
-      if ( ( this.maintainScriptOrder &&
-          item.type == createjs.Types.JAVASCRIPT
-          //&& loader instanceof createjs.XHRLoader //NOTE: Have to track all JS files this way
-        ) ||
-        item.maintainOrder === true ) {
-        this._scriptOrder.push( item );
-        this._loadedScripts.push( null );
+      if (
+        (this.maintainScriptOrder && item.type == createjs.Types.JAVASCRIPT) ||
+        //&& loader instanceof createjs.XHRLoader //NOTE: Have to track all JS files this way
+        item.maintainOrder === true
+      ) {
+        this._scriptOrder.push(item);
+        this._loadedScripts.push(null);
       }
     }
   };
@@ -22643,51 +23994,55 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Object} The loader instance that will be used.
    * @private
    */
-  p._createLoadItem = function ( value, path, basePath ) {
-    var item = createjs.LoadItem.create( value );
-    if ( item == null ) {
+  p._createLoadItem = function (value, path, basePath) {
+    var item = createjs.LoadItem.create(value);
+    if (item == null) {
       return null;
     }
 
     var bp = ""; // Store the generated basePath
     var useBasePath = basePath || this._basePath;
 
-    if ( item.src instanceof Object ) {
-      if ( !item.type ) {
+    if (item.src instanceof Object) {
+      if (!item.type) {
         return null;
       } // the the src is an object, type is required to pass off to plugin
-      if ( path ) {
+      if (path) {
         bp = path;
-        var pathMatch = createjs.URLUtils.parseURI( path );
+        var pathMatch = createjs.URLUtils.parseURI(path);
         // Also append basePath
-        if ( useBasePath != null && !pathMatch.absolute && !pathMatch.relative ) {
+        if (useBasePath != null && !pathMatch.absolute && !pathMatch.relative) {
           bp = useBasePath + bp;
         }
-      } else if ( useBasePath != null ) {
+      } else if (useBasePath != null) {
         bp = useBasePath;
       }
     } else {
       // Determine Extension, etc.
-      var match = createjs.URLUtils.parseURI( item.src );
-      if ( match.extension ) {
+      var match = createjs.URLUtils.parseURI(item.src);
+      if (match.extension) {
         item.ext = match.extension;
       }
-      if ( item.type == null ) {
-        item.type = createjs.RequestUtils.getTypeByExtension( item.ext );
+      if (item.type == null) {
+        item.type = createjs.RequestUtils.getTypeByExtension(item.ext);
       }
 
       // Inject path & basePath
       var autoId = item.src;
-      if ( !match.absolute && !match.relative ) {
-        if ( path ) {
+      if (!match.absolute && !match.relative) {
+        if (path) {
           bp = path;
-          var pathMatch = createjs.URLUtils.parseURI( path );
+          var pathMatch = createjs.URLUtils.parseURI(path);
           autoId = path + autoId;
           // Also append basePath
-          if ( useBasePath != null && !pathMatch.absolute && !pathMatch.relative ) {
+          if (
+            useBasePath != null &&
+            !pathMatch.absolute &&
+            !pathMatch.relative
+          ) {
             bp = useBasePath + bp;
           }
-        } else if ( useBasePath != null ) {
+        } else if (useBasePath != null) {
           bp = useBasePath;
         }
       }
@@ -22696,41 +24051,41 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     item.path = bp;
 
     // If there's no id, set one now.
-    if ( item.id === undefined || item.id === null || item.id === "" ) {
+    if (item.id === undefined || item.id === null || item.id === "") {
       item.id = autoId;
     }
 
     // Give plugins a chance to modify the loadItem:
-    var customHandler = this._typeCallbacks[ item.type ] || this._extensionCallbacks[ item.ext ];
-    if ( customHandler ) {
+    var customHandler =
+      this._typeCallbacks[item.type] || this._extensionCallbacks[item.ext];
+    if (customHandler) {
       // Plugins are now passed both the full source, as well as a combined path+basePath (appropriately)
-      var result = customHandler.callback.call( customHandler.scope, item, this );
+      var result = customHandler.callback.call(customHandler.scope, item, this);
 
       // The plugin will handle the load, or has canceled it. Ignore it.
-      if ( result === false ) {
+      if (result === false) {
         return null;
 
         // Load as normal:
-      } else if ( result === true ) {
+      } else if (result === true) {
         // Do Nothing
-
         // Result is a loader class:
-      } else if ( result != null ) {
+      } else if (result != null) {
         item._loader = result;
       }
 
       // Update the extension in case the type changed:
-      match = createjs.URLUtils.parseURI( item.src );
-      if ( match.extension != null ) {
+      match = createjs.URLUtils.parseURI(item.src);
+      if (match.extension != null) {
         item.ext = match.extension;
       }
     }
 
     // Store the item for lookup. This also helps clean-up later.
-    this._loadItemsById[ item.id ] = item;
-    this._loadItemsBySrc[ item.src ] = item;
+    this._loadItemsById[item.id] = item;
+    this._loadItemsBySrc[item.src] = item;
 
-    if ( item.crossOrigin == null ) {
+    if (item.crossOrigin == null) {
       item.crossOrigin = this._crossOrigin;
     }
 
@@ -22744,18 +24099,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {AbstractLoader} A loader that can be used to load content.
    * @private
    */
-  p._createLoader = function ( item ) {
-    if ( item._loader != null ) { // A plugin already specified a loader
+  p._createLoader = function (item) {
+    if (item._loader != null) {
+      // A plugin already specified a loader
       return item._loader;
     }
 
     // Initially, try and use the provided/supported XHR mode:
     var preferXHR = this.preferXHR;
 
-    for ( var i = 0; i < this._availableLoaders.length; i++ ) {
-      var loader = this._availableLoaders[ i ];
-      if ( loader && loader.canLoadItem( item ) ) {
-        return new loader( item, preferXHR );
+    for (var i = 0; i < this._availableLoaders.length; i++) {
+      var loader = this._availableLoaders[i];
+      if (loader && loader.canLoadItem(item)) {
+        return new loader(item, preferXHR);
       }
     }
 
@@ -22772,23 +24128,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @private
    */
   p._loadNext = function () {
-    if ( this._paused ) {
+    if (this._paused) {
       return;
     }
 
     // Only dispatch loadstart event when the first file is loaded.
-    if ( !this._loadStartWasDispatched ) {
+    if (!this._loadStartWasDispatched) {
       this._sendLoadStart();
       this._loadStartWasDispatched = true;
     }
 
     // The queue has completed.
-    if ( this._numItems == this._numItemsLoaded ) {
+    if (this._numItems == this._numItemsLoaded) {
       this.loaded = true;
       this._sendComplete();
 
       // Load the next queue, if it has been defined.
-      if ( this.next && this.next.load ) {
+      if (this.next && this.next.load) {
         this.next.load();
       }
     } else {
@@ -22796,20 +24152,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     }
 
     // Must iterate forwards to load in the right order.
-    for ( var i = 0; i < this._loadQueue.length; i++ ) {
-      if ( this._currentLoads.length >= this._maxConnections ) {
+    for (var i = 0; i < this._loadQueue.length; i++) {
+      if (this._currentLoads.length >= this._maxConnections) {
         break;
       }
-      var loader = this._loadQueue[ i ];
+      var loader = this._loadQueue[i];
 
       // Determine if we should be only loading one tag-script at a time:
       // Note: maintainOrder items don't do anything here because we can hold onto their loaded value
-      if ( !this._canStartLoad( loader ) ) {
+      if (!this._canStartLoad(loader)) {
         continue;
       }
-      this._loadQueue.splice( i, 1 );
+      this._loadQueue.splice(i, 1);
       i--;
-      this._loadItem( loader );
+      this._loadItem(loader);
     }
   };
 
@@ -22819,14 +24175,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {AbstractLoader} loader The loader instance to start. Currently, this will be an XHRLoader or TagLoader.
    * @private
    */
-  p._loadItem = function ( loader ) {
-    loader.on( "fileload", this._handleFileLoad, this );
-    loader.on( "progress", this._handleProgress, this );
-    loader.on( "complete", this._handleFileComplete, this );
-    loader.on( "error", this._handleError, this );
-    loader.on( "fileerror", this._handleFileError, this );
-    this._currentLoads.push( loader );
-    this._sendFileStart( loader.getItem() );
+  p._loadItem = function (loader) {
+    loader.on("fileload", this._handleFileLoad, this);
+    loader.on("progress", this._handleProgress, this);
+    loader.on("complete", this._handleFileComplete, this);
+    loader.on("error", this._handleError, this);
+    loader.on("fileerror", this._handleFileError, this);
+    this._currentLoads.push(loader);
+    this._sendFileStart(loader.getItem());
     loader.load();
   };
 
@@ -22838,9 +24194,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @private
    * @since 0.6.0
    */
-  p._handleFileLoad = function ( event ) {
+  p._handleFileLoad = function (event) {
     event.target = null;
-    this.dispatchEvent( event );
+    this.dispatchEvent(event);
   };
 
   /**
@@ -22849,9 +24205,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param event
    * @private
    */
-  p._handleFileError = function ( event ) {
-    var newEvent = new createjs.ErrorEvent( "FILE_LOAD_ERROR", null, event.item );
-    this._sendError( newEvent );
+  p._handleFileError = function (event) {
+    var newEvent = new createjs.ErrorEvent("FILE_LOAD_ERROR", null, event.item);
+    this._sendError(newEvent);
   };
 
   /**
@@ -22861,24 +24217,28 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {ErrorEvent} event The error event, containing relevant error information.
    * @private
    */
-  p._handleError = function ( event ) {
+  p._handleError = function (event) {
     var loader = event.target;
     this._numItemsLoaded++;
 
-    this._finishOrderedItem( loader, true );
+    this._finishOrderedItem(loader, true);
     this._updateProgress();
 
-    var newEvent = new createjs.ErrorEvent( "FILE_LOAD_ERROR", null, loader.getItem() );
+    var newEvent = new createjs.ErrorEvent(
+      "FILE_LOAD_ERROR",
+      null,
+      loader.getItem()
+    );
     // TODO: Propagate actual error message.
 
-    this._sendError( newEvent );
+    this._sendError(newEvent);
 
-    if ( !this.stopOnError ) {
-      this._removeLoadItem( loader );
-      this._cleanLoadItem( loader );
+    if (!this.stopOnError) {
+      this._removeLoadItem(loader);
+      this._cleanLoadItem(loader);
       this._loadNext();
     } else {
-      this.setPaused( true );
+      this.setPaused(true);
     }
   };
 
@@ -22890,29 +24250,29 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Event} event The event object from the loader.
    * @private
    */
-  p._handleFileComplete = function ( event ) {
+  p._handleFileComplete = function (event) {
     var loader = event.target;
     var item = loader.getItem();
 
     var result = loader.getResult();
-    this._loadedResults[ item.id ] = result;
-    var rawResult = loader.getResult( true );
-    if ( rawResult != null && rawResult !== result ) {
-      this._loadedRawResults[ item.id ] = rawResult;
+    this._loadedResults[item.id] = result;
+    var rawResult = loader.getResult(true);
+    if (rawResult != null && rawResult !== result) {
+      this._loadedRawResults[item.id] = rawResult;
     }
 
-    this._saveLoadedItems( loader );
+    this._saveLoadedItems(loader);
 
     // Remove the load item
-    this._removeLoadItem( loader );
+    this._removeLoadItem(loader);
 
-    if ( !this._finishOrderedItem( loader ) ) {
+    if (!this._finishOrderedItem(loader)) {
       // The item was NOT managed, so process it now
-      this._processFinishedLoad( item, loader );
+      this._processFinishedLoad(item, loader);
     }
 
     // Clean up the load item
-    this._cleanLoadItem( loader );
+    this._cleanLoadItem(loader);
   };
 
   /**
@@ -22925,24 +24285,24 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @since 0.6.0
    */
-  p._saveLoadedItems = function ( loader ) {
+  p._saveLoadedItems = function (loader) {
     // TODO: Not sure how to handle this. Would be nice to expose the items.
     // Loaders may load sub-items. This adds them to this queue
     var list = loader.getLoadedItems();
-    if ( list === null ) {
+    if (list === null) {
       return;
     }
 
-    for ( var i = 0; i < list.length; i++ ) {
-      var item = list[ i ].item;
+    for (var i = 0; i < list.length; i++) {
+      var item = list[i].item;
 
       // Store item lookups
-      this._loadItemsBySrc[ item.src ] = item;
-      this._loadItemsById[ item.id ] = item;
+      this._loadItemsBySrc[item.src] = item;
+      this._loadItemsById[item.id] = item;
 
       // Store loaded content
-      this._loadedResults[ item.id ] = list[ i ].result;
-      this._loadedRawResults[ item.id ] = list[ i ].rawResult;
+      this._loadedResults[item.id] = list[i].result;
+      this._loadedRawResults[item.id] = list[i].rawResult;
     }
   };
 
@@ -22956,22 +24316,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * behaviour if it is.
    * @private
    */
-  p._finishOrderedItem = function ( loader, loadFailed ) {
+  p._finishOrderedItem = function (loader, loadFailed) {
     var item = loader.getItem();
 
-    if ( ( this.maintainScriptOrder && item.type == createjs.Types.JAVASCRIPT ) ||
-      item.maintainOrder ) {
-
+    if (
+      (this.maintainScriptOrder && item.type == createjs.Types.JAVASCRIPT) ||
+      item.maintainOrder
+    ) {
       //TODO: Evaluate removal of the _currentlyLoadingScript
-      if ( loader instanceof createjs.JavaScriptLoader ) {
+      if (loader instanceof createjs.JavaScriptLoader) {
         this._currentlyLoadingScript = false;
       }
 
-      var index = createjs.indexOf( this._scriptOrder, item );
-      if ( index == -1 ) {
+      var index = createjs.indexOf(this._scriptOrder, item);
+      if (index == -1) {
         return false;
       } // This loader no longer exists
-      this._loadedScripts[ index ] = ( loadFailed === true ) ? true : item;
+      this._loadedScripts[index] = loadFailed === true ? true : item;
 
       this._checkScriptLoadOrder();
       return true;
@@ -22992,24 +24353,24 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   p._checkScriptLoadOrder = function () {
     var l = this._loadedScripts.length;
 
-    for ( var i = 0; i < l; i++ ) {
-      var item = this._loadedScripts[ i ];
-      if ( item === null ) {
+    for (var i = 0; i < l; i++) {
+      var item = this._loadedScripts[i];
+      if (item === null) {
         break;
       } // This is still loading. Do not process further.
-      if ( item === true ) {
+      if (item === true) {
         continue;
       } // This has completed, and been processed. Move on.
 
-      var loadItem = this._loadedResults[ item.id ];
-      if ( item.type == createjs.Types.JAVASCRIPT ) {
+      var loadItem = this._loadedResults[item.id];
+      if (item.type == createjs.Types.JAVASCRIPT) {
         // Append script tags to the head automatically.
-        createjs.DomUtils.appendToHead( loadItem );
+        createjs.DomUtils.appendToHead(loadItem);
       }
 
       var loader = item._loader;
-      this._processFinishedLoad( item, loader );
-      this._loadedScripts[ i ] = true;
+      this._processFinishedLoad(item, loader);
+      this._loadedScripts[i] = true;
     }
   };
 
@@ -23021,18 +24382,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {AbstractLoader} loader
    * @protected
    */
-  p._processFinishedLoad = function ( item, loader ) {
+  p._processFinishedLoad = function (item, loader) {
     this._numItemsLoaded++;
 
     // Since LoadQueue needs maintain order, we can't append scripts in the loader.
     // So we do it here instead. Or in _checkScriptLoadOrder();
-    if ( !this.maintainScriptOrder && item.type == createjs.Types.JAVASCRIPT ) {
+    if (!this.maintainScriptOrder && item.type == createjs.Types.JAVASCRIPT) {
       var tag = loader.getTag();
-      createjs.DomUtils.appendToHead( tag );
+      createjs.DomUtils.appendToHead(tag);
     }
 
     this._updateProgress();
-    this._sendFileComplete( item, loader );
+    this._sendFileComplete(item, loader);
     this._loadNext();
   };
 
@@ -23045,23 +24406,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} Whether the item can start a load or not.
    * @private
    */
-  p._canStartLoad = function ( loader ) {
-    if ( !this.maintainScriptOrder || loader.preferXHR ) {
+  p._canStartLoad = function (loader) {
+    if (!this.maintainScriptOrder || loader.preferXHR) {
       return true;
     }
     var item = loader.getItem();
-    if ( item.type != createjs.Types.JAVASCRIPT ) {
+    if (item.type != createjs.Types.JAVASCRIPT) {
       return true;
     }
-    if ( this._currentlyLoadingScript ) {
+    if (this._currentlyLoadingScript) {
       return false;
     }
 
-    var index = this._scriptOrder.indexOf( item );
+    var index = this._scriptOrder.indexOf(item);
     var i = 0;
-    while ( i < index ) {
-      var checkItem = this._loadedScripts[ i ];
-      if ( checkItem == null ) {
+    while (i < index) {
+      var checkItem = this._loadedScripts[i];
+      if (checkItem == null) {
         return false;
       }
       i++;
@@ -23076,11 +24437,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {AbstractLoader} loader A loader instance to remove.
    * @private
    */
-  p._removeLoadItem = function ( loader ) {
+  p._removeLoadItem = function (loader) {
     var l = this._currentLoads.length;
-    for ( var i = 0; i < l; i++ ) {
-      if ( this._currentLoads[ i ] == loader ) {
-        this._currentLoads.splice( i, 1 );
+    for (var i = 0; i < l; i++) {
+      if (this._currentLoads[i] == loader) {
+        this._currentLoads.splice(i, 1);
         break;
       }
     }
@@ -23092,12 +24453,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param loader
    * @private
    */
-  p._cleanLoadItem = function ( loader ) {
+  p._cleanLoadItem = function (loader) {
     var item = loader.getItem();
-    if ( item ) {
+    if (item) {
       delete item._loader;
     }
-  }
+  };
 
   /**
    * An item has dispatched progress. Propagate that progress, and update the LoadQueue's overall progress.
@@ -23105,9 +24466,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {ProgressEvent} event The progress event from the item.
    * @private
    */
-  p._handleProgress = function ( event ) {
+  p._handleProgress = function (event) {
     var loader = event.target;
-    this._sendFileProgress( loader.getItem(), loader.progress );
+    this._sendFileProgress(loader.getItem(), loader.progress);
     this._updateProgress();
   };
 
@@ -23129,16 +24490,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   p._updateProgress = function () {
     var loaded = this._numItemsLoaded / this._numItems; // Fully Loaded Progress
     var remaining = this._numItems - this._numItemsLoaded;
-    if ( remaining > 0 ) {
+    if (remaining > 0) {
       var chunk = 0;
-      for ( var i = 0, l = this._currentLoads.length; i < l; i++ ) {
-        chunk += this._currentLoads[ i ].progress;
+      for (var i = 0, l = this._currentLoads.length; i < l; i++) {
+        chunk += this._currentLoads[i].progress;
       }
-      loaded += ( chunk / remaining ) * ( remaining / this._numItems );
+      loaded += (chunk / remaining) * (remaining / this._numItems);
     }
 
-    if ( this._lastProgress != loaded ) {
-      this._sendProgress( loaded );
+    if (this._lastProgress != loaded) {
+      this._sendProgress(loaded);
       this._lastProgress = loaded;
     }
   };
@@ -23150,11 +24511,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {LoadItem|Object} item The item that was passed in for preloading.
    * @private
    */
-  p._disposeItem = function ( item ) {
-    delete this._loadedResults[ item.id ];
-    delete this._loadedRawResults[ item.id ];
-    delete this._loadItemsById[ item.id ];
-    delete this._loadItemsBySrc[ item.src ];
+  p._disposeItem = function (item) {
+    delete this._loadedResults[item.id];
+    delete this._loadedRawResults[item.id];
+    delete this._loadItemsById[item.id];
+    delete this._loadItemsBySrc[item.src];
   };
 
   /**
@@ -23165,22 +24526,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} progress The amount the item has been loaded (between 0 and 1).
    * @protected
    */
-  p._sendFileProgress = function ( item, progress ) {
-    if ( this._isCanceled() || this._paused ) {
+  p._sendFileProgress = function (item, progress) {
+    if (this._isCanceled() || this._paused) {
       return;
     }
-    if ( !this.hasEventListener( "fileprogress" ) ) {
+    if (!this.hasEventListener("fileprogress")) {
       return;
     }
 
     //LM: Rework ProgressEvent to support this?
-    var event = new createjs.Event( "fileprogress" );
+    var event = new createjs.Event("fileprogress");
     event.progress = progress;
     event.loaded = progress;
     event.total = 1;
     event.item = item;
 
-    this.dispatchEvent( event );
+    this.dispatchEvent(event);
   };
 
   /**
@@ -23191,23 +24552,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {AbstractLoader} loader
    * @protected
    */
-  p._sendFileComplete = function ( item, loader ) {
-    if ( this._isCanceled() || this._paused ) {
+  p._sendFileComplete = function (item, loader) {
+    if (this._isCanceled() || this._paused) {
       return;
     }
 
-    var event = new createjs.Event( "fileload" );
+    var event = new createjs.Event("fileload");
     event.loader = loader;
     event.item = item;
-    event.result = this._loadedResults[ item.id ];
-    event.rawResult = this._loadedRawResults[ item.id ];
+    event.result = this._loadedResults[item.id];
+    event.rawResult = this._loadedRawResults[item.id];
 
     // This calls a handler specified on the actual load item. Currently, the SoundJS plugin uses this.
-    if ( item.completeHandler ) {
-      item.completeHandler( event );
+    if (item.completeHandler) {
+      item.completeHandler(event);
     }
 
-    this.hasEventListener( "fileload" ) && this.dispatchEvent( event );
+    this.hasEventListener("fileload") && this.dispatchEvent(event);
   };
 
   /**
@@ -23217,24 +24578,24 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {LoadItem|Object} item The item that is being loaded.
    * @protected
    */
-  p._sendFileStart = function ( item ) {
-    var event = new createjs.Event( "filestart" );
+  p._sendFileStart = function (item) {
+    var event = new createjs.Event("filestart");
     event.item = item;
-    this.hasEventListener( "filestart" ) && this.dispatchEvent( event );
+    this.hasEventListener("filestart") && this.dispatchEvent(event);
   };
 
   p.toString = function () {
     return "[PreloadJS LoadQueue]";
   };
 
-  createjs.LoadQueue = createjs.promote( LoadQueue, "AbstractLoader" );
-}() );
+  createjs.LoadQueue = createjs.promote(LoadQueue, "AbstractLoader");
+})();
 
 //##############################################################################
 // TextLoader.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   // constructor
@@ -23245,11 +24606,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends AbstractLoader
    * @constructor
    */
-  function TextLoader( loadItem ) {
-    this.AbstractLoader_constructor( loadItem, true, createjs.Types.TEXT );
-  };
+  function TextLoader(loadItem) {
+    this.AbstractLoader_constructor(loadItem, true, createjs.Types.TEXT);
+  }
 
-  var p = createjs.extend( TextLoader, createjs.AbstractLoader );
+  var p = createjs.extend(TextLoader, createjs.AbstractLoader);
   var s = TextLoader;
 
   // static methods
@@ -23261,19 +24622,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Boolean} Whether the loader can load the item.
    * @static
    */
-  s.canLoadItem = function ( item ) {
+  s.canLoadItem = function (item) {
     return item.type == createjs.Types.TEXT;
   };
 
-  createjs.TextLoader = createjs.promote( TextLoader, "AbstractLoader" );
-
-}() );
+  createjs.TextLoader = createjs.promote(TextLoader, "AbstractLoader");
+})();
 
 //##############################################################################
 // BinaryLoader.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   // constructor
@@ -23284,12 +24644,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends AbstractLoader
    * @constructor
    */
-  function BinaryLoader( loadItem ) {
-    this.AbstractLoader_constructor( loadItem, true, createjs.Types.BINARY );
-    this.on( "initialize", this._updateXHR, this );
-  };
+  function BinaryLoader(loadItem) {
+    this.AbstractLoader_constructor(loadItem, true, createjs.Types.BINARY);
+    this.on("initialize", this._updateXHR, this);
+  }
 
-  var p = createjs.extend( BinaryLoader, createjs.AbstractLoader );
+  var p = createjs.extend(BinaryLoader, createjs.AbstractLoader);
   var s = BinaryLoader;
 
   // static methods
@@ -23301,7 +24661,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Boolean} Whether the loader can load the item.
    * @static
    */
-  s.canLoadItem = function ( item ) {
+  s.canLoadItem = function (item) {
     return item.type == createjs.Types.BINARY;
   };
 
@@ -23312,19 +24672,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Event} event
    * @private
    */
-  p._updateXHR = function ( event ) {
-    event.loader.setResponseType( "arraybuffer" );
+  p._updateXHR = function (event) {
+    event.loader.setResponseType("arraybuffer");
   };
 
-  createjs.BinaryLoader = createjs.promote( BinaryLoader, "AbstractLoader" );
-
-}() );
+  createjs.BinaryLoader = createjs.promote(BinaryLoader, "AbstractLoader");
+})();
 
 //##############################################################################
 // CSSLoader.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   // constructor
@@ -23336,8 +24695,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends AbstractLoader
    * @constructor
    */
-  function CSSLoader( loadItem, preferXHR ) {
-    this.AbstractLoader_constructor( loadItem, preferXHR, createjs.Types.CSS );
+  function CSSLoader(loadItem, preferXHR) {
+    this.AbstractLoader_constructor(loadItem, preferXHR, createjs.Types.CSS);
 
     // public properties
     this.resultFormatter = this._formatResult;
@@ -23345,7 +24704,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     // protected properties
     this._tagSrcAttribute = "href";
 
-    if ( preferXHR ) {
+    if (preferXHR) {
       this._tag = createjs.Elements.style();
     } else {
       this._tag = createjs.Elements.link();
@@ -23353,9 +24712,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 
     this._tag.rel = "stylesheet";
     this._tag.type = "text/css";
-  };
+  }
 
-  var p = createjs.extend( CSSLoader, createjs.AbstractLoader );
+  var p = createjs.extend(CSSLoader, createjs.AbstractLoader);
   var s = CSSLoader;
 
   // static methods
@@ -23367,7 +24726,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Boolean} Whether the loader can load the item.
    * @static
    */
-  s.canLoadItem = function ( item ) {
+  s.canLoadItem = function (item) {
     return item.type == createjs.Types.CSS;
   };
 
@@ -23379,34 +24738,34 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {HTMLLinkElement|HTMLStyleElement}
    * @private
    */
-  p._formatResult = function ( loader ) {
-    if ( this._preferXHR ) {
+  p._formatResult = function (loader) {
+    if (this._preferXHR) {
       var tag = loader.getTag();
 
-      if ( tag.styleSheet ) { // IE
-        tag.styleSheet.cssText = loader.getResult( true );
+      if (tag.styleSheet) {
+        // IE
+        tag.styleSheet.cssText = loader.getResult(true);
       } else {
-        var textNode = createjs.Elements.text( loader.getResult( true ) );
-        tag.appendChild( textNode );
+        var textNode = createjs.Elements.text(loader.getResult(true));
+        tag.appendChild(textNode);
       }
     } else {
       tag = this._tag;
     }
 
-    createjs.DomUtils.appendToHead( tag );
+    createjs.DomUtils.appendToHead(tag);
 
     return tag;
   };
 
-  createjs.CSSLoader = createjs.promote( CSSLoader, "AbstractLoader" );
-
-}() );
+  createjs.CSSLoader = createjs.promote(CSSLoader, "AbstractLoader");
+})();
 
 //##############################################################################
 // FontLoader.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   // constructor:
@@ -23421,8 +24780,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends AbstractLoader
    * @constructor
    **/
-  function FontLoader( loadItem, preferXHR ) {
-    this.AbstractLoader_constructor( loadItem, preferXHR, loadItem.type );
+  function FontLoader(loadItem, preferXHR) {
+    this.AbstractLoader_constructor(loadItem, preferXHR, loadItem.type);
 
     // private properties:
     /**
@@ -23473,11 +24832,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @type {boolean}
      * @protected
      */
-    this._injectCSS = ( loadItem.injectCSS === undefined ) ? true : loadItem.injectCSS;
+    this._injectCSS =
+      loadItem.injectCSS === undefined ? true : loadItem.injectCSS;
 
-    this.dispatchEvent( "initialize" );
+    this.dispatchEvent("initialize");
   }
-  var p = createjs.extend( FontLoader, createjs.AbstractLoader );
+  var p = createjs.extend(FontLoader, createjs.AbstractLoader);
 
   /**
    * Determines if the loader can load a specific item. This loader can only load items that are of type
@@ -23487,8 +24847,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Boolean} Whether the loader can load the item.
    * @static
    */
-  FontLoader.canLoadItem = function ( item ) {
-    return item.type == createjs.Types.FONT || item.type == createjs.Types.FONTCSS;
+  FontLoader.canLoadItem = function (item) {
+    return (
+      item.type == createjs.Types.FONT || item.type == createjs.Types.FONTCSS
+    );
   };
 
   // static properties:
@@ -23501,7 +24863,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @private
    */
-  FontLoader.sampleText = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  FontLoader.sampleText =
+    "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
   /**
    * The canvas context used to test the font size. Note that this currently requires an HTML DOM.
@@ -23510,7 +24873,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @private
    */
-  FontLoader._ctx = document.createElement( "canvas" ).getContext( "2d" ); // TODO: Consider a method to do this like EaselJS Stage has.
+  FontLoader._ctx = document.createElement("canvas").getContext("2d"); // TODO: Consider a method to do this like EaselJS Stage has.
 
   /**
    * A list of reference fonts to test. Multiple faces are tested to address the rare case of a loaded font being the
@@ -23520,7 +24883,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @default ["serif", "monospace"]
    * @private
    */
-  FontLoader._referenceFonts = [ "serif", "monospace" ];
+  FontLoader._referenceFonts = ["serif", "monospace"];
 
   /**
    * A regular expression that pulls out possible style values from the font name.
@@ -23547,7 +24910,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @type {RegExp}
    * @static
    */
-  FontLoader.WEIGHT_REGEX = /[- ._]*(thin|normal|book|regular|medium|black|heavy|[1-9]00|(?:extra|ultra|semi|demi)?[- ._]*(?:light|bold))[- ._]*/ig;
+  FontLoader.WEIGHT_REGEX =
+    /[- ._]*(thin|normal|book|regular|medium|black|heavy|[1-9]00|(?:extra|ultra|semi|demi)?[- ._]*(?:light|bold))[- ._]*/gi;
 
   /**
    * A regular expression that pulls out possible style values from the font name. These include "italic"
@@ -23556,7 +24920,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @type {RegExp}
    * @static
    */
-  FontLoader.STYLE_REGEX = /[- ._]*(italic|oblique)[- ._]*/ig;
+  FontLoader.STYLE_REGEX = /[- ._]*(italic|oblique)[- ._]*/gi;
 
   /**
    * A lookup of font types for generating a CSS definition. For example, TTF fonts requires a "truetype" type.
@@ -23568,7 +24932,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     woff2: "woff2",
     woff: "woff",
     ttf: "truetype",
-    otf: "truetype"
+    otf: "truetype",
   };
 
   /**
@@ -23591,7 +24955,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     extrabold: 800,
     ultrabold: 800,
     black: 900,
-    heavy: 900
+    heavy: 900,
   };
 
   /**
@@ -23604,26 +24968,28 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   FontLoader.WATCH_DURATION = 10;
   // public methods:
   p.load = function () {
-    if ( this.type == createjs.Types.FONTCSS ) {
+    if (this.type == createjs.Types.FONTCSS) {
       var loaded = this._watchCSS();
 
       // If the CSS is not ready, it will create a request, which AbstractLoader can handle.
-      if ( !loaded ) {
+      if (!loaded) {
         this.AbstractLoader_load();
         return;
       }
-
-    } else if ( this._item.src instanceof Array ) {
+    } else if (this._item.src instanceof Array) {
       this._watchFontArray();
     } else {
-      var def = this._defFromSrc( this._item.src );
-      this._watchFont( def );
-      this._injectStyleTag( this._cssFromDef( def ) );
+      var def = this._defFromSrc(this._item.src);
+      this._watchFont(def);
+      this._injectStyleTag(this._cssFromDef(def));
     }
 
-    this._loadTimeout = setTimeout( createjs.proxy( this._handleTimeout, this ), this._item.loadTimeout );
+    this._loadTimeout = setTimeout(
+      createjs.proxy(this._handleTimeout, this),
+      this._item.loadTimeout
+    );
 
-    this.dispatchEvent( "loadstart" );
+    this.dispatchEvent("loadstart");
   };
 
   /**
@@ -23634,7 +25000,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   p._handleTimeout = function () {
     this._stopWatching();
-    this.dispatchEvent( new createjs.ErrorEvent( "PRELOAD_TIMEOUT" ) );
+    this.dispatchEvent(new createjs.ErrorEvent("PRELOAD_TIMEOUT"));
   };
 
   // WatchCSS does the work for us, and provides a modified src.
@@ -23643,17 +25009,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   };
 
   // Events come from the internal XHR loader.
-  p.handleEvent = function ( event ) {
-    switch ( event.type ) {
+  p.handleEvent = function (event) {
+    switch (event.type) {
       case "complete":
         this._rawResult = event.target._response;
         this._result = true;
-        this._parseCSS( this._rawResult );
+        this._parseCSS(this._rawResult);
         break;
 
       case "error":
         this._stopWatching();
-        this.AbstractLoader_handleEvent( event );
+        this.AbstractLoader_handleEvent(event);
         break;
     }
   };
@@ -23670,22 +25036,25 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     var src = this._item.src;
 
     // An HTMLElement was passed in. Just use it.
-    if ( src instanceof HTMLStyleElement ) {
-      if ( this._injectCSS && !src.parentNode ) {
-        ( document.head || document.getElementsByTagName( 'head' )[ 0 ] ).appendChild( src );
+    if (src instanceof HTMLStyleElement) {
+      if (this._injectCSS && !src.parentNode) {
+        (document.head || document.getElementsByTagName("head")[0]).appendChild(
+          src
+        );
       }
       this._injectCSS = false;
       src = "\n" + src.textContent;
     }
 
     // A CSS string was passed in. Parse and use it
-    if ( src.search( /\n|\r|@font-face/i ) !== -1 ) { // css string.
-      this._parseCSS( src );
+    if (src.search(/\n|\r|@font-face/i) !== -1) {
+      // css string.
+      this._parseCSS(src);
       return true;
     }
 
     // Load a CSS Path. Note that we CAN NOT load it without XHR because we need to read the CSS definition
-    this._request = new createjs.XHRRequest( this._item );
+    this._request = new createjs.XHRRequest(this._item);
     return false;
   };
 
@@ -23695,16 +25064,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String} css The CSS string to parse
    * @protected
    */
-  p._parseCSS = function ( css ) {
-    var regex = /@font-face\s*\{([^}]+)}/g
-    while ( true ) {
-      var result = regex.exec( css );
-      if ( !result ) {
+  p._parseCSS = function (css) {
+    var regex = /@font-face\s*\{([^}]+)}/g;
+    while (true) {
+      var result = regex.exec(css);
+      if (!result) {
         break;
       }
-      this._watchFont( this._parseFontFace( result[ 1 ] ) );
+      this._watchFont(this._parseFontFace(result[1]));
     }
-    this._injectStyleTag( css );
+    this._injectStyleTag(css);
   };
 
   /**
@@ -23716,17 +25085,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     var arr = this._item.src,
       css = "",
       def;
-    for ( var i = arr.length - 1; i >= 0; i-- ) {
-      var o = arr[ i ];
-      if ( typeof o === "string" ) {
-        def = this._defFromSrc( o )
+    for (var i = arr.length - 1; i >= 0; i--) {
+      var o = arr[i];
+      if (typeof o === "string") {
+        def = this._defFromSrc(o);
       } else {
-        def = this._defFromObj( o );
+        def = this._defFromObj(o);
       }
-      this._watchFont( def );
-      css += this._cssFromDef( def ) + "\n";
+      this._watchFont(def);
+      css += this._cssFromDef(def) + "\n";
     }
-    this._injectStyleTag( css );
+    this._injectStyleTag(css);
   };
 
   /**
@@ -23737,19 +25106,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String} css The CSS string content to be appended to the
    * @protected
    */
-  p._injectStyleTag = function ( css ) {
-    if ( !this._injectCSS ) {
+  p._injectStyleTag = function (css) {
+    if (!this._injectCSS) {
       return;
     }
-    var head = document.head || document.getElementsByTagName( 'head' )[ 0 ];
-    var styleTag = document.createElement( "style" );
+    var head = document.head || document.getElementsByTagName("head")[0];
+    var styleTag = document.createElement("style");
     styleTag.type = "text/css";
-    if ( styleTag.styleSheet ) {
+    if (styleTag.styleSheet) {
       styleTag.styleSheet.cssText = css;
     } else {
-      styleTag.appendChild( document.createTextNode( css ) );
+      styleTag.appendChild(document.createTextNode(css));
     }
-    head.appendChild( styleTag );
+    head.appendChild(styleTag);
   };
 
   /**
@@ -23759,18 +25128,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @return {String} A modified CSS object containing family name, src, style, and weight
    */
-  p._parseFontFace = function ( str ) {
-    var family = this._getCSSValue( str, "font-family" ),
-      src = this._getCSSValue( str, "src" );
-    if ( !family || !src ) {
+  p._parseFontFace = function (str) {
+    var family = this._getCSSValue(str, "font-family"),
+      src = this._getCSSValue(str, "src");
+    if (!family || !src) {
       return null;
     }
-    return this._defFromObj( {
+    return this._defFromObj({
       family: family,
       src: src,
-      style: this._getCSSValue( str, "font-style" ),
-      weight: this._getCSSValue( str, "font-weight" )
-    } );
+      style: this._getCSSValue(str, "font-style"),
+      weight: this._getCSSValue(str, "font-weight"),
+    });
   };
 
   /**
@@ -23780,15 +25149,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} def The font definition
    * @protected
    */
-  p._watchFont = function ( def ) {
-    if ( !def || this._faces[ def.id ] ) {
+  p._watchFont = function (def) {
+    if (!def || this._faces[def.id]) {
       return;
     }
-    this._faces[ def.id ] = def;
-    this._watched.push( def );
+    this._faces[def.id] = def;
+    this._watched.push(def);
     this._count++;
 
-    this._calculateReferenceSizes( def );
+    this._calculateReferenceSizes(def);
     this._startWatching();
   };
 
@@ -23799,10 +25168,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    */
   p._startWatching = function () {
-    if ( this._watchInterval != null ) {
+    if (this._watchInterval != null) {
       return;
     }
-    this._watchInterval = setInterval( createjs.proxy( this._watch, this ), FontLoader.WATCH_DURATION );
+    this._watchInterval = setInterval(
+      createjs.proxy(this._watch, this),
+      FontLoader.WATCH_DURATION
+    );
   };
 
   /**
@@ -23812,8 +25184,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    */
   p._stopWatching = function () {
-    clearInterval( this._watchInterval );
-    clearTimeout( this._loadTimeout );
+    clearInterval(this._watchInterval);
+    clearTimeout(this._loadTimeout);
     this._watchInterval = null;
   };
 
@@ -23832,26 +25204,33 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     var defs = this._watched,
       refFonts = FontLoader._referenceFonts,
       l = defs.length;
-    for ( var i = l - 1; i >= 0; i-- ) {
-      var def = defs[ i ],
+    for (var i = l - 1; i >= 0; i--) {
+      var def = defs[i],
         refs = def.refs;
-      for ( var j = refs.length - 1; j >= 0; j-- ) {
-        var w = this._getTextWidth( def.family + "," + refFonts[ j ], def.weight, def.style );
-        if ( w != refs[ j ] ) {
-          var event = new createjs.Event( "fileload" );
+      for (var j = refs.length - 1; j >= 0; j--) {
+        var w = this._getTextWidth(
+          def.family + "," + refFonts[j],
+          def.weight,
+          def.style
+        );
+        if (w != refs[j]) {
+          var event = new createjs.Event("fileload");
           def.type = "font-family";
           event.item = def;
-          this.dispatchEvent( event );
-          defs.splice( i, 1 );
+          this.dispatchEvent(event);
+          defs.splice(i, 1);
           break;
         }
       }
     }
-    if ( l !== defs.length ) {
-      var event = new createjs.ProgressEvent( this._count - defs.length, this._count );
-      this.dispatchEvent( event );
+    if (l !== defs.length) {
+      var event = new createjs.ProgressEvent(
+        this._count - defs.length,
+        this._count
+      );
+      this.dispatchEvent(event);
     }
-    if ( l === 0 ) {
+    if (l === 0) {
       this._stopWatching();
       this._sendComplete();
     }
@@ -23863,11 +25242,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} def The font definition to get the size of.
    * @protected
    */
-  p._calculateReferenceSizes = function ( def ) {
+  p._calculateReferenceSizes = function (def) {
     var refFonts = FontLoader._referenceFonts;
-    var refs = def.refs = [];
-    for ( var i = 0; i < refFonts.length; i++ ) {
-      refs[ i ] = this._getTextWidth( refFonts[ i ], def.weight, def.style );
+    var refs = (def.refs = []);
+    for (var i = 0; i < refFonts.length; i++) {
+      refs[i] = this._getTextWidth(refFonts[i], def.weight, def.style);
     }
   };
 
@@ -23877,52 +25256,52 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String} src The font source
    * @protected
    */
-  p._defFromSrc = function ( src ) {
+  p._defFromSrc = function (src) {
     var re = /[- ._]+/g,
       name = src,
       ext = null,
       index;
 
-    index = name.search( /[?#]/ );
-    if ( index !== -1 ) {
-      name = name.substr( 0, index );
+    index = name.search(/[?#]/);
+    if (index !== -1) {
+      name = name.substr(0, index);
     }
-    index = name.lastIndexOf( "." );
-    if ( index !== -1 ) {
-      ext = name.substr( index + 1 );
-      name = name.substr( 0, index );
+    index = name.lastIndexOf(".");
+    if (index !== -1) {
+      ext = name.substr(index + 1);
+      name = name.substr(0, index);
     }
-    index = name.lastIndexOf( "/" );
-    if ( index !== -1 ) {
-      name = name.substr( index + 1 );
+    index = name.lastIndexOf("/");
+    if (index !== -1) {
+      name = name.substr(index + 1);
     }
 
     var family = name,
-      weight = family.match( FontLoader.WEIGHT_REGEX );
-    if ( weight ) {
-      weight = weight[ 0 ];
-      family = family.replace( weight, "" );
-      weight = weight.replace( re, "" ).toLowerCase();
+      weight = family.match(FontLoader.WEIGHT_REGEX);
+    if (weight) {
+      weight = weight[0];
+      family = family.replace(weight, "");
+      weight = weight.replace(re, "").toLowerCase();
     }
-    var style = name.match( FontLoader.STYLE_REGEX );
-    if ( style ) {
-      family = family.replace( style[ 0 ], "" );
+    var style = name.match(FontLoader.STYLE_REGEX);
+    if (style) {
+      family = family.replace(style[0], "");
       style = "italic";
     }
-    family = family.replace( re, "" );
+    family = family.replace(re, "");
 
-    var cssSrc = "local('" + name.replace( re, " " ) + "'), url('" + src + "')";
-    var format = FontLoader.FONT_FORMAT[ ext ];
-    if ( format ) {
+    var cssSrc = "local('" + name.replace(re, " ") + "'), url('" + src + "')";
+    var format = FontLoader.FONT_FORMAT[ext];
+    if (format) {
       cssSrc += " format('" + format + "')";
     }
 
-    return this._defFromObj( {
+    return this._defFromObj({
       family: family,
-      weight: FontLoader.FONT_WEIGHT[ weight ] || weight,
+      weight: FontLoader.FONT_WEIGHT[weight] || weight,
       style: style,
-      src: cssSrc
-    } );
+      src: cssSrc,
+    });
   };
 
   /**
@@ -23932,12 +25311,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Object} A standard font object that the FontLoader understands
    * @protected
    */
-  p._defFromObj = function ( o ) {
+  p._defFromObj = function (o) {
     var def = {
       family: o.family,
       src: o.src,
       style: o.style || "normal",
-      weight: o.weight || "normal"
+      weight: o.weight || "normal",
     };
     def.id = def.family + ";" + def.style + ";" + def.weight;
     return def;
@@ -23950,13 +25329,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {string} A CSS string representing the object
    * @protected
    */
-  p._cssFromDef = function ( def ) {
-    return "@font-face {\n" +
-      "\tfont-family: '" + def.family + "';\n" +
-      "\tfont-style: " + def.style + ";\n" +
-      "\tfont-weight: " + def.weight + ";\n" +
-      "\tsrc: " + def.src + ";\n" +
-      "}";
+  p._cssFromDef = function (def) {
+    return (
+      "@font-face {\n" +
+      "\tfont-family: '" +
+      def.family +
+      "';\n" +
+      "\tfont-style: " +
+      def.style +
+      ";\n" +
+      "\tfont-weight: " +
+      def.weight +
+      ";\n" +
+      "\tsrc: " +
+      def.src +
+      ";\n" +
+      "}"
+    );
   };
 
   /**
@@ -23968,10 +25357,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Number} The pixel measurement of the font.
    * @protected
    */
-  p._getTextWidth = function ( family, weight, style ) {
+  p._getTextWidth = function (family, weight, style) {
     var ctx = FontLoader._ctx;
     ctx.font = style + " " + weight + " 72px " + family;
-    return ctx.measureText( FontLoader.sampleText ).width;
+    return ctx.measureText(FontLoader.sampleText).width;
   };
 
   /**
@@ -23983,24 +25372,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {String} The value in the CSS for the provided property name
    * @protected
    */
-  p._getCSSValue = function ( str, propName ) {
-    var regex = new RegExp( propName + ":\s*([^;}]+?)\s*[;}]" );
-    var result = regex.exec( str );
-    if ( !result || !result[ 1 ] ) {
+  p._getCSSValue = function (str, propName) {
+    var regex = new RegExp(propName + ":s*([^;}]+?)s*[;}]");
+    var result = regex.exec(str);
+    if (!result || !result[1]) {
       return null;
     }
-    return result[ 1 ];
+    return result[1];
   };
 
-  createjs.FontLoader = createjs.promote( FontLoader, "AbstractLoader" );
-
-} )();
+  createjs.FontLoader = createjs.promote(FontLoader, "AbstractLoader");
+})();
 
 //##############################################################################
 // ImageLoader.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   // constructor
@@ -24012,8 +25400,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends AbstractLoader
    * @constructor
    */
-  function ImageLoader( loadItem, preferXHR ) {
-    this.AbstractLoader_constructor( loadItem, preferXHR, createjs.Types.IMAGE );
+  function ImageLoader(loadItem, preferXHR) {
+    this.AbstractLoader_constructor(loadItem, preferXHR, createjs.Types.IMAGE);
 
     // public properties
     this.resultFormatter = this._formatResult;
@@ -24022,24 +25410,24 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     this._tagSrcAttribute = "src";
 
     // Check if the preload item is already a tag.
-    if ( createjs.DomUtils.isImageTag( loadItem ) ) {
+    if (createjs.DomUtils.isImageTag(loadItem)) {
       this._tag = loadItem;
-    } else if ( createjs.DomUtils.isImageTag( loadItem.src ) ) {
+    } else if (createjs.DomUtils.isImageTag(loadItem.src)) {
       this._tag = loadItem.src;
-    } else if ( createjs.DomUtils.isImageTag( loadItem.tag ) ) {
+    } else if (createjs.DomUtils.isImageTag(loadItem.tag)) {
       this._tag = loadItem.tag;
     }
 
-    if ( this._tag != null ) {
+    if (this._tag != null) {
       this._preferXHR = false;
     } else {
       this._tag = createjs.Elements.img();
     }
 
-    this.on( "initialize", this._updateXHR, this );
-  };
+    this.on("initialize", this._updateXHR, this);
+  }
 
-  var p = createjs.extend( ImageLoader, createjs.AbstractLoader );
+  var p = createjs.extend(ImageLoader, createjs.AbstractLoader);
   var s = ImageLoader;
 
   // static methods
@@ -24051,22 +25439,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Boolean} Whether the loader can load the item.
    * @static
    */
-  s.canLoadItem = function ( item ) {
+  s.canLoadItem = function (item) {
     return item.type == createjs.Types.IMAGE;
   };
 
   // public methods
   p.load = function () {
-    if ( this._tag.src != "" && this._tag.complete ) {
+    if (this._tag.src != "" && this._tag.complete) {
       this._sendComplete();
       return;
     }
 
     var crossOrigin = this._item.crossOrigin;
-    if ( crossOrigin == true ) {
+    if (crossOrigin == true) {
       crossOrigin = "Anonymous";
     }
-    if ( crossOrigin != null && !createjs.URLUtils.isLocal( this._item ) ) {
+    if (crossOrigin != null && !createjs.URLUtils.isLocal(this._item)) {
       this._tag.crossOrigin = crossOrigin;
     }
 
@@ -24080,12 +25468,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Event} event
    * @private
    */
-  p._updateXHR = function ( event ) {
-    event.loader.mimeType = 'text/plain; charset=x-user-defined-binary';
+  p._updateXHR = function (event) {
+    event.loader.mimeType = "text/plain; charset=x-user-defined-binary";
 
     // Only exists for XHR
-    if ( event.loader.setResponseType ) {
-      event.loader.setResponseType( "blob" );
+    if (event.loader.setResponseType) {
+      event.loader.setResponseType("blob");
     }
   };
 
@@ -24096,7 +25484,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {HTMLImageElement}
    * @private
    */
-  p._formatResult = function ( loader ) {
+  p._formatResult = function (loader) {
     return this._formatImage;
   };
 
@@ -24108,35 +25496,34 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Function} errorCallback The method to call if an error occurs during formatting
    * @private
    */
-  p._formatImage = function ( successCallback, errorCallback ) {
+  p._formatImage = function (successCallback, errorCallback) {
     var tag = this._tag;
     var URL = window.URL || window.webkitURL;
 
-    if ( !this._preferXHR ) {
-
+    if (!this._preferXHR) {
       //document.body.removeChild(tag);
-    } else if ( URL ) {
-      var objURL = URL.createObjectURL( this.getResult( true ) );
+    } else if (URL) {
+      var objURL = URL.createObjectURL(this.getResult(true));
       tag.src = objURL;
 
-      tag.addEventListener( "load", this._cleanUpURL, false );
-      tag.addEventListener( "error", this._cleanUpURL, false );
+      tag.addEventListener("load", this._cleanUpURL, false);
+      tag.addEventListener("error", this._cleanUpURL, false);
     } else {
       tag.src = this._item.src;
     }
 
-    if ( tag.complete ) {
-      successCallback( tag );
+    if (tag.complete) {
+      successCallback(tag);
     } else {
-      tag.onload = createjs.proxy( function () {
-        successCallback( this._tag );
+      tag.onload = createjs.proxy(function () {
+        successCallback(this._tag);
         tag.onload = tag.onerror = null;
-      }, this );
+      }, this);
 
-      tag.onerror = createjs.proxy( function ( event ) {
-        errorCallback( new createjs.ErrorEvent( 'IMAGE_FORMAT', null, event ) );
+      tag.onerror = createjs.proxy(function (event) {
+        errorCallback(new createjs.ErrorEvent("IMAGE_FORMAT", null, event));
         tag.onload = tag.onerror = null;
-      }, this );
+      }, this);
     }
   };
 
@@ -24148,20 +25535,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param event
    * @private
    */
-  p._cleanUpURL = function ( event ) {
+  p._cleanUpURL = function (event) {
     var URL = window.URL || window.webkitURL;
-    URL.revokeObjectURL( event.target.src );
+    URL.revokeObjectURL(event.target.src);
   };
 
-  createjs.ImageLoader = createjs.promote( ImageLoader, "AbstractLoader" );
-
-}() );
+  createjs.ImageLoader = createjs.promote(ImageLoader, "AbstractLoader");
+})();
 
 //##############################################################################
 // JavaScriptLoader.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   // constructor
@@ -24173,18 +25559,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends AbstractLoader
    * @constructor
    */
-  function JavaScriptLoader( loadItem, preferXHR ) {
-    this.AbstractLoader_constructor( loadItem, preferXHR, createjs.Types.JAVASCRIPT );
+  function JavaScriptLoader(loadItem, preferXHR) {
+    this.AbstractLoader_constructor(
+      loadItem,
+      preferXHR,
+      createjs.Types.JAVASCRIPT
+    );
 
     // public properties
     this.resultFormatter = this._formatResult;
 
     // protected properties
     this._tagSrcAttribute = "src";
-    this.setTag( createjs.Elements.script() );
-  };
+    this.setTag(createjs.Elements.script());
+  }
 
-  var p = createjs.extend( JavaScriptLoader, createjs.AbstractLoader );
+  var p = createjs.extend(JavaScriptLoader, createjs.AbstractLoader);
   var s = JavaScriptLoader;
 
   // static methods
@@ -24196,7 +25586,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Boolean} Whether the loader can load the item.
    * @static
    */
-  s.canLoadItem = function ( item ) {
+  s.canLoadItem = function (item) {
     return item.type == createjs.Types.JAVASCRIPT;
   };
 
@@ -24208,23 +25598,25 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {HTMLLinkElement|HTMLStyleElement}
    * @private
    */
-  p._formatResult = function ( loader ) {
+  p._formatResult = function (loader) {
     var tag = loader.getTag();
-    if ( this._preferXHR ) {
-      tag.text = loader.getResult( true );
+    if (this._preferXHR) {
+      tag.text = loader.getResult(true);
     }
     return tag;
   };
 
-  createjs.JavaScriptLoader = createjs.promote( JavaScriptLoader, "AbstractLoader" );
-
-}() );
+  createjs.JavaScriptLoader = createjs.promote(
+    JavaScriptLoader,
+    "AbstractLoader"
+  );
+})();
 
 //##############################################################################
 // JSONLoader.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   // constructor
@@ -24237,14 +25629,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends AbstractLoader
    * @constructor
    */
-  function JSONLoader( loadItem ) {
-    this.AbstractLoader_constructor( loadItem, true, createjs.Types.JSON );
+  function JSONLoader(loadItem) {
+    this.AbstractLoader_constructor(loadItem, true, createjs.Types.JSON);
 
     // public properties
     this.resultFormatter = this._formatResult;
-  };
+  }
 
-  var p = createjs.extend( JSONLoader, createjs.AbstractLoader );
+  var p = createjs.extend(JSONLoader, createjs.AbstractLoader);
   var s = JSONLoader;
 
   // static methods
@@ -24256,7 +25648,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Boolean} Whether the loader can load the item.
    * @static
    */
-  s.canLoadItem = function ( item ) {
+  s.canLoadItem = function (item) {
     return item.type == createjs.Types.JSON;
   };
 
@@ -24268,28 +25660,27 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {HTMLLinkElement|HTMLStyleElement}
    * @private
    */
-  p._formatResult = function ( loader ) {
+  p._formatResult = function (loader) {
     var json = null;
     try {
-      json = createjs.DataUtils.parseJSON( loader.getResult( true ) );
-    } catch ( e ) {
-      var event = new createjs.ErrorEvent( "JSON_FORMAT", null, e );
-      this._sendError( event );
+      json = createjs.DataUtils.parseJSON(loader.getResult(true));
+    } catch (e) {
+      var event = new createjs.ErrorEvent("JSON_FORMAT", null, e);
+      this._sendError(event);
       return e;
     }
 
     return json;
   };
 
-  createjs.JSONLoader = createjs.promote( JSONLoader, "AbstractLoader" );
-
-}() );
+  createjs.JSONLoader = createjs.promote(JSONLoader, "AbstractLoader");
+})();
 
 //##############################################################################
 // JSONPLoader.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   // constructor
@@ -24335,15 +25726,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends AbstractLoader
    * @constructor
    */
-  function JSONPLoader( loadItem ) {
-    this.AbstractLoader_constructor( loadItem, false, createjs.Types.JSONP );
-    this.setTag( createjs.Elements.script() );
+  function JSONPLoader(loadItem) {
+    this.AbstractLoader_constructor(loadItem, false, createjs.Types.JSONP);
+    this.setTag(createjs.Elements.script());
     this.getTag().type = "text/javascript";
-  };
+  }
 
-  var p = createjs.extend( JSONPLoader, createjs.AbstractLoader );
+  var p = createjs.extend(JSONPLoader, createjs.AbstractLoader);
   var s = JSONPLoader;
-
 
   // static methods
   /**
@@ -24354,7 +25744,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Boolean} Whether the loader can load the item.
    * @static
    */
-  s.canLoadItem = function ( item ) {
+  s.canLoadItem = function (item) {
     return item.type == createjs.Types.JSONP;
   };
 
@@ -24372,25 +25762,29 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    *
    */
   p.load = function () {
-    if ( this._item.callback == null ) {
-      throw new Error( 'callback is required for loading JSONP requests.' );
+    if (this._item.callback == null) {
+      throw new Error("callback is required for loading JSONP requests.");
     }
 
     // TODO: Look into creating our own iFrame to handle the load
     // In the first attempt, FF did not get the result
     //   result instanceof Object did not work either
     //   so we would need to clone the result.
-    if ( window[ this._item.callback ] != null ) {
+    if (window[this._item.callback] != null) {
       throw new Error(
         "JSONP callback '" +
-        this._item.callback +
-        "' already exists on window. You need to specify a different callback or re-name the current one." );
+          this._item.callback +
+          "' already exists on window. You need to specify a different callback or re-name the current one."
+      );
     }
 
-    window[ this._item.callback ] = createjs.proxy( this._handleLoad, this );
-    createjs.DomUtils.appendToBody( this._tag );
+    window[this._item.callback] = createjs.proxy(this._handleLoad, this);
+    createjs.DomUtils.appendToBody(this._tag);
 
-    this._loadTimeout = setTimeout( createjs.proxy( this._handleTimeout, this ), this._item.loadTimeout );
+    this._loadTimeout = setTimeout(
+      createjs.proxy(this._handleTimeout, this),
+      this._item.loadTimeout
+    );
 
     // Load the tag
     this._tag.src = this._item.src;
@@ -24403,7 +25797,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} data The formatted JSON data.
    * @private
    */
-  p._handleLoad = function ( data ) {
+  p._handleLoad = function (data) {
     this._result = this._rawResult = data;
     this._sendComplete();
 
@@ -24418,7 +25812,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   p._handleTimeout = function () {
     this._dispose();
-    this.dispatchEvent( new createjs.ErrorEvent( "timeout" ) );
+    this.dispatchEvent(new createjs.ErrorEvent("timeout"));
   };
 
   /**
@@ -24427,21 +25821,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @private
    */
   p._dispose = function () {
-    createjs.DomUtils.removeChild( this._tag );
-    delete window[ this._item.callback ];
+    createjs.DomUtils.removeChild(this._tag);
+    delete window[this._item.callback];
 
-    clearTimeout( this._loadTimeout );
+    clearTimeout(this._loadTimeout);
   };
 
-  createjs.JSONPLoader = createjs.promote( JSONPLoader, "AbstractLoader" );
-
-}() );
+  createjs.JSONPLoader = createjs.promote(JSONPLoader, "AbstractLoader");
+})();
 
 //##############################################################################
 // ManifestLoader.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   // constructor
@@ -24476,8 +25869,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends AbstractLoader
    * @constructor
    */
-  function ManifestLoader( loadItem, preferXHR ) {
-    this.AbstractLoader_constructor( loadItem, preferXHR, createjs.Types.MANIFEST );
+  function ManifestLoader(loadItem, preferXHR) {
+    this.AbstractLoader_constructor(
+      loadItem,
+      preferXHR,
+      createjs.Types.MANIFEST
+    );
 
     // Public Properties
     /**
@@ -24490,7 +25887,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      */
     this.plugins = null;
 
-
     // Protected Properties
     /**
      * An internal {{#crossLink "LoadQueue"}}{{/crossLink}} that loads the contents of the manifest.
@@ -24499,9 +25895,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @private
      */
     this._manifestQueue = null;
-  };
+  }
 
-  var p = createjs.extend( ManifestLoader, createjs.AbstractLoader );
+  var p = createjs.extend(ManifestLoader, createjs.AbstractLoader);
   var s = ManifestLoader;
 
   // static properties
@@ -24524,7 +25920,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Boolean} Whether the loader can load the item.
    * @static
    */
-  s.canLoadItem = function ( item ) {
+  s.canLoadItem = function (item) {
     return item.type == createjs.Types.MANIFEST;
   };
 
@@ -24536,31 +25932,31 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   // protected methods
   p._createRequest = function () {
     var callback = this._item.callback;
-    if ( callback != null ) {
-      this._request = new createjs.JSONPLoader( this._item );
+    if (callback != null) {
+      this._request = new createjs.JSONPLoader(this._item);
     } else {
-      this._request = new createjs.JSONLoader( this._item );
+      this._request = new createjs.JSONLoader(this._item);
     }
   };
 
-  p.handleEvent = function ( event ) {
-    switch ( event.type ) {
+  p.handleEvent = function (event) {
+    switch (event.type) {
       case "complete":
-        this._rawResult = event.target.getResult( true );
+        this._rawResult = event.target.getResult(true);
         this._result = event.target.getResult();
-        this._sendProgress( s.MANIFEST_PROGRESS );
-        this._loadManifest( this._result );
+        this._sendProgress(s.MANIFEST_PROGRESS);
+        this._loadManifest(this._result);
         return;
       case "progress":
         event.loaded *= s.MANIFEST_PROGRESS;
         this.progress = event.loaded / event.total;
-        if ( isNaN( this.progress ) || this.progress == Infinity ) {
+        if (isNaN(this.progress) || this.progress == Infinity) {
           this.progress = 0;
         }
-        this._sendProgress( event );
+        this._sendProgress(event);
         return;
     }
-    this.AbstractLoader_handleEvent( event );
+    this.AbstractLoader_handleEvent(event);
   };
 
   p.destroy = function () {
@@ -24574,17 +25970,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} json
    * @private
    */
-  p._loadManifest = function ( json ) {
-    if ( json && json.manifest ) {
-      var queue = this._manifestQueue = new createjs.LoadQueue( this._preferXHR );
-      queue.on( "fileload", this._handleManifestFileLoad, this );
-      queue.on( "progress", this._handleManifestProgress, this );
-      queue.on( "complete", this._handleManifestComplete, this, true );
-      queue.on( "error", this._handleManifestError, this, true );
-      for ( var i = 0, l = this.plugins.length; i < l; i++ ) { // conserve order of plugins
-        queue.installPlugin( this.plugins[ i ] );
+  p._loadManifest = function (json) {
+    if (json && json.manifest) {
+      var queue = (this._manifestQueue = new createjs.LoadQueue(
+        this._preferXHR
+      ));
+      queue.on("fileload", this._handleManifestFileLoad, this);
+      queue.on("progress", this._handleManifestProgress, this);
+      queue.on("complete", this._handleManifestComplete, this, true);
+      queue.on("error", this._handleManifestError, this, true);
+      for (var i = 0, l = this.plugins.length; i < l; i++) {
+        // conserve order of plugins
+        queue.installPlugin(this.plugins[i]);
       }
-      queue.loadManifest( json );
+      queue.loadManifest(json);
     } else {
       this._sendComplete();
     }
@@ -24596,9 +25995,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Event} event
    * @private
    */
-  p._handleManifestFileLoad = function ( event ) {
+  p._handleManifestFileLoad = function (event) {
     event.target = null;
-    this.dispatchEvent( event );
+    this.dispatchEvent(event);
   };
 
   /**
@@ -24608,8 +26007,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Event} event
    * @private
    */
-  p._handleManifestComplete = function ( event ) {
-    this._loadedItems = this._manifestQueue.getItems( true );
+  p._handleManifestComplete = function (event) {
+    this._loadedItems = this._manifestQueue.getItems(true);
     this._sendComplete();
   };
 
@@ -24619,9 +26018,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {ProgressEvent} event
    * @private
    */
-  p._handleManifestProgress = function ( event ) {
-    this.progress = event.progress * ( 1 - s.MANIFEST_PROGRESS ) + s.MANIFEST_PROGRESS;
-    this._sendProgress( this.progress );
+  p._handleManifestProgress = function (event) {
+    this.progress =
+      event.progress * (1 - s.MANIFEST_PROGRESS) + s.MANIFEST_PROGRESS;
+    this._sendProgress(this.progress);
   };
 
   /**
@@ -24630,21 +26030,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {ErrorEvent} event
    * @private
    */
-  p._handleManifestError = function ( event ) {
-    var newEvent = new createjs.Event( "fileerror" );
+  p._handleManifestError = function (event) {
+    var newEvent = new createjs.Event("fileerror");
     newEvent.item = event.data;
-    this.dispatchEvent( newEvent );
+    this.dispatchEvent(newEvent);
   };
 
-  createjs.ManifestLoader = createjs.promote( ManifestLoader, "AbstractLoader" );
-
-}() );
+  createjs.ManifestLoader = createjs.promote(ManifestLoader, "AbstractLoader");
+})();
 
 //##############################################################################
 // SoundLoader.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   // constructor
@@ -24659,24 +26058,30 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends AbstractMediaLoader
    * @constructor
    */
-  function SoundLoader( loadItem, preferXHR ) {
-    this.AbstractMediaLoader_constructor( loadItem, preferXHR, createjs.Types.SOUND );
+  function SoundLoader(loadItem, preferXHR) {
+    this.AbstractMediaLoader_constructor(
+      loadItem,
+      preferXHR,
+      createjs.Types.SOUND
+    );
 
     // protected properties
-    if ( createjs.DomUtils.isAudioTag( loadItem ) ) {
+    if (createjs.DomUtils.isAudioTag(loadItem)) {
       this._tag = loadItem;
-    } else if ( createjs.DomUtils.isAudioTag( loadItem.src ) ) {
+    } else if (createjs.DomUtils.isAudioTag(loadItem.src)) {
       this._tag = loadItem;
-    } else if ( createjs.DomUtils.isAudioTag( loadItem.tag ) ) {
-      this._tag = createjs.DomUtils.isAudioTag( loadItem ) ? loadItem : loadItem.src;
+    } else if (createjs.DomUtils.isAudioTag(loadItem.tag)) {
+      this._tag = createjs.DomUtils.isAudioTag(loadItem)
+        ? loadItem
+        : loadItem.src;
     }
 
-    if ( this._tag != null ) {
+    if (this._tag != null) {
       this._preferXHR = false;
     }
-  };
+  }
 
-  var p = createjs.extend( SoundLoader, createjs.AbstractMediaLoader );
+  var p = createjs.extend(SoundLoader, createjs.AbstractMediaLoader);
   var s = SoundLoader;
 
   // static methods
@@ -24688,12 +26093,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Boolean} Whether the loader can load the item.
    * @static
    */
-  s.canLoadItem = function ( item ) {
+  s.canLoadItem = function (item) {
     return item.type == createjs.Types.SOUND;
   };
 
   // protected methods
-  p._createTag = function ( src ) {
+  p._createTag = function (src) {
     var tag = createjs.Elements.audio();
     tag.autoplay = false;
     tag.preload = "none";
@@ -24703,15 +26108,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return tag;
   };
 
-  createjs.SoundLoader = createjs.promote( SoundLoader, "AbstractMediaLoader" );
-
-}() );
+  createjs.SoundLoader = createjs.promote(SoundLoader, "AbstractMediaLoader");
+})();
 
 //##############################################################################
 // VideoLoader.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   // constructor
@@ -24723,20 +26127,29 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends AbstractMediaLoader
    * @constructor
    */
-  function VideoLoader( loadItem, preferXHR ) {
-    this.AbstractMediaLoader_constructor( loadItem, preferXHR, createjs.Types.VIDEO );
+  function VideoLoader(loadItem, preferXHR) {
+    this.AbstractMediaLoader_constructor(
+      loadItem,
+      preferXHR,
+      createjs.Types.VIDEO
+    );
 
-    if ( createjs.DomUtils.isVideoTag( loadItem ) || createjs.DomUtils.isVideoTag( loadItem.src ) ) {
-      this.setTag( createjs.DomUtils.isVideoTag( loadItem ) ? loadItem : loadItem.src );
+    if (
+      createjs.DomUtils.isVideoTag(loadItem) ||
+      createjs.DomUtils.isVideoTag(loadItem.src)
+    ) {
+      this.setTag(
+        createjs.DomUtils.isVideoTag(loadItem) ? loadItem : loadItem.src
+      );
 
       // We can't use XHR for a tag that's passed in.
       this._preferXHR = false;
     } else {
-      this.setTag( this._createTag() );
+      this.setTag(this._createTag());
     }
-  };
+  }
 
-  var p = createjs.extend( VideoLoader, createjs.AbstractMediaLoader );
+  var p = createjs.extend(VideoLoader, createjs.AbstractMediaLoader);
   var s = VideoLoader;
 
   /**
@@ -24758,19 +26171,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Boolean} Whether the loader can load the item.
    * @static
    */
-  s.canLoadItem = function ( item ) {
+  s.canLoadItem = function (item) {
     return item.type == createjs.Types.VIDEO;
   };
 
-  createjs.VideoLoader = createjs.promote( VideoLoader, "AbstractMediaLoader" );
-
-}() );
+  createjs.VideoLoader = createjs.promote(VideoLoader, "AbstractMediaLoader");
+})();
 
 //##############################################################################
 // SpriteSheetLoader.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   // constructor
@@ -24796,8 +26208,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends AbstractLoader
    * @constructor
    */
-  function SpriteSheetLoader( loadItem, preferXHR ) {
-    this.AbstractLoader_constructor( loadItem, preferXHR, createjs.Types.SPRITESHEET );
+  function SpriteSheetLoader(loadItem, preferXHR) {
+    this.AbstractLoader_constructor(
+      loadItem,
+      preferXHR,
+      createjs.Types.SPRITESHEET
+    );
 
     // protected properties
     /**
@@ -24809,7 +26225,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     this._manifestQueue = null;
   }
 
-  var p = createjs.extend( SpriteSheetLoader, createjs.AbstractLoader );
+  var p = createjs.extend(SpriteSheetLoader, createjs.AbstractLoader);
   var s = SpriteSheetLoader;
 
   // static properties
@@ -24832,7 +26248,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Boolean} Whether the loader can load the item.
    * @static
    */
-  s.canLoadItem = function ( item ) {
+  s.canLoadItem = function (item) {
     return item.type == createjs.Types.SPRITESHEET;
   };
 
@@ -24845,31 +26261,31 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   // protected methods
   p._createRequest = function () {
     var callback = this._item.callback;
-    if ( callback != null ) {
-      this._request = new createjs.JSONPLoader( this._item );
+    if (callback != null) {
+      this._request = new createjs.JSONPLoader(this._item);
     } else {
-      this._request = new createjs.JSONLoader( this._item );
+      this._request = new createjs.JSONLoader(this._item);
     }
   };
 
-  p.handleEvent = function ( event ) {
-    switch ( event.type ) {
+  p.handleEvent = function (event) {
+    switch (event.type) {
       case "complete":
-        this._rawResult = event.target.getResult( true );
+        this._rawResult = event.target.getResult(true);
         this._result = event.target.getResult();
-        this._sendProgress( s.SPRITESHEET_PROGRESS );
-        this._loadManifest( this._result );
+        this._sendProgress(s.SPRITESHEET_PROGRESS);
+        this._loadManifest(this._result);
         return;
       case "progress":
         event.loaded *= s.SPRITESHEET_PROGRESS;
         this.progress = event.loaded / event.total;
-        if ( isNaN( this.progress ) || this.progress == Infinity ) {
+        if (isNaN(this.progress) || this.progress == Infinity) {
           this.progress = 0;
         }
-        this._sendProgress( event );
+        this._sendProgress(event);
         return;
     }
-    this.AbstractLoader_handleEvent( event );
+    this.AbstractLoader_handleEvent(event);
   };
 
   /**
@@ -24878,14 +26294,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} json
    * @private
    */
-  p._loadManifest = function ( json ) {
-    if ( json && json.images ) {
-      var queue = this._manifestQueue = new createjs.LoadQueue( this._preferXHR, this._item.path, this._item.crossOrigin );
-      queue.on( "complete", this._handleManifestComplete, this, true );
-      queue.on( "fileload", this._handleManifestFileLoad, this );
-      queue.on( "progress", this._handleManifestProgress, this );
-      queue.on( "error", this._handleManifestError, this, true );
-      queue.loadManifest( json.images );
+  p._loadManifest = function (json) {
+    if (json && json.images) {
+      var queue = (this._manifestQueue = new createjs.LoadQueue(
+        this._preferXHR,
+        this._item.path,
+        this._item.crossOrigin
+      ));
+      queue.on("complete", this._handleManifestComplete, this, true);
+      queue.on("fileload", this._handleManifestFileLoad, this);
+      queue.on("progress", this._handleManifestProgress, this);
+      queue.on("error", this._handleManifestError, this, true);
+      queue.loadManifest(json.images);
     }
   };
 
@@ -24895,12 +26315,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Event} event
    * @private
    */
-  p._handleManifestFileLoad = function ( event ) {
+  p._handleManifestFileLoad = function (event) {
     var image = event.result;
-    if ( image != null ) {
+    if (image != null) {
       var images = this.getResult().images;
-      var pos = images.indexOf( event.item.src );
-      images[ pos ] = image;
+      var pos = images.indexOf(event.item.src);
+      images[pos] = image;
     }
   };
 
@@ -24911,9 +26331,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Event} event
    * @private
    */
-  p._handleManifestComplete = function ( event ) {
-    this._result = new createjs.SpriteSheet( this._result );
-    this._loadedItems = this._manifestQueue.getItems( true );
+  p._handleManifestComplete = function (event) {
+    this._result = new createjs.SpriteSheet(this._result);
+    this._loadedItems = this._manifestQueue.getItems(true);
     this._sendComplete();
   };
 
@@ -24923,9 +26343,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {ProgressEvent} event
    * @private
    */
-  p._handleManifestProgress = function ( event ) {
-    this.progress = event.progress * ( 1 - s.SPRITESHEET_PROGRESS ) + s.SPRITESHEET_PROGRESS;
-    this._sendProgress( this.progress );
+  p._handleManifestProgress = function (event) {
+    this.progress =
+      event.progress * (1 - s.SPRITESHEET_PROGRESS) + s.SPRITESHEET_PROGRESS;
+    this._sendProgress(this.progress);
   };
 
   /**
@@ -24934,21 +26355,23 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {ErrorEvent} event
    * @private
    */
-  p._handleManifestError = function ( event ) {
-    var newEvent = new createjs.Event( "fileerror" );
+  p._handleManifestError = function (event) {
+    var newEvent = new createjs.Event("fileerror");
     newEvent.item = event.data;
-    this.dispatchEvent( newEvent );
+    this.dispatchEvent(newEvent);
   };
 
-  createjs.SpriteSheetLoader = createjs.promote( SpriteSheetLoader, "AbstractLoader" );
-
-}() );
+  createjs.SpriteSheetLoader = createjs.promote(
+    SpriteSheetLoader,
+    "AbstractLoader"
+  );
+})();
 
 //##############################################################################
 // SVGLoader.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   // constructor
@@ -24960,8 +26383,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends AbstractLoader
    * @constructor
    */
-  function SVGLoader( loadItem, preferXHR ) {
-    this.AbstractLoader_constructor( loadItem, preferXHR, createjs.Types.SVG );
+  function SVGLoader(loadItem, preferXHR) {
+    this.AbstractLoader_constructor(loadItem, preferXHR, createjs.Types.SVG);
 
     // public properties
     this.resultFormatter = this._formatResult;
@@ -24969,15 +26392,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     // protected properties
     this._tagSrcAttribute = "data";
 
-    if ( preferXHR ) {
-      this.setTag( createjs.Elements.svg() );
+    if (preferXHR) {
+      this.setTag(createjs.Elements.svg());
     } else {
-      this.setTag( createjs.Elements.object() );
+      this.setTag(createjs.Elements.object());
       this.getTag().type = "image/svg+xml";
     }
-  };
+  }
 
-  var p = createjs.extend( SVGLoader, createjs.AbstractLoader );
+  var p = createjs.extend(SVGLoader, createjs.AbstractLoader);
   var s = SVGLoader;
 
   // static methods
@@ -24989,7 +26412,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Boolean} Whether the loader can load the item.
    * @static
    */
-  s.canLoadItem = function ( item ) {
+  s.canLoadItem = function (item) {
     return item.type == createjs.Types.SVG;
   };
 
@@ -25001,37 +26424,37 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Object}
    * @private
    */
-  p._formatResult = function ( loader ) {
+  p._formatResult = function (loader) {
     // mime should be image/svg+xml, but Opera requires text/xml
-    var xml = createjs.DataUtils.parseXML( loader.getResult( true ) );
+    var xml = createjs.DataUtils.parseXML(loader.getResult(true));
     var tag = loader.getTag();
 
-    if ( !this._preferXHR && document.body.contains( tag ) ) {
-      document.body.removeChild( tag );
+    if (!this._preferXHR && document.body.contains(tag)) {
+      document.body.removeChild(tag);
     }
 
-    if ( xml.documentElement != null ) {
+    if (xml.documentElement != null) {
       var element = xml.documentElement;
       // Support loading an SVG from a different domain in ID
-      if ( document.importNode ) {
-        element = document.importNode( element, true );
+      if (document.importNode) {
+        element = document.importNode(element, true);
       }
-      tag.appendChild( element );
+      tag.appendChild(element);
       return tag;
-    } else { // For browsers that don't support SVG, just give them the XML. (IE 9-8)
+    } else {
+      // For browsers that don't support SVG, just give them the XML. (IE 9-8)
       return xml;
     }
   };
 
-  createjs.SVGLoader = createjs.promote( SVGLoader, "AbstractLoader" );
-
-}() );
+  createjs.SVGLoader = createjs.promote(SVGLoader, "AbstractLoader");
+})();
 
 //##############################################################################
 // XMLLoader.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   // constructor
@@ -25042,14 +26465,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends AbstractLoader
    * @constructor
    */
-  function XMLLoader( loadItem ) {
-    this.AbstractLoader_constructor( loadItem, true, createjs.Types.XML );
+  function XMLLoader(loadItem) {
+    this.AbstractLoader_constructor(loadItem, true, createjs.Types.XML);
 
     // public properties
     this.resultFormatter = this._formatResult;
-  };
+  }
 
-  var p = createjs.extend( XMLLoader, createjs.AbstractLoader );
+  var p = createjs.extend(XMLLoader, createjs.AbstractLoader);
   var s = XMLLoader;
 
   // static methods
@@ -25061,7 +26484,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Boolean} Whether the loader can load the item.
    * @static
    */
-  s.canLoadItem = function ( item ) {
+  s.canLoadItem = function (item) {
     return item.type == createjs.Types.XML;
   };
 
@@ -25073,27 +26496,25 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {XMLDocument}
    * @private
    */
-  p._formatResult = function ( loader ) {
-    return createjs.DataUtils.parseXML( loader.getResult( true ) );
+  p._formatResult = function (loader) {
+    return createjs.DataUtils.parseXML(loader.getResult(true));
   };
 
-  createjs.XMLLoader = createjs.promote( XMLLoader, "AbstractLoader" );
-
-}() );
+  createjs.XMLLoader = createjs.promote(XMLLoader, "AbstractLoader");
+})();
 
 //##############################################################################
 // version.js
 //##############################################################################
 
-( function () {
-
+(function () {
   /**
    * Static class holding library specific information such as the version and buildDate of the library.
    * The SoundJS class has been renamed {{#crossLink "Sound"}}{{/crossLink}}.  Please see {{#crossLink "Sound"}}{{/crossLink}}
    * for information on using sound.
    * @class SoundJS
    **/
-  var s = createjs.SoundJS = createjs.SoundJS || {};
+  var s = (createjs.SoundJS = createjs.SoundJS || {});
 
   /**
    * The version string for this release.
@@ -25110,8 +26531,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    **/
   s.buildDate = /*=date*/ "Thu, 12 Oct 2017 16:34:05 GMT"; // injected by build process
-
-} )();
+})();
 
 //##############################################################################
 // BrowserDetect.js
@@ -25120,7 +26540,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 /**
  * @class Utility Methods
  */
-( function () {
+(function () {
   "use strict";
 
   /**
@@ -25147,27 +26567,31 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   function BrowserDetect() {
     throw "BrowserDetect cannot be instantiated";
-  };
+  }
 
-  var agent = BrowserDetect.agent = window.navigator.userAgent;
-  BrowserDetect.isWindowPhone = ( agent.indexOf( "IEMobile" ) > -1 ) || ( agent.indexOf( "Windows Phone" ) > -1 );
-  BrowserDetect.isFirefox = ( agent.indexOf( "Firefox" ) > -1 );
-  BrowserDetect.isOpera = ( window.opera != null );
-  BrowserDetect.isChrome = ( agent.indexOf( "Chrome" ) > -1 ); // NOTE that Chrome on Android returns true but is a completely different browser with different abilities
-  BrowserDetect.isIOS = ( agent.indexOf( "iPod" ) > -1 || agent.indexOf( "iPhone" ) > -1 || agent.indexOf( "iPad" ) > -1 ) && !BrowserDetect.isWindowPhone;
-  BrowserDetect.isAndroid = ( agent.indexOf( "Android" ) > -1 ) && !BrowserDetect.isWindowPhone;
-  BrowserDetect.isBlackberry = ( agent.indexOf( "Blackberry" ) > -1 );
+  var agent = (BrowserDetect.agent = window.navigator.userAgent);
+  BrowserDetect.isWindowPhone =
+    agent.indexOf("IEMobile") > -1 || agent.indexOf("Windows Phone") > -1;
+  BrowserDetect.isFirefox = agent.indexOf("Firefox") > -1;
+  BrowserDetect.isOpera = window.opera != null;
+  BrowserDetect.isChrome = agent.indexOf("Chrome") > -1; // NOTE that Chrome on Android returns true but is a completely different browser with different abilities
+  BrowserDetect.isIOS =
+    (agent.indexOf("iPod") > -1 ||
+      agent.indexOf("iPhone") > -1 ||
+      agent.indexOf("iPad") > -1) &&
+    !BrowserDetect.isWindowPhone;
+  BrowserDetect.isAndroid =
+    agent.indexOf("Android") > -1 && !BrowserDetect.isWindowPhone;
+  BrowserDetect.isBlackberry = agent.indexOf("Blackberry") > -1;
 
   createjs.BrowserDetect = BrowserDetect;
-
-}() );
+})();
 
 //##############################################################################
 // AudioSprite.js
 //##############################################################################
 
 //  NOTE this is "Class" is purely to document audioSprite Setup and usage.
-
 
 /**
  * <strong>Note: AudioSprite is not a class, but its usage is easily lost in the documentation, so it has been called
@@ -25236,7 +26660,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 // PlayPropsConfig.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
   /**
    * A class to store the optional play properties passed in {{#crossLink "Sound/play"}}{{/crossLink}} and
@@ -25341,9 +26765,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      */
     this.duration = null;
   };
-  var p = PlayPropsConfig.prototype = {};
+  var p = (PlayPropsConfig.prototype = {});
   var s = PlayPropsConfig;
-
 
   // Static Methods
   /**
@@ -25354,17 +26777,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {PlayPropsConfig}
    * @static
    */
-  s.create = function ( value ) {
-    if ( typeof ( value ) === "string" ) {
+  s.create = function (value) {
+    if (typeof value === "string") {
       // Handle the old API gracefully.
-      console && ( console.warn || console.log )( "Deprecated behaviour. Sound.play takes a configuration object instead of individual arguments. See docs for info." );
-      return new createjs.PlayPropsConfig().set( {
-        interrupt: value
-      } );
-    } else if ( value == null || value instanceof s || value instanceof Object ) {
-      return new createjs.PlayPropsConfig().set( value );
-    } else if ( value == null ) {
-      throw new Error( "PlayProps configuration not recognized." );
+      console &&
+        (console.warn || console.log)(
+          "Deprecated behaviour. Sound.play takes a configuration object instead of individual arguments. See docs for info."
+        );
+      return new createjs.PlayPropsConfig().set({
+        interrupt: value,
+      });
+    } else if (value == null || value instanceof s || value instanceof Object) {
+      return new createjs.PlayPropsConfig().set(value);
+    } else if (value == null) {
+      throw new Error("PlayProps configuration not recognized.");
     }
   };
 
@@ -25380,10 +26806,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} props A generic object containing properties to copy to the PlayPropsConfig instance.
    * @return {PlayPropsConfig} Returns the instance the method is called on (useful for chaining calls.)
    */
-  p.set = function ( props ) {
-    if ( props != null ) {
-      for ( var n in props ) {
-        this[ n ] = props[ n ];
+  p.set = function (props) {
+    if (props != null) {
+      for (var n in props) {
+        this[n] = props[n];
       }
     }
     return this;
@@ -25394,14 +26820,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   };
 
   createjs.PlayPropsConfig = s;
-
-}() );
+})();
 
 //##############################################################################
 // Sound.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   /**
@@ -25582,7 +27007,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 
   var s = Sound;
 
-
   // Static Properties
   /**
    * The interrupt value to interrupt any currently playing instance with the same source, if the maximum number of
@@ -25685,7 +27109,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @since 0.4.0
    * @static
    */
-  s.SUPPORTED_EXTENSIONS = [ "mp3", "ogg", "opus", "mpeg", "wav", "m4a", "mp4", "aiff", "wma", "mid" ];
+  s.SUPPORTED_EXTENSIONS = [
+    "mp3",
+    "ogg",
+    "opus",
+    "mpeg",
+    "wav",
+    "m4a",
+    "mp4",
+    "aiff",
+    "wma",
+    "mid",
+  ];
 
   /**
    * Some extensions use another type of extension support to play (one of them is a codex).  This allows you to map
@@ -25700,7 +27135,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    */
   s.EXTENSION_MAP = {
-    m4a: "mp4"
+    m4a: "mp4",
   };
 
   /**
@@ -25711,8 +27146,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @private
    */
-  s.FILE_PATTERN = /^(?:(\w+:)\/{2}(\w+(?:\.\w+)*\/?))?([/.]*?(?:[^?]+)?\/)?((?:[^/?]+)\.(\w+))(?:\?(\S+)?)?$/;
-
+  s.FILE_PATTERN =
+    /^(?:(\w+:)\/{2}(\w+(?:\.\w+)*\/?))?([/.]*?(?:[^?]+)?\/)?((?:[^/?]+)\.(\w+))(?:\?(\S+)?)?$/;
 
   // Class Public properties
   /**
@@ -25765,7 +27200,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   s.activePlugin = null;
 
-
   // class getter / setter properties
 
   /**
@@ -25804,28 +27238,32 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return this._masterVolume;
   };
   // Sound.getMasterVolume is @deprecated. Remove for 1.1+
-  s.getVolume = createjs.deprecate( s._getMasterVolume, "Sound.getVolume" );
+  s.getVolume = createjs.deprecate(s._getMasterVolume, "Sound.getVolume");
   /**
    * Use the {{#crossLink "Sound/volume:property"}}{{/crossLink}} property instead.
    * @method _setMasterVolume
    * @static
    * @private
    **/
-  s._setMasterVolume = function ( value ) {
-    if ( Number( value ) == null ) {
+  s._setMasterVolume = function (value) {
+    if (Number(value) == null) {
       return;
     }
-    value = Math.max( 0, Math.min( 1, value ) );
+    value = Math.max(0, Math.min(1, value));
     s._masterVolume = value;
-    if ( !this.activePlugin || !this.activePlugin.setVolume || !this.activePlugin.setVolume( value ) ) {
+    if (
+      !this.activePlugin ||
+      !this.activePlugin.setVolume ||
+      !this.activePlugin.setVolume(value)
+    ) {
       var instances = this._instances;
-      for ( var i = 0, l = instances.length; i < l; i++ ) {
-        instances[ i ].setMasterVolume( value );
+      for (var i = 0, l = instances.length; i < l; i++) {
+        instances[i].setMasterVolume(value);
       }
     }
   };
   // Sound.stMasterVolume is @deprecated. Remove for 1.1+
-  s.setVolume = createjs.deprecate( s._setMasterVolume, "Sound.setVolume" );
+  s.setVolume = createjs.deprecate(s._setMasterVolume, "Sound.setVolume");
 
   /**
    * Mute/Unmute all audio. Note that muted audio still plays at 0 volume. This global mute value is maintained
@@ -25855,7 +27293,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return this._masterMute;
   };
   // Sound.getMute is @deprecated. Remove for 1.1+
-  s.getMute = createjs.deprecate( s._getMute, "Sound.getMute" );
+  s.getMute = createjs.deprecate(s._getMute, "Sound.getMute");
 
   /**
    * Use the {{#crossLink "Sound/muted:property"}}{{/crossLink}} property instead.
@@ -25864,20 +27302,24 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @private
    */
-  s._setMute = function ( value ) {
-    if ( value == null ) {
+  s._setMute = function (value) {
+    if (value == null) {
       return;
     }
     this._masterMute = value;
-    if ( !this.activePlugin || !this.activePlugin.setMute || !this.activePlugin.setMute( value ) ) {
+    if (
+      !this.activePlugin ||
+      !this.activePlugin.setMute ||
+      !this.activePlugin.setMute(value)
+    ) {
       var instances = this._instances;
-      for ( var i = 0, l = instances.length; i < l; i++ ) {
-        instances[ i ].setMasterMute( value );
+      for (var i = 0, l = instances.length; i < l; i++) {
+        instances[i].setMasterMute(value);
       }
     }
   };
   // Sound.setMute is @deprecated. Remove for 1.1+
-  s.setMute = createjs.deprecate( s._setMute, "Sound.setMute" );
+  s.setMute = createjs.deprecate(s._setMute, "Sound.setMute");
 
   /**
    * Get the active plugins capabilities, which help determine if a plugin can be used in the current environment,
@@ -25920,28 +27362,30 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @private
    */
   s._getCapabilities = function () {
-    if ( s.activePlugin == null ) {
+    if (s.activePlugin == null) {
       return null;
     }
     return s.activePlugin._capabilities;
   };
   // Sound.getCapabilities is @deprecated. Remove for 1.1+
-  s.getCapabilities = createjs.deprecate( s._getCapabilities, "Sound.getCapabilities" );
+  s.getCapabilities = createjs.deprecate(
+    s._getCapabilities,
+    "Sound.getCapabilities"
+  );
 
-  Object.defineProperties( s, {
+  Object.defineProperties(s, {
     volume: {
       get: s._getMasterVolume,
-      set: s._setMasterVolume
+      set: s._setMasterVolume,
     },
     muted: {
       get: s._getMute,
-      set: s._setMute
+      set: s._setMute,
     },
     capabilities: {
-      get: s._getCapabilities
-    }
-  } );
-
+      get: s._getCapabilities,
+    },
+  });
 
   // Class Private properties
   /**
@@ -26009,7 +27453,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   s._defaultPlayPropsHash = {};
 
-
   // EventDispatcher methods:
   s.addEventListener = null;
   s.removeEventListener = null;
@@ -26018,8 +27461,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   s.hasEventListener = null;
   s._listeners = null;
 
-  createjs.EventDispatcher.initialize( s ); // inject EventDispatcher methods.
-
+  createjs.EventDispatcher.initialize(s); // inject EventDispatcher methods.
 
   // Events
   /**
@@ -26046,7 +27488,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @since 0.6.0
    */
 
-
   // Class Public Methods
   /**
    * Get the preload rules to allow Sound to be used as a plugin by <a href="http://preloadjs.com" target="_blank">PreloadJS</a>.
@@ -26064,9 +27505,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   s.getPreloadHandlers = function () {
     return {
-      callback: createjs.proxy( s.initLoad, s ),
-      types: [ "sound" ],
-      extensions: s.SUPPORTED_EXTENSIONS
+      callback: createjs.proxy(s.initLoad, s),
+      types: ["sound"],
+      extensions: s.SUPPORTED_EXTENSIONS,
     };
   };
 
@@ -26078,27 +27519,27 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @since 0.6.0
    */
-  s._handleLoadComplete = function ( event ) {
+  s._handleLoadComplete = function (event) {
     var src = event.target.getItem().src;
-    if ( !s._preloadHash[ src ] ) {
+    if (!s._preloadHash[src]) {
       return;
     }
 
-    for ( var i = 0, l = s._preloadHash[ src ].length; i < l; i++ ) {
-      var item = s._preloadHash[ src ][ i ];
-      s._preloadHash[ src ][ i ] = true;
+    for (var i = 0, l = s._preloadHash[src].length; i < l; i++) {
+      var item = s._preloadHash[src][i];
+      s._preloadHash[src][i] = true;
 
-      if ( !s.hasEventListener( "fileload" ) ) {
+      if (!s.hasEventListener("fileload")) {
         continue;
       }
 
-      var event = new createjs.Event( "fileload" );
+      var event = new createjs.Event("fileload");
       event.src = item.src;
       event.id = item.id;
       event.data = item.data;
       event.sprite = item.sprite;
 
-      s.dispatchEvent( event );
+      s.dispatchEvent(event);
     }
   };
 
@@ -26109,27 +27550,27 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @since 0.6.0
    * @static
    */
-  s._handleLoadError = function ( event ) {
+  s._handleLoadError = function (event) {
     var src = event.target.getItem().src;
-    if ( !s._preloadHash[ src ] ) {
+    if (!s._preloadHash[src]) {
       return;
     }
 
-    for ( var i = 0, l = s._preloadHash[ src ].length; i < l; i++ ) {
-      var item = s._preloadHash[ src ][ i ];
-      s._preloadHash[ src ][ i ] = false;
+    for (var i = 0, l = s._preloadHash[src].length; i < l; i++) {
+      var item = s._preloadHash[src][i];
+      s._preloadHash[src][i] = false;
 
-      if ( !s.hasEventListener( "fileerror" ) ) {
+      if (!s.hasEventListener("fileerror")) {
         continue;
       }
 
-      var event = new createjs.Event( "fileerror" );
+      var event = new createjs.Event("fileerror");
       event.src = item.src;
       event.id = item.id;
       event.data = item.data;
       event.sprite = item.sprite;
 
-      s.dispatchEvent( event );
+      s.dispatchEvent(event);
     }
   };
 
@@ -26142,9 +27583,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @private
    */
-  s._registerPlugin = function ( plugin ) {
+  s._registerPlugin = function (plugin) {
     // Note: Each plugin is passed in as a class reference, but we store the activePlugin as an instance
-    if ( plugin.isSupported() ) {
+    if (plugin.isSupported()) {
       s.activePlugin = new plugin();
       return true;
     }
@@ -26164,10 +27605,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} Whether a plugin was successfully initialized.
    * @static
    */
-  s.registerPlugins = function ( plugins ) {
+  s.registerPlugins = function (plugins) {
     s._pluginsRegistered = true;
-    for ( var i = 0, l = plugins.length; i < l; i++ ) {
-      if ( s._registerPlugin( plugins[ i ] ) ) {
+    for (var i = 0, l = plugins.length; i < l; i++) {
+      if (s._registerPlugin(plugins[i])) {
         return true;
       }
     }
@@ -26189,13 +27630,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    */
   s.initializeDefaultPlugins = function () {
-    if ( s.activePlugin != null ) {
+    if (s.activePlugin != null) {
       return true;
     }
-    if ( s._pluginsRegistered ) {
+    if (s._pluginsRegistered) {
       return false;
     }
-    if ( s.registerPlugins( [ createjs.WebAudioPlugin, createjs.HTMLAudioPlugin ] ) ) {
+    if (
+      s.registerPlugins([createjs.WebAudioPlugin, createjs.HTMLAudioPlugin])
+    ) {
       return true;
     }
     return false;
@@ -26217,7 +27660,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    */
   s.isReady = function () {
-    return ( s.activePlugin != null );
+    return s.activePlugin != null;
   };
 
   /**
@@ -26229,11 +27672,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @private
    * @static
    */
-  s.initLoad = function ( loadItem ) {
-    if ( loadItem.type == "video" ) {
+  s.initLoad = function (loadItem) {
+    if (loadItem.type == "video") {
       return true;
     } // Don't handle video. PreloadJS's plugin model is really aggressive.
-    return s._registerSound( loadItem );
+    return s._registerSound(loadItem);
   };
 
   /**
@@ -26249,19 +27692,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @since 0.6.0
    */
 
-  s._registerSound = function ( loadItem ) {
-    if ( !s.initializeDefaultPlugins() ) {
+  s._registerSound = function (loadItem) {
+    if (!s.initializeDefaultPlugins()) {
       return false;
     }
 
     var details;
-    if ( loadItem.src instanceof Object ) {
-      details = s._parseSrc( loadItem.src );
+    if (loadItem.src instanceof Object) {
+      details = s._parseSrc(loadItem.src);
       details.src = loadItem.path + details.src;
     } else {
-      details = s._parsePath( loadItem.src );
+      details = s._parsePath(loadItem.src);
     }
-    if ( details == null ) {
+    if (details == null) {
       return false;
     }
     loadItem.src = details.src;
@@ -26269,51 +27712,55 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 
     var data = loadItem.data;
     var numChannels = null;
-    if ( data != null ) {
-      if ( !isNaN( data.channels ) ) {
-        numChannels = parseInt( data.channels );
-      } else if ( !isNaN( data ) ) {
-        numChannels = parseInt( data );
+    if (data != null) {
+      if (!isNaN(data.channels)) {
+        numChannels = parseInt(data.channels);
+      } else if (!isNaN(data)) {
+        numChannels = parseInt(data);
       }
 
-      if ( data.audioSprite ) {
+      if (data.audioSprite) {
         var sp;
-        for ( var i = data.audioSprite.length; i--; ) {
-          sp = data.audioSprite[ i ];
-          s._idHash[ sp.id ] = {
+        for (var i = data.audioSprite.length; i--; ) {
+          sp = data.audioSprite[i];
+          s._idHash[sp.id] = {
             src: loadItem.src,
-            startTime: parseInt( sp.startTime ),
-            duration: parseInt( sp.duration )
+            startTime: parseInt(sp.startTime),
+            duration: parseInt(sp.duration),
           };
 
-          if ( sp.defaultPlayProps ) {
-            s._defaultPlayPropsHash[ sp.id ] = createjs.PlayPropsConfig.create( sp.defaultPlayProps );
+          if (sp.defaultPlayProps) {
+            s._defaultPlayPropsHash[sp.id] = createjs.PlayPropsConfig.create(
+              sp.defaultPlayProps
+            );
           }
         }
       }
     }
-    if ( loadItem.id != null ) {
-      s._idHash[ loadItem.id ] = {
-        src: loadItem.src
-      }
-    };
-    var loader = s.activePlugin.register( loadItem );
+    if (loadItem.id != null) {
+      s._idHash[loadItem.id] = {
+        src: loadItem.src,
+      };
+    }
+    var loader = s.activePlugin.register(loadItem);
 
-    SoundChannel.create( loadItem.src, numChannels );
+    SoundChannel.create(loadItem.src, numChannels);
 
     // return the number of instances to the user.  This will also be returned in the load event.
-    if ( data == null || !isNaN( data ) ) {
+    if (data == null || !isNaN(data)) {
       loadItem.data = numChannels || SoundChannel.maxPerChannel();
     } else {
       loadItem.data.channels = numChannels || SoundChannel.maxPerChannel();
     }
 
-    if ( loader.type ) {
+    if (loader.type) {
       loadItem.type = loader.type;
     }
 
-    if ( loadItem.defaultPlayProps ) {
-      s._defaultPlayPropsHash[ loadItem.src ] = createjs.PlayPropsConfig.create( loadItem.defaultPlayProps );
+    if (loadItem.defaultPlayProps) {
+      s._defaultPlayPropsHash[loadItem.src] = createjs.PlayPropsConfig.create(
+        loadItem.defaultPlayProps
+      );
     }
     return loader;
   };
@@ -26351,40 +27798,40 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @since 0.4.0
    */
-  s.registerSound = function ( src, id, data, basePath, defaultPlayProps ) {
+  s.registerSound = function (src, id, data, basePath, defaultPlayProps) {
     var loadItem = {
       src: src,
       id: id,
       data: data,
-      defaultPlayProps: defaultPlayProps
+      defaultPlayProps: defaultPlayProps,
     };
-    if ( src instanceof Object && src.src ) {
+    if (src instanceof Object && src.src) {
       basePath = id;
       loadItem = src;
     }
-    loadItem = createjs.LoadItem.create( loadItem );
+    loadItem = createjs.LoadItem.create(loadItem);
     loadItem.path = basePath;
 
-    if ( basePath != null && !( loadItem.src instanceof Object ) ) {
+    if (basePath != null && !(loadItem.src instanceof Object)) {
       loadItem.src = basePath + loadItem.src;
     }
 
-    var loader = s._registerSound( loadItem );
-    if ( !loader ) {
+    var loader = s._registerSound(loadItem);
+    if (!loader) {
       return false;
     }
 
-    if ( !s._preloadHash[ loadItem.src ] ) {
-      s._preloadHash[ loadItem.src ] = [];
+    if (!s._preloadHash[loadItem.src]) {
+      s._preloadHash[loadItem.src] = [];
     }
-    s._preloadHash[ loadItem.src ].push( loadItem );
-    if ( s._preloadHash[ loadItem.src ].length == 1 ) {
+    s._preloadHash[loadItem.src].push(loadItem);
+    if (s._preloadHash[loadItem.src].length == 1) {
       // OJR note this will disallow reloading a sound if loading fails or the source changes
-      loader.on( "complete", this._handleLoadComplete, this );
-      loader.on( "error", this._handleLoadError, this );
-      s.activePlugin.preload( loader );
+      loader.on("complete", this._handleLoadComplete, this);
+      loader.on("error", this._handleLoadError, this);
+      s.activePlugin.preload(loader);
     } else {
-      if ( s._preloadHash[ loadItem.src ][ 0 ] == true ) {
+      if (s._preloadHash[loadItem.src][0] == true) {
         return true;
       }
     }
@@ -26424,10 +27871,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @since 0.6.0
    */
-  s.registerSounds = function ( sounds, basePath ) {
+  s.registerSounds = function (sounds, basePath) {
     var returnValues = [];
-    if ( sounds.path ) {
-      if ( !basePath ) {
+    if (sounds.path) {
+      if (!basePath) {
         basePath = sounds.path;
       } else {
         basePath = basePath + sounds.path;
@@ -26435,8 +27882,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       sounds = sounds.manifest;
       // TODO document this feature
     }
-    for ( var i = 0, l = sounds.length; i < l; i++ ) {
-      returnValues[ i ] = createjs.Sound.registerSound( sounds[ i ].src, sounds[ i ].id, sounds[ i ].data, basePath, sounds[ i ].defaultPlayProps );
+    for (var i = 0, l = sounds.length; i < l; i++) {
+      returnValues[i] = createjs.Sound.registerSound(
+        sounds[i].src,
+        sounds[i].id,
+        sounds[i].data,
+        basePath,
+        sounds[i].defaultPlayProps
+      );
     }
     return returnValues;
   };
@@ -26461,42 +27914,42 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @since 0.4.1
    */
-  s.removeSound = function ( src, basePath ) {
-    if ( s.activePlugin == null ) {
+  s.removeSound = function (src, basePath) {
+    if (s.activePlugin == null) {
       return false;
     }
 
-    if ( src instanceof Object && src.src ) {
+    if (src instanceof Object && src.src) {
       src = src.src;
     }
 
     var details;
-    if ( src instanceof Object ) {
-      details = s._parseSrc( src );
+    if (src instanceof Object) {
+      details = s._parseSrc(src);
     } else {
-      src = s._getSrcById( src ).src;
-      details = s._parsePath( src );
+      src = s._getSrcById(src).src;
+      details = s._parsePath(src);
     }
-    if ( details == null ) {
+    if (details == null) {
       return false;
     }
     src = details.src;
-    if ( basePath != null ) {
+    if (basePath != null) {
       src = basePath + src;
     }
 
-    for ( var prop in s._idHash ) {
-      if ( s._idHash[ prop ].src == src ) {
-        delete( s._idHash[ prop ] );
+    for (var prop in s._idHash) {
+      if (s._idHash[prop].src == src) {
+        delete s._idHash[prop];
       }
     }
 
     // clear from SoundChannel, which also stops and deletes all instances
-    SoundChannel.removeSrc( src );
+    SoundChannel.removeSrc(src);
 
-    delete( s._preloadHash[ src ] );
+    delete s._preloadHash[src];
 
-    s.activePlugin.removeSound( src );
+    s.activePlugin.removeSound(src);
 
     return true;
   };
@@ -26527,18 +27980,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @since 0.4.1
    */
-  s.removeSounds = function ( sounds, basePath ) {
+  s.removeSounds = function (sounds, basePath) {
     var returnValues = [];
-    if ( sounds.path ) {
-      if ( !basePath ) {
+    if (sounds.path) {
+      if (!basePath) {
         basePath = sounds.path;
       } else {
         basePath = basePath + sounds.path;
       }
       sounds = sounds.manifest;
     }
-    for ( var i = 0, l = sounds.length; i < l; i++ ) {
-      returnValues[ i ] = createjs.Sound.removeSound( sounds[ i ].src, basePath );
+    for (var i = 0, l = sounds.length; i < l; i++) {
+      returnValues[i] = createjs.Sound.removeSound(sounds[i].src, basePath);
     }
     return returnValues;
   };
@@ -26560,7 +28013,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     s._idHash = {};
     s._preloadHash = {};
     SoundChannel.removeAll();
-    if ( s.activePlugin ) {
+    if (s.activePlugin) {
       s.activePlugin.removeAllSounds();
     }
   };
@@ -26582,20 +28035,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @since 0.4.0
    * @static
    */
-  s.loadComplete = function ( src ) {
-    if ( !s.isReady() ) {
+  s.loadComplete = function (src) {
+    if (!s.isReady()) {
       return false;
     }
-    var details = s._parsePath( src );
-    if ( details ) {
-      src = s._getSrcById( details.src ).src;
+    var details = s._parsePath(src);
+    if (details) {
+      src = s._getSrcById(details.src).src;
     } else {
-      src = s._getSrcById( src ).src;
+      src = s._getSrcById(src).src;
     }
-    if ( s._preloadHash[ src ] == undefined ) {
+    if (s._preloadHash[src] == undefined) {
       return false;
     }
-    return ( s._preloadHash[ src ][ 0 ] == true ); // src only loads once, so if it's true for the first it's true for all
+    return s._preloadHash[src][0] == true; // src only loads once, so if it's true for the first it's true for all
   };
 
   /**
@@ -26608,32 +28061,32 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @private
    * @static
    */
-  s._parsePath = function ( value ) {
-    if ( typeof ( value ) != "string" ) {
+  s._parsePath = function (value) {
+    if (typeof value != "string") {
       value = value.toString();
     }
 
-    var match = value.match( s.FILE_PATTERN );
-    if ( match == null ) {
+    var match = value.match(s.FILE_PATTERN);
+    if (match == null) {
       return false;
     }
 
-    var name = match[ 4 ];
-    var ext = match[ 5 ];
+    var name = match[4];
+    var ext = match[5];
     var c = s.capabilities;
     var i = 0;
-    while ( !c[ ext ] ) {
-      ext = s.alternateExtensions[ i++ ];
-      if ( i > s.alternateExtensions.length ) {
+    while (!c[ext]) {
+      ext = s.alternateExtensions[i++];
+      if (i > s.alternateExtensions.length) {
         return null;
       } // no extensions are supported
     }
-    value = value.replace( "." + match[ 5 ], "." + ext );
+    value = value.replace("." + match[5], "." + ext);
 
     var ret = {
       name: name,
       src: value,
-      extension: ext
+      extension: ext,
     };
     return ret;
   };
@@ -26648,28 +28101,28 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @private
    * @static
    */
-  s._parseSrc = function ( value ) {
+  s._parseSrc = function (value) {
     var ret = {
       name: undefined,
       src: undefined,
-      extension: undefined
+      extension: undefined,
     };
     var c = s.capabilities;
 
-    for ( var prop in value ) {
-      if ( value.hasOwnProperty( prop ) && c[ prop ] ) {
-        ret.src = value[ prop ];
+    for (var prop in value) {
+      if (value.hasOwnProperty(prop) && c[prop]) {
+        ret.src = value[prop];
         ret.extension = prop;
         break;
       }
     }
-    if ( !ret.src ) {
+    if (!ret.src) {
       return false;
     } // no matches
 
-    var i = ret.src.lastIndexOf( "/" );
-    if ( i != -1 ) {
-      ret.name = ret.src.slice( i + 1 );
+    var i = ret.src.lastIndexOf("/");
+    if (i != -1) {
+      ret.name = ret.src.slice(i + 1);
     } else {
       ret.name = ret.src;
     }
@@ -26709,11 +28162,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * after it is created.
    * @static
    */
-  s.play = function ( src, props ) {
-    var playProps = createjs.PlayPropsConfig.create( props );
-    var instance = s.createInstance( src, playProps.startTime, playProps.duration );
-    var ok = s._playInstance( instance, playProps );
-    if ( !ok ) {
+  s.play = function (src, props) {
+    var playProps = createjs.PlayPropsConfig.create(props);
+    var instance = s.createInstance(
+      src,
+      playProps.startTime,
+      playProps.duration
+    );
+    var ok = s._playInstance(instance, playProps);
+    if (!ok) {
       instance._playFailed();
     }
     return instance;
@@ -26747,30 +28204,35 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @since 0.4.0
    * @static
    */
-  s.createInstance = function ( src, startTime, duration ) {
-    if ( !s.initializeDefaultPlugins() ) {
-      return new createjs.DefaultSoundInstance( src, startTime, duration );
+  s.createInstance = function (src, startTime, duration) {
+    if (!s.initializeDefaultPlugins()) {
+      return new createjs.DefaultSoundInstance(src, startTime, duration);
     }
 
-    var defaultPlayProps = s._defaultPlayPropsHash[ src ]; // for audio sprites, which create and store defaults by id
-    src = s._getSrcById( src );
+    var defaultPlayProps = s._defaultPlayPropsHash[src]; // for audio sprites, which create and store defaults by id
+    src = s._getSrcById(src);
 
-    var details = s._parsePath( src.src );
+    var details = s._parsePath(src.src);
 
     var instance = null;
-    if ( details != null && details.src != null ) {
-      SoundChannel.create( details.src );
-      if ( startTime == null ) {
+    if (details != null && details.src != null) {
+      SoundChannel.create(details.src);
+      if (startTime == null) {
         startTime = src.startTime;
       }
-      instance = s.activePlugin.create( details.src, startTime, duration || src.duration );
+      instance = s.activePlugin.create(
+        details.src,
+        startTime,
+        duration || src.duration
+      );
 
-      defaultPlayProps = defaultPlayProps || s._defaultPlayPropsHash[ details.src ];
-      if ( defaultPlayProps ) {
-        instance.applyPlayProps( defaultPlayProps );
+      defaultPlayProps =
+        defaultPlayProps || s._defaultPlayPropsHash[details.src];
+      if (defaultPlayProps) {
+        instance.applyPlayProps(defaultPlayProps);
       }
     } else {
-      instance = new createjs.DefaultSoundInstance( src, startTime, duration );
+      instance = new createjs.DefaultSoundInstance(src, startTime, duration);
     }
 
     instance.uniqueId = s._lastID++;
@@ -26791,8 +28253,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   s.stop = function () {
     var instances = this._instances;
-    for ( var i = instances.length; i--; ) {
-      instances[ i ].stop(); // NOTE stop removes instance from this._instances
+    for (var i = instances.length; i--; ) {
+      instances[i].stop(); // NOTE stop removes instance from this._instances
     }
   };
 
@@ -26805,9 +28267,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object | PlayPropsConfig} playProps The playback properties you would like to set.
    * @since 0.6.1
    */
-  s.setDefaultPlayProps = function ( src, playProps ) {
-    src = s._getSrcById( src );
-    s._defaultPlayPropsHash[ s._parsePath( src.src ).src ] = createjs.PlayPropsConfig.create( playProps );
+  s.setDefaultPlayProps = function (src, playProps) {
+    src = s._getSrcById(src);
+    s._defaultPlayPropsHash[s._parsePath(src.src).src] =
+      createjs.PlayPropsConfig.create(playProps);
   };
 
   /**
@@ -26819,11 +28282,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {PlayPropsConfig} returns an existing PlayPropsConfig or null if one does not exist
    * @since 0.6.1
    */
-  s.getDefaultPlayProps = function ( src ) {
-    src = s._getSrcById( src );
-    return s._defaultPlayPropsHash[ s._parsePath( src.src ).src ];
+  s.getDefaultPlayProps = function (src) {
+    src = s._getSrcById(src);
+    return s._defaultPlayPropsHash[s._parsePath(src.src).src];
   };
-
 
   /* ---------------
    Internal methods
@@ -26839,42 +28301,43 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @private
    * @static
    */
-  s._playInstance = function ( instance, playProps ) {
-    var defaultPlayProps = s._defaultPlayPropsHash[ instance.src ] || {};
-    if ( playProps.interrupt == null ) {
-      playProps.interrupt = defaultPlayProps.interrupt || s.defaultInterruptBehavior
-    };
-    if ( playProps.delay == null ) {
+  s._playInstance = function (instance, playProps) {
+    var defaultPlayProps = s._defaultPlayPropsHash[instance.src] || {};
+    if (playProps.interrupt == null) {
+      playProps.interrupt =
+        defaultPlayProps.interrupt || s.defaultInterruptBehavior;
+    }
+    if (playProps.delay == null) {
       playProps.delay = defaultPlayProps.delay || 0;
     }
-    if ( playProps.offset == null ) {
+    if (playProps.offset == null) {
       playProps.offset = instance.position;
     }
-    if ( playProps.loop == null ) {
+    if (playProps.loop == null) {
       playProps.loop = instance.loop;
     }
-    if ( playProps.volume == null ) {
+    if (playProps.volume == null) {
       playProps.volume = instance.volume;
     }
-    if ( playProps.pan == null ) {
+    if (playProps.pan == null) {
       playProps.pan = instance.pan;
     }
 
-    if ( playProps.delay == 0 ) {
-      var ok = s._beginPlaying( instance, playProps );
-      if ( !ok ) {
+    if (playProps.delay == 0) {
+      var ok = s._beginPlaying(instance, playProps);
+      if (!ok) {
         return false;
       }
     } else {
       //Note that we can't pass arguments to proxy OR setTimeout (IE only), so just wrap the function call.
       // OJR WebAudio may want to handle this differently, so it might make sense to move this functionality into the plugins in the future
-      var delayTimeoutId = setTimeout( function () {
-        s._beginPlaying( instance, playProps );
-      }, playProps.delay );
+      var delayTimeoutId = setTimeout(function () {
+        s._beginPlaying(instance, playProps);
+      }, playProps.delay);
       instance.delayTimeoutId = delayTimeoutId;
     }
 
-    this._instances.push( instance );
+    this._instances.push(instance);
 
     return true;
   };
@@ -26889,15 +28352,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @private
    * @static
    */
-  s._beginPlaying = function ( instance, playProps ) {
-    if ( !SoundChannel.add( instance, playProps.interrupt ) ) {
+  s._beginPlaying = function (instance, playProps) {
+    if (!SoundChannel.add(instance, playProps.interrupt)) {
       return false;
     }
-    var result = instance._beginPlaying( playProps );
-    if ( !result ) {
-      var index = createjs.indexOf( this._instances, instance );
-      if ( index > -1 ) {
-        this._instances.splice( index, 1 );
+    var result = instance._beginPlaying(playProps);
+    if (!result) {
+      var index = createjs.indexOf(this._instances, instance);
+      if (index > -1) {
+        this._instances.splice(index, 1);
       }
       return false;
     }
@@ -26913,10 +28376,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @private
    * @static
    */
-  s._getSrcById = function ( value ) {
-    return s._idHash[ value ] || {
-      src: value
-    };
+  s._getSrcById = function (value) {
+    return (
+      s._idHash[value] || {
+        src: value,
+      }
+    );
   };
 
   /**
@@ -26928,11 +28393,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @private
    * @static
    */
-  s._playFinished = function ( instance ) {
-    SoundChannel.remove( instance );
-    var index = createjs.indexOf( this._instances, instance );
-    if ( index > -1 ) {
-      this._instances.splice( index, 1 );
+  s._playFinished = function (instance) {
+    SoundChannel.remove(instance);
+    var index = createjs.indexOf(this._instances, instance);
+    if (index > -1) {
+      this._instances.splice(index, 1);
     } // OJR this will always be > -1, there is no way for an instance to exist without being added to this._instances
   };
 
@@ -26954,8 +28419,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @constructor
    * @protected
    */
-  function SoundChannel( src, max ) {
-    this.init( src, max );
+  function SoundChannel(src, max) {
+    this.init(src, max);
   }
 
   /* ------------
@@ -26977,10 +28442,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} If the channels were created.
    * @static
    */
-  SoundChannel.create = function ( src, max ) {
-    var channel = SoundChannel.get( src );
-    if ( channel == null ) {
-      SoundChannel.channels[ src ] = new SoundChannel( src, max );
+  SoundChannel.create = function (src, max) {
+    var channel = SoundChannel.get(src);
+    if (channel == null) {
+      SoundChannel.channels[src] = new SoundChannel(src, max);
       return true;
     }
     return false;
@@ -26992,13 +28457,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} If the channels were deleted.
    * @static
    */
-  SoundChannel.removeSrc = function ( src ) {
-    var channel = SoundChannel.get( src );
-    if ( channel == null ) {
+  SoundChannel.removeSrc = function (src) {
+    var channel = SoundChannel.get(src);
+    if (channel == null) {
       return false;
     }
     channel._removeAll(); // this stops and removes all active instances
-    delete( SoundChannel.channels[ src ] );
+    delete SoundChannel.channels[src];
     return true;
   };
   /**
@@ -27007,8 +28472,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    */
   SoundChannel.removeAll = function () {
-    for ( var channel in SoundChannel.channels ) {
-      SoundChannel.channels[ channel ]._removeAll(); // this stops and removes all active instances
+    for (var channel in SoundChannel.channels) {
+      SoundChannel.channels[channel]._removeAll(); // this stops and removes all active instances
     }
     SoundChannel.channels = {};
   };
@@ -27021,12 +28486,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} The success of the method call. If the channel is full, it will return false.
    * @static
    */
-  SoundChannel.add = function ( instance, interrupt ) {
-    var channel = SoundChannel.get( instance.src );
-    if ( channel == null ) {
+  SoundChannel.add = function (instance, interrupt) {
+    var channel = SoundChannel.get(instance.src);
+    if (channel == null) {
       return false;
     }
-    return channel._add( instance, interrupt );
+    return channel._add(instance, interrupt);
   };
   /**
    * Remove an instance from the channel.
@@ -27035,12 +28500,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return The success of the method call. If there is no channel, it will return false.
    * @static
    */
-  SoundChannel.remove = function ( instance ) {
-    var channel = SoundChannel.get( instance.src );
-    if ( channel == null ) {
+  SoundChannel.remove = function (instance) {
+    var channel = SoundChannel.get(instance.src);
+    if (channel == null) {
       return false;
     }
-    channel._remove( instance );
+    channel._remove(instance);
     return true;
   };
   /**
@@ -27057,8 +28522,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String} src The src to use to look up the channel
    * @static
    */
-  SoundChannel.get = function ( src ) {
-    return SoundChannel.channels[ src ];
+  SoundChannel.get = function (src) {
+    return SoundChannel.channels[src];
   };
 
   var p = SoundChannel.prototype;
@@ -27101,10 +28566,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} max The maximum number of instances in the channel
    * @protected
    */
-  p.init = function ( src, max ) {
+  p.init = function (src, max) {
     this.src = src;
     this.max = max || this.maxDefault;
-    if ( this.max == -1 ) {
+    if (this.max == -1) {
       this.max = this.maxDefault;
     }
     this._instances = [];
@@ -27116,8 +28581,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} index The index to return.
    * @return {AbstractSoundInstance} The AbstractSoundInstance at a specific instance.
    */
-  p._get = function ( index ) {
-    return this._instances[ index ];
+  p._get = function (index) {
+    return this._instances[index];
   };
 
   /**
@@ -27126,11 +28591,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {AbstractSoundInstance} instance The instance to add.
    * @return {Boolean} The success of the method call. If the channel is full, it will return false.
    */
-  p._add = function ( instance, interrupt ) {
-    if ( !this._getSlot( interrupt, instance ) ) {
+  p._add = function (instance, interrupt) {
+    if (!this._getSlot(interrupt, instance)) {
       return false;
     }
-    this._instances.push( instance );
+    this._instances.push(instance);
     this.length++;
     return true;
   };
@@ -27142,12 +28607,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} The success of the remove call. If the instance is not found in this channel, it will
    * return false.
    */
-  p._remove = function ( instance ) {
-    var index = createjs.indexOf( this._instances, instance );
-    if ( index == -1 ) {
+  p._remove = function (instance) {
+    var index = createjs.indexOf(this._instances, instance);
+    if (index == -1) {
       return false;
     }
-    this._instances.splice( index, 1 );
+    this._instances.splice(index, 1);
     this.length--;
     return true;
   };
@@ -27158,8 +28623,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   p._removeAll = function () {
     // Note that stop() removes the item from the list
-    for ( var i = this.length - 1; i >= 0; i-- ) {
-      this._instances[ i ].stop();
+    for (var i = this.length - 1; i >= 0; i--) {
+      this._instances[i].stop();
     }
   };
 
@@ -27171,47 +28636,53 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} Determines if there is an available slot. Depending on the interrupt mode, if there are no slots,
    * an existing AbstractSoundInstance may be interrupted. If there are no slots, this method returns false.
    */
-  p._getSlot = function ( interrupt, instance ) {
+  p._getSlot = function (interrupt, instance) {
     var target, replacement;
 
-    if ( interrupt != Sound.INTERRUPT_NONE ) {
+    if (interrupt != Sound.INTERRUPT_NONE) {
       // First replacement candidate
-      replacement = this._get( 0 );
-      if ( replacement == null ) {
+      replacement = this._get(0);
+      if (replacement == null) {
         return true;
       }
     }
 
-    for ( var i = 0, l = this.max; i < l; i++ ) {
-      target = this._get( i );
+    for (var i = 0, l = this.max; i < l; i++) {
+      target = this._get(i);
 
       // Available Space
-      if ( target == null ) {
+      if (target == null) {
         return true;
       }
 
       // Audio is complete or not playing
-      if ( target.playState == Sound.PLAY_FINISHED ||
+      if (
+        target.playState == Sound.PLAY_FINISHED ||
         target.playState == Sound.PLAY_INTERRUPTED ||
-        target.playState == Sound.PLAY_FAILED ) {
+        target.playState == Sound.PLAY_FAILED
+      ) {
         replacement = target;
         break;
       }
 
-      if ( interrupt == Sound.INTERRUPT_NONE ) {
+      if (interrupt == Sound.INTERRUPT_NONE) {
         continue;
       }
 
       // Audio is a better candidate than the current target, according to playhead
-      if ( ( interrupt == Sound.INTERRUPT_EARLY && target.position < replacement.position ) ||
-        ( interrupt == Sound.INTERRUPT_LATE && target.position > replacement.position ) ) {
+      if (
+        (interrupt == Sound.INTERRUPT_EARLY &&
+          target.position < replacement.position) ||
+        (interrupt == Sound.INTERRUPT_LATE &&
+          target.position > replacement.position)
+      ) {
         replacement = target;
       }
     }
 
-    if ( replacement != null ) {
+    if (replacement != null) {
       replacement._interrupt();
-      this._remove( replacement );
+      this._remove(replacement);
       return true;
     }
     return false;
@@ -27221,8 +28692,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return "[Sound SoundChannel]";
   };
   // do not add SoundChannel to namespace
-
-}() );
+})();
 
 //##############################################################################
 // AbstractSoundInstance.js
@@ -27269,14 +28739,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
  * @constructor
  */
 
-( function () {
+(function () {
   "use strict";
 
-
   // Constructor:
-  var AbstractSoundInstance = function ( src, startTime, duration, playbackResource ) {
+  var AbstractSoundInstance = function (
+    src,
+    startTime,
+    duration,
+    playbackResource
+  ) {
     this.EventDispatcher_constructor();
-
 
     // public properties:
     /**
@@ -27315,7 +28788,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     this.delayTimeoutId = null;
     // TODO consider moving delay into AbstractSoundInstance so it can be handled by plugins
 
-
     // private properties
     // Getter / Setter Properties
     // OJR TODO find original reason that we didn't use defined functions.  I think it was performance related
@@ -27330,12 +28802,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @default 1
      */
     this._volume = 1;
-    Object.defineProperty( this, "volume", {
+    Object.defineProperty(this, "volume", {
       get: this._getVolume,
-      set: this._setVolume
-    } );
-    this.getVolume = createjs.deprecate( this._getVolume, "AbstractSoundInstance.getVolume" );
-    this.setVolume = createjs.deprecate( this._setVolume, "AbstractSoundInstance.setVolume" );
+      set: this._setVolume,
+    });
+    this.getVolume = createjs.deprecate(
+      this._getVolume,
+      "AbstractSoundInstance.getVolume"
+    );
+    this.setVolume = createjs.deprecate(
+      this._setVolume,
+      "AbstractSoundInstance.setVolume"
+    );
 
     /**
      * The pan of the sound, between -1 (left) and 1 (right). Note that pan is not supported by HTML Audio.
@@ -27346,12 +28824,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @default 0
      */
     this._pan = 0;
-    Object.defineProperty( this, "pan", {
+    Object.defineProperty(this, "pan", {
       get: this._getPan,
-      set: this._setPan
-    } );
-    this.getPan = createjs.deprecate( this._getPan, "AbstractSoundInstance.getPan" );
-    this.setPan = createjs.deprecate( this._setPan, "AbstractSoundInstance.setPan" );
+      set: this._setPan,
+    });
+    this.getPan = createjs.deprecate(
+      this._getPan,
+      "AbstractSoundInstance.getPan"
+    );
+    this.setPan = createjs.deprecate(
+      this._setPan,
+      "AbstractSoundInstance.setPan"
+    );
 
     /**
      * Audio sprite property used to determine the starting offset.
@@ -27360,13 +28844,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @default 0
      * @since 0.6.1
      */
-    this._startTime = Math.max( 0, startTime || 0 );
-    Object.defineProperty( this, "startTime", {
+    this._startTime = Math.max(0, startTime || 0);
+    Object.defineProperty(this, "startTime", {
       get: this._getStartTime,
-      set: this._setStartTime
-    } );
-    this.getStartTime = createjs.deprecate( this._getStartTime, "AbstractSoundInstance.getStartTime" );
-    this.setStartTime = createjs.deprecate( this._setStartTime, "AbstractSoundInstance.setStartTime" );
+      set: this._setStartTime,
+    });
+    this.getStartTime = createjs.deprecate(
+      this._getStartTime,
+      "AbstractSoundInstance.getStartTime"
+    );
+    this.setStartTime = createjs.deprecate(
+      this._setStartTime,
+      "AbstractSoundInstance.setStartTime"
+    );
 
     /**
      * Sets or gets the length of the audio clip, value is in milliseconds.
@@ -27376,13 +28866,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @default 0
      * @since 0.6.0
      */
-    this._duration = Math.max( 0, duration || 0 );
-    Object.defineProperty( this, "duration", {
+    this._duration = Math.max(0, duration || 0);
+    Object.defineProperty(this, "duration", {
       get: this._getDuration,
-      set: this._setDuration
-    } );
-    this.getDuration = createjs.deprecate( this._getDuration, "AbstractSoundInstance.getDuration" );
-    this.setDuration = createjs.deprecate( this._setDuration, "AbstractSoundInstance.setDuration" );
+      set: this._setDuration,
+    });
+    this.getDuration = createjs.deprecate(
+      this._getDuration,
+      "AbstractSoundInstance.getDuration"
+    );
+    this.setDuration = createjs.deprecate(
+      this._setDuration,
+      "AbstractSoundInstance.setDuration"
+    );
 
     /**
      * Object that holds plugin specific resource need for audio playback.
@@ -27394,15 +28890,21 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @default null
      */
     this._playbackResource = null;
-    Object.defineProperty( this, "playbackResource", {
+    Object.defineProperty(this, "playbackResource", {
       get: this._getPlaybackResource,
-      set: this._setPlaybackResource
-    } );
-    if ( playbackResource !== false && playbackResource !== true ) {
-      this._setPlaybackResource( playbackResource );
+      set: this._setPlaybackResource,
+    });
+    if (playbackResource !== false && playbackResource !== true) {
+      this._setPlaybackResource(playbackResource);
     }
-    this.getPlaybackResource = createjs.deprecate( this._getPlaybackResource, "AbstractSoundInstance.getPlaybackResource" );
-    this.setPlaybackResource = createjs.deprecate( this._setPlaybackResource, "AbstractSoundInstance.setPlaybackResource" );
+    this.getPlaybackResource = createjs.deprecate(
+      this._getPlaybackResource,
+      "AbstractSoundInstance.getPlaybackResource"
+    );
+    this.setPlaybackResource = createjs.deprecate(
+      this._setPlaybackResource,
+      "AbstractSoundInstance.setPlaybackResource"
+    );
 
     /**
      * The position of the playhead in milliseconds. This can be set while a sound is playing, paused, or stopped.
@@ -27413,12 +28915,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @since 0.6.0
      */
     this._position = 0;
-    Object.defineProperty( this, "position", {
+    Object.defineProperty(this, "position", {
       get: this._getPosition,
-      set: this._setPosition
-    } );
-    this.getPosition = createjs.deprecate( this._getPosition, "AbstractSoundInstance.getPosition" );
-    this.setPosition = createjs.deprecate( this._setPosition, "AbstractSoundInstance.setPosition" );
+      set: this._setPosition,
+    });
+    this.getPosition = createjs.deprecate(
+      this._getPosition,
+      "AbstractSoundInstance.getPosition"
+    );
+    this.setPosition = createjs.deprecate(
+      this._setPosition,
+      "AbstractSoundInstance.setPosition"
+    );
 
     /**
      * The number of play loops remaining. Negative values will loop infinitely.
@@ -27430,12 +28938,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @since 0.6.0
      */
     this._loop = 0;
-    Object.defineProperty( this, "loop", {
+    Object.defineProperty(this, "loop", {
       get: this._getLoop,
-      set: this._setLoop
-    } );
-    this.getLoop = createjs.deprecate( this._getLoop, "AbstractSoundInstance.getLoop" );
-    this.setLoop = createjs.deprecate( this._setLoop, "AbstractSoundInstance.setLoop" );
+      set: this._setLoop,
+    });
+    this.getLoop = createjs.deprecate(
+      this._getLoop,
+      "AbstractSoundInstance.getLoop"
+    );
+    this.setLoop = createjs.deprecate(
+      this._setLoop,
+      "AbstractSoundInstance.setLoop"
+    );
 
     /**
      * Mutes or unmutes the current audio instance.
@@ -27446,12 +28960,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @since 0.6.0
      */
     this._muted = false;
-    Object.defineProperty( this, "muted", {
+    Object.defineProperty(this, "muted", {
       get: this._getMuted,
-      set: this._setMuted
-    } );
-    this.getMuted = createjs.deprecate( this._getMuted, "AbstractSoundInstance.getMuted" );
-    this.setMuted = createjs.deprecate( this._setMuted, "AbstractSoundInstance.setMuted" );
+      set: this._setMuted,
+    });
+    this.getMuted = createjs.deprecate(
+      this._getMuted,
+      "AbstractSoundInstance.getMuted"
+    );
+    this.setMuted = createjs.deprecate(
+      this._setMuted,
+      "AbstractSoundInstance.setMuted"
+    );
 
     /**
      * Pauses or resumes the current audio instance.
@@ -27460,13 +28980,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @type {Boolean}
      */
     this._paused = false;
-    Object.defineProperty( this, "paused", {
+    Object.defineProperty(this, "paused", {
       get: this._getPaused,
-      set: this._setPaused
-    } );
-    this.getPaused = createjs.deprecate( this._getPaused, "AbstractSoundInstance.getPaused" );
-    this.setPaused = createjs.deprecate( this._setPaused, "AbstractSoundInstance.setPaused" );
-
+      set: this._setPaused,
+    });
+    this.getPaused = createjs.deprecate(
+      this._getPaused,
+      "AbstractSoundInstance.getPaused"
+    );
+    this.setPaused = createjs.deprecate(
+      this._setPaused,
+      "AbstractSoundInstance.setPaused"
+    );
 
     // Events
     /**
@@ -27514,7 +29039,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      */
   };
 
-  var p = createjs.extend( AbstractSoundInstance, createjs.EventDispatcher );
+  var p = createjs.extend(AbstractSoundInstance, createjs.EventDispatcher);
 
   // Public Methods:
   /**
@@ -27536,17 +29061,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * play a sound. See the {{#crossLink "PlayPropsConfig"}}{{/crossLink}} for more info.
    * @return {AbstractSoundInstance} A reference to itself, intended for chaining calls.
    */
-  p.play = function ( props ) {
-    var playProps = createjs.PlayPropsConfig.create( props );
-    if ( this.playState == createjs.Sound.PLAY_SUCCEEDED ) {
-      this.applyPlayProps( playProps );
-      if ( this._paused ) {
-        this._setPaused( false );
+  p.play = function (props) {
+    var playProps = createjs.PlayPropsConfig.create(props);
+    if (this.playState == createjs.Sound.PLAY_SUCCEEDED) {
+      this.applyPlayProps(playProps);
+      if (this._paused) {
+        this._setPaused(false);
       }
       return;
     }
     this._cleanUp();
-    createjs.Sound._playInstance( this, playProps ); // make this an event dispatch??
+    createjs.Sound._playInstance(this, playProps); // make this an event dispatch??
     return this;
   };
 
@@ -27592,22 +29117,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @since 0.6.1
    * @return {AbstractSoundInstance} A reference to itself, intended for chaining calls.
    */
-  p.applyPlayProps = function ( playProps ) {
-    if ( playProps.offset != null ) {
-      this._setPosition( playProps.offset )
+  p.applyPlayProps = function (playProps) {
+    if (playProps.offset != null) {
+      this._setPosition(playProps.offset);
     }
-    if ( playProps.loop != null ) {
-      this._setLoop( playProps.loop );
+    if (playProps.loop != null) {
+      this._setLoop(playProps.loop);
     }
-    if ( playProps.volume != null ) {
-      this._setVolume( playProps.volume );
+    if (playProps.volume != null) {
+      this._setVolume(playProps.volume);
     }
-    if ( playProps.pan != null ) {
-      this._setPan( playProps.pan );
+    if (playProps.pan != null) {
+      this._setPan(playProps.pan);
     }
-    if ( playProps.startTime != null ) {
-      this._setStartTime( playProps.startTime );
-      this._setDuration( playProps.duration );
+    if (playProps.startTime != null) {
+      this._setStartTime(playProps.startTime);
+      this._setDuration(playProps.duration);
     }
     return this;
   };
@@ -27636,20 +29161,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @since 0.6.0
    * @return {AbstractSoundInstance} A reference to itself, intended for chaining calls.
    */
-  p._setPaused = function ( value ) {
-    if ( ( value !== true && value !== false ) || this._paused == value ) {
+  p._setPaused = function (value) {
+    if ((value !== true && value !== false) || this._paused == value) {
       return;
     }
-    if ( value == true && this.playState != createjs.Sound.PLAY_SUCCEEDED ) {
+    if (value == true && this.playState != createjs.Sound.PLAY_SUCCEEDED) {
       return;
     }
     this._paused = value;
-    if ( value ) {
+    if (value) {
       this._pause();
     } else {
       this._resume();
     }
-    clearTimeout( this.delayTimeoutId );
+    clearTimeout(this.delayTimeoutId);
     return this;
   };
 
@@ -27660,12 +29185,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} value The volume to set, between 0 and 1.
    * @return {AbstractSoundInstance} A reference to itself, intended for chaining calls.
    */
-  p._setVolume = function ( value ) {
-    if ( value == this._volume ) {
+  p._setVolume = function (value) {
+    if (value == this._volume) {
       return this;
     }
-    this._volume = Math.max( 0, Math.min( 1, value ) );
-    if ( !this._muted ) {
+    this._volume = Math.max(0, Math.min(1, value));
+    if (!this._muted) {
       this._updateVolume();
     }
     return this;
@@ -27689,8 +29214,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {AbstractSoundInstance} A reference to itself, intended for chaining calls.
    * @since 0.6.0
    */
-  p._setMuted = function ( value ) {
-    if ( value !== true && value !== false ) {
+  p._setMuted = function (value) {
+    if (value !== true && value !== false) {
       return;
     }
     this._muted = value;
@@ -27716,11 +29241,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} value The pan value, between -1 (left) and 1 (right).
    * @return {AbstractSoundInstance} Returns reference to itself for chaining calls
    */
-  p._setPan = function ( value ) {
-    if ( value == this._pan ) {
+  p._setPan = function (value) {
+    if (value == this._pan) {
       return this;
     }
-    this._pan = Math.max( -1, Math.min( 1, value ) );
+    this._pan = Math.max(-1, Math.min(1, value));
     this._updatePan();
     return this;
   };
@@ -27742,7 +29267,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Number} The position of the playhead in the sound, in milliseconds.
    */
   p._getPosition = function () {
-    if ( !this._paused && this.playState == createjs.Sound.PLAY_SUCCEEDED ) {
+    if (!this._paused && this.playState == createjs.Sound.PLAY_SUCCEEDED) {
       this._position = this._calculateCurrentPosition();
     }
     return this._position;
@@ -27755,9 +29280,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} value The position to place the playhead, in milliseconds.
    * @return {AbstractSoundInstance} Returns reference to itself for chaining calls
    */
-  p._setPosition = function ( value ) {
-    this._position = Math.max( 0, value );
-    if ( this.playState == createjs.Sound.PLAY_SUCCEEDED ) {
+  p._setPosition = function (value) {
+    this._position = Math.max(0, value);
+    if (this.playState == createjs.Sound.PLAY_SUCCEEDED) {
       this._updatePosition();
     }
     return this;
@@ -27780,11 +29305,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {number} value The new startTime time in milli seconds.
    * @return {AbstractSoundInstance} Returns reference to itself for chaining calls
    */
-  p._setStartTime = function ( value ) {
-    if ( value == this._startTime ) {
+  p._setStartTime = function (value) {
+    if (value == this._startTime) {
       return this;
     }
-    this._startTime = Math.max( 0, value || 0 );
+    this._startTime = Math.max(0, value || 0);
     this._updateStartTime();
     return this;
   };
@@ -27807,11 +29332,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {AbstractSoundInstance} Returns reference to itself for chaining calls
    * @since 0.6.0
    */
-  p._setDuration = function ( value ) {
-    if ( value == this._duration ) {
+  p._setDuration = function (value) {
+    if (value == this._duration) {
       return this;
     }
-    this._duration = Math.max( 0, value || 0 );
+    this._duration = Math.max(0, value || 0);
     this._updateDuration();
     return this;
   };
@@ -27824,9 +29349,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {AbstractSoundInstance} Returns reference to itself for chaining calls
    * @since 0.6.0
    **/
-  p._setPlaybackResource = function ( value ) {
+  p._setPlaybackResource = function (value) {
     this._playbackResource = value;
-    if ( this._duration == 0 && this._playbackResource ) {
+    if (this._duration == 0 && this._playbackResource) {
       this._setDurationFromSource();
     }
     return this;
@@ -27862,20 +29387,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {number} value The number of times to loop after play.
    * @since 0.6.0
    */
-  p._setLoop = function ( value ) {
-    if ( this._playbackResource != null ) {
+  p._setLoop = function (value) {
+    if (this._playbackResource != null) {
       // remove looping
-      if ( this._loop != 0 && value == 0 ) {
-        this._removeLooping( value );
+      if (this._loop != 0 && value == 0) {
+        this._removeLooping(value);
       }
       // add looping
-      else if ( this._loop == 0 && value != 0 ) {
-        this._addLooping( value );
+      else if (this._loop == 0 && value != 0) {
+        this._addLooping(value);
       }
     }
     this._loop = value;
   };
-
 
   // Private Methods:
   /**
@@ -27884,9 +29408,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String} type The event type
    * @protected
    */
-  p._sendEvent = function ( type ) {
-    var event = new createjs.Event( type );
-    this.dispatchEvent( event );
+  p._sendEvent = function (type) {
+    var event = new createjs.Event(type);
+    this.dispatchEvent(event);
   };
 
   /**
@@ -27895,11 +29419,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    */
   p._cleanUp = function () {
-    clearTimeout( this.delayTimeoutId ); // clear timeout that plays delayed sound
+    clearTimeout(this.delayTimeoutId); // clear timeout that plays delayed sound
     this._handleCleanUp();
     this._paused = false;
 
-    createjs.Sound._playFinished( this ); // TODO change to an event
+    createjs.Sound._playFinished(this); // TODO change to an event
   };
 
   /**
@@ -27910,7 +29434,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   p._interrupt = function () {
     this._cleanUp();
     this.playState = createjs.Sound.PLAY_INTERRUPTED;
-    this._sendEvent( "interrupted" );
+    this._sendEvent("interrupted");
   };
 
   /**
@@ -27922,21 +29446,21 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    */
   // OJR FlashAudioSoundInstance overwrites
-  p._beginPlaying = function ( playProps ) {
-    this._setPosition( playProps.offset );
-    this._setLoop( playProps.loop );
-    this._setVolume( playProps.volume );
-    this._setPan( playProps.pan );
-    if ( playProps.startTime != null ) {
-      this._setStartTime( playProps.startTime );
-      this._setDuration( playProps.duration );
+  p._beginPlaying = function (playProps) {
+    this._setPosition(playProps.offset);
+    this._setLoop(playProps.loop);
+    this._setVolume(playProps.volume);
+    this._setPan(playProps.pan);
+    if (playProps.startTime != null) {
+      this._setStartTime(playProps.startTime);
+      this._setDuration(playProps.duration);
     }
 
-    if ( this._playbackResource != null && this._position < this._duration ) {
+    if (this._playbackResource != null && this._position < this._duration) {
       this._paused = false;
       this._handleSoundReady();
       this.playState = createjs.Sound.PLAY_SUCCEEDED;
-      this._sendEvent( "succeeded" );
+      this._sendEvent("succeeded");
       return true;
     } else {
       this._playFailed();
@@ -27953,7 +29477,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   p._playFailed = function () {
     this._cleanUp();
     this.playState = createjs.Sound.PLAY_FAILED;
-    this._sendEvent( "failed" );
+    this._sendEvent("failed");
   };
 
   /**
@@ -27962,19 +29486,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param event
    * @protected
    */
-  p._handleSoundComplete = function ( event ) {
+  p._handleSoundComplete = function (event) {
     this._position = 0; // have to set this as it can be set by pause during playback
 
-    if ( this._loop != 0 ) {
+    if (this._loop != 0) {
       this._loop--; // NOTE this introduces a theoretical limit on loops = float max size x 2 - 1
       this._handleLoop();
-      this._sendEvent( "loop" );
+      this._sendEvent("loop");
       return;
     }
 
     this._cleanUp();
     this.playState = createjs.Sound.PLAY_FINISHED;
-    this._sendEvent( "complete" );
+    this._sendEvent("complete");
   };
 
   // Plugin specific code
@@ -28064,7 +29588,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @since 0.6.0
    */
-  p._removeLooping = function ( value ) {
+  p._removeLooping = function (value) {
     // plugin specific code
   };
 
@@ -28075,7 +29599,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @since 0.6.0
    */
-  p._addLooping = function ( value ) {
+  p._addLooping = function (value) {
     // plugin specific code
   };
 
@@ -28129,17 +29653,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     // plugin specific code
   };
 
-  createjs.AbstractSoundInstance = createjs.promote( AbstractSoundInstance, "EventDispatcher" );
+  createjs.AbstractSoundInstance = createjs.promote(
+    AbstractSoundInstance,
+    "EventDispatcher"
+  );
   createjs.DefaultSoundInstance = createjs.AbstractSoundInstance; // used when no plugin is supported
-}() );
+})();
 
 //##############################################################################
 // AbstractPlugin.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -28234,7 +29760,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return true;
   };
 
-
   // public methods:
   /**
    * Pre-register a sound for preloading and setup. This is called by {{#crossLink "Sound"}}{{/crossLink}}.
@@ -28245,17 +29770,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * Note that not every plugin will manage this value.
    * @return {Object} A result object, containing a "tag" for preloading purposes.
    */
-  p.register = function ( loadItem ) {
-    var loader = this._loaders[ loadItem.src ];
-    if ( loader && !loader.canceled ) {
-      return this._loaders[ loadItem.src ];
+  p.register = function (loadItem) {
+    var loader = this._loaders[loadItem.src];
+    if (loader && !loader.canceled) {
+      return this._loaders[loadItem.src];
     } // already loading/loaded this, so don't load twice
     // OJR potential issue that we won't be firing loaded event, might need to trigger if this is already loaded?
-    this._audioSources[ loadItem.src ] = true;
-    this._soundInstances[ loadItem.src ] = [];
-    loader = new this._loaderClass( loadItem );
-    loader.on( "complete", this._handlePreloadComplete, this );
-    this._loaders[ loadItem.src ] = loader;
+    this._audioSources[loadItem.src] = true;
+    this._soundInstances[loadItem.src] = [];
+    loader = new this._loaderClass(loadItem);
+    loader.on("complete", this._handlePreloadComplete, this);
+    this._loaders[loadItem.src] = loader;
     return loader;
   };
 
@@ -28265,8 +29790,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method preload
    * @param {Loader} loader The sound URI to load.
    */
-  p.preload = function ( loader ) {
-    loader.on( "error", this._handlePreloadError, this );
+  p.preload = function (loader) {
+    loader.on("error", this._handlePreloadError, this);
     loader.load();
   };
 
@@ -28277,8 +29802,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String} src The sound URI to check.
    * @return {Boolean}
    */
-  p.isPreloadStarted = function ( src ) {
-    return ( this._audioSources[ src ] != null );
+  p.isPreloadStarted = function (src) {
+    return this._audioSources[src] != null;
   };
 
   /**
@@ -28287,8 +29812,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String} src The sound URI to load.
    * @return {Boolean}
    */
-  p.isPreloadComplete = function ( src ) {
-    return ( !( this._audioSources[ src ] == null || this._audioSources[ src ] == true ) );
+  p.isPreloadComplete = function (src) {
+    return !(
+      this._audioSources[src] == null || this._audioSources[src] == true
+    );
   };
 
   /**
@@ -28296,20 +29823,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method removeSound
    * @param {String} src The sound URI to unload.
    */
-  p.removeSound = function ( src ) {
-    if ( !this._soundInstances[ src ] ) {
+  p.removeSound = function (src) {
+    if (!this._soundInstances[src]) {
       return;
     }
-    for ( var i = this._soundInstances[ src ].length; i--; ) {
-      var item = this._soundInstances[ src ][ i ];
+    for (var i = this._soundInstances[src].length; i--; ) {
+      var item = this._soundInstances[src][i];
       item.destroy();
     }
-    delete( this._soundInstances[ src ] );
-    delete( this._audioSources[ src ] );
-    if ( this._loaders[ src ] ) {
-      this._loaders[ src ].destroy();
+    delete this._soundInstances[src];
+    delete this._audioSources[src];
+    if (this._loaders[src]) {
+      this._loaders[src].destroy();
     }
-    delete( this._loaders[ src ] );
+    delete this._loaders[src];
   };
 
   /**
@@ -28318,8 +29845,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String} src The sound URI to unload.
    */
   p.removeAllSounds = function () {
-    for ( var key in this._audioSources ) {
-      this.removeSound( key );
+    for (var key in this._audioSources) {
+      this.removeSound(key);
     }
   };
 
@@ -28331,19 +29858,24 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} duration Audio sprite property used to set the time the clip plays for, in milliseconds.
    * @return {AbstractSoundInstance} A sound instance for playback and control.
    */
-  p.create = function ( src, startTime, duration ) {
-    if ( !this.isPreloadStarted( src ) ) {
-      this.preload( this.register( src ) );
+  p.create = function (src, startTime, duration) {
+    if (!this.isPreloadStarted(src)) {
+      this.preload(this.register(src));
     }
-    var si = new this._soundInstanceClass( src, startTime, duration, this._audioSources[ src ] );
-    if ( this._soundInstances[ src ] ) {
-      this._soundInstances[ src ].push( si );
+    var si = new this._soundInstanceClass(
+      src,
+      startTime,
+      duration,
+      this._audioSources[src]
+    );
+    if (this._soundInstances[src]) {
+      this._soundInstances[src].push(si);
     }
 
     // Plugins that don't have a setVolume should implement a setMasterVolune/setMasterMute
     // So we have to check that here.
-    si.setMasterVolume && si.setMasterVolume( createjs.Sound.volume );
-    si.setMasterMute && si.setMasterMute( createjs.Sound.muted );
+    si.setMasterVolume && si.setMasterVolume(createjs.Sound.volume);
+    si.setMasterMute && si.setMasterMute(createjs.Sound.muted);
 
     return si;
   };
@@ -28356,7 +29888,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} If the plugin processes the setVolume call (true). The Sound class will affect all the
    * instances manually otherwise.
    */
-  p.setVolume = function ( value ) {
+  p.setVolume = function (value) {
     this._volume = value;
     this._updateVolume();
     return true;
@@ -28378,7 +29910,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * the mute value of Sound {{#crossLink "Sound/muted:property"}}{{/crossLink}}, so this property is not used here.
    * @return {Boolean} If the mute call succeeds.
    */
-  p.setMute = function ( value ) {
+  p.setMute = function (value) {
     this._updateVolume();
     return true;
   };
@@ -28388,7 +29920,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return "[AbstractPlugin]";
   };
 
-
   // private methods:
   /**
    * Handles internal preload completion.
@@ -28396,14 +29927,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param event
    * @protected
    */
-  p._handlePreloadComplete = function ( event ) {
+  p._handlePreloadComplete = function (event) {
     var src = event.target.getItem().src;
-    this._audioSources[ src ] = event.result;
-    for ( var i = 0, l = this._soundInstances[ src ].length; i < l; i++ ) {
-      var item = this._soundInstances[ src ][ i ];
-      item.playbackResource = this._audioSources[ src ];
+    this._audioSources[src] = event.result;
+    for (var i = 0, l = this._soundInstances[src].length; i < l; i++) {
+      var item = this._soundInstances[src][i];
+      item.playbackResource = this._audioSources[src];
       // ToDo consider adding play call here if playstate == playfailed
-      this._soundInstances[ src ] = null;
+      this._soundInstances[src] = null;
     }
   };
 
@@ -28413,7 +29944,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param event
    * @protected
    */
-  p._handlePreloadError = function ( event ) {
+  p._handlePreloadError = function (event) {
     //delete(this._audioSources[src]);
   };
 
@@ -28427,13 +29958,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   };
 
   createjs.AbstractPlugin = AbstractPlugin;
-}() );
+})();
 
 //##############################################################################
 // WebAudioLoader.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   /**
@@ -28445,11 +29976,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends XHRRequest
    * @protected
    */
-  function Loader( loadItem ) {
-    this.AbstractLoader_constructor( loadItem, true, createjs.Types.SOUND );
-
-  };
-  var p = createjs.extend( Loader, createjs.AbstractLoader );
+  function Loader(loadItem) {
+    this.AbstractLoader_constructor(loadItem, true, createjs.Types.SOUND);
+  }
+  var p = createjs.extend(Loader, createjs.AbstractLoader);
 
   /**
    * web audio context required for decoding audio
@@ -28459,26 +29989,25 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   Loader.context = null;
 
-
   // public methods
   p.toString = function () {
     return "[WebAudioLoader]";
   };
 
-
   // private methods
   p._createRequest = function () {
-    this._request = new createjs.XHRRequest( this._item, false );
-    this._request.setResponseType( "arraybuffer" );
+    this._request = new createjs.XHRRequest(this._item, false);
+    this._request.setResponseType("arraybuffer");
   };
 
-  p._sendComplete = function ( event ) {
+  p._sendComplete = function (event) {
     // OJR we leave this wrapped in Loader because we need to reference src and the handler only receives a single argument, the decodedAudio
-    Loader.context.decodeAudioData( this._rawResult,
-      createjs.proxy( this._handleAudioDecoded, this ),
-      createjs.proxy( this._sendError, this ) );
+    Loader.context.decodeAudioData(
+      this._rawResult,
+      createjs.proxy(this._handleAudioDecoded, this),
+      createjs.proxy(this._sendError, this)
+    );
   };
-
 
   /**
    * The audio has been decoded.
@@ -28486,13 +30015,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param decoded
    * @protected
    */
-  p._handleAudioDecoded = function ( decodedAudio ) {
+  p._handleAudioDecoded = function (decodedAudio) {
     this._result = decodedAudio;
     this.AbstractLoader__sendComplete();
   };
 
-  createjs.WebAudioLoader = createjs.promote( Loader, "AbstractLoader" );
-}() );
+  createjs.WebAudioLoader = createjs.promote(Loader, "AbstractLoader");
+})();
 
 //##############################################################################
 // WebAudioSoundInstance.js
@@ -28512,12 +30041,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
  * @extends AbstractSoundInstance
  * @constructor
  */
-( function () {
+(function () {
   "use strict";
 
-  function WebAudioSoundInstance( src, startTime, duration, playbackResource ) {
-    this.AbstractSoundInstance_constructor( src, startTime, duration, playbackResource );
-
+  function WebAudioSoundInstance(src, startTime, duration, playbackResource) {
+    this.AbstractSoundInstance_constructor(
+      src,
+      startTime,
+      duration,
+      playbackResource
+    );
 
     // public properties
     /**
@@ -28539,7 +30072,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      */
     this.panNode = s.context.createPanner();
     this.panNode.panningModel = s._panningModel;
-    this.panNode.connect( this.gainNode );
+    this.panNode.connect(this.gainNode);
     this._updatePan();
 
     /**
@@ -28551,7 +30084,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      *
      */
     this.sourceNode = null;
-
 
     // private properties
     /**
@@ -28589,9 +30121,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     this._playbackStartTime = 0;
 
     // Proxies, make removing listeners easier.
-    this._endedHandler = createjs.proxy( this._handleSoundComplete, this );
-  };
-  var p = createjs.extend( WebAudioSoundInstance, createjs.AbstractSoundInstance );
+    this._endedHandler = createjs.proxy(this._handleSoundComplete, this);
+  }
+  var p = createjs.extend(
+    WebAudioSoundInstance,
+    createjs.AbstractSoundInstance
+  );
   var s = WebAudioSoundInstance;
 
   /**
@@ -28606,7 +30141,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 
   /**
    * Note this is only intended for use by advanced users.
-   * <br />The scratch buffer that will be assigned to the buffer property of a source node on close.  
+   * <br />The scratch buffer that will be assigned to the buffer property of a source node on close.
    * This is and should be the same scratch buffer referenced by {{#crossLink "WebAudioPlugin"}}{{/crossLink}}.
    * @property _scratchBuffer
    * @type {AudioBufferSourceNode}
@@ -28634,14 +30169,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   s._panningModel = "equalpower";
 
-
   // Public methods
   p.destroy = function () {
     this.AbstractSoundInstance_destroy();
 
-    this.panNode.disconnect( 0 );
+    this.panNode.disconnect(0);
     this.panNode = null;
-    this.gainNode.disconnect( 0 );
+    this.gainNode.disconnect(0);
     this.gainNode = null;
   };
 
@@ -28649,22 +30183,24 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     return "[WebAudioSoundInstance]";
   };
 
-
   // Private Methods
   p._updatePan = function () {
-    this.panNode.setPosition( this._pan, 0, -0.5 );
+    this.panNode.setPosition(this._pan, 0, -0.5);
     // z need to be -0.5 otherwise the sound only plays in left, right, or center
   };
 
-  p._removeLooping = function ( value ) {
-    this._sourceNodeNext = this._cleanUpAudioNode( this._sourceNodeNext );
+  p._removeLooping = function (value) {
+    this._sourceNodeNext = this._cleanUpAudioNode(this._sourceNodeNext);
   };
 
-  p._addLooping = function ( value ) {
-    if ( this.playState != createjs.Sound.PLAY_SUCCEEDED ) {
+  p._addLooping = function (value) {
+    if (this.playState != createjs.Sound.PLAY_SUCCEEDED) {
       return;
     }
-    this._sourceNodeNext = this._createAndPlayAudioNode( this._playbackStartTime, 0 );
+    this._sourceNodeNext = this._createAndPlayAudioNode(
+      this._playbackStartTime,
+      0
+    );
   };
 
   p._setDurationFromSource = function () {
@@ -28672,17 +30208,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   };
 
   p._handleCleanUp = function () {
-    if ( this.sourceNode && this.playState == createjs.Sound.PLAY_SUCCEEDED ) {
-      this.sourceNode = this._cleanUpAudioNode( this.sourceNode );
-      this._sourceNodeNext = this._cleanUpAudioNode( this._sourceNodeNext );
+    if (this.sourceNode && this.playState == createjs.Sound.PLAY_SUCCEEDED) {
+      this.sourceNode = this._cleanUpAudioNode(this.sourceNode);
+      this._sourceNodeNext = this._cleanUpAudioNode(this._sourceNodeNext);
     }
 
-    if ( this.gainNode.numberOfOutputs != 0 ) {
-      this.gainNode.disconnect( 0 );
+    if (this.gainNode.numberOfOutputs != 0) {
+      this.gainNode.disconnect(0);
     }
     // OJR there appears to be a bug that this doesn't always work in webkit (Chrome and Safari). According to the documentation, this should work.
 
-    clearTimeout( this._soundCompleteTimeout );
+    clearTimeout(this._soundCompleteTimeout);
 
     this._playbackStartTime = 0; // This is used by _getPosition
   };
@@ -28695,34 +30231,43 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @since 0.4.1
    */
-  p._cleanUpAudioNode = function ( audioNode ) {
-    if ( audioNode ) {
-      audioNode.stop( 0 );
-      audioNode.disconnect( 0 );
+  p._cleanUpAudioNode = function (audioNode) {
+    if (audioNode) {
+      audioNode.stop(0);
+      audioNode.disconnect(0);
       // necessary to prevent leak on iOS Safari 7-9. will throw in almost all other
       // browser implementations.
-      if ( createjs.BrowserDetect.isIOS ) {
+      if (createjs.BrowserDetect.isIOS) {
         try {
           audioNode.buffer = s._scratchBuffer;
-        } catch ( e ) {}
+        } catch (e) {}
       }
       audioNode = null;
     }
     return audioNode;
   };
 
-  p._handleSoundReady = function ( event ) {
-    this.gainNode.connect( s.destinationNode ); // this line can cause a memory leak.  Nodes need to be disconnected from the audioDestination or any sequence that leads to it.
+  p._handleSoundReady = function (event) {
+    this.gainNode.connect(s.destinationNode); // this line can cause a memory leak.  Nodes need to be disconnected from the audioDestination or any sequence that leads to it.
 
     var dur = this._duration * 0.001,
-      pos = Math.min( Math.max( 0, this._position ) * 0.001, dur );
-    this.sourceNode = this._createAndPlayAudioNode( ( s.context.currentTime - dur ), pos );
+      pos = Math.min(Math.max(0, this._position) * 0.001, dur);
+    this.sourceNode = this._createAndPlayAudioNode(
+      s.context.currentTime - dur,
+      pos
+    );
     this._playbackStartTime = this.sourceNode.startTime - pos;
 
-    this._soundCompleteTimeout = setTimeout( this._endedHandler, ( dur - pos ) * 1000 );
+    this._soundCompleteTimeout = setTimeout(
+      this._endedHandler,
+      (dur - pos) * 1000
+    );
 
-    if ( this._loop != 0 ) {
-      this._sourceNodeNext = this._createAndPlayAudioNode( this._playbackStartTime, 0 );
+    if (this._loop != 0) {
+      this._sourceNodeNext = this._createAndPlayAudioNode(
+        this._playbackStartTime,
+        0
+      );
     }
   };
 
@@ -28735,26 +30280,30 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @since 0.4.1
    */
-  p._createAndPlayAudioNode = function ( startTime, offset ) {
+  p._createAndPlayAudioNode = function (startTime, offset) {
     var audioNode = s.context.createBufferSource();
     audioNode.buffer = this.playbackResource;
-    audioNode.connect( this.panNode );
+    audioNode.connect(this.panNode);
     var dur = this._duration * 0.001;
     audioNode.startTime = startTime + dur;
-    audioNode.start( audioNode.startTime, offset + ( this._startTime * 0.001 ), dur - offset );
+    audioNode.start(
+      audioNode.startTime,
+      offset + this._startTime * 0.001,
+      dur - offset
+    );
     return audioNode;
   };
 
   p._pause = function () {
-    this._position = ( s.context.currentTime - this._playbackStartTime ) * 1000; // * 1000 to give milliseconds, lets us restart at same point
-    this.sourceNode = this._cleanUpAudioNode( this.sourceNode );
-    this._sourceNodeNext = this._cleanUpAudioNode( this._sourceNodeNext );
+    this._position = (s.context.currentTime - this._playbackStartTime) * 1000; // * 1000 to give milliseconds, lets us restart at same point
+    this.sourceNode = this._cleanUpAudioNode(this.sourceNode);
+    this._sourceNodeNext = this._cleanUpAudioNode(this._sourceNodeNext);
 
-    if ( this.gainNode.numberOfOutputs != 0 ) {
-      this.gainNode.disconnect( 0 );
+    if (this.gainNode.numberOfOutputs != 0) {
+      this.gainNode.disconnect(0);
     }
 
-    clearTimeout( this._soundCompleteTimeout );
+    clearTimeout(this._soundCompleteTimeout);
   };
 
   p._resume = function () {
@@ -28769,21 +30318,21 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 
   p._updateVolume = function () {
     var newVolume = this._muted ? 0 : this._volume;
-    if ( newVolume != this.gainNode.gain.value ) {
+    if (newVolume != this.gainNode.gain.value) {
       this.gainNode.gain.value = newVolume;
     }
   };
 
   p._calculateCurrentPosition = function () {
-    return ( ( s.context.currentTime - this._playbackStartTime ) * 1000 ); // pos in seconds * 1000 to give milliseconds
+    return (s.context.currentTime - this._playbackStartTime) * 1000; // pos in seconds * 1000 to give milliseconds
   };
 
   p._updatePosition = function () {
-    this.sourceNode = this._cleanUpAudioNode( this.sourceNode );
-    this._sourceNodeNext = this._cleanUpAudioNode( this._sourceNodeNext );
-    clearTimeout( this._soundCompleteTimeout );
+    this.sourceNode = this._cleanUpAudioNode(this.sourceNode);
+    this._sourceNodeNext = this._cleanUpAudioNode(this._sourceNodeNext);
+    clearTimeout(this._soundCompleteTimeout);
 
-    if ( !this._paused ) {
+    if (!this._paused) {
       this._handleSoundReady();
     }
   };
@@ -28793,29 +30342,34 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   // This technique is described here:  http://www.html5rocks.com/en/tutorials/audio/scheduling/
   // NOTE the cost of this is that our audio loop may not always match the loop event timing precisely.
   p._handleLoop = function () {
-    this._cleanUpAudioNode( this.sourceNode );
+    this._cleanUpAudioNode(this.sourceNode);
     this.sourceNode = this._sourceNodeNext;
     this._playbackStartTime = this.sourceNode.startTime;
-    this._sourceNodeNext = this._createAndPlayAudioNode( this._playbackStartTime, 0 );
-    this._soundCompleteTimeout = setTimeout( this._endedHandler, this._duration );
+    this._sourceNodeNext = this._createAndPlayAudioNode(
+      this._playbackStartTime,
+      0
+    );
+    this._soundCompleteTimeout = setTimeout(this._endedHandler, this._duration);
   };
 
   p._updateDuration = function () {
-    if ( this.playState == createjs.Sound.PLAY_SUCCEEDED ) {
+    if (this.playState == createjs.Sound.PLAY_SUCCEEDED) {
       this._pause();
       this._resume();
     }
   };
 
-  createjs.WebAudioSoundInstance = createjs.promote( WebAudioSoundInstance, "AbstractSoundInstance" );
-}() );
+  createjs.WebAudioSoundInstance = createjs.promote(
+    WebAudioSoundInstance,
+    "AbstractSoundInstance"
+  );
+})();
 
 //##############################################################################
 // WebAudioPlugin.js
 //##############################################################################
 
-( function () {
-
+(function () {
   "use strict";
 
   /**
@@ -28857,7 +30411,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   function WebAudioPlugin() {
     this.AbstractPlugin_constructor();
 
-
     // Private Properties
     /**
      * Value to set panning model to equal power for WebAudioSoundInstance.  Can be "equalpower" or 0 depending on browser implementation.
@@ -28865,7 +30418,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @type {Number / String}
      * @protected
      */
-    this._panningModel = s._panningModel;;
+    this._panningModel = s._panningModel;
 
     /**
      * The web audio context, which WebAudio uses to play audio. All nodes that interact with the WebAudioPlugin
@@ -28884,7 +30437,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @type {AudioNode}
      */
     this.dynamicsCompressorNode = this.context.createDynamicsCompressor();
-    this.dynamicsCompressorNode.connect( this.context.destination );
+    this.dynamicsCompressorNode.connect(this.context.destination);
 
     /**
      * A GainNode for controlling master volume. It is connected to {{#crossLink "WebAudioPlugin/dynamicsCompressorNode:property"}}{{/crossLink}}.
@@ -28894,7 +30447,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @type {AudioGainNode}
      */
     this.gainNode = this.context.createGain();
-    this.gainNode.connect( this.dynamicsCompressorNode );
+    this.gainNode.connect(this.dynamicsCompressorNode);
     createjs.WebAudioSoundInstance.destinationNode = this.gainNode;
 
     this._capabilities = s._capabilities;
@@ -28904,7 +30457,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 
     this._addPropsToClasses();
   }
-  var p = createjs.extend( WebAudioPlugin, createjs.AbstractPlugin );
+  var p = createjs.extend(WebAudioPlugin, createjs.AbstractPlugin);
 
   // Static Properties
   var s = WebAudioPlugin;
@@ -28983,13 +30536,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   s.isSupported = function () {
     // check if this is some kind of mobile device, Web Audio works with local protocol under PhoneGap and it is unlikely someone is trying to run a local file
-    var isMobilePhoneGap = createjs.BrowserDetect.isIOS || createjs.BrowserDetect.isAndroid || createjs.BrowserDetect.isBlackberry;
+    var isMobilePhoneGap =
+      createjs.BrowserDetect.isIOS ||
+      createjs.BrowserDetect.isAndroid ||
+      createjs.BrowserDetect.isBlackberry;
     // OJR isMobile may be redundant with _isFileXHRSupported available.  Consider removing.
-    if ( location.protocol == "file:" && !isMobilePhoneGap && !this._isFileXHRSupported() ) {
+    if (
+      location.protocol == "file:" &&
+      !isMobilePhoneGap &&
+      !this._isFileXHRSupported()
+    ) {
       return false;
     } // Web Audio requires XHR, which is not usually available locally
     s._generateCapabilities();
-    if ( s.context == null ) {
+    if (s.context == null) {
       return false;
     }
     return true;
@@ -29012,15 +30572,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @since 0.4.1
    */
   s.playEmptySound = function () {
-    if ( s.context == null ) {
+    if (s.context == null) {
       return;
     }
     var source = s.context.createBufferSource();
     source.buffer = s._scratchBuffer;
-    source.connect( s.context.destination );
-    source.start( 0, 0, 0 );
+    source.connect(s.context.destination);
+    source.start(0, 0, 0);
   };
-
 
   // Static Private Methods
   /**
@@ -29037,8 +30596,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 
     var xhr = new XMLHttpRequest();
     try {
-      xhr.open( "GET", "WebAudioPluginTest.fail", false ); // loading non-existant file triggers 404 only if it could load (synchronous call)
-    } catch ( error ) {
+      xhr.open("GET", "WebAudioPluginTest.fail", false); // loading non-existant file triggers 404 only if it could load (synchronous call)
+    } catch (error) {
       // catch errors in cases where the onerror is passed by
       supported = false;
       return supported;
@@ -29048,11 +30607,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     }; // cause irrelevant
     // with security turned off, we can get empty success results, which is actually a failed read (status code 0?)
     xhr.onload = function () {
-      supported = this.status == 404 || ( this.status == 200 || ( this.status == 0 && this.response != "" ) );
+      supported =
+        this.status == 404 ||
+        this.status == 200 ||
+        (this.status == 0 && this.response != "");
     };
     try {
       xhr.send();
-    } catch ( error ) {
+    } catch (error) {
       // catch errors in cases where the onerror is passed by
       supported = false;
     }
@@ -29068,53 +30630,57 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @private
    */
   s._generateCapabilities = function () {
-    if ( s._capabilities != null ) {
+    if (s._capabilities != null) {
       return;
     }
     // Web Audio can be in any formats supported by the audio element, from http://www.w3.org/TR/webaudio/#AudioContext-section
-    var t = document.createElement( "audio" );
-    if ( t.canPlayType == null ) {
+    var t = document.createElement("audio");
+    if (t.canPlayType == null) {
       return null;
     }
 
-    if ( s.context == null ) {
+    if (s.context == null) {
       s.context = s._createAudioContext();
-      if ( s.context == null ) {
+      if (s.context == null) {
         return null;
       }
     }
-    if ( s._scratchBuffer == null ) {
-      s._scratchBuffer = s.context.createBuffer( 1, 1, 22050 );
+    if (s._scratchBuffer == null) {
+      s._scratchBuffer = s.context.createBuffer(1, 1, 22050);
     }
 
     s._compatibilitySetUp();
 
     // Listen for document level clicks to unlock WebAudio on iOS. See the _unlock method.
-    if ( "ontouchstart" in window && s.context.state != "running" ) {
+    if ("ontouchstart" in window && s.context.state != "running") {
       s._unlock(); // When played inside of a touch event, this will enable audio on iOS immediately.
-      document.addEventListener( "mousedown", s._unlock, true );
-      document.addEventListener( "touchstart", s._unlock, true );
-      document.addEventListener( "touchend", s._unlock, true );
+      document.addEventListener("mousedown", s._unlock, true);
+      document.addEventListener("touchstart", s._unlock, true);
+      document.addEventListener("touchend", s._unlock, true);
     }
 
     s._capabilities = {
       panning: true,
       volume: true,
-      tracks: -1
+      tracks: -1,
     };
 
     // determine which extensions our browser supports for this plugin by iterating through Sound.SUPPORTED_EXTENSIONS
     var supportedExtensions = createjs.Sound.SUPPORTED_EXTENSIONS;
     var extensionMap = createjs.Sound.EXTENSION_MAP;
-    for ( var i = 0, l = supportedExtensions.length; i < l; i++ ) {
-      var ext = supportedExtensions[ i ];
-      var playType = extensionMap[ ext ] || ext;
-      s._capabilities[ ext ] = ( t.canPlayType( "audio/" + ext ) != "no" && t.canPlayType( "audio/" + ext ) != "" ) || ( t.canPlayType( "audio/" + playType ) != "no" && t.canPlayType( "audio/" + playType ) != "" );
+    for (var i = 0, l = supportedExtensions.length; i < l; i++) {
+      var ext = supportedExtensions[i];
+      var playType = extensionMap[ext] || ext;
+      s._capabilities[ext] =
+        (t.canPlayType("audio/" + ext) != "no" &&
+          t.canPlayType("audio/" + ext) != "") ||
+        (t.canPlayType("audio/" + playType) != "no" &&
+          t.canPlayType("audio/" + playType) != "");
     } // OJR another way to do this might be canPlayType:"m4a", codex: mp4
 
     // 0=no output, 1=mono, 2=stereo, 4=surround, 6=5.1 surround.
     // See http://www.w3.org/TR/webaudio/#AudioChannelSplitter for more details on channels.
-    if ( s.context.destination.numberOfChannels < 2 ) {
+    if (s.context.destination.numberOfChannels < 2) {
       s._capabilities.panning = false;
     }
   };
@@ -29134,8 +30700,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   s._createAudioContext = function () {
     // Slightly modified version of https://github.com/Jam3/ios-safe-audio-context
     // Resolves issues with first-run contexts playing garbled on iOS.
-    var AudioCtor = ( window.AudioContext || window.webkitAudioContext );
-    if ( AudioCtor == null ) {
+    var AudioCtor = window.AudioContext || window.webkitAudioContext;
+    if (AudioCtor == null) {
       return null;
     }
     var context = new AudioCtor();
@@ -29143,20 +30709,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     // Check if hack is necessary. Only occurs in iOS6+ devices
     // and only when you first boot the iPhone, or play a audio/video
     // with a different sample rate
-    if ( /(iPhone|iPad)/i.test( navigator.userAgent ) &&
-      context.sampleRate !== s.DEFAULT_SAMPLE_RATE ) {
-      var buffer = context.createBuffer( 1, 1, s.DEFAULT_SAMPLE_RATE ),
+    if (
+      /(iPhone|iPad)/i.test(navigator.userAgent) &&
+      context.sampleRate !== s.DEFAULT_SAMPLE_RATE
+    ) {
+      var buffer = context.createBuffer(1, 1, s.DEFAULT_SAMPLE_RATE),
         dummy = context.createBufferSource();
       dummy.buffer = buffer;
-      dummy.connect( context.destination );
-      dummy.start( 0 );
+      dummy.connect(context.destination);
+      dummy.start(0);
       dummy.disconnect();
-      context.close() // dispose old context
+      context.close(); // dispose old context
 
       context = new AudioCtor();
     }
     return context;
-  }
+  };
 
   /**
    * Set up compatibility if only deprecated web audio calls are supported.
@@ -29172,7 +30740,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   s._compatibilitySetUp = function () {
     s._panningModel = "equalpower";
     //assume that if one new call is supported, they all are
-    if ( s.context.createGain ) {
+    if (s.context.createGain) {
       return;
     }
 
@@ -29201,24 +30769,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @private
    */
   s._unlock = function () {
-    if ( s._unlocked ) {
+    if (s._unlocked) {
       return;
     }
     s.playEmptySound();
-    if ( s.context.state == "running" ) {
-      document.removeEventListener( "mousedown", s._unlock, true );
-      document.removeEventListener( "touchend", s._unlock, true );
-      document.removeEventListener( "touchstart", s._unlock, true );
+    if (s.context.state == "running") {
+      document.removeEventListener("mousedown", s._unlock, true);
+      document.removeEventListener("touchend", s._unlock, true);
+      document.removeEventListener("touchstart", s._unlock, true);
       s._unlocked = true;
     }
   };
-
 
   // Public Methods
   p.toString = function () {
     return "[WebAudioPlugin]";
   };
-
 
   // Private Methods
   /**
@@ -29238,7 +30804,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     this._loaderClass.context = this.context;
   };
 
-
   /**
    * Set the gain value for master audio. Should not be called externally.
    * @method _updateVolume
@@ -29246,19 +30811,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   p._updateVolume = function () {
     var newVolume = createjs.Sound._masterMute ? 0 : this._volume;
-    if ( newVolume != this.gainNode.gain.value ) {
+    if (newVolume != this.gainNode.gain.value) {
       this.gainNode.gain.value = newVolume;
     }
   };
 
-  createjs.WebAudioPlugin = createjs.promote( WebAudioPlugin, "AbstractPlugin" );
-}() );
+  createjs.WebAudioPlugin = createjs.promote(WebAudioPlugin, "AbstractPlugin");
+})();
 
 //##############################################################################
 // HTMLAudioTagPool.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   /**
@@ -29308,19 +30873,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String} src The source file used by the audio tag.
    * @static
    */
-  s.get = function ( src ) {
-    var t = s._tags[ src ];
-    if ( t == null ) {
+  s.get = function (src) {
+    var t = s._tags[src];
+    if (t == null) {
       // create new base tag
-      t = s._tags[ src ] = s._tagPool.get();
+      t = s._tags[src] = s._tagPool.get();
       t.src = src;
     } else {
       // get base or pool
-      if ( s._tagUsed[ src ] ) {
+      if (s._tagUsed[src]) {
         t = s._tagPool.get();
         t.src = src;
       } else {
-        s._tagUsed[ src ] = true;
+        s._tagUsed[src] = true;
       }
     }
     return t;
@@ -29333,12 +30898,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {HTMLElement} tag Audio tag to set.
    * @static
    */
-  s.set = function ( src, tag ) {
+  s.set = function (src, tag) {
     // check if this is base, if yes set boolean if not return to pool
-    if ( tag == s._tags[ src ] ) {
-      s._tagUsed[ src ] = false;
+    if (tag == s._tags[src]) {
+      s._tagUsed[src] = false;
     } else {
-      s._tagPool.set( tag );
+      s._tagPool.set(tag);
     }
   };
 
@@ -29349,14 +30914,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} If the TagPool was deleted.
    * @static
    */
-  s.remove = function ( src ) {
-    var tag = s._tags[ src ];
-    if ( tag == null ) {
+  s.remove = function (src) {
+    var tag = s._tags[src];
+    if (tag == null) {
       return false;
     }
-    s._tagPool.set( tag );
-    delete( s._tags[ src ] );
-    delete( s._tagUsed[ src ] );
+    s._tagPool.set(tag);
+    delete s._tags[src];
+    delete s._tagUsed[src];
     return true;
   };
 
@@ -29367,16 +30932,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Number} Duration of src in milliseconds
    * @static
    */
-  s.getDuration = function ( src ) {
-    var t = s._tags[ src ];
-    if ( t == null || !t.duration ) {
+  s.getDuration = function (src) {
+    var t = s._tags[src];
+    if (t == null || !t.duration) {
       return 0;
     } // OJR duration is NaN if loading has not completed
     return t.duration * 1000;
   };
 
   createjs.HTMLAudioTagPool = HTMLAudioTagPool;
-
 
   // ************************************************************************************************************
   /**
@@ -29385,8 +30949,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String} src The source of the channel.
    * @protected
    */
-  function TagPool( src ) {
-
+  function TagPool(src) {
     // Public Properties
     /**
      * A list of all available tags in the pool.
@@ -29395,11 +30958,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @protected
      */
     this._tags = [];
-  };
+  }
 
   var p = TagPool.prototype;
   p.constructor = TagPool;
-
 
   // Public Methods
   /**
@@ -29409,13 +30971,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   p.get = function () {
     var tag;
-    if ( this._tags.length == 0 ) {
+    if (this._tags.length == 0) {
       tag = this._createTag();
     } else {
       tag = this._tags.pop();
     }
-    if ( tag.parentNode == null ) {
-      document.body.appendChild( tag );
+    if (tag.parentNode == null) {
+      document.body.appendChild(tag);
     }
     return tag;
   };
@@ -29425,19 +30987,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * #method set
    * @param {HTMLAudioElement} tag HTML audio tag
    */
-  p.set = function ( tag ) {
+  p.set = function (tag) {
     // OJR this first step seems unnecessary
-    var index = createjs.indexOf( this._tags, tag );
-    if ( index == -1 ) {
+    var index = createjs.indexOf(this._tags, tag);
+    if (index == -1) {
       this._tags.src = null;
-      this._tags.push( tag );
+      this._tags.push(tag);
     }
   };
 
   p.toString = function () {
     return "[TagPool]";
   };
-
 
   // Private Methods
   /**
@@ -29448,20 +31009,19 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    */
   p._createTag = function () {
-    var tag = document.createElement( "audio" );
+    var tag = document.createElement("audio");
     tag.autoplay = false;
     tag.preload = "none";
     //LM: Firefox fails when this the preload="none" for other tags, but it needs to be "none" to ensure PreloadJS works.
     return tag;
   };
-
-}() );
+})();
 
 //##############################################################################
 // HTMLAudioSoundInstance.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   /**
@@ -29476,28 +31036,38 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends AbstractSoundInstance
    * @constructor
    */
-  function HTMLAudioSoundInstance( src, startTime, duration, playbackResource ) {
-    this.AbstractSoundInstance_constructor( src, startTime, duration, playbackResource );
-
+  function HTMLAudioSoundInstance(src, startTime, duration, playbackResource) {
+    this.AbstractSoundInstance_constructor(
+      src,
+      startTime,
+      duration,
+      playbackResource
+    );
 
     // Private Properties
     this._audioSpriteStopTime = null;
     this._delayTimeoutId = null;
 
     // Proxies, make removing listeners easier.
-    this._endedHandler = createjs.proxy( this._handleSoundComplete, this );
-    this._readyHandler = createjs.proxy( this._handleTagReady, this );
-    this._stalledHandler = createjs.proxy( this._playFailed, this );
-    this._audioSpriteEndHandler = createjs.proxy( this._handleAudioSpriteLoop, this );
-    this._loopHandler = createjs.proxy( this._handleSoundComplete, this );
+    this._endedHandler = createjs.proxy(this._handleSoundComplete, this);
+    this._readyHandler = createjs.proxy(this._handleTagReady, this);
+    this._stalledHandler = createjs.proxy(this._playFailed, this);
+    this._audioSpriteEndHandler = createjs.proxy(
+      this._handleAudioSpriteLoop,
+      this
+    );
+    this._loopHandler = createjs.proxy(this._handleSoundComplete, this);
 
-    if ( duration ) {
-      this._audioSpriteStopTime = ( startTime + duration ) * 0.001;
+    if (duration) {
+      this._audioSpriteStopTime = (startTime + duration) * 0.001;
     } else {
-      this._duration = createjs.HTMLAudioTagPool.getDuration( this.src );
+      this._duration = createjs.HTMLAudioTagPool.getDuration(this.src);
     }
   }
-  var p = createjs.extend( HTMLAudioSoundInstance, createjs.AbstractSoundInstance );
+  var p = createjs.extend(
+    HTMLAudioSoundInstance,
+    createjs.AbstractSoundInstance
+  );
 
   // Public Methods
   /**
@@ -29506,7 +31076,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * #method setMasterVolume
    * @param value
    */
-  p.setMasterVolume = function ( value ) {
+  p.setMasterVolume = function (value) {
     this._updateVolume();
   };
 
@@ -29516,7 +31086,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * #method setMasterMute
    * @param value
    */
-  p.setMasterMute = function ( isMuted ) {
+  p.setMasterMute = function (isMuted) {
     this._updateVolume();
   };
 
@@ -29526,63 +31096,112 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 
   //Private Methods
   p._removeLooping = function () {
-    if ( this._playbackResource == null ) {
+    if (this._playbackResource == null) {
       return;
     }
     this._playbackResource.loop = false;
-    this._playbackResource.removeEventListener( createjs.HTMLAudioPlugin._AUDIO_SEEKED, this._loopHandler, false );
+    this._playbackResource.removeEventListener(
+      createjs.HTMLAudioPlugin._AUDIO_SEEKED,
+      this._loopHandler,
+      false
+    );
   };
 
   p._addLooping = function () {
-    if ( this._playbackResource == null || this._audioSpriteStopTime ) {
+    if (this._playbackResource == null || this._audioSpriteStopTime) {
       return;
     }
-    this._playbackResource.addEventListener( createjs.HTMLAudioPlugin._AUDIO_SEEKED, this._loopHandler, false );
+    this._playbackResource.addEventListener(
+      createjs.HTMLAudioPlugin._AUDIO_SEEKED,
+      this._loopHandler,
+      false
+    );
     this._playbackResource.loop = true;
   };
 
   p._handleCleanUp = function () {
     var tag = this._playbackResource;
-    if ( tag != null ) {
+    if (tag != null) {
       tag.pause();
       tag.loop = false;
-      tag.removeEventListener( createjs.HTMLAudioPlugin._AUDIO_ENDED, this._endedHandler, false );
-      tag.removeEventListener( createjs.HTMLAudioPlugin._AUDIO_READY, this._readyHandler, false );
-      tag.removeEventListener( createjs.HTMLAudioPlugin._AUDIO_STALLED, this._stalledHandler, false );
-      tag.removeEventListener( createjs.HTMLAudioPlugin._AUDIO_SEEKED, this._loopHandler, false );
-      tag.removeEventListener( createjs.HTMLAudioPlugin._TIME_UPDATE, this._audioSpriteEndHandler, false );
+      tag.removeEventListener(
+        createjs.HTMLAudioPlugin._AUDIO_ENDED,
+        this._endedHandler,
+        false
+      );
+      tag.removeEventListener(
+        createjs.HTMLAudioPlugin._AUDIO_READY,
+        this._readyHandler,
+        false
+      );
+      tag.removeEventListener(
+        createjs.HTMLAudioPlugin._AUDIO_STALLED,
+        this._stalledHandler,
+        false
+      );
+      tag.removeEventListener(
+        createjs.HTMLAudioPlugin._AUDIO_SEEKED,
+        this._loopHandler,
+        false
+      );
+      tag.removeEventListener(
+        createjs.HTMLAudioPlugin._TIME_UPDATE,
+        this._audioSpriteEndHandler,
+        false
+      );
 
       try {
         tag.currentTime = this._startTime;
-      } catch ( e ) {} // Reset Position
-      createjs.HTMLAudioTagPool.set( this.src, tag );
+      } catch (e) {} // Reset Position
+      createjs.HTMLAudioTagPool.set(this.src, tag);
       this._playbackResource = null;
     }
   };
 
-  p._beginPlaying = function ( playProps ) {
-    this._playbackResource = createjs.HTMLAudioTagPool.get( this.src );
-    return this.AbstractSoundInstance__beginPlaying( playProps );
+  p._beginPlaying = function (playProps) {
+    this._playbackResource = createjs.HTMLAudioTagPool.get(this.src);
+    return this.AbstractSoundInstance__beginPlaying(playProps);
   };
 
-  p._handleSoundReady = function ( event ) {
-    if ( this._playbackResource.readyState !== 4 ) {
+  p._handleSoundReady = function (event) {
+    if (this._playbackResource.readyState !== 4) {
       var tag = this._playbackResource;
-      tag.addEventListener( createjs.HTMLAudioPlugin._AUDIO_READY, this._readyHandler, false );
-      tag.addEventListener( createjs.HTMLAudioPlugin._AUDIO_STALLED, this._stalledHandler, false );
+      tag.addEventListener(
+        createjs.HTMLAudioPlugin._AUDIO_READY,
+        this._readyHandler,
+        false
+      );
+      tag.addEventListener(
+        createjs.HTMLAudioPlugin._AUDIO_STALLED,
+        this._stalledHandler,
+        false
+      );
       tag.preload = "auto"; // This is necessary for Firefox, as it won't ever "load" until this is set.
       tag.load();
       return;
     }
 
     this._updateVolume();
-    this._playbackResource.currentTime = ( this._startTime + this._position ) * 0.001;
-    if ( this._audioSpriteStopTime ) {
-      this._playbackResource.addEventListener( createjs.HTMLAudioPlugin._TIME_UPDATE, this._audioSpriteEndHandler, false );
+    this._playbackResource.currentTime =
+      (this._startTime + this._position) * 0.001;
+    if (this._audioSpriteStopTime) {
+      this._playbackResource.addEventListener(
+        createjs.HTMLAudioPlugin._TIME_UPDATE,
+        this._audioSpriteEndHandler,
+        false
+      );
     } else {
-      this._playbackResource.addEventListener( createjs.HTMLAudioPlugin._AUDIO_ENDED, this._endedHandler, false );
-      if ( this._loop != 0 ) {
-        this._playbackResource.addEventListener( createjs.HTMLAudioPlugin._AUDIO_SEEKED, this._loopHandler, false );
+      this._playbackResource.addEventListener(
+        createjs.HTMLAudioPlugin._AUDIO_ENDED,
+        this._endedHandler,
+        false
+      );
+      if (this._loop != 0) {
+        this._playbackResource.addEventListener(
+          createjs.HTMLAudioPlugin._AUDIO_SEEKED,
+          this._loopHandler,
+          false
+        );
         this._playbackResource.loop = true;
       }
     }
@@ -29596,9 +31215,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param event
    * @protected
    */
-  p._handleTagReady = function ( event ) {
-    this._playbackResource.removeEventListener( createjs.HTMLAudioPlugin._AUDIO_READY, this._readyHandler, false );
-    this._playbackResource.removeEventListener( createjs.HTMLAudioPlugin._AUDIO_STALLED, this._stalledHandler, false );
+  p._handleTagReady = function (event) {
+    this._playbackResource.removeEventListener(
+      createjs.HTMLAudioPlugin._AUDIO_READY,
+      this._readyHandler,
+      false
+    );
+    this._playbackResource.removeEventListener(
+      createjs.HTMLAudioPlugin._AUDIO_STALLED,
+      this._stalledHandler,
+      false
+    );
 
     this._handleSoundReady();
   };
@@ -29612,25 +31239,38 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   };
 
   p._updateVolume = function () {
-    if ( this._playbackResource != null ) {
-      var newVolume = ( this._muted || createjs.Sound._masterMute ) ? 0 : this._volume * createjs.Sound._masterVolume;
-      if ( newVolume != this._playbackResource.volume ) {
+    if (this._playbackResource != null) {
+      var newVolume =
+        this._muted || createjs.Sound._masterMute
+          ? 0
+          : this._volume * createjs.Sound._masterVolume;
+      if (newVolume != this._playbackResource.volume) {
         this._playbackResource.volume = newVolume;
       }
     }
   };
 
   p._calculateCurrentPosition = function () {
-    return ( this._playbackResource.currentTime * 1000 ) - this._startTime;
+    return this._playbackResource.currentTime * 1000 - this._startTime;
   };
 
   p._updatePosition = function () {
-    this._playbackResource.removeEventListener( createjs.HTMLAudioPlugin._AUDIO_SEEKED, this._loopHandler, false );
-    this._playbackResource.addEventListener( createjs.HTMLAudioPlugin._AUDIO_SEEKED, this._handleSetPositionSeek, false );
+    this._playbackResource.removeEventListener(
+      createjs.HTMLAudioPlugin._AUDIO_SEEKED,
+      this._loopHandler,
+      false
+    );
+    this._playbackResource.addEventListener(
+      createjs.HTMLAudioPlugin._AUDIO_SEEKED,
+      this._handleSetPositionSeek,
+      false
+    );
     try {
-      this._playbackResource.currentTime = ( this._position + this._startTime ) * 0.001;
-    } catch ( error ) { // Out of range
-      this._handleSetPositionSeek( null );
+      this._playbackResource.currentTime =
+        (this._position + this._startTime) * 0.001;
+    } catch (error) {
+      // Out of range
+      this._handleSetPositionSeek(null);
     }
   };
 
@@ -29640,12 +31280,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param event
    * @protected
    */
-  p._handleSetPositionSeek = function ( event ) {
-    if ( this._playbackResource == null ) {
+  p._handleSetPositionSeek = function (event) {
+    if (this._playbackResource == null) {
       return;
     }
-    this._playbackResource.removeEventListener( createjs.HTMLAudioPlugin._AUDIO_SEEKED, this._handleSetPositionSeek, false );
-    this._playbackResource.addEventListener( createjs.HTMLAudioPlugin._AUDIO_SEEKED, this._loopHandler, false );
+    this._playbackResource.removeEventListener(
+      createjs.HTMLAudioPlugin._AUDIO_SEEKED,
+      this._handleSetPositionSeek,
+      false
+    );
+    this._playbackResource.addEventListener(
+      createjs.HTMLAudioPlugin._AUDIO_SEEKED,
+      this._loopHandler,
+      false
+    );
   };
 
   /**
@@ -29657,65 +31305,87 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param event
    * @private
    */
-  p._handleAudioSpriteLoop = function ( event ) {
-    if ( this._playbackResource.currentTime <= this._audioSpriteStopTime ) {
+  p._handleAudioSpriteLoop = function (event) {
+    if (this._playbackResource.currentTime <= this._audioSpriteStopTime) {
       return;
     }
     this._playbackResource.pause();
-    if ( this._loop == 0 ) {
-      this._handleSoundComplete( null );
+    if (this._loop == 0) {
+      this._handleSoundComplete(null);
     } else {
       this._position = 0;
       this._loop--;
       this._playbackResource.currentTime = this._startTime * 0.001;
-      if ( !this._paused ) {
+      if (!this._paused) {
         this._playbackResource.play();
       }
-      this._sendEvent( "loop" );
+      this._sendEvent("loop");
     }
   };
 
   // NOTE with this approach audio will loop as reliably as the browser allows
   // but we could end up sending the loop event after next loop playback begins
-  p._handleLoop = function ( event ) {
-    if ( this._loop == 0 ) {
+  p._handleLoop = function (event) {
+    if (this._loop == 0) {
       this._playbackResource.loop = false;
-      this._playbackResource.removeEventListener( createjs.HTMLAudioPlugin._AUDIO_SEEKED, this._loopHandler, false );
+      this._playbackResource.removeEventListener(
+        createjs.HTMLAudioPlugin._AUDIO_SEEKED,
+        this._loopHandler,
+        false
+      );
     }
   };
 
   p._updateStartTime = function () {
-    this._audioSpriteStopTime = ( this._startTime + this._duration ) * 0.001;
+    this._audioSpriteStopTime = (this._startTime + this._duration) * 0.001;
 
-    if ( this.playState == createjs.Sound.PLAY_SUCCEEDED ) {
-      this._playbackResource.removeEventListener( createjs.HTMLAudioPlugin._AUDIO_ENDED, this._endedHandler, false );
-      this._playbackResource.addEventListener( createjs.HTMLAudioPlugin._TIME_UPDATE, this._audioSpriteEndHandler, false );
+    if (this.playState == createjs.Sound.PLAY_SUCCEEDED) {
+      this._playbackResource.removeEventListener(
+        createjs.HTMLAudioPlugin._AUDIO_ENDED,
+        this._endedHandler,
+        false
+      );
+      this._playbackResource.addEventListener(
+        createjs.HTMLAudioPlugin._TIME_UPDATE,
+        this._audioSpriteEndHandler,
+        false
+      );
     }
   };
 
   p._updateDuration = function () {
-    this._audioSpriteStopTime = ( this._startTime + this._duration ) * 0.001;
+    this._audioSpriteStopTime = (this._startTime + this._duration) * 0.001;
 
-    if ( this.playState == createjs.Sound.PLAY_SUCCEEDED ) {
-      this._playbackResource.removeEventListener( createjs.HTMLAudioPlugin._AUDIO_ENDED, this._endedHandler, false );
-      this._playbackResource.addEventListener( createjs.HTMLAudioPlugin._TIME_UPDATE, this._audioSpriteEndHandler, false );
+    if (this.playState == createjs.Sound.PLAY_SUCCEEDED) {
+      this._playbackResource.removeEventListener(
+        createjs.HTMLAudioPlugin._AUDIO_ENDED,
+        this._endedHandler,
+        false
+      );
+      this._playbackResource.addEventListener(
+        createjs.HTMLAudioPlugin._TIME_UPDATE,
+        this._audioSpriteEndHandler,
+        false
+      );
     }
   };
 
   p._setDurationFromSource = function () {
-    this._duration = createjs.HTMLAudioTagPool.getDuration( this.src );
+    this._duration = createjs.HTMLAudioTagPool.getDuration(this.src);
     this._playbackResource = null;
   };
 
-  createjs.HTMLAudioSoundInstance = createjs.promote( HTMLAudioSoundInstance, "AbstractSoundInstance" );
-}() );
+  createjs.HTMLAudioSoundInstance = createjs.promote(
+    HTMLAudioSoundInstance,
+    "AbstractSoundInstance"
+  );
+})();
 
 //##############################################################################
 // HTMLAudioPlugin.js
 //##############################################################################
 
-( function () {
-
+(function () {
   "use strict";
 
   /**
@@ -29771,7 +31441,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   function HTMLAudioPlugin() {
     this.AbstractPlugin_constructor();
 
-
     // Public Properties
     this._capabilities = s._capabilities;
 
@@ -29779,7 +31448,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     this._soundInstanceClass = createjs.HTMLAudioSoundInstance;
   }
 
-  var p = createjs.extend( HTMLAudioPlugin, createjs.AbstractPlugin );
+  var p = createjs.extend(HTMLAudioPlugin, createjs.AbstractPlugin);
   var s = HTMLAudioPlugin;
 
   // Static Properties
@@ -29856,7 +31525,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   s._capabilities = null;
 
-
   // Static Methods
   /**
    * Determine if the plugin can be used in the current browser/OS. Note that HTML audio is available in most modern
@@ -29867,7 +31535,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   s.isSupported = function () {
     s._generateCapabilities();
-    return ( s._capabilities != null );
+    return s._capabilities != null;
   };
 
   /**
@@ -29878,47 +31546,50 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @private
    */
   s._generateCapabilities = function () {
-    if ( s._capabilities != null ) {
+    if (s._capabilities != null) {
       return;
     }
-    var t = document.createElement( "audio" );
-    if ( t.canPlayType == null ) {
+    var t = document.createElement("audio");
+    if (t.canPlayType == null) {
       return null;
     }
 
     s._capabilities = {
       panning: false,
       volume: true,
-      tracks: -1
+      tracks: -1,
     };
 
     // determine which extensions our browser supports for this plugin by iterating through Sound.SUPPORTED_EXTENSIONS
     var supportedExtensions = createjs.Sound.SUPPORTED_EXTENSIONS;
     var extensionMap = createjs.Sound.EXTENSION_MAP;
-    for ( var i = 0, l = supportedExtensions.length; i < l; i++ ) {
-      var ext = supportedExtensions[ i ];
-      var playType = extensionMap[ ext ] || ext;
-      s._capabilities[ ext ] = ( t.canPlayType( "audio/" + ext ) != "no" && t.canPlayType( "audio/" + ext ) != "" ) || ( t.canPlayType( "audio/" + playType ) != "no" && t.canPlayType( "audio/" + playType ) != "" );
+    for (var i = 0, l = supportedExtensions.length; i < l; i++) {
+      var ext = supportedExtensions[i];
+      var playType = extensionMap[ext] || ext;
+      s._capabilities[ext] =
+        (t.canPlayType("audio/" + ext) != "no" &&
+          t.canPlayType("audio/" + ext) != "") ||
+        (t.canPlayType("audio/" + playType) != "no" &&
+          t.canPlayType("audio/" + playType) != "");
     } // OJR another way to do this might be canPlayType:"m4a", codex: mp4
   };
 
-
   // public methods
-  p.register = function ( loadItem ) {
-    var tag = createjs.HTMLAudioTagPool.get( loadItem.src );
-    var loader = this.AbstractPlugin_register( loadItem );
-    loader.setTag( tag );
+  p.register = function (loadItem) {
+    var tag = createjs.HTMLAudioTagPool.get(loadItem.src);
+    var loader = this.AbstractPlugin_register(loadItem);
+    loader.setTag(tag);
 
     return loader;
   };
 
-  p.removeSound = function ( src ) {
-    this.AbstractPlugin_removeSound( src );
-    createjs.HTMLAudioTagPool.remove( src );
+  p.removeSound = function (src) {
+    this.AbstractPlugin_removeSound(src);
+    createjs.HTMLAudioTagPool.remove(src);
   };
 
-  p.create = function ( src, startTime, duration ) {
-    var si = this.AbstractPlugin_create( src, startTime, duration );
+  p.create = function (src, startTime, duration) {
+    var si = this.AbstractPlugin_create(src, startTime, duration);
     si.playbackResource = null;
     return si;
   };
@@ -29930,17 +31601,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   // plugin does not support these
   p.setVolume = p.getVolume = p.setMute = null;
 
-
-  createjs.HTMLAudioPlugin = createjs.promote( HTMLAudioPlugin, "AbstractPlugin" );
-}() );
+  createjs.HTMLAudioPlugin = createjs.promote(
+    HTMLAudioPlugin,
+    "AbstractPlugin"
+  );
+})();
 
 //##############################################################################
 // AbstractTween.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor
   /**
@@ -29960,7 +31632,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends EventDispatcher
    * @constructor
    */
-  function AbstractTween( props ) {
+  function AbstractTween(props) {
     this.EventDispatcher_constructor();
 
     // public properties:
@@ -30053,7 +31725,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      */
     this.rawPosition = -1;
 
-
     // private properties:
     /**
      * @property _paused
@@ -30101,21 +31772,21 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      **/
     this._labelList = null;
 
-    if ( props ) {
+    if (props) {
       this.useTicks = !!props.useTicks;
       this.ignoreGlobalPause = !!props.ignoreGlobalPause;
-      this.loop = props.loop === true ? -1 : ( props.loop || 0 );
+      this.loop = props.loop === true ? -1 : props.loop || 0;
       this.reversed = !!props.reversed;
       this.bounce = !!props.bounce;
       this.timeScale = props.timeScale || 1;
-      props.onChange && this.addEventListener( "change", props.onChange );
-      props.onComplete && this.addEventListener( "complete", props.onComplete );
+      props.onChange && this.addEventListener("change", props.onChange);
+      props.onComplete && this.addEventListener("complete", props.onComplete);
     }
 
     // while `position` is shared, it needs to happen after ALL props are set, so it's handled in _init()
-  };
+  }
 
-  var p = createjs.extend( AbstractTween, createjs.EventDispatcher );
+  var p = createjs.extend(AbstractTween, createjs.EventDispatcher);
 
   // events:
   /**
@@ -30140,11 +31811,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @chainable
    */
-  p._setPaused = function ( value ) {
-    createjs.Tween._register( this, value );
+  p._setPaused = function (value) {
+    createjs.Tween._register(this, value);
     return this;
   };
-  p.setPaused = createjs.deprecate( p._setPaused, "AbstractTween.setPaused" );
+  p.setPaused = createjs.deprecate(p._setPaused, "AbstractTween.setPaused");
 
   /**
    * Use the {{#crossLink "AbstractTween/paused:property"}}{{/crossLink}} property instead.
@@ -30154,7 +31825,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   p._getPaused = function () {
     return this._paused;
   };
-  p.getPaused = createjs.deprecate( p._getPaused, "AbstactTween.getPaused" );
+  p.getPaused = createjs.deprecate(p._getPaused, "AbstactTween.getPaused");
 
   /**
    * Use the {{#crossLink "AbstractTween/currentLabel:property"}}{{/crossLink}} property instead.
@@ -30162,19 +31833,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    * @return {String} The name of the current label or null if there is no label
    **/
-  p._getCurrentLabel = function ( pos ) {
+  p._getCurrentLabel = function (pos) {
     var labels = this.getLabels();
-    if ( pos == null ) {
+    if (pos == null) {
       pos = this.position;
     }
-    for ( var i = 0, l = labels.length; i < l; i++ ) {
-      if ( pos < labels[ i ].position ) {
+    for (var i = 0, l = labels.length; i < l; i++) {
+      if (pos < labels[i].position) {
         break;
       }
     }
-    return ( i === 0 ) ? null : labels[ i - 1 ].label;
+    return i === 0 ? null : labels[i - 1].label;
   };
-  p.getCurrentLabel = createjs.deprecate( p._getCurrentLabel, "AbstractTween.getCurrentLabel" );
+  p.getCurrentLabel = createjs.deprecate(
+    p._getCurrentLabel,
+    "AbstractTween.getCurrentLabel"
+  );
 
   /**
    * Pauses or unpauses the tween. A paused tween is removed from the global registry and is eligible for garbage
@@ -30198,16 +31872,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
 
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       paused: {
         set: p._setPaused,
-        get: p._getPaused
+        get: p._getPaused,
       },
       currentLabel: {
-        get: p._getCurrentLabel
-      }
-    } );
-  } catch ( e ) {}
+        get: p._getCurrentLabel,
+      },
+    });
+  } catch (e) {}
 
   // public methods:
   /**
@@ -30216,8 +31890,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Number} delta The amount to advance in milliseconds (or ticks if useTicks is true). Negative values are supported.
    * @param {Number} [ignoreActions=false] If true, actions will not be executed due to this change in position.
    */
-  p.advance = function ( delta, ignoreActions ) {
-    this.setPosition( this.rawPosition + delta * this.timeScale, ignoreActions );
+  p.advance = function (delta, ignoreActions) {
+    this.setPosition(this.rawPosition + delta * this.timeScale, ignoreActions);
   };
 
   /**
@@ -30228,7 +31902,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Boolean} [jump=false] If true, only actions at the new position will be run. If false, actions between the old and new position are run.
    * @param {Function} [callback] Primarily for use with MovieClip, this callback is called after properties are updated, but before actions are run.
    */
-  p.setPosition = function ( rawPosition, ignoreActions, jump, callback ) {
+  p.setPosition = function (rawPosition, ignoreActions, jump, callback) {
     var d = this.duration,
       loopCount = this.loop,
       prevRawPos = this.rawPosition;
@@ -30237,30 +31911,30 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       end = false;
 
     // normalize position:
-    if ( rawPosition < 0 ) {
+    if (rawPosition < 0) {
       rawPosition = 0;
     }
 
-    if ( d === 0 ) {
+    if (d === 0) {
       // deal with 0 length tweens.
       end = true;
-      if ( prevRawPos !== -1 ) {
+      if (prevRawPos !== -1) {
         return end;
       } // we can avoid doing anything else if we're already at 0.
     } else {
-      loop = rawPosition / d | 0;
+      loop = (rawPosition / d) | 0;
       t = rawPosition - loop * d;
 
-      end = ( loopCount !== -1 && rawPosition >= loopCount * d + d );
-      if ( end ) {
-        rawPosition = ( t = d ) * ( loop = loopCount ) + d;
+      end = loopCount !== -1 && rawPosition >= loopCount * d + d;
+      if (end) {
+        rawPosition = (t = d) * (loop = loopCount) + d;
       }
-      if ( rawPosition === prevRawPos ) {
+      if (rawPosition === prevRawPos) {
         return end;
       } // no need to update
 
-      var rev = !this.reversed !== !( this.bounce && loop % 2 ); // current loop is reversed
-      if ( rev ) {
+      var rev = !this.reversed !== !(this.bounce && loop % 2); // current loop is reversed
+      if (rev) {
         t = d - t;
       }
     }
@@ -30269,20 +31943,25 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     this.position = t;
     this.rawPosition = rawPosition;
 
-    this._updatePosition( jump, end );
-    if ( end ) {
+    this._updatePosition(jump, end);
+    if (end) {
       this.paused = true;
     }
 
-    callback && callback( this );
+    callback && callback(this);
 
-    if ( !ignoreActions ) {
-      this._runActions( prevRawPos, rawPosition, jump, !jump && prevRawPos === -1 );
+    if (!ignoreActions) {
+      this._runActions(
+        prevRawPos,
+        rawPosition,
+        jump,
+        !jump && prevRawPos === -1
+      );
     }
 
-    this.dispatchEvent( "change" );
-    if ( end ) {
-      this.dispatchEvent( "complete" );
+    this.dispatchEvent("change");
+    if (end) {
+      this.dispatchEvent("complete");
     }
   };
 
@@ -30292,28 +31971,28 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method calculatePosition
    * @param {Number} rawPosition A raw position.
    */
-  p.calculatePosition = function ( rawPosition ) {
+  p.calculatePosition = function (rawPosition) {
     // largely duplicated from setPosition, but necessary to avoid having to instantiate generic objects to pass values (end, loop, position) back.
     var d = this.duration,
       loopCount = this.loop,
       loop = 0,
       t = 0;
 
-    if ( d === 0 ) {
+    if (d === 0) {
       return 0;
     }
-    if ( loopCount !== -1 && rawPosition >= loopCount * d + d ) {
+    if (loopCount !== -1 && rawPosition >= loopCount * d + d) {
       t = d;
-      loop = loopCount
+      loop = loopCount;
     } // end
-    else if ( rawPosition < 0 ) {
+    else if (rawPosition < 0) {
       t = 0;
     } else {
-      loop = rawPosition / d | 0;
+      loop = (rawPosition / d) | 0;
       t = rawPosition - loop * d;
     }
 
-    var rev = !this.reversed !== !( this.bounce && loop % 2 ); // current loop is reversed
+    var rev = !this.reversed !== !(this.bounce && loop % 2); // current loop is reversed
     return rev ? d - t : t;
   };
 
@@ -30324,22 +32003,21 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
   p.getLabels = function () {
     var list = this._labelList;
-    if ( !list ) {
+    if (!list) {
       list = this._labelList = [];
       var labels = this._labels;
-      for ( var n in labels ) {
-        list.push( {
+      for (var n in labels) {
+        list.push({
           label: n,
-          position: labels[ n ]
-        } );
+          position: labels[n],
+        });
       }
-      list.sort( function ( a, b ) {
+      list.sort(function (a, b) {
         return a.position - b.position;
-      } );
+      });
     }
     return list;
   };
-
 
   /**
    * Defines labels for use with gotoAndPlay/Stop. Overwrites any previously set labels.
@@ -30347,7 +32025,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} labels An object defining labels for using {{#crossLink "Timeline/gotoAndPlay"}}{{/crossLink}}/{{#crossLink "Timeline/gotoAndStop"}}{{/crossLink}}
    * in the form `{myLabelName:time}` where time is in milliseconds (or ticks if `useTicks` is `true`).
    **/
-  p.setLabels = function ( labels ) {
+  p.setLabels = function (labels) {
     this._labels = labels;
     this._labelList = null;
   };
@@ -30358,22 +32036,22 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String} label The label name.
    * @param {Number} position The position this label represents.
    **/
-  p.addLabel = function ( label, position ) {
-    if ( !this._labels ) {
+  p.addLabel = function (label, position) {
+    if (!this._labels) {
       this._labels = {};
     }
-    this._labels[ label ] = position;
+    this._labels[label] = position;
     var list = this._labelList;
-    if ( list ) {
-      for ( var i = 0, l = list.length; i < l; i++ ) {
-        if ( position < list[ i ].position ) {
+    if (list) {
+      for (var i = 0, l = list.length; i < l; i++) {
+        if (position < list[i].position) {
           break;
         }
       }
-      list.splice( i, 0, {
+      list.splice(i, 0, {
         label: label,
-        position: position
-      } );
+        position: position,
+      });
     }
   };
 
@@ -30383,9 +32061,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String|Number} positionOrLabel The position in milliseconds (or ticks if `useTicks` is `true`)
    * or label to jump to.
    **/
-  p.gotoAndPlay = function ( positionOrLabel ) {
+  p.gotoAndPlay = function (positionOrLabel) {
     this.paused = false;
-    this._goto( positionOrLabel );
+    this._goto(positionOrLabel);
   };
 
   /**
@@ -30394,9 +32072,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {String|Number} positionOrLabel The position in milliseconds (or ticks if `useTicks` is `true`) or label
    * to jump to.
    **/
-  p.gotoAndStop = function ( positionOrLabel ) {
+  p.gotoAndStop = function (positionOrLabel) {
     this.paused = true;
-    this._goto( positionOrLabel );
+    this._goto(positionOrLabel);
   };
 
   /**
@@ -30405,14 +32083,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method resolve
    * @param {String|Number} positionOrLabel A numeric position value or label string.
    **/
-  p.resolve = function ( positionOrLabel ) {
-    var pos = Number( positionOrLabel );
-    if ( isNaN( pos ) ) {
-      pos = this._labels && this._labels[ positionOrLabel ];
+  p.resolve = function (positionOrLabel) {
+    var pos = Number(positionOrLabel);
+    if (isNaN(pos)) {
+      pos = this._labels && this._labels[positionOrLabel];
     }
     return pos;
   };
-
 
   /**
    * Returns a string representation of this object.
@@ -30428,9 +32105,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    */
   p.clone = function () {
-    throw ( "AbstractTween can not be cloned." )
+    throw "AbstractTween can not be cloned.";
   };
-
 
   // private methods:
   /**
@@ -30438,12 +32114,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method _init
    * @protected
    */
-  p._init = function ( props ) {
-    if ( !props || !props.paused ) {
+  p._init = function (props) {
+    if (!props || !props.paused) {
       this.paused = false;
     }
-    if ( props && ( props.position != null ) ) {
-      this.setPosition( props.position );
+    if (props && props.position != null) {
+      this.setPosition(props.position);
     }
   };
 
@@ -30451,7 +32127,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method _updatePosition
    * @protected
    */
-  p._updatePosition = function ( jump, end ) {
+  p._updatePosition = function (jump, end) {
     // abstract.
   };
 
@@ -30459,10 +32135,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method _goto
    * @protected
    **/
-  p._goto = function ( positionOrLabel ) {
-    var pos = this.resolve( positionOrLabel );
-    if ( pos != null ) {
-      this.setPosition( pos, false, true );
+  p._goto = function (positionOrLabel) {
+    var pos = this.resolve(positionOrLabel);
+    if (pos != null) {
+      this.setPosition(pos, false, true);
     }
   };
 
@@ -30470,14 +32146,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @method _runActions
    * @protected
    */
-  p._runActions = function ( startRawPos, endRawPos, jump, includeStart ) {
+  p._runActions = function (startRawPos, endRawPos, jump, includeStart) {
     // runs actions between startPos & endPos. Separated to support action deferral.
 
     //console.log(this.passive === false ? " > Tween" : "Timeline", "run", startRawPos, endRawPos, jump, includeStart);
 
     // if we don't have any actions, and we're not a Timeline, then return:
     // TODO: a cleaner way to handle this would be to override this method in Tween, but I'm not sure it's worth the overhead.
-    if ( !this._actionHead && !this.tweens ) {
+    if (!this._actionHead && !this.tweens) {
       return;
     }
 
@@ -30487,76 +32163,83 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       loopCount = this.loop;
     var loop0, loop1, t0, t1;
 
-    if ( d === 0 ) {
+    if (d === 0) {
       // deal with 0 length tweens:
       loop0 = loop1 = t0 = t1 = 0;
       reversed = bounce = false;
     } else {
-      loop0 = startRawPos / d | 0;
-      loop1 = endRawPos / d | 0;
+      loop0 = (startRawPos / d) | 0;
+      loop1 = (endRawPos / d) | 0;
       t0 = startRawPos - loop0 * d;
       t1 = endRawPos - loop1 * d;
     }
 
     // catch positions that are past the end:
-    if ( loopCount !== -1 ) {
-      if ( loop1 > loopCount ) {
+    if (loopCount !== -1) {
+      if (loop1 > loopCount) {
         t1 = d;
         loop1 = loopCount;
       }
-      if ( loop0 > loopCount ) {
+      if (loop0 > loopCount) {
         t0 = d;
         loop0 = loopCount;
       }
     }
 
     // special cases:
-    if ( jump ) {
-      return this._runActionsRange( t1, t1, jump, includeStart );
+    if (jump) {
+      return this._runActionsRange(t1, t1, jump, includeStart);
     } // jump.
-    else if ( loop0 === loop1 && t0 === t1 && !jump && !includeStart ) {
+    else if (loop0 === loop1 && t0 === t1 && !jump && !includeStart) {
       return;
     } // no actions if the position is identical and we aren't including the start
-    else if ( loop0 === -1 ) {
+    else if (loop0 === -1) {
       loop0 = t0 = 0;
     } // correct the -1 value for first advance, important with useTicks.
 
-    var dir = ( startRawPos <= endRawPos ),
+    var dir = startRawPos <= endRawPos,
       loop = loop0;
     do {
-      var rev = !reversed !== !( bounce && loop % 2 );
+      var rev = !reversed !== !(bounce && loop % 2);
 
-      var start = ( loop === loop0 ) ? t0 : dir ? 0 : d;
-      var end = ( loop === loop1 ) ? t1 : dir ? d : 0;
+      var start = loop === loop0 ? t0 : dir ? 0 : d;
+      var end = loop === loop1 ? t1 : dir ? d : 0;
 
-      if ( rev ) {
+      if (rev) {
         start = d - start;
         end = d - end;
       }
 
-      if ( bounce && loop !== loop0 && start === end ) {
-        /* bounced onto the same time/frame, don't re-execute end actions */ } else if ( this._runActionsRange( start, end, jump, includeStart || ( loop !== loop0 && !bounce ) ) ) {
+      if (bounce && loop !== loop0 && start === end) {
+        /* bounced onto the same time/frame, don't re-execute end actions */
+      } else if (
+        this._runActionsRange(
+          start,
+          end,
+          jump,
+          includeStart || (loop !== loop0 && !bounce)
+        )
+      ) {
         return true;
       }
 
       includeStart = false;
-    } while ( ( dir && ++loop <= loop1 ) || ( !dir && --loop >= loop1 ) );
+    } while ((dir && ++loop <= loop1) || (!dir && --loop >= loop1));
   };
 
-  p._runActionsRange = function ( startPos, endPos, jump, includeStart ) {
+  p._runActionsRange = function (startPos, endPos, jump, includeStart) {
     // abstract
   };
 
-  createjs.AbstractTween = createjs.promote( AbstractTween, "EventDispatcher" );
-}() );
+  createjs.AbstractTween = createjs.promote(AbstractTween, "EventDispatcher");
+})();
 
 //##############################################################################
 // Tween.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor
   /**
@@ -30604,8 +32287,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends AbstractTween
    * @constructor
    */
-  function Tween( target, props ) {
-    this.AbstractTween_constructor( props );
+  function Tween(target, props) {
+    this.AbstractTween_constructor(props);
 
     // public properties:
 
@@ -30616,11 +32299,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * As such, this data should be set before the first `to` call in most cases.
      * @example
      *	myTween.pluginData.SmartRotation = data;
-     * 
+     *
      * Most plugins also support a property to disable them for a specific tween. This is typically the plugin name followed by "_disabled".
      * @example
      *	myTween.pluginData.SmartRotation_disabled = true;
-     * 
+     *
      * Some plugins also store working data in this object, usually in a property named `_PluginClassName`.
      * See the documentation for individual plugins for more details.
      * @property pluginData
@@ -30645,7 +32328,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      **/
     this.passive = false;
 
-
     // private properties:
 
     /**
@@ -30653,7 +32335,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      * @type {TweenStep}
      * @protected
      */
-    this._stepHead = new TweenStep( null, 0, 0, {}, null, true );
+    this._stepHead = new TweenStep(null, 0, 0, {}, null, true);
 
     /**
      * @property _stepTail
@@ -30712,20 +32394,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      */
     this._injected = null;
 
-    if ( props ) {
+    if (props) {
       this.pluginData = props.pluginData;
-      if ( props.override ) {
-        Tween.removeTweens( target );
+      if (props.override) {
+        Tween.removeTweens(target);
       }
     }
-    if ( !this.pluginData ) {
+    if (!this.pluginData) {
       this.pluginData = {};
     }
 
-    this._init( props );
-  };
+    this._init(props);
+  }
 
-  var p = createjs.extend( Tween, createjs.AbstractTween );
+  var p = createjs.extend(Tween, createjs.AbstractTween);
 
   // static properties
 
@@ -30769,8 +32451,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   Tween._tweenTail = null;
 
-
-  // static methods	
+  // static methods
   /**
    * Returns a new tween instance. This is functionally identical to using `new Tween(...)`, but may look cleaner
    * with the chained syntax of TweenJS.
@@ -30800,8 +32481,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Tween} A reference to the created tween.
    * @static
    */
-  Tween.get = function ( target, props ) {
-    return new Tween( target, props );
+  Tween.get = function (target, props) {
+    return new Tween(target, props);
   };
 
   /**
@@ -30814,13 +32495,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * will ignore this, but all others will pause if this is `true`.
    * @static
    */
-  Tween.tick = function ( delta, paused ) {
+  Tween.tick = function (delta, paused) {
     var tween = Tween._tweenHead;
-    while ( tween ) {
+    while (tween) {
       var next = tween._next; // in case it completes and wipes its _next property
-      if ( ( paused && !tween.ignoreGlobalPause ) || tween._paused ) {
-        /* paused */ } else {
-        tween.advance( tween.useTicks ? 1 : delta );
+      if ((paused && !tween.ignoreGlobalPause) || tween._paused) {
+        /* paused */
+      } else {
+        tween.advance(tween.useTicks ? 1 : delta);
       }
       tween = next;
     }
@@ -30837,9 +32519,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @since 0.4.2
    */
-  Tween.handleEvent = function ( event ) {
-    if ( event.type === "tick" ) {
-      this.tick( event.delta, event.paused );
+  Tween.handleEvent = function (event) {
+    if (event.type === "tick") {
+      this.tick(event.delta, event.paused);
     }
   };
 
@@ -30850,15 +32532,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} target The target object to remove existing tweens from.
    * @static
    */
-  Tween.removeTweens = function ( target ) {
-    if ( !target.tweenjs_count ) {
+  Tween.removeTweens = function (target) {
+    if (!target.tweenjs_count) {
       return;
     }
     var tween = Tween._tweenHead;
-    while ( tween ) {
+    while (tween) {
       var next = tween._next;
-      if ( tween.target === target ) {
-        Tween._register( tween, true );
+      if (tween.target === target) {
+        Tween._register(tween, true);
       }
       tween = next;
     }
@@ -30873,10 +32555,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    */
   Tween.removeAllTweens = function () {
     var tween = Tween._tweenHead;
-    while ( tween ) {
+    while (tween) {
       var next = tween._next;
       tween._paused = true;
-      tween.target && ( tween.target.tweenjs_count = 0 );
+      tween.target && (tween.target.tweenjs_count = 0);
       tween._next = tween._prev = null;
       tween = next;
     }
@@ -30891,8 +32573,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Boolean} Indicates if there are active tweens.
    * @static
    */
-  Tween.hasActiveTweens = function ( target ) {
-    if ( target ) {
+  Tween.hasActiveTweens = function (target) {
+    if (target) {
       return !!target.tweenjs_count;
     }
     return !!Tween._tweenHead;
@@ -30907,15 +32589,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @protected
    */
-  Tween._installPlugin = function ( plugin ) {
-    var priority = ( plugin.priority = plugin.priority || 0 ),
-      arr = ( Tween._plugins = Tween._plugins || [] );
-    for ( var i = 0, l = arr.length; i < l; i++ ) {
-      if ( priority < arr[ i ].priority ) {
+  Tween._installPlugin = function (plugin) {
+    var priority = (plugin.priority = plugin.priority || 0),
+      arr = (Tween._plugins = Tween._plugins || []);
+    for (var i = 0, l = arr.length; i < l; i++) {
+      if (priority < arr[i].priority) {
         break;
       }
     }
-    arr.splice( i, 0, plugin );
+    arr.splice(i, 0, plugin);
   };
 
   /**
@@ -30926,37 +32608,39 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @protected
    */
-  Tween._register = function ( tween, paused ) {
+  Tween._register = function (tween, paused) {
     var target = tween.target;
-    if ( !paused && tween._paused ) {
+    if (!paused && tween._paused) {
       // TODO: this approach might fail if a dev is using sealed objects
-      if ( target ) {
-        target.tweenjs_count = target.tweenjs_count ? target.tweenjs_count + 1 : 1;
+      if (target) {
+        target.tweenjs_count = target.tweenjs_count
+          ? target.tweenjs_count + 1
+          : 1;
       }
       var tail = Tween._tweenTail;
-      if ( !tail ) {
+      if (!tail) {
         Tween._tweenHead = Tween._tweenTail = tween;
       } else {
         Tween._tweenTail = tail._next = tween;
         tween._prev = tail;
       }
-      if ( !Tween._inited && createjs.Ticker ) {
-        createjs.Ticker.addEventListener( "tick", Tween );
+      if (!Tween._inited && createjs.Ticker) {
+        createjs.Ticker.addEventListener("tick", Tween);
         Tween._inited = true;
       }
-    } else if ( paused && !tween._paused ) {
-      if ( target ) {
+    } else if (paused && !tween._paused) {
+      if (target) {
         target.tweenjs_count--;
       }
       var next = tween._next,
         prev = tween._prev;
 
-      if ( next ) {
+      if (next) {
         next._prev = prev;
       } else {
         Tween._tweenTail = prev;
       } // was tail
-      if ( prev ) {
+      if (prev) {
         prev._next = next;
       } else {
         Tween._tweenHead = next;
@@ -30966,7 +32650,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     }
     tween._paused = paused;
   };
-
 
   // events:
 
@@ -30986,9 +32669,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Tween} This tween instance (for chaining calls).
    * @chainable
    **/
-  p.wait = function ( duration, passive ) {
-    if ( duration > 0 ) {
-      this._addStep( +duration, this._stepTail.props, null, passive );
+  p.wait = function (duration, passive) {
+    if (duration > 0) {
+      this._addStep(+duration, this._stepTail.props, null, passive);
     }
     return this;
   };
@@ -31010,33 +32693,33 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Tween} This tween instance (for chaining calls).
    * @chainable
    */
-  p.to = function ( props, duration, ease ) {
-    if ( duration == null || duration < 0 ) {
+  p.to = function (props, duration, ease) {
+    if (duration == null || duration < 0) {
       duration = 0;
     }
-    var step = this._addStep( +duration, null, ease );
-    this._appendProps( props, step );
+    var step = this._addStep(+duration, null, ease);
+    this._appendProps(props, step);
     return this;
   };
 
   /**
    * Adds a label that can be used with {{#crossLink "Tween/gotoAndPlay"}}{{/crossLink}}/{{#crossLink "Tween/gotoAndStop"}}{{/crossLink}}
    * at the current point in the tween. For example:
-   * 
+   *
    * 	var tween = createjs.Tween.get(foo)
    * 					.to({x:100}, 1000)
    * 					.label("myLabel")
    * 					.to({x:200}, 1000);
    * // ...
    * tween.gotoAndPlay("myLabel"); // would play from 1000ms in.
-   * 
+   *
    * @method label
    * @param {String} label The label name.
    * @return {Tween} This tween instance (for chaining calls).
    * @chainable
    **/
-  p.label = function ( name ) {
-    this.addLabel( name, this.duration );
+  p.label = function (name) {
+    this.addLabel(name, this.duration);
     return this;
   };
 
@@ -31055,8 +32738,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Tween} This tween instance (for chaining calls).
    * @chainable
    */
-  p.call = function ( callback, params, scope ) {
-    return this._addAction( scope || this.target, callback, params || [ this ] );
+  p.call = function (callback, params, scope) {
+    return this._addAction(scope || this.target, callback, params || [this]);
   };
 
   /**
@@ -31073,8 +32756,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Tween} This tween instance (for chaining calls).
    * @chainable
    */
-  p.set = function ( props, target ) {
-    return this._addAction( target || this.target, this._set, [ props ] );
+  p.set = function (props, target) {
+    return this._addAction(target || this.target, this._set, [props]);
   };
 
   /**
@@ -31088,34 +32771,38 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {Tween} This tween instance (for chaining calls).
    * @chainable
    */
-  p.play = function ( tween ) {
-    return this._addAction( tween || this, this._set, [ {
-      paused: false
-    } ] );
+  p.play = function (tween) {
+    return this._addAction(tween || this, this._set, [
+      {
+        paused: false,
+      },
+    ]);
   };
 
   /**
    * Adds an action to pause the specified tween.
-   * 
+   *
    * 	myTween.pause(otherTween).to({alpha:1}, 1000).play(otherTween);
-   * 
+   *
    * Note that this executes at the end of a tween update, so the tween may advance beyond the time the pause
    * action was inserted at. For example:
-   * 
+   *
    * myTween.to({foo:0}, 1000).pause().to({foo:1}, 1000);
-   * 
+   *
    * At 60fps the tween will advance by ~16ms per tick, if the tween above was at 999ms prior to the current tick, it
    * will advance to 1015ms (15ms into the second "step") and then pause.
-   * 
+   *
    * @method pause
    * @param {Tween} [tween] The tween to pause. Defaults to this tween.
    * @return {Tween} This tween instance (for chaining calls)
    * @chainable
    */
-  p.pause = function ( tween ) {
-    return this._addAction( tween || this, this._set, [ {
-      paused: true
-    } ] );
+  p.pause = function (tween) {
+    return this._addAction(tween || this, this._set, [
+      {
+        paused: true,
+      },
+    ]);
   };
 
   // tiny api (primarily for tool output):
@@ -31138,9 +32825,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    */
   p.clone = function () {
-    throw ( "Tween can not be cloned." )
+    throw "Tween can not be cloned.";
   };
-
 
   // private methods:
   /**
@@ -31149,39 +32835,39 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} plugin
    * @protected
    */
-  p._addPlugin = function ( plugin ) {
-    var ids = this._pluginIds || ( this._pluginIds = {} ),
+  p._addPlugin = function (plugin) {
+    var ids = this._pluginIds || (this._pluginIds = {}),
       id = plugin.ID;
-    if ( !id || ids[ id ] ) {
+    if (!id || ids[id]) {
       return;
     } // already added
 
-    ids[ id ] = true;
-    var plugins = this._plugins || ( this._plugins = [] ),
+    ids[id] = true;
+    var plugins = this._plugins || (this._plugins = []),
       priority = plugin.priority || 0;
-    for ( var i = 0, l = plugins.length; i < l; i++ ) {
-      if ( priority < plugins[ i ].priority ) {
-        plugins.splice( i, 0, plugin );
+    for (var i = 0, l = plugins.length; i < l; i++) {
+      if (priority < plugins[i].priority) {
+        plugins.splice(i, 0, plugin);
         return;
       }
     }
-    plugins.push( plugin );
+    plugins.push(plugin);
   };
 
   // Docced in AbstractTween
-  p._updatePosition = function ( jump, end ) {
+  p._updatePosition = function (jump, end) {
     var step = this._stepHead.next,
       t = this.position,
       d = this.duration;
-    if ( this.target && step ) {
+    if (this.target && step) {
       // find our new step index:
       var stepNext = step.next;
-      while ( stepNext && stepNext.t <= t ) {
+      while (stepNext && stepNext.t <= t) {
         step = step.next;
         stepNext = step.next;
       }
-      var ratio = end ? d === 0 ? 1 : t / d : ( t - step.t ) / step.d; // TODO: revisit this.
-      this._updateTargetProps( step, ratio, end );
+      var ratio = end ? (d === 0 ? 1 : t / d) : (t - step.t) / step.d; // TODO: revisit this.
+      this._updateTargetProps(step, ratio, end);
     }
     this._stepPosition = step ? t - step.t : 0;
   };
@@ -31193,44 +32879,43 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Boolean} end Indicates to plugins that the full tween has ended.
    * @protected
    */
-  p._updateTargetProps = function ( step, ratio, end ) {
-    if ( this.passive = !!step.passive ) {
+  p._updateTargetProps = function (step, ratio, end) {
+    if ((this.passive = !!step.passive)) {
       return;
     } // don't update props.
 
     var v, v0, v1, ease;
     var p0 = step.prev.props;
     var p1 = step.props;
-    if ( ease = step.ease ) {
-      ratio = ease( ratio, 0, 1, 1 );
+    if ((ease = step.ease)) {
+      ratio = ease(ratio, 0, 1, 1);
     }
 
     var plugins = this._plugins;
-    proploop: for ( var n in p0 ) {
-      v0 = p0[ n ];
-      v1 = p1[ n ];
+    proploop: for (var n in p0) {
+      v0 = p0[n];
+      v1 = p1[n];
 
       // values are different & it is numeric then interpolate:
-      if ( v0 !== v1 && ( typeof ( v0 ) === "number" ) ) {
-        v = v0 + ( v1 - v0 ) * ratio;
+      if (v0 !== v1 && typeof v0 === "number") {
+        v = v0 + (v1 - v0) * ratio;
       } else {
         v = ratio >= 1 ? v1 : v0;
       }
 
-      if ( plugins ) {
-        for ( var i = 0, l = plugins.length; i < l; i++ ) {
-          var value = plugins[ i ].change( this, step, n, v, ratio, end );
-          if ( value === Tween.IGNORE ) {
+      if (plugins) {
+        for (var i = 0, l = plugins.length; i < l; i++) {
+          var value = plugins[i].change(this, step, n, v, ratio, end);
+          if (value === Tween.IGNORE) {
             continue proploop;
           }
-          if ( value !== undefined ) {
+          if (value !== undefined) {
             v = value;
           }
         }
       }
-      this.target[ n ] = v;
+      this.target[n] = v;
     }
-
   };
 
   /**
@@ -31240,21 +32925,25 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Boolean} includeStart
    * @protected
    */
-  p._runActionsRange = function ( startPos, endPos, jump, includeStart ) {
+  p._runActionsRange = function (startPos, endPos, jump, includeStart) {
     var rev = startPos > endPos;
     var action = rev ? this._actionTail : this._actionHead;
     var ePos = endPos,
       sPos = startPos;
-    if ( rev ) {
+    if (rev) {
       ePos = startPos;
       sPos = endPos;
     }
     var t = this.position;
-    while ( action ) {
+    while (action) {
       var pos = action.t;
-      if ( pos === endPos || ( pos > sPos && pos < ePos ) || ( includeStart && pos === startPos ) ) {
-        action.funct.apply( action.scope, action.params );
-        if ( t !== this.position ) {
+      if (
+        pos === endPos ||
+        (pos > sPos && pos < ePos) ||
+        (includeStart && pos === startPos)
+      ) {
+        action.funct.apply(action.scope, action.params);
+        if (t !== this.position) {
           return true;
         }
       }
@@ -31267,74 +32956,75 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} props
    * @protected
    */
-  p._appendProps = function ( props, step, stepPlugins ) {
+  p._appendProps = function (props, step, stepPlugins) {
     var initProps = this._stepHead.props,
       target = this.target,
       plugins = Tween._plugins;
     var n, i, value, initValue, inject;
     var oldStep = step.prev,
       oldProps = oldStep.props;
-    var stepProps = step.props || ( step.props = this._cloneProps( oldProps ) );
+    var stepProps = step.props || (step.props = this._cloneProps(oldProps));
     var cleanProps = {}; // TODO: is there some way to avoid this additional object?
 
-    for ( n in props ) {
-      if ( !props.hasOwnProperty( n ) ) {
+    for (n in props) {
+      if (!props.hasOwnProperty(n)) {
         continue;
       }
-      cleanProps[ n ] = stepProps[ n ] = props[ n ];
+      cleanProps[n] = stepProps[n] = props[n];
 
-      if ( initProps[ n ] !== undefined ) {
+      if (initProps[n] !== undefined) {
         continue;
       }
 
       initValue = undefined; // accessing missing properties on DOMElements when using CSSPlugin is INSANELY expensive, so we let the plugin take a first swing at it.
-      if ( plugins ) {
-        for ( i = plugins.length - 1; i >= 0; i-- ) {
-          value = plugins[ i ].init( this, n, initValue );
-          if ( value !== undefined ) {
+      if (plugins) {
+        for (i = plugins.length - 1; i >= 0; i--) {
+          value = plugins[i].init(this, n, initValue);
+          if (value !== undefined) {
             initValue = value;
           }
-          if ( initValue === Tween.IGNORE ) {
-            delete( stepProps[ n ] );
-            delete( cleanProps[ n ] );
+          if (initValue === Tween.IGNORE) {
+            delete stepProps[n];
+            delete cleanProps[n];
             break;
           }
         }
       }
 
-      if ( initValue !== Tween.IGNORE ) {
-        if ( initValue === undefined ) {
-          initValue = target[ n ];
+      if (initValue !== Tween.IGNORE) {
+        if (initValue === undefined) {
+          initValue = target[n];
         }
-        oldProps[ n ] = ( initValue === undefined ) ? null : initValue;
+        oldProps[n] = initValue === undefined ? null : initValue;
       }
     }
 
-    for ( n in cleanProps ) {
-      value = props[ n ];
+    for (n in cleanProps) {
+      value = props[n];
 
       // propagate old value to previous steps:
-      var o, prev = oldStep;
-      while ( ( o = prev ) && ( prev = o.prev ) ) {
-        if ( prev.props === o.props ) {
+      var o,
+        prev = oldStep;
+      while ((o = prev) && (prev = o.prev)) {
+        if (prev.props === o.props) {
           continue;
         } // wait step
-        if ( prev.props[ n ] !== undefined ) {
+        if (prev.props[n] !== undefined) {
           break;
         } // already has a value, we're done.
-        prev.props[ n ] = oldProps[ n ];
+        prev.props[n] = oldProps[n];
       }
     }
 
-    if ( stepPlugins !== false && ( plugins = this._plugins ) ) {
-      for ( i = plugins.length - 1; i >= 0; i-- ) {
-        plugins[ i ].step( this, step, cleanProps );
+    if (stepPlugins !== false && (plugins = this._plugins)) {
+      for (i = plugins.length - 1; i >= 0; i--) {
+        plugins[i].step(this, step, cleanProps);
       }
     }
 
-    if ( inject = this._injected ) {
+    if ((inject = this._injected)) {
       this._injected = null;
-      this._appendProps( inject, step, false );
+      this._appendProps(inject, step, false);
     }
   };
 
@@ -31347,9 +33037,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} value
    * @protected
    */
-  p._injectProp = function ( name, value ) {
-    var o = this._injected || ( this._injected = {} );
-    o[ name ] = value;
+  p._injectProp = function (name, value) {
+    var o = this._injected || (this._injected = {});
+    o[name] = value;
   };
 
   /**
@@ -31360,10 +33050,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Boolean} passive
    * @protected
    */
-  p._addStep = function ( duration, props, ease, passive ) {
-    var step = new TweenStep( this._stepTail, this.duration, duration, props, ease, passive || false );
+  p._addStep = function (duration, props, ease, passive) {
+    var step = new TweenStep(
+      this._stepTail,
+      this.duration,
+      duration,
+      props,
+      ease,
+      passive || false
+    );
     this.duration += duration;
-    return this._stepTail = ( this._stepTail.next = step );
+    return (this._stepTail = this._stepTail.next = step);
   };
 
   /**
@@ -31373,9 +33070,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Array} params
    * @protected
    */
-  p._addAction = function ( scope, funct, params ) {
-    var action = new TweenAction( this._actionTail, this.duration, scope, funct, params );
-    if ( this._actionTail ) {
+  p._addAction = function (scope, funct, params) {
+    var action = new TweenAction(
+      this._actionTail,
+      this.duration,
+      scope,
+      funct,
+      params
+    );
+    if (this._actionTail) {
       this._actionTail.next = action;
     } else {
       this._actionHead = action;
@@ -31389,9 +33092,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} props
    * @protected
    */
-  p._set = function ( props ) {
-    for ( var n in props ) {
-      this[ n ] = props[ n ];
+  p._set = function (props) {
+    for (var n in props) {
+      this[n] = props[n];
     }
   };
 
@@ -31400,17 +33103,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} props
    * @protected
    */
-  p._cloneProps = function ( props ) {
+  p._cloneProps = function (props) {
     var o = {};
-    for ( var n in props ) {
-      o[ n ] = props[ n ];
+    for (var n in props) {
+      o[n] = props[n];
     }
     return o;
   };
 
-  createjs.Tween = createjs.promote( Tween, "AbstractTween" );
+  createjs.Tween = createjs.promote(Tween, "AbstractTween");
 
-  function TweenStep( prev, t, d, props, ease, passive ) {
+  function TweenStep(prev, t, d, props, ease, passive) {
     this.next = null;
     this.prev = prev;
     this.t = t;
@@ -31419,9 +33122,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     this.ease = ease;
     this.passive = passive;
     this.index = prev ? prev.index + 1 : 0;
-  };
+  }
 
-  function TweenAction( prev, t, scope, funct, params ) {
+  function TweenAction(prev, t, scope, funct, params) {
     this.next = null;
     this.prev = prev;
     this.t = t;
@@ -31429,22 +33132,21 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     this.scope = scope;
     this.funct = funct;
     this.params = params;
-  };
-}() );
+  }
+})();
 
 //##############################################################################
 // Timeline.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
-
-  // constructor	
+  // constructor
   /**
    * The Timeline class synchronizes multiple tweens and allows them to be controlled as a group. Please note that if a
    * timeline is looping, the tweens on it may appear to loop even if the "loop" property of the tween is false.
-   * 
+   *
    * NOTE: Timeline currently also accepts a param list in the form: `tweens, labels, props`. This is for backwards
    * compatibility only and will be removed in the future. Include tweens and labels as properties on the props object.
    * @class Timeline
@@ -31465,20 +33167,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @extends AbstractTween
    * @constructor
    **/
-  function Timeline( props ) {
+  function Timeline(props) {
     var tweens, labels;
     // handle old params (tweens, labels, props):
     // TODO: deprecated.
-    if ( props instanceof Array || ( props == null && arguments.length > 1 ) ) {
+    if (props instanceof Array || (props == null && arguments.length > 1)) {
       tweens = props;
-      labels = arguments[ 1 ];
-      props = arguments[ 2 ];
-    } else if ( props ) {
+      labels = arguments[1];
+      props = arguments[2];
+    } else if (props) {
       tweens = props.tweens;
       labels = props.labels;
     }
 
-    this.AbstractTween_constructor( props );
+    this.AbstractTween_constructor(props);
 
     // private properties:
     /**
@@ -31490,20 +33192,18 @@ createjs.deprecate = function ( fallbackMethod, name ) {
      **/
     this.tweens = [];
 
-    if ( tweens ) {
-      this.addTween.apply( this, tweens );
+    if (tweens) {
+      this.addTween.apply(this, tweens);
     }
-    this.setLabels( labels );
+    this.setLabels(labels);
 
-    this._init( props );
-  };
+    this._init(props);
+  }
 
-  var p = createjs.extend( Timeline, createjs.AbstractTween );
-
+  var p = createjs.extend(Timeline, createjs.AbstractTween);
 
   // events:
   // docced in AbstractTween.
-
 
   // public methods:
   /**
@@ -31514,34 +33214,34 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Tween} ...tween The tween(s) to add. Accepts multiple arguments.
    * @return {Tween} The first tween that was passed in.
    **/
-  p.addTween = function ( tween ) {
-    if ( tween._parent ) {
-      tween._parent.removeTween( tween );
+  p.addTween = function (tween) {
+    if (tween._parent) {
+      tween._parent.removeTween(tween);
     }
 
     var l = arguments.length;
-    if ( l > 1 ) {
-      for ( var i = 0; i < l; i++ ) {
-        this.addTween( arguments[ i ] );
+    if (l > 1) {
+      for (var i = 0; i < l; i++) {
+        this.addTween(arguments[i]);
       }
-      return arguments[ l - 1 ];
-    } else if ( l === 0 ) {
+      return arguments[l - 1];
+    } else if (l === 0) {
       return null;
     }
 
-    this.tweens.push( tween );
+    this.tweens.push(tween);
     tween._parent = this;
     tween.paused = true;
     var d = tween.duration;
-    if ( tween.loop > 0 ) {
+    if (tween.loop > 0) {
       d *= tween.loop + 1;
     }
-    if ( d > this.duration ) {
+    if (d > this.duration) {
       this.duration = d;
     }
 
-    if ( this.rawPosition >= 0 ) {
-      tween.setPosition( this.rawPosition );
+    if (this.rawPosition >= 0) {
+      tween.setPosition(this.rawPosition);
     }
     return tween;
   };
@@ -31552,25 +33252,25 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Tween} ...tween The tween(s) to remove. Accepts multiple arguments.
    * @return Boolean Returns `true` if all of the tweens were successfully removed.
    **/
-  p.removeTween = function ( tween ) {
+  p.removeTween = function (tween) {
     var l = arguments.length;
-    if ( l > 1 ) {
+    if (l > 1) {
       var good = true;
-      for ( var i = 0; i < l; i++ ) {
-        good = good && this.removeTween( arguments[ i ] );
+      for (var i = 0; i < l; i++) {
+        good = good && this.removeTween(arguments[i]);
       }
       return good;
-    } else if ( l === 0 ) {
+    } else if (l === 0) {
       return true;
     }
 
     var tweens = this.tweens;
     var i = tweens.length;
-    while ( i-- ) {
-      if ( tweens[ i ] === tween ) {
-        tweens.splice( i, 1 );
+    while (i--) {
+      if (tweens[i] === tween) {
+        tweens.splice(i, 1);
         tween._parent = null;
-        if ( tween.duration >= this.duration ) {
+        if (tween.duration >= this.duration) {
           this.updateDuration();
         }
         return true;
@@ -31586,13 +33286,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    **/
   p.updateDuration = function () {
     this.duration = 0;
-    for ( var i = 0, l = this.tweens.length; i < l; i++ ) {
-      var tween = this.tweens[ i ];
+    for (var i = 0, l = this.tweens.length; i < l; i++) {
+      var tween = this.tweens[i];
       var d = tween.duration;
-      if ( tween.loop > 0 ) {
+      if (tween.loop > 0) {
         d *= tween.loop + 1;
       }
-      if ( d > this.duration ) {
+      if (d > this.duration) {
         this.duration = d;
       }
     }
@@ -31612,41 +33312,39 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @protected
    **/
   p.clone = function () {
-    throw ( "Timeline can not be cloned." )
+    throw "Timeline can not be cloned.";
   };
 
   // private methods:
 
   // Docced in AbstractTween
-  p._updatePosition = function ( jump, end ) {
+  p._updatePosition = function (jump, end) {
     var t = this.position;
-    for ( var i = 0, l = this.tweens.length; i < l; i++ ) {
-      this.tweens[ i ].setPosition( t, true, jump ); // actions will run after all the tweens update.
+    for (var i = 0, l = this.tweens.length; i < l; i++) {
+      this.tweens[i].setPosition(t, true, jump); // actions will run after all the tweens update.
     }
   };
 
   // Docced in AbstractTween
-  p._runActionsRange = function ( startPos, endPos, jump, includeStart ) {
+  p._runActionsRange = function (startPos, endPos, jump, includeStart) {
     //console.log("	range", startPos, endPos, jump, includeStart);
     var t = this.position;
-    for ( var i = 0, l = this.tweens.length; i < l; i++ ) {
-      this.tweens[ i ]._runActions( startPos, endPos, jump, includeStart );
-      if ( t !== this.position ) {
+    for (var i = 0, l = this.tweens.length; i < l; i++) {
+      this.tweens[i]._runActions(startPos, endPos, jump, includeStart);
+      if (t !== this.position) {
         return true;
       } // an action changed this timeline's position.
     }
   };
 
-
-  createjs.Timeline = createjs.promote( Timeline, "AbstractTween" );
-
-}() );
+  createjs.Timeline = createjs.promote(Timeline, "AbstractTween");
+})();
 
 //##############################################################################
 // Ease.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   /**
@@ -31672,7 +33370,6 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     throw "Ease cannot be instantiated.";
   }
 
-
   // static methods and properties
   /**
    * @method linear
@@ -31680,7 +33377,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Number}
    **/
-  Ease.linear = function ( t ) {
+  Ease.linear = function (t) {
     return t;
   };
 
@@ -31700,20 +33397,20 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Function}
    **/
-  Ease.get = function ( amount ) {
-    if ( amount < -1 ) {
+  Ease.get = function (amount) {
+    if (amount < -1) {
       amount = -1;
-    } else if ( amount > 1 ) {
+    } else if (amount > 1) {
       amount = 1;
     }
-    return function ( t ) {
-      if ( amount == 0 ) {
+    return function (t) {
+      if (amount == 0) {
         return t;
       }
-      if ( amount < 0 ) {
-        return t * ( t * -amount + 1 + amount );
+      if (amount < 0) {
+        return t * (t * -amount + 1 + amount);
       }
-      return t * ( ( 2 - t ) * amount + ( 1 - amount ) );
+      return t * ((2 - t) * amount + (1 - amount));
     };
   };
 
@@ -31724,9 +33421,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Function}
    **/
-  Ease.getPowIn = function ( pow ) {
-    return function ( t ) {
-      return Math.pow( t, pow );
+  Ease.getPowIn = function (pow) {
+    return function (t) {
+      return Math.pow(t, pow);
     };
   };
 
@@ -31737,9 +33434,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Function}
    **/
-  Ease.getPowOut = function ( pow ) {
-    return function ( t ) {
-      return 1 - Math.pow( 1 - t, pow );
+  Ease.getPowOut = function (pow) {
+    return function (t) {
+      return 1 - Math.pow(1 - t, pow);
     };
   };
 
@@ -31750,10 +33447,10 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Function}
    **/
-  Ease.getPowInOut = function ( pow ) {
-    return function ( t ) {
-      if ( ( t *= 2 ) < 1 ) return 0.5 * Math.pow( t, pow );
-      return 1 - 0.5 * Math.abs( Math.pow( 2 - t, pow ) );
+  Ease.getPowInOut = function (pow) {
+    return function (t) {
+      if ((t *= 2) < 1) return 0.5 * Math.pow(t, pow);
+      return 1 - 0.5 * Math.abs(Math.pow(2 - t, pow));
     };
   };
 
@@ -31763,21 +33460,21 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Number}
    **/
-  Ease.quadIn = Ease.getPowIn( 2 );
+  Ease.quadIn = Ease.getPowIn(2);
   /**
    * @method quadOut
    * @param {Number} t
    * @static
    * @return {Number}
    **/
-  Ease.quadOut = Ease.getPowOut( 2 );
+  Ease.quadOut = Ease.getPowOut(2);
   /**
    * @method quadInOut
    * @param {Number} t
    * @static
    * @return {Number}
    **/
-  Ease.quadInOut = Ease.getPowInOut( 2 );
+  Ease.quadInOut = Ease.getPowInOut(2);
 
   /**
    * @method cubicIn
@@ -31785,21 +33482,21 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Number}
    **/
-  Ease.cubicIn = Ease.getPowIn( 3 );
+  Ease.cubicIn = Ease.getPowIn(3);
   /**
    * @method cubicOut
    * @param {Number} t
    * @static
    * @return {Number}
    **/
-  Ease.cubicOut = Ease.getPowOut( 3 );
+  Ease.cubicOut = Ease.getPowOut(3);
   /**
    * @method cubicInOut
    * @param {Number} t
    * @static
    * @return {Number}
    **/
-  Ease.cubicInOut = Ease.getPowInOut( 3 );
+  Ease.cubicInOut = Ease.getPowInOut(3);
 
   /**
    * @method quartIn
@@ -31807,21 +33504,21 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Number}
    **/
-  Ease.quartIn = Ease.getPowIn( 4 );
+  Ease.quartIn = Ease.getPowIn(4);
   /**
    * @method quartOut
    * @param {Number} t
    * @static
    * @return {Number}
    **/
-  Ease.quartOut = Ease.getPowOut( 4 );
+  Ease.quartOut = Ease.getPowOut(4);
   /**
    * @method quartInOut
    * @param {Number} t
    * @static
    * @return {Number}
    **/
-  Ease.quartInOut = Ease.getPowInOut( 4 );
+  Ease.quartInOut = Ease.getPowInOut(4);
 
   /**
    * @method quintIn
@@ -31829,21 +33526,21 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Number}
    **/
-  Ease.quintIn = Ease.getPowIn( 5 );
+  Ease.quintIn = Ease.getPowIn(5);
   /**
    * @method quintOut
    * @param {Number} t
    * @static
    * @return {Number}
    **/
-  Ease.quintOut = Ease.getPowOut( 5 );
+  Ease.quintOut = Ease.getPowOut(5);
   /**
    * @method quintInOut
    * @param {Number} t
    * @static
    * @return {Number}
    **/
-  Ease.quintInOut = Ease.getPowInOut( 5 );
+  Ease.quintInOut = Ease.getPowInOut(5);
 
   /**
    * @method sineIn
@@ -31851,8 +33548,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Number}
    **/
-  Ease.sineIn = function ( t ) {
-    return 1 - Math.cos( t * Math.PI / 2 );
+  Ease.sineIn = function (t) {
+    return 1 - Math.cos((t * Math.PI) / 2);
   };
 
   /**
@@ -31861,8 +33558,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Number}
    **/
-  Ease.sineOut = function ( t ) {
-    return Math.sin( t * Math.PI / 2 );
+  Ease.sineOut = function (t) {
+    return Math.sin((t * Math.PI) / 2);
   };
 
   /**
@@ -31871,8 +33568,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Number}
    **/
-  Ease.sineInOut = function ( t ) {
-    return -0.5 * ( Math.cos( Math.PI * t ) - 1 );
+  Ease.sineInOut = function (t) {
+    return -0.5 * (Math.cos(Math.PI * t) - 1);
   };
 
   /**
@@ -31882,9 +33579,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Function}
    **/
-  Ease.getBackIn = function ( amount ) {
-    return function ( t ) {
-      return t * t * ( ( amount + 1 ) * t - amount );
+  Ease.getBackIn = function (amount) {
+    return function (t) {
+      return t * t * ((amount + 1) * t - amount);
     };
   };
   /**
@@ -31893,7 +33590,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Number}
    **/
-  Ease.backIn = Ease.getBackIn( 1.7 );
+  Ease.backIn = Ease.getBackIn(1.7);
 
   /**
    * Configurable "back out" ease.
@@ -31902,9 +33599,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Function}
    **/
-  Ease.getBackOut = function ( amount ) {
-    return function ( t ) {
-      return ( --t * t * ( ( amount + 1 ) * t + amount ) + 1 );
+  Ease.getBackOut = function (amount) {
+    return function (t) {
+      return --t * t * ((amount + 1) * t + amount) + 1;
     };
   };
   /**
@@ -31913,7 +33610,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Number}
    **/
-  Ease.backOut = Ease.getBackOut( 1.7 );
+  Ease.backOut = Ease.getBackOut(1.7);
 
   /**
    * Configurable "back in out" ease.
@@ -31922,11 +33619,11 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Function}
    **/
-  Ease.getBackInOut = function ( amount ) {
+  Ease.getBackInOut = function (amount) {
     amount *= 1.525;
-    return function ( t ) {
-      if ( ( t *= 2 ) < 1 ) return 0.5 * ( t * t * ( ( amount + 1 ) * t - amount ) );
-      return 0.5 * ( ( t -= 2 ) * t * ( ( amount + 1 ) * t + amount ) + 2 );
+    return function (t) {
+      if ((t *= 2) < 1) return 0.5 * (t * t * ((amount + 1) * t - amount));
+      return 0.5 * ((t -= 2) * t * ((amount + 1) * t + amount) + 2);
     };
   };
   /**
@@ -31935,7 +33632,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Number}
    **/
-  Ease.backInOut = Ease.getBackInOut( 1.7 );
+  Ease.backInOut = Ease.getBackInOut(1.7);
 
   /**
    * @method circIn
@@ -31943,8 +33640,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Number}
    **/
-  Ease.circIn = function ( t ) {
-    return -( Math.sqrt( 1 - t * t ) - 1 );
+  Ease.circIn = function (t) {
+    return -(Math.sqrt(1 - t * t) - 1);
   };
 
   /**
@@ -31953,8 +33650,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Number}
    **/
-  Ease.circOut = function ( t ) {
-    return Math.sqrt( 1 - ( --t ) * t );
+  Ease.circOut = function (t) {
+    return Math.sqrt(1 - --t * t);
   };
 
   /**
@@ -31963,9 +33660,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Number}
    **/
-  Ease.circInOut = function ( t ) {
-    if ( ( t *= 2 ) < 1 ) return -0.5 * ( Math.sqrt( 1 - t * t ) - 1 );
-    return 0.5 * ( Math.sqrt( 1 - ( t -= 2 ) * t ) + 1 );
+  Ease.circInOut = function (t) {
+    if ((t *= 2) < 1) return -0.5 * (Math.sqrt(1 - t * t) - 1);
+    return 0.5 * (Math.sqrt(1 - (t -= 2) * t) + 1);
   };
 
   /**
@@ -31974,8 +33671,8 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Number}
    **/
-  Ease.bounceIn = function ( t ) {
-    return 1 - Ease.bounceOut( 1 - t );
+  Ease.bounceIn = function (t) {
+    return 1 - Ease.bounceOut(1 - t);
   };
 
   /**
@@ -31984,15 +33681,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Number}
    **/
-  Ease.bounceOut = function ( t ) {
-    if ( t < 1 / 2.75 ) {
-      return ( 7.5625 * t * t );
-    } else if ( t < 2 / 2.75 ) {
-      return ( 7.5625 * ( t -= 1.5 / 2.75 ) * t + 0.75 );
-    } else if ( t < 2.5 / 2.75 ) {
-      return ( 7.5625 * ( t -= 2.25 / 2.75 ) * t + 0.9375 );
+  Ease.bounceOut = function (t) {
+    if (t < 1 / 2.75) {
+      return 7.5625 * t * t;
+    } else if (t < 2 / 2.75) {
+      return 7.5625 * (t -= 1.5 / 2.75) * t + 0.75;
+    } else if (t < 2.5 / 2.75) {
+      return 7.5625 * (t -= 2.25 / 2.75) * t + 0.9375;
     } else {
-      return ( 7.5625 * ( t -= 2.625 / 2.75 ) * t + 0.984375 );
+      return 7.5625 * (t -= 2.625 / 2.75) * t + 0.984375;
     }
   };
 
@@ -32002,9 +33699,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Number}
    **/
-  Ease.bounceInOut = function ( t ) {
-    if ( t < 0.5 ) return Ease.bounceIn( t * 2 ) * .5;
-    return Ease.bounceOut( t * 2 - 1 ) * 0.5 + 0.5;
+  Ease.bounceInOut = function (t) {
+    if (t < 0.5) return Ease.bounceIn(t * 2) * 0.5;
+    return Ease.bounceOut(t * 2 - 1) * 0.5 + 0.5;
   };
 
   /**
@@ -32015,12 +33712,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Function}
    **/
-  Ease.getElasticIn = function ( amplitude, period ) {
+  Ease.getElasticIn = function (amplitude, period) {
     var pi2 = Math.PI * 2;
-    return function ( t ) {
-      if ( t == 0 || t == 1 ) return t;
-      var s = period / pi2 * Math.asin( 1 / amplitude );
-      return -( amplitude * Math.pow( 2, 10 * ( t -= 1 ) ) * Math.sin( ( t - s ) * pi2 / period ) );
+    return function (t) {
+      if (t == 0 || t == 1) return t;
+      var s = (period / pi2) * Math.asin(1 / amplitude);
+      return -(
+        amplitude *
+        Math.pow(2, 10 * (t -= 1)) *
+        Math.sin(((t - s) * pi2) / period)
+      );
     };
   };
   /**
@@ -32029,7 +33730,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Number}
    **/
-  Ease.elasticIn = Ease.getElasticIn( 1, 0.3 );
+  Ease.elasticIn = Ease.getElasticIn(1, 0.3);
 
   /**
    * Configurable elastic ease.
@@ -32039,12 +33740,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Function}
    **/
-  Ease.getElasticOut = function ( amplitude, period ) {
+  Ease.getElasticOut = function (amplitude, period) {
     var pi2 = Math.PI * 2;
-    return function ( t ) {
-      if ( t == 0 || t == 1 ) return t;
-      var s = period / pi2 * Math.asin( 1 / amplitude );
-      return ( amplitude * Math.pow( 2, -10 * t ) * Math.sin( ( t - s ) * pi2 / period ) + 1 );
+    return function (t) {
+      if (t == 0 || t == 1) return t;
+      var s = (period / pi2) * Math.asin(1 / amplitude);
+      return (
+        amplitude * Math.pow(2, -10 * t) * Math.sin(((t - s) * pi2) / period) +
+        1
+      );
     };
   };
   /**
@@ -32053,7 +33757,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Number}
    **/
-  Ease.elasticOut = Ease.getElasticOut( 1, 0.3 );
+  Ease.elasticOut = Ease.getElasticOut(1, 0.3);
 
   /**
    * Configurable elastic ease.
@@ -32063,12 +33767,24 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Function}
    **/
-  Ease.getElasticInOut = function ( amplitude, period ) {
+  Ease.getElasticInOut = function (amplitude, period) {
     var pi2 = Math.PI * 2;
-    return function ( t ) {
-      var s = period / pi2 * Math.asin( 1 / amplitude );
-      if ( ( t *= 2 ) < 1 ) return -0.5 * ( amplitude * Math.pow( 2, 10 * ( t -= 1 ) ) * Math.sin( ( t - s ) * pi2 / period ) );
-      return amplitude * Math.pow( 2, -10 * ( t -= 1 ) ) * Math.sin( ( t - s ) * pi2 / period ) * 0.5 + 1;
+    return function (t) {
+      var s = (period / pi2) * Math.asin(1 / amplitude);
+      if ((t *= 2) < 1)
+        return (
+          -0.5 *
+          (amplitude *
+            Math.pow(2, 10 * (t -= 1)) *
+            Math.sin(((t - s) * pi2) / period))
+        );
+      return (
+        amplitude *
+          Math.pow(2, -10 * (t -= 1)) *
+          Math.sin(((t - s) * pi2) / period) *
+          0.5 +
+        1
+      );
     };
   };
   /**
@@ -32077,17 +33793,16 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    * @return {Number}
    **/
-  Ease.elasticInOut = Ease.getElasticInOut( 1, 0.3 * 1.5 );
+  Ease.elasticInOut = Ease.getElasticInOut(1, 0.3 * 1.5);
 
   createjs.Ease = Ease;
-
-}() );
+})();
 
 //##############################################################################
 // MotionGuidePlugin.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   /**
@@ -32124,10 +33839,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @constructor
    */
   function MotionGuidePlugin() {
-    throw ( "MotionGuidePlugin cannot be instantiated." )
+    throw "MotionGuidePlugin cannot be instantiated.";
   }
   var s = MotionGuidePlugin;
-
 
   // static properties:
   /**
@@ -32153,7 +33867,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    */
   s.install = function () {
-    createjs.Tween._installPlugin( MotionGuidePlugin );
+    createjs.Tween._installPlugin(MotionGuidePlugin);
     return createjs.Tween.IGNORE;
   };
 
@@ -32167,9 +33881,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {any}
    * @static
    */
-  s.init = function ( tween, prop, value ) {
-    if ( prop == "guide" ) {
-      tween._addPlugin( s );
+  s.init = function (tween, prop, value) {
+    if (prop == "guide") {
+      tween._addPlugin(s);
     }
   };
 
@@ -32182,55 +33896,64 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} props
    * @static
    */
-  s.step = function ( tween, step, props ) {
-    for ( var n in props ) {
-      if ( n !== "guide" ) {
+  s.step = function (tween, step, props) {
+    for (var n in props) {
+      if (n !== "guide") {
         continue;
       }
 
       var guideData = step.props.guide;
-      var error = s._solveGuideData( props.guide, guideData );
+      var error = s._solveGuideData(props.guide, guideData);
       guideData.valid = !error;
 
       var end = guideData.endData;
-      tween._injectProp( "x", end.x );
-      tween._injectProp( "y", end.y );
+      tween._injectProp("x", end.x);
+      tween._injectProp("y", end.y);
 
-      if ( error || !guideData.orient ) {
+      if (error || !guideData.orient) {
         break;
       }
 
-      var initRot = step.prev.props.rotation === undefined ? ( tween.target.rotation || 0 ) : step.prev.props.rotation;
+      var initRot =
+        step.prev.props.rotation === undefined
+          ? tween.target.rotation || 0
+          : step.prev.props.rotation;
 
       guideData.startOffsetRot = initRot - guideData.startData.rotation;
 
-      if ( guideData.orient == "fixed" ) {
+      if (guideData.orient == "fixed") {
         // controlled rotation
         guideData.endAbsRot = end.rotation + guideData.startOffsetRot;
         guideData.deltaRotation = 0;
       } else {
         // interpreted rotation
 
-        var finalRot = props.rotation === undefined ? ( tween.target.rotation || 0 ) : props.rotation;
-        var deltaRot = ( finalRot - guideData.endData.rotation ) - guideData.startOffsetRot;
+        var finalRot =
+          props.rotation === undefined
+            ? tween.target.rotation || 0
+            : props.rotation;
+        var deltaRot =
+          finalRot - guideData.endData.rotation - guideData.startOffsetRot;
         var modRot = deltaRot % 360;
 
         guideData.endAbsRot = finalRot;
 
-        switch ( guideData.orient ) {
+        switch (guideData.orient) {
           case "auto":
             guideData.deltaRotation = deltaRot;
             break;
           case "cw":
-            guideData.deltaRotation = ( ( modRot + 360 ) % 360 ) + ( 360 * Math.abs( ( deltaRot / 360 ) | 0 ) );
+            guideData.deltaRotation =
+              ((modRot + 360) % 360) + 360 * Math.abs((deltaRot / 360) | 0);
             break;
           case "ccw":
-            guideData.deltaRotation = ( ( modRot - 360 ) % 360 ) + ( -360 * Math.abs( ( deltaRot / 360 ) | 0 ) );
+            guideData.deltaRotation =
+              ((modRot - 360) % 360) + -360 * Math.abs((deltaRot / 360) | 0);
             break;
         }
       }
 
-      tween._injectProp( "rotation", guideData.endAbsRot );
+      tween._injectProp("rotation", guideData.endAbsRot);
     }
   };
 
@@ -32247,25 +33970,26 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @return {any}
    * @static
    */
-  s.change = function ( tween, step, prop, value, ratio, end ) {
+  s.change = function (tween, step, prop, value, ratio, end) {
     var guideData = step.props.guide;
 
     if (
       !guideData || // Missing data
-      ( step.props === step.prev.props ) || // In a wait()
-      ( guideData === step.prev.props.guide ) // Guide hasn't changed
+      step.props === step.prev.props || // In a wait()
+      guideData === step.prev.props.guide // Guide hasn't changed
     ) {
       return; // have no business making decisions
     }
     if (
-      ( prop === "guide" && !guideData.valid ) || // this data is broken
-      ( prop == "x" || prop == "y" ) || // these always get over-written
-      ( prop === "rotation" && guideData.orient ) // currently over-written
+      (prop === "guide" && !guideData.valid) || // this data is broken
+      prop == "x" ||
+      prop == "y" || // these always get over-written
+      (prop === "rotation" && guideData.orient) // currently over-written
     ) {
       return createjs.Tween.IGNORE;
     }
 
-    s._ratioToPositionData( ratio, guideData, tween.target );
+    s._ratioToPositionData(ratio, guideData, tween.target);
   };
 
   // public methods
@@ -32279,17 +34003,17 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Array} [higlight=undefined] Array of ratio positions to highlight
    * @returns {undefined|String}
    */
-  s.debug = function ( guideData, ctx, higlight ) {
+  s.debug = function (guideData, ctx, higlight) {
     guideData = guideData.guide || guideData;
 
     // errors
-    var err = s._findPathProblems( guideData );
-    if ( err ) {
-      console.error( "MotionGuidePlugin Error found: \n" + err );
+    var err = s._findPathProblems(guideData);
+    if (err) {
+      console.error("MotionGuidePlugin Error found: \n" + err);
     }
 
     // drawing
-    if ( !ctx ) {
+    if (!ctx) {
       return err;
     }
 
@@ -32307,12 +34031,9 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     ctx.beginPath();
 
     // curve
-    ctx.moveTo( path[ 0 ], path[ 1 ] );
-    for ( i = 2; i < pathLength; i += 4 ) {
-      ctx.quadraticCurveTo(
-        path[ i ], path[ i + 1 ],
-        path[ i + 2 ], path[ i + 3 ]
-      );
+    ctx.moveTo(path[0], path[1]);
+    for (i = 2; i < pathLength; i += 4) {
+      ctx.quadraticCurveTo(path[i], path[i + 1], path[i + 2], path[i + 3]);
     }
 
     ctx.strokeStyle = "black";
@@ -32325,21 +34046,21 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 
     // highlights
     var hiCount = higlight.length;
-    if ( higlight && hiCount ) {
+    if (higlight && hiCount) {
       var tempStore = {};
       var tempLook = {};
-      s._solveGuideData( guideData, tempStore );
+      s._solveGuideData(guideData, tempStore);
 
-      for ( var i = 0; i < hiCount; i++ ) {
+      for (var i = 0; i < hiCount; i++) {
         tempStore.orient = "fixed";
-        s._ratioToPositionData( higlight[ i ], tempStore, tempLook );
+        s._ratioToPositionData(higlight[i], tempStore, tempLook);
 
         ctx.beginPath();
 
-        ctx.moveTo( tempLook.x, tempLook.y );
+        ctx.moveTo(tempLook.x, tempLook.y);
         ctx.lineTo(
-          tempLook.x + Math.cos( tempLook.rotation * 0.0174533 ) * length,
-          tempLook.y + Math.sin( tempLook.rotation * 0.0174533 ) * length
+          tempLook.x + Math.cos(tempLook.rotation * 0.0174533) * length,
+          tempLook.y + Math.sin(tempLook.rotation * 0.0174533) * length
         );
 
         ctx.strokeStyle = "black";
@@ -32366,57 +34087,77 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {undefined|String} Can return an error if unable to generate the data.
    * @private
    */
-  s._solveGuideData = function ( source, storage ) {
+  s._solveGuideData = function (source, storage) {
     var err = undefined;
-    if ( err = s.debug( source ) ) {
+    if ((err = s.debug(source))) {
       return err;
     }
 
-    var path = storage.path = source.path;
-    var orient = storage.orient = source.orient;
+    var path = (storage.path = source.path);
+    var orient = (storage.orient = source.orient);
     storage.subLines = [];
     storage.totalLength = 0;
     storage.startOffsetRot = 0;
     storage.deltaRotation = 0;
     storage.startData = {
-      ratio: 0
+      ratio: 0,
     };
     storage.endData = {
-      ratio: 1
+      ratio: 1,
     };
     storage.animSpan = 1;
 
     var pathLength = path.length;
 
     var precision = 10;
-    var sx, sy, cx, cy, ex, ey, i, j, len, temp = {};
+    var sx,
+      sy,
+      cx,
+      cy,
+      ex,
+      ey,
+      i,
+      j,
+      len,
+      temp = {};
 
-    sx = path[ 0 ];
-    sy = path[ 1 ];
+    sx = path[0];
+    sy = path[1];
 
     // get the data for each curve
-    for ( i = 2; i < pathLength; i += 4 ) {
-      cx = path[ i ];
-      cy = path[ i + 1 ];
-      ex = path[ i + 2 ];
-      ey = path[ i + 3 ];
+    for (i = 2; i < pathLength; i += 4) {
+      cx = path[i];
+      cy = path[i + 1];
+      ex = path[i + 2];
+      ey = path[i + 3];
 
       var subLine = {
         weightings: [],
         estLength: 0,
-        portion: 0
+        portion: 0,
       };
 
       var subX = sx,
         subY = sy;
       // get the distance data for each point
-      for ( j = 1; j <= precision; j++ ) { // we need to evaluate t = 1 not t = 0
-        s._getParamsForCurve( sx, sy, cx, cy, ex, ey, j / precision, false, temp );
+      for (j = 1; j <= precision; j++) {
+        // we need to evaluate t = 1 not t = 0
+        s._getParamsForCurve(
+          sx,
+          sy,
+          cx,
+          cy,
+          ex,
+          ey,
+          j / precision,
+          false,
+          temp
+        );
 
         var dx = temp.x - subX,
           dy = temp.y - subY;
-        len = Math.sqrt( dx * dx + dy * dy );
-        subLine.weightings.push( len );
+        len = Math.sqrt(dx * dx + dy * dy);
+        subLine.weightings.push(len);
         subLine.estLength += len;
 
         subX = temp.x;
@@ -32427,12 +34168,12 @@ createjs.deprecate = function ( fallbackMethod, name ) {
       storage.totalLength += subLine.estLength;
 
       // use length to figure out proportional weightings
-      for ( j = 0; j < precision; j++ ) {
+      for (j = 0; j < precision; j++) {
         len = subLine.estLength;
-        subLine.weightings[ j ] = subLine.weightings[ j ] / len;
+        subLine.weightings[j] = subLine.weightings[j] / len;
       }
 
-      storage.subLines.push( subLine );
+      storage.subLines.push(subLine);
       sx = ex;
       sy = ey;
     }
@@ -32440,15 +34181,15 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     // use length to figure out proportional weightings
     len = storage.totalLength;
     var l = storage.subLines.length;
-    for ( i = 0; i < l; i++ ) {
-      storage.subLines[ i ].portion = storage.subLines[ i ].estLength / len;
+    for (i = 0; i < l; i++) {
+      storage.subLines[i].portion = storage.subLines[i].estLength / len;
     }
 
     // determine start and end data
-    var startRatio = isNaN( source.start ) ? 0 : source.start;
-    var endRatio = isNaN( source.end ) ? 1 : source.end;
-    s._ratioToPositionData( startRatio, storage, storage.startData );
-    s._ratioToPositionData( endRatio, storage, storage.endData );
+    var startRatio = isNaN(source.start) ? 0 : source.start;
+    var endRatio = isNaN(source.end) ? 1 : source.end;
+    s._ratioToPositionData(startRatio, storage, storage.startData);
+    s._ratioToPositionData(endRatio, storage, storage.endData);
 
     // this has to be done last else the prev ratios will be out of place
     storage.startData.ratio = startRatio;
@@ -32464,63 +34205,71 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {Object} The output object, useful for isolated calls.
    * @private
    */
-  s._ratioToPositionData = function ( ratio, guideData, output ) {
+  s._ratioToPositionData = function (ratio, guideData, output) {
     var lineSegments = guideData.subLines;
 
     var i, l, t, test, target;
 
     var look = 0;
     var precision = 10;
-    var effRatio = ( ratio * guideData.animSpan ) + guideData.startData.ratio;
+    var effRatio = ratio * guideData.animSpan + guideData.startData.ratio;
 
     // find subline
     l = lineSegments.length;
-    for ( i = 0; i < l; i++ ) {
-      test = lineSegments[ i ].portion;
-      if ( look + test >= effRatio ) {
+    for (i = 0; i < l; i++) {
+      test = lineSegments[i].portion;
+      if (look + test >= effRatio) {
         target = i;
         break;
       }
       look += test;
     }
-    if ( target === undefined ) {
+    if (target === undefined) {
       target = l - 1;
       look -= test;
     }
 
     // find midline weighting
-    var subLines = lineSegments[ target ].weightings;
+    var subLines = lineSegments[target].weightings;
     var portion = test;
     l = subLines.length;
-    for ( i = 0; i < l; i++ ) {
-      test = subLines[ i ] * portion;
-      if ( look + test >= effRatio ) {
+    for (i = 0; i < l; i++) {
+      test = subLines[i] * portion;
+      if (look + test >= effRatio) {
         break;
       }
       look += test;
     }
 
     // translate the subline index into a position in the path data
-    target = ( target * 4 ) + 2;
+    target = target * 4 + 2;
     // take the distance we've covered in our ratio, and scale it to distance into the weightings
-    t = ( i / precision ) + ( ( ( effRatio - look ) / test ) * ( 1 / precision ) );
+    t = i / precision + ((effRatio - look) / test) * (1 / precision);
 
     // position
     var pathData = guideData.path;
     s._getParamsForCurve(
-      pathData[ target - 2 ], pathData[ target - 1 ],
-      pathData[ target ], pathData[ target + 1 ],
-      pathData[ target + 2 ], pathData[ target + 3 ],
+      pathData[target - 2],
+      pathData[target - 1],
+      pathData[target],
+      pathData[target + 1],
+      pathData[target + 2],
+      pathData[target + 3],
       t,
       guideData.orient,
       output
     );
 
-    if ( guideData.orient ) {
-      if ( ratio >= 0.99999 && ratio <= 1.00001 && guideData.endAbsRot !== undefined ) {
+    if (guideData.orient) {
+      if (
+        ratio >= 0.99999 &&
+        ratio <= 1.00001 &&
+        guideData.endAbsRot !== undefined
+      ) {
         output.rotation = guideData.endAbsRot;
       } else {
-        output.rotation += guideData.startOffsetRot + ( ratio * guideData.deltaRotation );
+        output.rotation +=
+          guideData.startOffsetRot + ratio * guideData.deltaRotation;
       }
     }
 
@@ -32540,7 +34289,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @param {Object} output Object to save output properties of x,y, and rotation onto.
    * @private
    */
-  s._getParamsForCurve = function ( sx, sy, cx, cy, ex, ey, t, orient, output ) {
+  s._getParamsForCurve = function (sx, sy, cx, cy, ex, ey, t, orient, output) {
     var inv = 1 - t;
 
     // finding a point on a bezier curve
@@ -32548,12 +34297,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
     output.y = inv * inv * sy + 2 * inv * t * cy + t * t * ey;
 
     // finding an angle on a bezier curve
-    if ( orient ) {
+    if (orient) {
       // convert from radians back to degrees
-      output.rotation = 57.2957795 * Math.atan2(
-        ( cy - sy ) * inv + ( ey - cy ) * t,
-        ( cx - sx ) * inv + ( ex - cx ) * t
-      );
+      output.rotation =
+        57.2957795 *
+        Math.atan2(
+          (cy - sy) * inv + (ey - cy) * t,
+          (cx - sx) * inv + (ex - cx) * t
+        );
     }
   };
 
@@ -32563,36 +34314,54 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @returns {undefined|String} The problem found, or undefined if no problems.
    * @private
    */
-  s._findPathProblems = function ( guideData ) {
+  s._findPathProblems = function (guideData) {
     var path = guideData.path;
-    var valueCount = ( path && path.length ) || 0; // ensure this is a number to simplify later logic
-    if ( valueCount < 6 || ( valueCount - 2 ) % 4 ) {
-      var message = "\tCannot parse 'path' array due to invalid number of entries in path. ";
-      message += "There should be an odd number of points, at least 3 points, and 2 entries per point (x & y). ";
-      message += "See 'CanvasRenderingContext2D.quadraticCurveTo' for details as 'path' models a quadratic bezier.\n\n";
-      message += "Only [ " + valueCount + " ] values found. Expected: " + Math.max( Math.ceil( ( valueCount - 2 ) / 4 ) * 4 + 2, 6 ); //6, 10, 14,...
+    var valueCount = (path && path.length) || 0; // ensure this is a number to simplify later logic
+    if (valueCount < 6 || (valueCount - 2) % 4) {
+      var message =
+        "\tCannot parse 'path' array due to invalid number of entries in path. ";
+      message +=
+        "There should be an odd number of points, at least 3 points, and 2 entries per point (x & y). ";
+      message +=
+        "See 'CanvasRenderingContext2D.quadraticCurveTo' for details as 'path' models a quadratic bezier.\n\n";
+      message +=
+        "Only [ " +
+        valueCount +
+        " ] values found. Expected: " +
+        Math.max(Math.ceil((valueCount - 2) / 4) * 4 + 2, 6); //6, 10, 14,...
       return message;
     }
 
-    for ( var i = 0; i < valueCount; i++ ) {
-      if ( isNaN( path[ i ] ) ) {
+    for (var i = 0; i < valueCount; i++) {
+      if (isNaN(path[i])) {
         return "All data in path array must be numeric";
       }
     }
 
     var start = guideData.start;
-    if ( isNaN( start ) && !( start === undefined ) /* || start < 0 || start > 1*/ ) { // outside 0-1 is unpredictable, but not breaking
+    if (isNaN(start) && !(start === undefined) /* || start < 0 || start > 1*/) {
+      // outside 0-1 is unpredictable, but not breaking
       return "'start' out of bounds. Expected 0 to 1, got: " + start;
     }
     var end = guideData.end;
-    if ( isNaN( end ) && ( end !== undefined ) /* || end < 0 || end > 1*/ ) { // outside 0-1 is unpredictable, but not breaking
+    if (isNaN(end) && end !== undefined /* || end < 0 || end > 1*/) {
+      // outside 0-1 is unpredictable, but not breaking
       return "'end' out of bounds. Expected 0 to 1, got: " + end;
     }
 
     var orient = guideData.orient;
-    if ( orient ) { // mirror the check used elsewhere
-      if ( orient != "fixed" && orient != "auto" && orient != "cw" && orient != "ccw" ) {
-        return 'Invalid orientation value. Expected ["fixed", "auto", "cw", "ccw", undefined], got: ' + orient;
+    if (orient) {
+      // mirror the check used elsewhere
+      if (
+        orient != "fixed" &&
+        orient != "auto" &&
+        orient != "cw" &&
+        orient != "ccw"
+      ) {
+        return (
+          'Invalid orientation value. Expected ["fixed", "auto", "cw", "ccw", undefined], got: ' +
+          orient
+        );
       }
     }
 
@@ -32600,14 +34369,13 @@ createjs.deprecate = function ( fallbackMethod, name ) {
   };
 
   createjs.MotionGuidePlugin = MotionGuidePlugin;
-
-}() );
+})();
 
 //##############################################################################
 // version.js
 //##############################################################################
 
-( function () {
+(function () {
   "use strict";
 
   /**
@@ -32615,7 +34383,7 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * the library.
    * @class TweenJS
    **/
-  var s = createjs.TweenJS = createjs.TweenJS || {};
+  var s = (createjs.TweenJS = createjs.TweenJS || {});
 
   /**
    * The version string for this release.
@@ -32632,5 +34400,4 @@ createjs.deprecate = function ( fallbackMethod, name ) {
    * @static
    **/
   s.buildDate = /*=date*/ "Thu, 12 Oct 2017 16:34:05 GMT"; // injected by build process
-
-} )();
+})();

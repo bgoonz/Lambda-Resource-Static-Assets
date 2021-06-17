@@ -7,8 +7,6 @@
 - seeding.
 - knex.
 
-
-
 ## Assignment
 
 Design the **data model** for a _recipe book_ application, then use `Knex migrations and seeding` functionality to build a `SQLite3` database based on the model and seed it with test data.
@@ -21,22 +19,22 @@ The requirements for the system, as stated by the client are:
 - when saving the ingredients for a **recipe** capture the quantity required for that **ingredient** as a floating number.
 - have a way to save step by step instructions for preparing a recipe.
 
-**Hint**: Before writing any code, write out all desired tables in the data model and determine all relationships between tables. 
+**Hint**: Before writing any code, write out all desired tables in the data model and determine all relationships between tables.
 
     https://dbdesigner.page.link/EVj5c1nyiUBmGpri6
 
 ### Migrations and Seeds
 
-- [X] Write a migration file that creates all tables necessary to model this data
-- [X] Write seed files to populate the tables with test data. **Hint**: Keep your recipes *very* simple or this step could become extremely time consuming.
+- [x] Write a migration file that creates all tables necessary to model this data
+- [x] Write seed files to populate the tables with test data. **Hint**: Keep your recipes _very_ simple or this step could become extremely time consuming.
 
 ### Data Access
 
 In addition to the `migrations` and `seeding` scripts, write a data access file that **exports** an object with the following functions:
 
-- [X] `getRecipes()`: should return a list of all recipes in the database.
-- [X] `getShoppingList(recipe_id)`: should return a list of all ingredients and quantities for a given recipe
-- [X] `getInstructions(recipe_id)`: should return a list of step by step instructions for preparing a recipe
+- [x] `getRecipes()`: should return a list of all recipes in the database.
+- [x] `getShoppingList(recipe_id)`: should return a list of all ingredients and quantities for a given recipe
+- [x] `getInstructions(recipe_id)`: should return a list of step by step instructions for preparing a recipe
 
 Organize and name your files anyway you see fit.
 
@@ -44,7 +42,7 @@ Organize and name your files anyway you see fit.
 
 Build the following endpoints. Write any additional data access helpers as needed.
 
-- [X] `GET /api/recipes/`: all recipes (without details about ingredients or steps)
-- [X] `GET /api/recipes/:id/shoppingList`: a list of ingredients and quantites for a single recipe
-- [X] `GET /api/recipes/:id/instructions`: a correctly ordered list of how to prepare a single recipe
-- [X] `GET /api/ingredients/:id/recipes`: all recipes in the system that utilize a single ingredient 
+- [x] `GET /api/recipes/`: all recipes (without details about ingredients or steps)
+- [x] `GET /api/recipes/:id/shoppingList`: a list of ingredients and quantites for a single recipe
+- [x] `GET /api/recipes/:id/instructions`: a correctly ordered list of how to prepare a single recipe
+- [x] `GET /api/ingredients/:id/recipes`: all recipes in the system that utilize a single ingredient

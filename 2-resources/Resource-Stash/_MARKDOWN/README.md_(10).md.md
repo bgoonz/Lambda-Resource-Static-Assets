@@ -5,7 +5,7 @@ files.
 
 ## Prerequisites
 
-* NodeJS
+- NodeJS
 
 ## Usage
 
@@ -17,7 +17,7 @@ python asm.py source.asm
 
 ## Features
 
-* Labels
-* String constants
-* Numeric constants
-* Comments
+- Labels
+- String constants
+- Numeric constants
+- Comments

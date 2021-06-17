@@ -6,7 +6,7 @@ This challenge allows you to practice the concepts and techniques learned over t
 
 ## Instructions
 
-**Read these instructions carefully. Understand exactly what is expected *before* starting this Sprint Challenge.**
+**Read these instructions carefully. Understand exactly what is expected _before_ starting this Sprint Challenge.**
 
 This is an individual assessment. All work must be your own. Your challenge score is a measure of your ability to work independently using the material covered through this sprint. You need to demonstrate proficiency in the concepts and objectives introduced and practiced in preceding days.
 
@@ -25,7 +25,7 @@ In this challenge, you will create a Single Page Application complete with Clien
 
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question.
 
-- [ ]  Explain benefit(s) using `client-side routing`?
+- [ ] Explain benefit(s) using `client-side routing`?
 
 > Answer: It's much more efficient than the traditional way, because a lot of data isn't being transmitted unnecessarily.
 
@@ -33,15 +33,15 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 Follow these steps to set up and work on your project:
 
-- [X]  Create a forked copy of this project.
-- [X]  Add TL as collaborator on GitHub.
-- [X]  Clone your OWN version of Repo (Not Lambda's by mistake!).
-- [X]  Create a new Branch on the clone: `git checkout -b <firstName-lastName>`.
-- [X]  Implement the project on this branch, committing changes regularly.
-- [X]  Push commits: `git push origin <firstName-lastName>`.
-- [X]  **LOOK** at your project directory and notice it's just a plain ol' React App that we've built using `create-react-app`.
-- [X]  **RUN** `yarn install` or `npm install` to retrieve the client-side dependencies.
-- [X]  **RUN** `yarn start` or `npm start` to fire up your React application.
+- [x] Create a forked copy of this project.
+- [x] Add TL as collaborator on GitHub.
+- [x] Clone your OWN version of Repo (Not Lambda's by mistake!).
+- [x] Create a new Branch on the clone: `git checkout -b <firstName-lastName>`.
+- [x] Implement the project on this branch, committing changes regularly.
+- [x] Push commits: `git push origin <firstName-lastName>`.
+- [x] **LOOK** at your project directory and notice it's just a plain ol' React App that we've built using `create-react-app`.
+- [x] **RUN** `yarn install` or `npm install` to retrieve the client-side dependencies.
+- [x] **RUN** `yarn start` or `npm start` to fire up your React application.
 
 ### Exceeded rate limits?
 
@@ -53,35 +53,38 @@ If the [main API service](https://rickandmortyapi.com/documentation) goes down, 
 **[Backup URL:](https://rick-api.herokuapp.com/api/)** `https://rick-api.herokuapp.com/api/`
 
 You can still be locked out - watch your [chrome devtools' network panel](https://developers.google.com/web/tools/chrome-devtools/network/reference) to make sure you aren't making too many requests.
+
 </details>
 
 ## Minimum Viable Product (MVP)
 
 > The MVP of this project is broken up between a couple parts.
-Construct a Single Page Application with React.
+> Construct a Single Page Application with React.
 
 **Your finished project must include all of the following requirements:**
 
 _Display Data from a Server API_
-- [X]  Fetch a list of characters from the Rick and Morty API's Characters endpoint *`https://rickandmortyapi.com/api/character/`* and render them to the screen.
-- [X]  You must display at least one element for each character.
+
+- [x] Fetch a list of characters from the Rick and Morty API's Characters endpoint *`https://rickandmortyapi.com/api/character/`* and render them to the screen.
+- [x] You must display at least one element for each character.
 
 _Add a Router to this application using [React Router](https://reacttraining.com/react-router/web/guides/quick-start)._
-- [X]  Hook up the Welcome page(Home page) and a Characters page with React Router.
-- [X]  Use a styling or component library for part of or all of your application. (Pick at least 1 of: [s](https://react-bootstrap.github.io/)tyled-components or Reactstrap).
+
+- [x] Hook up the Welcome page(Home page) and a Characters page with React Router.
+- [x] Use a styling or component library for part of or all of your application. (Pick at least 1 of: [s](https://react-bootstrap.github.io/)tyled-components or Reactstrap).
 
 _Add 'Search by Name' feature._
 
-- [X]  Add the `<SearchForm />` component (see `./components/SearchForm.js`).
-- [X]  Create a search form that will filter through the data displayed in the character list.
+- [x] Add the `<SearchForm />` component (see `./components/SearchForm.js`).
+- [x] Create a search form that will filter through the data displayed in the character list.
 
 ### **Required best practices:**
 
-- [X]  Consistent naming. Examples: variables, functions, Components, and file/folder organization.
-- [X]  Consistent spacing. Examples: line breaks, around arguments and before/after functions.
-- [X]  Consistent quotation usage.
-- [X]  Spell-check.
-- [X]  Schedule time to review, refine and reassess your work.
+- [x] Consistent naming. Examples: variables, functions, Components, and file/folder organization.
+- [x] Consistent spacing. Examples: line breaks, around arguments and before/after functions.
+- [x] Consistent quotation usage.
+- [x] Spell-check.
+- [x] Schedule time to review, refine and reassess your work.
 
 It is better to submit a challenge that meets [MVP](https://en.wikipedia.org/wiki/Minimum_viable_product) than one that attempts too much and fails.
 
@@ -93,24 +96,25 @@ It is better to submit a challenge that meets [MVP](https://en.wikipedia.org/wi
 
 There's a range of difficulty in the options below. 😈
 
-*Note:* The most difficult stretch goal(s) could take an expert an hour or more.
+_Note:_ The most difficult stretch goal(s) could take an expert an hour or more.
 
-Start with the most *familiar (or fun) sounding* stretch goal.
+Start with the most _familiar (or fun) sounding_ stretch goal.
 Complete search component to your list views.
-- [X] Try adding 2 more components and display data from the episodes and locations end point.
+
+- [x] Try adding 2 more components and display data from the episodes and locations end point.
 - [ ] https://rickandmortyapi.com/api/location/ - docs
 - [ ] https://rickandmortyapi.com/api/episode/ - docs
 
-- [ ]  Wire up the `onSearch(name)` callback prop to support [querying the API](https://rickandmortyapi.com/documentation/#filter-characters). (To search for `rick`, you would request `/api/character/?name=rick`.)
-- [ ]  Animate page transition and/or card loading.
-- [ ]  Persist search form field(s) by using the custom hook `useLocalStorage`.
-- [X]  Add error handling for all async (axios/AJAX) calls. (Including some styled UI.)
-- [ ]  Add a "details view" and route to show more details for each type of record. (Hint: Look into route parameters or nested routes.)
-- [ ]  Similar to the "details view" now with a UI twist: use a [modal](https://react.semantic-ui.com/modules/modal/#variations-size) component to show item view. (If you can, build [modal with routes](https://codesandbox.io/s/react-router-modal-gallery-classes-example-z98l5).)
-- [ ]  Add [paging support](https://react.semantic-ui.com/addons/pagination/#types-pagination) (next/previous links.)
-- [ ]  Refactor to use as few Components as possible - while still readable to a React Dev. (Hint: research these patterns: HoC, render props, FaaC.)
-- [X]  Add additional fields to search form. They are unique for each endpoint. See **[Available parameters**.](https://rickandmortyapi.com/documentation/#filter-characters), etc..
-- [ ]  Use the [GraphQL Endpoint](https://rickandmortyapi.com/documentation/#graphql) with multiple search fields.
+- [ ] Wire up the `onSearch(name)` callback prop to support [querying the API](https://rickandmortyapi.com/documentation/#filter-characters). (To search for `rick`, you would request `/api/character/?name=rick`.)
+- [ ] Animate page transition and/or card loading.
+- [ ] Persist search form field(s) by using the custom hook `useLocalStorage`.
+- [x] Add error handling for all async (axios/AJAX) calls. (Including some styled UI.)
+- [ ] Add a "details view" and route to show more details for each type of record. (Hint: Look into route parameters or nested routes.)
+- [ ] Similar to the "details view" now with a UI twist: use a [modal](https://react.semantic-ui.com/modules/modal/#variations-size) component to show item view. (If you can, build [modal with routes](https://codesandbox.io/s/react-router-modal-gallery-classes-example-z98l5).)
+- [ ] Add [paging support](https://react.semantic-ui.com/addons/pagination/#types-pagination) (next/previous links.)
+- [ ] Refactor to use as few Components as possible - while still readable to a React Dev. (Hint: research these patterns: HoC, render props, FaaC.)
+- [x] Add additional fields to search form. They are unique for each endpoint. See **[Available parameters**.](https://rickandmortyapi.com/documentation/#filter-characters), etc..
+- [ ] Use the [GraphQL Endpoint](https://rickandmortyapi.com/documentation/#graphql) with multiple search fields.
 
 > 💡Reminder: git commit -am 'Stretch Progress 💪'
 
@@ -118,9 +122,9 @@ Complete search component to your list views.
 
 > Follow these steps to complete your project:
 
-- [ ]  Submit a Pull Request to merge `<firstName-lastName>` branch into master (student's repo).
-- [ ]  Add your TL as a Reviewer on the Pull Request.
-- [ ]  TL then will count the HW as done by merging the branch into master.
+- [ ] Submit a Pull Request to merge `<firstName-lastName>` branch into master (student's repo).
+- [ ] Add your TL as a Reviewer on the Pull Request.
+- [ ] TL then will count the HW as done by merging the branch into master.
 
 <!-- TLs: NOTE: use resources to coach, or share over zoom - avoid sharing entire solution folder. Share preview links if available. -->
 

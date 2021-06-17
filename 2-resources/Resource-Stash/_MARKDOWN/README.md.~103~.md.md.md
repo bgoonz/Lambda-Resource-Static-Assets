@@ -16,31 +16,31 @@ In this project you'll take this crypto currency tracker app and build two custo
 
 ## Project Set Up
 
-- [X] Create a forked copy of this project.
-- [X] Add your team lead as collaborator on Github.
-- [X] Clone your OWN version of the repository in your terminal
-- [X] CD into the project base directory `cd dark-mode`
-- [X] Download project dependencies by running one of these two commands `yarn` or `npm install`
-- [X] Using the same command tool (yarn or npm) start up the app using `yarn start` or `npm start`
-- [X] Create a new branch: git checkout -b `<firstName-lastName>`.
-- [X] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly.
-- [X] Push commits: git push origin `<firstName-lastName>`.
+- [x] Create a forked copy of this project.
+- [x] Add your team lead as collaborator on Github.
+- [x] Clone your OWN version of the repository in your terminal
+- [x] CD into the project base directory `cd dark-mode`
+- [x] Download project dependencies by running one of these two commands `yarn` or `npm install`
+- [x] Using the same command tool (yarn or npm) start up the app using `yarn start` or `npm start`
+- [x] Create a new branch: git checkout -b `<firstName-lastName>`.
+- [x] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly.
+- [x] Push commits: git push origin `<firstName-lastName>`.
 
 Follow these steps for completing your project.
 
-- [X] Submit a Pull-Request to merge <firstName-lastName> Branch into master (student's Repository). **Please don't merge your own pull request**
-- [X] Add your team lead as a reviewer on the pull-request
-- [X] Your team lead will count the project as complete by merging the branch back into master.
-- [X] Do your magic!
+- [x] Submit a Pull-Request to merge <firstName-lastName> Branch into master (student's Repository). **Please don't merge your own pull request**
+- [x] Add your team lead as a reviewer on the pull-request
+- [x] Your team lead will count the project as complete by merging the branch back into master.
+- [x] Do your magic!
 
 ## Minimum Viable Product
 
-- [X] Build a custom hook that let's you save data to localStorage
-- [X] Build a second custom hook that sets the `dark-mode` class on the body element
-- [X] Compose your two new hooks together to be able to set and persist your user's dark mode preference in your app
+- [x] Build a custom hook that let's you save data to localStorage
+- [x] Build a second custom hook that sets the `dark-mode` class on the body element
+- [x] Compose your two new hooks together to be able to set and persist your user's dark mode preference in your app
 <!--
 - [ ] Write tests that use mocks and spies to handle dependencies in your components
--->
+      -->
 
 ## STEP 1 - useLocalStorage
 
@@ -48,17 +48,16 @@ Open your app and take a look around. The crypto currency data is being fetched 
 
 This is going to be a pretty cool hook. It will be used pretty much the same way as `useState`, but with a key and value passed into it - ie `const [name, setName] = useLocalStorage('name', 'Dustin')`. You can use `setName` to update the value of `name` on localStorage! Pretty cool, huh? Let's get to it!
 
-- [X] Create a new directory called `hooks`, and a new file in it called `useLocalStorage`.
-- [X] Build a function called `useLocalStorage`. 
-- [X] Now, to set something to localStorage, we need a key (must be a string) and a value (can be anything). 
-- [X] To retrieve something from localStorage, we need the key. 
-- [X] To update something in localStorage, you use the same method as adding something new, and it will just replace the old key/value pair in localStorage. 
-- [X] Knowing this, let's add `key` and `initialValue` as parameters to the hook.
-- [X] We're going to set up some state here. Set up a state property called storedValue.
-- [X] This state property is going to take a function as it's initial value. When we do this, whatever that callback function returns is what gets set as the intialValue for the state property.
-- [X] In the callback function, we'll check to see if the item we passed in already exists in localStorage, and return that value, otherwise we'll return whatever initialValue was passed in.
-- [X] Quick note, if you pass in arrays or objects to localStorage, you will need to parse it into JSON. Then when you retrieve it, like we do below, you'll need to parse it back into regular JavaScript
-
+- [x] Create a new directory called `hooks`, and a new file in it called `useLocalStorage`.
+- [x] Build a function called `useLocalStorage`.
+- [x] Now, to set something to localStorage, we need a key (must be a string) and a value (can be anything).
+- [x] To retrieve something from localStorage, we need the key.
+- [x] To update something in localStorage, you use the same method as adding something new, and it will just replace the old key/value pair in localStorage.
+- [x] Knowing this, let's add `key` and `initialValue` as parameters to the hook.
+- [x] We're going to set up some state here. Set up a state property called storedValue.
+- [x] This state property is going to take a function as it's initial value. When we do this, whatever that callback function returns is what gets set as the intialValue for the state property.
+- [x] In the callback function, we'll check to see if the item we passed in already exists in localStorage, and return that value, otherwise we'll return whatever initialValue was passed in.
+- [x] Quick note, if you pass in arrays or objects to localStorage, you will need to parse it into JSON. Then when you retrieve it, like we do below, you'll need to parse it back into regular JavaScript
 
 ```js
 // To retrieve an item from localStorage, call localStorage.getItem('itemName')
@@ -69,8 +68,6 @@ const [storedValue, setStoredValue] = useState(() => {
   // Parse and return stored json or, if undefined, return initialValue
   return item ? JSON.parse(item) : initialValue;
 });
-
-
 ```
 
 - Now, let's return `storedValue` from this hook in an array:
@@ -88,15 +85,15 @@ export const useLocalStorage = (key, initialValue) => {
 };
 ```
 
-- [X] Remember we're trying to use this hook like this: `const [name, setName] = useLocalStorage('name', 'Dustin')`. So far we have made the value part of the hook, but not the setter. Let's go ahead and create a setter function, and return that in the array as well.
-- [X] inside the hook, write a function called `setValue` that takes a `value` parameter
-- [X] In `setValue`, set the `value` to localStorage using the `key` that was passed into the hook itself
-- [X] Also, update the state of `storedValue` with `value` as well
-- [X] Add `setValue` to the array that is being returned out of this hook
-- [X] `setValue` should look something like this:
+- [x] Remember we're trying to use this hook like this: `const [name, setName] = useLocalStorage('name', 'Dustin')`. So far we have made the value part of the hook, but not the setter. Let's go ahead and create a setter function, and return that in the array as well.
+- [x] inside the hook, write a function called `setValue` that takes a `value` parameter
+- [x] In `setValue`, set the `value` to localStorage using the `key` that was passed into the hook itself
+- [x] Also, update the state of `storedValue` with `value` as well
+- [x] Add `setValue` to the array that is being returned out of this hook
+- [x] `setValue` should look something like this:
 
 ```js
-const setValue = value => {
+const setValue = (value) => {
   // Save state
   setStoredValue(value);
   // Save to local storage
@@ -108,25 +105,25 @@ We're going to use this inside our dark mode hook, but this can be used anywhere
 
 ## STEP 2 - useDarkMode
 
-- [X] Inside the `hooks` directory, add a new file called `useDarkMode`.
-- [X] Build a function called `useDarkMode`.
-- [X] Import `useLocalStorage`
-- [X] Call `useLocalStorage` and pass in the key you want to use to store whether or not dark mode is enabled. 
-- [X] Remember, this hook returns an array with a value and a setter in an array, exactly like the state hook, so make sure to capture those values in a `const` - `const [someValue, setSomeValue] = useLocalStorage('your key here')`
-- [X] Now to add the class to the body. If we need to manipulate the DOM directly, how do we do that? Any direct DOM manipulation is considered a side effect, right? So let's use the effect hook.
-- [X] Import and set up your effect hook.
-- [X] Inside it, check to see if the value from `useLocalStorage` is true or false.
-- [X] If it's true, add the class `dark-mode` to the `body` element.
-- [X] If it's false, remove the class from the `body` element. (If you don't quite remember how to do this from ages and ages ago, Google will be your friend here 😉)
-- [X] We don't want this effect to run every time anything in the component changes, right? Think about what piece of data this hook depends on, and should be synced with, and add that in its dependency array.
-- [X] Finally, we need to return something out of here so we can use this in our app. What do you think we'll need? We'll need to know if dark mode is enabled, right? And we'll need a setter function to toggle dark mode. Let's just forward the value and the setter that were returned out of the `useLocalStorage` call. Return those two values in an array as well.
+- [x] Inside the `hooks` directory, add a new file called `useDarkMode`.
+- [x] Build a function called `useDarkMode`.
+- [x] Import `useLocalStorage`
+- [x] Call `useLocalStorage` and pass in the key you want to use to store whether or not dark mode is enabled.
+- [x] Remember, this hook returns an array with a value and a setter in an array, exactly like the state hook, so make sure to capture those values in a `const` - `const [someValue, setSomeValue] = useLocalStorage('your key here')`
+- [x] Now to add the class to the body. If we need to manipulate the DOM directly, how do we do that? Any direct DOM manipulation is considered a side effect, right? So let's use the effect hook.
+- [x] Import and set up your effect hook.
+- [x] Inside it, check to see if the value from `useLocalStorage` is true or false.
+- [x] If it's true, add the class `dark-mode` to the `body` element.
+- [x] If it's false, remove the class from the `body` element. (If you don't quite remember how to do this from ages and ages ago, Google will be your friend here 😉)
+- [x] We don't want this effect to run every time anything in the component changes, right? Think about what piece of data this hook depends on, and should be synced with, and add that in its dependency array.
+- [x] Finally, we need to return something out of here so we can use this in our app. What do you think we'll need? We'll need to know if dark mode is enabled, right? And we'll need a setter function to toggle dark mode. Let's just forward the value and the setter that were returned out of the `useLocalStorage` call. Return those two values in an array as well.
 
 ## STEP 3 - Using the hook in a component
 
 Now that we have composed our different pieces of stateful logic, let's use it in our component!
 
-- [X] import the dark mode hook into the `NavBar` component
-- [X] Looking at this component, we see that we are controlling the toggle with some state. The state hook here returns a `darkMode` value, and a `setDarkMode` function. Isn't that exactly what our `useDarkMode` hook returns as well? Replace the state hook with our hook, click the toggle, and watch the magic happen!!!
+- [x] import the dark mode hook into the `NavBar` component
+- [x] Looking at this component, we see that we are controlling the toggle with some state. The state hook here returns a `darkMode` value, and a `setDarkMode` function. Isn't that exactly what our `useDarkMode` hook returns as well? Replace the state hook with our hook, click the toggle, and watch the magic happen!!!
 
 (If it wasn't magical, you have a bug somewhere 😫 go back through the steps slowly, one at a time, to see if you missed any of the steps)
 

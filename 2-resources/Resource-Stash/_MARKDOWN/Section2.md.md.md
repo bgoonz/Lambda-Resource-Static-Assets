@@ -1,6 +1,6 @@
 # REST API Review - Node/Express
-### Section 2
 
+### Section 2
 
 ## Configures knex
 
@@ -17,15 +17,14 @@ This creates a new knexfile.js at the root of our project. Edit it to look simil
 // Update with your config settings.
 
 module.exports = {
-
   development: {
-    client: 'pg',
-    connection: 'postgres://localhost/cocktailRecipeDB',
+    client: "pg",
+    connection: "postgres://localhost/cocktailRecipeDB",
     migrations: {
-      directory: './data/migrations',
+      directory: "./data/migrations",
     },
     seeds: {
-      directory: './data/seeds',
+      directory: "./data/seeds",
     },
     pool: {
       min: 2,
@@ -34,20 +33,19 @@ module.exports = {
   },
 
   production: {
-    client: 'pg',
+    client: "pg",
     connection: process.env.DATABASE_URL,
     migrations: {
-      directory: './data/migrations',
+      directory: "./data/migrations",
     },
     pool: {
       min: 2,
-      max: 10
+      max: 10,
     },
-  }
-
+  },
 };
-
 ```
+
 > **NOTE:** I'm using an unsecured Postgres DB here, it should be pretty easy to find the correct config for adding credentials.
 
 Notice that we don't include a staging environment here. That's because we have two seperate heroku deploys and we want them to mirror each other as closely as possible, so we'll also point our heroku 'Staging' app to the 'Production' knex config. It'll be using a different db anyhow so having the one env in our simple context is ideal.
@@ -55,7 +53,6 @@ Notice that we don't include a staging environment here. That's because we have 
 - [ ] Commit and push
 
 <br />
-
 
 ## Creates migration for users table
 
@@ -65,33 +62,24 @@ In your terminal:
 
 - [ ] which will create a `_users.js` file in `data/migrations/`, edit it to look like so:
 
-__users.js_
+\__users.js_
 
 ```javascript
-exports.up = function(knex) {
-  return knex.schema.createTable('users', users => {
-
+exports.up = function (knex) {
+  return knex.schema.createTable("users", (users) => {
     users.increments();
 
-    users
-      .string('username', 128)
-      .notNullable()
-      .unique();
+    users.string("username", 128).notNullable().unique();
 
-    users 
-      .string('password', 128)
-      .notNullable();
+    users.string("password", 128).notNullable();
 
-      users 
-      .string('email', 128)
-      .notNullable()
-      .unique();
+    users.string("email", 128).notNullable().unique();
   });
 };
 
-exports.down = function(knex) {
-  return knex.schema.dropTableIfExists('users');
-}
+exports.down = function (knex) {
+  return knex.schema.dropTableIfExists("users");
+};
 ```
 
 - [ ] Commit and push this work
@@ -106,13 +94,12 @@ I am not covering seeding in this review. We will use insomnia or postman to pop
 
 _data/dbConfig.js_
 
-
 ```javascript
-const knex = require('knex');
+const knex = require("knex");
 
-const knexConfig = require('../knexfile.js');
+const knexConfig = require("../knexfile.js");
 
-const environment = process.env.DB_ENV || 'development'
+const environment = process.env.DB_ENV || "development";
 
 module.exports = knex(knexConfig[environment]);
 ```
@@ -126,17 +113,15 @@ module.exports = knex(knexConfig[environment]);
 Now we'll build out the model, router, and basic validation for accessing the `Users` resource, so we can use it when registering or logging in.
 
 - [ ] At the root of our project, add a `users/` directory, and add to it 3 files:
-	- [ ] user-helpers.js
-	- [ ] user-model.js
-	- [ ] user-router.js 
-
-	
+  - [ ] user-helpers.js
+  - [ ] user-model.js
+  - [ ] user-router.js
 - [ ] First we'll write our knex query functions to look something like this:
 
 _users/user-model.js_
 
 ```javascript
-const db = require('../data/dbConfig');
+const db = require("../data/dbConfig");
 
 module.exports = {
   add,
@@ -144,86 +129,85 @@ module.exports = {
   findBy,
   findById,
   update,
-  remove
+  remove,
 };
 
 function find() {
-  return db('users').select('id', 'username', 'email');
+  return db("users").select("id", "username", "email");
 }
 
 function findBy(filter) {
-  return db('users').where(filter);
+  return db("users").where(filter);
 }
 
 async function add(user) {
-  const [id] = await db('users').insert(user, 'id');
+  const [id] = await db("users").insert(user, "id");
   return findById(id);
 }
 
 function findById(id) {
-  return db('users')
-    .select('id', 'username', 'email')
-    .where({ id })
-    .first();
+  return db("users").select("id", "username", "email").where({ id }).first();
 }
 
 function update(id, user) {
-  return db('users')
-    .where('id', Number(id))
-    .update(user);
+  return db("users").where("id", Number(id)).update(user);
 }
 
 function remove(id) {
-  return db('users')
-    .where('id', Number(id))
-    .del();
+  return db("users").where("id", Number(id)).del();
 }
-```	
+```
 
 - [ ] Now in our router, we're only going to write a `GET` to `/`, a `GET` to `/:id`, and `DELETE` to `/:id`. We'll take care of `ADD` in our Register endpoint later.
 
 _users/user-router.js_
 
 ```javascript
-const router = require('express').Router();
+const router = require("express").Router();
 
-const Users = require('./user-model.js');
+const Users = require("./user-model.js");
 
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
   Users.find()
-    .then(users => {
+    .then((users) => {
       res.status(200).json(users);
     })
-    .catch(err => res.send(err));
+    .catch((err) => res.send(err));
 });
 
-router.get('/:id', (req, res) => {
+router.get("/:id", (req, res) => {
   const id = req.params.id;
   if (!id) {
-    res.status(404).json({ message: "The user with the specified id does not exist." });
+    res
+      .status(404)
+      .json({ message: "The user with the specified id does not exist." });
   } else {
     Users.findById(id)
-    .then(user => {
-      res.status(201).json(user)
-    })
-    .catch(err => {
-      res.status(500).json({ message: 'The user information could not be retrieved.' });
-    })
+      .then((user) => {
+        res.status(201).json(user);
+      })
+      .catch((err) => {
+        res
+          .status(500)
+          .json({ message: "The user information could not be retrieved." });
+      });
   }
 });
 
-router.delete('/:id', (req, res) => {
+router.delete("/:id", (req, res) => {
   const id = req.params.id;
   if (!id) {
-    res.status(404).json({ message: "The user with the specified ID does not exist." })
+    res
+      .status(404)
+      .json({ message: "The user with the specified ID does not exist." });
   }
   Users.remove(id)
-   .then(user => {
-     res.json(user);
-   })
-    .catch(err => {
-      res.status(500).json({ message: 'The user could not be removed' });
+    .then((user) => {
+      res.json(user);
     })
+    .catch((err) => {
+      res.status(500).json({ message: "The user could not be removed" });
+    });
 });
 
 module.exports = router;
@@ -232,11 +216,11 @@ module.exports = router;
 - [ ] Let's navigate now into our server and `.use` our new route.
 
 ```javascript
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
+const express = require("express");
+const cors = require("cors");
+const helmet = require("helmet");
 
-const logger = require('../middleware/logger');
+const logger = require("../middleware/logger");
 
 const usersRouter = require("../users/user-router");
 
@@ -249,9 +233,9 @@ server.use(logger);
 
 server.use("/api/users", usersRouter);
 
-server.get('/', (req, res) => {
-  res.send('<h1>🚀</h1>');
-})
+server.get("/", (req, res) => {
+  res.send("<h1>🚀</h1>");
+});
 
 module.exports = server;
 ```
@@ -259,7 +243,6 @@ module.exports = server;
 - [ ] Test out your new route by starting up your server and pointing postman or insomnia toward `localhost:5000/api/users`. You should return an empty array with a status of `200`.
 
 - [ ] Commit this work and push
-
 
 ## Adds validation for `POST`
 
@@ -271,28 +254,27 @@ _users/user-helper.js_
 
 ```javascript
 module.exports = {
-  validateUser
+  validateUser,
 };
 
 function validateUser(user) {
   let errors = [];
 
   if (!user.username || user.username.length < 2) {
-    errors.push('Username must contain at least 2 characters');
+    errors.push("Username must contain at least 2 characters");
   }
 
   if (!user.password || user.password.length < 4) {
-    errors.push('Password must contain at least 4 characters');
+    errors.push("Password must contain at least 4 characters");
   }
 
   return {
     isSuccessful: errors.length > 0 ? false : true,
-    errors
+    errors,
   };
-
-} 
+}
 ```
 
 - [ ] Commit and push
 
-[Next Page](Section3.md#REST-API-Review--NodeExpress) 
+[Next Page](Section3.md#REST-API-Review--NodeExpress)

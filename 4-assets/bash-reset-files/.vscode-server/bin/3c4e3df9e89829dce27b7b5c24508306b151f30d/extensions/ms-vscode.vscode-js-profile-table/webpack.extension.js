@@ -1,1 +1,1 @@
-module.exports = require('../../scripts/webpack.extension')(__dirname);
+module.exports = require("../../scripts/webpack.extension")(__dirname);

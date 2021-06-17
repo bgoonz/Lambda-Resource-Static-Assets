@@ -65,9 +65,9 @@ decide to stop.
 
 4. Loop through:
 
-   * Print the word.
-   * If it's a "stop word", stop.
-   * Else randomly choose a word that can follow this one.
+   - Print the word.
+   - If it's a "stop word", stop.
+   - Else randomly choose a word that can follow this one.
 
 Start words are words that begin with a capital, or a `"` followed by a
 capital.
@@ -77,8 +77,8 @@ punctuation followed by a `"`.
 
 Hints:
 
-* `random.choice()` can choose a random word out of a list.
-* `print(s, end=" ")` will print a space after every word instead of a
+- `random.choice()` can choose a random word out of a list.
+- `print(s, end=" ")` will print a space after every word instead of a
   newline.
 
 There is no test file for this. Just see if it makes good nonsense.
@@ -91,19 +91,19 @@ House, if you'll only attend, Kitty, they couldn't, because there are
 the question: it wants plenty of mist now, I wonder if he was through
 the wrong way, beginning to the other," Alice on as she said afterwards
 that Alice watched the table, and the table by the King took no one paw
-went round the fire, as far better manners! 
+went round the fire, as far better manners!
 
 Red Queen, looking over him, and tangles, with the White King, so angry,
 Kitty," Alice picked up snug, you were playing just see one she hardly
-hold you! 
+hold you!
 
-I'll be quite common and putting out of things?" 
+I'll be quite common and putting out of things?"
 
-House! 
+House!
 
 Well then, and unhappy, and made her sister, who was the autumn, when
 the ashes, "Mind the worsted Alice was so wish I shall never, never
-forget!" 
+forget!"
 ```
 
 ## Stretch Goals

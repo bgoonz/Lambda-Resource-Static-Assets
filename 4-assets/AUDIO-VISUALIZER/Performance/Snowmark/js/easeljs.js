@@ -26,7 +26,6 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
 //##############################################################################
 // extend.js
 //##############################################################################
@@ -55,14 +54,14 @@ this.createjs = this.createjs || {};
  * @param {Function} superclass The superclass to extend.
  * @return {Function} Returns the subclass's new prototype.
  */
-createjs.extend = function ( subclass, superclass ) {
+createjs.extend = function (subclass, superclass) {
   "use strict";
 
   function o() {
     this.constructor = subclass;
   }
   o.prototype = superclass.prototype;
-  return ( subclass.prototype = new o() );
+  return (subclass.prototype = new o());
 };
 
 //##############################################################################
@@ -112,16 +111,17 @@ this.createjs = this.createjs || {};
  * @param {String} prefix The prefix to add to the promoted method names. Usually the name of the superclass.
  * @return {Function} Returns the subclass.
  */
-createjs.promote = function ( subclass, prefix ) {
+createjs.promote = function (subclass, prefix) {
   "use strict";
 
   var subP = subclass.prototype,
-    supP = ( Object.getPrototypeOf && Object.getPrototypeOf( subP ) ) || subP.__proto__;
-  if ( supP ) {
-    subP[ ( prefix += "_" ) + "constructor" ] = supP.constructor; // constructor is not always innumerable
-    for ( var n in supP ) {
-      if ( subP.hasOwnProperty( n ) && ( typeof supP[ n ] == "function" ) ) {
-        subP[ prefix + n ] = supP[ n ];
+    supP =
+      (Object.getPrototypeOf && Object.getPrototypeOf(subP)) || subP.__proto__;
+  if (supP) {
+    subP[(prefix += "_") + "constructor"] = supP.constructor; // constructor is not always innumerable
+    for (var n in supP) {
+      if (subP.hasOwnProperty(n) && typeof supP[n] == "function") {
+        subP[prefix + n] = supP[n];
       }
     }
   }
@@ -149,11 +149,11 @@ this.createjs = this.createjs || {};
  * @param searchElement Element to find in array.
  * @return {Number} The first index of searchElement in array.
  */
-createjs.indexOf = function ( array, searchElement ) {
+createjs.indexOf = function (array, searchElement) {
   "use strict";
 
-  for ( var i = 0, l = array.length; i < l; i++ ) {
-    if ( searchElement === array[ i ] ) {
+  for (var i = 0, l = array.length; i < l; i++) {
+    if (searchElement === array[i]) {
       return i;
     }
   }
@@ -166,9 +166,8 @@ createjs.indexOf = function ( array, searchElement ) {
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -181,7 +180,6 @@ this.createjs = this.createjs || {};
     throw "UID cannot be instantiated";
   }
 
-
   // private static properties:
   /**
    * @property _nextID
@@ -189,7 +187,6 @@ this.createjs = this.createjs || {};
    * @protected
    **/
   UID._nextID = 0;
-
 
   // public static methods:
   /**
@@ -202,9 +199,8 @@ this.createjs = this.createjs || {};
     return UID._nextID++;
   };
 
-
   createjs.UID = UID;
-}() );
+})();
 
 //##############################################################################
 // deprecate.js
@@ -239,13 +235,14 @@ this.createjs = this.createjs || {};
  * @return {Function} If a fallbackMethod is supplied, returns a closure that will call the fallback method after
  * logging the warning in the console.
  */
-createjs.deprecate = function ( fallbackMethod, name ) {
+createjs.deprecate = function (fallbackMethod, name) {
   "use strict";
   return function () {
-    var msg = "Deprecated property or method '" + name + "'. See docs for info.";
-    console && ( console.warn ? console.warn( msg ) : console.log( msg ) );
-    return fallbackMethod && fallbackMethod.apply( this, arguments );
-  }
+    var msg =
+      "Deprecated property or method '" + name + "'. See docs for info.";
+    console && (console.warn ? console.warn(msg) : console.log(msg));
+    return fallbackMethod && fallbackMethod.apply(this, arguments);
+  };
 };
 
 //##############################################################################
@@ -254,14 +251,14 @@ createjs.deprecate = function ( fallbackMethod, name ) {
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
 
   // constructor:
   /**
    * Contains properties and methods shared by all events for use with
    * {{#crossLink "EventDispatcher"}}{{/crossLink}}.
-   * 
+   *
    * Note that Event objects are often reused, so you should never
    * rely on an event object's state outside of the call stack it was received in.
    * @class Event
@@ -270,9 +267,7 @@ this.createjs = this.createjs || {};
    * @param {Boolean} cancelable Indicates whether the default behaviour of this event can be cancelled.
    * @constructor
    **/
-  function Event( type, bubbles, cancelable ) {
-
-
+  function Event(type, bubbles, cancelable) {
     // public properties:
     /**
      * The type of event.
@@ -341,7 +336,7 @@ this.createjs = this.createjs || {};
      * @default 0
      * @readonly
      */
-    this.timeStamp = ( new Date() ).getTime();
+    this.timeStamp = new Date().getTime();
 
     /**
      * Indicates if {{#crossLink "Event/preventDefault"}}{{/crossLink}} has been called
@@ -416,12 +411,12 @@ this.createjs = this.createjs || {};
 
   /**
    * Causes the active listener to be removed via removeEventListener();
-   * 
+   *
    * 		myBtn.addEventListener("click", function(evt) {
    * 			// do stuff...
    * 			evt.remove(); // removes this listener.
    * 		});
-   * 
+   *
    * @method remove
    **/
   p.remove = function () {
@@ -434,7 +429,7 @@ this.createjs = this.createjs || {};
    * @return {Event} a clone of the Event instance.
    **/
   p.clone = function () {
-    return new Event( this.type, this.bubbles, this.cancelable );
+    return new Event(this.type, this.bubbles, this.cancelable);
   };
 
   /**
@@ -445,9 +440,9 @@ this.createjs = this.createjs || {};
    * @return {Event} Returns the instance the method is called on (useful for chaining calls.)
    * @chainable
    */
-  p.set = function ( props ) {
-    for ( var n in props ) {
-      this[ n ] = props[ n ];
+  p.set = function (props) {
+    for (var n in props) {
+      this[n] = props[n];
     }
     return this;
   };
@@ -462,7 +457,7 @@ this.createjs = this.createjs || {};
   };
 
   createjs.Event = Event;
-}() );
+})();
 
 //##############################################################################
 // EventDispatcher.js
@@ -470,9 +465,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -480,18 +474,18 @@ this.createjs = this.createjs || {};
    *
    * You can either extend EventDispatcher or mix its methods into an existing prototype or instance by using the
    * EventDispatcher {{#crossLink "EventDispatcher/initialize"}}{{/crossLink}} method.
-   * 
+   *
    * Together with the CreateJS Event class, EventDispatcher provides an extended event model that is based on the
    * DOM Level 2 event model, including addEventListener, removeEventListener, and dispatchEvent. It supports
    * bubbling / capture, preventDefault, stopPropagation, stopImmediatePropagation, and handleEvent.
-   * 
+   *
    * EventDispatcher also exposes a {{#crossLink "EventDispatcher/on"}}{{/crossLink}} method, which makes it easier
-   * to create scoped listeners, listeners that only run once, and listeners with associated arbitrary data. The 
+   * to create scoped listeners, listeners that only run once, and listeners with associated arbitrary data. The
    * {{#crossLink "EventDispatcher/off"}}{{/crossLink}} method is merely an alias to
    * {{#crossLink "EventDispatcher/removeEventListener"}}{{/crossLink}}.
-   * 
+   *
    * Another addition to the DOM Level 2 model is the {{#crossLink "EventDispatcher/removeAllEventListeners"}}{{/crossLink}}
-   * method, which can be used to listeners for all events, or listeners for a specific event. The Event object also 
+   * method, which can be used to listeners for all events, or listeners for a specific event. The Event object also
    * includes a {{#crossLink "Event/remove"}}{{/crossLink}} method which removes the active listener.
    *
    * <h4>Example</h4>
@@ -513,25 +507,23 @@ this.createjs = this.createjs || {};
    *      instance.addEventListener("click", function(event) {
    *          console.log(instance == this); // false, scope is ambiguous.
    *      });
-   *      
+   *
    *      instance.on("click", function(event) {
    *          console.log(instance == this); // true, "on" uses dispatcher scope by default.
    *      });
-   * 
+   *
    * If you want to use addEventListener instead, you may want to use function.bind() or a similar proxy to manage
    * scope.
    *
    * <b>Browser support</b>
    * The event model in CreateJS can be used separately from the suite in any project, however the inheritance model
    * requires modern browsers (IE9+).
-   *      
+   *
    *
    * @class EventDispatcher
    * @constructor
    **/
   function EventDispatcher() {
-
-
     // private properties:
     /**
      * @protected
@@ -552,16 +544,16 @@ this.createjs = this.createjs || {};
   // static public methods:
   /**
    * Static initializer to mix EventDispatcher methods into a target object or prototype.
-   * 
+   *
    * 		EventDispatcher.initialize(MyClass.prototype); // add to the prototype of the class
    * 		EventDispatcher.initialize(myObject); // add to a specific instance
-   * 
+   *
    * @method initialize
    * @static
    * @param {Object} target The target object to inject EventDispatcher methods into. This can be an instance or a
    * prototype.
    **/
-  EventDispatcher.initialize = function ( target ) {
+  EventDispatcher.initialize = function (target) {
     target.addEventListener = p.addEventListener;
     target.on = p.on;
     target.removeEventListener = target.off = p.removeEventListener;
@@ -571,7 +563,6 @@ this.createjs = this.createjs || {};
     target._dispatchEvent = p._dispatchEvent;
     target.willTrigger = p.willTrigger;
   };
-
 
   // public methods:
   /**
@@ -592,22 +583,22 @@ this.createjs = this.createjs || {};
    * @param {Boolean} [useCapture] For events that bubble, indicates whether to listen for the event in the capture or bubbling/target phase.
    * @return {Function | Object} Returns the listener for chaining or assignment.
    **/
-  p.addEventListener = function ( type, listener, useCapture ) {
+  p.addEventListener = function (type, listener, useCapture) {
     var listeners;
-    if ( useCapture ) {
+    if (useCapture) {
       listeners = this._captureListeners = this._captureListeners || {};
     } else {
       listeners = this._listeners = this._listeners || {};
     }
-    var arr = listeners[ type ];
-    if ( arr ) {
-      this.removeEventListener( type, listener, useCapture );
+    var arr = listeners[type];
+    if (arr) {
+      this.removeEventListener(type, listener, useCapture);
     }
-    arr = listeners[ type ]; // remove may have deleted the array
-    if ( !arr ) {
-      listeners[ type ] = [ listener ];
+    arr = listeners[type]; // remove may have deleted the array
+    if (!arr) {
+      listeners[type] = [listener];
     } else {
-      arr.push( listener );
+      arr.push(listener);
     }
     return listener;
   };
@@ -615,16 +606,16 @@ this.createjs = this.createjs || {};
   /**
    * A shortcut method for using addEventListener that makes it easier to specify an execution scope, have a listener
    * only run once, associate arbitrary data with the listener, and remove the listener.
-   * 
+   *
    * This method works by creating an anonymous wrapper function and subscribing it with addEventListener.
    * The wrapper function is returned for use with `removeEventListener` (or `off`).
-   * 
+   *
    * <b>IMPORTANT:</b> To remove a listener added with `on`, you must pass in the returned wrapper function as the listener, or use
    * {{#crossLink "Event/remove"}}{{/crossLink}}. Likewise, each time you call `on` a NEW wrapper function is subscribed, so multiple calls
    * to `on` with the same params will create multiple listeners.
-   * 
+   *
    * <h4>Example</h4>
-   * 
+   *
    * 		var listener = myBtn.on("click", handleClick, null, false, {count:3});
    * 		function handleClick(evt, data) {
    * 			data.count -= 1;
@@ -635,7 +626,7 @@ this.createjs = this.createjs || {};
    * 				// alternately: evt.remove();
    * 			}
    * 		}
-   * 
+   *
    * @method on
    * @param {String} type The string type of the event.
    * @param {Function | Object} listener An object with a handleEvent method, or a function that will be called when
@@ -646,16 +637,20 @@ this.createjs = this.createjs || {};
    * @param {Boolean} [useCapture=false] For events that bubble, indicates whether to listen for the event in the capture or bubbling/target phase.
    * @return {Function} Returns the anonymous function that was created and assigned as the listener. This is needed to remove the listener later using .removeEventListener.
    **/
-  p.on = function ( type, listener, scope, once, data, useCapture ) {
-    if ( listener.handleEvent ) {
+  p.on = function (type, listener, scope, once, data, useCapture) {
+    if (listener.handleEvent) {
       scope = scope || listener;
       listener = listener.handleEvent;
     }
     scope = scope || this;
-    return this.addEventListener( type, function ( evt ) {
-      listener.call( scope, evt, data );
-      once && evt.remove();
-    }, useCapture );
+    return this.addEventListener(
+      type,
+      function (evt) {
+        listener.call(scope, evt, data);
+        once && evt.remove();
+      },
+      useCapture
+    );
   };
 
   /**
@@ -674,22 +669,22 @@ this.createjs = this.createjs || {};
    * @param {Function | Object} listener The listener function or object.
    * @param {Boolean} [useCapture] For events that bubble, indicates whether to listen for the event in the capture or bubbling/target phase.
    **/
-  p.removeEventListener = function ( type, listener, useCapture ) {
+  p.removeEventListener = function (type, listener, useCapture) {
     var listeners = useCapture ? this._captureListeners : this._listeners;
-    if ( !listeners ) {
+    if (!listeners) {
       return;
     }
-    var arr = listeners[ type ];
-    if ( !arr ) {
+    var arr = listeners[type];
+    if (!arr) {
       return;
     }
-    for ( var i = 0, l = arr.length; i < l; i++ ) {
-      if ( arr[ i ] == listener ) {
-        if ( l == 1 ) {
-          delete( listeners[ type ] );
+    for (var i = 0, l = arr.length; i < l; i++) {
+      if (arr[i] == listener) {
+        if (l == 1) {
+          delete listeners[type];
         } // allows for faster checks.
         else {
-          arr.splice( i, 1 );
+          arr.splice(i, 1);
         }
         break;
       }
@@ -699,8 +694,8 @@ this.createjs = this.createjs || {};
   /**
    * A shortcut to the removeEventListener method, with the same parameters and return value. This is a companion to the
    * .on method.
-   * 
-   * <b>IMPORTANT:</b> To remove a listener added with `on`, you must pass in the returned wrapper function as the listener. See 
+   *
+   * <b>IMPORTANT:</b> To remove a listener added with `on`, you must pass in the returned wrapper function as the listener. See
    * {{#crossLink "EventDispatcher/on"}}{{/crossLink}} for an example.
    *
    * @method off
@@ -724,15 +719,15 @@ this.createjs = this.createjs || {};
    * @method removeAllEventListeners
    * @param {String} [type] The string type of the event. If omitted, all listeners for all types will be removed.
    **/
-  p.removeAllEventListeners = function ( type ) {
-    if ( !type ) {
+  p.removeAllEventListeners = function (type) {
+    if (!type) {
       this._listeners = this._captureListeners = null;
     } else {
-      if ( this._listeners ) {
-        delete( this._listeners[ type ] );
+      if (this._listeners) {
+        delete this._listeners[type];
       }
-      if ( this._captureListeners ) {
-        delete( this._captureListeners[ type ] );
+      if (this._captureListeners) {
+        delete this._captureListeners[type];
       }
     }
   };
@@ -758,15 +753,15 @@ this.createjs = this.createjs || {};
    * @param {Boolean} [cancelable] Specifies the `cancelable` value when a string was passed to eventObj.
    * @return {Boolean} Returns false if `preventDefault()` was called on a cancelable event, true otherwise.
    **/
-  p.dispatchEvent = function ( eventObj, bubbles, cancelable ) {
-    if ( typeof eventObj == "string" ) {
+  p.dispatchEvent = function (eventObj, bubbles, cancelable) {
+    if (typeof eventObj == "string") {
       // skip everything if there's no listeners and it doesn't bubble:
       var listeners = this._listeners;
-      if ( !bubbles && ( !listeners || !listeners[ eventObj ] ) ) {
+      if (!bubbles && (!listeners || !listeners[eventObj])) {
         return true;
       }
-      eventObj = new createjs.Event( eventObj, bubbles, cancelable );
-    } else if ( eventObj.target && eventObj.clone ) {
+      eventObj = new createjs.Event(eventObj, bubbles, cancelable);
+    } else if (eventObj.target && eventObj.clone) {
       // redispatching an active event object, so clone it:
       eventObj = eventObj.clone();
     }
@@ -774,25 +769,26 @@ this.createjs = this.createjs || {};
     // TODO: it would be nice to eliminate this. Maybe in favour of evtObj instanceof Event? Or !!evtObj.createEvent
     try {
       eventObj.target = this;
-    } catch ( e ) {} // try/catch allows redispatching of native events
+    } catch (e) {} // try/catch allows redispatching of native events
 
-    if ( !eventObj.bubbles || !this.parent ) {
-      this._dispatchEvent( eventObj, 2 );
+    if (!eventObj.bubbles || !this.parent) {
+      this._dispatchEvent(eventObj, 2);
     } else {
       var top = this,
-        list = [ top ];
-      while ( top.parent ) {
-        list.push( top = top.parent );
+        list = [top];
+      while (top.parent) {
+        list.push((top = top.parent));
       }
-      var i, l = list.length;
+      var i,
+        l = list.length;
 
       // capture & atTarget
-      for ( i = l - 1; i >= 0 && !eventObj.propagationStopped; i-- ) {
-        list[ i ]._dispatchEvent( eventObj, 1 + ( i == 0 ) );
+      for (i = l - 1; i >= 0 && !eventObj.propagationStopped; i--) {
+        list[i]._dispatchEvent(eventObj, 1 + (i == 0));
       }
       // bubbling
-      for ( i = 1; i < l && !eventObj.propagationStopped; i++ ) {
-        list[ i ]._dispatchEvent( eventObj, 3 );
+      for (i = 1; i < l && !eventObj.propagationStopped; i++) {
+        list[i]._dispatchEvent(eventObj, 3);
       }
     }
     return !eventObj.defaultPrevented;
@@ -804,27 +800,30 @@ this.createjs = this.createjs || {};
    * @param {String} type The string type of the event.
    * @return {Boolean} Returns true if there is at least one listener for the specified event.
    **/
-  p.hasEventListener = function ( type ) {
+  p.hasEventListener = function (type) {
     var listeners = this._listeners,
       captureListeners = this._captureListeners;
-    return !!( ( listeners && listeners[ type ] ) || ( captureListeners && captureListeners[ type ] ) );
+    return !!(
+      (listeners && listeners[type]) ||
+      (captureListeners && captureListeners[type])
+    );
   };
 
   /**
    * Indicates whether there is at least one listener for the specified event type on this object or any of its
    * ancestors (parent, parent's parent, etc). A return value of true indicates that if a bubbling event of the
    * specified type is dispatched from this object, it will trigger at least one listener.
-   * 
+   *
    * This is similar to {{#crossLink "EventDispatcher/hasEventListener"}}{{/crossLink}}, but it searches the entire
    * event flow for a listener, not just this object.
    * @method willTrigger
    * @param {String} type The string type of the event.
    * @return {Boolean} Returns `true` if there is at least one listener for the specified event.
    **/
-  p.willTrigger = function ( type ) {
+  p.willTrigger = function (type) {
     var o = this;
-    while ( o ) {
-      if ( o.hasEventListener( type ) ) {
+    while (o) {
+      if (o.hasEventListener(type)) {
         return true;
       }
       o = o.parent;
@@ -840,7 +839,6 @@ this.createjs = this.createjs || {};
     return "[EventDispatcher]";
   };
 
-
   // private methods:
   /**
    * @method _dispatchEvent
@@ -848,39 +846,45 @@ this.createjs = this.createjs || {};
    * @param {Object} eventPhase
    * @protected
    **/
-  p._dispatchEvent = function ( eventObj, eventPhase ) {
-    var l, arr, listeners = ( eventPhase <= 2 ) ? this._captureListeners : this._listeners;
-    if ( eventObj && listeners && ( arr = listeners[ eventObj.type ] ) && ( l = arr.length ) ) {
+  p._dispatchEvent = function (eventObj, eventPhase) {
+    var l,
+      arr,
+      listeners = eventPhase <= 2 ? this._captureListeners : this._listeners;
+    if (
+      eventObj &&
+      listeners &&
+      (arr = listeners[eventObj.type]) &&
+      (l = arr.length)
+    ) {
       try {
         eventObj.currentTarget = this;
-      } catch ( e ) {}
+      } catch (e) {}
       try {
         eventObj.eventPhase = eventPhase | 0;
-      } catch ( e ) {}
+      } catch (e) {}
       eventObj.removed = false;
 
       arr = arr.slice(); // to avoid issues with items being removed or added during the dispatch
-      for ( var i = 0; i < l && !eventObj.immediatePropagationStopped; i++ ) {
-        var o = arr[ i ];
-        if ( o.handleEvent ) {
-          o.handleEvent( eventObj );
+      for (var i = 0; i < l && !eventObj.immediatePropagationStopped; i++) {
+        var o = arr[i];
+        if (o.handleEvent) {
+          o.handleEvent(eventObj);
         } else {
-          o( eventObj );
+          o(eventObj);
         }
-        if ( eventObj.removed ) {
-          this.off( eventObj.type, o, eventPhase == 1 );
+        if (eventObj.removed) {
+          this.off(eventObj.type, o, eventPhase == 1);
           eventObj.removed = false;
         }
       }
     }
-    if ( eventPhase === 2 ) {
-      this._dispatchEvent( eventObj, 2.1 );
+    if (eventPhase === 2) {
+      this._dispatchEvent(eventObj, 2.1);
     }
   };
 
-
   createjs.EventDispatcher = EventDispatcher;
-}() );
+})();
 
 //##############################################################################
 // Ticker.js
@@ -888,9 +892,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -918,7 +921,6 @@ this.createjs = this.createjs || {};
   function Ticker() {
     throw "Ticker cannot be instantiated.";
   }
-
 
   // constants:
   /**
@@ -970,7 +972,6 @@ this.createjs = this.createjs || {};
    **/
   Ticker.TIMEOUT = "timeout";
 
-
   // static events:
   /**
    * Dispatched each tick. The event will be dispatched to each listener even when the Ticker has been paused using
@@ -994,7 +995,6 @@ this.createjs = this.createjs || {};
    * @since 0.6.0
    */
 
-
   // public static properties:
   /**
    * Specifies the timing api (setTimeout or requestAnimationFrame) and mode to use. See
@@ -1012,10 +1012,10 @@ this.createjs = this.createjs || {};
    * based animations and systems to prevent issues caused by large time gaps caused by background tabs, system sleep,
    * alert dialogs, or other blocking routines. Double the expected frame duration is often an effective value
    * (ex. maxDelta=50 when running at 40fps).
-   * 
+   *
    * This does not impact any other values (ex. time, runTime, etc), so you may experience issues if you enable maxDelta
    * when using both delta and other values.
-   * 
+   *
    * If 0, there is no maximum.
    * @property maxDelta
    * @static
@@ -1047,7 +1047,6 @@ this.createjs = this.createjs || {};
    **/
   Ticker.paused = false;
 
-
   // mix-ins:
   // EventDispatcher methods:
   Ticker.removeEventListener = null;
@@ -1055,13 +1054,12 @@ this.createjs = this.createjs || {};
   Ticker.dispatchEvent = null;
   Ticker.hasEventListener = null;
   Ticker._listeners = null;
-  createjs.EventDispatcher.initialize( Ticker ); // inject EventDispatcher methods.
+  createjs.EventDispatcher.initialize(Ticker); // inject EventDispatcher methods.
   Ticker._addEventListener = Ticker.addEventListener;
   Ticker.addEventListener = function () {
     !Ticker._inited && Ticker.init();
-    return Ticker._addEventListener.apply( Ticker, arguments );
+    return Ticker._addEventListener.apply(Ticker, arguments);
   };
-
 
   // private static properties:
   /**
@@ -1157,7 +1155,6 @@ this.createjs = this.createjs || {};
    **/
   Ticker._raf = true;
 
-
   // static getter / setters:
   /**
    * Use the {{#crossLink "Ticker/interval:property"}}{{/crossLink}} property instead.
@@ -1166,15 +1163,18 @@ this.createjs = this.createjs || {};
    * @static
    * @param {Number} interval
    **/
-  Ticker._setInterval = function ( interval ) {
+  Ticker._setInterval = function (interval) {
     Ticker._interval = interval;
-    if ( !Ticker._inited ) {
+    if (!Ticker._inited) {
       return;
     }
     Ticker._setupTick();
   };
   // Ticker.setInterval is @deprecated. Remove for 1.1+
-  Ticker.setInterval = createjs.deprecate( Ticker._setInterval, "Ticker.setInterval" );
+  Ticker.setInterval = createjs.deprecate(
+    Ticker._setInterval,
+    "Ticker.setInterval"
+  );
 
   /**
    * Use the {{#crossLink "Ticker/interval:property"}}{{/crossLink}} property instead.
@@ -1187,7 +1187,10 @@ this.createjs = this.createjs || {};
     return Ticker._interval;
   };
   // Ticker.getInterval is @deprecated. Remove for 1.1+
-  Ticker.getInterval = createjs.deprecate( Ticker._getInterval, "Ticker.getInterval" );
+  Ticker.getInterval = createjs.deprecate(
+    Ticker._getInterval,
+    "Ticker.getInterval"
+  );
 
   /**
    * Use the {{#crossLink "Ticker/framerate:property"}}{{/crossLink}} property instead.
@@ -1196,11 +1199,11 @@ this.createjs = this.createjs || {};
    * @static
    * @param {Number} value
    **/
-  Ticker._setFPS = function ( value ) {
-    Ticker._setInterval( 1000 / value );
+  Ticker._setFPS = function (value) {
+    Ticker._setInterval(1000 / value);
   };
   // Ticker.setFPS is @deprecated. Remove for 1.1+
-  Ticker.setFPS = createjs.deprecate( Ticker._setFPS, "Ticker.setFPS" );
+  Ticker.setFPS = createjs.deprecate(Ticker._setFPS, "Ticker.setFPS");
 
   /**
    * Use the {{#crossLink "Ticker/framerate:property"}}{{/crossLink}} property instead.
@@ -1213,7 +1216,7 @@ this.createjs = this.createjs || {};
     return 1000 / Ticker._interval;
   };
   // Ticker.getFPS is @deprecated. Remove for 1.1+
-  Ticker.getFPS = createjs.deprecate( Ticker._getFPS, "Ticker.getFPS" );
+  Ticker.getFPS = createjs.deprecate(Ticker._getFPS, "Ticker.getFPS");
 
   /**
    * Indicates the target time (in milliseconds) between ticks. Default is 50 (20 FPS).
@@ -1232,20 +1235,19 @@ this.createjs = this.createjs || {};
    * @type {Number}
    **/
   try {
-    Object.defineProperties( Ticker, {
+    Object.defineProperties(Ticker, {
       interval: {
         get: Ticker._getInterval,
-        set: Ticker._setInterval
+        set: Ticker._setInterval,
       },
       framerate: {
         get: Ticker._getFPS,
-        set: Ticker._setFPS
-      }
-    } );
-  } catch ( e ) {
-    console.log( e );
+        set: Ticker._setFPS,
+      },
+    });
+  } catch (e) {
+    console.log(e);
   }
-
 
   // public static methods:
   /**
@@ -1254,14 +1256,14 @@ this.createjs = this.createjs || {};
    * @static
    **/
   Ticker.init = function () {
-    if ( Ticker._inited ) {
+    if (Ticker._inited) {
       return;
     }
     Ticker._inited = true;
     Ticker._times = [];
     Ticker._tickTimes = [];
     Ticker._startTime = Ticker._getTime();
-    Ticker._times.push( Ticker._lastTime = 0 );
+    Ticker._times.push((Ticker._lastTime = 0));
     Ticker.interval = Ticker._interval;
   };
 
@@ -1271,24 +1273,33 @@ this.createjs = this.createjs || {};
    * @static
    **/
   Ticker.reset = function () {
-    if ( Ticker._raf ) {
-      var f = window.cancelAnimationFrame || window.webkitCancelAnimationFrame || window.mozCancelAnimationFrame || window.oCancelAnimationFrame || window.msCancelAnimationFrame;
-      f && f( Ticker._timerId );
+    if (Ticker._raf) {
+      var f =
+        window.cancelAnimationFrame ||
+        window.webkitCancelAnimationFrame ||
+        window.mozCancelAnimationFrame ||
+        window.oCancelAnimationFrame ||
+        window.msCancelAnimationFrame;
+      f && f(Ticker._timerId);
     } else {
-      clearTimeout( Ticker._timerId );
+      clearTimeout(Ticker._timerId);
     }
-    Ticker.removeAllEventListeners( "tick" );
+    Ticker.removeAllEventListeners("tick");
     Ticker._timerId = Ticker._times = Ticker._tickTimes = null;
-    Ticker._startTime = Ticker._lastTime = Ticker._ticks = Ticker._pausedTime = 0;
+    Ticker._startTime =
+      Ticker._lastTime =
+      Ticker._ticks =
+      Ticker._pausedTime =
+        0;
     Ticker._inited = false;
   };
 
   /**
    * Returns the average time spent within a tick. This can vary significantly from the value provided by getMeasuredFPS
-   * because it only measures the time spent within the tick execution stack. 
-   * 
-   * Example 1: With a target FPS of 20, getMeasuredFPS() returns 20fps, which indicates an average of 50ms between 
-   * the end of one tick and the end of the next. However, getMeasuredTickTime() returns 15ms. This indicates that 
+   * because it only measures the time spent within the tick execution stack.
+   *
+   * Example 1: With a target FPS of 20, getMeasuredFPS() returns 20fps, which indicates an average of 50ms between
+   * the end of one tick and the end of the next. However, getMeasuredTickTime() returns 15ms. This indicates that
    * there may be up to 35ms of "idle" time between the end of one tick and the start of the next.
    *
    * Example 2: With a target FPS of 30, {{#crossLink "Ticker/framerate:property"}}{{/crossLink}} returns 10fps, which
@@ -1301,17 +1312,17 @@ this.createjs = this.createjs || {};
    * Defaults to the number of ticks per second. To get only the last tick's time, pass in 1.
    * @return {Number} The average time spent in a tick in milliseconds.
    **/
-  Ticker.getMeasuredTickTime = function ( ticks ) {
+  Ticker.getMeasuredTickTime = function (ticks) {
     var ttl = 0,
       times = Ticker._tickTimes;
-    if ( !times || times.length < 1 ) {
+    if (!times || times.length < 1) {
       return -1;
     }
 
     // by default, calculate average for the past ~1 second:
-    ticks = Math.min( times.length, ticks || ( Ticker._getFPS() | 0 ) );
-    for ( var i = 0; i < ticks; i++ ) {
-      ttl += times[ i ];
+    ticks = Math.min(times.length, ticks || Ticker._getFPS() | 0);
+    for (var i = 0; i < ticks; i++) {
+      ttl += times[i];
     }
     return ttl / ticks;
   };
@@ -1325,15 +1336,15 @@ this.createjs = this.createjs || {};
    * @return {Number} The actual frames / ticks per second. Depending on performance, this may differ
    * from the target frames per second.
    **/
-  Ticker.getMeasuredFPS = function ( ticks ) {
+  Ticker.getMeasuredFPS = function (ticks) {
     var times = Ticker._times;
-    if ( !times || times.length < 2 ) {
+    if (!times || times.length < 2) {
       return -1;
     }
 
     // by default, calculate fps for the past ~1 second:
-    ticks = Math.min( times.length - 1, ticks || ( Ticker._getFPS() | 0 ) );
-    return 1000 / ( ( times[ 0 ] - times[ ticks ] ) / ticks );
+    ticks = Math.min(times.length - 1, ticks || Ticker._getFPS() | 0);
+    return 1000 / ((times[0] - times[ticks]) / ticks);
   };
 
   /**
@@ -1346,8 +1357,10 @@ this.createjs = this.createjs || {};
    * If false, the value returned will be total time elapsed since the first tick event listener was added.
    * @return {Number} Number of milliseconds that have elapsed since Ticker was initialized or -1.
    **/
-  Ticker.getTime = function ( runTime ) {
-    return Ticker._startTime ? Ticker._getTime() - ( runTime ? Ticker._pausedTime : 0 ) : -1;
+  Ticker.getTime = function (runTime) {
+    return Ticker._startTime
+      ? Ticker._getTime() - (runTime ? Ticker._pausedTime : 0)
+      : -1;
   };
 
   /**
@@ -1358,8 +1371,11 @@ this.createjs = this.createjs || {};
    * @param runTime {Boolean} [runTime=false] If true, the runTime property will be returned instead of time.
    * @returns {number} The time or runTime property from the most recent tick event or -1.
    */
-  Ticker.getEventTime = function ( runTime ) {
-    return Ticker._startTime ? ( Ticker._lastTime || Ticker._startTime ) - ( runTime ? Ticker._pausedTime : 0 ) : -1;
+  Ticker.getEventTime = function (runTime) {
+    return Ticker._startTime
+      ? (Ticker._lastTime || Ticker._startTime) -
+          (runTime ? Ticker._pausedTime : 0)
+      : -1;
   };
 
   /**
@@ -1372,10 +1388,9 @@ this.createjs = this.createjs || {};
    * value. The default value is false.
    * @return {Number} of ticks that have been broadcast.
    **/
-  Ticker.getTicks = function ( pauseable ) {
-    return Ticker._ticks - ( pauseable ? Ticker._pausedTicks : 0 );
+  Ticker.getTicks = function (pauseable) {
+    return Ticker._ticks - (pauseable ? Ticker._pausedTicks : 0);
   };
-
 
   // private static methods:
   /**
@@ -1388,7 +1403,7 @@ this.createjs = this.createjs || {};
     Ticker._setupTick();
 
     // run if enough time has elapsed, with a little bit of flexibility to be early:
-    if ( Ticker._getTime() - Ticker._lastTime >= ( Ticker._interval - 1 ) * 0.97 ) {
+    if (Ticker._getTime() - Ticker._lastTime >= (Ticker._interval - 1) * 0.97) {
       Ticker._tick();
     }
   };
@@ -1421,21 +1436,28 @@ this.createjs = this.createjs || {};
    * @private
    **/
   Ticker._setupTick = function () {
-    if ( Ticker._timerId != null ) {
+    if (Ticker._timerId != null) {
       return;
     } // avoid duplicates
 
     var mode = Ticker.timingMode;
-    if ( mode == Ticker.RAF_SYNCHED || mode == Ticker.RAF ) {
-      var f = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame;
-      if ( f ) {
-        Ticker._timerId = f( mode == Ticker.RAF ? Ticker._handleRAF : Ticker._handleSynch );
+    if (mode == Ticker.RAF_SYNCHED || mode == Ticker.RAF) {
+      var f =
+        window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame;
+      if (f) {
+        Ticker._timerId = f(
+          mode == Ticker.RAF ? Ticker._handleRAF : Ticker._handleSynch
+        );
         Ticker._raf = true;
         return;
       }
     }
     Ticker._raf = false;
-    Ticker._timerId = setTimeout( Ticker._handleTimeout, Ticker._interval );
+    Ticker._timerId = setTimeout(Ticker._handleTimeout, Ticker._interval);
   };
 
   /**
@@ -1450,28 +1472,28 @@ this.createjs = this.createjs || {};
     Ticker._lastTime = time;
     Ticker._ticks++;
 
-    if ( paused ) {
+    if (paused) {
       Ticker._pausedTicks++;
       Ticker._pausedTime += elapsedTime;
     }
 
-    if ( Ticker.hasEventListener( "tick" ) ) {
-      var event = new createjs.Event( "tick" );
+    if (Ticker.hasEventListener("tick")) {
+      var event = new createjs.Event("tick");
       var maxDelta = Ticker.maxDelta;
-      event.delta = ( maxDelta && elapsedTime > maxDelta ) ? maxDelta : elapsedTime;
+      event.delta = maxDelta && elapsedTime > maxDelta ? maxDelta : elapsedTime;
       event.paused = paused;
       event.time = time;
       event.runTime = time - Ticker._pausedTime;
-      Ticker.dispatchEvent( event );
+      Ticker.dispatchEvent(event);
     }
 
-    Ticker._tickTimes.unshift( Ticker._getTime() - time );
-    while ( Ticker._tickTimes.length > 100 ) {
+    Ticker._tickTimes.unshift(Ticker._getTime() - time);
+    while (Ticker._tickTimes.length > 100) {
       Ticker._tickTimes.pop();
     }
 
-    Ticker._times.unshift( time );
-    while ( Ticker._times.length > 100 ) {
+    Ticker._times.unshift(time);
+    while (Ticker._times.length > 100) {
       Ticker._times.pop();
     }
   };
@@ -1482,14 +1504,21 @@ this.createjs = this.createjs || {};
    * @private
    **/
   var w = window,
-    now = w.performance.now || w.performance.mozNow || w.performance.msNow || w.performance.oNow || w.performance.webkitNow;
+    now =
+      w.performance.now ||
+      w.performance.mozNow ||
+      w.performance.msNow ||
+      w.performance.oNow ||
+      w.performance.webkitNow;
   Ticker._getTime = function () {
-    return ( ( now && now.call( w.performance ) ) || ( new Date().getTime() ) ) - Ticker._startTime;
+    return (
+      ((now && now.call(w.performance)) || new Date().getTime()) -
+      Ticker._startTime
+    );
   };
 
-
   createjs.Ticker = Ticker;
-}() );
+})();
 
 //##############################################################################
 // VideoBuffer.js
@@ -1497,25 +1526,23 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
    * When an HTML video seeks, including when looping, there is an indeterminate period before a new frame is available.
    * This can result in the video blinking or flashing when it is drawn to a canvas. The VideoBuffer class resolves
    * this issue by drawing each frame to an off-screen canvas and preserving the prior frame during a seek.
-   * 
+   *
    * 	var myBuffer = new createjs.VideoBuffer(myVideo);
    * 	var myBitmap = new Bitmap(myBuffer);
-   * 
+   *
    * @class VideoBuffer
    * @param {HTMLVideoElement} video The HTML video element to buffer.
    * @constructor
    **/
-  function VideoBuffer( video ) {
-
+  function VideoBuffer(video) {
     // private properties:
     /**
      * Used by Bitmap to determine when the video buffer is ready to be drawn. Not intended for general use.
@@ -1550,12 +1577,11 @@ this.createjs = this.createjs || {};
      **/
     this._lastTime = -1;
 
-    if ( this.readyState < 2 ) {
-      video.addEventListener( "canplaythrough", this._videoReady.bind( this ) );
+    if (this.readyState < 2) {
+      video.addEventListener("canplaythrough", this._videoReady.bind(this));
     } //once:true isn't supported everywhere, but its a non-critical optimization here.
   }
   var p = VideoBuffer.prototype;
-
 
   // public methods:
   /**
@@ -1564,20 +1590,22 @@ this.createjs = this.createjs || {};
    * @method getImage
    **/
   p.getImage = function () {
-    if ( this.readyState < 2 ) {
+    if (this.readyState < 2) {
       return;
     }
     var canvas = this._canvas,
       video = this._video;
-    if ( !canvas ) {
-      canvas = this._canvas = createjs.createCanvas ? createjs.createCanvas() : document.createElement( "canvas" );
+    if (!canvas) {
+      canvas = this._canvas = createjs.createCanvas
+        ? createjs.createCanvas()
+        : document.createElement("canvas");
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
     }
-    if ( video.readyState >= 2 && video.currentTime !== this._lastTime ) {
-      var ctx = canvas.getContext( "2d" );
-      ctx.clearRect( 0, 0, canvas.width, canvas.height );
-      ctx.drawImage( video, 0, 0, canvas.width, canvas.height );
+    if (video.readyState >= 2 && video.currentTime !== this._lastTime) {
+      var ctx = canvas.getContext("2d");
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
       this._lastTime = video.currentTime;
     }
     return canvas;
@@ -1592,9 +1620,8 @@ this.createjs = this.createjs || {};
     this.readyState = 2;
   };
 
-
   createjs.VideoBuffer = VideoBuffer;
-}() );
+})();
 
 //##############################################################################
 // MouseEvent.js
@@ -1602,9 +1629,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -1625,9 +1651,20 @@ this.createjs = this.createjs || {};
    * @extends Event
    * @constructor
    **/
-  function MouseEvent( type, bubbles, cancelable, stageX, stageY, nativeEvent, pointerID, primary, rawX, rawY, relatedTarget ) {
-    this.Event_constructor( type, bubbles, cancelable );
-
+  function MouseEvent(
+    type,
+    bubbles,
+    cancelable,
+    stageX,
+    stageY,
+    nativeEvent,
+    pointerID,
+    primary,
+    rawX,
+    rawY,
+    relatedTarget
+  ) {
+    this.Event_constructor(type, bubbles, cancelable);
 
     // public properties:
     /**
@@ -1650,7 +1687,7 @@ this.createjs = this.createjs || {};
      * @property rawX
      * @type Number
      */
-    this.rawX = ( rawX == null ) ? stageX : rawX;
+    this.rawX = rawX == null ? stageX : rawX;
 
     /**
      * The raw y position relative to the stage. Normally this will be the same as the stageY value, unless
@@ -1658,7 +1695,7 @@ this.createjs = this.createjs || {};
      * @property rawY
      * @type Number
      */
-    this.rawY = ( rawY == null ) ? stageY : rawY;
+    this.rawY = rawY == null ? stageY : rawY;
 
     /**
      * The native MouseEvent generated by the browser. The properties and API for this
@@ -1690,18 +1727,17 @@ this.createjs = this.createjs || {};
      * The secondary target for the event, if applicable. This is used for mouseout/rollout
      * events to indicate the object that the mouse entered from, mouseover/rollover for the object the mouse exited,
      * and stagemousedown/stagemouseup events for the object that was the under the cursor, if any.
-     * 
+     *
      * Only valid interaction targets will be returned (ie. objects with mouse listeners or a cursor set).
      * @property relatedTarget
      * @type {DisplayObject}
      */
     this.relatedTarget = relatedTarget;
   }
-  var p = createjs.extend( MouseEvent, createjs.Event );
+  var p = createjs.extend(MouseEvent, createjs.Event);
 
   // TODO: deprecated
   // p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
-
 
   // getter / setters:
   /**
@@ -1711,7 +1747,7 @@ this.createjs = this.createjs || {};
    * @readonly
    */
   p._get_localX = function () {
-    return this.currentTarget.globalToLocal( this.rawX, this.rawY ).x;
+    return this.currentTarget.globalToLocal(this.rawX, this.rawY).x;
   };
 
   /**
@@ -1721,7 +1757,7 @@ this.createjs = this.createjs || {};
    * @readonly
    */
   p._get_localY = function () {
-    return this.currentTarget.globalToLocal( this.rawX, this.rawY ).y;
+    return this.currentTarget.globalToLocal(this.rawX, this.rawY).y;
   };
 
   /**
@@ -1734,21 +1770,19 @@ this.createjs = this.createjs || {};
     return this.pointerID !== -1;
   };
 
-
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       localX: {
-        get: p._get_localX
+        get: p._get_localX,
       },
       localY: {
-        get: p._get_localY
+        get: p._get_localY,
       },
       isTouch: {
-        get: p._get_isTouch
-      }
-    } );
-  } catch ( e ) {} // TODO: use Log
-
+        get: p._get_isTouch,
+      },
+    });
+  } catch (e) {} // TODO: use Log
 
   // public methods:
   /**
@@ -1757,7 +1791,18 @@ this.createjs = this.createjs || {};
    * @return {MouseEvent} a clone of the MouseEvent instance.
    **/
   p.clone = function () {
-    return new MouseEvent( this.type, this.bubbles, this.cancelable, this.stageX, this.stageY, this.nativeEvent, this.pointerID, this.primary, this.rawX, this.rawY );
+    return new MouseEvent(
+      this.type,
+      this.bubbles,
+      this.cancelable,
+      this.stageX,
+      this.stageY,
+      this.nativeEvent,
+      this.pointerID,
+      this.primary,
+      this.rawX,
+      this.rawY
+    );
   };
 
   /**
@@ -1766,12 +1811,19 @@ this.createjs = this.createjs || {};
    * @return {String} a string representation of the instance.
    **/
   p.toString = function () {
-    return "[MouseEvent (type=" + this.type + " stageX=" + this.stageX + " stageY=" + this.stageY + ")]";
+    return (
+      "[MouseEvent (type=" +
+      this.type +
+      " stageX=" +
+      this.stageX +
+      " stageY=" +
+      this.stageY +
+      ")]"
+    );
   };
 
-
-  createjs.MouseEvent = createjs.promote( MouseEvent, "Event" );
-}() );
+  createjs.MouseEvent = createjs.promote(MouseEvent, "Event");
+})();
 
 //##############################################################################
 // Matrix2D.js
@@ -1779,9 +1831,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -1804,8 +1855,8 @@ this.createjs = this.createjs || {};
    * @param {Number} [ty=0] Specifies the ty property for the new matrix.
    * @constructor
    **/
-  function Matrix2D( a, b, c, d, tx, ty ) {
-    this.setValues( a, b, c, d, tx, ty );
+  function Matrix2D(a, b, c, d, tx, ty) {
+    this.setValues(a, b, c, d, tx, ty);
 
     // public properties:
     // assigned in the setValues method.
@@ -1858,7 +1909,6 @@ this.createjs = this.createjs || {};
    **/
   Matrix2D.DEG_TO_RAD = Math.PI / 180;
 
-
   // static public properties:
   /**
    * An identity matrix, representing a null transformation.
@@ -1869,10 +1919,9 @@ this.createjs = this.createjs || {};
    **/
   Matrix2D.identity = null; // set at bottom of class definition.
 
-
   // public methods:
   /**
-   * Sets the specified values on this instance. 
+   * Sets the specified values on this instance.
    * @method setValues
    * @param {Number} [a=1] Specifies the a property for the new matrix.
    * @param {Number} [b=0] Specifies the b property for the new matrix.
@@ -1882,12 +1931,12 @@ this.createjs = this.createjs || {};
    * @param {Number} [ty=0] Specifies the ty property for the new matrix.
    * @return {Matrix2D} This instance. Useful for chaining method calls.
    */
-  p.setValues = function ( a, b, c, d, tx, ty ) {
+  p.setValues = function (a, b, c, d, tx, ty) {
     // don't forget to update docs in the constructor if these change:
-    this.a = ( a == null ) ? 1 : a;
+    this.a = a == null ? 1 : a;
     this.b = b || 0;
     this.c = c || 0;
-    this.d = ( d == null ) ? 1 : d;
+    this.d = d == null ? 1 : d;
     this.tx = tx || 0;
     this.ty = ty || 0;
     return this;
@@ -1905,12 +1954,12 @@ this.createjs = this.createjs || {};
    * @param {Number} ty
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    **/
-  p.append = function ( a, b, c, d, tx, ty ) {
+  p.append = function (a, b, c, d, tx, ty) {
     var a1 = this.a;
     var b1 = this.b;
     var c1 = this.c;
     var d1 = this.d;
-    if ( a != 1 || b != 0 || c != 0 || d != 1 ) {
+    if (a != 1 || b != 0 || c != 0 || d != 1) {
       this.a = a1 * a + c1 * b;
       this.b = b1 * a + d1 * b;
       this.c = a1 * c + c1 * d;
@@ -1934,7 +1983,7 @@ this.createjs = this.createjs || {};
    * @param {Number} ty
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    **/
-  p.prepend = function ( a, b, c, d, tx, ty ) {
+  p.prepend = function (a, b, c, d, tx, ty) {
     var a1 = this.a;
     var c1 = this.c;
     var tx1 = this.tx;
@@ -1955,15 +2004,22 @@ this.createjs = this.createjs || {};
    * @param {Matrix2D} matrix
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    **/
-  p.appendMatrix = function ( matrix ) {
-    return this.append( matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty );
+  p.appendMatrix = function (matrix) {
+    return this.append(
+      matrix.a,
+      matrix.b,
+      matrix.c,
+      matrix.d,
+      matrix.tx,
+      matrix.ty
+    );
   };
 
   /**
    * Prepends the specified matrix to this matrix.
    * This is the equivalent of multiplying `(specified matrix) * (this matrix)`.
    * For example, you could calculate the combined transformation for a child object using:
-   * 
+   *
    * 	var o = myDisplayObject;
    * 	var mtx = o.getMatrix();
    * 	while (o = o.parent) {
@@ -1974,14 +2030,21 @@ this.createjs = this.createjs || {};
    * @param {Matrix2D} matrix
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    **/
-  p.prependMatrix = function ( matrix ) {
-    return this.prepend( matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty );
+  p.prependMatrix = function (matrix) {
+    return this.prepend(
+      matrix.a,
+      matrix.b,
+      matrix.c,
+      matrix.d,
+      matrix.tx,
+      matrix.ty
+    );
   };
 
   /**
    * Generates matrix properties from the specified display object transform properties, and appends them to this matrix.
    * For example, you can use this to generate a matrix representing the transformations of a display object:
-   * 
+   *
    * 	var mtx = new createjs.Matrix2D();
    * 	mtx.appendTransform(o.x, o.y, o.scaleX, o.scaleY, o.rotation);
    * @method appendTransform
@@ -1996,27 +2059,58 @@ this.createjs = this.createjs || {};
    * @param {Number} regY Optional.
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    **/
-  p.appendTransform = function ( x, y, scaleX, scaleY, rotation, skewX, skewY, regX, regY ) {
-    if ( rotation % 360 ) {
+  p.appendTransform = function (
+    x,
+    y,
+    scaleX,
+    scaleY,
+    rotation,
+    skewX,
+    skewY,
+    regX,
+    regY
+  ) {
+    if (rotation % 360) {
       var r = rotation * Matrix2D.DEG_TO_RAD;
-      var cos = Math.cos( r );
-      var sin = Math.sin( r );
+      var cos = Math.cos(r);
+      var sin = Math.sin(r);
     } else {
       cos = 1;
       sin = 0;
     }
 
-    if ( skewX || skewY ) {
+    if (skewX || skewY) {
       // TODO: can this be combined into a single append operation?
       skewX *= Matrix2D.DEG_TO_RAD;
       skewY *= Matrix2D.DEG_TO_RAD;
-      this.append( Math.cos( skewY ), Math.sin( skewY ), -Math.sin( skewX ), Math.cos( skewX ), x, y );
-      this.append( cos * scaleX, sin * scaleX, -sin * scaleY, cos * scaleY, 0, 0 );
+      this.append(
+        Math.cos(skewY),
+        Math.sin(skewY),
+        -Math.sin(skewX),
+        Math.cos(skewX),
+        x,
+        y
+      );
+      this.append(
+        cos * scaleX,
+        sin * scaleX,
+        -sin * scaleY,
+        cos * scaleY,
+        0,
+        0
+      );
     } else {
-      this.append( cos * scaleX, sin * scaleX, -sin * scaleY, cos * scaleY, x, y );
+      this.append(
+        cos * scaleX,
+        sin * scaleX,
+        -sin * scaleY,
+        cos * scaleY,
+        x,
+        y
+      );
     }
 
-    if ( regX || regY ) {
+    if (regX || regY) {
       // append the registration offset:
       this.tx -= regX * this.a + regY * this.c;
       this.ty -= regX * this.b + regY * this.d;
@@ -2027,14 +2121,14 @@ this.createjs = this.createjs || {};
   /**
    * Generates matrix properties from the specified display object transform properties, and prepends them to this matrix.
    * For example, you could calculate the combined transformation for a child object using:
-   * 
+   *
    * 	var o = myDisplayObject;
    * 	var mtx = new createjs.Matrix2D();
    * 	do  {
    * 		// prepend each parent's transformation in turn:
    * 		mtx.prependTransform(o.x, o.y, o.scaleX, o.scaleY, o.rotation, o.skewX, o.skewY, o.regX, o.regY);
    * 	} while (o = o.parent);
-   * 	
+   *
    * 	Note that the above example would not account for {{#crossLink "DisplayObject/transformMatrix:property"}}{{/crossLink}}
    * 	values. See {{#crossLink "Matrix2D/prependMatrix"}}{{/crossLink}} for an example that does.
    * @method prependTransform
@@ -2049,29 +2143,60 @@ this.createjs = this.createjs || {};
    * @param {Number} regY Optional.
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    **/
-  p.prependTransform = function ( x, y, scaleX, scaleY, rotation, skewX, skewY, regX, regY ) {
-    if ( rotation % 360 ) {
+  p.prependTransform = function (
+    x,
+    y,
+    scaleX,
+    scaleY,
+    rotation,
+    skewX,
+    skewY,
+    regX,
+    regY
+  ) {
+    if (rotation % 360) {
       var r = rotation * Matrix2D.DEG_TO_RAD;
-      var cos = Math.cos( r );
-      var sin = Math.sin( r );
+      var cos = Math.cos(r);
+      var sin = Math.sin(r);
     } else {
       cos = 1;
       sin = 0;
     }
 
-    if ( regX || regY ) {
+    if (regX || regY) {
       // prepend the registration offset:
       this.tx -= regX;
       this.ty -= regY;
     }
-    if ( skewX || skewY ) {
+    if (skewX || skewY) {
       // TODO: can this be combined into a single prepend operation?
       skewX *= Matrix2D.DEG_TO_RAD;
       skewY *= Matrix2D.DEG_TO_RAD;
-      this.prepend( cos * scaleX, sin * scaleX, -sin * scaleY, cos * scaleY, 0, 0 );
-      this.prepend( Math.cos( skewY ), Math.sin( skewY ), -Math.sin( skewX ), Math.cos( skewX ), x, y );
+      this.prepend(
+        cos * scaleX,
+        sin * scaleX,
+        -sin * scaleY,
+        cos * scaleY,
+        0,
+        0
+      );
+      this.prepend(
+        Math.cos(skewY),
+        Math.sin(skewY),
+        -Math.sin(skewX),
+        Math.cos(skewX),
+        x,
+        y
+      );
     } else {
-      this.prepend( cos * scaleX, sin * scaleX, -sin * scaleY, cos * scaleY, x, y );
+      this.prepend(
+        cos * scaleX,
+        sin * scaleX,
+        -sin * scaleY,
+        cos * scaleY,
+        x,
+        y
+      );
     }
     return this;
   };
@@ -2082,10 +2207,10 @@ this.createjs = this.createjs || {};
    * @param {Number} angle The angle to rotate by, in degrees. To use a value in radians, multiply it by `180/Math.PI`.
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    **/
-  p.rotate = function ( angle ) {
+  p.rotate = function (angle) {
     angle = angle * Matrix2D.DEG_TO_RAD;
-    var cos = Math.cos( angle );
-    var sin = Math.sin( angle );
+    var cos = Math.cos(angle);
+    var sin = Math.sin(angle);
 
     var a1 = this.a;
     var b1 = this.b;
@@ -2104,10 +2229,17 @@ this.createjs = this.createjs || {};
    * @param {Number} skewY The amount to skew vertically in degrees.
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    */
-  p.skew = function ( skewX, skewY ) {
+  p.skew = function (skewX, skewY) {
     skewX = skewX * Matrix2D.DEG_TO_RAD;
     skewY = skewY * Matrix2D.DEG_TO_RAD;
-    this.append( Math.cos( skewY ), Math.sin( skewY ), -Math.sin( skewX ), Math.cos( skewX ), 0, 0 );
+    this.append(
+      Math.cos(skewY),
+      Math.sin(skewY),
+      -Math.sin(skewX),
+      Math.cos(skewX),
+      0,
+      0
+    );
     return this;
   };
 
@@ -2118,7 +2250,7 @@ this.createjs = this.createjs || {};
    * @param {Number} y The amount to scale vertically.
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    **/
-  p.scale = function ( x, y ) {
+  p.scale = function (x, y) {
     this.a *= x;
     this.b *= x;
     this.c *= y;
@@ -2135,7 +2267,7 @@ this.createjs = this.createjs || {};
    * @param {Number} y
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    **/
-  p.translate = function ( x, y ) {
+  p.translate = function (x, y) {
     this.tx += this.a * x + this.c * y;
     this.ty += this.b * x + this.d * y;
     return this;
@@ -2169,8 +2301,8 @@ this.createjs = this.createjs || {};
     this.b = -b1 / n;
     this.c = -c1 / n;
     this.d = a1 / n;
-    this.tx = ( c1 * this.ty - d1 * tx1 ) / n;
-    this.ty = -( a1 * this.ty - b1 * tx1 ) / n;
+    this.tx = (c1 * this.ty - d1 * tx1) / n;
+    this.ty = -(a1 * this.ty - b1 * tx1) / n;
     return this;
   };
 
@@ -2180,7 +2312,14 @@ this.createjs = this.createjs || {};
    * @return {Boolean}
    **/
   p.isIdentity = function () {
-    return this.tx === 0 && this.ty === 0 && this.a === 1 && this.b === 0 && this.c === 0 && this.d === 1;
+    return (
+      this.tx === 0 &&
+      this.ty === 0 &&
+      this.a === 1 &&
+      this.b === 0 &&
+      this.c === 0 &&
+      this.d === 1
+    );
   };
 
   /**
@@ -2189,8 +2328,15 @@ this.createjs = this.createjs || {};
    * @param {Matrix2D} matrix The matrix to compare.
    * @return {Boolean}
    **/
-  p.equals = function ( matrix ) {
-    return this.tx === matrix.tx && this.ty === matrix.ty && this.a === matrix.a && this.b === matrix.b && this.c === matrix.c && this.d === matrix.d;
+  p.equals = function (matrix) {
+    return (
+      this.tx === matrix.tx &&
+      this.ty === matrix.ty &&
+      this.a === matrix.a &&
+      this.b === matrix.b &&
+      this.c === matrix.c &&
+      this.d === matrix.d
+    );
   };
 
   /**
@@ -2201,7 +2347,7 @@ this.createjs = this.createjs || {};
    * @param {Point | Object} [pt] An object to copy the result into. If omitted a generic object with x/y properties will be returned.
    * @return {Point} This matrix. Useful for chaining method calls.
    **/
-  p.transformPoint = function ( x, y, pt ) {
+  p.transformPoint = function (x, y, pt) {
     pt = pt || {};
     pt.x = x * this.a + y * this.c + this.tx;
     pt.y = x * this.b + y * this.d + this.ty;
@@ -2216,24 +2362,25 @@ this.createjs = this.createjs || {};
    * @param {Object} target The object to apply the transform properties to. If null, then a new object will be returned.
    * @return {Object} The target, or a new generic object with the transform properties applied.
    */
-  p.decompose = function ( target ) {
+  p.decompose = function (target) {
     // TODO: it would be nice to be able to solve for whether the matrix can be decomposed into only scale/rotation even when scale is negative
-    if ( target == null ) {
+    if (target == null) {
       target = {};
     }
     target.x = this.tx;
     target.y = this.ty;
-    target.scaleX = Math.sqrt( this.a * this.a + this.b * this.b );
-    target.scaleY = Math.sqrt( this.c * this.c + this.d * this.d );
+    target.scaleX = Math.sqrt(this.a * this.a + this.b * this.b);
+    target.scaleY = Math.sqrt(this.c * this.c + this.d * this.d);
 
-    var skewX = Math.atan2( -this.c, this.d );
-    var skewY = Math.atan2( this.b, this.a );
+    var skewX = Math.atan2(-this.c, this.d);
+    var skewY = Math.atan2(this.b, this.a);
 
-    var delta = Math.abs( 1 - skewX / skewY );
-    if ( delta < 0.00001 ) { // effectively identical, can use rotation:
+    var delta = Math.abs(1 - skewX / skewY);
+    if (delta < 0.00001) {
+      // effectively identical, can use rotation:
       target.rotation = skewY / Matrix2D.DEG_TO_RAD;
-      if ( this.a < 0 && this.d >= 0 ) {
-        target.rotation += ( target.rotation <= 0 ) ? 180 : -180;
+      if (this.a < 0 && this.d >= 0) {
+        target.rotation += target.rotation <= 0 ? 180 : -180;
       }
       target.skewX = target.skewY = 0;
     } else {
@@ -2249,8 +2396,15 @@ this.createjs = this.createjs || {};
    * @param {Matrix2D} matrix The matrix to copy properties from.
    * @return {Matrix2D} This matrix. Useful for chaining method calls.
    */
-  p.copy = function ( matrix ) {
-    return this.setValues( matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty );
+  p.copy = function (matrix) {
+    return this.setValues(
+      matrix.a,
+      matrix.b,
+      matrix.c,
+      matrix.d,
+      matrix.tx,
+      matrix.ty
+    );
   };
 
   /**
@@ -2259,7 +2413,7 @@ this.createjs = this.createjs || {};
    * @return {Matrix2D} a clone of the Matrix2D instance.
    **/
   p.clone = function () {
-    return new Matrix2D( this.a, this.b, this.c, this.d, this.tx, this.ty );
+    return new Matrix2D(this.a, this.b, this.c, this.d, this.tx, this.ty);
   };
 
   /**
@@ -2268,15 +2422,28 @@ this.createjs = this.createjs || {};
    * @return {String} a string representation of the instance.
    **/
   p.toString = function () {
-    return "[Matrix2D (a=" + this.a + " b=" + this.b + " c=" + this.c + " d=" + this.d + " tx=" + this.tx + " ty=" + this.ty + ")]";
+    return (
+      "[Matrix2D (a=" +
+      this.a +
+      " b=" +
+      this.b +
+      " c=" +
+      this.c +
+      " d=" +
+      this.d +
+      " tx=" +
+      this.tx +
+      " ty=" +
+      this.ty +
+      ")]"
+    );
   };
 
   // this has to be populated after the class is defined:
   Matrix2D.identity = new Matrix2D();
 
-
   createjs.Matrix2D = Matrix2D;
-}() );
+})();
 
 //##############################################################################
 // DisplayProps.js
@@ -2284,7 +2451,7 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
 
   /**
@@ -2297,8 +2464,8 @@ this.createjs = this.createjs || {};
    * @param {Number} [matrix] A transformation matrix. Defaults to a new identity matrix.
    * @constructor
    **/
-  function DisplayProps( visible, alpha, shadow, compositeOperation, matrix ) {
-    this.setValues( visible, alpha, shadow, compositeOperation, matrix );
+  function DisplayProps(visible, alpha, shadow, compositeOperation, matrix) {
+    this.setValues(visible, alpha, shadow, compositeOperation, matrix);
 
     // public properties:
     // assigned in the setValues method.
@@ -2348,12 +2515,15 @@ this.createjs = this.createjs || {};
    * @return {DisplayProps} This instance. Useful for chaining method calls.
    * @chainable
    */
-  p.setValues = function ( visible, alpha, shadow, compositeOperation, matrix ) {
+  p.setValues = function (visible, alpha, shadow, compositeOperation, matrix) {
     this.visible = visible == null ? true : !!visible;
     this.alpha = alpha == null ? 1 : alpha;
     this.shadow = shadow;
     this.compositeOperation = compositeOperation;
-    this.matrix = matrix || ( this.matrix && this.matrix.identity() ) || new createjs.Matrix2D();
+    this.matrix =
+      matrix ||
+      (this.matrix && this.matrix.identity()) ||
+      new createjs.Matrix2D();
     return this;
   };
 
@@ -2369,26 +2539,26 @@ this.createjs = this.createjs || {};
    * @return {DisplayProps} This instance. Useful for chaining method calls.
    * @chainable
    */
-  p.append = function ( visible, alpha, shadow, compositeOperation, matrix ) {
+  p.append = function (visible, alpha, shadow, compositeOperation, matrix) {
     this.alpha *= alpha;
     this.shadow = shadow || this.shadow;
     this.compositeOperation = compositeOperation || this.compositeOperation;
     this.visible = this.visible && visible;
-    matrix && this.matrix.appendMatrix( matrix );
+    matrix && this.matrix.appendMatrix(matrix);
     return this;
   };
 
   /**
    * Prepends the specified display properties. This is generally used to apply a parent's properties to a child's.
    * For example, to get the combined display properties that would be applied to a child, you could use:
-   * 
+   *
    * 	var o = myDisplayObject;
    * 	var props = new createjs.DisplayProps();
    * 	do {
    * 		// prepend each parent's props in turn:
    * 		props.prepend(o.visible, o.alpha, o.shadow, o.compositeOperation, o.getMatrix());
    * 	} while (o = o.parent);
-   * 	
+   *
    * @method prepend
    * @param {Boolean} visible desired visible value
    * @param {Number} alpha desired alpha value
@@ -2398,12 +2568,12 @@ this.createjs = this.createjs || {};
    * @return {DisplayProps} This instance. Useful for chaining method calls.
    * @chainable
    */
-  p.prepend = function ( visible, alpha, shadow, compositeOperation, matrix ) {
+  p.prepend = function (visible, alpha, shadow, compositeOperation, matrix) {
     this.alpha *= alpha;
     this.shadow = this.shadow || shadow;
     this.compositeOperation = this.compositeOperation || compositeOperation;
     this.visible = this.visible && visible;
-    matrix && this.matrix.prependMatrix( matrix );
+    matrix && this.matrix.prependMatrix(matrix);
     return this;
   };
 
@@ -2427,13 +2597,19 @@ this.createjs = this.createjs || {};
    * @return {DisplayProps} a clone of the DisplayProps instance.
    **/
   p.clone = function () {
-    return new DisplayProps( this.alpha, this.shadow, this.compositeOperation, this.visible, this.matrix.clone() );
+    return new DisplayProps(
+      this.alpha,
+      this.shadow,
+      this.compositeOperation,
+      this.visible,
+      this.matrix.clone()
+    );
   };
 
   // private methods:
 
   createjs.DisplayProps = DisplayProps;
-} )();
+})();
 
 //##############################################################################
 // Point.js
@@ -2441,26 +2617,24 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
    * Represents a point on a 2 dimensional x / y coordinate system.
    *
    * <h4>Example</h4>
-   * 
+   *
    *      var point = new createjs.Point(0, 100);
-   * 
+   *
    * @class Point
    * @param {Number} [x=0] X position.
    * @param {Number} [y=0] Y position.
    * @constructor
    **/
-  function Point( x, y ) {
-    this.setValues( x, y );
-
+  function Point(x, y) {
+    this.setValues(x, y);
 
     // public properties:
     // assigned in the setValues method.
@@ -2479,7 +2653,7 @@ this.createjs = this.createjs || {};
   var p = Point.prototype;
 
   // public methods:
-  /** 
+  /**
    * Sets the specified values on this instance.
    * @method setValues
    * @param {Number} [x=0] X position.
@@ -2487,7 +2661,7 @@ this.createjs = this.createjs || {};
    * @return {Point} This instance. Useful for chaining method calls.
    * @chainable
    */
-  p.setValues = function ( x, y ) {
+  p.setValues = function (x, y) {
     this.x = x || 0;
     this.y = y || 0;
     return this;
@@ -2500,7 +2674,7 @@ this.createjs = this.createjs || {};
    * @return {Point} This point. Useful for chaining method calls.
    * @chainable
    */
-  p.copy = function ( point ) {
+  p.copy = function (point) {
     this.x = point.x;
     this.y = point.y;
     return this;
@@ -2512,7 +2686,7 @@ this.createjs = this.createjs || {};
    * @return {Point} a clone of the Point instance.
    **/
   p.clone = function () {
-    return new Point( this.x, this.y );
+    return new Point(this.x, this.y);
   };
 
   /**
@@ -2524,9 +2698,8 @@ this.createjs = this.createjs || {};
     return "[Point (x=" + this.x + " y=" + this.y + ")]";
   };
 
-
   createjs.Point = Point;
-}() );
+})();
 
 //##############################################################################
 // Rectangle.js
@@ -2534,9 +2707,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -2553,9 +2725,8 @@ this.createjs = this.createjs || {};
    * @param {Number} [height=0] The height of the Rectangle.
    * @constructor
    **/
-  function Rectangle( x, y, width, height ) {
-    this.setValues( x, y, width, height );
-
+  function Rectangle(x, y, width, height) {
+    this.setValues(x, y, width, height);
 
     // public properties:
     // assigned in the setValues method.
@@ -2586,7 +2757,7 @@ this.createjs = this.createjs || {};
   var p = Rectangle.prototype;
 
   // public methods:
-  /** 
+  /**
    * Sets the specified values on this instance.
    * @method setValues
    * @param {Number} [x=0] X position.
@@ -2596,7 +2767,7 @@ this.createjs = this.createjs || {};
    * @return {Rectangle} This instance. Useful for chaining method calls.
    * @chainable
    */
-  p.setValues = function ( x, y, width, height ) {
+  p.setValues = function (x, y, width, height) {
     // don't forget to update docs in the constructor if these change:
     this.x = x || 0;
     this.y = y || 0;
@@ -2605,7 +2776,7 @@ this.createjs = this.createjs || {};
     return this;
   };
 
-  /** 
+  /**
    * Extends the rectangle's bounds to include the described point or rectangle.
    * @method extend
    * @param {Number} x X position of the point or rectangle.
@@ -2615,27 +2786,27 @@ this.createjs = this.createjs || {};
    * @return {Rectangle} This instance. Useful for chaining method calls.
    * @chainable
    */
-  p.extend = function ( x, y, width, height ) {
+  p.extend = function (x, y, width, height) {
     width = width || 0;
     height = height || 0;
-    if ( x + width > this.x + this.width ) {
+    if (x + width > this.x + this.width) {
       this.width = x + width - this.x;
     }
-    if ( y + height > this.y + this.height ) {
+    if (y + height > this.y + this.height) {
       this.height = y + height - this.y;
     }
-    if ( x < this.x ) {
+    if (x < this.x) {
       this.width += this.x - x;
       this.x = x;
     }
-    if ( y < this.y ) {
+    if (y < this.y) {
       this.height += this.y - y;
       this.y = y;
     }
     return this;
   };
 
-  /** 
+  /**
    * Adds the specified padding to the rectangle's bounds.
    * @method pad
    * @param {Number} top
@@ -2645,7 +2816,7 @@ this.createjs = this.createjs || {};
    * @return {Rectangle} This instance. Useful for chaining method calls.
    * @chainable
    */
-  p.pad = function ( top, left, bottom, right ) {
+  p.pad = function (top, left, bottom, right) {
     this.x -= left;
     this.y -= top;
     this.width += left + right;
@@ -2660,11 +2831,16 @@ this.createjs = this.createjs || {};
    * @return {Rectangle} This rectangle. Useful for chaining method calls.
    * @chainable
    */
-  p.copy = function ( rectangle ) {
-    return this.setValues( rectangle.x, rectangle.y, rectangle.width, rectangle.height );
+  p.copy = function (rectangle) {
+    return this.setValues(
+      rectangle.x,
+      rectangle.y,
+      rectangle.width,
+      rectangle.height
+    );
   };
 
-  /** 
+  /**
    * Returns true if this rectangle fully encloses the described point or rectangle.
    * @method contains
    * @param {Number} x X position of the point or rectangle.
@@ -2673,60 +2849,72 @@ this.createjs = this.createjs || {};
    * @param {Number} [height=0] The height of the rectangle.
    * @return {Boolean} True if the described point or rectangle is contained within this rectangle.
    */
-  p.contains = function ( x, y, width, height ) {
+  p.contains = function (x, y, width, height) {
     width = width || 0;
     height = height || 0;
-    return ( x >= this.x && x + width <= this.x + this.width && y >= this.y && y + height <= this.y + this.height );
+    return (
+      x >= this.x &&
+      x + width <= this.x + this.width &&
+      y >= this.y &&
+      y + height <= this.y + this.height
+    );
   };
 
-  /** 
+  /**
    * Returns a new rectangle which contains this rectangle and the specified rectangle.
    * @method union
    * @param {Rectangle} rect The rectangle to calculate a union with.
    * @return {Rectangle} A new rectangle describing the union.
    */
-  p.union = function ( rect ) {
-    return this.clone().extend( rect.x, rect.y, rect.width, rect.height );
+  p.union = function (rect) {
+    return this.clone().extend(rect.x, rect.y, rect.width, rect.height);
   };
 
-  /** 
+  /**
    * Returns a new rectangle which describes the intersection (overlap) of this rectangle and the specified rectangle,
    * or null if they do not intersect.
    * @method intersection
    * @param {Rectangle} rect The rectangle to calculate an intersection with.
    * @return {Rectangle} A new rectangle describing the intersection or null.
    */
-  p.intersection = function ( rect ) {
+  p.intersection = function (rect) {
     var x1 = rect.x,
       y1 = rect.y,
       x2 = x1 + rect.width,
       y2 = y1 + rect.height;
-    if ( this.x > x1 ) {
+    if (this.x > x1) {
       x1 = this.x;
     }
-    if ( this.y > y1 ) {
+    if (this.y > y1) {
       y1 = this.y;
     }
-    if ( this.x + this.width < x2 ) {
+    if (this.x + this.width < x2) {
       x2 = this.x + this.width;
     }
-    if ( this.y + this.height < y2 ) {
+    if (this.y + this.height < y2) {
       y2 = this.y + this.height;
     }
-    return ( x2 <= x1 || y2 <= y1 ) ? null : new Rectangle( x1, y1, x2 - x1, y2 - y1 );
+    return x2 <= x1 || y2 <= y1
+      ? null
+      : new Rectangle(x1, y1, x2 - x1, y2 - y1);
   };
 
-  /** 
+  /**
    * Returns true if the specified rectangle intersects (has any overlap) with this rectangle.
    * @method intersects
    * @param {Rectangle} rect The rectangle to compare.
    * @return {Boolean} True if the rectangles intersect.
    */
-  p.intersects = function ( rect ) {
-    return ( rect.x <= this.x + this.width && this.x <= rect.x + rect.width && rect.y <= this.y + this.height && this.y <= rect.y + rect.height );
+  p.intersects = function (rect) {
+    return (
+      rect.x <= this.x + this.width &&
+      this.x <= rect.x + rect.width &&
+      rect.y <= this.y + this.height &&
+      this.y <= rect.y + rect.height
+    );
   };
 
-  /** 
+  /**
    * Returns true if the width or height are equal or less than 0.
    * @method isEmpty
    * @return {Boolean} True if the rectangle is empty.
@@ -2741,7 +2929,7 @@ this.createjs = this.createjs || {};
    * @return {Rectangle} a clone of the Rectangle instance.
    **/
   p.clone = function () {
-    return new Rectangle( this.x, this.y, this.width, this.height );
+    return new Rectangle(this.x, this.y, this.width, this.height);
   };
 
   /**
@@ -2750,12 +2938,21 @@ this.createjs = this.createjs || {};
    * @return {String} a string representation of the instance.
    **/
   p.toString = function () {
-    return "[Rectangle (x=" + this.x + " y=" + this.y + " width=" + this.width + " height=" + this.height + ")]";
+    return (
+      "[Rectangle (x=" +
+      this.x +
+      " y=" +
+      this.y +
+      " width=" +
+      this.width +
+      " height=" +
+      this.height +
+      ")]"
+    );
   };
 
-
   createjs.Rectangle = Rectangle;
-}() );
+})();
 
 //##############################################################################
 // ButtonHelper.js
@@ -2763,9 +2960,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -2776,7 +2972,7 @@ this.createjs = this.createjs || {};
    *
    * The ButtonHelper instance does not need to be added to the stage, but a reference should be maintained to prevent
    * garbage collection.
-   * 
+   *
    * Note that over states will not work unless you call {{#crossLink "Stage/enableMouseOver"}}{{/crossLink}}.
    *
    * <h4>Example</h4>
@@ -2801,11 +2997,18 @@ this.createjs = this.createjs || {};
    * null, then the default state of the hitArea will be used. *
    * @constructor
    */
-  function ButtonHelper( target, outLabel, overLabel, downLabel, play, hitArea, hitLabel ) {
-    if ( !target.addEventListener ) {
+  function ButtonHelper(
+    target,
+    outLabel,
+    overLabel,
+    downLabel,
+    play,
+    hitArea,
+    hitLabel
+  ) {
+    if (!target.addEventListener) {
       return;
     }
-
 
     // public properties:
     /**
@@ -2845,7 +3048,6 @@ this.createjs = this.createjs || {};
      **/
     this.play = play;
 
-
     //  private properties
     /**
      * @property _isPressed
@@ -2871,11 +3073,11 @@ this.createjs = this.createjs || {};
     // setup:
     target.mouseChildren = false; // prevents issues when children are removed from the display list when state changes.
     this.enabled = true;
-    this.handleEvent( {} );
-    if ( hitArea ) {
-      if ( hitLabel ) {
+    this.handleEvent({});
+    if (hitArea) {
+      if (hitLabel) {
         hitArea.actionsEnabled = false;
-        hitArea.gotoAndStop && hitArea.gotoAndStop( hitLabel );
+        hitArea.gotoAndStop && hitArea.gotoAndStop(hitLabel);
       }
       target.hitArea = hitArea;
     }
@@ -2890,36 +3092,36 @@ this.createjs = this.createjs || {};
    * @[rptected
    * @protected
    **/
-  p._setEnabled = function ( value ) {
-    if ( value == this._enabled ) {
+  p._setEnabled = function (value) {
+    if (value == this._enabled) {
       return;
     }
     var o = this.target;
     this._enabled = value;
-    if ( value ) {
+    if (value) {
       o.cursor = "pointer";
-      o.addEventListener( "rollover", this );
-      o.addEventListener( "rollout", this );
-      o.addEventListener( "mousedown", this );
-      o.addEventListener( "pressup", this );
-      if ( o._reset ) {
+      o.addEventListener("rollover", this);
+      o.addEventListener("rollout", this);
+      o.addEventListener("mousedown", this);
+      o.addEventListener("pressup", this);
+      if (o._reset) {
         o.__reset = o._reset;
         o._reset = this._reset;
       }
     } else {
       o.cursor = null;
-      o.removeEventListener( "rollover", this );
-      o.removeEventListener( "rollout", this );
-      o.removeEventListener( "mousedown", this );
-      o.removeEventListener( "pressup", this );
-      if ( o.__reset ) {
+      o.removeEventListener("rollover", this);
+      o.removeEventListener("rollout", this);
+      o.removeEventListener("mousedown", this);
+      o.removeEventListener("pressup", this);
+      if (o.__reset) {
         o._reset = o.__reset;
-        delete( o.__reset );
+        delete o.__reset;
       }
     }
   };
   // ButtonHelper.setEnabled is @deprecated. Remove for 1.1+
-  p.setEnabled = createjs.deprecate( p._setEnabled, "ButtonHelper.setEnabled" );
+  p.setEnabled = createjs.deprecate(p._setEnabled, "ButtonHelper.setEnabled");
 
   /**
    * Use the {{#crossLink "ButtonHelper/enabled:property"}}{{/crossLink}} property instead.
@@ -2931,7 +3133,7 @@ this.createjs = this.createjs || {};
     return this._enabled;
   };
   // ButtonHelper.getEnabled is @deprecated. Remove for 1.1+
-  p.getEnabled = createjs.deprecate( p._getEnabled, "ButtonHelper.getEnabled" );
+  p.getEnabled = createjs.deprecate(p._getEnabled, "ButtonHelper.getEnabled");
 
   /**
    * Enables or disables the button functionality on the target.
@@ -2939,14 +3141,13 @@ this.createjs = this.createjs || {};
    * @type {Boolean}
    **/
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       enabled: {
         get: p._getEnabled,
-        set: p._setEnabled
-      }
-    } );
-  } catch ( e ) {} // TODO: use Log
-
+        set: p._setEnabled,
+      },
+    });
+  } catch (e) {} // TODO: use Log
 
   // public methods:
   /**
@@ -2958,33 +3159,34 @@ this.createjs = this.createjs || {};
     return "[ButtonHelper]";
   };
 
-
   // private methods:
   /**
    * @method handleEvent
    * @param {Object} evt The mouse event to handle.
    * @protected
    **/
-  p.handleEvent = function ( evt ) {
-    var label, t = this.target,
+  p.handleEvent = function (evt) {
+    var label,
+      t = this.target,
       type = evt.type;
-    if ( type == "mousedown" ) {
+    if (type == "mousedown") {
       this._isPressed = true;
       label = this.downLabel;
-    } else if ( type == "pressup" ) {
+    } else if (type == "pressup") {
       this._isPressed = false;
       label = this._isOver ? this.overLabel : this.outLabel;
-    } else if ( type == "rollover" ) {
+    } else if (type == "rollover") {
       this._isOver = true;
       label = this._isPressed ? this.downLabel : this.overLabel;
-    } else { // rollout and default
+    } else {
+      // rollout and default
       this._isOver = false;
       label = this._isPressed ? this.overLabel : this.outLabel;
     }
-    if ( this.play ) {
-      t.gotoAndPlay && t.gotoAndPlay( label );
+    if (this.play) {
+      t.gotoAndPlay && t.gotoAndPlay(label);
     } else {
-      t.gotoAndStop && t.gotoAndStop( label );
+      t.gotoAndStop && t.gotoAndStop(label);
     }
   };
 
@@ -3000,9 +3202,8 @@ this.createjs = this.createjs || {};
     this.paused = p;
   };
 
-
   createjs.ButtonHelper = ButtonHelper;
-}() );
+})();
 
 //##############################################################################
 // Shadow.js
@@ -3010,9 +3211,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -3030,11 +3230,9 @@ this.createjs = this.createjs || {};
    * @param {Number} offsetY The y offset of the shadow in pixels.
    * @param {Number} blur The size of the blurring effect.
    **/
-  function Shadow( color, offsetX, offsetY, blur ) {
-
-
+  function Shadow(color, offsetX, offsetY, blur) {
     // public properties:
-    /** 
+    /**
      * The color of the shadow. This can be any valid CSS color value.
      * @property color
      * @type String
@@ -3074,8 +3272,7 @@ this.createjs = this.createjs || {};
    * @final
    * @readonly
    **/
-  Shadow.identity = new Shadow( "transparent", 0, 0, 0 );
-
+  Shadow.identity = new Shadow("transparent", 0, 0, 0);
 
   // public methods:
   /**
@@ -3093,12 +3290,11 @@ this.createjs = this.createjs || {};
    * @return {Shadow} A clone of the current Shadow instance.
    **/
   p.clone = function () {
-    return new Shadow( this.color, this.offsetX, this.offsetY, this.blur );
+    return new Shadow(this.color, this.offsetX, this.offsetY, this.blur);
   };
 
-
   createjs.Shadow = Shadow;
-}() );
+})();
 
 //##############################################################################
 // SpriteSheet.js
@@ -3106,9 +3302,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -3279,9 +3474,8 @@ this.createjs = this.createjs || {};
    * @param {Object} data An object describing the SpriteSheet data.
    * @extends EventDispatcher
    **/
-  function SpriteSheet( data ) {
+  function SpriteSheet(data) {
     this.EventDispatcher_constructor();
-
 
     // public properties:
     /**
@@ -3299,7 +3493,6 @@ this.createjs = this.createjs || {};
      * @type Number
      **/
     this.framerate = 0;
-
 
     // private properties:
     /**
@@ -3388,13 +3581,12 @@ this.createjs = this.createjs || {};
     this._margin = 0;
 
     // setup:
-    this._parseData( data );
+    this._parseData(data);
   }
-  var p = createjs.extend( SpriteSheet, createjs.EventDispatcher );
+  var p = createjs.extend(SpriteSheet, createjs.EventDispatcher);
 
   // TODO: deprecated
   // p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
-
 
   // events:
   /**
@@ -3431,7 +3623,6 @@ this.createjs = this.createjs || {};
    * @since 0.8.2
    */
 
-
   // getter / setters:
   /**
    * Use the {{#crossLink "SpriteSheet/animations:property"}}{{/crossLink}} property instead.
@@ -3443,7 +3634,10 @@ this.createjs = this.createjs || {};
     return this._animations.slice();
   };
   // SpriteSheet.getAnimations is @deprecated. Remove for 1.1+
-  p.getAnimations = createjs.deprecate( p._getAnimations, "SpriteSheet.getAnimations" );
+  p.getAnimations = createjs.deprecate(
+    p._getAnimations,
+    "SpriteSheet.getAnimations"
+  );
 
   /**
    * Returns an array of all available animation names available on this sprite sheet as strings.
@@ -3452,13 +3646,12 @@ this.createjs = this.createjs || {};
    * @readonly
    **/
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       animations: {
-        get: p._getAnimations
-      }
-    } );
-  } catch ( e ) {}
-
+        get: p._getAnimations,
+      },
+    });
+  } catch (e) {}
 
   // public methods:
   /**
@@ -3469,12 +3662,12 @@ this.createjs = this.createjs || {};
    * @param {String} animation The name of the animation to get a frame count for.
    * @return {Number} The number of frames in the animation, or in the entire sprite sheet if the animation param is omitted.
    */
-  p.getNumFrames = function ( animation ) {
-    if ( animation == null ) {
+  p.getNumFrames = function (animation) {
+    if (animation == null) {
       return this._frames ? this._frames.length : this._numFrames || 0;
     } else {
-      var data = this._data[ animation ];
-      if ( data == null ) {
+      var data = this._data[animation];
+      if (data == null) {
         return 0;
       } else {
         return data.frames.length;
@@ -3494,8 +3687,8 @@ this.createjs = this.createjs || {};
    * @param {String} name The name of the animation to get.
    * @return {Object} a generic object with frames, speed, name, and next properties.
    **/
-  p.getAnimation = function ( name ) {
-    return this._data[ name ];
+  p.getAnimation = function (name) {
+    return this._data[name];
   };
 
   /**
@@ -3509,9 +3702,9 @@ this.createjs = this.createjs || {};
    * @param {Number} frameIndex The index of the frame.
    * @return {Object} a generic object with image and rect properties. Returns null if the frame does not exist.
    **/
-  p.getFrame = function ( frameIndex ) {
+  p.getFrame = function (frameIndex) {
     var frame;
-    if ( this._frames && ( frame = this._frames[ frameIndex ] ) ) {
+    if (this._frames && (frame = this._frames[frameIndex])) {
       return frame;
     }
     return null;
@@ -3528,9 +3721,16 @@ this.createjs = this.createjs || {};
    * @param {Rectangle} [rectangle] A Rectangle instance to copy the values into. By default a new instance is created.
    * @return {Rectangle} A Rectangle instance. Returns null if the frame does not exist, or the image is not fully loaded.
    **/
-  p.getFrameBounds = function ( frameIndex, rectangle ) {
-    var frame = this.getFrame( frameIndex );
-    return frame ? ( rectangle || new createjs.Rectangle() ).setValues( -frame.regX, -frame.regY, frame.rect.width, frame.rect.height ) : null;
+  p.getFrameBounds = function (frameIndex, rectangle) {
+    var frame = this.getFrame(frameIndex);
+    return frame
+      ? (rectangle || new createjs.Rectangle()).setValues(
+          -frame.regX,
+          -frame.regY,
+          frame.rect.width,
+          frame.rect.height
+        )
+      : null;
   };
 
   /**
@@ -3547,7 +3747,7 @@ this.createjs = this.createjs || {};
    * @method clone
    **/
   p.clone = function () {
-    throw ( "SpriteSheet cannot be cloned." )
+    throw "SpriteSheet cannot be cloned.";
   };
 
   // private methods:
@@ -3556,55 +3756,56 @@ this.createjs = this.createjs || {};
    * @param {Object} data An object describing the SpriteSheet data.
    * @protected
    **/
-  p._parseData = function ( data ) {
+  p._parseData = function (data) {
     var i, l, o, a;
-    if ( data == null ) {
+    if (data == null) {
       return;
     }
 
     this.framerate = data.framerate || 0;
 
     // parse images:
-    if ( data.images && ( l = data.images.length ) > 0 ) {
+    if (data.images && (l = data.images.length) > 0) {
       a = this._images = [];
-      for ( i = 0; i < l; i++ ) {
-        var img = data.images[ i ];
-        if ( typeof img == "string" ) {
+      for (i = 0; i < l; i++) {
+        var img = data.images[i];
+        if (typeof img == "string") {
           var src = img;
-          img = document.createElement( "img" );
+          img = document.createElement("img");
           img.src = src;
         }
-        a.push( img );
-        if ( !img.getContext && !img.naturalWidth ) {
+        a.push(img);
+        if (!img.getContext && !img.naturalWidth) {
           this._loadCount++;
           this.complete = false;
-          ( function ( o, src ) {
+          (function (o, src) {
             img.onload = function () {
-              o._handleImageLoad( src );
-            }
-          } )( this, src );
-          ( function ( o, src ) {
+              o._handleImageLoad(src);
+            };
+          })(this, src);
+          (function (o, src) {
             img.onerror = function () {
-              o._handleImageError( src );
-            }
-          } )( this, src );
+              o._handleImageError(src);
+            };
+          })(this, src);
         }
       }
     }
 
     // parse frames:
-    if ( data.frames == null ) { // nothing
-    } else if ( Array.isArray( data.frames ) ) {
+    if (data.frames == null) {
+      // nothing
+    } else if (Array.isArray(data.frames)) {
       this._frames = [];
       a = data.frames;
-      for ( i = 0, l = a.length; i < l; i++ ) {
-        var arr = a[ i ];
-        this._frames.push( {
-          image: this._images[ arr[ 4 ] ? arr[ 4 ] : 0 ],
-          rect: new createjs.Rectangle( arr[ 0 ], arr[ 1 ], arr[ 2 ], arr[ 3 ] ),
-          regX: arr[ 5 ] || 0,
-          regY: arr[ 6 ] || 0
-        } );
+      for (i = 0, l = a.length; i < l; i++) {
+        var arr = a[i];
+        this._frames.push({
+          image: this._images[arr[4] ? arr[4] : 0],
+          rect: new createjs.Rectangle(arr[0], arr[1], arr[2], arr[3]),
+          regX: arr[5] || 0,
+          regY: arr[6] || 0,
+        });
       }
     } else {
       o = data.frames;
@@ -3615,51 +3816,55 @@ this.createjs = this.createjs || {};
       this._spacing = o.spacing || 0;
       this._margin = o.margin || 0;
       this._numFrames = o.count;
-      if ( this._loadCount == 0 ) {
+      if (this._loadCount == 0) {
         this._calculateFrames();
       }
     }
 
     // parse animations:
     this._animations = [];
-    if ( ( o = data.animations ) != null ) {
+    if ((o = data.animations) != null) {
       this._data = {};
       var name;
-      for ( name in o ) {
+      for (name in o) {
         var anim = {
-          name: name
+          name: name,
         };
-        var obj = o[ name ];
-        if ( typeof obj == "number" ) { // single frame
-          a = anim.frames = [ obj ];
-        } else if ( Array.isArray( obj ) ) { // simple
-          if ( obj.length == 1 ) {
-            anim.frames = [ obj[ 0 ] ];
+        var obj = o[name];
+        if (typeof obj == "number") {
+          // single frame
+          a = anim.frames = [obj];
+        } else if (Array.isArray(obj)) {
+          // simple
+          if (obj.length == 1) {
+            anim.frames = [obj[0]];
           } else {
-            anim.speed = obj[ 3 ];
-            anim.next = obj[ 2 ];
+            anim.speed = obj[3];
+            anim.next = obj[2];
             a = anim.frames = [];
-            for ( i = obj[ 0 ]; i <= obj[ 1 ]; i++ ) {
-              a.push( i );
+            for (i = obj[0]; i <= obj[1]; i++) {
+              a.push(i);
             }
           }
-        } else { // complex
+        } else {
+          // complex
           anim.speed = obj.speed;
           anim.next = obj.next;
           var frames = obj.frames;
-          a = anim.frames = ( typeof frames == "number" ) ? [ frames ] : frames.slice( 0 );
+          a = anim.frames =
+            typeof frames == "number" ? [frames] : frames.slice(0);
         }
-        if ( anim.next === true || anim.next === undefined ) {
+        if (anim.next === true || anim.next === undefined) {
           anim.next = name;
         } // loop
-        if ( anim.next === false || ( a.length < 2 && anim.next == name ) ) {
+        if (anim.next === false || (a.length < 2 && anim.next == name)) {
           anim.next = null;
         } // stop
-        if ( !anim.speed ) {
+        if (!anim.speed) {
           anim.speed = 1;
         }
-        this._animations.push( name );
-        this._data[ name ] = anim;
+        this._animations.push(name);
+        this._data[name] = anim;
       }
     }
   };
@@ -3668,11 +3873,11 @@ this.createjs = this.createjs || {};
    * @method _handleImageLoad
    * @protected
    **/
-  p._handleImageLoad = function ( src ) {
-    if ( --this._loadCount == 0 ) {
+  p._handleImageLoad = function (src) {
+    if (--this._loadCount == 0) {
       this._calculateFrames();
       this.complete = true;
-      this.dispatchEvent( "complete" );
+      this.dispatchEvent("complete");
     }
   };
 
@@ -3680,14 +3885,14 @@ this.createjs = this.createjs || {};
    * @method _handleImageError
    * @protected
    */
-  p._handleImageError = function ( src ) {
-    var errorEvent = new createjs.Event( "error" );
+  p._handleImageError = function (src) {
+    var errorEvent = new createjs.Event("error");
     errorEvent.src = src;
-    this.dispatchEvent( errorEvent );
+    this.dispatchEvent(errorEvent);
 
     // Complete is still dispatched.
-    if ( --this._loadCount == 0 ) {
-      this.dispatchEvent( "complete" );
+    if (--this._loadCount == 0) {
+      this.dispatchEvent("complete");
     }
   };
 
@@ -3696,7 +3901,7 @@ this.createjs = this.createjs || {};
    * @protected
    **/
   p._calculateFrames = function () {
-    if ( this._frames || this._frameWidth == 0 ) {
+    if (this._frames || this._frameWidth == 0) {
       return;
     }
 
@@ -3709,37 +3914,35 @@ this.createjs = this.createjs || {};
     var spacing = this._spacing,
       margin = this._margin;
 
-    imgLoop:
-      for ( var i = 0, imgs = this._images; i < imgs.length; i++ ) {
-        var img = imgs[ i ],
-          imgW = ( img.width || img.naturalWidth ),
-          imgH = ( img.height || img.naturalHeight );
+    imgLoop: for (var i = 0, imgs = this._images; i < imgs.length; i++) {
+      var img = imgs[i],
+        imgW = img.width || img.naturalWidth,
+        imgH = img.height || img.naturalHeight;
 
-        var y = margin;
-        while ( y <= imgH - margin - frameHeight ) {
-          var x = margin;
-          while ( x <= imgW - margin - frameWidth ) {
-            if ( frameCount >= maxFrames ) {
-              break imgLoop;
-            }
-            frameCount++;
-            this._frames.push( {
-              image: img,
-              rect: new createjs.Rectangle( x, y, frameWidth, frameHeight ),
-              regX: this._regX,
-              regY: this._regY
-            } );
-            x += frameWidth + spacing;
+      var y = margin;
+      while (y <= imgH - margin - frameHeight) {
+        var x = margin;
+        while (x <= imgW - margin - frameWidth) {
+          if (frameCount >= maxFrames) {
+            break imgLoop;
           }
-          y += frameHeight + spacing;
+          frameCount++;
+          this._frames.push({
+            image: img,
+            rect: new createjs.Rectangle(x, y, frameWidth, frameHeight),
+            regX: this._regX,
+            regY: this._regY,
+          });
+          x += frameWidth + spacing;
         }
+        y += frameHeight + spacing;
       }
+    }
     this._numFrames = frameCount;
   };
 
-
-  createjs.SpriteSheet = createjs.promote( SpriteSheet, "EventDispatcher" );
-}() );
+  createjs.SpriteSheet = createjs.promote(SpriteSheet, "EventDispatcher");
+})();
 
 //##############################################################################
 // Graphics.js
@@ -3747,9 +3950,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -3848,8 +4050,6 @@ this.createjs = this.createjs || {};
    * @constructor
    **/
   function Graphics() {
-
-
     // public properties
     /**
      * Holds a reference to the last command that was created or appended. For example, you could retain a reference
@@ -3863,7 +4063,6 @@ this.createjs = this.createjs || {};
      * @type Object
      **/
     this.command = null;
-
 
     // private properties
     /**
@@ -3985,14 +4184,14 @@ this.createjs = this.createjs || {};
    * @return {String} A CSS compatible color string based on the specified RGB numeric color values in the format
    * "rgba(255,255,255,1.0)", or if alpha is null then in the format "rgb(255,255,255)".
    **/
-  Graphics.getRGB = function ( r, g, b, alpha ) {
-    if ( r != null && b == null ) {
+  Graphics.getRGB = function (r, g, b, alpha) {
+    if (r != null && b == null) {
       alpha = g;
-      b = r & 0xFF;
-      g = r >> 8 & 0xFF;
-      r = r >> 16 & 0xFF;
+      b = r & 0xff;
+      g = (r >> 8) & 0xff;
+      r = (r >> 16) & 0xff;
     }
-    if ( alpha == null ) {
+    if (alpha == null) {
       return "rgb(" + r + "," + g + "," + b + ")";
     } else {
       return "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
@@ -4015,14 +4214,23 @@ this.createjs = this.createjs || {};
    * @return {String} A CSS compatible color string based on the specified HSL numeric color values in the format
    * "hsla(360,100,100,1.0)", or if alpha is null then in the format "hsl(360,100,100)".
    **/
-  Graphics.getHSL = function ( hue, saturation, lightness, alpha ) {
-    if ( alpha == null ) {
-      return "hsl(" + ( hue % 360 ) + "," + saturation + "%," + lightness + "%)";
+  Graphics.getHSL = function (hue, saturation, lightness, alpha) {
+    if (alpha == null) {
+      return "hsl(" + (hue % 360) + "," + saturation + "%," + lightness + "%)";
     } else {
-      return "hsla(" + ( hue % 360 ) + "," + saturation + "%," + lightness + "%," + alpha + ")";
+      return (
+        "hsla(" +
+        (hue % 360) +
+        "," +
+        saturation +
+        "%," +
+        lightness +
+        "%," +
+        alpha +
+        ")"
+      );
     }
   };
-
 
   // static properties:
   /**
@@ -4043,70 +4251,70 @@ this.createjs = this.createjs || {};
    * @type {Object}
    **/
   Graphics.BASE_64 = {
-    "A": 0,
-    "B": 1,
-    "C": 2,
-    "D": 3,
-    "E": 4,
-    "F": 5,
-    "G": 6,
-    "H": 7,
-    "I": 8,
-    "J": 9,
-    "K": 10,
-    "L": 11,
-    "M": 12,
-    "N": 13,
-    "O": 14,
-    "P": 15,
-    "Q": 16,
-    "R": 17,
-    "S": 18,
-    "T": 19,
-    "U": 20,
-    "V": 21,
-    "W": 22,
-    "X": 23,
-    "Y": 24,
-    "Z": 25,
-    "a": 26,
-    "b": 27,
-    "c": 28,
-    "d": 29,
-    "e": 30,
-    "f": 31,
-    "g": 32,
-    "h": 33,
-    "i": 34,
-    "j": 35,
-    "k": 36,
-    "l": 37,
-    "m": 38,
-    "n": 39,
-    "o": 40,
-    "p": 41,
-    "q": 42,
-    "r": 43,
-    "s": 44,
-    "t": 45,
-    "u": 46,
-    "v": 47,
-    "w": 48,
-    "x": 49,
-    "y": 50,
-    "z": 51,
-    "0": 52,
-    "1": 53,
-    "2": 54,
-    "3": 55,
-    "4": 56,
-    "5": 57,
-    "6": 58,
-    "7": 59,
-    "8": 60,
-    "9": 61,
+    A: 0,
+    B: 1,
+    C: 2,
+    D: 3,
+    E: 4,
+    F: 5,
+    G: 6,
+    H: 7,
+    I: 8,
+    J: 9,
+    K: 10,
+    L: 11,
+    M: 12,
+    N: 13,
+    O: 14,
+    P: 15,
+    Q: 16,
+    R: 17,
+    S: 18,
+    T: 19,
+    U: 20,
+    V: 21,
+    W: 22,
+    X: 23,
+    Y: 24,
+    Z: 25,
+    a: 26,
+    b: 27,
+    c: 28,
+    d: 29,
+    e: 30,
+    f: 31,
+    g: 32,
+    h: 33,
+    i: 34,
+    j: 35,
+    k: 36,
+    l: 37,
+    m: 38,
+    n: 39,
+    o: 40,
+    p: 41,
+    q: 42,
+    r: 43,
+    s: 44,
+    t: 45,
+    u: 46,
+    v: 47,
+    w: 48,
+    x: 49,
+    y: 50,
+    z: 51,
+    0: 52,
+    1: 53,
+    2: 54,
+    3: 55,
+    4: 56,
+    5: 57,
+    6: 58,
+    7: 59,
+    8: 60,
+    9: 61,
     "+": 62,
-    "/": 63
+    "/": 63,
   };
 
   /**
@@ -4123,7 +4331,7 @@ this.createjs = this.createjs || {};
    * @readonly
    * @type {Array}
    **/
-  Graphics.STROKE_CAPS_MAP = [ "butt", "round", "square" ];
+  Graphics.STROKE_CAPS_MAP = ["butt", "round", "square"];
 
   /**
    * Maps numeric values for the joints parameter of {{#crossLink "Graphics/setStrokeStyle"}}{{/crossLink}} to
@@ -4139,7 +4347,7 @@ this.createjs = this.createjs || {};
    * @readonly
    * @type {Array}
    **/
-  Graphics.STROKE_JOINTS_MAP = [ "miter", "round", "bevel" ];
+  Graphics.STROKE_JOINTS_MAP = ["miter", "round", "bevel"];
 
   /**
    * @property _ctx
@@ -4147,12 +4355,13 @@ this.createjs = this.createjs || {};
    * @protected
    * @type {CanvasRenderingContext2D}
    **/
-  var canvas = ( createjs.createCanvas ? createjs.createCanvas() : document.createElement( "canvas" ) );
-  if ( canvas.getContext ) {
-    Graphics._ctx = canvas.getContext( "2d" );
+  var canvas = createjs.createCanvas
+    ? createjs.createCanvas()
+    : document.createElement("canvas");
+  if (canvas.getContext) {
+    Graphics._ctx = canvas.getContext("2d");
     canvas.width = canvas.height = 1;
   }
-
 
   // getter / setters:
   /**
@@ -4166,7 +4375,10 @@ this.createjs = this.createjs || {};
     return this._instructions;
   };
   // Graphics.getInstructions is @deprecated. Remove for 1.1+
-  p.getInstructions = createjs.deprecate( p._getInstructions, "Graphics.getInstructions" );
+  p.getInstructions = createjs.deprecate(
+    p._getInstructions,
+    "Graphics.getInstructions"
+  );
 
   /**
    * Returns the graphics instructions array. Each entry is a graphics command object (ex. Graphics.Fill, Graphics.Rect)
@@ -4178,13 +4390,12 @@ this.createjs = this.createjs || {};
    * @readonly
    **/
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       instructions: {
-        get: p._getInstructions
-      }
-    } );
-  } catch ( e ) {}
-
+        get: p._getInstructions,
+      },
+    });
+  } catch (e) {}
 
   // public methods:
   /**
@@ -4193,7 +4404,7 @@ this.createjs = this.createjs || {};
    * @return {Boolean} Returns true if this Graphics instance has no drawing commands.
    **/
   p.isEmpty = function () {
-    return !( this._instructions.length || this._activeInstructions.length );
+    return !(this._instructions.length || this._activeInstructions.length);
   };
 
   /**
@@ -4205,11 +4416,11 @@ this.createjs = this.createjs || {};
    * @param {CanvasRenderingContext2D} ctx The canvas 2D context object to draw into.
    * @param {Object} data Optional data that is passed to graphics command exec methods. When called from a Shape instance, the shape passes itself as the data parameter. This can be used by custom graphic commands to insert contextual data.
    **/
-  p.draw = function ( ctx, data ) {
+  p.draw = function (ctx, data) {
     this._updateInstructions();
     var instr = this._instructions;
-    for ( var i = this._storeIndex, l = instr.length; i < l; i++ ) {
-      instr[ i ].exec( ctx, data );
+    for (var i = this._storeIndex, l = instr.length; i < l; i++) {
+      instr[i].exec(ctx, data);
     }
   };
 
@@ -4221,17 +4432,17 @@ this.createjs = this.createjs || {};
    * @method drawAsPath
    * @param {CanvasRenderingContext2D} ctx The canvas 2D context object to draw into.
    **/
-  p.drawAsPath = function ( ctx ) {
+  p.drawAsPath = function (ctx) {
     this._updateInstructions();
-    var instr, instrs = this._instructions;
-    for ( var i = this._storeIndex, l = instrs.length; i < l; i++ ) {
+    var instr,
+      instrs = this._instructions;
+    for (var i = this._storeIndex, l = instrs.length; i < l; i++) {
       // the first command is always a beginPath command.
-      if ( ( instr = instrs[ i ] ).path !== false ) {
-        instr.exec( ctx );
+      if ((instr = instrs[i]).path !== false) {
+        instr.exec(ctx);
       }
     }
   };
-
 
   // public methods that map directly to context 2D calls:
   /**
@@ -4242,8 +4453,8 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls).
    * @chainable
    **/
-  p.moveTo = function ( x, y ) {
-    return this.append( new G.MoveTo( x, y ), true );
+  p.moveTo = function (x, y) {
+    return this.append(new G.MoveTo(x, y), true);
   };
 
   /**
@@ -4260,8 +4471,8 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.lineTo = function ( x, y ) {
-    return this.append( new G.LineTo( x, y ) );
+  p.lineTo = function (x, y) {
+    return this.append(new G.LineTo(x, y));
   };
 
   /**
@@ -4277,8 +4488,8 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.arcTo = function ( x1, y1, x2, y2, radius ) {
-    return this.append( new G.ArcTo( x1, y1, x2, y2, radius ) );
+  p.arcTo = function (x1, y1, x2, y2, radius) {
+    return this.append(new G.ArcTo(x1, y1, x2, y2, radius));
   };
 
   /**
@@ -4300,8 +4511,10 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.arc = function ( x, y, radius, startAngle, endAngle, anticlockwise ) {
-    return this.append( new G.Arc( x, y, radius, startAngle, endAngle, anticlockwise ) );
+  p.arc = function (x, y, radius, startAngle, endAngle, anticlockwise) {
+    return this.append(
+      new G.Arc(x, y, radius, startAngle, endAngle, anticlockwise)
+    );
   };
 
   /**
@@ -4316,8 +4529,8 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.quadraticCurveTo = function ( cpx, cpy, x, y ) {
-    return this.append( new G.QuadraticCurveTo( cpx, cpy, x, y ) );
+  p.quadraticCurveTo = function (cpx, cpy, x, y) {
+    return this.append(new G.QuadraticCurveTo(cpx, cpy, x, y));
   };
 
   /**
@@ -4335,8 +4548,8 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.bezierCurveTo = function ( cp1x, cp1y, cp2x, cp2y, x, y ) {
-    return this.append( new G.BezierCurveTo( cp1x, cp1y, cp2x, cp2y, x, y ) );
+  p.bezierCurveTo = function (cp1x, cp1y, cp2x, cp2y, x, y) {
+    return this.append(new G.BezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y));
   };
 
   /**
@@ -4352,8 +4565,8 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.rect = function ( x, y, w, h ) {
-    return this.append( new G.Rect( x, y, w, h ) );
+  p.rect = function (x, y, w, h) {
+    return this.append(new G.Rect(x, y, w, h));
   };
 
   /**
@@ -4364,9 +4577,10 @@ this.createjs = this.createjs || {};
    * @chainable
    **/
   p.closePath = function () {
-    return this._activeInstructions.length ? this.append( new G.ClosePath() ) : this;
+    return this._activeInstructions.length
+      ? this.append(new G.ClosePath())
+      : this;
   };
-
 
   // public methods that roughly map to Adobe Flash/Animate graphics APIs:
   /**
@@ -4377,8 +4591,17 @@ this.createjs = this.createjs || {};
    * @chainable
    **/
   p.clear = function () {
-    this._instructions.length = this._activeInstructions.length = this._commitIndex = 0;
-    this._strokeStyle = this._oldStrokeStyle = this._stroke = this._fill = this._strokeDash = this._oldStrokeDash = null;
+    this._instructions.length =
+      this._activeInstructions.length =
+      this._commitIndex =
+        0;
+    this._strokeStyle =
+      this._oldStrokeStyle =
+      this._stroke =
+      this._fill =
+      this._strokeDash =
+      this._oldStrokeDash =
+        null;
     this._dirty = this._strokeIgnoreScale = false;
     return this;
   };
@@ -4391,8 +4614,8 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.beginFill = function ( color ) {
-    return this._setFill( color ? new G.Fill( color ) : null );
+  p.beginFill = function (color) {
+    return this._setFill(color ? new G.Fill(color) : null);
   };
 
   /**
@@ -4415,8 +4638,10 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.beginLinearGradientFill = function ( colors, ratios, x0, y0, x1, y1 ) {
-    return this._setFill( new G.Fill().linearGradient( colors, ratios, x0, y0, x1, y1 ) );
+  p.beginLinearGradientFill = function (colors, ratios, x0, y0, x1, y1) {
+    return this._setFill(
+      new G.Fill().linearGradient(colors, ratios, x0, y0, x1, y1)
+    );
   };
 
   /**
@@ -4440,8 +4665,19 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.beginRadialGradientFill = function ( colors, ratios, x0, y0, r0, x1, y1, r1 ) {
-    return this._setFill( new G.Fill().radialGradient( colors, ratios, x0, y0, r0, x1, y1, r1 ) );
+  p.beginRadialGradientFill = function (
+    colors,
+    ratios,
+    x0,
+    y0,
+    r0,
+    x1,
+    y1,
+    r1
+  ) {
+    return this._setFill(
+      new G.Fill().radialGradient(colors, ratios, x0, y0, r0, x1, y1, r1)
+    );
   };
 
   /**
@@ -4458,8 +4694,8 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.beginBitmapFill = function ( image, repetition, matrix ) {
-    return this._setFill( new G.Fill( null, matrix ).bitmap( image, repetition ) );
+  p.beginBitmapFill = function (image, repetition, matrix) {
+    return this._setFill(new G.Fill(null, matrix).bitmap(image, repetition));
   };
 
   /**
@@ -4495,12 +4731,24 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.setStrokeStyle = function ( thickness, caps, joints, miterLimit, ignoreScale ) {
-    this._updateInstructions( true );
-    this._strokeStyle = this.command = new G.StrokeStyle( thickness, caps, joints, miterLimit, ignoreScale );
+  p.setStrokeStyle = function (
+    thickness,
+    caps,
+    joints,
+    miterLimit,
+    ignoreScale
+  ) {
+    this._updateInstructions(true);
+    this._strokeStyle = this.command = new G.StrokeStyle(
+      thickness,
+      caps,
+      joints,
+      miterLimit,
+      ignoreScale
+    );
 
     // ignoreScale lives on Stroke, not StrokeStyle, so we do a little trickery:
-    if ( this._stroke ) {
+    if (this._stroke) {
       this._stroke.ignoreScale = ignoreScale;
     }
     this._strokeIgnoreScale = ignoreScale;
@@ -4521,9 +4769,9 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.setStrokeDash = function ( segments, offset ) {
-    this._updateInstructions( true );
-    this._strokeDash = this.command = new G.StrokeDash( segments, offset );
+  p.setStrokeDash = function (segments, offset) {
+    this._updateInstructions(true);
+    this._strokeDash = this.command = new G.StrokeDash(segments, offset);
     return this;
   };
 
@@ -4535,8 +4783,8 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.beginStroke = function ( color ) {
-    return this._setStroke( color ? new G.Stroke( color ) : null );
+  p.beginStroke = function (color) {
+    return this._setStroke(color ? new G.Stroke(color) : null);
   };
 
   /**
@@ -4560,8 +4808,10 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.beginLinearGradientStroke = function ( colors, ratios, x0, y0, x1, y1 ) {
-    return this._setStroke( new G.Stroke().linearGradient( colors, ratios, x0, y0, x1, y1 ) );
+  p.beginLinearGradientStroke = function (colors, ratios, x0, y0, x1, y1) {
+    return this._setStroke(
+      new G.Stroke().linearGradient(colors, ratios, x0, y0, x1, y1)
+    );
   };
 
   /**
@@ -4588,8 +4838,19 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.beginRadialGradientStroke = function ( colors, ratios, x0, y0, r0, x1, y1, r1 ) {
-    return this._setStroke( new G.Stroke().radialGradient( colors, ratios, x0, y0, r0, x1, y1, r1 ) );
+  p.beginRadialGradientStroke = function (
+    colors,
+    ratios,
+    x0,
+    y0,
+    r0,
+    x1,
+    y1,
+    r1
+  ) {
+    return this._setStroke(
+      new G.Stroke().radialGradient(colors, ratios, x0, y0, r0, x1, y1, r1)
+    );
   };
 
   /**
@@ -4604,9 +4865,9 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.beginBitmapStroke = function ( image, repetition ) {
+  p.beginBitmapStroke = function (image, repetition) {
     // NOTE: matrix is not supported for stroke because transforms on strokes also affect the drawn stroke width.
-    return this._setStroke( new G.Stroke().bitmap( image, repetition ) );
+    return this._setStroke(new G.Stroke().bitmap(image, repetition));
   };
 
   /**
@@ -4658,8 +4919,17 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.drawRoundRect = function ( x, y, w, h, radius ) {
-    return this.drawRoundRectComplex( x, y, w, h, radius, radius, radius, radius );
+  p.drawRoundRect = function (x, y, w, h, radius) {
+    return this.drawRoundRectComplex(
+      x,
+      y,
+      w,
+      h,
+      radius,
+      radius,
+      radius,
+      radius
+    );
   };
 
   /**
@@ -4677,8 +4947,19 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.drawRoundRectComplex = function ( x, y, w, h, radiusTL, radiusTR, radiusBR, radiusBL ) {
-    return this.append( new G.RoundRect( x, y, w, h, radiusTL, radiusTR, radiusBR, radiusBL ) );
+  p.drawRoundRectComplex = function (
+    x,
+    y,
+    w,
+    h,
+    radiusTL,
+    radiusTR,
+    radiusBR,
+    radiusBL
+  ) {
+    return this.append(
+      new G.RoundRect(x, y, w, h, radiusTL, radiusTR, radiusBR, radiusBL)
+    );
   };
 
   /**
@@ -4705,8 +4986,8 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.drawCircle = function ( x, y, radius ) {
-    return this.append( new G.Circle( x, y, radius ) );
+  p.drawCircle = function (x, y, radius) {
+    return this.append(new G.Circle(x, y, radius));
   };
 
   /**
@@ -4723,8 +5004,8 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.drawEllipse = function ( x, y, w, h ) {
-    return this.append( new G.Ellipse( x, y, w, h ) );
+  p.drawEllipse = function (x, y, w, h) {
+    return this.append(new G.Ellipse(x, y, w, h));
   };
 
   /**
@@ -4749,8 +5030,8 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.drawPolyStar = function ( x, y, radius, sides, pointSize, angle ) {
-    return this.append( new G.PolyStar( x, y, radius, sides, pointSize, angle ) );
+  p.drawPolyStar = function (x, y, radius, sides, pointSize, angle) {
+    return this.append(new G.PolyStar(x, y, radius, sides, pointSize, angle));
   };
 
   /**
@@ -4780,10 +5061,10 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.append = function ( command, clean ) {
-    this._activeInstructions.push( command );
+  p.append = function (command, clean) {
+    this._activeInstructions.push(command);
     this.command = command;
-    if ( !clean ) {
+    if (!clean) {
       this._dirty = true;
     }
     return this;
@@ -4825,9 +5106,15 @@ this.createjs = this.createjs || {};
    * @return {Graphics} The Graphics instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.decodePath = function ( str ) {
-    var instructions = [ this.moveTo, this.lineTo, this.quadraticCurveTo, this.bezierCurveTo, this.closePath ];
-    var paramCount = [ 2, 2, 4, 6, 0 ];
+  p.decodePath = function (str) {
+    var instructions = [
+      this.moveTo,
+      this.lineTo,
+      this.quadraticCurveTo,
+      this.bezierCurveTo,
+      this.closePath,
+    ];
+    var paramCount = [2, 2, 4, 6, 0];
     var i = 0,
       l = str.length;
     var params = [];
@@ -4835,39 +5122,39 @@ this.createjs = this.createjs || {};
       y = 0;
     var base64 = Graphics.BASE_64;
 
-    while ( i < l ) {
-      var c = str.charAt( i );
-      var n = base64[ c ];
+    while (i < l) {
+      var c = str.charAt(i);
+      var n = base64[c];
       var fi = n >> 3; // highest order bits 1-3 code for operation.
-      var f = instructions[ fi ];
+      var f = instructions[fi];
       // check that we have a valid instruction & that the unused bits are empty:
-      if ( !f || ( n & 3 ) ) {
-        throw ( "bad path data (@" + i + "): " + c );
+      if (!f || n & 3) {
+        throw "bad path data (@" + i + "): " + c;
       }
-      var pl = paramCount[ fi ];
-      if ( !fi ) {
+      var pl = paramCount[fi];
+      if (!fi) {
         x = y = 0;
       } // move operations reset the position.
       params.length = 0;
       i++;
-      var charCount = ( n >> 2 & 1 ) + 2; // 4th header bit indicates number size for this operation.
-      for ( var p = 0; p < pl; p++ ) {
-        var num = base64[ str.charAt( i ) ];
-        var sign = ( num >> 5 ) ? -1 : 1;
-        num = ( ( num & 31 ) << 6 ) | ( base64[ str.charAt( i + 1 ) ] );
-        if ( charCount == 3 ) {
-          num = ( num << 6 ) | ( base64[ str.charAt( i + 2 ) ] );
+      var charCount = ((n >> 2) & 1) + 2; // 4th header bit indicates number size for this operation.
+      for (var p = 0; p < pl; p++) {
+        var num = base64[str.charAt(i)];
+        var sign = num >> 5 ? -1 : 1;
+        num = ((num & 31) << 6) | base64[str.charAt(i + 1)];
+        if (charCount == 3) {
+          num = (num << 6) | base64[str.charAt(i + 2)];
         }
-        num = sign * num / 10;
-        if ( p % 2 ) {
-          x = ( num += x );
+        num = (sign * num) / 10;
+        if (p % 2) {
+          x = num += x;
         } else {
-          y = ( num += y );
+          y = num += y;
         }
-        params[ p ] = num;
+        params[p] = num;
         i += charCount;
       }
-      f.apply( this, params );
+      f.apply(this, params);
     }
     return this;
   };
@@ -4910,7 +5197,7 @@ this.createjs = this.createjs || {};
    * @chainable
    **/
   p.store = function () {
-    this._updateInstructions( true );
+    this._updateInstructions(true);
     this._storeIndex = this._instructions.length;
     return this;
   };
@@ -4957,7 +5244,6 @@ this.createjs = this.createjs || {};
   p.toString = function () {
     return "[Graphics]";
   };
-
 
   // tiny API:
   /**
@@ -5343,51 +5629,50 @@ this.createjs = this.createjs || {};
    **/
   p.p = p.decodePath;
 
-
   // private methods:
   /**
    * @method _updateInstructions
    * @param commit
    * @protected
    **/
-  p._updateInstructions = function ( commit ) {
+  p._updateInstructions = function (commit) {
     var instr = this._instructions,
       active = this._activeInstructions,
       commitIndex = this._commitIndex;
 
-    if ( this._dirty && active.length ) {
+    if (this._dirty && active.length) {
       instr.length = commitIndex; // remove old, uncommitted commands
-      instr.push( Graphics.beginCmd );
+      instr.push(Graphics.beginCmd);
 
       var l = active.length,
         ll = instr.length;
       instr.length = ll + l;
-      for ( var i = 0; i < l; i++ ) {
-        instr[ i + ll ] = active[ i ];
+      for (var i = 0; i < l; i++) {
+        instr[i + ll] = active[i];
       }
 
-      if ( this._fill ) {
-        instr.push( this._fill );
+      if (this._fill) {
+        instr.push(this._fill);
       }
-      if ( this._stroke ) {
+      if (this._stroke) {
         // doesn't need to be re-applied if it hasn't changed.
-        if ( this._strokeDash !== this._oldStrokeDash ) {
-          instr.push( this._strokeDash );
+        if (this._strokeDash !== this._oldStrokeDash) {
+          instr.push(this._strokeDash);
         }
-        if ( this._strokeStyle !== this._oldStrokeStyle ) {
-          instr.push( this._strokeStyle );
+        if (this._strokeStyle !== this._oldStrokeStyle) {
+          instr.push(this._strokeStyle);
         }
-        if ( commit ) {
+        if (commit) {
           this._oldStrokeStyle = this._strokeStyle;
           this._oldStrokeDash = this._strokeDash;
         }
-        instr.push( this._stroke );
+        instr.push(this._stroke);
       }
 
       this._dirty = false;
     }
 
-    if ( commit ) {
+    if (commit) {
       active.length = 0;
       this._commitIndex = instr.length;
     }
@@ -5398,8 +5683,8 @@ this.createjs = this.createjs || {};
    * @param fill
    * @protected
    **/
-  p._setFill = function ( fill ) {
-    this._updateInstructions( true );
+  p._setFill = function (fill) {
+    this._updateInstructions(true);
     this.command = this._fill = fill;
     return this;
   };
@@ -5409,9 +5694,9 @@ this.createjs = this.createjs || {};
    * @param stroke
    * @protected
    **/
-  p._setStroke = function ( stroke ) {
-    this._updateInstructions( true );
-    if ( this.command = this._stroke = stroke ) {
+  p._setStroke = function (stroke) {
+    this._updateInstructions(true);
+    if ((this.command = this._stroke = stroke)) {
       stroke.ignoreScale = this._strokeIgnoreScale;
     }
     return this;
@@ -5441,11 +5726,13 @@ this.createjs = this.createjs || {};
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.LineTo = function ( x, y ) {
-    this.x = x;
-    this.y = y;
-  } ).prototype.exec = function ( ctx ) {
-    ctx.lineTo( this.x, this.y );
+  (
+    G.LineTo = function (x, y) {
+      this.x = x;
+      this.y = y;
+    }
+  ).prototype.exec = function (ctx) {
+    ctx.lineTo(this.x, this.y);
   };
 
   /**
@@ -5467,13 +5754,14 @@ this.createjs = this.createjs || {};
    * @method exec
    * @param {CanvasRenderingContext2D} ctx
    */
-  ( G.MoveTo = function ( x, y ) {
-    this.x = x;
-    this.y = y;
-  } ).prototype.exec = function ( ctx ) {
-    ctx.moveTo( this.x, this.y );
+  (
+    G.MoveTo = function (x, y) {
+      this.x = x;
+      this.y = y;
+    }
+  ).prototype.exec = function (ctx) {
+    ctx.moveTo(this.x, this.y);
   };
-
 
   /**
    * Graphics command object. See {{#crossLink "Graphics/arcTo"}}{{/crossLink}} and {{#crossLink "Graphics/append"}}{{/crossLink}} for more information.
@@ -5510,14 +5798,16 @@ this.createjs = this.createjs || {};
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.ArcTo = function ( x1, y1, x2, y2, radius ) {
-    this.x1 = x1;
-    this.y1 = y1;
-    this.x2 = x2;
-    this.y2 = y2;
-    this.radius = radius;
-  } ).prototype.exec = function ( ctx ) {
-    ctx.arcTo( this.x1, this.y1, this.x2, this.y2, this.radius );
+  (
+    G.ArcTo = function (x1, y1, x2, y2, radius) {
+      this.x1 = x1;
+      this.y1 = y1;
+      this.x2 = x2;
+      this.y2 = y2;
+      this.radius = radius;
+    }
+  ).prototype.exec = function (ctx) {
+    ctx.arcTo(this.x1, this.y1, this.x2, this.y2, this.radius);
   };
 
   /**
@@ -5560,15 +5850,24 @@ this.createjs = this.createjs || {};
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.Arc = function ( x, y, radius, startAngle, endAngle, anticlockwise ) {
-    this.x = x;
-    this.y = y;
-    this.radius = radius;
-    this.startAngle = startAngle;
-    this.endAngle = endAngle;
-    this.anticlockwise = !!anticlockwise;
-  } ).prototype.exec = function ( ctx ) {
-    ctx.arc( this.x, this.y, this.radius, this.startAngle, this.endAngle, this.anticlockwise );
+  (
+    G.Arc = function (x, y, radius, startAngle, endAngle, anticlockwise) {
+      this.x = x;
+      this.y = y;
+      this.radius = radius;
+      this.startAngle = startAngle;
+      this.endAngle = endAngle;
+      this.anticlockwise = !!anticlockwise;
+    }
+  ).prototype.exec = function (ctx) {
+    ctx.arc(
+      this.x,
+      this.y,
+      this.radius,
+      this.startAngle,
+      this.endAngle,
+      this.anticlockwise
+    );
   };
 
   /**
@@ -5601,13 +5900,15 @@ this.createjs = this.createjs || {};
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.QuadraticCurveTo = function ( cpx, cpy, x, y ) {
-    this.cpx = cpx;
-    this.cpy = cpy;
-    this.x = x;
-    this.y = y;
-  } ).prototype.exec = function ( ctx ) {
-    ctx.quadraticCurveTo( this.cpx, this.cpy, this.x, this.y );
+  (
+    G.QuadraticCurveTo = function (cpx, cpy, x, y) {
+      this.cpx = cpx;
+      this.cpy = cpy;
+      this.x = x;
+      this.y = y;
+    }
+  ).prototype.exec = function (ctx) {
+    ctx.quadraticCurveTo(this.cpx, this.cpy, this.x, this.y);
   };
 
   /**
@@ -5650,15 +5951,24 @@ this.createjs = this.createjs || {};
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.BezierCurveTo = function ( cp1x, cp1y, cp2x, cp2y, x, y ) {
-    this.cp1x = cp1x;
-    this.cp1y = cp1y;
-    this.cp2x = cp2x;
-    this.cp2y = cp2y;
-    this.x = x;
-    this.y = y;
-  } ).prototype.exec = function ( ctx ) {
-    ctx.bezierCurveTo( this.cp1x, this.cp1y, this.cp2x, this.cp2y, this.x, this.y );
+  (
+    G.BezierCurveTo = function (cp1x, cp1y, cp2x, cp2y, x, y) {
+      this.cp1x = cp1x;
+      this.cp1y = cp1y;
+      this.cp2x = cp2x;
+      this.cp2y = cp2y;
+      this.x = x;
+      this.y = y;
+    }
+  ).prototype.exec = function (ctx) {
+    ctx.bezierCurveTo(
+      this.cp1x,
+      this.cp1y,
+      this.cp2x,
+      this.cp2y,
+      this.x,
+      this.y
+    );
   };
 
   /**
@@ -5691,13 +6001,15 @@ this.createjs = this.createjs || {};
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.Rect = function ( x, y, w, h ) {
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-  } ).prototype.exec = function ( ctx ) {
-    ctx.rect( this.x, this.y, this.w, this.h );
+  (
+    G.Rect = function (x, y, w, h) {
+      this.x = x;
+      this.y = y;
+      this.w = w;
+      this.h = h;
+    }
+  ).prototype.exec = function (ctx) {
+    ctx.rect(this.x, this.y, this.w, this.h);
   };
 
   /**
@@ -5710,7 +6022,7 @@ this.createjs = this.createjs || {};
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.ClosePath = function () {} ).prototype.exec = function ( ctx ) {
+  (G.ClosePath = function () {}).prototype.exec = function (ctx) {
     ctx.closePath();
   };
 
@@ -5724,7 +6036,7 @@ this.createjs = this.createjs || {};
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.BeginPath = function () {} ).prototype.exec = function ( ctx ) {
+  (G.BeginPath = function () {}).prototype.exec = function (ctx) {
     ctx.beginPath();
   };
 
@@ -5749,22 +6061,22 @@ this.createjs = this.createjs || {};
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  p = ( G.Fill = function ( style, matrix ) {
+  p = (G.Fill = function (style, matrix) {
     this.style = style;
     this.matrix = matrix;
-  } ).prototype;
-  p.exec = function ( ctx ) {
-    if ( !this.style ) {
+  }).prototype;
+  p.exec = function (ctx) {
+    if (!this.style) {
       return;
     }
     ctx.fillStyle = this.style;
     var mtx = this.matrix;
-    if ( mtx ) {
+    if (mtx) {
       ctx.save();
-      ctx.transform( mtx.a, mtx.b, mtx.c, mtx.d, mtx.tx, mtx.ty );
+      ctx.transform(mtx.a, mtx.b, mtx.c, mtx.d, mtx.tx, mtx.ty);
     }
     ctx.fill();
-    if ( mtx ) {
+    if (mtx) {
       ctx.restore();
     }
   };
@@ -5781,10 +6093,10 @@ this.createjs = this.createjs || {};
    * @param {Number} y1
    * @return {Fill} Returns this Fill object for chaining or assignment.
    */
-  p.linearGradient = function ( colors, ratios, x0, y0, x1, y1 ) {
-    var o = this.style = Graphics._ctx.createLinearGradient( x0, y0, x1, y1 );
-    for ( var i = 0, l = colors.length; i < l; i++ ) {
-      o.addColorStop( ratios[ i ], colors[ i ] );
+  p.linearGradient = function (colors, ratios, x0, y0, x1, y1) {
+    var o = (this.style = Graphics._ctx.createLinearGradient(x0, y0, x1, y1));
+    for (var i = 0, l = colors.length; i < l; i++) {
+      o.addColorStop(ratios[i], colors[i]);
     }
     o.props = {
       colors: colors,
@@ -5793,7 +6105,7 @@ this.createjs = this.createjs || {};
       y0: y0,
       x1: x1,
       y1: y1,
-      type: "linear"
+      type: "linear",
     };
     return this;
   };
@@ -5811,10 +6123,17 @@ this.createjs = this.createjs || {};
    * @param {Number} r1
    * @return {Fill} Returns this Fill object for chaining or assignment.
    */
-  p.radialGradient = function ( colors, ratios, x0, y0, r0, x1, y1, r1 ) {
-    var o = this.style = Graphics._ctx.createRadialGradient( x0, y0, r0, x1, y1, r1 );
-    for ( var i = 0, l = colors.length; i < l; i++ ) {
-      o.addColorStop( ratios[ i ], colors[ i ] );
+  p.radialGradient = function (colors, ratios, x0, y0, r0, x1, y1, r1) {
+    var o = (this.style = Graphics._ctx.createRadialGradient(
+      x0,
+      y0,
+      r0,
+      x1,
+      y1,
+      r1
+    ));
+    for (var i = 0, l = colors.length; i < l; i++) {
+      o.addColorStop(ratios[i], colors[i]);
     }
     o.props = {
       colors: colors,
@@ -5825,7 +6144,7 @@ this.createjs = this.createjs || {};
       x1: x1,
       y1: y1,
       r1: r1,
-      type: "radial"
+      type: "radial",
     };
     return this;
   };
@@ -5837,13 +6156,16 @@ this.createjs = this.createjs || {};
    * @param {String} [repetition] One of: repeat, repeat-x, repeat-y, or no-repeat.
    * @return {Fill} Returns this Fill object for chaining or assignment.
    */
-  p.bitmap = function ( image, repetition ) {
-    if ( image.naturalWidth || image.getContext || image.readyState >= 2 ) {
-      var o = this.style = Graphics._ctx.createPattern( image, repetition || "" );
+  p.bitmap = function (image, repetition) {
+    if (image.naturalWidth || image.getContext || image.readyState >= 2) {
+      var o = (this.style = Graphics._ctx.createPattern(
+        image,
+        repetition || ""
+      ));
       o.props = {
         image: image,
         repetition: repetition,
-        type: "bitmap"
+        type: "bitmap",
       };
     }
     return this;
@@ -5871,21 +6193,21 @@ this.createjs = this.createjs || {};
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  p = ( G.Stroke = function ( style, ignoreScale ) {
+  p = (G.Stroke = function (style, ignoreScale) {
     this.style = style;
     this.ignoreScale = ignoreScale;
-  } ).prototype;
-  p.exec = function ( ctx ) {
-    if ( !this.style ) {
+  }).prototype;
+  p.exec = function (ctx) {
+    if (!this.style) {
       return;
     }
     ctx.strokeStyle = this.style;
-    if ( this.ignoreScale ) {
+    if (this.ignoreScale) {
       ctx.save();
-      ctx.setTransform( 1, 0, 0, 1, 0, 0 );
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
     }
     ctx.stroke();
-    if ( this.ignoreScale ) {
+    if (this.ignoreScale) {
       ctx.restore();
     }
   };
@@ -5961,19 +6283,29 @@ this.createjs = this.createjs || {};
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  p = ( G.StrokeStyle = function ( width, caps, joints, miterLimit, ignoreScale ) {
+  p = (G.StrokeStyle = function (width, caps, joints, miterLimit, ignoreScale) {
     this.width = width;
     this.caps = caps;
     this.joints = joints;
     this.miterLimit = miterLimit;
     this.ignoreScale = ignoreScale;
-  } ).prototype;
-  p.exec = function ( ctx ) {
-    ctx.lineWidth = ( this.width == null ? "1" : this.width );
-    ctx.lineCap = ( this.caps == null ? "butt" : ( isNaN( this.caps ) ? this.caps : Graphics.STROKE_CAPS_MAP[ this.caps ] ) );
-    ctx.lineJoin = ( this.joints == null ? "miter" : ( isNaN( this.joints ) ? this.joints : Graphics.STROKE_JOINTS_MAP[ this.joints ] ) );
-    ctx.miterLimit = ( this.miterLimit == null ? "10" : this.miterLimit );
-    ctx.ignoreScale = ( this.ignoreScale == null ? false : this.ignoreScale );
+  }).prototype;
+  p.exec = function (ctx) {
+    ctx.lineWidth = this.width == null ? "1" : this.width;
+    ctx.lineCap =
+      this.caps == null
+        ? "butt"
+        : isNaN(this.caps)
+        ? this.caps
+        : Graphics.STROKE_CAPS_MAP[this.caps];
+    ctx.lineJoin =
+      this.joints == null
+        ? "miter"
+        : isNaN(this.joints)
+        ? this.joints
+        : Graphics.STROKE_JOINTS_MAP[this.joints];
+    ctx.miterLimit = this.miterLimit == null ? "10" : this.miterLimit;
+    ctx.ignoreScale = this.ignoreScale == null ? false : this.ignoreScale;
   };
   p.path = false;
 
@@ -5997,12 +6329,15 @@ this.createjs = this.createjs || {};
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.StrokeDash = function ( segments, offset ) {
-    this.segments = segments;
-    this.offset = offset || 0;
-  } ).prototype.exec = function ( ctx ) {
-    if ( ctx.setLineDash ) { // feature detection.
-      ctx.setLineDash( this.segments || G.StrokeDash.EMPTY_SEGMENTS ); // instead of [] to reduce churn.
+  (
+    G.StrokeDash = function (segments, offset) {
+      this.segments = segments;
+      this.offset = offset || 0;
+    }
+  ).prototype.exec = function (ctx) {
+    if (ctx.setLineDash) {
+      // feature detection.
+      ctx.setLineDash(this.segments || G.StrokeDash.EMPTY_SEGMENTS); // instead of [] to reduce churn.
       ctx.lineDashOffset = this.offset || 0;
     }
   };
@@ -6067,17 +6402,28 @@ this.createjs = this.createjs || {};
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.RoundRect = function ( x, y, w, h, radiusTL, radiusTR, radiusBR, radiusBL ) {
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-    this.radiusTL = radiusTL;
-    this.radiusTR = radiusTR;
-    this.radiusBR = radiusBR;
-    this.radiusBL = radiusBL;
-  } ).prototype.exec = function ( ctx ) {
-    var max = ( w < h ? w : h ) / 2;
+  (
+    G.RoundRect = function (
+      x,
+      y,
+      w,
+      h,
+      radiusTL,
+      radiusTR,
+      radiusBR,
+      radiusBL
+    ) {
+      this.x = x;
+      this.y = y;
+      this.w = w;
+      this.h = h;
+      this.radiusTL = radiusTL;
+      this.radiusTR = radiusTR;
+      this.radiusBR = radiusBR;
+      this.radiusBL = radiusBL;
+    }
+  ).prototype.exec = function (ctx) {
+    var max = (w < h ? w : h) / 2;
     var mTL = 0,
       mTR = 0,
       mBR = 0,
@@ -6091,39 +6437,39 @@ this.createjs = this.createjs || {};
       rBR = this.radiusBR,
       rBL = this.radiusBL;
 
-    if ( rTL < 0 ) {
-      rTL *= ( mTL = -1 );
+    if (rTL < 0) {
+      rTL *= mTL = -1;
     }
-    if ( rTL > max ) {
+    if (rTL > max) {
       rTL = max;
     }
-    if ( rTR < 0 ) {
-      rTR *= ( mTR = -1 );
+    if (rTR < 0) {
+      rTR *= mTR = -1;
     }
-    if ( rTR > max ) {
+    if (rTR > max) {
       rTR = max;
     }
-    if ( rBR < 0 ) {
-      rBR *= ( mBR = -1 );
+    if (rBR < 0) {
+      rBR *= mBR = -1;
     }
-    if ( rBR > max ) {
+    if (rBR > max) {
       rBR = max;
     }
-    if ( rBL < 0 ) {
-      rBL *= ( mBL = -1 );
+    if (rBL < 0) {
+      rBL *= mBL = -1;
     }
-    if ( rBL > max ) {
+    if (rBL > max) {
       rBL = max;
     }
 
-    ctx.moveTo( x + w - rTR, y );
-    ctx.arcTo( x + w + rTR * mTR, y - rTR * mTR, x + w, y + rTR, rTR );
-    ctx.lineTo( x + w, y + h - rBR );
-    ctx.arcTo( x + w + rBR * mBR, y + h + rBR * mBR, x + w - rBR, y + h, rBR );
-    ctx.lineTo( x + rBL, y + h );
-    ctx.arcTo( x - rBL * mBL, y + h + rBL * mBL, x, y + h - rBL, rBL );
-    ctx.lineTo( x, y + rTL );
-    ctx.arcTo( x - rTL * mTL, y - rTL * mTL, x + rTL, y, rTL );
+    ctx.moveTo(x + w - rTR, y);
+    ctx.arcTo(x + w + rTR * mTR, y - rTR * mTR, x + w, y + rTR, rTR);
+    ctx.lineTo(x + w, y + h - rBR);
+    ctx.arcTo(x + w + rBR * mBR, y + h + rBR * mBR, x + w - rBR, y + h, rBR);
+    ctx.lineTo(x + rBL, y + h);
+    ctx.arcTo(x - rBL * mBL, y + h + rBL * mBL, x, y + h - rBL, rBL);
+    ctx.lineTo(x, y + rTL);
+    ctx.arcTo(x - rTL * mTL, y - rTL * mTL, x + rTL, y, rTL);
     ctx.closePath();
   };
 
@@ -6152,12 +6498,14 @@ this.createjs = this.createjs || {};
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.Circle = function ( x, y, radius ) {
-    this.x = x;
-    this.y = y;
-    this.radius = radius;
-  } ).prototype.exec = function ( ctx ) {
-    ctx.arc( this.x, this.y, this.radius, 0, Math.PI * 2 );
+  (
+    G.Circle = function (x, y, radius) {
+      this.x = x;
+      this.y = y;
+      this.radius = radius;
+    }
+  ).prototype.exec = function (ctx) {
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
   };
 
   /**
@@ -6190,30 +6538,32 @@ this.createjs = this.createjs || {};
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.Ellipse = function ( x, y, w, h ) {
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-  } ).prototype.exec = function ( ctx ) {
+  (
+    G.Ellipse = function (x, y, w, h) {
+      this.x = x;
+      this.y = y;
+      this.w = w;
+      this.h = h;
+    }
+  ).prototype.exec = function (ctx) {
     var x = this.x,
       y = this.y;
     var w = this.w,
       h = this.h;
 
     var k = 0.5522848;
-    var ox = ( w / 2 ) * k;
-    var oy = ( h / 2 ) * k;
+    var ox = (w / 2) * k;
+    var oy = (h / 2) * k;
     var xe = x + w;
     var ye = y + h;
     var xm = x + w / 2;
     var ym = y + h / 2;
 
-    ctx.moveTo( x, ym );
-    ctx.bezierCurveTo( x, ym - oy, xm - ox, y, xm, y );
-    ctx.bezierCurveTo( xm + ox, y, xe, ym - oy, xe, ym );
-    ctx.bezierCurveTo( xe, ym + oy, xm + ox, ye, xm, ye );
-    ctx.bezierCurveTo( xm - ox, ye, x, ym + oy, x, ym );
+    ctx.moveTo(x, ym);
+    ctx.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y);
+    ctx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym);
+    ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
+    ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
   };
 
   /**
@@ -6256,30 +6606,35 @@ this.createjs = this.createjs || {};
    * @method exec
    * @param {CanvasRenderingContext2D} ctx The canvas rendering context
    */
-  ( G.PolyStar = function ( x, y, radius, sides, pointSize, angle ) {
-    this.x = x;
-    this.y = y;
-    this.radius = radius;
-    this.sides = sides;
-    this.pointSize = pointSize;
-    this.angle = angle;
-  } ).prototype.exec = function ( ctx ) {
+  (
+    G.PolyStar = function (x, y, radius, sides, pointSize, angle) {
+      this.x = x;
+      this.y = y;
+      this.radius = radius;
+      this.sides = sides;
+      this.pointSize = pointSize;
+      this.angle = angle;
+    }
+  ).prototype.exec = function (ctx) {
     var x = this.x,
       y = this.y;
     var radius = this.radius;
-    var angle = ( this.angle || 0 ) / 180 * Math.PI;
+    var angle = ((this.angle || 0) / 180) * Math.PI;
     var sides = this.sides;
-    var ps = 1 - ( this.pointSize || 0 );
+    var ps = 1 - (this.pointSize || 0);
     var a = Math.PI / sides;
 
-    ctx.moveTo( x + Math.cos( angle ) * radius, y + Math.sin( angle ) * radius );
-    for ( var i = 0; i < sides; i++ ) {
+    ctx.moveTo(x + Math.cos(angle) * radius, y + Math.sin(angle) * radius);
+    for (var i = 0; i < sides; i++) {
       angle += a;
-      if ( ps != 1 ) {
-        ctx.lineTo( x + Math.cos( angle ) * radius * ps, y + Math.sin( angle ) * radius * ps );
+      if (ps != 1) {
+        ctx.lineTo(
+          x + Math.cos(angle) * radius * ps,
+          y + Math.sin(angle) * radius * ps
+        );
       }
       angle += a;
-      ctx.lineTo( x + Math.cos( angle ) * radius, y + Math.sin( angle ) * radius );
+      ctx.lineTo(x + Math.cos(angle) * radius, y + Math.sin(angle) * radius);
     }
     ctx.closePath();
   };
@@ -6287,9 +6642,8 @@ this.createjs = this.createjs || {};
   // docced above.
   Graphics.beginCmd = new G.BeginPath(); // so we don't have to instantiate multiple instances.
 
-
   createjs.Graphics = Graphics;
-}() );
+})();
 
 //##############################################################################
 // DisplayObject.js
@@ -6297,9 +6651,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -6314,7 +6667,6 @@ this.createjs = this.createjs || {};
    **/
   function DisplayObject() {
     this.EventDispatcher_constructor();
-
 
     // public properties:
     /**
@@ -6550,7 +6902,7 @@ this.createjs = this.createjs || {};
      * the hit test object were a child of this display object and relative to its regX/Y). The hitArea will be tested
      * using only its own `alpha` value regardless of the alpha value on the target display object, or the target's
      * ancestors (parents).
-     * 
+     *
      * If set on a {{#crossLink "Container"}}{{/crossLink}}, children of the Container will not receive mouse events.
      * This is similar to setting {{#crossLink "mouseChildren"}}{{/crossLink}} to false.
      *
@@ -6570,7 +6922,6 @@ this.createjs = this.createjs || {};
      * @default null
      */
     this.cursor = null;
-
 
     // private properties:
     /**
@@ -6634,7 +6985,7 @@ this.createjs = this.createjs || {};
      */
     this._webGLRenderStyle = DisplayObject._StageGL_NONE;
   }
-  var p = createjs.extend( DisplayObject, createjs.EventDispatcher );
+  var p = createjs.extend(DisplayObject, createjs.EventDispatcher);
 
   // static properties:
   /**
@@ -6644,7 +6995,17 @@ this.createjs = this.createjs || {};
    * @static
    * @type {Array}
    **/
-  DisplayObject._MOUSE_EVENTS = [ "click", "dblclick", "mousedown", "mouseout", "mouseover", "pressmove", "pressup", "rollout", "rollover" ];
+  DisplayObject._MOUSE_EVENTS = [
+    "click",
+    "dblclick",
+    "mousedown",
+    "mouseout",
+    "mouseover",
+    "pressmove",
+    "pressup",
+    "rollout",
+    "rollover",
+  ];
 
   /**
    * Suppresses errors generated when using features like hitTest, mouse events, and {{#crossLink "getObjectsUnderPoint"}}{{/crossLink}}
@@ -6704,16 +7065,18 @@ this.createjs = this.createjs || {};
    * @static
    * @protected
    **/
-  var canvas = createjs.createCanvas ? createjs.createCanvas() : document.createElement( "canvas" ); // prevent errors on load in browsers without canvas.
-  if ( canvas.getContext ) {
+  var canvas = createjs.createCanvas
+    ? createjs.createCanvas()
+    : document.createElement("canvas"); // prevent errors on load in browsers without canvas.
+  if (canvas.getContext) {
     DisplayObject._hitTestCanvas = canvas;
-    DisplayObject._hitTestContext = canvas.getContext( "2d" );
+    DisplayObject._hitTestContext = canvas.getContext("2d");
     canvas.width = canvas.height = 1;
   }
 
   // events:
   /**
-   * Dispatched when the user presses their left mouse button over the display object. See the 
+   * Dispatched when the user presses their left mouse button over the display object. See the
    * {{#crossLink "MouseEvent"}}{{/crossLink}} class for a listing of event properties.
    * @event mousedown
    * @since 0.6.0
@@ -6734,7 +7097,7 @@ this.createjs = this.createjs || {};
    */
 
   /**
-   * Dispatched when the user's mouse enters this display object. This event must be enabled using 
+   * Dispatched when the user's mouse enters this display object. This event must be enabled using
    * {{#crossLink "Stage/enableMouseOver"}}{{/crossLink}}. See also {{#crossLink "DisplayObject/rollover:event"}}{{/crossLink}}.
    * See the {{#crossLink "MouseEvent"}}{{/crossLink}} class for a listing of event properties.
    * @event mouseover
@@ -6742,7 +7105,7 @@ this.createjs = this.createjs || {};
    */
 
   /**
-   * Dispatched when the user's mouse leaves this display object. This event must be enabled using 
+   * Dispatched when the user's mouse leaves this display object. This event must be enabled using
    * {{#crossLink "Stage/enableMouseOver"}}{{/crossLink}}. See also {{#crossLink "DisplayObject/rollout:event"}}{{/crossLink}}.
    * See the {{#crossLink "MouseEvent"}}{{/crossLink}} class for a listing of event properties.
    * @event mouseout
@@ -6753,7 +7116,7 @@ this.createjs = this.createjs || {};
    * This event is similar to {{#crossLink "DisplayObject/mouseover:event"}}{{/crossLink}}, with the following
    * differences: it does not bubble, and it considers {{#crossLink "Container"}}{{/crossLink}} instances as an
    * aggregate of their content.
-   * 
+   *
    * For example, myContainer contains two overlapping children: shapeA and shapeB. The user moves their mouse over
    * shapeA and then directly on to shapeB. With a listener for {{#crossLink "mouseover:event"}}{{/crossLink}} on
    * myContainer, two events would be received, each targeting a child element:<OL>
@@ -6762,7 +7125,7 @@ this.createjs = this.createjs || {};
    * </OL>
    * However, with a listener for "rollover" instead, only a single event is received when the mouse first enters
    * the aggregate myContainer content (target=myContainer).
-   * 
+   *
    * This event must be enabled using {{#crossLink "Stage/enableMouseOver"}}{{/crossLink}}.
    * See the {{#crossLink "MouseEvent"}}{{/crossLink}} class for a listing of event properties.
    * @event rollover
@@ -6773,7 +7136,7 @@ this.createjs = this.createjs || {};
    * This event is similar to {{#crossLink "DisplayObject/mouseout:event"}}{{/crossLink}}, with the following
    * differences: it does not bubble, and it considers {{#crossLink "Container"}}{{/crossLink}} instances as an
    * aggregate of their content.
-   * 
+   *
    * For example, myContainer contains two overlapping children: shapeA and shapeB. The user moves their mouse over
    * shapeA, then directly on to shapeB, then off both. With a listener for {{#crossLink "mouseout:event"}}{{/crossLink}}
    * on myContainer, two events would be received, each targeting a child element:<OL>
@@ -6782,7 +7145,7 @@ this.createjs = this.createjs || {};
    * </OL>
    * However, with a listener for "rollout" instead, only a single event is received when the mouse leaves
    * the aggregate myContainer content (target=myContainer).
-   * 
+   *
    * This event must be enabled using {{#crossLink "Stage/enableMouseOver"}}{{/crossLink}}.
    * See the {{#crossLink "MouseEvent"}}{{/crossLink}} class for a listing of event properties.
    * @event rollout
@@ -6843,7 +7206,6 @@ this.createjs = this.createjs || {};
    * @since 0.6.0
    */
 
-
   // getter / setters:
   /**
    * Use the {{#crossLink "DisplayObject/stage:property"}}{{/crossLink}} property instead.
@@ -6854,17 +7216,17 @@ this.createjs = this.createjs || {};
   p._getStage = function () {
     // uses dynamic access to avoid circular dependencies;
     var o = this,
-      _Stage = createjs[ "Stage" ];
-    while ( o.parent ) {
+      _Stage = createjs["Stage"];
+    while (o.parent) {
       o = o.parent;
     }
-    if ( o instanceof _Stage ) {
+    if (o instanceof _Stage) {
       return o;
     }
     return null;
   };
   // DisplayObject.getStage is @deprecated. Remove for 1.1+
-  p.getStage = createjs.deprecate( p._getStage, "DisplayObject.getStage" );
+  p.getStage = createjs.deprecate(p._getStage, "DisplayObject.getStage");
 
   /**
    * Returns the Stage instance that this display object will be rendered on, or null if it has not been added to one.
@@ -6892,29 +7254,28 @@ this.createjs = this.createjs || {};
    * @default 1
    */
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       stage: {
-        get: p._getStage
+        get: p._getStage,
       },
       cacheID: {
         get: function () {
-          return this.bitmapCache && this.bitmapCache.cacheID
+          return this.bitmapCache && this.bitmapCache.cacheID;
         },
-        set: function ( a ) {
-          this.bitmapCache && ( this.bitmapCache.cacheID = a )
-        }
+        set: function (a) {
+          this.bitmapCache && (this.bitmapCache.cacheID = a);
+        },
       },
       scale: {
         get: function () {
           return this.scaleX;
         },
-        set: function ( scale ) {
+        set: function (scale) {
           this.scaleX = this.scaleY = scale;
         },
-      }
-    } );
-  } catch ( e ) {}
-
+      },
+    });
+  } catch (e) {}
 
   // public methods:
   /**
@@ -6926,7 +7287,12 @@ this.createjs = this.createjs || {};
    * @return {Boolean} Boolean indicating whether the display object would be visible if drawn to a canvas
    **/
   p.isVisible = function () {
-    return !!( this.visible && this.alpha > 0 && this.scaleX != 0 && this.scaleY != 0 );
+    return !!(
+      this.visible &&
+      this.alpha > 0 &&
+      this.scaleX != 0 &&
+      this.scaleY != 0
+    );
   };
 
   /**
@@ -6940,10 +7306,10 @@ this.createjs = this.createjs || {};
    * used for drawing the cache (to prevent it from simply drawing an existing cache back into itself).
    * @return {Boolean}
    **/
-  p.draw = function ( ctx, ignoreCache ) {
+  p.draw = function (ctx, ignoreCache) {
     var cache = this.bitmapCache;
-    if ( cache && !ignoreCache ) {
-      return cache.draw( ctx );
+    if (cache && !ignoreCache) {
+      return cache.draw(ctx);
     }
     return false;
   };
@@ -6954,36 +7320,36 @@ this.createjs = this.createjs || {};
    * @method updateContext
    * @param {CanvasRenderingContext2D} ctx The canvas 2D to update.
    **/
-  p.updateContext = function ( ctx ) {
+  p.updateContext = function (ctx) {
     var o = this,
       mask = o.mask,
       mtx = o._props.matrix;
 
-    if ( mask && mask.graphics && !mask.graphics.isEmpty() ) {
-      mask.getMatrix( mtx );
-      ctx.transform( mtx.a, mtx.b, mtx.c, mtx.d, mtx.tx, mtx.ty );
+    if (mask && mask.graphics && !mask.graphics.isEmpty()) {
+      mask.getMatrix(mtx);
+      ctx.transform(mtx.a, mtx.b, mtx.c, mtx.d, mtx.tx, mtx.ty);
 
-      mask.graphics.drawAsPath( ctx );
+      mask.graphics.drawAsPath(ctx);
       ctx.clip();
 
       mtx.invert();
-      ctx.transform( mtx.a, mtx.b, mtx.c, mtx.d, mtx.tx, mtx.ty );
+      ctx.transform(mtx.a, mtx.b, mtx.c, mtx.d, mtx.tx, mtx.ty);
     }
 
-    this.getMatrix( mtx );
+    this.getMatrix(mtx);
     var tx = mtx.tx,
       ty = mtx.ty;
-    if ( DisplayObject._snapToPixelEnabled && o.snapToPixel ) {
-      tx = tx + ( tx < 0 ? -0.5 : 0.5 ) | 0;
-      ty = ty + ( ty < 0 ? -0.5 : 0.5 ) | 0;
+    if (DisplayObject._snapToPixelEnabled && o.snapToPixel) {
+      tx = (tx + (tx < 0 ? -0.5 : 0.5)) | 0;
+      ty = (ty + (ty < 0 ? -0.5 : 0.5)) | 0;
     }
-    ctx.transform( mtx.a, mtx.b, mtx.c, mtx.d, tx, ty );
+    ctx.transform(mtx.a, mtx.b, mtx.c, mtx.d, tx, ty);
     ctx.globalAlpha *= o.alpha;
-    if ( o.compositeOperation ) {
+    if (o.compositeOperation) {
       ctx.globalCompositeOperation = o.compositeOperation;
     }
-    if ( o.shadow ) {
-      this._applyShadow( ctx, o.shadow );
+    if (o.shadow) {
+      this._applyShadow(ctx, o.shadow);
     }
   };
 
@@ -7005,7 +7371,7 @@ this.createjs = this.createjs || {};
    * Note that filters need to be defined <em>before</em> the cache is applied or you will have to call updateCache after
    * application. Check out the {{#crossLink "Filter"}}{{/crossLink}} class for more information. Some filters
    * (ex. BlurFilter) may not work as expected in conjunction with the scale param.
-   * 
+   *
    * Usually, the resulting cacheCanvas will have the dimensions width * scale, height * scale, however some filters (ex. BlurFilter)
    * will add padding to the canvas dimensions.
    *
@@ -7023,11 +7389,11 @@ this.createjs = this.createjs || {};
    * 	cached elements with greater fidelity. Default is 1.
    * @param {Object} [options=undefined] Specify additional parameters for the cache logic
    **/
-  p.cache = function ( x, y, width, height, scale, options ) {
-    if ( !this.bitmapCache ) {
+  p.cache = function (x, y, width, height, scale, options) {
+    if (!this.bitmapCache) {
       this.bitmapCache = new createjs.BitmapCache();
     }
-    this.bitmapCache.define( this, x, y, width, height, scale, options );
+    this.bitmapCache.define(this, x, y, width, height, scale, options);
   };
 
   /**
@@ -7052,11 +7418,11 @@ this.createjs = this.createjs || {};
    * <a href="https://html.spec.whatwg.org/multipage/scripting.html#dom-context-2d-globalcompositeoperation">
    * whatwg spec on compositing</a>.
    **/
-  p.updateCache = function ( compositeOperation ) {
-    if ( !this.bitmapCache ) {
+  p.updateCache = function (compositeOperation) {
+    if (!this.bitmapCache) {
       throw "cache() must be called before updateCache()";
     }
-    this.bitmapCache.update( compositeOperation );
+    this.bitmapCache.update(compositeOperation);
   };
 
   /**
@@ -7064,7 +7430,7 @@ this.createjs = this.createjs || {};
    * @method uncache
    **/
   p.uncache = function () {
-    if ( this.bitmapCache ) {
+    if (this.bitmapCache) {
       this.bitmapCache.release();
       this.bitmapCache = undefined;
     }
@@ -7097,12 +7463,16 @@ this.createjs = this.createjs || {};
    * @method localToGlobal
    * @param {Number} x The x position in the source display object to transform.
    * @param {Number} y The y position in the source display object to transform.
-   * @param {Point | Object} [pt] An object to copy the result into. If omitted a new Point object with x/y properties will be returned. 
+   * @param {Point | Object} [pt] An object to copy the result into. If omitted a new Point object with x/y properties will be returned.
    * @return {Point} A Point instance with x and y properties correlating to the transformed coordinates
    * on the stage.
    **/
-  p.localToGlobal = function ( x, y, pt ) {
-    return this.getConcatenatedMatrix( this._props.matrix ).transformPoint( x, y, pt || new createjs.Point() );
+  p.localToGlobal = function (x, y, pt) {
+    return this.getConcatenatedMatrix(this._props.matrix).transformPoint(
+      x,
+      y,
+      pt || new createjs.Point()
+    );
   };
 
   /**
@@ -7122,12 +7492,14 @@ this.createjs = this.createjs || {};
    * @method globalToLocal
    * @param {Number} x The x position on the stage to transform.
    * @param {Number} y The y position on the stage to transform.
-   * @param {Point | Object} [pt] An object to copy the result into. If omitted a new Point object with x/y properties will be returned. 
+   * @param {Point | Object} [pt] An object to copy the result into. If omitted a new Point object with x/y properties will be returned.
    * @return {Point} A Point instance with x and y properties correlating to the transformed position in the
    * display object's coordinate space.
    **/
-  p.globalToLocal = function ( x, y, pt ) {
-    return this.getConcatenatedMatrix( this._props.matrix ).invert().transformPoint( x, y, pt || new createjs.Point() );
+  p.globalToLocal = function (x, y, pt) {
+    return this.getConcatenatedMatrix(this._props.matrix)
+      .invert()
+      .transformPoint(x, y, pt || new createjs.Point());
   };
 
   /**
@@ -7143,13 +7515,13 @@ this.createjs = this.createjs || {};
    * @param {Number} x The x position in the source display object to transform.
    * @param {Number} y The y position on the source display object to transform.
    * @param {DisplayObject} target The target display object to which the coordinates will be transformed.
-   * @param {Point | Object} [pt] An object to copy the result into. If omitted a new Point object with x/y properties will be returned. 
+   * @param {Point | Object} [pt] An object to copy the result into. If omitted a new Point object with x/y properties will be returned.
    * @return {Point} Returns a Point instance with x and y properties correlating to the transformed position
    * in the target's coordinate space.
    **/
-  p.localToLocal = function ( x, y, target, pt ) {
-    pt = this.localToGlobal( x, y, pt );
-    return target.globalToLocal( pt.x, pt.y, pt );
+  p.localToLocal = function (x, y, target, pt) {
+    pt = this.localToGlobal(x, y, pt);
+    return target.globalToLocal(pt.x, pt.y, pt);
   };
 
   /**
@@ -7173,7 +7545,17 @@ this.createjs = this.createjs || {};
    * @return {DisplayObject} Returns this instance. Useful for chaining commands.
    * @chainable
    */
-  p.setTransform = function ( x, y, scaleX, scaleY, rotation, skewX, skewY, regX, regY ) {
+  p.setTransform = function (
+    x,
+    y,
+    scaleX,
+    scaleY,
+    rotation,
+    skewX,
+    skewY,
+    regX,
+    regY
+  ) {
     this.x = x || 0;
     this.y = y || 0;
     this.scaleX = scaleX == null ? 1 : scaleX;
@@ -7193,10 +7575,22 @@ this.createjs = this.createjs || {};
    * Matrix object is returned.
    * @return {Matrix2D} A matrix representing this display object's transform.
    **/
-  p.getMatrix = function ( matrix ) {
+  p.getMatrix = function (matrix) {
     var o = this,
-      mtx = matrix && matrix.identity() || new createjs.Matrix2D();
-    return o.transformMatrix ? mtx.copy( o.transformMatrix ) : mtx.appendTransform( o.x, o.y, o.scaleX, o.scaleY, o.rotation, o.skewX, o.skewY, o.regX, o.regY );
+      mtx = (matrix && matrix.identity()) || new createjs.Matrix2D();
+    return o.transformMatrix
+      ? mtx.copy(o.transformMatrix)
+      : mtx.appendTransform(
+          o.x,
+          o.y,
+          o.scaleX,
+          o.scaleY,
+          o.rotation,
+          o.skewX,
+          o.skewY,
+          o.regX,
+          o.regY
+        );
   };
 
   /**
@@ -7209,11 +7603,11 @@ this.createjs = this.createjs || {};
    * If null, a new Matrix2D object is returned.
    * @return {Matrix2D} The combined matrix.
    **/
-  p.getConcatenatedMatrix = function ( matrix ) {
+  p.getConcatenatedMatrix = function (matrix) {
     var o = this,
-      mtx = this.getMatrix( matrix );
-    while ( o = o.parent ) {
-      mtx.prependMatrix( o.getMatrix( o._props.matrix ) );
+      mtx = this.getMatrix(matrix);
+    while ((o = o.parent)) {
+      mtx.prependMatrix(o.getMatrix(o._props.matrix));
     }
     return mtx;
   };
@@ -7226,19 +7620,19 @@ this.createjs = this.createjs || {};
    * If null, a new DisplayProps object is returned.
    * @return {DisplayProps} The combined display properties.
    **/
-  p.getConcatenatedDisplayProps = function ( props ) {
+  p.getConcatenatedDisplayProps = function (props) {
     props = props ? props.identity() : new createjs.DisplayProps();
     var o = this,
-      mtx = o.getMatrix( props.matrix );
+      mtx = o.getMatrix(props.matrix);
     do {
-      props.prepend( o.visible, o.alpha, o.shadow, o.compositeOperation );
+      props.prepend(o.visible, o.alpha, o.shadow, o.compositeOperation);
 
       // we do this to avoid problems with the matrix being used for both operations when o._props.matrix is passed in as the props param.
       // this could be simplified (ie. just done as part of the prepend above) if we switched to using a pool.
-      if ( o != this ) {
-        mtx.prependMatrix( o.getMatrix( o._props.matrix ) );
+      if (o != this) {
+        mtx.prependMatrix(o.getMatrix(o._props.matrix));
       }
-    } while ( o = o.parent );
+    } while ((o = o.parent));
     return props;
   };
 
@@ -7260,14 +7654,14 @@ this.createjs = this.createjs || {};
    * @return {Boolean} A Boolean indicating whether a visible portion of the DisplayObject intersect the specified
    * local Point.
    */
-  p.hitTest = function ( x, y ) {
+  p.hitTest = function (x, y) {
     var ctx = DisplayObject._hitTestContext;
-    ctx.setTransform( 1, 0, 0, 1, -x, -y );
-    this.draw( ctx );
+    ctx.setTransform(1, 0, 0, 1, -x, -y);
+    this.draw(ctx);
 
-    var hit = this._testHit( ctx );
-    ctx.setTransform( 1, 0, 0, 1, 0, 0 );
-    ctx.clearRect( 0, 0, 2, 2 );
+    var hit = this._testHit(ctx);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, 2, 2);
     return hit;
   };
 
@@ -7284,9 +7678,9 @@ this.createjs = this.createjs || {};
    * @return {DisplayObject} Returns the instance the method is called on (useful for chaining calls.)
    * @chainable
    */
-  p.set = function ( props ) {
-    for ( var n in props ) {
-      this[ n ] = props[ n ];
+  p.set = function (props) {
+    for (var n in props) {
+      this[n] = props[n];
     }
     return this;
   };
@@ -7294,11 +7688,11 @@ this.createjs = this.createjs || {};
   /**
    * Returns a rectangle representing this object's bounds in its local coordinate system (ie. with no transformation).
    * Objects that have been cached will return the bounds of the cache.
-   * 
-   * Not all display objects can calculate their own bounds (ex. Shape). For these objects, you can use 
+   *
+   * Not all display objects can calculate their own bounds (ex. Shape). For these objects, you can use
    * {{#crossLink "DisplayObject/setBounds"}}{{/crossLink}} so that they are included when calculating Container
    * bounds.
-   * 
+   *
    * <table>
    * 	<tr><td><b>All</b></td><td>
    * 		All display objects support setting bounds manually using setBounds(). Likewise, display objects that
@@ -7327,34 +7721,39 @@ this.createjs = this.createjs || {};
    * 		to (x=0,y=0).
    * 	</td></tr>
    * </table>
-   * 
+   *
    * Bounds can be expensive to calculate for some objects (ex. text, or containers with many children), and
    * are recalculated each time you call getBounds(). You can prevent recalculation on static objects by setting the
    * bounds explicitly:
-   * 
+   *
    * 	var bounds = obj.getBounds();
    * 	obj.setBounds(bounds.x, bounds.y, bounds.width, bounds.height);
    * 	// getBounds will now use the set values, instead of recalculating
-   * 
+   *
    * To reduce memory impact, the returned Rectangle instance may be reused internally; clone the instance or copy its
    * values if you need to retain it.
-   * 
+   *
    * 	var myBounds = obj.getBounds().clone();
    * 	// OR:
    * 	myRect.copy(obj.getBounds());
-   * 
+   *
    * @method getBounds
    * @return {Rectangle} A Rectangle instance representing the bounds, or null if bounds are not available for this
    * object.
    **/
   p.getBounds = function () {
-    if ( this._bounds ) {
-      return this._rectangle.copy( this._bounds );
+    if (this._bounds) {
+      return this._rectangle.copy(this._bounds);
     }
     var cacheCanvas = this.cacheCanvas;
-    if ( cacheCanvas ) {
+    if (cacheCanvas) {
       var scale = this._cacheScale;
-      return this._rectangle.setValues( this._cacheOffsetX, this._cacheOffsetY, cacheCanvas.width / scale, cacheCanvas.height / scale );
+      return this._rectangle.setValues(
+        this._cacheOffsetX,
+        this._cacheOffsetY,
+        cacheCanvas.width / scale,
+        cacheCanvas.height / scale
+      );
     }
     return null;
   };
@@ -7362,14 +7761,14 @@ this.createjs = this.createjs || {};
   /**
    * Returns a rectangle representing this object's bounds in its parent's coordinate system (ie. with transformations applied).
    * Objects that have been cached will return the transformed bounds of the cache.
-   * 
-   * Not all display objects can calculate their own bounds (ex. Shape). For these objects, you can use 
+   *
+   * Not all display objects can calculate their own bounds (ex. Shape). For these objects, you can use
    * {{#crossLink "DisplayObject/setBounds"}}{{/crossLink}} so that they are included when calculating Container
    * bounds.
-   * 
+   *
    * To reduce memory impact, the returned Rectangle instance may be reused internally; clone the instance or copy its
    * values if you need to retain it.
-   * 
+   *
    * Container instances calculate aggregate bounds for all children that return bounds via getBounds.
    * @method getTransformedBounds
    * @return {Rectangle} A Rectangle instance representing the bounds, or null if bounds are not available for this object.
@@ -7382,7 +7781,7 @@ this.createjs = this.createjs || {};
    * Allows you to manually specify the bounds of an object that either cannot calculate their own bounds (ex. Shape &
    * Text) for future reference, or so the object can be included in Container bounds. Manually set bounds will always
    * override calculated bounds.
-   * 
+   *
    * The bounds should be specified in the object's local (untransformed) coordinates. For example, a Shape instance
    * with a 25px radius circle centered at 0,0 would have bounds of (-25, -25, 50, 50).
    * @method setBounds
@@ -7391,12 +7790,17 @@ this.createjs = this.createjs || {};
    * @param {Number} width The width of the bounds.
    * @param {Number} height The height of the bounds.
    **/
-  p.setBounds = function ( x, y, width, height ) {
-    if ( x == null ) {
+  p.setBounds = function (x, y, width, height) {
+    if (x == null) {
       this._bounds = x;
       return;
     }
-    this._bounds = ( this._bounds || new createjs.Rectangle() ).setValues( x, y, width, height );
+    this._bounds = (this._bounds || new createjs.Rectangle()).setValues(
+      x,
+      y,
+      width,
+      height
+    );
   };
 
   /**
@@ -7407,7 +7811,7 @@ this.createjs = this.createjs || {};
    * @return {DisplayObject} A clone of the current DisplayObject instance.
    **/
   p.clone = function () {
-    return this._cloneProps( new DisplayObject() );
+    return this._cloneProps(new DisplayObject());
   };
 
   /**
@@ -7418,7 +7822,6 @@ this.createjs = this.createjs || {};
   p.toString = function () {
     return "[DisplayObject (name=" + this.name + ")]";
   };
-
 
   // private methods:
   /**
@@ -7442,7 +7845,7 @@ this.createjs = this.createjs || {};
    * @return {DisplayObject} o
    * @protected
    **/
-  p._cloneProps = function ( o ) {
+  p._cloneProps = function (o) {
     o.alpha = this.alpha;
     o.mouseEnabled = this.mouseEnabled;
     o.tickEnabled = this.tickEnabled;
@@ -7460,7 +7863,7 @@ this.createjs = this.createjs || {};
     o.y = this.y;
     o.compositeOperation = this.compositeOperation;
     o.snapToPixel = this.snapToPixel;
-    o.filters = this.filters == null ? null : this.filters.slice( 0 );
+    o.filters = this.filters == null ? null : this.filters.slice(0);
     o.mask = this.mask;
     o.hitArea = this.hitArea;
     o.cursor = this.cursor;
@@ -7474,7 +7877,7 @@ this.createjs = this.createjs || {};
    * @param {CanvasRenderingContext2D} ctx
    * @param {Shadow} shadow
    **/
-  p._applyShadow = function ( ctx, shadow ) {
+  p._applyShadow = function (ctx, shadow) {
     shadow = shadow || Shadow.identity;
     ctx.shadowColor = shadow.color;
     ctx.shadowOffsetX = shadow.offsetX;
@@ -7487,14 +7890,14 @@ this.createjs = this.createjs || {};
    * @param {Object} evtObj An event object that will be dispatched to all tick listeners. This object is reused between dispatchers to reduce construction & GC costs.
    * @protected
    **/
-  p._tick = function ( evtObj ) {
+  p._tick = function (evtObj) {
     // because tick can be really performance sensitive, check for listeners before calling dispatchEvent.
     var ls = this._listeners;
-    if ( ls && ls[ "tick" ] ) {
+    if (ls && ls["tick"]) {
       // reset & reuse the event object to avoid construction / GC costs:
       evtObj.target = null;
       evtObj.propagationStopped = evtObj.immediatePropagationStopped = false;
-      this.dispatchEvent( evtObj );
+      this.dispatchEvent(evtObj);
     }
   };
 
@@ -7504,11 +7907,11 @@ this.createjs = this.createjs || {};
    * @param {CanvasRenderingContext2D} ctx
    * @return {Boolean}
    **/
-  p._testHit = function ( ctx ) {
+  p._testHit = function (ctx) {
     try {
-      var hit = ctx.getImageData( 0, 0, 1, 1 ).data[ 3 ] > 1;
-    } catch ( e ) {
-      if ( !DisplayObject.suppressCrossDomainErrors ) {
+      var hit = ctx.getImageData(0, 0, 1, 1).data[3] > 1;
+    } catch (e) {
+      if (!DisplayObject.suppressCrossDomainErrors) {
         throw "An error has occurred. This is most likely due to security restrictions on reading canvas pixel data with local or cross-domain images.";
       }
     }
@@ -7522,8 +7925,8 @@ this.createjs = this.createjs || {};
    * @return {Rectangle}
    * @protected
    **/
-  p._getBounds = function ( matrix, ignoreTransform ) {
-    return this._transformBounds( this.getBounds(), matrix, ignoreTransform );
+  p._getBounds = function (matrix, ignoreTransform) {
+    return this._transformBounds(this.getBounds(), matrix, ignoreTransform);
   };
 
   /**
@@ -7534,8 +7937,8 @@ this.createjs = this.createjs || {};
    * @return {Rectangle}
    * @protected
    **/
-  p._transformBounds = function ( bounds, matrix, ignoreTransform ) {
-    if ( !bounds ) {
+  p._transformBounds = function (bounds, matrix, ignoreTransform) {
+    if (!bounds) {
       return bounds;
     }
     var x = bounds.x,
@@ -7543,13 +7946,13 @@ this.createjs = this.createjs || {};
       width = bounds.width,
       height = bounds.height,
       mtx = this._props.matrix;
-    mtx = ignoreTransform ? mtx.identity() : this.getMatrix( mtx );
+    mtx = ignoreTransform ? mtx.identity() : this.getMatrix(mtx);
 
-    if ( x || y ) {
-      mtx.appendTransform( 0, 0, 1, 1, 0, 0, 0, -x, -y );
+    if (x || y) {
+      mtx.appendTransform(0, 0, 1, 1, 0, 0, 0, -x, -y);
     } // TODO: simplify this.
-    if ( matrix ) {
-      mtx.prependMatrix( matrix );
+    if (matrix) {
+      mtx.prependMatrix(matrix);
     }
 
     var x_a = width * mtx.a,
@@ -7564,39 +7967,39 @@ this.createjs = this.createjs || {};
       minY = ty,
       maxY = ty;
 
-    if ( ( x = x_a + tx ) < minX ) {
+    if ((x = x_a + tx) < minX) {
       minX = x;
-    } else if ( x > maxX ) {
+    } else if (x > maxX) {
       maxX = x;
     }
-    if ( ( x = x_a + y_c + tx ) < minX ) {
+    if ((x = x_a + y_c + tx) < minX) {
       minX = x;
-    } else if ( x > maxX ) {
+    } else if (x > maxX) {
       maxX = x;
     }
-    if ( ( x = y_c + tx ) < minX ) {
+    if ((x = y_c + tx) < minX) {
       minX = x;
-    } else if ( x > maxX ) {
+    } else if (x > maxX) {
       maxX = x;
     }
 
-    if ( ( y = x_b + ty ) < minY ) {
+    if ((y = x_b + ty) < minY) {
       minY = y;
-    } else if ( y > maxY ) {
+    } else if (y > maxY) {
       maxY = y;
     }
-    if ( ( y = x_b + y_d + ty ) < minY ) {
+    if ((y = x_b + y_d + ty) < minY) {
       minY = y;
-    } else if ( y > maxY ) {
+    } else if (y > maxY) {
       maxY = y;
     }
-    if ( ( y = y_d + ty ) < minY ) {
+    if ((y = y_d + ty) < minY) {
       minY = y;
-    } else if ( y > maxY ) {
+    } else if (y > maxY) {
       maxY = y;
     }
 
-    return bounds.setValues( minX, minY, maxX - minX, maxY - minY );
+    return bounds.setValues(minX, minY, maxX - minX, maxY - minY);
   };
 
   /**
@@ -7607,16 +8010,16 @@ this.createjs = this.createjs || {};
    **/
   p._hasMouseEventListener = function () {
     var evts = DisplayObject._MOUSE_EVENTS;
-    for ( var i = 0, l = evts.length; i < l; i++ ) {
-      if ( this.hasEventListener( evts[ i ] ) ) {
+    for (var i = 0, l = evts.length; i < l; i++) {
+      if (this.hasEventListener(evts[i])) {
         return true;
       }
     }
     return !!this.cursor;
   };
 
-  createjs.DisplayObject = createjs.promote( DisplayObject, "EventDispatcher" );
-}() );
+  createjs.DisplayObject = createjs.promote(DisplayObject, "EventDispatcher");
+})();
 
 //##############################################################################
 // Container.js
@@ -7624,9 +8027,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -7685,8 +8087,7 @@ this.createjs = this.createjs || {};
      **/
     this.tickChildren = true;
   }
-  var p = createjs.extend( Container, createjs.DisplayObject );
-
+  var p = createjs.extend(Container, createjs.DisplayObject);
 
   // getter / setters:
   /**
@@ -7699,7 +8100,10 @@ this.createjs = this.createjs || {};
     return this.children.length;
   };
   // Container.getNumChildren is @deprecated. Remove for 1.1+
-  p.getNumChildren = createjs.deprecate( p._getNumChildren, "Container.getNumChildren" );
+  p.getNumChildren = createjs.deprecate(
+    p._getNumChildren,
+    "Container.getNumChildren"
+  );
 
   /**
    * Returns the number of children in the container.
@@ -7708,13 +8112,12 @@ this.createjs = this.createjs || {};
    * @readonly
    **/
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       numChildren: {
-        get: p._getNumChildren
-      }
-    } );
-  } catch ( e ) {}
-
+        get: p._getNumChildren,
+      },
+    });
+  } catch (e) {}
 
   // public methods:
   /**
@@ -7735,7 +8138,13 @@ this.createjs = this.createjs || {};
    **/
   p.isVisible = function () {
     var hasContent = this.cacheCanvas || this.children.length;
-    return !!( this.visible && this.alpha > 0 && this.scaleX != 0 && this.scaleY != 0 && hasContent );
+    return !!(
+      this.visible &&
+      this.alpha > 0 &&
+      this.scaleX != 0 &&
+      this.scaleY != 0 &&
+      hasContent
+    );
   };
 
   /**
@@ -7749,23 +8158,23 @@ this.createjs = this.createjs || {};
    * For example, used for drawing the cache (to prevent it from simply drawing an existing cache back
    * into itself).
    **/
-  p.draw = function ( ctx, ignoreCache ) {
-    if ( this.DisplayObject_draw( ctx, ignoreCache ) ) {
+  p.draw = function (ctx, ignoreCache) {
+    if (this.DisplayObject_draw(ctx, ignoreCache)) {
       return true;
     }
 
     // this ensures we don't have issues with display list changes that occur during a draw:
     var list = this.children.slice();
-    for ( var i = 0, l = list.length; i < l; i++ ) {
-      var child = list[ i ];
-      if ( !child.isVisible() ) {
+    for (var i = 0, l = list.length; i < l; i++) {
+      var child = list[i];
+      if (!child.isVisible()) {
         continue;
       }
 
       // draw the child:
       ctx.save();
-      child.updateContext( ctx );
-      child.draw( ctx );
+      child.updateContext(ctx);
+      child.draw(ctx);
       ctx.restore();
     }
     return true;
@@ -7786,25 +8195,25 @@ this.createjs = this.createjs || {};
    * @param {DisplayObject} child The display object to add.
    * @return {DisplayObject} The child that was added, or the last child if multiple children were added.
    **/
-  p.addChild = function ( child ) {
-    if ( child == null ) {
+  p.addChild = function (child) {
+    if (child == null) {
       return child;
     }
     var l = arguments.length;
-    if ( l > 1 ) {
-      for ( var i = 0; i < l; i++ ) {
-        this.addChild( arguments[ i ] );
+    if (l > 1) {
+      for (var i = 0; i < l; i++) {
+        this.addChild(arguments[i]);
       }
-      return arguments[ l - 1 ];
+      return arguments[l - 1];
     }
     // Note: a lot of duplication with addChildAt, but push is WAY faster than splice.
     var par = child.parent,
       silent = par === this;
-    par && par._removeChildAt( createjs.indexOf( par.children, child ), silent );
+    par && par._removeChildAt(createjs.indexOf(par.children, child), silent);
     child.parent = this;
-    this.children.push( child );
-    if ( !silent ) {
-      child.dispatchEvent( "added" );
+    this.children.push(child);
+    if (!silent) {
+      child.dispatchEvent("added");
     }
     return child;
   };
@@ -7833,25 +8242,25 @@ this.createjs = this.createjs || {};
    * @param {Number} index The index to add the child at.
    * @return {DisplayObject} Returns the last child that was added, or the last child if multiple children were added.
    **/
-  p.addChildAt = function ( child, index ) {
+  p.addChildAt = function (child, index) {
     var l = arguments.length;
-    var indx = arguments[ l - 1 ]; // can't use the same name as the index param or it replaces arguments[1]
-    if ( indx < 0 || indx > this.children.length ) {
-      return arguments[ l - 2 ];
+    var indx = arguments[l - 1]; // can't use the same name as the index param or it replaces arguments[1]
+    if (indx < 0 || indx > this.children.length) {
+      return arguments[l - 2];
     }
-    if ( l > 2 ) {
-      for ( var i = 0; i < l - 1; i++ ) {
-        this.addChildAt( arguments[ i ], indx + i );
+    if (l > 2) {
+      for (var i = 0; i < l - 1; i++) {
+        this.addChildAt(arguments[i], indx + i);
       }
-      return arguments[ l - 2 ];
+      return arguments[l - 2];
     }
     var par = child.parent,
       silent = par === this;
-    par && par._removeChildAt( createjs.indexOf( par.children, child ), silent );
+    par && par._removeChildAt(createjs.indexOf(par.children, child), silent);
     child.parent = this;
-    this.children.splice( index, 0, child );
-    if ( !silent ) {
-      child.dispatchEvent( "added" );
+    this.children.splice(index, 0, child);
+    if (!silent) {
+      child.dispatchEvent("added");
     }
     return child;
   };
@@ -7873,16 +8282,16 @@ this.createjs = this.createjs || {};
    * @param {DisplayObject} child The child to remove.
    * @return {Boolean} true if the child (or children) was removed, or false if it was not in the display list.
    **/
-  p.removeChild = function ( child ) {
+  p.removeChild = function (child) {
     var l = arguments.length;
-    if ( l > 1 ) {
+    if (l > 1) {
       var good = true;
-      for ( var i = 0; i < l; i++ ) {
-        good = good && this.removeChild( arguments[ i ] );
+      for (var i = 0; i < l; i++) {
+        good = good && this.removeChild(arguments[i]);
       }
       return good;
     }
-    return this._removeChildAt( createjs.indexOf( this.children, child ) );
+    return this._removeChildAt(createjs.indexOf(this.children, child));
   };
 
   /**
@@ -7901,23 +8310,23 @@ this.createjs = this.createjs || {};
    * @param {Number} index The index of the child to remove.
    * @return {Boolean} true if the child (or children) was removed, or false if any index was out of range.
    **/
-  p.removeChildAt = function ( index ) {
+  p.removeChildAt = function (index) {
     var l = arguments.length;
-    if ( l > 1 ) {
+    if (l > 1) {
       var a = [];
-      for ( var i = 0; i < l; i++ ) {
-        a[ i ] = arguments[ i ];
+      for (var i = 0; i < l; i++) {
+        a[i] = arguments[i];
       }
-      a.sort( function ( a, b ) {
+      a.sort(function (a, b) {
         return b - a;
-      } );
+      });
       var good = true;
-      for ( var i = 0; i < l; i++ ) {
-        good = good && this._removeChildAt( a[ i ] );
+      for (var i = 0; i < l; i++) {
+        good = good && this._removeChildAt(a[i]);
       }
       return good;
     }
-    return this._removeChildAt( index );
+    return this._removeChildAt(index);
   };
 
   /**
@@ -7931,8 +8340,8 @@ this.createjs = this.createjs || {};
    **/
   p.removeAllChildren = function () {
     var kids = this.children;
-    while ( kids.length ) {
-      this._removeChildAt( 0 );
+    while (kids.length) {
+      this._removeChildAt(0);
     }
   };
 
@@ -7947,8 +8356,8 @@ this.createjs = this.createjs || {};
    * @param {Number} index The index of the child to return.
    * @return {DisplayObject} The child at the specified index. Returns null if there is no child at the index.
    **/
-  p.getChildAt = function ( index ) {
-    return this.children[ index ];
+  p.getChildAt = function (index) {
+    return this.children[index];
   };
 
   /**
@@ -7957,11 +8366,11 @@ this.createjs = this.createjs || {};
    * @param {String} name The name of the child to return.
    * @return {DisplayObject} The child with the specified name.
    **/
-  p.getChildByName = function ( name ) {
+  p.getChildByName = function (name) {
     var kids = this.children;
-    for ( var i = 0, l = kids.length; i < l; i++ ) {
-      if ( kids[ i ].name == name ) {
-        return kids[ i ];
+    for (var i = 0, l = kids.length; i < l; i++) {
+      if (kids[i].name == name) {
+        return kids[i];
       }
     }
     return null;
@@ -7971,7 +8380,7 @@ this.createjs = this.createjs || {};
    * Performs an array sort operation on the child list.
    *
    * <h4>Example: Display children with a higher y in front.</h4>
-   * 
+   *
    *      var sortFunction = function(obj1, obj2, options) {
    *          if (obj1.y > obj2.y) { return 1; }
    *          if (obj1.y < obj2.y) { return -1; }
@@ -7983,8 +8392,8 @@ this.createjs = this.createjs || {};
    * @param {Function} sortFunction the function to use to sort the child list. See JavaScript's <code>Array.sort</code>
    * documentation for details.
    **/
-  p.sortChildren = function ( sortFunction ) {
-    this.children.sort( sortFunction );
+  p.sortChildren = function (sortFunction) {
+    this.children.sort(sortFunction);
   };
 
   /**
@@ -7998,8 +8407,8 @@ this.createjs = this.createjs || {};
    * @param {DisplayObject} child The child to return the index of.
    * @return {Number} The index of the specified child. -1 if the child is not found.
    **/
-  p.getChildIndex = function ( child ) {
-    return createjs.indexOf( this.children, child );
+  p.getChildIndex = function (child) {
+    return createjs.indexOf(this.children, child);
   };
 
   /**
@@ -8008,15 +8417,15 @@ this.createjs = this.createjs || {};
    * @param {Number} index1
    * @param {Number} index2
    **/
-  p.swapChildrenAt = function ( index1, index2 ) {
+  p.swapChildrenAt = function (index1, index2) {
     var kids = this.children;
-    var o1 = kids[ index1 ];
-    var o2 = kids[ index2 ];
-    if ( !o1 || !o2 ) {
+    var o1 = kids[index1];
+    var o2 = kids[index2];
+    if (!o1 || !o2) {
       return;
     }
-    kids[ index1 ] = o2;
-    kids[ index2 ] = o1;
+    kids[index1] = o2;
+    kids[index2] = o1;
   };
 
   /**
@@ -8026,49 +8435,49 @@ this.createjs = this.createjs || {};
    * @param {DisplayObject} child1
    * @param {DisplayObject} child2
    **/
-  p.swapChildren = function ( child1, child2 ) {
+  p.swapChildren = function (child1, child2) {
     var kids = this.children;
     var index1, index2;
-    for ( var i = 0, l = kids.length; i < l; i++ ) {
-      if ( kids[ i ] == child1 ) {
+    for (var i = 0, l = kids.length; i < l; i++) {
+      if (kids[i] == child1) {
         index1 = i;
       }
-      if ( kids[ i ] == child2 ) {
+      if (kids[i] == child2) {
         index2 = i;
       }
-      if ( index1 != null && index2 != null ) {
+      if (index1 != null && index2 != null) {
         break;
       }
     }
-    if ( i == l ) {
+    if (i == l) {
       return;
     } // TODO: throw error?
-    kids[ index1 ] = child2;
-    kids[ index2 ] = child1;
+    kids[index1] = child2;
+    kids[index2] = child1;
   };
 
   /**
    * Changes the depth of the specified child. Fails silently if the child is not a child of this container, or the index is out of range.
    * @param {DisplayObject} child
-   * @param {Number} index  
+   * @param {Number} index
    * @method setChildIndex
    **/
-  p.setChildIndex = function ( child, index ) {
+  p.setChildIndex = function (child, index) {
     var kids = this.children,
       l = kids.length;
-    if ( child.parent != this || index < 0 || index >= l ) {
+    if (child.parent != this || index < 0 || index >= l) {
       return;
     }
-    for ( var i = 0; i < l; i++ ) {
-      if ( kids[ i ] == child ) {
+    for (var i = 0; i < l; i++) {
+      if (kids[i] == child) {
         break;
       }
     }
-    if ( i == l || i == index ) {
+    if (i == l || i == index) {
       return;
     }
-    kids.splice( i, 1 );
-    kids.splice( index, 0, child );
+    kids.splice(i, 1);
+    kids.splice(index, 0, child);
   };
 
   /**
@@ -8078,9 +8487,9 @@ this.createjs = this.createjs || {};
    * @param {DisplayObject} child The DisplayObject to be checked.
    * @return {Boolean} true if the specified display object either is this container or is a descendent.
    **/
-  p.contains = function ( child ) {
-    while ( child ) {
-      if ( child == this ) {
+  p.contains = function (child) {
+    while (child) {
+      if (child == this) {
         return true;
       }
       child = child.parent;
@@ -8098,9 +8507,9 @@ this.createjs = this.createjs || {};
    * @return {Boolean} A Boolean indicating whether there is a visible section of a DisplayObject that overlaps the specified
    * coordinates.
    **/
-  p.hitTest = function ( x, y ) {
+  p.hitTest = function (x, y) {
     // TODO: optimize to use the fast cache check where possible.
-    return ( this.getObjectUnderPoint( x, y ) != null );
+    return this.getObjectUnderPoint(x, y) != null;
   };
 
   /**
@@ -8110,7 +8519,7 @@ this.createjs = this.createjs || {};
    * This uses shape based hit detection, and can be an expensive operation to run, so it is best to use it carefully.
    * For example, if testing for objects under the mouse, test on tick (instead of on {{#crossLink "DisplayObject/mousemove:event"}}{{/crossLink}}),
    * and only if the mouse's position has changed.
-   * 
+   *
    * <ul>
    *     <li>By default (mode=0) this method evaluates all display objects.</li>
    *     <li>By setting the `mode` parameter to `1`, the {{#crossLink "DisplayObject/mouseEnabled:property"}}{{/crossLink}}
@@ -8120,7 +8529,7 @@ this.createjs = this.createjs || {};
    * 	   	that would normally intercept mouse interaction will be included. This can significantly improve performance
    * 	   	in some cases by reducing the number of display objects that need to be tested.</li>
    * </li>
-   * 
+   *
    * This method accounts for both {{#crossLink "DisplayObject/hitArea:property"}}{{/crossLink}} and {{#crossLink "DisplayObject/mask:property"}}{{/crossLink}}.
    * @method getObjectsUnderPoint
    * @param {Number} x The x position in the container to test.
@@ -8128,10 +8537,10 @@ this.createjs = this.createjs || {};
    * @param {Number} [mode=0] The mode to use to determine which display objects to include. 0-all, 1-respect mouseEnabled/mouseChildren, 2-only mouse opaque objects.
    * @return {Array} An Array of DisplayObjects under the specified coordinates.
    **/
-  p.getObjectsUnderPoint = function ( x, y, mode ) {
+  p.getObjectsUnderPoint = function (x, y, mode) {
     var arr = [];
-    var pt = this.localToGlobal( x, y );
-    this._getObjectsUnderPoint( pt.x, pt.y, arr, mode > 0, mode == 1 );
+    var pt = this.localToGlobal(x, y);
+    this._getObjectsUnderPoint(pt.x, pt.y, arr, mode > 0, mode == 1);
     return arr;
   };
 
@@ -8145,18 +8554,17 @@ this.createjs = this.createjs || {};
    * @param {Number} mode The mode to use to determine which display objects to include.  0-all, 1-respect mouseEnabled/mouseChildren, 2-only mouse opaque objects.
    * @return {DisplayObject} The top-most display object under the specified coordinates.
    **/
-  p.getObjectUnderPoint = function ( x, y, mode ) {
-    var pt = this.localToGlobal( x, y );
-    return this._getObjectsUnderPoint( pt.x, pt.y, null, mode > 0, mode == 1 );
+  p.getObjectUnderPoint = function (x, y, mode) {
+    var pt = this.localToGlobal(x, y);
+    return this._getObjectsUnderPoint(pt.x, pt.y, null, mode > 0, mode == 1);
   };
 
   /**
    * Docced in superclass.
    */
   p.getBounds = function () {
-    return this._getBounds( null, true );
+    return this._getBounds(null, true);
   };
-
 
   /**
    * Docced in superclass.
@@ -8173,10 +8581,10 @@ this.createjs = this.createjs || {};
    * properties of the container will be cloned, but the new instance will not have any children.
    * @return {Container} A clone of the current Container instance.
    **/
-  p.clone = function ( recursive ) {
-    var o = this._cloneProps( new Container() );
-    if ( recursive ) {
-      this._cloneChildren( o );
+  p.clone = function (recursive) {
+    var o = this._cloneProps(new Container());
+    if (recursive) {
+      this._cloneChildren(o);
     }
     return o;
   };
@@ -8190,23 +8598,22 @@ this.createjs = this.createjs || {};
     return "[Container (name=" + this.name + ")]";
   };
 
-
   // private methods:
   /**
    * @method _tick
    * @param {Object} evtObj An event object that will be dispatched to all tick listeners. This object is reused between dispatchers to reduce construction & GC costs.
    * @protected
    **/
-  p._tick = function ( evtObj ) {
-    if ( this.tickChildren ) {
-      for ( var i = this.children.length - 1; i >= 0; i-- ) {
-        var child = this.children[ i ];
-        if ( child.tickEnabled && child._tick ) {
-          child._tick( evtObj );
+  p._tick = function (evtObj) {
+    if (this.tickChildren) {
+      for (var i = this.children.length - 1; i >= 0; i--) {
+        var child = this.children[i];
+        if (child.tickEnabled && child._tick) {
+          child._tick(evtObj);
         }
       }
     }
-    this.DisplayObject__tick( evtObj );
+    this.DisplayObject__tick(evtObj);
   };
 
   /**
@@ -8215,15 +8622,15 @@ this.createjs = this.createjs || {};
    * @protected
    * @param {Container} o The target container.
    **/
-  p._cloneChildren = function ( o ) {
-    if ( o.children.length ) {
+  p._cloneChildren = function (o) {
+    if (o.children.length) {
       o.removeAllChildren();
     }
     var arr = o.children;
-    for ( var i = 0, l = this.children.length; i < l; i++ ) {
-      var clone = this.children[ i ].clone( true );
+    for (var i = 0, l = this.children.length; i < l; i++) {
+      var clone = this.children[i].clone(true);
       clone.parent = o;
-      arr.push( clone );
+      arr.push(clone);
     }
   };
 
@@ -8236,17 +8643,17 @@ this.createjs = this.createjs || {};
    * @param {Boolean} [silent] Prevents dispatch of `removed` event if true.
    * @return {Boolean} true if the child (or children) was removed, or false if any index was out of range.
    **/
-  p._removeChildAt = function ( index, silent ) {
-    if ( index < 0 || index > this.children.length - 1 ) {
+  p._removeChildAt = function (index, silent) {
+    if (index < 0 || index > this.children.length - 1) {
       return false;
     }
-    var child = this.children[ index ];
-    if ( child ) {
+    var child = this.children[index];
+    if (child) {
       child.parent = null;
     }
-    this.children.splice( index, 1 );
-    if ( !silent ) {
-      child.dispatchEvent( "removed" );
+    this.children.splice(index, 1);
+    if (!silent) {
+      child.dispatchEvent("removed");
     }
     return true;
   };
@@ -8262,59 +8669,78 @@ this.createjs = this.createjs || {};
    * @return {DisplayObject}
    * @protected
    **/
-  p._getObjectsUnderPoint = function ( x, y, arr, mouse, activeListener, currentDepth ) {
+  p._getObjectsUnderPoint = function (
+    x,
+    y,
+    arr,
+    mouse,
+    activeListener,
+    currentDepth
+  ) {
     currentDepth = currentDepth || 0;
-    if ( !currentDepth && !this._testMask( this, x, y ) ) {
+    if (!currentDepth && !this._testMask(this, x, y)) {
       return null;
     }
-    var mtx, ctx = createjs.DisplayObject._hitTestContext;
-    activeListener = activeListener || ( mouse && this._hasMouseEventListener() );
+    var mtx,
+      ctx = createjs.DisplayObject._hitTestContext;
+    activeListener = activeListener || (mouse && this._hasMouseEventListener());
 
     // draw children one at a time, and check if we get a hit:
     var children = this.children,
       l = children.length;
-    for ( var i = l - 1; i >= 0; i-- ) {
-      var child = children[ i ];
+    for (var i = l - 1; i >= 0; i--) {
+      var child = children[i];
       var hitArea = child.hitArea;
-      if ( !child.visible || ( !hitArea && !child.isVisible() ) || ( mouse && !child.mouseEnabled ) ) {
+      if (
+        !child.visible ||
+        (!hitArea && !child.isVisible()) ||
+        (mouse && !child.mouseEnabled)
+      ) {
         continue;
       }
-      if ( !hitArea && !this._testMask( child, x, y ) ) {
+      if (!hitArea && !this._testMask(child, x, y)) {
         continue;
       }
 
       // if a child container has a hitArea then we only need to check its hitAre2a, so we can treat it as a normal DO:
-      if ( !hitArea && child instanceof Container ) {
-        var result = child._getObjectsUnderPoint( x, y, arr, mouse, activeListener, currentDepth + 1 );
-        if ( !arr && result ) {
-          return ( mouse && !this.mouseChildren ) ? this : result;
+      if (!hitArea && child instanceof Container) {
+        var result = child._getObjectsUnderPoint(
+          x,
+          y,
+          arr,
+          mouse,
+          activeListener,
+          currentDepth + 1
+        );
+        if (!arr && result) {
+          return mouse && !this.mouseChildren ? this : result;
         }
       } else {
-        if ( mouse && !activeListener && !child._hasMouseEventListener() ) {
+        if (mouse && !activeListener && !child._hasMouseEventListener()) {
           continue;
         }
 
         // TODO: can we pass displayProps forward, to avoid having to calculate this backwards every time? It's kind of a mixed bag. When we're only hunting for DOs with event listeners, it may not make sense.
-        var props = child.getConcatenatedDisplayProps( child._props );
+        var props = child.getConcatenatedDisplayProps(child._props);
         mtx = props.matrix;
 
-        if ( hitArea ) {
-          mtx.appendMatrix( hitArea.getMatrix( hitArea._props.matrix ) );
+        if (hitArea) {
+          mtx.appendMatrix(hitArea.getMatrix(hitArea._props.matrix));
           props.alpha = hitArea.alpha;
         }
 
         ctx.globalAlpha = props.alpha;
-        ctx.setTransform( mtx.a, mtx.b, mtx.c, mtx.d, mtx.tx - x, mtx.ty - y );
-        ( hitArea || child ).draw( ctx );
-        if ( !this._testHit( ctx ) ) {
+        ctx.setTransform(mtx.a, mtx.b, mtx.c, mtx.d, mtx.tx - x, mtx.ty - y);
+        (hitArea || child).draw(ctx);
+        if (!this._testHit(ctx)) {
           continue;
         }
-        ctx.setTransform( 1, 0, 0, 1, 0, 0 );
-        ctx.clearRect( 0, 0, 2, 2 );
-        if ( arr ) {
-          arr.push( child );
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.clearRect(0, 0, 2, 2);
+        if (arr) {
+          arr.push(child);
         } else {
-          return ( mouse && !this.mouseChildren ) ? this : child;
+          return mouse && !this.mouseChildren ? this : child;
         }
       }
     }
@@ -8329,30 +8755,30 @@ this.createjs = this.createjs || {};
    * @return {Boolean} Indicates whether the x/y is within the masked region.
    * @protected
    **/
-  p._testMask = function ( target, x, y ) {
+  p._testMask = function (target, x, y) {
     var mask = target.mask;
-    if ( !mask || !mask.graphics || mask.graphics.isEmpty() ) {
+    if (!mask || !mask.graphics || mask.graphics.isEmpty()) {
       return true;
     }
 
     var mtx = this._props.matrix,
       parent = target.parent;
-    mtx = parent ? parent.getConcatenatedMatrix( mtx ) : mtx.identity();
-    mtx = mask.getMatrix( mask._props.matrix ).prependMatrix( mtx );
+    mtx = parent ? parent.getConcatenatedMatrix(mtx) : mtx.identity();
+    mtx = mask.getMatrix(mask._props.matrix).prependMatrix(mtx);
 
     var ctx = createjs.DisplayObject._hitTestContext;
-    ctx.setTransform( mtx.a, mtx.b, mtx.c, mtx.d, mtx.tx - x, mtx.ty - y );
+    ctx.setTransform(mtx.a, mtx.b, mtx.c, mtx.d, mtx.tx - x, mtx.ty - y);
 
     // draw the mask as a solid fill:
-    mask.graphics.drawAsPath( ctx );
+    mask.graphics.drawAsPath(ctx);
     ctx.fillStyle = "#000";
     ctx.fill();
 
-    if ( !this._testHit( ctx ) ) {
+    if (!this._testHit(ctx)) {
       return false;
     }
-    ctx.setTransform( 1, 0, 0, 1, 0, 0 );
-    ctx.clearRect( 0, 0, 2, 2 );
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, 2, 2);
 
     return true;
   };
@@ -8364,27 +8790,27 @@ this.createjs = this.createjs || {};
    * @return {Rectangle}
    * @protected
    **/
-  p._getBounds = function ( matrix, ignoreTransform ) {
+  p._getBounds = function (matrix, ignoreTransform) {
     var bounds = this.DisplayObject_getBounds();
-    if ( bounds ) {
-      return this._transformBounds( bounds, matrix, ignoreTransform );
+    if (bounds) {
+      return this._transformBounds(bounds, matrix, ignoreTransform);
     }
 
     var mtx = this._props.matrix;
-    mtx = ignoreTransform ? mtx.identity() : this.getMatrix( mtx );
-    if ( matrix ) {
-      mtx.prependMatrix( matrix );
+    mtx = ignoreTransform ? mtx.identity() : this.getMatrix(mtx);
+    if (matrix) {
+      mtx.prependMatrix(matrix);
     }
 
     var l = this.children.length,
       rect = null;
-    for ( var i = 0; i < l; i++ ) {
-      var child = this.children[ i ];
-      if ( !child.visible || !( bounds = child._getBounds( mtx ) ) ) {
+    for (var i = 0; i < l; i++) {
+      var child = this.children[i];
+      if (!child.visible || !(bounds = child._getBounds(mtx))) {
         continue;
       }
-      if ( rect ) {
-        rect.extend( bounds.x, bounds.y, bounds.width, bounds.height );
+      if (rect) {
+        rect.extend(bounds.x, bounds.y, bounds.width, bounds.height);
       } else {
         rect = bounds.clone();
       }
@@ -8392,9 +8818,8 @@ this.createjs = this.createjs || {};
     return rect;
   };
 
-
-  createjs.Container = createjs.promote( Container, "DisplayObject" );
-}() );
+  createjs.Container = createjs.promote(Container, "DisplayObject");
+})();
 
 //##############################################################################
 // Stage.js
@@ -8402,9 +8827,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -8430,9 +8854,8 @@ this.createjs = this.createjs || {};
    * @param {HTMLCanvasElement | String | Object} canvas A canvas object that the Stage will render to, or the string id
    * of a canvas object in the current document.
    **/
-  function Stage( canvas ) {
+  function Stage(canvas) {
     this.Container_constructor();
-
 
     // public properties:
     /**
@@ -8465,7 +8888,8 @@ this.createjs = this.createjs || {};
      * @property canvas
      * @type HTMLCanvasElement | Object
      **/
-    this.canvas = ( typeof canvas == "string" ) ? document.getElementById( canvas ) : canvas;
+    this.canvas =
+      typeof canvas == "string" ? document.getElementById(canvas) : canvas;
 
     /**
      * The current mouse X position on the canvas. If the mouse leaves the canvas, this will indicate the most recent
@@ -8529,7 +8953,6 @@ this.createjs = this.createjs || {};
      **/
     this.mouseMoveOutside = false;
 
-
     /**
      * Prevents selection of other elements in the html page if the user clicks and drags, or double clicks on the canvas.
      * This works by calling `preventDefault()` on any mousedown events (or touch equivalent) originating on the canvas.
@@ -8545,7 +8968,6 @@ this.createjs = this.createjs || {};
      * @type {DisplayObject}
      * @default null
      */
-
 
     // private properties:
     /**
@@ -8594,11 +9016,10 @@ this.createjs = this.createjs || {};
      **/
     this._prevStage = null;
 
-
     // initialize:
-    this.enableDOMEvents( true );
+    this.enableDOMEvents(true);
   }
-  var p = createjs.extend( Stage, createjs.Container );
+  var p = createjs.extend(Stage, createjs.Container);
 
   // events:
   /**
@@ -8666,7 +9087,6 @@ this.createjs = this.createjs || {};
    * @since 0.7.0
    */
 
-
   // getter / setters:
   /**
    * Specifies a target stage that will have mouse / touch interactions relayed to it after this stage handles them.
@@ -8676,7 +9096,7 @@ this.createjs = this.createjs || {};
    *      topStage.nextStage = bottomStage;
    *
    * To disable relaying, set nextStage to null.
-   * 
+   *
    * MouseOver, MouseOut, RollOver, and RollOut interactions are also passed through using the mouse over settings
    * of the top-most stage, but are only processed if the target stage has mouse over interactions enabled.
    * Considerations when using roll over in relay targets:<OL>
@@ -8689,37 +9109,36 @@ this.createjs = this.createjs || {};
    * 	topStage.nextStage = targetStage;
    * 	topStage.enableMouseOver(10);
    * 	targetStage.enableMouseOver(30);
-   * 
+   *
    * If the target stage's canvas is completely covered by this stage's canvas, you may also want to disable its
    * DOM events using:
-   * 
+   *
    *	targetStage.enableDOMEvents(false);
-   * 
+   *
    * @property nextStage
    * @type {Stage}
    **/
   p._get_nextStage = function () {
     return this._nextStage;
   };
-  p._set_nextStage = function ( value ) {
-    if ( this._nextStage ) {
+  p._set_nextStage = function (value) {
+    if (this._nextStage) {
       this._nextStage._prevStage = null;
     }
-    if ( value ) {
+    if (value) {
       value._prevStage = this;
     }
     this._nextStage = value;
   };
 
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       nextStage: {
         get: p._get_nextStage,
-        set: p._set_nextStage
-      }
-    } );
-  } catch ( e ) {} // TODO: use Log
-
+        set: p._set_nextStage,
+      },
+    });
+  } catch (e) {} // TODO: use Log
 
   // public methods:
   /**
@@ -8730,37 +9149,37 @@ this.createjs = this.createjs || {};
    * @method update
    * @param {Object} [props] Props object to pass to `tick()`. Should usually be a {{#crossLink "Ticker"}}{{/crossLink}} event object, or similar object with a delta property.
    **/
-  p.update = function ( props ) {
-    if ( !this.canvas ) {
+  p.update = function (props) {
+    if (!this.canvas) {
       return;
     }
-    if ( this.tickOnUpdate ) {
-      this.tick( props );
+    if (this.tickOnUpdate) {
+      this.tick(props);
     }
-    if ( this.dispatchEvent( "drawstart", false, true ) === false ) {
+    if (this.dispatchEvent("drawstart", false, true) === false) {
       return;
     }
     createjs.DisplayObject._snapToPixelEnabled = this.snapToPixelEnabled;
     var r = this.drawRect,
-      ctx = this.canvas.getContext( "2d" );
-    ctx.setTransform( 1, 0, 0, 1, 0, 0 );
-    if ( this.autoClear ) {
-      if ( r ) {
-        ctx.clearRect( r.x, r.y, r.width, r.height );
+      ctx = this.canvas.getContext("2d");
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    if (this.autoClear) {
+      if (r) {
+        ctx.clearRect(r.x, r.y, r.width, r.height);
       } else {
-        ctx.clearRect( 0, 0, this.canvas.width + 1, this.canvas.height + 1 );
+        ctx.clearRect(0, 0, this.canvas.width + 1, this.canvas.height + 1);
       }
     }
     ctx.save();
-    if ( this.drawRect ) {
+    if (this.drawRect) {
       ctx.beginPath();
-      ctx.rect( r.x, r.y, r.width, r.height );
+      ctx.rect(r.x, r.y, r.width, r.height);
       ctx.clip();
     }
-    this.updateContext( ctx );
-    this.draw( ctx, false );
+    this.updateContext(ctx);
+    this.draw(ctx, false);
     ctx.restore();
-    this.dispatchEvent( "drawend" );
+    this.dispatchEvent("drawend");
   };
 
   /**
@@ -8778,35 +9197,38 @@ this.createjs = this.createjs || {};
    * 	function handleTick(evtObj) {
    * 		// clone the event object from Ticker, and add some custom data to it:
    * 		var evt = evtObj.clone().set({greeting:"hello", name:"world"});
-   * 		
+   *
    * 		// pass it to stage.update():
    * 		myStage.update(evt); // subsequently calls tick() with the same param
    * 	}
-   * 	
+   *
    * 	// ...
    * 	myDisplayObject.on("tick", handleDisplayObjectTick);
    * 	function handleDisplayObjectTick(evt) {
    * 		console.log(evt.delta); // the delta property from the Ticker tick event object
    * 		console.log(evt.greeting, evt.name); // custom data: "hello world"
    * 	}
-   * 
+   *
    * @method tick
    * @param {Object} [props] An object with properties that should be copied to the event object. Should usually be a Ticker event object, or similar object with a delta property.
    **/
-  p.tick = function ( props ) {
-    if ( !this.tickEnabled || this.dispatchEvent( "tickstart", false, true ) === false ) {
+  p.tick = function (props) {
+    if (
+      !this.tickEnabled ||
+      this.dispatchEvent("tickstart", false, true) === false
+    ) {
       return;
     }
-    var evtObj = new createjs.Event( "tick" );
-    if ( props ) {
-      for ( var n in props ) {
-        if ( props.hasOwnProperty( n ) ) {
-          evtObj[ n ] = props[ n ];
+    var evtObj = new createjs.Event("tick");
+    if (props) {
+      for (var n in props) {
+        if (props.hasOwnProperty(n)) {
+          evtObj[n] = props[n];
         }
       }
     }
-    this._tick( evtObj );
-    this.dispatchEvent( "tickend" );
+    this._tick(evtObj);
+    this.dispatchEvent("tickend");
   };
 
   /**
@@ -8821,9 +9243,9 @@ this.createjs = this.createjs || {};
    * @property handleEvent
    * @type Function
    **/
-  p.handleEvent = function ( evt ) {
-    if ( evt.type == "tick" ) {
-      this.update( evt );
+  p.handleEvent = function (evt) {
+    if (evt.type == "tick") {
+      this.update(evt);
     }
   };
 
@@ -8832,12 +9254,12 @@ this.createjs = this.createjs || {};
    * @method clear
    **/
   p.clear = function () {
-    if ( !this.canvas ) {
+    if (!this.canvas) {
       return;
     }
-    var ctx = this.canvas.getContext( "2d" );
-    ctx.setTransform( 1, 0, 0, 1, 0, 0 );
-    ctx.clearRect( 0, 0, this.canvas.width + 1, this.canvas.height + 1 );
+    var ctx = this.canvas.getContext("2d");
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, this.canvas.width + 1, this.canvas.height + 1);
   };
 
   /**
@@ -8850,24 +9272,25 @@ this.createjs = this.createjs || {};
    * is passed in, or if the browser does not support the specified MIME type, the default value will be used.
    * @return {String} a Base64 encoded image.
    **/
-  p.toDataURL = function ( backgroundColor, mimeType ) {
-    var data, ctx = this.canvas.getContext( '2d' ),
+  p.toDataURL = function (backgroundColor, mimeType) {
+    var data,
+      ctx = this.canvas.getContext("2d"),
       w = this.canvas.width,
       h = this.canvas.height;
 
-    if ( backgroundColor ) {
-      data = ctx.getImageData( 0, 0, w, h );
+    if (backgroundColor) {
+      data = ctx.getImageData(0, 0, w, h);
       var compositeOperation = ctx.globalCompositeOperation;
       ctx.globalCompositeOperation = "destination-over";
 
       ctx.fillStyle = backgroundColor;
-      ctx.fillRect( 0, 0, w, h );
+      ctx.fillRect(0, 0, w, h);
     }
 
-    var dataURL = this.canvas.toDataURL( mimeType || "image/png" );
+    var dataURL = this.canvas.toDataURL(mimeType || "image/png");
 
-    if ( backgroundColor ) {
-      ctx.putImageData( data, 0, 0 );
+    if (backgroundColor) {
+      ctx.putImageData(data, 0, 0);
       ctx.globalCompositeOperation = compositeOperation;
     }
 
@@ -8891,23 +9314,23 @@ this.createjs = this.createjs || {};
    * mouse over/out events. Set to 0 to disable mouse over events completely. Maximum is 50. A lower frequency is less
    * responsive, but uses less CPU.
    **/
-  p.enableMouseOver = function ( frequency ) {
-    if ( this._mouseOverIntervalID ) {
-      clearInterval( this._mouseOverIntervalID );
+  p.enableMouseOver = function (frequency) {
+    if (this._mouseOverIntervalID) {
+      clearInterval(this._mouseOverIntervalID);
       this._mouseOverIntervalID = null;
-      if ( frequency == 0 ) {
-        this._testMouseOver( true );
+      if (frequency == 0) {
+        this._testMouseOver(true);
       }
     }
-    if ( frequency == null ) {
+    if (frequency == null) {
       frequency = 20;
-    } else if ( frequency <= 0 ) {
+    } else if (frequency <= 0) {
       return;
     }
     var o = this;
-    this._mouseOverIntervalID = setInterval( function () {
+    this._mouseOverIntervalID = setInterval(function () {
       o._testMouseOver();
-    }, 1000 / Math.min( 50, frequency ) );
+    }, 1000 / Math.min(50, frequency));
   };
 
   /**
@@ -8925,49 +9348,51 @@ this.createjs = this.createjs || {};
    * @method enableDOMEvents
    * @param {Boolean} [enable=true] Indicates whether to enable or disable the events. Default is true.
    **/
-  p.enableDOMEvents = function ( enable ) {
-    if ( enable == null ) {
+  p.enableDOMEvents = function (enable) {
+    if (enable == null) {
       enable = true;
     }
-    var n, o, ls = this._eventListeners;
-    if ( !enable && ls ) {
-      for ( n in ls ) {
-        o = ls[ n ];
-        o.t.removeEventListener( n, o.f, false );
+    var n,
+      o,
+      ls = this._eventListeners;
+    if (!enable && ls) {
+      for (n in ls) {
+        o = ls[n];
+        o.t.removeEventListener(n, o.f, false);
       }
       this._eventListeners = null;
-    } else if ( enable && !ls && this.canvas ) {
+    } else if (enable && !ls && this.canvas) {
       var t = window.addEventListener ? window : document;
       var _this = this;
       ls = this._eventListeners = {};
-      ls[ "mouseup" ] = {
+      ls["mouseup"] = {
         t: t,
-        f: function ( e ) {
-          _this._handleMouseUp( e )
-        }
+        f: function (e) {
+          _this._handleMouseUp(e);
+        },
       };
-      ls[ "mousemove" ] = {
+      ls["mousemove"] = {
         t: t,
-        f: function ( e ) {
-          _this._handleMouseMove( e )
-        }
+        f: function (e) {
+          _this._handleMouseMove(e);
+        },
       };
-      ls[ "dblclick" ] = {
+      ls["dblclick"] = {
         t: this.canvas,
-        f: function ( e ) {
-          _this._handleDoubleClick( e )
-        }
+        f: function (e) {
+          _this._handleDoubleClick(e);
+        },
       };
-      ls[ "mousedown" ] = {
+      ls["mousedown"] = {
         t: this.canvas,
-        f: function ( e ) {
-          _this._handleMouseDown( e )
-        }
+        f: function (e) {
+          _this._handleMouseDown(e);
+        },
       };
 
-      for ( n in ls ) {
-        o = ls[ n ];
-        o.t.addEventListener( n, o.f, false );
+      for (n in ls) {
+        o = ls[n];
+        o.t.addEventListener(n, o.f, false);
       }
     }
   };
@@ -8977,7 +9402,7 @@ this.createjs = this.createjs || {};
    * @method clone
    **/
   p.clone = function () {
-    throw ( "Stage cannot be cloned." );
+    throw "Stage cannot be cloned.";
   };
 
   /**
@@ -8989,43 +9414,50 @@ this.createjs = this.createjs || {};
     return "[Stage (name=" + this.name + ")]";
   };
 
-
   // private methods:
   /**
    * @method _getElementRect
    * @protected
    * @param {HTMLElement} e
    **/
-  p._getElementRect = function ( e ) {
+  p._getElementRect = function (e) {
     var bounds;
     try {
       bounds = e.getBoundingClientRect();
-    } // this can fail on disconnected DOM elements in IE9
-    catch ( err ) {
+    } catch (err) {
+      // this can fail on disconnected DOM elements in IE9
       bounds = {
         top: e.offsetTop,
         left: e.offsetLeft,
         width: e.offsetWidth,
-        height: e.offsetHeight
+        height: e.offsetHeight,
       };
     }
 
-    var offX = ( window.pageXOffset || document.scrollLeft || 0 ) - ( document.clientLeft || document.body.clientLeft || 0 );
-    var offY = ( window.pageYOffset || document.scrollTop || 0 ) - ( document.clientTop || document.body.clientTop || 0 );
+    var offX =
+      (window.pageXOffset || document.scrollLeft || 0) -
+      (document.clientLeft || document.body.clientLeft || 0);
+    var offY =
+      (window.pageYOffset || document.scrollTop || 0) -
+      (document.clientTop || document.body.clientTop || 0);
 
-    var styles = window.getComputedStyle ? getComputedStyle( e, null ) : e.currentStyle; // IE <9 compatibility.
-    var padL = parseInt( styles.paddingLeft ) + parseInt( styles.borderLeftWidth );
-    var padT = parseInt( styles.paddingTop ) + parseInt( styles.borderTopWidth );
-    var padR = parseInt( styles.paddingRight ) + parseInt( styles.borderRightWidth );
-    var padB = parseInt( styles.paddingBottom ) + parseInt( styles.borderBottomWidth );
+    var styles = window.getComputedStyle
+      ? getComputedStyle(e, null)
+      : e.currentStyle; // IE <9 compatibility.
+    var padL = parseInt(styles.paddingLeft) + parseInt(styles.borderLeftWidth);
+    var padT = parseInt(styles.paddingTop) + parseInt(styles.borderTopWidth);
+    var padR =
+      parseInt(styles.paddingRight) + parseInt(styles.borderRightWidth);
+    var padB =
+      parseInt(styles.paddingBottom) + parseInt(styles.borderBottomWidth);
 
     // note: in some browsers bounds properties are read only.
     return {
       left: bounds.left + offX + padL,
       right: bounds.right + offX - padR,
       top: bounds.top + offY + padT,
-      bottom: bounds.bottom + offY - padB
-    }
+      bottom: bounds.bottom + offY - padB,
+    };
   };
 
   /**
@@ -9033,12 +9465,12 @@ this.createjs = this.createjs || {};
    * @protected
    * @param {Number} id
    **/
-  p._getPointerData = function ( id ) {
-    var data = this._pointerData[ id ];
-    if ( !data ) {
-      data = this._pointerData[ id ] = {
+  p._getPointerData = function (id) {
+    var data = this._pointerData[id];
+    if (!data) {
+      data = this._pointerData[id] = {
         x: 0,
-        y: 0
+        y: 0,
       };
     }
     return data;
@@ -9049,11 +9481,11 @@ this.createjs = this.createjs || {};
    * @protected
    * @param {MouseEvent} e
    **/
-  p._handleMouseMove = function ( e ) {
-    if ( !e ) {
+  p._handleMouseMove = function (e) {
+    if (!e) {
       e = window.event;
     }
-    this._handlePointerMove( -1, e, e.pageX, e.pageY );
+    this._handlePointerMove(-1, e, e.pageX, e.pageY);
   };
 
   /**
@@ -9065,28 +9497,35 @@ this.createjs = this.createjs || {};
    * @param {Number} pageY
    * @param {Stage} owner Indicates that the event has already been captured & handled by the indicated stage.
    **/
-  p._handlePointerMove = function ( id, e, pageX, pageY, owner ) {
-    if ( this._prevStage && owner === undefined ) {
+  p._handlePointerMove = function (id, e, pageX, pageY, owner) {
+    if (this._prevStage && owner === undefined) {
       return;
     } // redundant listener.
-    if ( !this.canvas ) {
+    if (!this.canvas) {
       return;
     }
     var nextStage = this._nextStage,
-      o = this._getPointerData( id );
+      o = this._getPointerData(id);
 
     var inBounds = o.inBounds;
-    this._updatePointerPosition( id, e, pageX, pageY );
-    if ( inBounds || o.inBounds || this.mouseMoveOutside ) {
-      if ( id === -1 && o.inBounds == !inBounds ) {
-        this._dispatchMouseEvent( this, ( inBounds ? "mouseleave" : "mouseenter" ), false, id, o, e );
+    this._updatePointerPosition(id, e, pageX, pageY);
+    if (inBounds || o.inBounds || this.mouseMoveOutside) {
+      if (id === -1 && o.inBounds == !inBounds) {
+        this._dispatchMouseEvent(
+          this,
+          inBounds ? "mouseleave" : "mouseenter",
+          false,
+          id,
+          o,
+          e
+        );
       }
 
-      this._dispatchMouseEvent( this, "stagemousemove", false, id, o, e );
-      this._dispatchMouseEvent( o.target, "pressmove", true, id, o, e );
+      this._dispatchMouseEvent(this, "stagemousemove", false, id, o, e);
+      this._dispatchMouseEvent(o.target, "pressmove", true, id, o, e);
     }
 
-    nextStage && nextStage._handlePointerMove( id, e, pageX, pageY, null );
+    nextStage && nextStage._handlePointerMove(id, e, pageX, pageY, null);
   };
 
   /**
@@ -9097,29 +9536,32 @@ this.createjs = this.createjs || {};
    * @param {Number} pageX
    * @param {Number} pageY
    **/
-  p._updatePointerPosition = function ( id, e, pageX, pageY ) {
-    var rect = this._getElementRect( this.canvas );
+  p._updatePointerPosition = function (id, e, pageX, pageY) {
+    var rect = this._getElementRect(this.canvas);
     pageX -= rect.left;
     pageY -= rect.top;
 
     var w = this.canvas.width;
     var h = this.canvas.height;
-    pageX /= ( rect.right - rect.left ) / w;
-    pageY /= ( rect.bottom - rect.top ) / h;
-    var o = this._getPointerData( id );
-    if ( o.inBounds = ( pageX >= 0 && pageY >= 0 && pageX <= w - 1 && pageY <= h - 1 ) ) {
+    pageX /= (rect.right - rect.left) / w;
+    pageY /= (rect.bottom - rect.top) / h;
+    var o = this._getPointerData(id);
+    if (
+      (o.inBounds =
+        pageX >= 0 && pageY >= 0 && pageX <= w - 1 && pageY <= h - 1)
+    ) {
       o.x = pageX;
       o.y = pageY;
-    } else if ( this.mouseMoveOutside ) {
-      o.x = pageX < 0 ? 0 : ( pageX > w - 1 ? w - 1 : pageX );
-      o.y = pageY < 0 ? 0 : ( pageY > h - 1 ? h - 1 : pageY );
+    } else if (this.mouseMoveOutside) {
+      o.x = pageX < 0 ? 0 : pageX > w - 1 ? w - 1 : pageX;
+      o.y = pageY < 0 ? 0 : pageY > h - 1 ? h - 1 : pageY;
     }
 
     o.posEvtObj = e;
     o.rawX = pageX;
     o.rawY = pageY;
 
-    if ( id === this._primaryPointerID || id === -1 ) {
+    if (id === this._primaryPointerID || id === -1) {
       this.mouseX = o.x;
       this.mouseY = o.y;
       this.mouseInBounds = o.inBounds;
@@ -9131,8 +9573,8 @@ this.createjs = this.createjs || {};
    * @protected
    * @param {MouseEvent} e
    **/
-  p._handleMouseUp = function ( e ) {
-    this._handlePointerUp( -1, e, false );
+  p._handleMouseUp = function (e) {
+    this._handlePointerUp(-1, e, false);
   };
 
   /**
@@ -9143,39 +9585,40 @@ this.createjs = this.createjs || {};
    * @param {Boolean} clear
    * @param {Stage} owner Indicates that the event has already been captured & handled by the indicated stage.
    **/
-  p._handlePointerUp = function ( id, e, clear, owner ) {
+  p._handlePointerUp = function (id, e, clear, owner) {
     var nextStage = this._nextStage,
-      o = this._getPointerData( id );
-    if ( this._prevStage && owner === undefined ) {
+      o = this._getPointerData(id);
+    if (this._prevStage && owner === undefined) {
       return;
     } // redundant listener.
 
     var target = null,
       oTarget = o.target;
-    if ( !owner && ( oTarget || nextStage ) ) {
-      target = this._getObjectsUnderPoint( o.x, o.y, null, true );
+    if (!owner && (oTarget || nextStage)) {
+      target = this._getObjectsUnderPoint(o.x, o.y, null, true);
     }
 
-    if ( o.down ) {
-      this._dispatchMouseEvent( this, "stagemouseup", false, id, o, e, target );
+    if (o.down) {
+      this._dispatchMouseEvent(this, "stagemouseup", false, id, o, e, target);
       o.down = false;
     }
 
-    if ( target == oTarget ) {
-      this._dispatchMouseEvent( oTarget, "click", true, id, o, e );
+    if (target == oTarget) {
+      this._dispatchMouseEvent(oTarget, "click", true, id, o, e);
     }
-    this._dispatchMouseEvent( oTarget, "pressup", true, id, o, e );
+    this._dispatchMouseEvent(oTarget, "pressup", true, id, o, e);
 
-    if ( clear ) {
-      if ( id == this._primaryPointerID ) {
+    if (clear) {
+      if (id == this._primaryPointerID) {
         this._primaryPointerID = null;
       }
-      delete( this._pointerData[ id ] );
+      delete this._pointerData[id];
     } else {
       o.target = null;
     }
 
-    nextStage && nextStage._handlePointerUp( id, e, clear, owner || target && this );
+    nextStage &&
+      nextStage._handlePointerUp(id, e, clear, owner || (target && this));
   };
 
   /**
@@ -9183,8 +9626,8 @@ this.createjs = this.createjs || {};
    * @protected
    * @param {MouseEvent} e
    **/
-  p._handleMouseDown = function ( e ) {
-    this._handlePointerDown( -1, e, e.pageX, e.pageY );
+  p._handleMouseDown = function (e) {
+    this._handlePointerDown(-1, e, e.pageX, e.pageY);
   };
 
   /**
@@ -9196,31 +9639,38 @@ this.createjs = this.createjs || {};
    * @param {Number} pageY
    * @param {Stage} owner Indicates that the event has already been captured & handled by the indicated stage.
    **/
-  p._handlePointerDown = function ( id, e, pageX, pageY, owner ) {
-    if ( this.preventSelection ) {
+  p._handlePointerDown = function (id, e, pageX, pageY, owner) {
+    if (this.preventSelection) {
       e.preventDefault();
     }
-    if ( this._primaryPointerID == null || id === -1 ) {
+    if (this._primaryPointerID == null || id === -1) {
       this._primaryPointerID = id;
     } // mouse always takes over.
 
-    if ( pageY != null ) {
-      this._updatePointerPosition( id, e, pageX, pageY );
+    if (pageY != null) {
+      this._updatePointerPosition(id, e, pageX, pageY);
     }
     var target = null,
       nextStage = this._nextStage,
-      o = this._getPointerData( id );
-    if ( !owner ) {
-      target = o.target = this._getObjectsUnderPoint( o.x, o.y, null, true );
+      o = this._getPointerData(id);
+    if (!owner) {
+      target = o.target = this._getObjectsUnderPoint(o.x, o.y, null, true);
     }
 
-    if ( o.inBounds ) {
-      this._dispatchMouseEvent( this, "stagemousedown", false, id, o, e, target );
+    if (o.inBounds) {
+      this._dispatchMouseEvent(this, "stagemousedown", false, id, o, e, target);
       o.down = true;
     }
-    this._dispatchMouseEvent( target, "mousedown", true, id, o, e );
+    this._dispatchMouseEvent(target, "mousedown", true, id, o, e);
 
-    nextStage && nextStage._handlePointerDown( id, e, pageX, pageY, owner || target && this );
+    nextStage &&
+      nextStage._handlePointerDown(
+        id,
+        e,
+        pageX,
+        pageY,
+        owner || (target && this)
+      );
   };
 
   /**
@@ -9230,79 +9680,92 @@ this.createjs = this.createjs || {};
    * @param {Stage} eventTarget The stage that the cursor is actively over.
    * @protected
    **/
-  p._testMouseOver = function ( clear, owner, eventTarget ) {
-    if ( this._prevStage && owner === undefined ) {
+  p._testMouseOver = function (clear, owner, eventTarget) {
+    if (this._prevStage && owner === undefined) {
       return;
     } // redundant listener.
 
     var nextStage = this._nextStage;
-    if ( !this._mouseOverIntervalID ) {
+    if (!this._mouseOverIntervalID) {
       // not enabled for mouseover, but should still relay the event.
-      nextStage && nextStage._testMouseOver( clear, owner, eventTarget );
+      nextStage && nextStage._testMouseOver(clear, owner, eventTarget);
       return;
     }
-    var o = this._getPointerData( -1 );
+    var o = this._getPointerData(-1);
     // only update if the mouse position has changed. This provides a lot of optimization, but has some trade-offs.
-    if ( !o || ( !clear && this.mouseX == this._mouseOverX && this.mouseY == this._mouseOverY && this.mouseInBounds ) ) {
+    if (
+      !o ||
+      (!clear &&
+        this.mouseX == this._mouseOverX &&
+        this.mouseY == this._mouseOverY &&
+        this.mouseInBounds)
+    ) {
       return;
     }
 
     var e = o.posEvtObj;
-    var isEventTarget = eventTarget || e && ( e.target == this.canvas );
+    var isEventTarget = eventTarget || (e && e.target == this.canvas);
     var target = null,
       common = -1,
       cursor = "",
-      t, i, l;
+      t,
+      i,
+      l;
 
-    if ( !owner && ( clear || this.mouseInBounds && isEventTarget ) ) {
-      target = this._getObjectsUnderPoint( this.mouseX, this.mouseY, null, true );
+    if (!owner && (clear || (this.mouseInBounds && isEventTarget))) {
+      target = this._getObjectsUnderPoint(this.mouseX, this.mouseY, null, true);
       this._mouseOverX = this.mouseX;
       this._mouseOverY = this.mouseY;
     }
 
     var oldList = this._mouseOverTarget || [];
-    var oldTarget = oldList[ oldList.length - 1 ];
-    var list = this._mouseOverTarget = [];
+    var oldTarget = oldList[oldList.length - 1];
+    var list = (this._mouseOverTarget = []);
 
     // generate ancestor list and check for cursor:
     t = target;
-    while ( t ) {
-      list.unshift( t );
-      if ( !cursor ) {
+    while (t) {
+      list.unshift(t);
+      if (!cursor) {
         cursor = t.cursor;
       }
       t = t.parent;
     }
     this.canvas.style.cursor = cursor;
-    if ( !owner && eventTarget ) {
+    if (!owner && eventTarget) {
       eventTarget.canvas.style.cursor = cursor;
     }
 
     // find common ancestor:
-    for ( i = 0, l = list.length; i < l; i++ ) {
-      if ( list[ i ] != oldList[ i ] ) {
+    for (i = 0, l = list.length; i < l; i++) {
+      if (list[i] != oldList[i]) {
         break;
       }
       common = i;
     }
 
-    if ( oldTarget != target ) {
-      this._dispatchMouseEvent( oldTarget, "mouseout", true, -1, o, e, target );
+    if (oldTarget != target) {
+      this._dispatchMouseEvent(oldTarget, "mouseout", true, -1, o, e, target);
     }
 
-    for ( i = oldList.length - 1; i > common; i-- ) {
-      this._dispatchMouseEvent( oldList[ i ], "rollout", false, -1, o, e, target );
+    for (i = oldList.length - 1; i > common; i--) {
+      this._dispatchMouseEvent(oldList[i], "rollout", false, -1, o, e, target);
     }
 
-    for ( i = list.length - 1; i > common; i-- ) {
-      this._dispatchMouseEvent( list[ i ], "rollover", false, -1, o, e, oldTarget );
+    for (i = list.length - 1; i > common; i--) {
+      this._dispatchMouseEvent(list[i], "rollover", false, -1, o, e, oldTarget);
     }
 
-    if ( oldTarget != target ) {
-      this._dispatchMouseEvent( target, "mouseover", true, -1, o, e, oldTarget );
+    if (oldTarget != target) {
+      this._dispatchMouseEvent(target, "mouseover", true, -1, o, e, oldTarget);
     }
 
-    nextStage && nextStage._testMouseOver( clear, owner || target && this, eventTarget || isEventTarget && this );
+    nextStage &&
+      nextStage._testMouseOver(
+        clear,
+        owner || (target && this),
+        eventTarget || (isEventTarget && this)
+      );
   };
 
   /**
@@ -9311,15 +9774,15 @@ this.createjs = this.createjs || {};
    * @param {MouseEvent} e
    * @param {Stage} owner Indicates that the event has already been captured & handled by the indicated stage.
    **/
-  p._handleDoubleClick = function ( e, owner ) {
+  p._handleDoubleClick = function (e, owner) {
     var target = null,
       nextStage = this._nextStage,
-      o = this._getPointerData( -1 );
-    if ( !owner ) {
-      target = this._getObjectsUnderPoint( o.x, o.y, null, true );
-      this._dispatchMouseEvent( target, "dblclick", true, -1, o, e );
+      o = this._getPointerData(-1);
+    if (!owner) {
+      target = this._getObjectsUnderPoint(o.x, o.y, null, true);
+      this._dispatchMouseEvent(target, "dblclick", true, -1, o, e);
     }
-    nextStage && nextStage._handleDoubleClick( e, owner || target && this );
+    nextStage && nextStage._handleDoubleClick(e, owner || (target && this));
   };
 
   /**
@@ -9333,9 +9796,17 @@ this.createjs = this.createjs || {};
    * @param {MouseEvent} [nativeEvent]
    * @param {DisplayObject} [relatedTarget]
    **/
-  p._dispatchMouseEvent = function ( target, type, bubbles, pointerId, o, nativeEvent, relatedTarget ) {
+  p._dispatchMouseEvent = function (
+    target,
+    type,
+    bubbles,
+    pointerId,
+    o,
+    nativeEvent,
+    relatedTarget
+  ) {
     // TODO: might be worth either reusing MouseEvent instances, or adding a willTrigger method to avoid GC.
-    if ( !target || ( !bubbles && !target.hasEventListener( type ) ) ) {
+    if (!target || (!bubbles && !target.hasEventListener(type))) {
       return;
     }
     /*
@@ -9344,13 +9815,24 @@ this.createjs = this.createjs || {};
     var pt = this._mtx.transformPoint(o.x, o.y);
     var evt = new createjs.MouseEvent(type, bubbles, false, pt.x, pt.y, nativeEvent, pointerId, pointerId==this._primaryPointerID || pointerId==-1, o.rawX, o.rawY);
     */
-    var evt = new createjs.MouseEvent( type, bubbles, false, o.x, o.y, nativeEvent, pointerId, pointerId === this._primaryPointerID || pointerId === -1, o.rawX, o.rawY, relatedTarget );
-    target.dispatchEvent( evt );
+    var evt = new createjs.MouseEvent(
+      type,
+      bubbles,
+      false,
+      o.x,
+      o.y,
+      nativeEvent,
+      pointerId,
+      pointerId === this._primaryPointerID || pointerId === -1,
+      o.rawX,
+      o.rawY,
+      relatedTarget
+    );
+    target.dispatchEvent(evt);
   };
 
-
-  createjs.Stage = createjs.promote( Stage, "Container" );
-}() );
+  createjs.Stage = createjs.promote(Stage, "Container");
+})();
 
 //##############################################################################
 // StageGL.js
@@ -9376,7 +9858,7 @@ this.createjs = this.createjs || {};
  * Slot: A space on the GPU into which textures can be loaded for use in a batch, using "ActiveTexture" switches texture slot.
  */
 
-( function () {
+(function () {
   "use strict";
 
   /**
@@ -9393,11 +9875,11 @@ this.createjs = this.createjs || {};
    * 	are not rendered when added to the display list.
    * - To display something StageGL cannot render, {{#crossLink "displayObject/cache"}}{{/crossLink}} the object.
    *	Caches can be rendered regardless of source.
-   * - Images are wrapped as a webGL "Texture". Each graphics card has a limit to its concurrent Textures, too many 
+   * - Images are wrapped as a webGL "Texture". Each graphics card has a limit to its concurrent Textures, too many
    * Textures will noticeably slow performance.
-   * - Each cache counts as an individual Texture. As such {{#crossLink "SpriteSheet"}}{{/crossLink}} and 
+   * - Each cache counts as an individual Texture. As such {{#crossLink "SpriteSheet"}}{{/crossLink}} and
    * {{#crossLink "SpriteSheetBuilder"}}{{/crossLink}} are recommended practices to help keep texture counts low.
-   * - To use any image node (DOM Image/Canvas Element) between multiple StageGL instances it must be a 
+   * - To use any image node (DOM Image/Canvas Element) between multiple StageGL instances it must be a
    * {{#crossLink "Bitmap/clone"}}{{/crossLink}}, otherwise the GPU texture loading and tracking will get confused.
    * - to avoid an up/down scaled render you must call {{#crossLink "StageGL/updateViewport"}}{{/crossLink}} if you
    * resize your canvas after making a StageGL instance, this will properly size the WebGL context stored in memory.
@@ -9445,12 +9927,12 @@ this.createjs = this.createjs || {};
    * `purgeTextures(autoPurge)` every `autoPurge/2` draws. See {{#crossLink "StageGL/purgeTextures"}}{{/crossLink}} for more
    * information.
    */
-  function StageGL( canvas, options ) {
-    this.Stage_constructor( canvas );
+  function StageGL(canvas, options) {
+    this.Stage_constructor(canvas);
 
-    if ( options !== undefined ) {
-      if ( typeof options !== "object" ) {
-        throw ( "Invalid options object" );
+    if (options !== undefined) {
+      if (typeof options !== "object") {
+        throw "Invalid options object";
       }
       var premultiply = options.premultiply;
       var transparent = options.transparent;
@@ -9563,10 +10045,10 @@ this.createjs = this.createjs || {};
      * @default {r: 0.50, g: 0.50, b: 0.50, a: 0.00}
      */
     this._clearColor = {
-      r: 0.50,
-      g: 0.50,
-      b: 0.50,
-      a: 0.00
+      r: 0.5,
+      g: 0.5,
+      b: 0.5,
+      a: 0.0,
     };
 
     /**
@@ -9788,7 +10270,7 @@ this.createjs = this.createjs || {};
     // and begin
     this._initializeWebGL();
   }
-  var p = createjs.extend( StageGL, createjs.Stage );
+  var p = createjs.extend(StageGL, createjs.Stage);
 
   // static methods:
   /**
@@ -9810,22 +10292,23 @@ this.createjs = this.createjs || {};
    * @static
    * @return {Object} the target frame if supplied and present or a generic frame {t, l, b, r}
    */
-  StageGL.buildUVRects = function ( spritesheet, target, onlyTarget ) {
-    if ( !spritesheet || !spritesheet._frames ) {
+  StageGL.buildUVRects = function (spritesheet, target, onlyTarget) {
+    if (!spritesheet || !spritesheet._frames) {
       return null;
     }
-    if ( target === undefined ) {
+    if (target === undefined) {
       target = -1;
     }
-    if ( onlyTarget === undefined ) {
+    if (onlyTarget === undefined) {
       onlyTarget = false;
     }
 
-    var start = ( target != -1 && onlyTarget ) ? ( target ) : ( 0 );
-    var end = ( target != -1 && onlyTarget ) ? ( target + 1 ) : ( spritesheet._frames.length );
-    for ( var i = start; i < end; i++ ) {
-      var f = spritesheet._frames[ i ];
-      if ( f.uvRect || f.image.width <= 0 || f.image.height <= 0 ) {
+    var start = target != -1 && onlyTarget ? target : 0;
+    var end =
+      target != -1 && onlyTarget ? target + 1 : spritesheet._frames.length;
+    for (var i = start; i < end; i++) {
+      var f = spritesheet._frames[i];
+      if (f.uvRect || f.image.width <= 0 || f.image.height <= 0) {
         continue;
       }
 
@@ -9833,17 +10316,19 @@ this.createjs = this.createjs || {};
       f.uvRect = {
         t: r.y / f.image.height,
         l: r.x / f.image.width,
-        b: ( r.y + r.height ) / f.image.height,
-        r: ( r.x + r.width ) / f.image.width
+        b: (r.y + r.height) / f.image.height,
+        r: (r.x + r.width) / f.image.width,
       };
     }
 
-    return spritesheet._frames[ ( target != -1 ) ? target : 0 ].uvRect || {
-      t: 0,
-      l: 0,
-      b: 1,
-      r: 1
-    };
+    return (
+      spritesheet._frames[target != -1 ? target : 0].uvRect || {
+        t: 0,
+        l: 0,
+        b: 1,
+        r: 1,
+      }
+    );
   };
 
   /**
@@ -9853,10 +10338,12 @@ this.createjs = this.createjs || {};
    * @static
    * @return {Boolean} Whether WebGL is enabled
    */
-  StageGL.isWebGLActive = function ( ctx ) {
-    return ctx &&
+  StageGL.isWebGLActive = function (ctx) {
+    return (
+      ctx &&
       ctx instanceof WebGLRenderingContext &&
-      typeof WebGLRenderingContext !== 'undefined';
+      typeof WebGLRenderingContext !== "undefined"
+    );
   };
 
   // static properties:
@@ -9904,7 +10391,7 @@ this.createjs = this.createjs || {};
    * @default 65536
    * @readonly
    */
-  StageGL.WEBGL_MAX_INDEX_NUM = Math.pow( 2, 16 );
+  StageGL.WEBGL_MAX_INDEX_NUM = Math.pow(2, 16);
 
   /**
    * Default U/V rect for dealing with full coverage from an image source.
@@ -9919,7 +10406,7 @@ this.createjs = this.createjs || {};
     t: 0,
     l: 0,
     b: 1,
-    r: 1
+    r: 1,
   };
 
   try {
@@ -9931,14 +10418,20 @@ this.createjs = this.createjs || {};
      * @type {Float32Array}
      * @readonly
      */
-    StageGL.COVER_VERT = new Float32Array( [
-      -1, 1, //TL
-      1, 1, //TR
-      -1, -1, //BL
-      1, 1, //TR
-      1, -1, //BR
-      -1, -1 //BL
-    ] );
+    StageGL.COVER_VERT = new Float32Array([
+      -1,
+      1, //TL
+      1,
+      1, //TR
+      -1,
+      -1, //BL
+      1,
+      1, //TR
+      1,
+      -1, //BR
+      -1,
+      -1, //BL
+    ]);
 
     /**
      * U/V for {{#crossLink "StageGL/COVER_VERT:property"}}{{/crossLink}}.
@@ -9948,14 +10441,20 @@ this.createjs = this.createjs || {};
      * @type {Float32Array}
      * @readonly
      */
-    StageGL.COVER_UV = new Float32Array( [
-      0, 0, //TL
-      1, 0, //TR
-      0, 1, //BL
-      1, 0, //TR
-      1, 1, //BR
-      0, 1 //BL
-    ] );
+    StageGL.COVER_UV = new Float32Array([
+      0,
+      0, //TL
+      1,
+      0, //TR
+      0,
+      1, //BL
+      1,
+      0, //TR
+      1,
+      1, //BR
+      0,
+      1, //BL
+    ]);
 
     /**
      * Flipped U/V for {{#crossLink "StageGL:COVER_VERT:property"}}{{/crossLink}}.
@@ -9965,16 +10464,23 @@ this.createjs = this.createjs || {};
      * @type {Float32Array}
      * @readonly
      */
-    StageGL.COVER_UV_FLIP = new Float32Array( [
-      0, 1, //TL
-      1, 1, //TR
-      0, 0, //BL
-      1, 1, //TR
-      1, 0, //BR
-      0, 0 //BL
-    ] );
-  } catch ( e ) {
-    /* Breaking in older browsers, but those browsers wont run StageGL so no recovery or warning needed */ }
+    StageGL.COVER_UV_FLIP = new Float32Array([
+      0,
+      1, //TL
+      1,
+      1, //TR
+      0,
+      0, //BL
+      1,
+      1, //TR
+      1,
+      0, //BR
+      0,
+      0, //BL
+    ]);
+  } catch (e) {
+    /* Breaking in older browsers, but those browsers wont run StageGL so no recovery or warning needed */
+  }
 
   /**
    * Portion of the shader that contains the "varying" properties required in both vertex and fragment shaders. The
@@ -9986,12 +10492,11 @@ this.createjs = this.createjs || {};
    * @type {String}
    * @readonly
    */
-  StageGL.REGULAR_VARYING_HEADER = (
+  StageGL.REGULAR_VARYING_HEADER =
     "precision mediump float;" +
     "varying vec2 vTextureCoord;" +
     "varying lowp float indexPicker;" +
-    "varying lowp float alphaValue;"
-  );
+    "varying lowp float alphaValue;";
 
   /**
    * Actual full header for the vertex shader. Includes the varying header. The regular shader is designed to render
@@ -10002,14 +10507,13 @@ this.createjs = this.createjs || {};
    * @type {String}
    * @readonly
    */
-  StageGL.REGULAR_VERTEX_HEADER = (
+  StageGL.REGULAR_VERTEX_HEADER =
     StageGL.REGULAR_VARYING_HEADER +
     "attribute vec2 vertexPosition;" +
     "attribute vec2 uvPosition;" +
     "attribute lowp float textureIndex;" +
     "attribute lowp float objectAlpha;" +
-    "uniform mat4 pMatrix;"
-  );
+    "uniform mat4 pMatrix;";
 
   /**
    * Actual full header for the fragment shader. Includes the varying header. The regular shader is designed to render
@@ -10020,10 +10524,8 @@ this.createjs = this.createjs || {};
    * @type {String}
    * @readonly
    */
-  StageGL.REGULAR_FRAGMENT_HEADER = (
-    StageGL.REGULAR_VARYING_HEADER +
-    "uniform sampler2D uSampler[{{count}}];"
-  );
+  StageGL.REGULAR_FRAGMENT_HEADER =
+    StageGL.REGULAR_VARYING_HEADER + "uniform sampler2D uSampler[{{count}}];";
 
   /**
    * Body of the vertex shader. The regular shader is designed to render all expected objects. Shader code may contain
@@ -10034,7 +10536,7 @@ this.createjs = this.createjs || {};
    * @type {String}
    * @readonly
    */
-  StageGL.REGULAR_VERTEX_BODY = (
+  StageGL.REGULAR_VERTEX_BODY =
     "void main(void) {" +
     //DHG TODO: This doesn't work. Must be something wrong with the hand built matrix see js... bypass for now
     //vertexPosition, round if flag
@@ -10048,8 +10550,7 @@ this.createjs = this.createjs || {};
     "alphaValue = objectAlpha;" +
     "indexPicker = textureIndex;" +
     "vTextureCoord = uvPosition;" +
-    "}"
-  );
+    "}";
 
   /**
    * Body of the fragment shader. The regular shader is designed to render all expected objects. Shader code may
@@ -10060,28 +10561,23 @@ this.createjs = this.createjs || {};
    * @type {String}
    * @readonly
    */
-  StageGL.REGULAR_FRAGMENT_BODY = (
+  StageGL.REGULAR_FRAGMENT_BODY =
     "void main(void) {" +
     "vec4 color = vec4(1.0, 0.0, 0.0, 1.0);" +
-
     "if (indexPicker <= 0.5) {" +
     "color = texture2D(uSampler[0], vTextureCoord);" +
     "{{alternates}}" +
     "}" +
-
     "{{fragColor}}" +
-    "}"
-  );
-  StageGL.REGULAR_FRAG_COLOR_NORMAL = (
-    "gl_FragColor = vec4(color.rgb, color.a * alphaValue);"
-  );
-  StageGL.REGULAR_FRAG_COLOR_PREMULTIPLY = (
+    "}";
+  StageGL.REGULAR_FRAG_COLOR_NORMAL =
+    "gl_FragColor = vec4(color.rgb, color.a * alphaValue);";
+  StageGL.REGULAR_FRAG_COLOR_PREMULTIPLY =
     "if(color.a > 0.0035) {" + // 1/255 = 0.0039, so ignore any value below 1 because it's probably noise
     "gl_FragColor = vec4(color.rgb/color.a, color.a * alphaValue);" +
     "} else {" +
     "gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);" +
-    "}"
-  );
+    "}";
 
   //TODO: DHG: a real particle shader
   /**
@@ -10092,9 +10588,7 @@ this.createjs = this.createjs || {};
    * @type {String}
    * @readonly
    */
-  StageGL.PARTICLE_VERTEX_BODY = (
-    StageGL.REGULAR_VERTEX_BODY
-  );
+  StageGL.PARTICLE_VERTEX_BODY = StageGL.REGULAR_VERTEX_BODY;
   /**
    * @property PARTICLE_FRAGMENT_BODY
    * @todo
@@ -10103,9 +10597,7 @@ this.createjs = this.createjs || {};
    * @type {String}
    * @readonly
    */
-  StageGL.PARTICLE_FRAGMENT_BODY = (
-    StageGL.REGULAR_FRAGMENT_BODY
-  );
+  StageGL.PARTICLE_FRAGMENT_BODY = StageGL.REGULAR_FRAGMENT_BODY;
 
   /**
    * Portion of the shader that contains the "varying" properties required in both vertex and fragment shaders. The
@@ -10117,12 +10609,10 @@ this.createjs = this.createjs || {};
    * @type {String}
    * @readonly
    */
-  StageGL.COVER_VARYING_HEADER = (
+  StageGL.COVER_VARYING_HEADER =
     "precision mediump float;" +
-
     "varying highp vec2 vRenderCoord;" +
-    "varying highp vec2 vTextureCoord;"
-  );
+    "varying highp vec2 vTextureCoord;";
 
   /**
    * Actual full header for the vertex shader. Includes the varying header. The cover shader is designed to be a
@@ -10134,12 +10624,11 @@ this.createjs = this.createjs || {};
    * @type {String}
    * @readonly
    */
-  StageGL.COVER_VERTEX_HEADER = (
+  StageGL.COVER_VERTEX_HEADER =
     StageGL.COVER_VARYING_HEADER +
     "attribute vec2 vertexPosition;" +
     "attribute vec2 uvPosition;" +
-    "uniform float uUpright;"
-  );
+    "uniform float uUpright;";
 
   /**
    * Actual full header for the fragment shader. Includes the varying header. The cover shader is designed to be a
@@ -10151,10 +10640,8 @@ this.createjs = this.createjs || {};
    * @type {String}
    * @readonly
    */
-  StageGL.COVER_FRAGMENT_HEADER = (
-    StageGL.COVER_VARYING_HEADER +
-    "uniform sampler2D uSampler;"
-  );
+  StageGL.COVER_FRAGMENT_HEADER =
+    StageGL.COVER_VARYING_HEADER + "uniform sampler2D uSampler;";
 
   /**
    * Body of the vertex shader. The cover shader is designed to be a simple vertex/uv only texture render that covers
@@ -10165,13 +10652,12 @@ this.createjs = this.createjs || {};
    * @type {String}
    * @readonly
    */
-  StageGL.COVER_VERTEX_BODY = (
+  StageGL.COVER_VERTEX_BODY =
     "void main(void) {" +
     "gl_Position = vec4(vertexPosition.x, vertexPosition.y, 0.0, 1.0);" +
     "vRenderCoord = uvPosition;" +
     "vTextureCoord = vec2(uvPosition.x, abs(uUpright - uvPosition.y));" +
-    "}"
-  );
+    "}";
 
   /**
    * Body of the fragment shader. The cover shader is designed to be a simple vertex/uv only texture render that
@@ -10182,12 +10668,11 @@ this.createjs = this.createjs || {};
    * @type {String}
    * @readonly
    */
-  StageGL.COVER_FRAGMENT_BODY = (
+  StageGL.COVER_FRAGMENT_BODY =
     "void main(void) {" +
     "vec4 color = texture2D(uSampler, vRenderCoord);" +
     "gl_FragColor = color;" +
-    "}"
-  );
+    "}";
 
   // events:
   /**
@@ -10206,19 +10691,19 @@ this.createjs = this.createjs || {};
     return !!this._webGLContext;
   };
 
-  p._set_autoPurge = function ( value ) {
-    value = isNaN( value ) ? 1200 : value;
-    if ( value != -1 ) {
+  p._set_autoPurge = function (value) {
+    value = isNaN(value) ? 1200 : value;
+    if (value != -1) {
       value = value < 10 ? 10 : value;
     }
     this._autoPurge = value;
   };
   p._get_autoPurge = function () {
-    return Number( this._autoPurge );
+    return Number(this._autoPurge);
   };
 
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       /**
        * Indicates whether WebGL is being used for rendering. For example, this would be `false` if WebGL is not
        * supported in the browser.
@@ -10227,7 +10712,7 @@ this.createjs = this.createjs || {};
        * @readonly
        */
       isWebGL: {
-        get: p._get_isWebGL
+        get: p._get_isWebGL,
       },
 
       /**
@@ -10240,11 +10725,10 @@ this.createjs = this.createjs || {};
        */
       autoPurge: {
         get: p._get_autoPurge,
-        set: p._set_autoPurge
-      }
-    } );
-  } catch ( e ) {} // TODO: use Log
-
+        set: p._set_autoPurge,
+      },
+    });
+  } catch (e) {} // TODO: use Log
 
   // constructor methods:
   /**
@@ -10254,8 +10738,8 @@ this.createjs = this.createjs || {};
    * @return {WebGLRenderingContext}
    */
   p._initializeWebGL = function () {
-    if ( this.canvas ) {
-      if ( !this._webGLContext || this._webGLContext.canvas !== this.canvas ) {
+    if (this.canvas) {
+      if (!this._webGLContext || this._webGLContext.canvas !== this.canvas) {
         // A context hasn't been defined yet,
         // OR the defined context belongs to a different canvas, so reinitialize.
 
@@ -10266,27 +10750,47 @@ this.createjs = this.createjs || {};
           stencil: true,
           antialias: this._antialias,
           premultipliedAlpha: this._premultiply, // Assume the drawing buffer contains colors with premultiplied alpha.
-          preserveDrawingBuffer: this._preserveBuffer
+          preserveDrawingBuffer: this._preserveBuffer,
         };
 
-        var gl = this._webGLContext = this._fetchWebGLContext( this.canvas, options );
-        if ( !gl ) {
+        var gl = (this._webGLContext = this._fetchWebGLContext(
+          this.canvas,
+          options
+        ));
+        if (!gl) {
           return null;
         }
 
-        this.updateSimultaneousTextureCount( gl.getParameter( gl.MAX_TEXTURE_IMAGE_UNITS ) );
-        this._maxTextureSlots = gl.getParameter( gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS );
-        this._createBuffers( gl );
-        this._initTextures( gl );
+        this.updateSimultaneousTextureCount(
+          gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS)
+        );
+        this._maxTextureSlots = gl.getParameter(
+          gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS
+        );
+        this._createBuffers(gl);
+        this._initTextures(gl);
 
-        gl.disable( gl.DEPTH_TEST );
-        gl.enable( gl.BLEND );
-        gl.blendFuncSeparate( gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA );
-        gl.pixelStorei( gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this._premultiply );
+        gl.disable(gl.DEPTH_TEST);
+        gl.enable(gl.BLEND);
+        gl.blendFuncSeparate(
+          gl.SRC_ALPHA,
+          gl.ONE_MINUS_SRC_ALPHA,
+          gl.ONE,
+          gl.ONE_MINUS_SRC_ALPHA
+        );
+        gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, this._premultiply);
         //gl.pixelStorei(gl.UNPACK_COLORSPACE_CONVERSION_WEBGL, gl.NONE);
 
-        this._webGLContext.clearColor( this._clearColor.r, this._clearColor.g, this._clearColor.b, this._clearColor.a );
-        this.updateViewport( this._viewportWidth || this.canvas.width, this._viewportHeight || this.canvas.height );
+        this._webGLContext.clearColor(
+          this._clearColor.r,
+          this._clearColor.g,
+          this._clearColor.b,
+          this._clearColor.a
+        );
+        this.updateViewport(
+          this._viewportWidth || this.canvas.width,
+          this._viewportHeight || this.canvas.height
+        );
       }
     } else {
       this._webGLContext = null;
@@ -10298,50 +10802,58 @@ this.createjs = this.createjs || {};
   /**
    * Docced in superclass
    */
-  p.update = function ( props ) {
-    if ( !this.canvas ) {
+  p.update = function (props) {
+    if (!this.canvas) {
       return;
     }
-    if ( this.tickOnUpdate ) {
-      this.tick( props );
+    if (this.tickOnUpdate) {
+      this.tick(props);
     }
-    this.dispatchEvent( "drawstart" );
-    if ( this.autoClear ) {
+    this.dispatchEvent("drawstart");
+    if (this.autoClear) {
       this.clear();
     }
 
-    if ( this._webGLContext ) {
+    if (this._webGLContext) {
       // Use WebGL.
-      this._batchDraw( this, this._webGLContext );
-      if ( this._autoPurge != -1 && !( this._drawID % ( ( this._autoPurge / 2 ) | 0 ) ) ) {
-        this.purgeTextures( this._autoPurge );
+      this._batchDraw(this, this._webGLContext);
+      if (
+        this._autoPurge != -1 &&
+        !(this._drawID % ((this._autoPurge / 2) | 0))
+      ) {
+        this.purgeTextures(this._autoPurge);
       }
     } else {
       // Use 2D.
-      var ctx = this.canvas.getContext( "2d" );
+      var ctx = this.canvas.getContext("2d");
       ctx.save();
-      this.updateContext( ctx );
-      this.draw( ctx, false );
+      this.updateContext(ctx);
+      this.draw(ctx, false);
       ctx.restore();
     }
-    this.dispatchEvent( "drawend" );
+    this.dispatchEvent("drawend");
   };
 
   /**
    * Docced in superclass
    */
   p.clear = function () {
-    if ( !this.canvas ) {
+    if (!this.canvas) {
       return;
     }
-    if ( StageGL.isWebGLActive( this._webGLContext ) ) {
+    if (StageGL.isWebGLActive(this._webGLContext)) {
       var gl = this._webGLContext;
       var cc = this._clearColor;
       var adjust = this._transparent ? cc.a : 1.0;
       // Use WebGL settings; adjust for pre multiplied alpha appropriate to scenario
-      this._webGLContext.clearColor( cc.r * adjust, cc.g * adjust, cc.b * adjust, adjust );
-      gl.clear( gl.COLOR_BUFFER_BIT );
-      this._webGLContext.clearColor( cc.r, cc.g, cc.b, cc.a );
+      this._webGLContext.clearColor(
+        cc.r * adjust,
+        cc.g * adjust,
+        cc.b * adjust,
+        adjust
+      );
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      this._webGLContext.clearColor(cc.r, cc.g, cc.b, cc.a);
     } else {
       // Use 2D.
       this.Stage_clear();
@@ -10360,13 +10872,16 @@ this.createjs = this.createjs || {};
    *  example, used for drawing the cache (to prevent it from simply drawing an existing cache back into itself).
    * @return {Boolean} If the draw was handled by this function
    */
-  p.draw = function ( context, ignoreCache ) {
-    if ( context === this._webGLContext && StageGL.isWebGLActive( this._webGLContext ) ) {
+  p.draw = function (context, ignoreCache) {
+    if (
+      context === this._webGLContext &&
+      StageGL.isWebGLActive(this._webGLContext)
+    ) {
       var gl = this._webGLContext;
-      this._batchDraw( this, gl, ignoreCache );
+      this._batchDraw(this, gl, ignoreCache);
       return true;
     } else {
-      return this.Stage_draw( context, ignoreCache );
+      return this.Stage_draw(context, ignoreCache);
     }
   };
 
@@ -10381,10 +10896,10 @@ this.createjs = this.createjs || {};
    * @param {BitmapCache} manager The BitmapCache instance looking after the cache
    * @return {Boolean} If the draw was handled by this function
    */
-  p.cacheDraw = function ( target, filters, manager ) {
-    if ( StageGL.isWebGLActive( this._webGLContext ) ) {
+  p.cacheDraw = function (target, filters, manager) {
+    if (StageGL.isWebGLActive(this._webGLContext)) {
       var gl = this._webGLContext;
-      this._cacheDraw( gl, target, filters, manager );
+      this._cacheDraw(gl, target, filters, manager);
       return true;
     } else {
       return false;
@@ -10403,11 +10918,11 @@ this.createjs = this.createjs || {};
    * @param  {Number} id The slot to be affected
    * @param  {Boolean} [lock=false] Whether this slot is the one being locked.
    */
-  p.protectTextureSlot = function ( id, lock ) {
-    if ( id > this._maxTextureSlots || id < 0 ) {
+  p.protectTextureSlot = function (id, lock) {
+    if (id > this._maxTextureSlots || id < 0) {
       throw "Slot outside of acceptable range";
     }
-    this._slotBlacklist[ id ] = !!lock;
+    this._slotBlacklist[id] = !!lock;
   };
 
   /**
@@ -10422,34 +10937,35 @@ this.createjs = this.createjs || {};
    * @return {Objet}
    * @todo fill in return type
    */
-  p.getTargetRenderTexture = function ( target, w, h ) {
-    var result, toggle = false;
+  p.getTargetRenderTexture = function (target, w, h) {
+    var result,
+      toggle = false;
     var gl = this._webGLContext;
-    if ( target.__lastRT !== undefined && target.__lastRT === target.__rtA ) {
+    if (target.__lastRT !== undefined && target.__lastRT === target.__rtA) {
       toggle = true;
     }
-    if ( !toggle ) {
-      if ( target.__rtA === undefined ) {
-        target.__rtA = this.getRenderBufferTexture( w, h );
+    if (!toggle) {
+      if (target.__rtA === undefined) {
+        target.__rtA = this.getRenderBufferTexture(w, h);
       } else {
-        if ( w != target.__rtA._width || h != target.__rtA._height ) {
-          this.resizeTexture( target.__rtA, w, h );
+        if (w != target.__rtA._width || h != target.__rtA._height) {
+          this.resizeTexture(target.__rtA, w, h);
         }
-        this.setTextureParams( gl );
+        this.setTextureParams(gl);
       }
       result = target.__rtA;
     } else {
-      if ( target.__rtB === undefined ) {
-        target.__rtB = this.getRenderBufferTexture( w, h );
+      if (target.__rtB === undefined) {
+        target.__rtB = this.getRenderBufferTexture(w, h);
       } else {
-        if ( w != target.__rtB._width || h != target.__rtB._height ) {
-          this.resizeTexture( target.__rtB, w, h );
+        if (w != target.__rtB._width || h != target.__rtB._height) {
+          this.resizeTexture(target.__rtB, w, h);
         }
-        this.setTextureParams( gl );
+        this.setTextureParams(gl);
       }
       result = target.__rtB;
     }
-    if ( !result ) {
+    if (!result) {
       throw "Problems creating render textures, known causes include using too much VRAM by not releasing WebGL texture instances";
     }
     target.__lastRT = result;
@@ -10457,12 +10973,12 @@ this.createjs = this.createjs || {};
   };
 
   /**
-   * For every image encountered StageGL registers and tracks it automatically. This tracking can cause memory leaks 
+   * For every image encountered StageGL registers and tracks it automatically. This tracking can cause memory leaks
    * if not purged. StageGL, by default, automatically purges them. This does have a cost and may unfortunately find
    * false positives. This function is for manual management of this memory instead of the automatic system controlled
    * by the {{#crossLink "StageGL/autoPurge:property"}}{{/crossLink}} property.
    *
-   * This function will recursively remove all textures found on the object, its children, cache, etc. It will uncache 
+   * This function will recursively remove all textures found on the object, its children, cache, etc. It will uncache
    * objects and remove any texture it finds REGARDLESS of whether it is currently in use elsewhere. It is up to the
    * developer to ensure that a texture in use is not removed.
    *
@@ -10471,56 +10987,56 @@ this.createjs = this.createjs || {};
    * @method releaseTexture
    * @param  {DisplayObject | Texture | Image | Canvas} item An object that used the texture to be discarded.
    */
-  p.releaseTexture = function ( item ) {
+  p.releaseTexture = function (item) {
     var i, l;
-    if ( !item ) {
+    if (!item) {
       return;
     }
 
     // this is a container object
-    if ( item.children ) {
-      for ( i = 0, l = item.children.length; i < l; i++ ) {
-        this.releaseTexture( item.children[ i ] );
+    if (item.children) {
+      for (i = 0, l = item.children.length; i < l; i++) {
+        this.releaseTexture(item.children[i]);
       }
     }
 
     // this has a cache canvas
-    if ( item.cacheCanvas ) {
+    if (item.cacheCanvas) {
       item.uncache();
     }
 
     var foundImage = undefined;
-    if ( item._storeID !== undefined ) {
+    if (item._storeID !== undefined) {
       // this is a texture itself
-      if ( item === this._textureDictionary[ item._storeID ] ) {
-        this._killTextureObject( item );
+      if (item === this._textureDictionary[item._storeID]) {
+        this._killTextureObject(item);
         item._storeID = undefined;
         return;
       }
 
       // this is an image or canvas
       foundImage = item;
-    } else if ( item._webGLRenderStyle === 2 ) {
+    } else if (item._webGLRenderStyle === 2) {
       // this is a Bitmap class
       foundImage = item.image;
-    } else if ( item._webGLRenderStyle === 1 ) {
+    } else if (item._webGLRenderStyle === 1) {
       // this is a SpriteSheet, we can't tell which image we used from the list easily so remove them all!
-      for ( i = 0, l = item.spriteSheet._images.length; i < l; i++ ) {
-        this.releaseTexture( item.spriteSheet._images[ i ] );
+      for (i = 0, l = item.spriteSheet._images.length; i < l; i++) {
+        this.releaseTexture(item.spriteSheet._images[i]);
       }
       return;
     }
 
     // did we find anything
-    if ( foundImage === undefined ) {
-      if ( this.vocalDebug ) {
-        console.log( "No associated texture found on release" );
+    if (foundImage === undefined) {
+      if (this.vocalDebug) {
+        console.log("No associated texture found on release");
       }
       return;
     }
 
     // remove it
-    this._killTextureObject( this._textureDictionary[ foundImage._storeID ] );
+    this._killTextureObject(this._textureDictionary[foundImage._storeID]);
     foundImage._storeID = undefined;
   };
 
@@ -10534,20 +11050,21 @@ this.createjs = this.createjs || {};
    * @method purgeTextures
    * @param {Number} [count=100] How many renders ago the texture was last used
    */
-  p.purgeTextures = function ( count ) {
-    if ( count == undefined ) {
+  p.purgeTextures = function (count) {
+    if (count == undefined) {
       count = 100;
     }
 
     var dict = this._textureDictionary;
     var l = dict.length;
-    for ( var i = 0; i < l; i++ ) {
-      var item = dict[ i ];
-      if ( !item ) {
+    for (var i = 0; i < l; i++) {
+      var item = dict[i];
+      if (!item) {
         continue;
       }
-      if ( item._drawID + count <= this._drawID ) { // use draw not batch as draw is more indicative of time
-        this._killTextureObject( item );
+      if (item._drawID + count <= this._drawID) {
+        // use draw not batch as draw is more indicative of time
+        this._killTextureObject(item);
       }
     }
   };
@@ -10562,32 +11079,35 @@ this.createjs = this.createjs || {};
    * @method updateSimultaneousTextureCount
    * @param {Number} [count=1] The number of textures intended for simultaneous loading.
    */
-  p.updateSimultaneousTextureCount = function ( count ) {
+  p.updateSimultaneousTextureCount = function (count) {
     // TODO: DHG: make sure API works in all instances, may be some issues with buffers etc I haven't foreseen
     var gl = this._webGLContext;
     var success = false;
 
-    if ( count < 1 || isNaN( count ) ) {
+    if (count < 1 || isNaN(count)) {
       count = 1;
     }
     this._batchTextureCount = count;
 
-    while ( !success ) {
+    while (!success) {
       try {
-        this._activeShader = this._fetchShaderProgram( gl );
+        this._activeShader = this._fetchShaderProgram(gl);
         success = true;
-      } catch ( e ) {
-        if ( this._batchTextureCount == 1 ) {
+      } catch (e) {
+        if (this._batchTextureCount == 1) {
           throw "Cannot compile shader " + e;
         }
 
         this._batchTextureCount -= 4;
-        if ( this._batchTextureCount < 1 ) {
+        if (this._batchTextureCount < 1) {
           this._batchTextureCount = 1;
         }
 
-        if ( this.vocalDebug ) {
-          console.log( "Reducing desired texture count due to errors: " + this._batchTextureCount );
+        if (this.vocalDebug) {
+          console.log(
+            "Reducing desired texture count due to errors: " +
+              this._batchTextureCount
+          );
         }
       }
     }
@@ -10601,29 +11121,43 @@ this.createjs = this.createjs || {};
    * @param {Integer} width The width of the render surface in pixels.
    * @param {Integer} height The height of the render surface in pixels.
    */
-  p.updateViewport = function ( width, height ) {
+  p.updateViewport = function (width, height) {
     this._viewportWidth = width | 0;
     this._viewportHeight = height | 0;
     var gl = this._webGLContext;
 
-    if ( gl ) {
-      gl.viewport( 0, 0, this._viewportWidth, this._viewportHeight );
+    if (gl) {
+      gl.viewport(0, 0, this._viewportWidth, this._viewportHeight);
 
       // WebGL works with a -1,1 space on its screen. It also follows Y-Up
       // we need to flip the y, scale and then translate the co-ordinates to match this
       // additionally we offset into they Y so the polygons are inside the camera's "clipping" plane
-      this._projectionMatrix = new Float32Array( [
-        2 / this._viewportWidth, 0, 0, 0,
-        0, -2 / this._viewportHeight, 1, 0,
-        0, 0, 1, 0,
-        -1, 1, 0.1, 0
-      ] );
+      this._projectionMatrix = new Float32Array([
+        2 / this._viewportWidth,
+        0,
+        0,
+        0,
+        0,
+        -2 / this._viewportHeight,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -1,
+        1,
+        0.1,
+        0,
+      ]);
       // create the flipped version for use with render texture flipping
       // DHG: this would be a slice/clone but some platforms don't offer them for Float32Array
-      this._projectionMatrixFlip = new Float32Array( [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ] );
-      this._projectionMatrixFlip.set( this._projectionMatrix );
-      this._projectionMatrixFlip[ 5 ] *= -1;
-      this._projectionMatrixFlip[ 13 ] *= -1;
+      this._projectionMatrixFlip = new Float32Array([
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      ]);
+      this._projectionMatrixFlip.set(this._projectionMatrix);
+      this._projectionMatrixFlip[5] *= -1;
+      this._projectionMatrixFlip[13] *= -1;
     }
   };
 
@@ -10634,31 +11168,33 @@ this.createjs = this.createjs || {};
    * @param  {Filter|Object} filter The object which will provide the information needed to construct the filter shader.
    * @return {WebGLProgram}
    */
-  p.getFilterShader = function ( filter ) {
-    if ( !filter ) {
+  p.getFilterShader = function (filter) {
+    if (!filter) {
       filter = this;
     }
 
     var gl = this._webGLContext;
     var targetShader = this._activeShader;
 
-    if ( filter._builtShader ) {
+    if (filter._builtShader) {
       targetShader = filter._builtShader;
-      if ( filter.shaderParamSetup ) {
-        gl.useProgram( targetShader );
-        filter.shaderParamSetup( gl, this, targetShader );
+      if (filter.shaderParamSetup) {
+        gl.useProgram(targetShader);
+        filter.shaderParamSetup(gl, this, targetShader);
       }
     } else {
       try {
         targetShader = this._fetchShaderProgram(
-          gl, "filter",
-          filter.VTX_SHADER_BODY, filter.FRAG_SHADER_BODY,
-          filter.shaderParamSetup && filter.shaderParamSetup.bind( filter )
+          gl,
+          "filter",
+          filter.VTX_SHADER_BODY,
+          filter.FRAG_SHADER_BODY,
+          filter.shaderParamSetup && filter.shaderParamSetup.bind(filter)
         );
         filter._builtShader = targetShader;
         targetShader._name = filter.toString();
-      } catch ( e ) {
-        console && console.log( "SHADER SWITCH FAILURE", e );
+      } catch (e) {
+        console && console.log("SHADER SWITCH FAILURE", e);
       }
     }
     return targetShader;
@@ -10671,14 +11207,14 @@ this.createjs = this.createjs || {};
    * @param  {uint} [w=1] The width of the texture in pixels, defaults to 1
    * @param  {uint} [h=1] The height of the texture in pixels, defaults to 1
    */
-  p.getBaseTexture = function ( w, h ) {
-    var width = Math.ceil( w > 0 ? w : 1 ) || 1;
-    var height = Math.ceil( h > 0 ? h : 1 ) || 1;
+  p.getBaseTexture = function (w, h) {
+    var width = Math.ceil(w > 0 ? w : 1) || 1;
+    var height = Math.ceil(h > 0 ? h : 1) || 1;
 
     var gl = this._webGLContext;
     var texture = gl.createTexture();
-    this.resizeTexture( texture, width, height );
-    this.setTextureParams( gl, false );
+    this.resizeTexture(texture, width, height);
+    this.setTextureParams(gl, false);
 
     return texture;
   };
@@ -10697,14 +11233,16 @@ this.createjs = this.createjs || {};
    * @param  {uint} [width=1] The width of the texture in pixels, defaults to 1
    * @param  {uint} [height=1] The height of the texture in pixels, defaults to 1
    */
-  p.resizeTexture = function ( texture, width, height ) {
+  p.resizeTexture = function (texture, width, height) {
     var gl = this._webGLContext;
-    gl.bindTexture( gl.TEXTURE_2D, texture );
+    gl.bindTexture(gl.TEXTURE_2D, texture);
     gl.texImage2D(
       gl.TEXTURE_2D, // target
       0, // level of detail
       gl.RGBA, // internal format
-      width, height, 0, // width, height, border (only for array/null sourced textures)
+      width,
+      height,
+      0, // width, height, border (only for array/null sourced textures)
       gl.RGBA, // format (match internal format)
       gl.UNSIGNED_BYTE, // type of texture(pixel color depth)
       null // image data, we can do null because we're doing array data
@@ -10722,18 +11260,18 @@ this.createjs = this.createjs || {};
    * @param  {Number} h The height of the texture in pixels.
    * @return {Texture} the basic texture instance with a render buffer property.
    */
-  p.getRenderBufferTexture = function ( w, h ) {
+  p.getRenderBufferTexture = function (w, h) {
     var gl = this._webGLContext;
 
     // get the texture
-    var renderTexture = this.getBaseTexture( w, h );
-    if ( !renderTexture ) {
+    var renderTexture = this.getBaseTexture(w, h);
+    if (!renderTexture) {
       return null;
     }
 
     // get the frame buffer
     var frameBuffer = gl.createFramebuffer();
-    if ( !frameBuffer ) {
+    if (!frameBuffer) {
       return null;
     }
 
@@ -10742,16 +11280,22 @@ this.createjs = this.createjs || {};
     renderTexture.height = h;
 
     // attach frame buffer to texture and provide cross links to look up each other
-    gl.bindFramebuffer( gl.FRAMEBUFFER, frameBuffer );
-    gl.framebufferTexture2D( gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, renderTexture, 0 );
+    gl.bindFramebuffer(gl.FRAMEBUFFER, frameBuffer);
+    gl.framebufferTexture2D(
+      gl.FRAMEBUFFER,
+      gl.COLOR_ATTACHMENT0,
+      gl.TEXTURE_2D,
+      renderTexture,
+      0
+    );
     frameBuffer._renderTexture = renderTexture;
     renderTexture._frameBuffer = frameBuffer;
 
     // these keep track of themselves simply to reduce complexity of some lookup code
     renderTexture._storeID = this._textureDictionary.length;
-    this._textureDictionary[ renderTexture._storeID ] = renderTexture;
+    this._textureDictionary[renderTexture._storeID] = renderTexture;
 
-    gl.bindFramebuffer( gl.FRAMEBUFFER, null );
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     return renderTexture;
   };
 
@@ -10761,17 +11305,17 @@ this.createjs = this.createjs || {};
    * @param  {WebGLRenderingContext} gl The canvas WebGL context object to draw into.
    * @param  {Boolean} [isPOT=false] Marks whether the texture is "Power of Two", this may allow better quality AA.
    */
-  p.setTextureParams = function ( gl, isPOT ) {
-    if ( isPOT && this._antialias ) {
+  p.setTextureParams = function (gl, isPOT) {
+    if (isPOT && this._antialias) {
       //non POT linear works in some devices, but performance is NOT good, investigate
-      gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR );
-      gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR );
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     } else {
-      gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST );
-      gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST );
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
     }
-    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE );
-    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE );
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
   };
 
   /**
@@ -10792,30 +11336,38 @@ this.createjs = this.createjs || {};
    * @method setClearColor
    * @param {String|int} [color=0x00000000] The new color to use as the background
    */
-  p.setClearColor = function ( color ) {
+  p.setClearColor = function (color) {
     var r, g, b, a, output;
 
-    if ( typeof color == "string" ) {
-      if ( color.indexOf( "#" ) == 0 ) {
-        if ( color.length == 4 ) {
-          color = "#" + color.charAt( 1 ) + color.charAt( 1 ) + color.charAt( 2 ) + color.charAt( 2 ) + color.charAt( 3 ) + color.charAt( 3 )
+    if (typeof color == "string") {
+      if (color.indexOf("#") == 0) {
+        if (color.length == 4) {
+          color =
+            "#" +
+            color.charAt(1) +
+            color.charAt(1) +
+            color.charAt(2) +
+            color.charAt(2) +
+            color.charAt(3) +
+            color.charAt(3);
         }
-        r = Number( "0x" + color.slice( 1, 3 ) ) / 255;
-        g = Number( "0x" + color.slice( 3, 5 ) ) / 255;
-        b = Number( "0x" + color.slice( 5, 7 ) ) / 255;
-        a = Number( "0x" + color.slice( 7, 9 ) ) / 255;
-      } else if ( color.indexOf( "rgba(" ) == 0 ) {
-        output = color.slice( 5, -1 ).split( "," );
-        r = Number( output[ 0 ] ) / 255;
-        g = Number( output[ 1 ] ) / 255;
-        b = Number( output[ 2 ] ) / 255;
-        a = Number( output[ 3 ] );
+        r = Number("0x" + color.slice(1, 3)) / 255;
+        g = Number("0x" + color.slice(3, 5)) / 255;
+        b = Number("0x" + color.slice(5, 7)) / 255;
+        a = Number("0x" + color.slice(7, 9)) / 255;
+      } else if (color.indexOf("rgba(") == 0) {
+        output = color.slice(5, -1).split(",");
+        r = Number(output[0]) / 255;
+        g = Number(output[1]) / 255;
+        b = Number(output[2]) / 255;
+        a = Number(output[3]);
       }
-    } else { // >>> is an unsigned shift which is what we want as 0x80000000 and up are negative values
-      r = ( ( color & 0xFF000000 ) >>> 24 ) / 255;
-      g = ( ( color & 0x00FF0000 ) >>> 16 ) / 255;
-      b = ( ( color & 0x0000FF00 ) >>> 8 ) / 255;
-      a = ( color & 0x000000FF ) / 255;
+    } else {
+      // >>> is an unsigned shift which is what we want as 0x80000000 and up are negative values
+      r = ((color & 0xff000000) >>> 24) / 255;
+      g = ((color & 0x00ff0000) >>> 16) / 255;
+      b = ((color & 0x0000ff00) >>> 8) / 255;
+      a = (color & 0x000000ff) / 255;
     }
 
     this._clearColor.r = r || 0;
@@ -10823,10 +11375,15 @@ this.createjs = this.createjs || {};
     this._clearColor.b = b || 0;
     this._clearColor.a = a || 0;
 
-    if ( !this._webGLContext ) {
+    if (!this._webGLContext) {
       return;
     }
-    this._webGLContext.clearColor( this._clearColor.r, this._clearColor.g, this._clearColor.b, this._clearColor.a );
+    this._webGLContext.clearColor(
+      this._clearColor.r,
+      this._clearColor.g,
+      this._clearColor.b,
+      this._clearColor.a
+    );
   };
 
   /**
@@ -10838,7 +11395,7 @@ this.createjs = this.createjs || {};
 
   // private methods:
   /**
-   * Sets up and returns the WebGL context for the canvas. May return undefined in error scenarios. These can include 
+   * Sets up and returns the WebGL context for the canvas. May return undefined in error scenarios. These can include
    * situations where the canvas element already has a context, 2D or GL.
    * @param  {Canvas} canvas The DOM canvas element to attach to
    * @param  {Object} options The options to be handed into the WebGL object, see WebGL spec
@@ -10846,18 +11403,20 @@ this.createjs = this.createjs || {};
    * @protected
    * @return {WebGLRenderingContext} The WebGL context, may return undefined in error scenarios
    */
-  p._fetchWebGLContext = function ( canvas, options ) {
+  p._fetchWebGLContext = function (canvas, options) {
     var gl;
 
     try {
-      gl = canvas.getContext( "webgl", options ) || canvas.getContext( "experimental-webgl", options );
-    } catch ( e ) {
+      gl =
+        canvas.getContext("webgl", options) ||
+        canvas.getContext("experimental-webgl", options);
+    } catch (e) {
       // don't do anything in catch, null check will handle it
     }
 
-    if ( !gl ) {
+    if (!gl) {
       var msg = "Could not initialize WebGL";
-      console.error ? console.error( msg ) : console.log( msg );
+      console.error ? console.error(msg) : console.log(msg);
     } else {
       gl.viewportWidth = canvas.width;
       gl.viewportHeight = canvas.height;
@@ -10874,77 +11433,106 @@ this.createjs = this.createjs || {};
    * @param  {WebGLRenderingContext} gl The canvas WebGL context object to draw into.
    * @param  {String} [shaderName="regular"] Working values: "regular", "override", and "filter". Which type of shader to build.
    * Filter and override both accept the custom params. Regular and override have all features. Filter is a special case reduced feature shader meant to be over-ridden.
-   * @param  {String} [customVTX] Extra vertex shader information to replace a regular draw, see 
+   * @param  {String} [customVTX] Extra vertex shader information to replace a regular draw, see
    * {{#crossLink "StageGL/COVER_VERTEX_BODY"}}{{/crossLink}} for default and {{#crossLink "Filter"}}{{/crossLink}} for examples.
-   * @param  {String} [customFRAG] Extra fragment shader information to replace a regular draw, see 
+   * @param  {String} [customFRAG] Extra fragment shader information to replace a regular draw, see
    * {{#crossLink "StageGL/COVER_FRAGMENT_BODY"}}{{/crossLink}} for default and {{#crossLink "Filter"}}{{/crossLink}} for examples.
    * @param  {Function} [shaderParamSetup] Function to run so custom shader parameters can get applied for the render.
    * @protected
    * @return {WebGLProgram} The compiled and linked shader
    */
-  p._fetchShaderProgram = function ( gl, shaderName, customVTX, customFRAG, shaderParamSetup ) {
-    gl.useProgram( null ); // safety to avoid collisions
+  p._fetchShaderProgram = function (
+    gl,
+    shaderName,
+    customVTX,
+    customFRAG,
+    shaderParamSetup
+  ) {
+    gl.useProgram(null); // safety to avoid collisions
 
     // build the correct shader string out of the right headers and bodies
     var targetFrag, targetVtx;
-    switch ( shaderName ) {
+    switch (shaderName) {
       case "filter":
-        targetVtx = StageGL.COVER_VERTEX_HEADER + ( customVTX || StageGL.COVER_VERTEX_BODY );
-        targetFrag = StageGL.COVER_FRAGMENT_HEADER + ( customFRAG || StageGL.COVER_FRAGMENT_BODY );
+        targetVtx =
+          StageGL.COVER_VERTEX_HEADER +
+          (customVTX || StageGL.COVER_VERTEX_BODY);
+        targetFrag =
+          StageGL.COVER_FRAGMENT_HEADER +
+          (customFRAG || StageGL.COVER_FRAGMENT_BODY);
         break;
       case "particle": //TODO
-        targetVtx = StageGL.REGULAR_VERTEX_HEADER + StageGL.PARTICLE_VERTEX_BODY;
-        targetFrag = StageGL.REGULAR_FRAGMENT_HEADER + StageGL.PARTICLE_FRAGMENT_BODY;
+        targetVtx =
+          StageGL.REGULAR_VERTEX_HEADER + StageGL.PARTICLE_VERTEX_BODY;
+        targetFrag =
+          StageGL.REGULAR_FRAGMENT_HEADER + StageGL.PARTICLE_FRAGMENT_BODY;
         break;
       case "override":
-        targetVtx = StageGL.REGULAR_VERTEX_HEADER + ( customVTX || StageGL.REGULAR_VERTEX_BODY );
-        targetFrag = StageGL.REGULAR_FRAGMENT_HEADER + ( customFRAG || StageGL.REGULAR_FRAGMENT_BODY );
+        targetVtx =
+          StageGL.REGULAR_VERTEX_HEADER +
+          (customVTX || StageGL.REGULAR_VERTEX_BODY);
+        targetFrag =
+          StageGL.REGULAR_FRAGMENT_HEADER +
+          (customFRAG || StageGL.REGULAR_FRAGMENT_BODY);
         break;
       case "regular":
       default:
         targetVtx = StageGL.REGULAR_VERTEX_HEADER + StageGL.REGULAR_VERTEX_BODY;
-        targetFrag = StageGL.REGULAR_FRAGMENT_HEADER + StageGL.REGULAR_FRAGMENT_BODY;
+        targetFrag =
+          StageGL.REGULAR_FRAGMENT_HEADER + StageGL.REGULAR_FRAGMENT_BODY;
         break;
     }
 
     // create the separate vars
-    var vertexShader = this._createShader( gl, gl.VERTEX_SHADER, targetVtx );
-    var fragmentShader = this._createShader( gl, gl.FRAGMENT_SHADER, targetFrag );
+    var vertexShader = this._createShader(gl, gl.VERTEX_SHADER, targetVtx);
+    var fragmentShader = this._createShader(gl, gl.FRAGMENT_SHADER, targetFrag);
 
     // link them together
     var shaderProgram = gl.createProgram();
-    gl.attachShader( shaderProgram, vertexShader );
-    gl.attachShader( shaderProgram, fragmentShader );
-    gl.linkProgram( shaderProgram );
+    gl.attachShader(shaderProgram, vertexShader);
+    gl.attachShader(shaderProgram, fragmentShader);
+    gl.linkProgram(shaderProgram);
     shaderProgram._type = shaderName;
 
     // check compile status
-    if ( !gl.getProgramParameter( shaderProgram, gl.LINK_STATUS ) ) {
-      gl.useProgram( this._activeShader );
-      throw gl.getProgramInfoLog( shaderProgram );
+    if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
+      gl.useProgram(this._activeShader);
+      throw gl.getProgramInfoLog(shaderProgram);
     }
 
     // set up the parameters on the shader
-    gl.useProgram( shaderProgram );
-    switch ( shaderName ) {
+    gl.useProgram(shaderProgram);
+    switch (shaderName) {
       case "filter":
         // get the places in memory the shader is stored so we can feed information into them
         // then save it off on the shader because it's so tied to the shader itself
-        shaderProgram.vertexPositionAttribute = gl.getAttribLocation( shaderProgram, "vertexPosition" );
-        gl.enableVertexAttribArray( shaderProgram.vertexPositionAttribute );
+        shaderProgram.vertexPositionAttribute = gl.getAttribLocation(
+          shaderProgram,
+          "vertexPosition"
+        );
+        gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
 
-        shaderProgram.uvPositionAttribute = gl.getAttribLocation( shaderProgram, "uvPosition" );
-        gl.enableVertexAttribArray( shaderProgram.uvPositionAttribute );
+        shaderProgram.uvPositionAttribute = gl.getAttribLocation(
+          shaderProgram,
+          "uvPosition"
+        );
+        gl.enableVertexAttribArray(shaderProgram.uvPositionAttribute);
 
-        shaderProgram.samplerUniform = gl.getUniformLocation( shaderProgram, "uSampler" );
-        gl.uniform1i( shaderProgram.samplerUniform, 0 );
+        shaderProgram.samplerUniform = gl.getUniformLocation(
+          shaderProgram,
+          "uSampler"
+        );
+        gl.uniform1i(shaderProgram.samplerUniform, 0);
 
-        shaderProgram.uprightUniform = gl.getUniformLocation( shaderProgram, "uUpright" );
-        gl.uniform1f( shaderProgram.uprightUniform, 0 );
+        shaderProgram.uprightUniform = gl.getUniformLocation(
+          shaderProgram,
+          "uUpright"
+        );
+        gl.uniform1f(shaderProgram.uprightUniform, 0);
 
         // if there's some custom attributes be sure to hook them up
-        if ( shaderParamSetup ) {
-          shaderParamSetup( gl, this, shaderProgram );
+        if (shaderParamSetup) {
+          shaderParamSetup(gl, this, shaderProgram);
         }
         break;
       case "override":
@@ -10953,32 +11541,50 @@ this.createjs = this.createjs || {};
       default:
         // get the places in memory the shader is stored so we can feed information into them
         // then save it off on the shader because it's so tied to the shader itself
-        shaderProgram.vertexPositionAttribute = gl.getAttribLocation( shaderProgram, "vertexPosition" );
-        gl.enableVertexAttribArray( shaderProgram.vertexPositionAttribute );
+        shaderProgram.vertexPositionAttribute = gl.getAttribLocation(
+          shaderProgram,
+          "vertexPosition"
+        );
+        gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
 
-        shaderProgram.uvPositionAttribute = gl.getAttribLocation( shaderProgram, "uvPosition" );
-        gl.enableVertexAttribArray( shaderProgram.uvPositionAttribute );
+        shaderProgram.uvPositionAttribute = gl.getAttribLocation(
+          shaderProgram,
+          "uvPosition"
+        );
+        gl.enableVertexAttribArray(shaderProgram.uvPositionAttribute);
 
-        shaderProgram.textureIndexAttribute = gl.getAttribLocation( shaderProgram, "textureIndex" );
-        gl.enableVertexAttribArray( shaderProgram.textureIndexAttribute );
+        shaderProgram.textureIndexAttribute = gl.getAttribLocation(
+          shaderProgram,
+          "textureIndex"
+        );
+        gl.enableVertexAttribArray(shaderProgram.textureIndexAttribute);
 
-        shaderProgram.alphaAttribute = gl.getAttribLocation( shaderProgram, "objectAlpha" );
-        gl.enableVertexAttribArray( shaderProgram.alphaAttribute );
+        shaderProgram.alphaAttribute = gl.getAttribLocation(
+          shaderProgram,
+          "objectAlpha"
+        );
+        gl.enableVertexAttribArray(shaderProgram.alphaAttribute);
 
         var samplers = [];
-        for ( var i = 0; i < this._batchTextureCount; i++ ) {
-          samplers[ i ] = i;
+        for (var i = 0; i < this._batchTextureCount; i++) {
+          samplers[i] = i;
         }
 
         shaderProgram.samplerData = samplers;
-        shaderProgram.samplerUniform = gl.getUniformLocation( shaderProgram, "uSampler" );
-        gl.uniform1iv( shaderProgram.samplerUniform, samplers );
+        shaderProgram.samplerUniform = gl.getUniformLocation(
+          shaderProgram,
+          "uSampler"
+        );
+        gl.uniform1iv(shaderProgram.samplerUniform, samplers);
 
-        shaderProgram.pMatrixUniform = gl.getUniformLocation( shaderProgram, "pMatrix" );
+        shaderProgram.pMatrixUniform = gl.getUniformLocation(
+          shaderProgram,
+          "pMatrix"
+        );
         break;
     }
 
-    gl.useProgram( this._activeShader );
+    gl.useProgram(this._activeShader);
     return shaderProgram;
   };
 
@@ -10991,27 +11597,37 @@ this.createjs = this.createjs || {};
    * @return {WebGLShader}
    * @protected
    */
-  p._createShader = function ( gl, type, str ) {
+  p._createShader = function (gl, type, str) {
     // inject the static number
-    str = str.replace( /{{count}}/g, this._batchTextureCount );
+    str = str.replace(/{{count}}/g, this._batchTextureCount);
 
     // resolve issue with no dynamic samplers by creating correct samplers in if else chain
     // TODO: WebGL 2.0 does not need this support
     var insert = "";
-    for ( var i = 1; i < this._batchTextureCount; i++ ) {
-      insert += "} else if (indexPicker <= " + i + ".5) { color = texture2D(uSampler[" + i + "], vTextureCoord);";
+    for (var i = 1; i < this._batchTextureCount; i++) {
+      insert +=
+        "} else if (indexPicker <= " +
+        i +
+        ".5) { color = texture2D(uSampler[" +
+        i +
+        "], vTextureCoord);";
     }
-    str = str.replace( /{{alternates}}/g, insert );
-    str = str.replace( /{{fragColor}}/g, this._premultiply ? StageGL.REGULAR_FRAG_COLOR_PREMULTIPLY : StageGL.REGULAR_FRAG_COLOR_NORMAL );
+    str = str.replace(/{{alternates}}/g, insert);
+    str = str.replace(
+      /{{fragColor}}/g,
+      this._premultiply
+        ? StageGL.REGULAR_FRAG_COLOR_PREMULTIPLY
+        : StageGL.REGULAR_FRAG_COLOR_NORMAL
+    );
 
     // actually compile the shader
-    var shader = gl.createShader( type );
-    gl.shaderSource( shader, str );
-    gl.compileShader( shader );
+    var shader = gl.createShader(type);
+    gl.shaderSource(shader, str);
+    gl.compileShader(shader);
 
     // check compile status
-    if ( !gl.getShaderParameter( shader, gl.COMPILE_STATUS ) ) {
-      throw gl.getShaderInfoLog( shader );
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+      throw gl.getShaderInfoLog(shader);
     }
 
     return shader;
@@ -11023,7 +11639,7 @@ this.createjs = this.createjs || {};
    * @param {WebGLRenderingContext} gl
    * @protected
    */
-  p._createBuffers = function ( gl ) {
+  p._createBuffers = function (gl) {
     var groupCount = this._maxCardsPerBatch * StageGL.INDICIES_PER_CARD;
     var groupSize, i, l;
 
@@ -11055,50 +11671,50 @@ this.createjs = this.createjs || {};
     // TODO bechmark and test using unified buffer
 
     // the actual position information
-    var vertexPositionBuffer = this._vertexPositionBuffer = gl.createBuffer();
-    gl.bindBuffer( gl.ARRAY_BUFFER, vertexPositionBuffer );
+    var vertexPositionBuffer = (this._vertexPositionBuffer = gl.createBuffer());
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexPositionBuffer);
     groupSize = 2;
-    var vertices = this._vertices = new Float32Array( groupCount * groupSize );
-    for ( i = 0, l = vertices.length; i < l; i += groupSize ) {
-      vertices[ i ] = vertices[ i + 1 ] = 0;
+    var vertices = (this._vertices = new Float32Array(groupCount * groupSize));
+    for (i = 0, l = vertices.length; i < l; i += groupSize) {
+      vertices[i] = vertices[i + 1] = 0;
     }
-    gl.bufferData( gl.ARRAY_BUFFER, vertices, gl.DYNAMIC_DRAW );
+    gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.DYNAMIC_DRAW);
     vertexPositionBuffer.itemSize = groupSize;
     vertexPositionBuffer.numItems = groupCount;
 
     // where on the texture it gets its information
-    var uvPositionBuffer = this._uvPositionBuffer = gl.createBuffer();
-    gl.bindBuffer( gl.ARRAY_BUFFER, uvPositionBuffer );
+    var uvPositionBuffer = (this._uvPositionBuffer = gl.createBuffer());
+    gl.bindBuffer(gl.ARRAY_BUFFER, uvPositionBuffer);
     groupSize = 2;
-    var uvs = this._uvs = new Float32Array( groupCount * groupSize );
-    for ( i = 0, l = uvs.length; i < l; i += groupSize ) {
-      uvs[ i ] = uvs[ i + 1 ] = 0;
+    var uvs = (this._uvs = new Float32Array(groupCount * groupSize));
+    for (i = 0, l = uvs.length; i < l; i += groupSize) {
+      uvs[i] = uvs[i + 1] = 0;
     }
-    gl.bufferData( gl.ARRAY_BUFFER, uvs, gl.DYNAMIC_DRAW );
+    gl.bufferData(gl.ARRAY_BUFFER, uvs, gl.DYNAMIC_DRAW);
     uvPositionBuffer.itemSize = groupSize;
     uvPositionBuffer.numItems = groupCount;
 
     // what texture it should use
-    var textureIndexBuffer = this._textureIndexBuffer = gl.createBuffer();
-    gl.bindBuffer( gl.ARRAY_BUFFER, textureIndexBuffer );
+    var textureIndexBuffer = (this._textureIndexBuffer = gl.createBuffer());
+    gl.bindBuffer(gl.ARRAY_BUFFER, textureIndexBuffer);
     groupSize = 1;
-    var indices = this._indices = new Float32Array( groupCount * groupSize );
-    for ( i = 0, l = indices.length; i < l; i++ ) {
-      indices[ i ] = 0;
+    var indices = (this._indices = new Float32Array(groupCount * groupSize));
+    for (i = 0, l = indices.length; i < l; i++) {
+      indices[i] = 0;
     }
-    gl.bufferData( gl.ARRAY_BUFFER, indices, gl.DYNAMIC_DRAW );
+    gl.bufferData(gl.ARRAY_BUFFER, indices, gl.DYNAMIC_DRAW);
     textureIndexBuffer.itemSize = groupSize;
     textureIndexBuffer.numItems = groupCount;
 
     // what alpha it should have
-    var alphaBuffer = this._alphaBuffer = gl.createBuffer();
-    gl.bindBuffer( gl.ARRAY_BUFFER, alphaBuffer );
+    var alphaBuffer = (this._alphaBuffer = gl.createBuffer());
+    gl.bindBuffer(gl.ARRAY_BUFFER, alphaBuffer);
     groupSize = 1;
-    var alphas = this._alphas = new Float32Array( groupCount * groupSize );
-    for ( i = 0, l = alphas.length; i < l; i++ ) {
-      alphas[ i ] = 1;
+    var alphas = (this._alphas = new Float32Array(groupCount * groupSize));
+    for (i = 0, l = alphas.length; i < l; i++) {
+      alphas[i] = 1;
     }
-    gl.bufferData( gl.ARRAY_BUFFER, alphas, gl.DYNAMIC_DRAW );
+    gl.bufferData(gl.ARRAY_BUFFER, alphas, gl.DYNAMIC_DRAW);
     alphaBuffer.itemSize = groupSize;
     alphaBuffer.numItems = groupCount;
   };
@@ -11121,10 +11737,10 @@ this.createjs = this.createjs || {};
     this._batchTextures = [];
 
     // fill in blanks as it helps the renderer be stable while textures are loading and reduces need for safety code
-    for ( var i = 0; i < this._batchTextureCount; i++ ) {
+    for (var i = 0; i < this._batchTextureCount; i++) {
       var tex = this.getBaseTexture();
-      this._baseTextures[ i ] = this._batchTextures[ i ] = tex;
-      if ( !tex ) {
+      this._baseTextures[i] = this._batchTextures[i] = tex;
+      if (!tex) {
         throw "Problems creating basic textures, known causes include using too much VRAM by not releasing WebGL texture instances";
       }
     }
@@ -11138,50 +11754,55 @@ this.createjs = this.createjs || {};
    * @return {WebGLTexture} The resulting Texture object
    * @protected
    */
-  p._loadTextureImage = function ( gl, image ) {
+  p._loadTextureImage = function (gl, image) {
     var src = image.src;
 
-    if ( !src ) {
+    if (!src) {
       // one time canvas property setup
       image._isCanvas = true;
       src = image.src = "canvas_" + this._lastTrackedCanvas++;
     }
 
     // put the texture into our storage system
-    var storeID = this._textureIDs[ src ];
-    if ( storeID === undefined ) {
-      storeID = this._textureIDs[ src ] = this._textureDictionary.length;
+    var storeID = this._textureIDs[src];
+    if (storeID === undefined) {
+      storeID = this._textureIDs[src] = this._textureDictionary.length;
     }
-    if ( this._textureDictionary[ storeID ] === undefined ) {
-      this._textureDictionary[ storeID ] = this.getBaseTexture();
+    if (this._textureDictionary[storeID] === undefined) {
+      this._textureDictionary[storeID] = this.getBaseTexture();
     }
 
-    var texture = this._textureDictionary[ storeID ];
+    var texture = this._textureDictionary[storeID];
 
-    if ( texture ) {
+    if (texture) {
       // get texture params all set up
       texture._batchID = this._batchID;
       texture._storeID = storeID;
       texture._imageData = image;
-      this._insertTextureInBatch( gl, texture );
+      this._insertTextureInBatch(gl, texture);
 
       // get the data into the texture or wait for it to load
       image._storeID = storeID;
-      if ( image.complete || image.naturalWidth || image._isCanvas ) { // is it already loaded
-        this._updateTextureImageData( gl, image );
+      if (image.complete || image.naturalWidth || image._isCanvas) {
+        // is it already loaded
+        this._updateTextureImageData(gl, image);
       } else {
-        image.addEventListener( "load", this._updateTextureImageData.bind( this, gl, image ) );
+        image.addEventListener(
+          "load",
+          this._updateTextureImageData.bind(this, gl, image)
+        );
       }
     } else {
       // we really really should have a texture, try to recover the error by using a saved empty texture so we don't crash
-      var msg = "Problem creating desired texture, known causes include using too much VRAM by not releasing WebGL texture instances";
-      ( console.error && console.error( msg ) ) || console.log( msg );
+      var msg =
+        "Problem creating desired texture, known causes include using too much VRAM by not releasing WebGL texture instances";
+      (console.error && console.error(msg)) || console.log(msg);
 
-      texture = this._baseTextures[ 0 ];
+      texture = this._baseTextures[0];
       texture._batchID = this._batchID;
       texture._storeID = -1;
       texture._imageData = texture;
-      this._insertTextureInBatch( gl, texture );
+      this._insertTextureInBatch(gl, texture);
     }
 
     return texture;
@@ -11195,28 +11816,37 @@ this.createjs = this.createjs || {};
    * @param {Image | Canvas} image The image data to be uploaded
    * @protected
    */
-  p._updateTextureImageData = function ( gl, image ) {
+  p._updateTextureImageData = function (gl, image) {
     // the bitwise & is intentional, cheap exponent 2 check
-    var isNPOT = ( image.width & image.width - 1 ) || ( image.height & image.height - 1 );
-    var texture = this._textureDictionary[ image._storeID ];
+    var isNPOT =
+      image.width & (image.width - 1) || image.height & (image.height - 1);
+    var texture = this._textureDictionary[image._storeID];
 
-    gl.activeTexture( gl.TEXTURE0 + texture._activeIndex );
-    gl.bindTexture( gl.TEXTURE_2D, texture );
+    gl.activeTexture(gl.TEXTURE0 + texture._activeIndex);
+    gl.bindTexture(gl.TEXTURE_2D, texture);
 
     texture.isPOT = !isNPOT;
-    this.setTextureParams( gl, texture.isPOT );
+    this.setTextureParams(gl, texture.isPOT);
 
     try {
-      gl.texImage2D( gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image );
-    } catch ( e ) {
-      var errString = "\nAn error has occurred. This is most likely due to security restrictions on WebGL images with local or cross-domain origins";
-      if ( console.error ) {
+      gl.texImage2D(
+        gl.TEXTURE_2D,
+        0,
+        gl.RGBA,
+        gl.RGBA,
+        gl.UNSIGNED_BYTE,
+        image
+      );
+    } catch (e) {
+      var errString =
+        "\nAn error has occurred. This is most likely due to security restrictions on WebGL images with local or cross-domain origins";
+      if (console.error) {
         //TODO: LM: I recommend putting this into a log function internally, since you do it so often, and each is implemented differently.
-        console.error( errString );
-        console.error( e );
-      } else if ( console ) {
-        console.log( errString );
-        console.log( e );
+        console.error(errString);
+        console.error(e);
+      } else if (console) {
+        console.log(errString);
+        console.log(e);
       }
     }
 
@@ -11225,12 +11855,24 @@ this.createjs = this.createjs || {};
     texture._w = image.width;
     texture._h = image.height;
 
-    if ( this.vocalDebug ) {
-      if ( isNPOT ) {
-        console.warn( "NPOT(Non Power of Two) Texture: " + image.src );
+    if (this.vocalDebug) {
+      if (isNPOT) {
+        console.warn("NPOT(Non Power of Two) Texture: " + image.src);
       }
-      if ( image.width > gl.MAX_TEXTURE_SIZE || image.height > gl.MAX_TEXTURE_SIZE ) {
-        console && console.error( "Oversized Texture: " + image.width + "x" + image.height + " vs " + gl.MAX_TEXTURE_SIZE + "max" );
+      if (
+        image.width > gl.MAX_TEXTURE_SIZE ||
+        image.height > gl.MAX_TEXTURE_SIZE
+      ) {
+        console &&
+          console.error(
+            "Oversized Texture: " +
+              image.width +
+              "x" +
+              image.height +
+              " vs " +
+              gl.MAX_TEXTURE_SIZE +
+              "max"
+          );
       }
     }
   };
@@ -11242,45 +11884,48 @@ this.createjs = this.createjs || {};
    * @param {WebGLTexture} texture The texture to be inserted.
    * @protected
    */
-  p._insertTextureInBatch = function ( gl, texture ) {
+  p._insertTextureInBatch = function (gl, texture) {
     // if it wasn't used last batch
-    if ( this._batchTextures[ texture._activeIndex ] !== texture ) {
+    if (this._batchTextures[texture._activeIndex] !== texture) {
       // we've got to find it a a spot.
       var found = -1;
-      var start = ( this._lastTextureInsert + 1 ) % this._batchTextureCount;
+      var start = (this._lastTextureInsert + 1) % this._batchTextureCount;
       var look = start;
       do {
-        if ( this._batchTextures[ look ]._batchID != this._batchID && !this._slotBlacklist[ look ] ) {
+        if (
+          this._batchTextures[look]._batchID != this._batchID &&
+          !this._slotBlacklist[look]
+        ) {
           found = look;
           break;
         }
-        look = ( look + 1 ) % this._batchTextureCount;
-      } while ( look !== start );
+        look = (look + 1) % this._batchTextureCount;
+      } while (look !== start);
 
       // we couldn't find anywhere for it go, meaning we're maxed out
-      if ( found === -1 ) {
+      if (found === -1) {
         this.batchReason = "textureOverflow";
-        this._drawBuffers( gl ); // <------------------------------------------------------------------------
+        this._drawBuffers(gl); // <------------------------------------------------------------------------
         this.batchCardCount = 0;
         found = start;
       }
 
       // lets put it into that spot
-      this._batchTextures[ found ] = texture;
+      this._batchTextures[found] = texture;
       texture._activeIndex = found;
       var image = texture._imageData;
-      if ( image && image._invalid && texture._drawID !== undefined ) {
-        this._updateTextureImageData( gl, image );
+      if (image && image._invalid && texture._drawID !== undefined) {
+        this._updateTextureImageData(gl, image);
       } else {
-        gl.activeTexture( gl.TEXTURE0 + found );
-        gl.bindTexture( gl.TEXTURE_2D, texture );
-        this.setTextureParams( gl );
+        gl.activeTexture(gl.TEXTURE0 + found);
+        gl.bindTexture(gl.TEXTURE_2D, texture);
+        this.setTextureParams(gl);
       }
       this._lastTextureInsert = found;
     } else {
       var image = texture._imageData;
-      if ( texture._storeID != undefined && image && image._invalid ) {
-        this._updateTextureImageData( gl, image );
+      if (texture._storeID != undefined && image && image._invalid) {
+        this._updateTextureImageData(gl, image);
       }
     }
 
@@ -11289,58 +11934,62 @@ this.createjs = this.createjs || {};
   };
 
   /**
-   * Remove and clean the texture, expects a texture and is inflexible. Mostly for internal use, recommended to call 
+   * Remove and clean the texture, expects a texture and is inflexible. Mostly for internal use, recommended to call
    * {{#crossLink "StageGL/releaseTexture"}}{{/crossLink}} instead as it will call this with the correct texture object(s).
    * Note: Testing shows this may not happen immediately, have to wait frames for WebGL to have actually adjust memory.
    * @method _killTextureObject
    * @param {Texture} tex The texture to be cleaned out
    * @protected
    */
-  p._killTextureObject = function ( tex ) {
-    if ( !tex ) {
+  p._killTextureObject = function (tex) {
+    if (!tex) {
       return;
     }
     var gl = this._webGLContext;
 
     // remove linkage
-    if ( tex._storeID !== undefined && tex._storeID >= 0 ) {
-      this._textureDictionary[ tex._storeID ] = undefined;
-      for ( var n in this._textureIDs ) {
-        if ( this._textureIDs[ n ] == tex._storeID ) {
-          delete this._textureIDs[ n ];
+    if (tex._storeID !== undefined && tex._storeID >= 0) {
+      this._textureDictionary[tex._storeID] = undefined;
+      for (var n in this._textureIDs) {
+        if (this._textureIDs[n] == tex._storeID) {
+          delete this._textureIDs[n];
         }
       }
-      if ( tex._imageData ) {
+      if (tex._imageData) {
         tex._imageData._storeID = undefined;
       }
       tex._imageData = tex._storeID = undefined;
     }
 
     // make sure to drop it out of an active slot
-    if ( tex._activeIndex !== undefined && this._batchTextures[ tex._activeIndex ] === tex ) {
-      this._batchTextures[ tex._activeIndex ] = this._baseTextures[ tex._activeIndex ];
+    if (
+      tex._activeIndex !== undefined &&
+      this._batchTextures[tex._activeIndex] === tex
+    ) {
+      this._batchTextures[tex._activeIndex] =
+        this._baseTextures[tex._activeIndex];
     }
 
     // remove buffers if present
     try {
-      if ( tex._frameBuffer ) {
-        gl.deleteFramebuffer( tex._frameBuffer );
+      if (tex._frameBuffer) {
+        gl.deleteFramebuffer(tex._frameBuffer);
       }
       tex._frameBuffer = undefined;
-    } catch ( e ) {
+    } catch (e) {
       /* suppress delete errors because it's already gone or didn't need deleting probably */
-      if ( this.vocalDebug ) {
-        console.log( e );
+      if (this.vocalDebug) {
+        console.log(e);
       }
     }
 
     // remove entry
     try {
-      gl.deleteTexture( tex );
-    } catch ( e ) {
+      gl.deleteTexture(tex);
+    } catch (e) {
       /* suppress delete errors because it's already gone or didn't need deleting probably */
-      if ( this.vocalDebug ) {
-        console.log( e );
+      if (this.vocalDebug) {
+        console.log(e);
       }
     }
   };
@@ -11352,29 +12001,29 @@ this.createjs = this.createjs || {};
    * @param {Array} [target=this._backupTextures] Where to perform the backup, defaults to internal backup.
    * @protected
    */
-  p._backupBatchTextures = function ( restore, target ) {
+  p._backupBatchTextures = function (restore, target) {
     var gl = this._webGLContext;
 
-    if ( !this._backupTextures ) {
+    if (!this._backupTextures) {
       this._backupTextures = [];
     }
-    if ( target === undefined ) {
+    if (target === undefined) {
       target = this._backupTextures;
     }
 
-    for ( var i = 0; i < this._batchTextureCount; i++ ) {
-      gl.activeTexture( gl.TEXTURE0 + i );
-      if ( restore ) {
-        this._batchTextures[ i ] = target[ i ];
+    for (var i = 0; i < this._batchTextureCount; i++) {
+      gl.activeTexture(gl.TEXTURE0 + i);
+      if (restore) {
+        this._batchTextures[i] = target[i];
       } else {
-        target[ i ] = this._batchTextures[ i ];
-        this._batchTextures[ i ] = this._baseTextures[ i ];
+        target[i] = this._batchTextures[i];
+        this._batchTextures[i] = this._baseTextures[i];
       }
-      gl.bindTexture( gl.TEXTURE_2D, this._batchTextures[ i ] );
-      this.setTextureParams( gl, this._batchTextures[ i ].isPOT );
+      gl.bindTexture(gl.TEXTURE_2D, this._batchTextures[i]);
+      this.setTextureParams(gl, this._batchTextures[i].isPOT);
     }
 
-    if ( restore && target === this._backupTextures ) {
+    if (restore && target === this._backupTextures) {
       this._backupTextures = [];
     }
   };
@@ -11387,9 +12036,9 @@ this.createjs = this.createjs || {};
    * @param {Boolean} ignoreCache
    * @protected
    */
-  p._batchDraw = function ( sceneGraph, gl, ignoreCache ) {
-    if ( this._isDrawing > 0 ) {
-      this._drawBuffers( gl );
+  p._batchDraw = function (sceneGraph, gl, ignoreCache) {
+    if (this._isDrawing > 0) {
+      this._drawBuffers(gl);
     }
     this._isDrawing++;
     this._drawID++;
@@ -11397,10 +12046,16 @@ this.createjs = this.createjs || {};
     this.batchCardCount = 0;
     this.depth = 0;
 
-    this._appendToBatchGroup( sceneGraph, gl, new createjs.Matrix2D(), this.alpha, ignoreCache );
+    this._appendToBatchGroup(
+      sceneGraph,
+      gl,
+      new createjs.Matrix2D(),
+      this.alpha,
+      ignoreCache
+    );
 
     this.batchReason = "drawFinish";
-    this._drawBuffers( gl ); // <--------------------------------------------------------
+    this._drawBuffers(gl); // <--------------------------------------------------------
     this._isDrawing--;
   };
 
@@ -11413,7 +12068,7 @@ this.createjs = this.createjs || {};
    * @param {BitmapCache} manager The BitmapCache instance looking after the cache
    * @protected
    */
-  p._cacheDraw = function ( gl, target, filters, manager ) {
+  p._cacheDraw = function (gl, target, filters, manager) {
     /*
     Implicitly there are 4 modes to this function: filtered-sameContext, filtered-uniqueContext, sameContext, uniqueContext.
     Each situation must be handled slightly differently as 'sameContext' or 'uniqueContext' define how the output works,
@@ -11431,48 +12086,55 @@ this.createjs = this.createjs || {};
       hBackup = this._viewportHeight;
 
     // protect the last slot so that we have somewhere to bind the renderTextures so it doesn't get upset
-    this.protectTextureSlot( lastTextureSlot, true );
+    this.protectTextureSlot(lastTextureSlot, true);
 
     // create offset container for drawing item
     var mtx = target.getMatrix();
     mtx = mtx.clone();
-    mtx.scale( 1 / manager.scale, 1 / manager.scale );
+    mtx.scale(1 / manager.scale, 1 / manager.scale);
     mtx = mtx.invert();
-    mtx.translate( -manager.offX / manager.scale * target.scaleX, -manager.offY / manager.scale * target.scaleY );
+    mtx.translate(
+      (-manager.offX / manager.scale) * target.scaleX,
+      (-manager.offY / manager.scale) * target.scaleY
+    );
     var container = this._cacheContainer;
-    container.children = [ target ];
+    container.children = [target];
     container.transformMatrix = mtx;
 
-    this._backupBatchTextures( false );
+    this._backupBatchTextures(false);
 
-    if ( filters && filters.length ) {
-      this._drawFilters( target, filters, manager );
+    if (filters && filters.length) {
+      this._drawFilters(target, filters, manager);
     } else {
       // is this for another stage or mine?
-      if ( this.isCacheControlled ) {
+      if (this.isCacheControlled) {
         // draw item to canvas				I -> C
-        gl.clear( gl.COLOR_BUFFER_BIT );
-        this._batchDraw( container, gl, true );
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        this._batchDraw(container, gl, true);
       } else {
-        gl.activeTexture( gl.TEXTURE0 + lastTextureSlot );
-        target.cacheCanvas = this.getTargetRenderTexture( target, manager._drawWidth, manager._drawHeight );
+        gl.activeTexture(gl.TEXTURE0 + lastTextureSlot);
+        target.cacheCanvas = this.getTargetRenderTexture(
+          target,
+          manager._drawWidth,
+          manager._drawHeight
+        );
         renderTexture = target.cacheCanvas;
 
         // draw item to render texture		I -> T
-        gl.bindFramebuffer( gl.FRAMEBUFFER, renderTexture._frameBuffer );
-        this.updateViewport( manager._drawWidth, manager._drawHeight );
+        gl.bindFramebuffer(gl.FRAMEBUFFER, renderTexture._frameBuffer);
+        this.updateViewport(manager._drawWidth, manager._drawHeight);
         this._projectionMatrix = this._projectionMatrixFlip;
-        gl.clear( gl.COLOR_BUFFER_BIT );
-        this._batchDraw( container, gl, true );
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        this._batchDraw(container, gl, true);
 
-        gl.bindFramebuffer( gl.FRAMEBUFFER, null );
-        this.updateViewport( wBackup, hBackup );
+        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+        this.updateViewport(wBackup, hBackup);
       }
     }
 
-    this._backupBatchTextures( true );
+    this._backupBatchTextures(true);
 
-    this.protectTextureSlot( lastTextureSlot, false );
+    this.protectTextureSlot(lastTextureSlot, false);
     this._activeShader = shaderBackup;
     this._slotBlacklist = blackListBackup;
   };
@@ -11484,7 +12146,7 @@ this.createjs = this.createjs || {};
    * @param {Array} filters The filters we're drawing into cache.
    * @param {BitmapCache} manager The BitmapCache instance looking after the cache
    */
-  p._drawFilters = function ( target, filters, manager ) {
+  p._drawFilters = function (target, filters, manager) {
     var gl = this._webGLContext;
     var renderTexture;
     var lastTextureSlot = this._maxTextureSlots - 1;
@@ -11496,79 +12158,92 @@ this.createjs = this.createjs || {};
 
     // we don't know which texture slot we're dealing with previously and we need one out of the way
     // once we're using that slot activate it so when we make and bind our RenderTexture it's safe there
-    gl.activeTexture( gl.TEXTURE0 + lastTextureSlot );
-    renderTexture = this.getTargetRenderTexture( target, manager._drawWidth, manager._drawHeight );
+    gl.activeTexture(gl.TEXTURE0 + lastTextureSlot);
+    renderTexture = this.getTargetRenderTexture(
+      target,
+      manager._drawWidth,
+      manager._drawHeight
+    );
 
     // draw item to render texture		I -> T
-    gl.bindFramebuffer( gl.FRAMEBUFFER, renderTexture._frameBuffer );
-    this.updateViewport( manager._drawWidth, manager._drawHeight );
-    gl.clear( gl.COLOR_BUFFER_BIT );
-    this._batchDraw( container, gl, true );
+    gl.bindFramebuffer(gl.FRAMEBUFFER, renderTexture._frameBuffer);
+    this.updateViewport(manager._drawWidth, manager._drawHeight);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    this._batchDraw(container, gl, true);
 
     // bind the result texture to slot 0 as all filters and cover draws assume original content is in slot 0
-    gl.activeTexture( gl.TEXTURE0 );
-    gl.bindTexture( gl.TEXTURE_2D, renderTexture );
-    this.setTextureParams( gl );
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, renderTexture);
+    this.setTextureParams(gl);
 
     var flipY = false;
     var i = 0,
-      filter = filters[ i ];
-    do { // this is safe because we wouldn't be in apply filters without a filter count of at least 1
+      filter = filters[i];
+    do {
+      // this is safe because we wouldn't be in apply filters without a filter count of at least 1
 
       // swap to correct shader
-      this._activeShader = this.getFilterShader( filter );
-      if ( !this._activeShader ) {
+      this._activeShader = this.getFilterShader(filter);
+      if (!this._activeShader) {
         continue;
       }
 
       // now the old result is stored in slot 0, make a new render texture
-      gl.activeTexture( gl.TEXTURE0 + lastTextureSlot );
-      renderTexture = this.getTargetRenderTexture( target, manager._drawWidth, manager._drawHeight );
-      gl.bindFramebuffer( gl.FRAMEBUFFER, renderTexture._frameBuffer );
+      gl.activeTexture(gl.TEXTURE0 + lastTextureSlot);
+      renderTexture = this.getTargetRenderTexture(
+        target,
+        manager._drawWidth,
+        manager._drawHeight
+      );
+      gl.bindFramebuffer(gl.FRAMEBUFFER, renderTexture._frameBuffer);
 
       // draw result to render texture	R -> T
-      gl.viewport( 0, 0, manager._drawWidth, manager._drawHeight );
-      gl.clear( gl.COLOR_BUFFER_BIT );
-      this._drawCover( gl, flipY );
+      gl.viewport(0, 0, manager._drawWidth, manager._drawHeight);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      this._drawCover(gl, flipY);
 
       // bind the result texture to slot 0 as all filters and cover draws assume original content is in slot 0
-      gl.activeTexture( gl.TEXTURE0 );
-      gl.bindTexture( gl.TEXTURE_2D, renderTexture );
-      this.setTextureParams( gl );
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, renderTexture);
+      this.setTextureParams(gl);
 
       // use flipping to keep things upright, things already cancel out on a single filter
       // this needs to be here as multiPass is not accurate to _this_ frame until after shader acquisition
-      if ( filterCount > 1 || filters[ 0 ]._multiPass ) {
+      if (filterCount > 1 || filters[0]._multiPass) {
         flipY = !flipY;
       }
 
       // work through the multipass if it's there, otherwise move on
-      filter = filter._multiPass !== null ? filter._multiPass : filters[ ++i ];
-    } while ( filter );
+      filter = filter._multiPass !== null ? filter._multiPass : filters[++i];
+    } while (filter);
 
     // is this for another stage or mine
-    if ( this.isCacheControlled ) {
-      gl.bindFramebuffer( gl.FRAMEBUFFER, null );
-      this.updateViewport( wBackup, hBackup );
+    if (this.isCacheControlled) {
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      this.updateViewport(wBackup, hBackup);
 
       // draw result to canvas			R -> C
-      this._activeShader = this.getFilterShader( this );
-      gl.clear( gl.COLOR_BUFFER_BIT );
-      this._drawCover( gl, flipY );
+      this._activeShader = this.getFilterShader(this);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      this._drawCover(gl, flipY);
     } else {
       //TODO: DHG: this is less than ideal. A flipped initial render for this circumstance might help. Adjust the perspective matrix?
-      if ( flipY ) {
-        gl.activeTexture( gl.TEXTURE0 + lastTextureSlot );
-        renderTexture = this.getTargetRenderTexture( target, manager._drawWidth, manager._drawHeight );
-        gl.bindFramebuffer( gl.FRAMEBUFFER, renderTexture._frameBuffer );
+      if (flipY) {
+        gl.activeTexture(gl.TEXTURE0 + lastTextureSlot);
+        renderTexture = this.getTargetRenderTexture(
+          target,
+          manager._drawWidth,
+          manager._drawHeight
+        );
+        gl.bindFramebuffer(gl.FRAMEBUFFER, renderTexture._frameBuffer);
 
-        this._activeShader = this.getFilterShader( this );
-        gl.viewport( 0, 0, manager._drawWidth, manager._drawHeight );
-        gl.clear( gl.COLOR_BUFFER_BIT );
-        this._drawCover( gl, !flipY );
+        this._activeShader = this.getFilterShader(this);
+        gl.viewport(0, 0, manager._drawWidth, manager._drawHeight);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        this._drawCover(gl, !flipY);
       }
-      gl.bindFramebuffer( gl.FRAMEBUFFER, null );
-      this.updateViewport( wBackup, hBackup );
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      this.updateViewport(wBackup, hBackup);
 
       // make sure the last texture is the active thing to draw
       target.cacheCanvas = renderTexture;
@@ -11586,21 +12261,32 @@ this.createjs = this.createjs || {};
    * @param {Boolean} ignoreCache Don't use an element's cache during this draw
    * @protected
    */
-  p._appendToBatchGroup = function ( container, gl, concatMtx, concatAlpha, ignoreCache ) {
+  p._appendToBatchGroup = function (
+    container,
+    gl,
+    concatMtx,
+    concatAlpha,
+    ignoreCache
+  ) {
     // sort out shared properties
-    if ( !container._glMtx ) {
+    if (!container._glMtx) {
       container._glMtx = new createjs.Matrix2D();
     }
     var cMtx = container._glMtx;
-    cMtx.copy( concatMtx );
-    if ( container.transformMatrix ) {
-      cMtx.appendMatrix( container.transformMatrix );
+    cMtx.copy(concatMtx);
+    if (container.transformMatrix) {
+      cMtx.appendMatrix(container.transformMatrix);
     } else {
       cMtx.appendTransform(
-        container.x, container.y,
-        container.scaleX, container.scaleY,
-        container.rotation, container.skewX, container.skewY,
-        container.regX, container.regY
+        container.x,
+        container.y,
+        container.scaleX,
+        container.scaleY,
+        container.rotation,
+        container.skewX,
+        container.skewY,
+        container.regX,
+        container.regY
       );
     }
 
@@ -11609,59 +12295,67 @@ this.createjs = this.createjs || {};
 
     // actually apply its data to the buffers
     var l = container.children.length;
-    for ( var i = 0; i < l; i++ ) {
-      var item = container.children[ i ];
+    for (var i = 0; i < l; i++) {
+      var item = container.children[i];
 
-      if ( !( item.visible && concatAlpha ) ) {
+      if (!(item.visible && concatAlpha)) {
         continue;
       }
-      if ( !item.cacheCanvas || ignoreCache ) {
-        if ( item._updateState ) {
+      if (!item.cacheCanvas || ignoreCache) {
+        if (item._updateState) {
           item._updateState();
         }
-        if ( item.children ) {
-          this._appendToBatchGroup( item, gl, cMtx, item.alpha * concatAlpha );
+        if (item.children) {
+          this._appendToBatchGroup(item, gl, cMtx, item.alpha * concatAlpha);
           continue;
         }
       }
 
       // check for overflowing batch, if yes then force a render
       // TODO: DHG: consider making this polygon count dependant for things like vector draws
-      if ( this.batchCardCount + 1 > this._maxCardsPerBatch ) {
+      if (this.batchCardCount + 1 > this._maxCardsPerBatch) {
         this.batchReason = "vertexOverflow";
-        this._drawBuffers( gl ); // <------------------------------------------------------------
+        this._drawBuffers(gl); // <------------------------------------------------------------
         this.batchCardCount = 0;
       }
 
       // keep track of concatenated position
-      if ( !item._glMtx ) {
+      if (!item._glMtx) {
         item._glMtx = new createjs.Matrix2D();
       }
       var iMtx = item._glMtx;
-      iMtx.copy( cMtx );
-      if ( item.transformMatrix ) {
-        iMtx.appendMatrix( item.transformMatrix );
+      iMtx.copy(cMtx);
+      if (item.transformMatrix) {
+        iMtx.appendMatrix(item.transformMatrix);
       } else {
         iMtx.appendTransform(
-          item.x, item.y,
-          item.scaleX, item.scaleY,
-          item.rotation, item.skewX, item.skewY,
-          item.regX, item.regY
+          item.x,
+          item.y,
+          item.scaleX,
+          item.scaleY,
+          item.rotation,
+          item.skewX,
+          item.skewY,
+          item.regX,
+          item.regY
         );
       }
 
       var uvRect, texIndex, image, frame, texture, src;
       var useCache = item.cacheCanvas && !ignoreCache;
 
-      if ( item._webGLRenderStyle === 2 || useCache ) { // BITMAP / Cached Canvas
-        image = ( ignoreCache ? false : item.cacheCanvas ) || item.image;
-      } else if ( item._webGLRenderStyle === 1 ) { // SPRITE
-        frame = item.spriteSheet.getFrame( item.currentFrame ); //TODO: Faster way?
-        if ( frame === null ) {
+      if (item._webGLRenderStyle === 2 || useCache) {
+        // BITMAP / Cached Canvas
+        image = (ignoreCache ? false : item.cacheCanvas) || item.image;
+      } else if (item._webGLRenderStyle === 1) {
+        // SPRITE
+        frame = item.spriteSheet.getFrame(item.currentFrame); //TODO: Faster way?
+        if (frame === null) {
           continue;
         }
         image = frame.image;
-      } else { // MISC (DOM objects render themselves later)
+      } else {
+        // MISC (DOM objects render themselves later)
         continue;
       }
 
@@ -11671,42 +12365,45 @@ this.createjs = this.createjs || {};
       var alphas = this._alphas;
 
       // calculate texture
-      if ( !image ) {
+      if (!image) {
         continue;
       }
-      if ( image._storeID === undefined ) {
+      if (image._storeID === undefined) {
         // this texture is new to us so load it and add it to the batch
-        texture = this._loadTextureImage( gl, image );
-        this._insertTextureInBatch( gl, texture );
+        texture = this._loadTextureImage(gl, image);
+        this._insertTextureInBatch(gl, texture);
       } else {
         // fetch the texture (render textures know how to look themselves up to simplify this logic)
-        texture = this._textureDictionary[ image._storeID ];
-        if ( !texture ) {
-          if ( this.vocalDebug ) {
-            console.log( "Texture should not be looked up while not being stored." );
+        texture = this._textureDictionary[image._storeID];
+        if (!texture) {
+          if (this.vocalDebug) {
+            console.log(
+              "Texture should not be looked up while not being stored."
+            );
           }
           continue;
         }
 
         // put it in the batch if needed
-        if ( texture._batchID !== this._batchID ) {
-          this._insertTextureInBatch( gl, texture );
+        if (texture._batchID !== this._batchID) {
+          this._insertTextureInBatch(gl, texture);
         }
       }
       texIndex = texture._activeIndex;
 
-      if ( item._webGLRenderStyle === 2 || useCache ) { // BITMAP / Cached Canvas
-        if ( !useCache && item.sourceRect ) {
+      if (item._webGLRenderStyle === 2 || useCache) {
+        // BITMAP / Cached Canvas
+        if (!useCache && item.sourceRect) {
           // calculate uvs
-          if ( !item._uvRect ) {
+          if (!item._uvRect) {
             item._uvRect = {};
           }
           src = item.sourceRect;
           uvRect = item._uvRect;
-          uvRect.t = ( src.y ) / image.height;
-          uvRect.l = ( src.x ) / image.width;
-          uvRect.b = ( src.y + src.height ) / image.height;
-          uvRect.r = ( src.x + src.width ) / image.width;
+          uvRect.t = src.y / image.height;
+          uvRect.l = src.x / image.width;
+          uvRect.b = (src.y + src.height) / image.height;
+          uvRect.r = (src.x + src.width) / image.width;
 
           // calculate vertices
           subL = 0;
@@ -11717,12 +12414,12 @@ this.createjs = this.createjs || {};
           // calculate uvs
           uvRect = StageGL.UV_RECT;
           // calculate vertices
-          if ( useCache ) {
+          if (useCache) {
             src = item.bitmapCache;
-            subL = src.x + ( src._filterOffX / src.scale );
-            subT = src.y + ( src._filterOffY / src.scale );
-            subR = ( src._drawWidth / src.scale ) + subL;
-            subB = ( src._drawHeight / src.scale ) + subT;
+            subL = src.x + src._filterOffX / src.scale;
+            subT = src.y + src._filterOffY / src.scale;
+            subR = src._drawWidth / src.scale + subL;
+            subB = src._drawHeight / src.scale + subT;
           } else {
             subL = 0;
             subT = 0;
@@ -11730,13 +12427,18 @@ this.createjs = this.createjs || {};
             subB = image.height + subT;
           }
         }
-      } else if ( item._webGLRenderStyle === 1 ) { // SPRITE
+      } else if (item._webGLRenderStyle === 1) {
+        // SPRITE
         var rect = frame.rect;
 
         // calculate uvs
         uvRect = frame.uvRect;
-        if ( !uvRect ) {
-          uvRect = StageGL.buildUVRects( item.spriteSheet, item.currentFrame, false );
+        if (!uvRect) {
+          uvRect = StageGL.buildUVRects(
+            item.spriteSheet,
+            item.currentFrame,
+            false
+          );
         }
 
         // calculate vertices
@@ -11752,38 +12454,50 @@ this.createjs = this.createjs || {};
 
       //DHG: See Matrix2D.transformPoint for why this math specifically
       // apply vertices
-      vertices[ offV2 ] = subL * iMtx.a + subT * iMtx.c + iMtx.tx;
-      vertices[ offV2 + 1 ] = subL * iMtx.b + subT * iMtx.d + iMtx.ty;
-      vertices[ offV2 + 2 ] = subL * iMtx.a + subB * iMtx.c + iMtx.tx;
-      vertices[ offV2 + 3 ] = subL * iMtx.b + subB * iMtx.d + iMtx.ty;
-      vertices[ offV2 + 4 ] = subR * iMtx.a + subT * iMtx.c + iMtx.tx;
-      vertices[ offV2 + 5 ] = subR * iMtx.b + subT * iMtx.d + iMtx.ty;
-      vertices[ offV2 + 6 ] = vertices[ offV2 + 2 ];
-      vertices[ offV2 + 7 ] = vertices[ offV2 + 3 ];
-      vertices[ offV2 + 8 ] = vertices[ offV2 + 4 ];
-      vertices[ offV2 + 9 ] = vertices[ offV2 + 5 ];
-      vertices[ offV2 + 10 ] = subR * iMtx.a + subB * iMtx.c + iMtx.tx;
-      vertices[ offV2 + 11 ] = subR * iMtx.b + subB * iMtx.d + iMtx.ty;
+      vertices[offV2] = subL * iMtx.a + subT * iMtx.c + iMtx.tx;
+      vertices[offV2 + 1] = subL * iMtx.b + subT * iMtx.d + iMtx.ty;
+      vertices[offV2 + 2] = subL * iMtx.a + subB * iMtx.c + iMtx.tx;
+      vertices[offV2 + 3] = subL * iMtx.b + subB * iMtx.d + iMtx.ty;
+      vertices[offV2 + 4] = subR * iMtx.a + subT * iMtx.c + iMtx.tx;
+      vertices[offV2 + 5] = subR * iMtx.b + subT * iMtx.d + iMtx.ty;
+      vertices[offV2 + 6] = vertices[offV2 + 2];
+      vertices[offV2 + 7] = vertices[offV2 + 3];
+      vertices[offV2 + 8] = vertices[offV2 + 4];
+      vertices[offV2 + 9] = vertices[offV2 + 5];
+      vertices[offV2 + 10] = subR * iMtx.a + subB * iMtx.c + iMtx.tx;
+      vertices[offV2 + 11] = subR * iMtx.b + subB * iMtx.d + iMtx.ty;
 
       // apply uvs
-      uvs[ offV2 ] = uvRect.l;
-      uvs[ offV2 + 1 ] = uvRect.t;
-      uvs[ offV2 + 2 ] = uvRect.l;
-      uvs[ offV2 + 3 ] = uvRect.b;
-      uvs[ offV2 + 4 ] = uvRect.r;
-      uvs[ offV2 + 5 ] = uvRect.t;
-      uvs[ offV2 + 6 ] = uvRect.l;
-      uvs[ offV2 + 7 ] = uvRect.b;
-      uvs[ offV2 + 8 ] = uvRect.r;
-      uvs[ offV2 + 9 ] = uvRect.t;
-      uvs[ offV2 + 10 ] = uvRect.r;
-      uvs[ offV2 + 11 ] = uvRect.b;
+      uvs[offV2] = uvRect.l;
+      uvs[offV2 + 1] = uvRect.t;
+      uvs[offV2 + 2] = uvRect.l;
+      uvs[offV2 + 3] = uvRect.b;
+      uvs[offV2 + 4] = uvRect.r;
+      uvs[offV2 + 5] = uvRect.t;
+      uvs[offV2 + 6] = uvRect.l;
+      uvs[offV2 + 7] = uvRect.b;
+      uvs[offV2 + 8] = uvRect.r;
+      uvs[offV2 + 9] = uvRect.t;
+      uvs[offV2 + 10] = uvRect.r;
+      uvs[offV2 + 11] = uvRect.b;
 
       // apply texture
-      texI[ offV1 ] = texI[ offV1 + 1 ] = texI[ offV1 + 2 ] = texI[ offV1 + 3 ] = texI[ offV1 + 4 ] = texI[ offV1 + 5 ] = texIndex;
+      texI[offV1] =
+        texI[offV1 + 1] =
+        texI[offV1 + 2] =
+        texI[offV1 + 3] =
+        texI[offV1 + 4] =
+        texI[offV1 + 5] =
+          texIndex;
 
       // apply alpha
-      alphas[ offV1 ] = alphas[ offV1 + 1 ] = alphas[ offV1 + 2 ] = alphas[ offV1 + 3 ] = alphas[ offV1 + 4 ] = alphas[ offV1 + 5 ] = item.alpha * concatAlpha;
+      alphas[offV1] =
+        alphas[offV1 + 1] =
+        alphas[offV1 + 2] =
+        alphas[offV1 + 3] =
+        alphas[offV1 + 4] =
+        alphas[offV1 + 5] =
+          item.alpha * concatAlpha;
 
       this.batchCardCount++;
     }
@@ -11795,13 +12509,15 @@ this.createjs = this.createjs || {};
    * @param {WebGLRenderingContext} gl The canvas WebGL context object to draw into.
    * @protected
    */
-  p._drawBuffers = function ( gl ) {
-    if ( this.batchCardCount <= 0 ) {
+  p._drawBuffers = function (gl) {
+    if (this.batchCardCount <= 0) {
       return;
     } // prevents error logs on stages filled with un-renederable content.
 
-    if ( this.vocalDebug ) {
-      console.log( "Draw[" + this._drawID + ":" + this._batchID + "] : " + this.batchReason );
+    if (this.vocalDebug) {
+      console.log(
+        "Draw[" + this._drawID + ":" + this._batchID + "] : " + this.batchReason
+      );
     }
     var shaderProgram = this._activeShader;
     var vertexPositionBuffer = this._vertexPositionBuffer;
@@ -11809,34 +12525,70 @@ this.createjs = this.createjs || {};
     var uvPositionBuffer = this._uvPositionBuffer;
     var alphaBuffer = this._alphaBuffer;
 
-    gl.useProgram( shaderProgram );
+    gl.useProgram(shaderProgram);
 
-    gl.bindBuffer( gl.ARRAY_BUFFER, vertexPositionBuffer );
-    gl.vertexAttribPointer( shaderProgram.vertexPositionAttribute, vertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0 );
-    gl.bufferSubData( gl.ARRAY_BUFFER, 0, this._vertices );
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexPositionBuffer);
+    gl.vertexAttribPointer(
+      shaderProgram.vertexPositionAttribute,
+      vertexPositionBuffer.itemSize,
+      gl.FLOAT,
+      false,
+      0,
+      0
+    );
+    gl.bufferSubData(gl.ARRAY_BUFFER, 0, this._vertices);
 
-    gl.bindBuffer( gl.ARRAY_BUFFER, textureIndexBuffer );
-    gl.vertexAttribPointer( shaderProgram.textureIndexAttribute, textureIndexBuffer.itemSize, gl.FLOAT, false, 0, 0 );
-    gl.bufferSubData( gl.ARRAY_BUFFER, 0, this._indices );
+    gl.bindBuffer(gl.ARRAY_BUFFER, textureIndexBuffer);
+    gl.vertexAttribPointer(
+      shaderProgram.textureIndexAttribute,
+      textureIndexBuffer.itemSize,
+      gl.FLOAT,
+      false,
+      0,
+      0
+    );
+    gl.bufferSubData(gl.ARRAY_BUFFER, 0, this._indices);
 
-    gl.bindBuffer( gl.ARRAY_BUFFER, uvPositionBuffer );
-    gl.vertexAttribPointer( shaderProgram.uvPositionAttribute, uvPositionBuffer.itemSize, gl.FLOAT, false, 0, 0 );
-    gl.bufferSubData( gl.ARRAY_BUFFER, 0, this._uvs );
+    gl.bindBuffer(gl.ARRAY_BUFFER, uvPositionBuffer);
+    gl.vertexAttribPointer(
+      shaderProgram.uvPositionAttribute,
+      uvPositionBuffer.itemSize,
+      gl.FLOAT,
+      false,
+      0,
+      0
+    );
+    gl.bufferSubData(gl.ARRAY_BUFFER, 0, this._uvs);
 
-    gl.bindBuffer( gl.ARRAY_BUFFER, alphaBuffer );
-    gl.vertexAttribPointer( shaderProgram.alphaAttribute, alphaBuffer.itemSize, gl.FLOAT, false, 0, 0 );
-    gl.bufferSubData( gl.ARRAY_BUFFER, 0, this._alphas );
+    gl.bindBuffer(gl.ARRAY_BUFFER, alphaBuffer);
+    gl.vertexAttribPointer(
+      shaderProgram.alphaAttribute,
+      alphaBuffer.itemSize,
+      gl.FLOAT,
+      false,
+      0,
+      0
+    );
+    gl.bufferSubData(gl.ARRAY_BUFFER, 0, this._alphas);
 
-    gl.uniformMatrix4fv( shaderProgram.pMatrixUniform, gl.FALSE, this._projectionMatrix );
+    gl.uniformMatrix4fv(
+      shaderProgram.pMatrixUniform,
+      gl.FALSE,
+      this._projectionMatrix
+    );
 
-    for ( var i = 0; i < this._batchTextureCount; i++ ) {
-      var texture = this._batchTextures[ i ];
-      gl.activeTexture( gl.TEXTURE0 + i );
-      gl.bindTexture( gl.TEXTURE_2D, texture );
-      this.setTextureParams( gl, texture.isPOT );
+    for (var i = 0; i < this._batchTextureCount; i++) {
+      var texture = this._batchTextures[i];
+      gl.activeTexture(gl.TEXTURE0 + i);
+      gl.bindTexture(gl.TEXTURE_2D, texture);
+      this.setTextureParams(gl, texture.isPOT);
     }
 
-    gl.drawArrays( gl.TRIANGLES, 0, this.batchCardCount * StageGL.INDICIES_PER_CARD );
+    gl.drawArrays(
+      gl.TRIANGLES,
+      0,
+      this.batchCardCount * StageGL.INDICIES_PER_CARD
+    );
     this._batchID++;
   };
 
@@ -11848,36 +12600,56 @@ this.createjs = this.createjs || {};
    * end up meaning the `y` space sometimes requires flipping in the render.
    * @protected
    */
-  p._drawCover = function ( gl, flipY ) {
-    if ( this._isDrawing > 0 ) {
-      this._drawBuffers( gl );
+  p._drawCover = function (gl, flipY) {
+    if (this._isDrawing > 0) {
+      this._drawBuffers(gl);
     }
 
-    if ( this.vocalDebug ) {
-      console.log( "Draw[" + this._drawID + ":" + this._batchID + "] : " + "Cover" );
+    if (this.vocalDebug) {
+      console.log(
+        "Draw[" + this._drawID + ":" + this._batchID + "] : " + "Cover"
+      );
     }
     var shaderProgram = this._activeShader;
     var vertexPositionBuffer = this._vertexPositionBuffer;
     var uvPositionBuffer = this._uvPositionBuffer;
 
-    gl.clear( gl.COLOR_BUFFER_BIT );
-    gl.useProgram( shaderProgram );
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.useProgram(shaderProgram);
 
-    gl.bindBuffer( gl.ARRAY_BUFFER, vertexPositionBuffer );
-    gl.vertexAttribPointer( shaderProgram.vertexPositionAttribute, vertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0 );
-    gl.bufferSubData( gl.ARRAY_BUFFER, 0, StageGL.COVER_VERT );
-    gl.bindBuffer( gl.ARRAY_BUFFER, uvPositionBuffer );
-    gl.vertexAttribPointer( shaderProgram.uvPositionAttribute, uvPositionBuffer.itemSize, gl.FLOAT, false, 0, 0 );
-    gl.bufferSubData( gl.ARRAY_BUFFER, 0, flipY ? StageGL.COVER_UV_FLIP : StageGL.COVER_UV );
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexPositionBuffer);
+    gl.vertexAttribPointer(
+      shaderProgram.vertexPositionAttribute,
+      vertexPositionBuffer.itemSize,
+      gl.FLOAT,
+      false,
+      0,
+      0
+    );
+    gl.bufferSubData(gl.ARRAY_BUFFER, 0, StageGL.COVER_VERT);
+    gl.bindBuffer(gl.ARRAY_BUFFER, uvPositionBuffer);
+    gl.vertexAttribPointer(
+      shaderProgram.uvPositionAttribute,
+      uvPositionBuffer.itemSize,
+      gl.FLOAT,
+      false,
+      0,
+      0
+    );
+    gl.bufferSubData(
+      gl.ARRAY_BUFFER,
+      0,
+      flipY ? StageGL.COVER_UV_FLIP : StageGL.COVER_UV
+    );
 
-    gl.uniform1i( shaderProgram.samplerUniform, 0 );
-    gl.uniform1f( shaderProgram.uprightUniform, flipY ? 0 : 1 );
+    gl.uniform1i(shaderProgram.samplerUniform, 0);
+    gl.uniform1f(shaderProgram.uprightUniform, flipY ? 0 : 1);
 
-    gl.drawArrays( gl.TRIANGLES, 0, StageGL.INDICIES_PER_CARD );
+    gl.drawArrays(gl.TRIANGLES, 0, StageGL.INDICIES_PER_CARD);
   };
 
-  createjs.StageGL = createjs.promote( StageGL, "Stage" );
-}() );
+  createjs.StageGL = createjs.promote(StageGL, "Stage");
+})();
 
 //##############################################################################
 // Bitmap.js
@@ -11885,8 +12657,7 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
-
+(function () {
   /**
    * A Bitmap represents an Image, Canvas, or Video in the display list. A Bitmap can be instantiated using an existing
    * HTML element, or a string.
@@ -11917,9 +12688,8 @@ this.createjs = this.createjs || {};
    * (image, video, canvas), an object with a `getImage` method that returns a CanvasImageSource, or a string URL to an image.
    * If the latter, a new Image instance with the URL as its src will be used.
    **/
-  function Bitmap( imageOrUri ) {
+  function Bitmap(imageOrUri) {
     this.DisplayObject_constructor();
-
 
     // public properties:
     /**
@@ -11929,8 +12699,8 @@ this.createjs = this.createjs || {};
      * @property image
      * @type CanvasImageSource | Object
      **/
-    if ( typeof imageOrUri == "string" ) {
-      this.image = document.createElement( "img" );
+    if (typeof imageOrUri == "string") {
+      this.image = document.createElement("img");
       this.image.src = imageOrUri;
     } else {
       this.image = imageOrUri;
@@ -11955,8 +12725,7 @@ this.createjs = this.createjs || {};
      */
     this._webGLRenderStyle = createjs.DisplayObject._StageGL_BITMAP;
   }
-  var p = createjs.extend( Bitmap, createjs.DisplayObject );
-
+  var p = createjs.extend(Bitmap, createjs.DisplayObject);
 
   // public methods:
   /**
@@ -11977,8 +12746,17 @@ this.createjs = this.createjs || {};
    **/
   p.isVisible = function () {
     var image = this.image;
-    var hasContent = this.cacheCanvas || ( image && ( image.naturalWidth || image.getContext || image.readyState >= 2 ) );
-    return !!( this.visible && this.alpha > 0 && this.scaleX != 0 && this.scaleY != 0 && hasContent );
+    var hasContent =
+      this.cacheCanvas ||
+      (image &&
+        (image.naturalWidth || image.getContext || image.readyState >= 2));
+    return !!(
+      this.visible &&
+      this.alpha > 0 &&
+      this.scaleX != 0 &&
+      this.scaleY != 0 &&
+      hasContent
+    );
   };
 
   /**
@@ -11993,19 +12771,19 @@ this.createjs = this.createjs || {};
    * into itself).
    * @return {Boolean}
    **/
-  p.draw = function ( ctx, ignoreCache ) {
-    if ( this.DisplayObject_draw( ctx, ignoreCache ) ) {
+  p.draw = function (ctx, ignoreCache) {
+    if (this.DisplayObject_draw(ctx, ignoreCache)) {
       return true;
     }
     var img = this.image,
       rect = this.sourceRect;
-    if ( img.getImage ) {
+    if (img.getImage) {
       img = img.getImage();
     }
-    if ( !img ) {
+    if (!img) {
       return true;
     }
-    if ( rect ) {
+    if (rect) {
       // some browsers choke on out of bound values, so we'll fix them:
       var x1 = rect.x,
         y1 = rect.y,
@@ -12015,23 +12793,23 @@ this.createjs = this.createjs || {};
         y = 0,
         w = img.width,
         h = img.height;
-      if ( x1 < 0 ) {
+      if (x1 < 0) {
         x -= x1;
         x1 = 0;
       }
-      if ( x2 > w ) {
+      if (x2 > w) {
         x2 = w;
       }
-      if ( y1 < 0 ) {
+      if (y1 < 0) {
         y -= y1;
         y1 = 0;
       }
-      if ( y2 > h ) {
+      if (y2 > h) {
         y2 = h;
       }
-      ctx.drawImage( img, x1, y1, x2 - x1, y2 - y1, x, y, x2 - x1, y2 - y1 );
+      ctx.drawImage(img, x1, y1, x2 - x1, y2 - y1, x, y, x2 - x1, y2 - y1);
     } else {
-      ctx.drawImage( img, 0, 0 );
+      ctx.drawImage(img, 0, 0);
     }
     return true;
   };
@@ -12074,13 +12852,17 @@ this.createjs = this.createjs || {};
    */
   p.getBounds = function () {
     var rect = this.DisplayObject_getBounds();
-    if ( rect ) {
+    if (rect) {
       return rect;
     }
     var image = this.image,
       o = this.sourceRect || image;
-    var hasContent = ( image && ( image.naturalWidth || image.getContext || image.readyState >= 2 ) );
-    return hasContent ? this._rectangle.setValues( 0, 0, o.width, o.height ) : null;
+    var hasContent =
+      image &&
+      (image.naturalWidth || image.getContext || image.readyState >= 2);
+    return hasContent
+      ? this._rectangle.setValues(0, 0, o.width, o.height)
+      : null;
   };
 
   /**
@@ -12089,16 +12871,16 @@ this.createjs = this.createjs || {};
    * @param {Boolean} node Whether the underlying dom element should be cloned as well.
    * @return {Bitmap} a clone of the Bitmap instance.
    **/
-  p.clone = function ( node ) {
+  p.clone = function (node) {
     var image = this.image;
-    if ( image && node ) {
+    if (image && node) {
       image = image.cloneNode();
     }
-    var o = new Bitmap( image );
-    if ( this.sourceRect ) {
+    var o = new Bitmap(image);
+    if (this.sourceRect) {
       o.sourceRect = this.sourceRect.clone();
     }
-    this._cloneProps( o );
+    this._cloneProps(o);
     return o;
   };
 
@@ -12111,9 +12893,8 @@ this.createjs = this.createjs || {};
     return "[Bitmap (name=" + this.name + ")]";
   };
 
-
-  createjs.Bitmap = createjs.promote( Bitmap, "DisplayObject" );
-}() );
+  createjs.Bitmap = createjs.promote(Bitmap, "DisplayObject");
+})();
 
 //##############################################################################
 // Sprite.js
@@ -12121,9 +12902,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -12149,9 +12929,8 @@ this.createjs = this.createjs || {};
    * dimensions, and frame data. See {{#crossLink "SpriteSheet"}}{{/crossLink}} for more information.
    * @param {String|Number} [frameOrAnimation] The frame number or animation to play initially.
    **/
-  function Sprite( spriteSheet, frameOrAnimation ) {
+  function Sprite(spriteSheet, frameOrAnimation) {
     this.DisplayObject_constructor();
-
 
     // public properties:
     /**
@@ -12221,7 +13000,6 @@ this.createjs = this.createjs || {};
      **/
     this.framerate = 0;
 
-
     // private properties:
     /**
      * Current animation object.
@@ -12255,11 +13033,11 @@ this.createjs = this.createjs || {};
      */
     this._webGLRenderStyle = createjs.DisplayObject._StageGL_SPRITE;
 
-    if ( frameOrAnimation != null ) {
-      this.gotoAndPlay( frameOrAnimation );
+    if (frameOrAnimation != null) {
+      this.gotoAndPlay(frameOrAnimation);
     }
   }
-  var p = createjs.extend( Sprite, createjs.DisplayObject );
+  var p = createjs.extend(Sprite, createjs.DisplayObject);
 
   /**
    * Constructor alias for backwards compatibility. This method will be removed in future versions.
@@ -12268,7 +13046,6 @@ this.createjs = this.createjs || {};
    * @deprecated in favour of `createjs.promote()`
    **/
   p.initialize = Sprite; // TODO: Deprecated. This is for backwards support of Flash/Animate spritesheet export.
-
 
   // events:
   /**
@@ -12289,7 +13066,6 @@ this.createjs = this.createjs || {};
    * @param {String} type The event type.
    */
 
-
   // public methods:
   /**
    * Returns true or false indicating whether the display object would be visible if drawn to a canvas.
@@ -12300,7 +13076,13 @@ this.createjs = this.createjs || {};
    **/
   p.isVisible = function () {
     var hasContent = this.cacheCanvas || this.spriteSheet.complete;
-    return !!( this.visible && this.alpha > 0 && this.scaleX != 0 && this.scaleY != 0 && hasContent );
+    return !!(
+      this.visible &&
+      this.alpha > 0 &&
+      this.scaleX != 0 &&
+      this.scaleY != 0 &&
+      hasContent
+    );
   };
 
   /**
@@ -12313,18 +13095,28 @@ this.createjs = this.createjs || {};
    * For example, used for drawing the cache (to prevent it from simply drawing an existing cache back
    * into itself).
    **/
-  p.draw = function ( ctx, ignoreCache ) {
-    if ( this.DisplayObject_draw( ctx, ignoreCache ) ) {
+  p.draw = function (ctx, ignoreCache) {
+    if (this.DisplayObject_draw(ctx, ignoreCache)) {
       return true;
     }
     this._normalizeFrame();
-    var o = this.spriteSheet.getFrame( this._currentFrame | 0 );
-    if ( !o ) {
+    var o = this.spriteSheet.getFrame(this._currentFrame | 0);
+    if (!o) {
       return false;
     }
     var rect = o.rect;
-    if ( rect.width && rect.height ) {
-      ctx.drawImage( o.image, rect.x, rect.y, rect.width, rect.height, -o.regX, -o.regY, rect.width, rect.height );
+    if (rect.width && rect.height) {
+      ctx.drawImage(
+        o.image,
+        rect.x,
+        rect.y,
+        rect.width,
+        rect.height,
+        -o.regX,
+        -o.regY,
+        rect.width,
+        rect.height
+      );
     }
     return true;
   };
@@ -12376,10 +13168,10 @@ this.createjs = this.createjs || {};
    * @param {String|Number} frameOrAnimation The frame number or animation name that the playhead should move to
    * and begin playing.
    **/
-  p.gotoAndPlay = function ( frameOrAnimation ) {
+  p.gotoAndPlay = function (frameOrAnimation) {
     this.paused = false;
     this._skipAdvance = true;
-    this._goto( frameOrAnimation );
+    this._goto(frameOrAnimation);
   };
 
   /**
@@ -12388,9 +13180,9 @@ this.createjs = this.createjs || {};
    * @param {String|Number} frameOrAnimation The frame number or animation name that the playhead should move to
    * and stop.
    **/
-  p.gotoAndStop = function ( frameOrAnimation ) {
+  p.gotoAndStop = function (frameOrAnimation) {
     this.paused = true;
-    this._goto( frameOrAnimation );
+    this._goto(frameOrAnimation);
   };
 
   /**
@@ -12399,10 +13191,10 @@ this.createjs = this.createjs || {};
    * or its SpriteSheet.
    * @method advance
    */
-  p.advance = function ( time ) {
+  p.advance = function (time) {
     var fps = this.framerate || this.spriteSheet.framerate;
-    var t = ( fps && time != null ) ? time / ( 1000 / fps ) : 1;
-    this._normalizeFrame( t );
+    var t = fps && time != null ? time / (1000 / fps) : 1;
+    this._normalizeFrame(t);
   };
 
   /**
@@ -12417,7 +13209,10 @@ this.createjs = this.createjs || {};
    **/
   p.getBounds = function () {
     // TODO: should this normalizeFrame?
-    return this.DisplayObject_getBounds() || this.spriteSheet.getFrameBounds( this.currentFrame, this._rectangle );
+    return (
+      this.DisplayObject_getBounds() ||
+      this.spriteSheet.getFrameBounds(this.currentFrame, this._rectangle)
+    );
   };
 
   /**
@@ -12427,7 +13222,7 @@ this.createjs = this.createjs || {};
    * @return {Sprite} a clone of the Sprite instance.
    **/
   p.clone = function () {
-    return this._cloneProps( new Sprite( this.spriteSheet ) );
+    return this._cloneProps(new Sprite(this.spriteSheet));
   };
 
   /**
@@ -12446,8 +13241,8 @@ this.createjs = this.createjs || {};
    * @return {Sprite} o
    * @protected
    **/
-  p._cloneProps = function ( o ) {
-    this.DisplayObject__cloneProps( o );
+  p._cloneProps = function (o) {
+    this.DisplayObject__cloneProps(o);
     o.currentFrame = this.currentFrame;
     o.currentAnimation = this.currentAnimation;
     o.paused = this.paused;
@@ -12467,41 +13262,40 @@ this.createjs = this.createjs || {};
    * @protected
    * @method _tick
    **/
-  p._tick = function ( evtObj ) {
-    if ( !this.paused ) {
-      if ( !this._skipAdvance ) {
-        this.advance( evtObj && evtObj.delta );
+  p._tick = function (evtObj) {
+    if (!this.paused) {
+      if (!this._skipAdvance) {
+        this.advance(evtObj && evtObj.delta);
       }
       this._skipAdvance = false;
     }
-    this.DisplayObject__tick( evtObj );
+    this.DisplayObject__tick(evtObj);
   };
-
 
   /**
    * Normalizes the current frame, advancing animations and dispatching callbacks as appropriate.
    * @protected
    * @method _normalizeFrame
    **/
-  p._normalizeFrame = function ( frameDelta ) {
+  p._normalizeFrame = function (frameDelta) {
     frameDelta = frameDelta || 0;
     var animation = this._animation;
     var paused = this.paused;
     var frame = this._currentFrame;
     var l;
 
-    if ( animation ) {
+    if (animation) {
       var speed = animation.speed || 1;
       var animFrame = this.currentAnimationFrame;
       l = animation.frames.length;
-      if ( animFrame + frameDelta * speed >= l ) {
+      if (animFrame + frameDelta * speed >= l) {
         var next = animation.next;
-        if ( this._dispatchAnimationEnd( animation, frame, paused, next, l - 1 ) ) {
+        if (this._dispatchAnimationEnd(animation, frame, paused, next, l - 1)) {
           // something changed in the event stack, so we shouldn't make any more changes here.
           return;
-        } else if ( next ) {
+        } else if (next) {
           // sequence. Automatically calls _normalizeFrame again with the remaining frames.
-          return this._goto( next, frameDelta - ( l - animFrame ) / speed );
+          return this._goto(next, frameDelta - (l - animFrame) / speed);
         } else {
           // end.
           this.paused = true;
@@ -12511,23 +13305,23 @@ this.createjs = this.createjs || {};
         animFrame += frameDelta * speed;
       }
       this.currentAnimationFrame = animFrame;
-      this._currentFrame = animation.frames[ animFrame | 0 ]
+      this._currentFrame = animation.frames[animFrame | 0];
     } else {
-      frame = ( this._currentFrame += frameDelta );
+      frame = this._currentFrame += frameDelta;
       l = this.spriteSheet.getNumFrames();
-      if ( frame >= l && l > 0 ) {
-        if ( !this._dispatchAnimationEnd( animation, frame, paused, l - 1 ) ) {
+      if (frame >= l && l > 0) {
+        if (!this._dispatchAnimationEnd(animation, frame, paused, l - 1)) {
           // looped.
-          if ( ( this._currentFrame -= l ) >= l ) {
+          if ((this._currentFrame -= l) >= l) {
             return this._normalizeFrame();
           }
         }
       }
     }
     frame = this._currentFrame | 0;
-    if ( this.currentFrame != frame ) {
+    if (this.currentFrame != frame) {
       this.currentFrame = frame;
-      this.dispatchEvent( "change" );
+      this.dispatchEvent("change");
     }
   };
 
@@ -12538,18 +13332,18 @@ this.createjs = this.createjs || {};
    * @private
    * @type {Function}
    **/
-  p._dispatchAnimationEnd = function ( animation, frame, paused, next, end ) {
+  p._dispatchAnimationEnd = function (animation, frame, paused, next, end) {
     var name = animation ? animation.name : null;
-    if ( this.hasEventListener( "animationend" ) ) {
-      var evt = new createjs.Event( "animationend" );
+    if (this.hasEventListener("animationend")) {
+      var evt = new createjs.Event("animationend");
       evt.name = name;
       evt.next = next;
-      this.dispatchEvent( evt );
+      this.dispatchEvent(evt);
     }
     // did the animation get changed in the event stack?:
-    var changed = ( this._animation != animation || this._currentFrame != frame );
+    var changed = this._animation != animation || this._currentFrame != frame;
     // if the animation hasn't changed, but the sprite was paused, then we want to stick to the last frame:
-    if ( !changed && !paused && this.paused ) {
+    if (!changed && !paused && this.paused) {
       this.currentAnimationFrame = end;
       changed = true;
     }
@@ -12563,14 +13357,14 @@ this.createjs = this.createjs || {};
    * @param {Boolean} [frame] The frame of the animation to go to. Defaults to 0.
    * @protected
    **/
-  p._goto = function ( frameOrAnimation, frame ) {
+  p._goto = function (frameOrAnimation, frame) {
     this.currentAnimationFrame = 0;
-    if ( isNaN( frameOrAnimation ) ) {
-      var data = this.spriteSheet.getAnimation( frameOrAnimation );
-      if ( data ) {
+    if (isNaN(frameOrAnimation)) {
+      var data = this.spriteSheet.getAnimation(frameOrAnimation);
+      if (data) {
         this._animation = data;
         this.currentAnimation = frameOrAnimation;
-        this._normalizeFrame( frame );
+        this._normalizeFrame(frame);
       }
     } else {
       this.currentAnimation = this._animation = null;
@@ -12579,9 +13373,8 @@ this.createjs = this.createjs || {};
     }
   };
 
-
-  createjs.Sprite = createjs.promote( Sprite, "DisplayObject" );
-}() );
+  createjs.Sprite = createjs.promote(Sprite, "DisplayObject");
+})();
 
 //##############################################################################
 // Shape.js
@@ -12589,9 +13382,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -12617,9 +13409,8 @@ this.createjs = this.createjs || {};
    * @constructor
    * @param {Graphics} graphics Optional. The graphics instance to display. If null, a new Graphics instance will be created.
    **/
-  function Shape( graphics ) {
+  function Shape(graphics) {
     this.DisplayObject_constructor();
-
 
     // public properties:
     /**
@@ -12629,11 +13420,10 @@ this.createjs = this.createjs || {};
      **/
     this.graphics = graphics ? graphics : new createjs.Graphics();
   }
-  var p = createjs.extend( Shape, createjs.DisplayObject );
+  var p = createjs.extend(Shape, createjs.DisplayObject);
 
   // TODO: deprecated
   // p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
-
 
   // public methods:
   /**
@@ -12644,8 +13434,15 @@ this.createjs = this.createjs || {};
    * @return {Boolean} Boolean indicating whether the Shape would be visible if drawn to a canvas
    **/
   p.isVisible = function () {
-    var hasContent = this.cacheCanvas || ( this.graphics && !this.graphics.isEmpty() );
-    return !!( this.visible && this.alpha > 0 && this.scaleX != 0 && this.scaleY != 0 && hasContent );
+    var hasContent =
+      this.cacheCanvas || (this.graphics && !this.graphics.isEmpty());
+    return !!(
+      this.visible &&
+      this.alpha > 0 &&
+      this.scaleX != 0 &&
+      this.scaleY != 0 &&
+      hasContent
+    );
   };
 
   /**
@@ -12659,11 +13456,11 @@ this.createjs = this.createjs || {};
    * used for drawing the cache (to prevent it from simply drawing an existing cache back into itself).
    * @return {Boolean}
    **/
-  p.draw = function ( ctx, ignoreCache ) {
-    if ( this.DisplayObject_draw( ctx, ignoreCache ) ) {
+  p.draw = function (ctx, ignoreCache) {
+    if (this.DisplayObject_draw(ctx, ignoreCache)) {
       return true;
     }
-    this.graphics.draw( ctx, this );
+    this.graphics.draw(ctx, this);
     return true;
   };
 
@@ -12674,9 +13471,9 @@ this.createjs = this.createjs || {};
    * @param {Boolean} recursive If true, this Shape's {{#crossLink "Graphics"}}{{/crossLink}} instance will also be
    * cloned. If false, the Graphics instance will be shared with the new Shape.
    **/
-  p.clone = function ( recursive ) {
-    var g = ( recursive && this.graphics ) ? this.graphics.clone() : this.graphics;
-    return this._cloneProps( new Shape( g ) );
+  p.clone = function (recursive) {
+    var g = recursive && this.graphics ? this.graphics.clone() : this.graphics;
+    return this._cloneProps(new Shape(g));
   };
 
   /**
@@ -12688,9 +13485,8 @@ this.createjs = this.createjs || {};
     return "[Shape (name=" + this.name + ")]";
   };
 
-
-  createjs.Shape = createjs.promote( Shape, "DisplayObject" );
-}() );
+  createjs.Shape = createjs.promote(Shape, "DisplayObject");
+})();
 
 //##############################################################################
 // Text.js
@@ -12698,9 +13494,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -12732,9 +13527,8 @@ this.createjs = this.createjs || {};
    * @param {String} [color] The color to draw the text in. Any valid value for the CSS color attribute is acceptable (ex.
    * "#F00", "red", or "#FF0000").
    **/
-  function Text( text, font, color ) {
+  function Text(text, font, color) {
     this.DisplayObject_constructor();
-
 
     // public properties:
     /**
@@ -12811,11 +13605,10 @@ this.createjs = this.createjs || {};
      **/
     this.lineWidth = null;
   }
-  var p = createjs.extend( Text, createjs.DisplayObject );
+  var p = createjs.extend(Text, createjs.DisplayObject);
 
   // TODO: deprecated
   // p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
-
 
   // static properties:
   /**
@@ -12823,12 +13616,13 @@ this.createjs = this.createjs || {};
    * @type CanvasRenderingContext2D
    * @private
    **/
-  var canvas = ( createjs.createCanvas ? createjs.createCanvas() : document.createElement( "canvas" ) );
-  if ( canvas.getContext ) {
-    Text._workingContext = canvas.getContext( "2d" );
+  var canvas = createjs.createCanvas
+    ? createjs.createCanvas()
+    : document.createElement("canvas");
+  if (canvas.getContext) {
+    Text._workingContext = canvas.getContext("2d");
     canvas.width = canvas.height = 1;
   }
-
 
   // constants:
   /**
@@ -12843,7 +13637,7 @@ this.createjs = this.createjs || {};
     left: 0,
     center: -0.5,
     end: -1,
-    right: -1
+    right: -1,
   };
 
   /**
@@ -12859,9 +13653,8 @@ this.createjs = this.createjs || {};
     middle: -0.4,
     alphabetic: -0.8,
     ideographic: -0.85,
-    bottom: -1
+    bottom: -1,
   };
-
 
   // public methods:
   /**
@@ -12872,8 +13665,15 @@ this.createjs = this.createjs || {};
    * @return {Boolean} Whether the display object would be visible if drawn to a canvas
    **/
   p.isVisible = function () {
-    var hasContent = this.cacheCanvas || ( this.text != null && this.text !== "" );
-    return !!( this.visible && this.alpha > 0 && this.scaleX != 0 && this.scaleY != 0 && hasContent );
+    var hasContent =
+      this.cacheCanvas || (this.text != null && this.text !== "");
+    return !!(
+      this.visible &&
+      this.alpha > 0 &&
+      this.scaleX != 0 &&
+      this.scaleY != 0 &&
+      hasContent
+    );
   };
 
   /**
@@ -12886,20 +13686,20 @@ this.createjs = this.createjs || {};
    * For example, used for drawing the cache (to prevent it from simply drawing an existing cache back
    * into itself).
    **/
-  p.draw = function ( ctx, ignoreCache ) {
-    if ( this.DisplayObject_draw( ctx, ignoreCache ) ) {
+  p.draw = function (ctx, ignoreCache) {
+    if (this.DisplayObject_draw(ctx, ignoreCache)) {
       return true;
     }
 
     var col = this.color || "#000";
-    if ( this.outline ) {
+    if (this.outline) {
       ctx.strokeStyle = col;
       ctx.lineWidth = this.outline * 1;
     } else {
       ctx.fillStyle = col;
     }
 
-    this._drawText( this._prepContext( ctx ) );
+    this._drawText(this._prepContext(ctx));
     return true;
   };
 
@@ -12909,7 +13709,7 @@ this.createjs = this.createjs || {};
    * @return {Number} The measured, untransformed width of the text.
    **/
   p.getMeasuredWidth = function () {
-    return this._getMeasuredWidth( this.text );
+    return this._getMeasuredWidth(this.text);
   };
 
   /**
@@ -12920,7 +13720,7 @@ this.createjs = this.createjs || {};
    * based on the measured width of a "M" character multiplied by 1.2, which approximates em for most fonts.
    **/
   p.getMeasuredLineHeight = function () {
-    return this._getMeasuredWidth( "M" ) * 1.2;
+    return this._getMeasuredWidth("M") * 1.2;
   };
 
   /**
@@ -12931,7 +13731,7 @@ this.createjs = this.createjs || {};
    * @return {Number} The approximate height of the untransformed multi-line text.
    **/
   p.getMeasuredHeight = function () {
-    return this._drawText( null, {} ).height;
+    return this._drawText(null, {}).height;
   };
 
   /**
@@ -12939,18 +13739,18 @@ this.createjs = this.createjs || {};
    */
   p.getBounds = function () {
     var rect = this.DisplayObject_getBounds();
-    if ( rect ) {
+    if (rect) {
       return rect;
     }
-    if ( this.text == null || this.text === "" ) {
+    if (this.text == null || this.text === "") {
       return null;
     }
-    var o = this._drawText( null, {} );
-    var w = ( this.maxWidth && this.maxWidth < o.width ) ? this.maxWidth : o.width;
-    var x = w * Text.H_OFFSETS[ this.textAlign || "left" ];
+    var o = this._drawText(null, {});
+    var w = this.maxWidth && this.maxWidth < o.width ? this.maxWidth : o.width;
+    var x = w * Text.H_OFFSETS[this.textAlign || "left"];
     var lineHeight = this.lineHeight || this.getMeasuredLineHeight();
-    var y = lineHeight * Text.V_OFFSETS[ this.textBaseline || "top" ];
-    return this._rectangle.setValues( x, y, w, o.height );
+    var y = lineHeight * Text.V_OFFSETS[this.textBaseline || "top"];
+    return this._rectangle.setValues(x, y, w, o.height);
   };
 
   /**
@@ -12963,11 +13763,11 @@ this.createjs = this.createjs || {};
    **/
   p.getMetrics = function () {
     var o = {
-      lines: []
+      lines: [],
     };
     o.lineHeight = this.lineHeight || this.getMeasuredLineHeight();
-    o.vOffset = o.lineHeight * Text.V_OFFSETS[ this.textBaseline || "top" ];
-    return this._drawText( null, o, o.lines );
+    o.vOffset = o.lineHeight * Text.V_OFFSETS[this.textBaseline || "top"];
+    return this._drawText(null, o, o.lines);
   };
 
   /**
@@ -12976,7 +13776,7 @@ this.createjs = this.createjs || {};
    * @return {Text} a clone of the Text instance.
    **/
   p.clone = function () {
-    return this._cloneProps( new Text( this.text, this.font, this.color ) );
+    return this._cloneProps(new Text(this.text, this.font, this.color));
   };
 
   /**
@@ -12985,9 +13785,12 @@ this.createjs = this.createjs || {};
    * @return {String} a string representation of the instance.
    **/
   p.toString = function () {
-    return "[Text (text=" + ( this.text.length > 20 ? this.text.substr( 0, 17 ) + "..." : this.text ) + ")]";
+    return (
+      "[Text (text=" +
+      (this.text.length > 20 ? this.text.substr(0, 17) + "..." : this.text) +
+      ")]"
+    );
   };
-
 
   // private methods:
   /**
@@ -12996,8 +13799,8 @@ this.createjs = this.createjs || {};
    * @protected
    * @return {Text} o
    **/
-  p._cloneProps = function ( o ) {
-    this.DisplayObject__cloneProps( o );
+  p._cloneProps = function (o) {
+    this.DisplayObject__cloneProps(o);
     o.textAlign = this.textAlign;
     o.textBaseline = this.textBaseline;
     o.maxWidth = this.maxWidth;
@@ -13013,7 +13816,7 @@ this.createjs = this.createjs || {};
    * @return {CanvasRenderingContext2D}
    * @protected
    **/
-  p._prepContext = function ( ctx ) {
+  p._prepContext = function (ctx) {
     ctx.font = this.font || "10px sans-serif";
     ctx.textAlign = this.textAlign || "left";
     ctx.textBaseline = this.textBaseline || "top";
@@ -13031,71 +13834,74 @@ this.createjs = this.createjs || {};
    * @return {Object}
    * @protected
    **/
-  p._drawText = function ( ctx, o, lines ) {
+  p._drawText = function (ctx, o, lines) {
     var paint = !!ctx;
-    if ( !paint ) {
+    if (!paint) {
       ctx = Text._workingContext;
       ctx.save();
-      this._prepContext( ctx );
+      this._prepContext(ctx);
     }
     var lineHeight = this.lineHeight || this.getMeasuredLineHeight();
 
     var maxW = 0,
       count = 0;
-    var hardLines = String( this.text ).split( /(?:\r\n|\r|\n)/ );
-    for ( var i = 0, l = hardLines.length; i < l; i++ ) {
-      var str = hardLines[ i ];
+    var hardLines = String(this.text).split(/(?:\r\n|\r|\n)/);
+    for (var i = 0, l = hardLines.length; i < l; i++) {
+      var str = hardLines[i];
       var w = null;
 
-      if ( this.lineWidth != null && ( w = ctx.measureText( str ).width ) > this.lineWidth ) {
+      if (
+        this.lineWidth != null &&
+        (w = ctx.measureText(str).width) > this.lineWidth
+      ) {
         // text wrapping:
-        var words = str.split( /(\s)/ );
-        str = words[ 0 ];
-        w = ctx.measureText( str ).width;
+        var words = str.split(/(\s)/);
+        str = words[0];
+        w = ctx.measureText(str).width;
 
-        for ( var j = 1, jl = words.length; j < jl; j += 2 ) {
+        for (var j = 1, jl = words.length; j < jl; j += 2) {
           // Line needs to wrap:
-          var wordW = ctx.measureText( words[ j ] + words[ j + 1 ] ).width;
-          if ( w + wordW > this.lineWidth ) {
-            if ( paint ) {
-              this._drawTextLine( ctx, str, count * lineHeight );
+          var wordW = ctx.measureText(words[j] + words[j + 1]).width;
+          if (w + wordW > this.lineWidth) {
+            if (paint) {
+              this._drawTextLine(ctx, str, count * lineHeight);
             }
-            if ( lines ) {
-              lines.push( str );
+            if (lines) {
+              lines.push(str);
             }
-            if ( w > maxW ) {
+            if (w > maxW) {
               maxW = w;
             }
-            str = words[ j + 1 ];
-            w = ctx.measureText( str ).width;
+            str = words[j + 1];
+            w = ctx.measureText(str).width;
             count++;
           } else {
-            str += words[ j ] + words[ j + 1 ];
+            str += words[j] + words[j + 1];
             w += wordW;
           }
         }
       }
 
-      if ( paint ) {
-        this._drawTextLine( ctx, str, count * lineHeight );
+      if (paint) {
+        this._drawTextLine(ctx, str, count * lineHeight);
       }
-      if ( lines ) {
-        lines.push( str );
+      if (lines) {
+        lines.push(str);
       }
-      if ( o && w == null ) {
-        w = ctx.measureText( str ).width;
+      if (o && w == null) {
+        w = ctx.measureText(str).width;
       }
-      if ( w > maxW ) {
+      if (w > maxW) {
         maxW = w;
       }
       count++;
     }
 
-    if ( o ) {
+    if (o) {
       o.width = maxW;
       o.height = count * lineHeight;
     }
-    if ( !paint ) {
+    if (!paint) {
       ctx.restore();
     }
     return o;
@@ -13108,32 +13914,30 @@ this.createjs = this.createjs || {};
    * @param {Number} y
    * @protected
    **/
-  p._drawTextLine = function ( ctx, text, y ) {
+  p._drawTextLine = function (ctx, text, y) {
     // Chrome 17 will fail to draw the text if the last param is included but null, so we feed it a large value instead:
-    if ( this.outline ) {
-      ctx.strokeText( text, 0, y, this.maxWidth || 0xFFFF );
+    if (this.outline) {
+      ctx.strokeText(text, 0, y, this.maxWidth || 0xffff);
     } else {
-      ctx.fillText( text, 0, y, this.maxWidth || 0xFFFF );
+      ctx.fillText(text, 0, y, this.maxWidth || 0xffff);
     }
   };
-
 
   /**
    * @method _getMeasuredWidth
    * @param {String} text
    * @protected
    **/
-  p._getMeasuredWidth = function ( text ) {
+  p._getMeasuredWidth = function (text) {
     var ctx = Text._workingContext;
     ctx.save();
-    var w = this._prepContext( ctx ).measureText( text ).width;
+    var w = this._prepContext(ctx).measureText(text).width;
     ctx.restore();
     return w;
   };
 
-
-  createjs.Text = createjs.promote( Text, "DisplayObject" );
-}() );
+  createjs.Text = createjs.promote(Text, "DisplayObject");
+})();
 
 //##############################################################################
 // BitmapText.js
@@ -13141,9 +13945,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -13161,9 +13964,8 @@ this.createjs = this.createjs || {};
    * @param {SpriteSheet} [spriteSheet=null] The spritesheet that defines the character glyphs.
    * @constructor
    **/
-  function BitmapText( text, spriteSheet ) {
+  function BitmapText(text, spriteSheet) {
     this.Container_constructor();
-
 
     // public properties:
     /**
@@ -13183,7 +13985,7 @@ this.createjs = this.createjs || {};
      *
      * would indicate that the frame at index 0 of the spritesheet should be drawn for the "A" character. The short form
      * is also acceptable:
-     * 
+     *
      * 		"A": 0
      *
      * Note that if a character in the text is not found in the sprite sheet, it will also
@@ -13227,7 +14029,6 @@ this.createjs = this.createjs || {};
      **/
     this.spaceWidth = 0;
 
-
     // private properties:
     /**
      * @property _oldProps
@@ -13239,7 +14040,7 @@ this.createjs = this.createjs || {};
       spriteSheet: 0,
       lineHeight: 0,
       letterSpacing: 0,
-      spaceWidth: 0
+      spaceWidth: 0,
     };
 
     /**
@@ -13257,7 +14058,7 @@ this.createjs = this.createjs || {};
      */
     this._drawAction = null;
   }
-  var p = createjs.extend( BitmapText, createjs.Container );
+  var p = createjs.extend(BitmapText, createjs.Container);
 
   // static properties:
   /**
@@ -13279,17 +14080,16 @@ this.createjs = this.createjs || {};
    */
   BitmapText._spritePool = [];
 
-
   // public methods:
   /**
    * Docced in superclass.
    **/
-  p.draw = function ( ctx, ignoreCache ) {
-    if ( this.DisplayObject_draw( ctx, ignoreCache ) ) {
+  p.draw = function (ctx, ignoreCache) {
+    if (this.DisplayObject_draw(ctx, ignoreCache)) {
       return;
     }
     this._updateState();
-    this.Container_draw( ctx, ignoreCache );
+    this.Container_draw(ctx, ignoreCache);
   };
 
   /**
@@ -13308,12 +14108,20 @@ this.createjs = this.createjs || {};
    * @return {Boolean} Boolean indicating whether the display object would be visible if drawn to a canvas
    **/
   p.isVisible = function () {
-    var hasContent = this.cacheCanvas || ( this.spriteSheet && this.spriteSheet.complete && this.text );
-    return !!( this.visible && this.alpha > 0 && this.scaleX !== 0 && this.scaleY !== 0 && hasContent );
+    var hasContent =
+      this.cacheCanvas ||
+      (this.spriteSheet && this.spriteSheet.complete && this.text);
+    return !!(
+      this.visible &&
+      this.alpha > 0 &&
+      this.scaleX !== 0 &&
+      this.scaleY !== 0 &&
+      hasContent
+    );
   };
 
   p.clone = function () {
-    return this._cloneProps( new BitmapText( this.text, this.spriteSheet ) );
+    return this._cloneProps(new BitmapText(this.text, this.spriteSheet));
   };
 
   /**
@@ -13336,8 +14144,12 @@ this.createjs = this.createjs || {};
    * <strong>Disabled in BitmapText.</strong>
    * @method removeAllChildren
    **/
-  p.addChild = p.addChildAt = p.removeChild = p.removeChildAt = p.removeAllChildren = function () {};
-
+  p.addChild =
+    p.addChildAt =
+    p.removeChild =
+    p.removeChildAt =
+    p.removeAllChildren =
+      function () {};
 
   // private methods:
   /**
@@ -13353,8 +14165,8 @@ this.createjs = this.createjs || {};
    * @return {BitmapText} o
    * @protected
    **/
-  p._cloneProps = function ( o ) {
-    this.Container__cloneProps( o );
+  p._cloneProps = function (o) {
+    this.Container__cloneProps(o);
     o.lineHeight = this.lineHeight;
     o.letterSpacing = this.letterSpacing;
     o.spaceWidth = this.spaceWidth;
@@ -13368,15 +14180,18 @@ this.createjs = this.createjs || {};
    * @return {Number}
    * @protected
    **/
-  p._getFrameIndex = function ( character, spriteSheet ) {
-    var c, o = spriteSheet.getAnimation( character );
-    if ( !o ) {
-      ( character != ( c = character.toUpperCase() ) ) || ( character != ( c = character.toLowerCase() ) ) || ( c = null );
-      if ( c ) {
-        o = spriteSheet.getAnimation( c );
+  p._getFrameIndex = function (character, spriteSheet) {
+    var c,
+      o = spriteSheet.getAnimation(character);
+    if (!o) {
+      character != (c = character.toUpperCase()) ||
+        character != (c = character.toLowerCase()) ||
+        (c = null);
+      if (c) {
+        o = spriteSheet.getAnimation(c);
       }
     }
-    return o && o.frames[ 0 ];
+    return o && o.frames[0];
   };
 
   /**
@@ -13386,9 +14201,9 @@ this.createjs = this.createjs || {};
    * @return {Object}
    * @protected
    **/
-  p._getFrame = function ( character, spriteSheet ) {
-    var index = this._getFrameIndex( character, spriteSheet );
-    return index == null ? index : spriteSheet.getFrame( index );
+  p._getFrame = function (character, spriteSheet) {
+    var index = this._getFrameIndex(character, spriteSheet);
+    return index == null ? index : spriteSheet.getFrame(index);
   };
 
   /**
@@ -13397,8 +14212,12 @@ this.createjs = this.createjs || {};
    * @return {Number}
    * @protected
    **/
-  p._getLineHeight = function ( ss ) {
-    var frame = this._getFrame( "1", ss ) || this._getFrame( "T", ss ) || this._getFrame( "L", ss ) || ss.getFrame( 0 );
+  p._getLineHeight = function (ss) {
+    var frame =
+      this._getFrame("1", ss) ||
+      this._getFrame("T", ss) ||
+      this._getFrame("L", ss) ||
+      ss.getFrame(0);
     return frame ? frame.rect.height : 1;
   };
 
@@ -13408,8 +14227,13 @@ this.createjs = this.createjs || {};
    * @return {Number}
    * @protected
    **/
-  p._getSpaceWidth = function ( ss ) {
-    var frame = this._getFrame( "1", ss ) || this._getFrame( "l", ss ) || this._getFrame( "e", ss ) || this._getFrame( "a", ss ) || ss.getFrame( 0 );
+  p._getSpaceWidth = function (ss) {
+    var frame =
+      this._getFrame("1", ss) ||
+      this._getFrame("l", ss) ||
+      this._getFrame("e", ss) ||
+      this._getFrame("a", ss) ||
+      ss.getFrame(0);
     return frame ? frame.rect.width : 1;
   };
 
@@ -13431,31 +14255,31 @@ this.createjs = this.createjs || {};
       numKids = kids.length,
       sprite;
 
-    for ( var n in o ) {
-      if ( o[ n ] != this[ n ] ) {
-        o[ n ] = this[ n ];
+    for (var n in o) {
+      if (o[n] != this[n]) {
+        o[n] = this[n];
         change = true;
       }
     }
-    if ( !change ) {
+    if (!change) {
       return;
     }
 
-    var hasSpace = !!this._getFrame( " ", ss );
-    if ( !hasSpace && !spaceW ) {
-      spaceW = this._getSpaceWidth( ss );
+    var hasSpace = !!this._getFrame(" ", ss);
+    if (!hasSpace && !spaceW) {
+      spaceW = this._getSpaceWidth(ss);
     }
-    if ( !lineH ) {
-      lineH = this._getLineHeight( ss );
+    if (!lineH) {
+      lineH = this._getLineHeight(ss);
     }
 
-    for ( var i = 0, l = this.text.length; i < l; i++ ) {
-      var character = this.text.charAt( i );
-      if ( character == " " && !hasSpace ) {
+    for (var i = 0, l = this.text.length; i < l; i++) {
+      var character = this.text.charAt(i);
+      if (character == " " && !hasSpace) {
         x += spaceW;
         continue;
-      } else if ( character == "\n" || character == "\r" ) {
-        if ( character == "\r" && this.text.charAt( i + 1 ) == "\n" ) {
+      } else if (character == "\n" || character == "\r") {
+        if (character == "\r" && this.text.charAt(i + 1) == "\n") {
           i++;
         } // crlf
         x = 0;
@@ -13463,40 +14287,39 @@ this.createjs = this.createjs || {};
         continue;
       }
 
-      var index = this._getFrameIndex( character, ss );
-      if ( index == null ) {
+      var index = this._getFrameIndex(character, ss);
+      if (index == null) {
         continue;
       }
 
-      if ( childIndex < numKids ) {
-        sprite = kids[ childIndex ];
+      if (childIndex < numKids) {
+        sprite = kids[childIndex];
       } else {
-        kids.push( sprite = pool.length ? pool.pop() : new createjs.Sprite() );
+        kids.push((sprite = pool.length ? pool.pop() : new createjs.Sprite()));
         sprite.parent = this;
         numKids++;
       }
       sprite.spriteSheet = ss;
-      sprite.gotoAndStop( index );
+      sprite.gotoAndStop(index);
       sprite.x = x;
       sprite.y = y;
       childIndex++;
 
       x += sprite.getBounds().width + this.letterSpacing;
     }
-    while ( numKids > childIndex ) {
+    while (numKids > childIndex) {
       // faster than removeChild.
-      pool.push( sprite = kids.pop() );
+      pool.push((sprite = kids.pop()));
       sprite.parent = null;
       numKids--;
     }
-    if ( pool.length > BitmapText.maxPoolSize ) {
+    if (pool.length > BitmapText.maxPoolSize) {
       pool.length = BitmapText.maxPoolSize;
     }
   };
 
-
-  createjs.BitmapText = createjs.promote( BitmapText, "Container" );
-}() );
+  createjs.BitmapText = createjs.promote(BitmapText, "Container");
+})();
 
 //##############################################################################
 // MovieClip.js
@@ -13504,9 +14327,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -13556,13 +14378,13 @@ this.createjs = this.createjs || {};
    *    <LI> `startPosition`</LI>
    *    <LI> `frameBounds`</LI>
    * </UL>
-   * 
+   *
    * This object will also be passed into the Timeline instance associated with this MovieClip. See the documentation
    * for Timeline for a list of supported props (ex. `paused`, `labels`, `loop`, `reversed`, etc.)
    * @extends Container
    * @constructor
    **/
-  function MovieClip( props ) {
+  function MovieClip(props) {
     this.Container_constructor();
     !MovieClip.inited && MovieClip.init(); // static init
 
@@ -13570,27 +14392,26 @@ this.createjs = this.createjs || {};
 
     // handle old params (mode, startPosition, loop, labels):
     // TODO: deprecated param handling:
-    if ( props instanceof String || arguments.length > 1 ) {
+    if (props instanceof String || arguments.length > 1) {
       mode = props;
-      startPosition = arguments[ 1 ];
-      loop = arguments[ 2 ];
-      labels = arguments[ 3 ];
-      if ( loop == null ) {
+      startPosition = arguments[1];
+      loop = arguments[2];
+      labels = arguments[3];
+      if (loop == null) {
         loop = -1;
       }
       props = null;
-    } else if ( props ) {
+    } else if (props) {
       mode = props.mode;
       startPosition = props.startPosition;
       loop = props.loop;
       labels = props.labels;
     }
-    if ( !props ) {
+    if (!props) {
       props = {
-        labels: labels
+        labels: labels,
       };
     }
-
 
     // public properties:
     /**
@@ -13617,7 +14438,7 @@ this.createjs = this.createjs || {};
      * @type Number
      * @default -1
      */
-    this.loop = loop === true ? -1 : ( loop || 0 );
+    this.loop = loop === true ? -1 : loop || 0;
 
     /**
      * The current frame of the movieclip.
@@ -13710,8 +14531,7 @@ this.createjs = this.createjs || {};
      * @type Timeline
      * @default null
      */
-    this.timeline = new createjs.Timeline( props );
-
+    this.timeline = new createjs.Timeline(props);
 
     // private properties:
     /**
@@ -13735,8 +14555,7 @@ this.createjs = this.createjs || {};
      * @type Function
      * @private
      */
-    this._bound_resolveState = this._resolveState.bind( this );
-
+    this._bound_resolveState = this._resolveState.bind(this);
 
     /**
      * The time remaining from the previous tick, only applicable when .framerate is set.
@@ -13754,8 +14573,7 @@ this.createjs = this.createjs || {};
      */
     this._managed = {};
   }
-  var p = createjs.extend( MovieClip, createjs.Container );
-
+  var p = createjs.extend(MovieClip, createjs.Container);
 
   // constants:
   /**
@@ -13790,21 +14608,18 @@ this.createjs = this.createjs || {};
    **/
   MovieClip.SYNCHED = "synched";
 
-
   // static properties:
   MovieClip.inited = false;
 
-
   // static methods:
   MovieClip.init = function () {
-    if ( MovieClip.inited ) {
+    if (MovieClip.inited) {
       return;
     }
     // plugins introduce some overhead to Tween, so we only install this if an MC is instantiated.
     MovieClipPlugin.install();
     MovieClip.inited = true;
   };
-
 
   // getter / setters:
   /**
@@ -13817,7 +14632,7 @@ this.createjs = this.createjs || {};
     return this.timeline.getLabels();
   };
   // MovieClip.getLabels is @deprecated. Remove for 1.1+
-  p.getLabels = createjs.deprecate( p._getLabels, "MovieClip.getLabels" );
+  p.getLabels = createjs.deprecate(p._getLabels, "MovieClip.getLabels");
 
   /**
    * Use the {{#crossLink "MovieClip/currentLabel:property"}}{{/crossLink}} property instead.
@@ -13829,7 +14644,10 @@ this.createjs = this.createjs || {};
     return this.timeline.currentLabel;
   };
   // MovieClip.getCurrentLabel is @deprecated. Remove for 1.1+
-  p.getCurrentLabel = createjs.deprecate( p._getCurrentLabel, "MovieClip.getCurrentLabel" );
+  p.getCurrentLabel = createjs.deprecate(
+    p._getCurrentLabel,
+    "MovieClip.getCurrentLabel"
+  );
 
   /**
    * Use the {{#crossLink "MovieClip/duration:property"}}{{/crossLink}} property instead.
@@ -13841,7 +14659,7 @@ this.createjs = this.createjs || {};
     return this.timeline.duration;
   };
   // MovieClip.getDuration is @deprecated. Remove for 1.1+
-  p.getDuration = createjs.deprecate( p._getDuration, "MovieClip.getDuration" );
+  p.getDuration = createjs.deprecate(p._getDuration, "MovieClip.getDuration");
 
   /**
    * Returns an array of objects with label and position (aka frame) properties, sorted by position.
@@ -13871,23 +14689,22 @@ this.createjs = this.createjs || {};
    * @readonly
    **/
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       labels: {
-        get: p._getLabels
+        get: p._getLabels,
       },
       currentLabel: {
-        get: p._getCurrentLabel
+        get: p._getCurrentLabel,
       },
       totalFrames: {
-        get: p._getDuration
+        get: p._getDuration,
       },
       duration: {
-        get: p._getDuration
-      }
+        get: p._getDuration,
+      },
       // TODO: can we just proxy .currentFrame to tl.position as well? Ditto for .loop (or just remove entirely).
-    } );
-  } catch ( e ) {}
-
+    });
+  } catch (e) {}
 
   // public methods:
   /**
@@ -13907,7 +14724,12 @@ this.createjs = this.createjs || {};
    **/
   p.isVisible = function () {
     // children are placed in draw, so we can't determine if we have content.
-    return !!( this.visible && this.alpha > 0 && this.scaleX != 0 && this.scaleY != 0 );
+    return !!(
+      this.visible &&
+      this.alpha > 0 &&
+      this.scaleX != 0 &&
+      this.scaleY != 0
+    );
   };
 
   /**
@@ -13920,13 +14742,13 @@ this.createjs = this.createjs || {};
    * For example, used for drawing the cache (to prevent it from simply drawing an existing cache back
    * into itself).
    **/
-  p.draw = function ( ctx, ignoreCache ) {
+  p.draw = function (ctx, ignoreCache) {
     // draw to cache first:
-    if ( this.DisplayObject_draw( ctx, ignoreCache ) ) {
+    if (this.DisplayObject_draw(ctx, ignoreCache)) {
       return true;
     }
     this._updateState();
-    this.Container_draw( ctx, ignoreCache );
+    this.Container_draw(ctx, ignoreCache);
     return true;
   };
 
@@ -13951,9 +14773,9 @@ this.createjs = this.createjs || {};
    * @method gotoAndPlay
    * @param {String|Number} positionOrLabel The animation name or frame number to go to.
    **/
-  p.gotoAndPlay = function ( positionOrLabel ) {
+  p.gotoAndPlay = function (positionOrLabel) {
     this.paused = false;
-    this._goto( positionOrLabel );
+    this._goto(positionOrLabel);
   };
 
   /**
@@ -13961,9 +14783,9 @@ this.createjs = this.createjs || {};
    * @method gotoAndStop
    * @param {String|Number} positionOrLabel The animation or frame name to go to.
    **/
-  p.gotoAndStop = function ( positionOrLabel ) {
+  p.gotoAndStop = function (positionOrLabel) {
     this.paused = true;
-    this._goto( positionOrLabel );
+    this._goto(positionOrLabel);
   };
 
   /**
@@ -13971,33 +14793,36 @@ this.createjs = this.createjs || {};
    * @param [time] {Number} The amount of time in ms to advance by. Only applicable if framerate is set.
    * @method advance
    */
-  p.advance = function ( time ) {
+  p.advance = function (time) {
     var independent = MovieClip.INDEPENDENT;
-    if ( this.mode !== independent ) {
+    if (this.mode !== independent) {
       return;
     } // update happens in draw for synched clips
 
     // if this MC doesn't have a framerate, hunt ancestors for one:
     var o = this,
       fps = o.framerate;
-    while ( ( o = o.parent ) && fps === null ) {
-      if ( o.mode === independent ) {
+    while ((o = o.parent) && fps === null) {
+      if (o.mode === independent) {
         fps = o._framerate;
       }
     }
     this._framerate = fps;
 
-    if ( this.paused ) {
+    if (this.paused) {
       return;
     }
 
     // calculate how many frames to advance:
-    var t = ( fps !== null && fps !== -1 && time !== null ) ? time / ( 1000 / fps ) + this._t : 1;
+    var t =
+      fps !== null && fps !== -1 && time !== null
+        ? time / (1000 / fps) + this._t
+        : 1;
     var frames = t | 0;
     this._t = t - frames; // leftover time, save to add to next advance.
 
-    while ( frames-- ) {
-      this._updateTimeline( this._rawPosition + 1, false );
+    while (frames--) {
+      this._updateTimeline(this._rawPosition + 1, false);
     }
   };
 
@@ -14007,7 +14832,7 @@ this.createjs = this.createjs || {};
    **/
   p.clone = function () {
     // TODO: add support for this? Need to clone the Timeline & retarget tweens - pretty complex.
-    throw ( "MovieClip cannot be cloned." );
+    throw "MovieClip cannot be cloned.";
   };
 
   /**
@@ -14019,14 +14844,13 @@ this.createjs = this.createjs || {};
     return "[MovieClip (name=" + this.name + ")]";
   };
 
-
   // private methods:
   /**
    * Docced in superclass.
    **/
   p._updateState = function () {
-    if ( this._rawPosition === -1 || this.mode !== MovieClip.INDEPENDENT ) {
-      this._updateTimeline( -1 );
+    if (this._rawPosition === -1 || this.mode !== MovieClip.INDEPENDENT) {
+      this._updateTimeline(-1);
     }
   };
 
@@ -14036,9 +14860,9 @@ this.createjs = this.createjs || {};
    * function.
    * @protected
    **/
-  p._tick = function ( evtObj ) {
-    this.advance( evtObj && evtObj.delta );
-    this.Container__tick( evtObj );
+  p._tick = function (evtObj) {
+    this.advance(evtObj && evtObj.delta);
+    this.Container__tick(evtObj);
   };
 
   /**
@@ -14046,13 +14870,13 @@ this.createjs = this.createjs || {};
    * @param {String|Number} positionOrLabel The animation name or frame number to go to.
    * @protected
    **/
-  p._goto = function ( positionOrLabel ) {
-    var pos = this.timeline.resolve( positionOrLabel );
-    if ( pos == null ) {
+  p._goto = function (positionOrLabel) {
+    var pos = this.timeline.resolve(positionOrLabel);
+    if (pos == null) {
       return;
     }
     this._t = 0;
-    this._updateTimeline( pos, true );
+    this._updateTimeline(pos, true);
   };
 
   /**
@@ -14070,23 +14894,30 @@ this.createjs = this.createjs || {};
    * @param {Boolean} jump Indicates whether this update is due to jumping (via gotoAndXX) to a new position.
    * @protected
    **/
-  p._updateTimeline = function ( rawPosition, jump ) {
+  p._updateTimeline = function (rawPosition, jump) {
     var synced = this.mode !== MovieClip.INDEPENDENT,
       tl = this.timeline;
-    if ( synced ) {
-      rawPosition = this.startPosition + ( this.mode === MovieClip.SINGLE_FRAME ? 0 : this._synchOffset );
+    if (synced) {
+      rawPosition =
+        this.startPosition +
+        (this.mode === MovieClip.SINGLE_FRAME ? 0 : this._synchOffset);
     }
-    if ( rawPosition < 0 ) {
+    if (rawPosition < 0) {
       rawPosition = 0;
     }
-    if ( this._rawPosition === rawPosition && !synced ) {
+    if (this._rawPosition === rawPosition && !synced) {
       return;
     }
     this._rawPosition = rawPosition;
 
     // update timeline position, ignoring actions if this is a graphic.
     tl.loop = this.loop; // TODO: should we maintain this on MovieClip, or just have it on timeline?
-    tl.setPosition( rawPosition, synced || !this.actionsEnabled, jump, this._bound_resolveState );
+    tl.setPosition(
+      rawPosition,
+      synced || !this.actionsEnabled,
+      jump,
+      this._bound_resolveState
+    );
   };
 
   /**
@@ -14099,7 +14930,7 @@ this.createjs = this.createjs || {};
   p._renderFirstFrame = function () {
     var tl = this.timeline,
       pos = tl.rawPosition;
-    tl.setPosition( 0, true, true, this._bound_resolveState );
+    tl.setPosition(0, true, true, this._bound_resolveState);
     tl.rawPosition = pos;
   };
 
@@ -14112,34 +14943,34 @@ this.createjs = this.createjs || {};
     var tl = this.timeline;
     this.currentFrame = tl.position;
 
-    for ( var n in this._managed ) {
-      this._managed[ n ] = 1;
+    for (var n in this._managed) {
+      this._managed[n] = 1;
     }
 
     var tweens = tl.tweens;
-    for ( var i = 0, l = tweens.length; i < l; i++ ) {
-      var tween = tweens[ i ],
+    for (var i = 0, l = tweens.length; i < l; i++) {
+      var tween = tweens[i],
         target = tween.target;
-      if ( target === this || tween.passive ) {
+      if (target === this || tween.passive) {
         continue;
       } // TODO: this assumes the actions tween from Animate has `this` as the target. There's likely a better approach.
       var offset = tween._stepPosition;
 
-      if ( target instanceof createjs.DisplayObject ) {
+      if (target instanceof createjs.DisplayObject) {
         // motion tween.
-        this._addManagedChild( target, offset );
+        this._addManagedChild(target, offset);
       } else {
         // state tween.
-        this._setState( target.state, offset );
+        this._setState(target.state, offset);
       }
     }
 
     var kids = this.children;
-    for ( i = kids.length - 1; i >= 0; i-- ) {
-      var id = kids[ i ].id;
-      if ( this._managed[ id ] === 1 ) {
-        this.removeChildAt( i );
-        delete( this._managed[ id ] );
+    for (i = kids.length - 1; i >= 0; i--) {
+      var id = kids[i].id;
+      if (this._managed[id] === 1) {
+        this.removeChildAt(i);
+        delete this._managed[id];
       }
     }
   };
@@ -14150,18 +14981,18 @@ this.createjs = this.createjs || {};
    * @param {Number} offset
    * @protected
    **/
-  p._setState = function ( state, offset ) {
-    if ( !state ) {
+  p._setState = function (state, offset) {
+    if (!state) {
       return;
     }
-    for ( var i = state.length - 1; i >= 0; i-- ) {
-      var o = state[ i ];
+    for (var i = state.length - 1; i >= 0; i--) {
+      var o = state[i];
       var target = o.t;
       var props = o.p;
-      for ( var n in props ) {
-        target[ n ] = props[ n ];
+      for (var n in props) {
+        target[n] = props[n];
       }
-      this._addManagedChild( target, offset );
+      this._addManagedChild(target, offset);
     }
   };
 
@@ -14172,21 +15003,25 @@ this.createjs = this.createjs || {};
    * @param {Number} offset
    * @private
    **/
-  p._addManagedChild = function ( child, offset ) {
-    if ( child._off ) {
+  p._addManagedChild = function (child, offset) {
+    if (child._off) {
       return;
     }
-    this.addChildAt( child, 0 );
+    this.addChildAt(child, 0);
 
-    if ( child instanceof MovieClip ) {
+    if (child instanceof MovieClip) {
       child._synchOffset = offset;
       // TODO: this does not precisely match Adobe Flash/Animate, which loses track of the clip if it is renamed or removed from the timeline, which causes it to reset.
       // TODO: should also reset when MovieClip loops, though that will be a bit tricky to detect.
-      if ( child.mode === MovieClip.INDEPENDENT && child.autoReset && ( !this._managed[ child.id ] ) ) {
+      if (
+        child.mode === MovieClip.INDEPENDENT &&
+        child.autoReset &&
+        !this._managed[child.id]
+      ) {
         child._reset();
       }
     }
-    this._managed[ child.id ] = 2;
+    this._managed[child.id] = 2;
   };
 
   /**
@@ -14196,23 +15031,20 @@ this.createjs = this.createjs || {};
    * @return {Rectangle}
    * @protected
    **/
-  p._getBounds = function ( matrix, ignoreTransform ) {
+  p._getBounds = function (matrix, ignoreTransform) {
     var bounds = this.DisplayObject_getBounds();
-    if ( !bounds ) {
-      if ( this.frameBounds ) {
-        bounds = this._rectangle.copy( this.frameBounds[ this.currentFrame ] );
+    if (!bounds) {
+      if (this.frameBounds) {
+        bounds = this._rectangle.copy(this.frameBounds[this.currentFrame]);
       }
     }
-    if ( bounds ) {
-      return this._transformBounds( bounds, matrix, ignoreTransform );
+    if (bounds) {
+      return this._transformBounds(bounds, matrix, ignoreTransform);
     }
-    return this.Container__getBounds( matrix, ignoreTransform );
+    return this.Container__getBounds(matrix, ignoreTransform);
   };
 
-
-  createjs.MovieClip = createjs.promote( MovieClip, "Container" );
-
-
+  createjs.MovieClip = createjs.promote(MovieClip, "Container");
 
   // MovieClipPlugin for TweenJS:
   /**
@@ -14223,7 +15055,7 @@ this.createjs = this.createjs || {};
    * @constructor
    **/
   function MovieClipPlugin() {
-    throw ( "MovieClipPlugin cannot be instantiated." )
+    throw "MovieClipPlugin cannot be instantiated.";
   }
 
   /**
@@ -14247,7 +15079,7 @@ this.createjs = this.createjs || {};
    * @static
    **/
   MovieClipPlugin.install = function () {
-    createjs.Tween._installPlugin( MovieClipPlugin );
+    createjs.Tween._installPlugin(MovieClipPlugin);
   };
 
   /**
@@ -14257,9 +15089,9 @@ this.createjs = this.createjs || {};
    * @param {*} value
    * @static
    **/
-  MovieClipPlugin.init = function ( tween, prop, value ) {
-    if ( prop === "startPosition" && tween.target instanceof MovieClip ) {
-      tween._addPlugin( MovieClipPlugin );
+  MovieClipPlugin.init = function (tween, prop, value) {
+    if (prop === "startPosition" && tween.target instanceof MovieClip) {
+      tween._addPlugin(MovieClipPlugin);
     }
   };
 
@@ -14270,7 +15102,7 @@ this.createjs = this.createjs || {};
    * @param {Object} props
    * @static
    **/
-  MovieClipPlugin.step = function ( tween, step, props ) {};
+  MovieClipPlugin.step = function (tween, step, props) {};
 
   /**
    * @method change
@@ -14282,13 +15114,12 @@ this.createjs = this.createjs || {};
    * @return {*}
    * @static
    */
-  MovieClipPlugin.change = function ( tween, step, prop, value, ratio, end ) {
-    if ( prop === "startPosition" ) {
-      return ( ratio === 1 ? step.props[ prop ] : step.prev.props[ prop ] );
+  MovieClipPlugin.change = function (tween, step, prop, value, ratio, end) {
+    if (prop === "startPosition") {
+      return ratio === 1 ? step.props[prop] : step.prev.props[prop];
     }
   };
-
-}() );
+})();
 
 //##############################################################################
 // SpriteSheetUtils.js
@@ -14296,9 +15127,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -14313,7 +15143,6 @@ this.createjs = this.createjs || {};
     throw "SpriteSheetUtils cannot be instantiated";
   }
 
-
   // private static properties:
   /**
    * @property _workingCanvas
@@ -14327,13 +15156,14 @@ this.createjs = this.createjs || {};
    * @type CanvasRenderingContext2D
    * @protected
    */
-  var canvas = ( createjs.createCanvas ? createjs.createCanvas() : document.createElement( "canvas" ) );
-  if ( canvas.getContext ) {
+  var canvas = createjs.createCanvas
+    ? createjs.createCanvas()
+    : document.createElement("canvas");
+  if (canvas.getContext) {
     SpriteSheetUtils._workingCanvas = canvas;
-    SpriteSheetUtils._workingContext = canvas.getContext( "2d" );
+    SpriteSheetUtils._workingContext = canvas.getContext("2d");
     canvas.width = canvas.height = 1;
   }
-
 
   // public static methods:
   /**
@@ -14353,106 +15183,127 @@ this.createjs = this.createjs || {};
    * name is specified, only the first frame of the animation will be extracted.
    * @return {HTMLImageElement} a single frame of the specified sprite sheet as a new PNG image.
    */
-  SpriteSheetUtils.extractFrame = function ( spriteSheet, frameOrAnimation ) {
-    if ( isNaN( frameOrAnimation ) ) {
-      frameOrAnimation = spriteSheet.getAnimation( frameOrAnimation ).frames[ 0 ];
+  SpriteSheetUtils.extractFrame = function (spriteSheet, frameOrAnimation) {
+    if (isNaN(frameOrAnimation)) {
+      frameOrAnimation = spriteSheet.getAnimation(frameOrAnimation).frames[0];
     }
-    var data = spriteSheet.getFrame( frameOrAnimation );
-    if ( !data ) {
+    var data = spriteSheet.getFrame(frameOrAnimation);
+    if (!data) {
       return null;
     }
     var r = data.rect;
     var canvas = SpriteSheetUtils._workingCanvas;
     canvas.width = r.width;
     canvas.height = r.height;
-    SpriteSheetUtils._workingContext.drawImage( data.image, r.x, r.y, r.width, r.height, 0, 0, r.width, r.height );
-    var img = document.createElement( "img" );
-    img.src = canvas.toDataURL( "image/png" );
+    SpriteSheetUtils._workingContext.drawImage(
+      data.image,
+      r.x,
+      r.y,
+      r.width,
+      r.height,
+      0,
+      0,
+      r.width,
+      r.height
+    );
+    var img = document.createElement("img");
+    img.src = canvas.toDataURL("image/png");
     return img;
   };
 
   // SpriteSheetUtils.addFlippedFrames is @deprecated. Remove for 1.1+
-  SpriteSheetUtils.addFlippedFrames = createjs.deprecate( null, "SpriteSheetUtils.addFlippedFrames" );
+  SpriteSheetUtils.addFlippedFrames = createjs.deprecate(
+    null,
+    "SpriteSheetUtils.addFlippedFrames"
+  );
 
   // SpriteSheetUtils.addFlippedFrames is @deprecated. Remove for 1.1+
-  SpriteSheetUtils.mergeAlpha = createjs.deprecate( null, "SpriteSheetUtils.mergeAlpha" );
-
+  SpriteSheetUtils.mergeAlpha = createjs.deprecate(
+    null,
+    "SpriteSheetUtils.mergeAlpha"
+  );
 
   // private static methods:
-  SpriteSheetUtils._flip = function ( spriteSheet, count, h, v ) {
+  SpriteSheetUtils._flip = function (spriteSheet, count, h, v) {
     var imgs = spriteSheet._images;
     var canvas = SpriteSheetUtils._workingCanvas;
     var ctx = SpriteSheetUtils._workingContext;
     var il = imgs.length / count;
-    for ( var i = 0; i < il; i++ ) {
-      var src = imgs[ i ];
+    for (var i = 0; i < il; i++) {
+      var src = imgs[i];
       src.__tmp = i; // a bit hacky, but faster than doing indexOf below.
-      ctx.setTransform( 1, 0, 0, 1, 0, 0 );
-      ctx.clearRect( 0, 0, canvas.width + 1, canvas.height + 1 );
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, canvas.width + 1, canvas.height + 1);
       canvas.width = src.width;
       canvas.height = src.height;
-      ctx.setTransform( h ? -1 : 1, 0, 0, v ? -1 : 1, h ? src.width : 0, v ? src.height : 0 );
-      ctx.drawImage( src, 0, 0 );
-      var img = document.createElement( "img" );
-      img.src = canvas.toDataURL( "image/png" );
+      ctx.setTransform(
+        h ? -1 : 1,
+        0,
+        0,
+        v ? -1 : 1,
+        h ? src.width : 0,
+        v ? src.height : 0
+      );
+      ctx.drawImage(src, 0, 0);
+      var img = document.createElement("img");
+      img.src = canvas.toDataURL("image/png");
       // work around a strange bug in Safari:
-      img.width = ( src.width || src.naturalWidth );
-      img.height = ( src.height || src.naturalHeight );
-      imgs.push( img );
+      img.width = src.width || src.naturalWidth;
+      img.height = src.height || src.naturalHeight;
+      imgs.push(img);
     }
 
     var frames = spriteSheet._frames;
     var fl = frames.length / count;
-    for ( i = 0; i < fl; i++ ) {
-      src = frames[ i ];
+    for (i = 0; i < fl; i++) {
+      src = frames[i];
       var rect = src.rect.clone();
-      img = imgs[ src.image.__tmp + il * count ];
+      img = imgs[src.image.__tmp + il * count];
 
       var frame = {
         image: img,
         rect: rect,
         regX: src.regX,
-        regY: src.regY
+        regY: src.regY,
       };
-      if ( h ) {
-        rect.x = ( img.width || img.naturalWidth ) - rect.x - rect.width; // update rect
+      if (h) {
+        rect.x = (img.width || img.naturalWidth) - rect.x - rect.width; // update rect
         frame.regX = rect.width - src.regX; // update registration point
       }
-      if ( v ) {
-        rect.y = ( img.height || img.naturalHeight ) - rect.y - rect.height; // update rect
+      if (v) {
+        rect.y = (img.height || img.naturalHeight) - rect.y - rect.height; // update rect
         frame.regY = rect.height - src.regY; // update registration point
       }
-      frames.push( frame );
+      frames.push(frame);
     }
 
-    var sfx = "_" + ( h ? "h" : "" ) + ( v ? "v" : "" );
+    var sfx = "_" + (h ? "h" : "") + (v ? "v" : "");
     var names = spriteSheet._animations;
     var data = spriteSheet._data;
     var al = names.length / count;
-    for ( i = 0; i < al; i++ ) {
-      var name = names[ i ];
-      src = data[ name ];
+    for (i = 0; i < al; i++) {
+      var name = names[i];
+      src = data[name];
       var anim = {
         name: name + sfx,
         speed: src.speed,
         next: src.next,
-        frames: []
+        frames: [],
       };
-      if ( src.next ) {
+      if (src.next) {
         anim.next += sfx;
       }
       frames = src.frames;
-      for ( var j = 0, l = frames.length; j < l; j++ ) {
-        anim.frames.push( frames[ j ] + fl * count );
+      for (var j = 0, l = frames.length; j < l; j++) {
+        anim.frames.push(frames[j] + fl * count);
       }
-      data[ anim.name ] = anim;
-      names.push( anim.name );
+      data[anim.name] = anim;
+      names.push(anim.name);
     }
   };
 
-
   createjs.SpriteSheetUtils = SpriteSheetUtils;
-}() );
+})();
 
 //##############################################################################
 // SpriteSheetBuilder.js
@@ -14460,9 +15311,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -14482,7 +15332,7 @@ this.createjs = this.createjs || {};
    * @extends EventDispatcher
    * @constructor
    **/
-  function SpriteSheetBuilder( framerate ) {
+  function SpriteSheetBuilder(framerate) {
     this.EventDispatcher_constructor();
 
     // public properties:
@@ -14562,7 +15412,6 @@ this.createjs = this.createjs || {};
      */
     this.framerate = framerate || 0;
 
-
     // private properties:
     /**
      * @property _frames
@@ -14613,10 +15462,11 @@ this.createjs = this.createjs || {};
      **/
     this._scale = 1;
   }
-  var p = createjs.extend( SpriteSheetBuilder, createjs.EventDispatcher );
+  var p = createjs.extend(SpriteSheetBuilder, createjs.EventDispatcher);
 
   // constants:
-  SpriteSheetBuilder.ERR_DIMENSIONS = "frame dimensions exceed max spritesheet dimensions";
+  SpriteSheetBuilder.ERR_DIMENSIONS =
+    "frame dimensions exceed max spritesheet dimensions";
   SpriteSheetBuilder.ERR_RUNNING = "a build is already running";
 
   // events:
@@ -14636,7 +15486,6 @@ this.createjs = this.createjs || {};
    * @param {Number} progress The current progress value (0-1).
    * @since 0.6.0
    */
-
 
   // public methods:
   /**
@@ -14658,27 +15507,29 @@ this.createjs = this.createjs || {};
    * @param {Object} [setupData] Arbitrary setup data to pass to setupFunction as the second parameter.
    * @return {Number} The index of the frame that was just added, or null if a sourceRect could not be determined.
    **/
-  p.addFrame = function ( source, sourceRect, scale, setupFunction, setupData ) {
-    if ( this._data ) {
+  p.addFrame = function (source, sourceRect, scale, setupFunction, setupData) {
+    if (this._data) {
       throw SpriteSheetBuilder.ERR_RUNNING;
     }
     var rect = sourceRect || source.bounds || source.nominalBounds;
-    if ( !rect && source.getBounds ) {
+    if (!rect && source.getBounds) {
       rect = source.getBounds();
     }
-    if ( !rect ) {
+    if (!rect) {
       return null;
     }
     scale = scale || 1;
-    return this._frames.push( {
-      source: source,
-      sourceRect: rect,
-      scale: scale,
-      funct: setupFunction,
-      data: setupData,
-      index: this._frames.length,
-      height: rect.height * scale
-    } ) - 1;
+    return (
+      this._frames.push({
+        source: source,
+        sourceRect: rect,
+        scale: scale,
+        funct: setupFunction,
+        data: setupData,
+        index: this._frames.length,
+        height: rect.height * scale,
+      }) - 1
+    );
   };
 
   /**
@@ -14693,14 +15544,14 @@ this.createjs = this.createjs || {};
    * cause the animation to advance every second tick. Note that earlier versions used `frequency` instead, which had
    * the opposite effect.
    **/
-  p.addAnimation = function ( name, frames, next, speed ) {
-    if ( this._data ) {
+  p.addAnimation = function (name, frames, next, speed) {
+    if (this._data) {
       throw SpriteSheetBuilder.ERR_RUNNING;
     }
-    this._animations[ name ] = {
+    this._animations[name] = {
       frames: frames,
       next: next,
-      speed: speed
+      speed: speed,
     };
   };
 
@@ -14727,56 +15578,65 @@ this.createjs = this.createjs || {};
    * parameters: the label name, the source MovieClip instance, the starting frame index (in the movieclip timeline)
    * and the end index. It must return a new name for the label/animation, or `false` to exclude the label.
    **/
-  p.addMovieClip = function ( source, sourceRect, scale, setupFunction, setupData, labelFunction ) {
-    if ( this._data ) {
+  p.addMovieClip = function (
+    source,
+    sourceRect,
+    scale,
+    setupFunction,
+    setupData,
+    labelFunction
+  ) {
+    if (this._data) {
       throw SpriteSheetBuilder.ERR_RUNNING;
     }
     var rects = source.frameBounds;
     var rect = sourceRect || source.bounds || source.nominalBounds;
-    if ( !rect && source.getBounds ) {
+    if (!rect && source.getBounds) {
       rect = source.getBounds();
     }
-    if ( !rect && !rects ) {
+    if (!rect && !rects) {
       return;
     }
 
-    var i, l, baseFrameIndex = this._frames.length;
+    var i,
+      l,
+      baseFrameIndex = this._frames.length;
     var duration = source.timeline.duration;
-    for ( i = 0; i < duration; i++ ) {
-      var r = ( rects && rects[ i ] ) ? rects[ i ] : rect;
-      this.addFrame( source, r, scale, this._setupMovieClipFrame, {
+    for (i = 0; i < duration; i++) {
+      var r = rects && rects[i] ? rects[i] : rect;
+      this.addFrame(source, r, scale, this._setupMovieClipFrame, {
         i: i,
         f: setupFunction,
-        d: setupData
-      } );
+        d: setupData,
+      });
     }
     var labels = source.timeline._labels;
     var lbls = [];
-    for ( var n in labels ) {
-      lbls.push( {
-        index: labels[ n ],
-        label: n
-      } );
+    for (var n in labels) {
+      lbls.push({
+        index: labels[n],
+        label: n,
+      });
     }
-    if ( lbls.length ) {
-      lbls.sort( function ( a, b ) {
+    if (lbls.length) {
+      lbls.sort(function (a, b) {
         return a.index - b.index;
-      } );
-      for ( i = 0, l = lbls.length; i < l; i++ ) {
-        var label = lbls[ i ].label;
-        var start = baseFrameIndex + lbls[ i ].index;
-        var end = baseFrameIndex + ( ( i == l - 1 ) ? duration : lbls[ i + 1 ].index );
+      });
+      for (i = 0, l = lbls.length; i < l; i++) {
+        var label = lbls[i].label;
+        var start = baseFrameIndex + lbls[i].index;
+        var end = baseFrameIndex + (i == l - 1 ? duration : lbls[i + 1].index);
         var frames = [];
-        for ( var j = start; j < end; j++ ) {
-          frames.push( j );
+        for (var j = start; j < end; j++) {
+          frames.push(j);
         }
-        if ( labelFunction ) {
-          label = labelFunction( label, source, start, end );
-          if ( !label ) {
+        if (labelFunction) {
+          label = labelFunction(label, source, start, end);
+          if (!label) {
             continue;
           }
         }
-        this.addAnimation( label, frames, true ); // for now, this loops all animations.
+        this.addAnimation(label, frames, true); // for now, this loops all animations.
       }
     }
   };
@@ -14788,11 +15648,11 @@ this.createjs = this.createjs || {};
    * occurred.
    **/
   p.build = function () {
-    if ( this._data ) {
+    if (this._data) {
       throw SpriteSheetBuilder.ERR_RUNNING;
     }
     this._startBuild();
-    while ( this._drawNext() ) {}
+    while (this._drawNext()) {}
     this._endBuild();
     return this.spriteSheet;
   };
@@ -14804,16 +15664,16 @@ this.createjs = this.createjs || {};
    * @method buildAsync
    * @param {Number} [timeSlice] Sets the timeSlice property on this instance.
    **/
-  p.buildAsync = function ( timeSlice ) {
-    if ( this._data ) {
+  p.buildAsync = function (timeSlice) {
+    if (this._data) {
       throw SpriteSheetBuilder.ERR_RUNNING;
     }
     this.timeSlice = timeSlice;
     this._startBuild();
     var _this = this;
-    this._timerID = setTimeout( function () {
+    this._timerID = setTimeout(function () {
       _this._run();
-    }, 50 - Math.max( 0.01, Math.min( 0.99, this.timeSlice || 0.3 ) ) * 50 );
+    }, 50 - Math.max(0.01, Math.min(0.99, this.timeSlice || 0.3)) * 50);
   };
 
   /**
@@ -14821,7 +15681,7 @@ this.createjs = this.createjs || {};
    * @method stopAsync
    **/
   p.stopAsync = function () {
-    clearTimeout( this._timerID );
+    clearTimeout(this._timerID);
     this._data = null;
   };
 
@@ -14830,7 +15690,7 @@ this.createjs = this.createjs || {};
    * @method clone
    **/
   p.clone = function () {
-    throw ( "SpriteSheetBuilder cannot be cloned." );
+    throw "SpriteSheetBuilder cannot be cloned.";
   };
 
   /**
@@ -14841,7 +15701,6 @@ this.createjs = this.createjs || {};
   p.toString = function () {
     return "[SpriteSheetBuilder]";
   };
-
 
   // private methods:
   /**
@@ -14859,32 +15718,34 @@ this.createjs = this.createjs || {};
       images: [],
       frames: dataFrames,
       framerate: this.framerate,
-      animations: this._animations // TODO: should we "clone" _animations in case someone adds more animations after a build?
+      animations: this._animations, // TODO: should we "clone" _animations in case someone adds more animations after a build?
     };
 
     var frames = this._frames.slice();
-    frames.sort( function ( a, b ) {
-      return ( a.height <= b.height ) ? -1 : 1;
-    } );
+    frames.sort(function (a, b) {
+      return a.height <= b.height ? -1 : 1;
+    });
 
-    if ( frames[ frames.length - 1 ].height + pad * 2 > this.maxHeight ) {
+    if (frames[frames.length - 1].height + pad * 2 > this.maxHeight) {
       throw SpriteSheetBuilder.ERR_DIMENSIONS;
     }
     var y = 0,
       x = 0;
     var img = 0;
-    while ( frames.length ) {
-      var o = this._fillRow( frames, y, img, dataFrames, pad );
-      if ( o.w > x ) {
+    while (frames.length) {
+      var o = this._fillRow(frames, y, img, dataFrames, pad);
+      if (o.w > x) {
         x = o.w;
       }
       y += o.h;
-      if ( !o.h || !frames.length ) {
-        var canvas = createjs.createCanvas ? createjs.createCanvas() : document.createElement( "canvas" );
-        canvas.width = this._getSize( x, this.maxWidth );
-        canvas.height = this._getSize( y, this.maxHeight );
-        this._data.images[ img ] = canvas;
-        if ( !o.h ) {
+      if (!o.h || !frames.length) {
+        var canvas = createjs.createCanvas
+          ? createjs.createCanvas()
+          : document.createElement("canvas");
+        canvas.width = this._getSize(x, this.maxWidth);
+        canvas.height = this._getSize(y, this.maxHeight);
+        this._data.images[img] = canvas;
+        if (!o.h) {
           x = y = 0;
           img++;
         }
@@ -14897,12 +15758,12 @@ this.createjs = this.createjs || {};
    * @protected
    * @return {Number} The width & height of the row.
    **/
-  p._setupMovieClipFrame = function ( source, data ) {
+  p._setupMovieClipFrame = function (source, data) {
     var ae = source.actionsEnabled;
     source.actionsEnabled = false;
-    source.gotoAndStop( data.i );
+    source.gotoAndStop(data.i);
     source.actionsEnabled = ae;
-    data.f && data.f( source, data.d, data.i );
+    data.f && data.f(source, data.d, data.i);
   };
 
   /**
@@ -14910,10 +15771,10 @@ this.createjs = this.createjs || {};
    * @protected
    * @return {Number} The width & height of the row.
    **/
-  p._getSize = function ( size, max ) {
+  p._getSize = function (size, max) {
     var pow = 4;
-    while ( Math.pow( 2, ++pow ) < size ) {}
-    return Math.min( max, Math.pow( 2, pow ) );
+    while (Math.pow(2, ++pow) < size) {}
+    return Math.min(max, Math.pow(2, pow));
   };
 
   /**
@@ -14926,38 +15787,46 @@ this.createjs = this.createjs || {};
    * @protected
    * @return {Number} The width & height of the row.
    **/
-  p._fillRow = function ( frames, y, img, dataFrames, pad ) {
+  p._fillRow = function (frames, y, img, dataFrames, pad) {
     var w = this.maxWidth;
     var maxH = this.maxHeight;
     y += pad;
     var h = maxH - y;
     var x = pad;
     var height = 0;
-    for ( var i = frames.length - 1; i >= 0; i-- ) {
-      var frame = frames[ i ];
+    for (var i = frames.length - 1; i >= 0; i--) {
+      var frame = frames[i];
       var sc = this._scale * frame.scale;
       var rect = frame.sourceRect;
       var source = frame.source;
-      var rx = Math.floor( sc * rect.x - pad );
-      var ry = Math.floor( sc * rect.y - pad );
-      var rh = Math.ceil( sc * rect.height + pad * 2 );
-      var rw = Math.ceil( sc * rect.width + pad * 2 );
-      if ( rw > w ) {
+      var rx = Math.floor(sc * rect.x - pad);
+      var ry = Math.floor(sc * rect.y - pad);
+      var rh = Math.ceil(sc * rect.height + pad * 2);
+      var rw = Math.ceil(sc * rect.width + pad * 2);
+      if (rw > w) {
         throw SpriteSheetBuilder.ERR_DIMENSIONS;
       }
-      if ( rh > h || x + rw > w ) {
+      if (rh > h || x + rw > w) {
         continue;
       }
       frame.img = img;
-      frame.rect = new createjs.Rectangle( x, y, rw, rh );
+      frame.rect = new createjs.Rectangle(x, y, rw, rh);
       height = height || rh;
-      frames.splice( i, 1 );
-      dataFrames[ frame.index ] = [ x, y, rw, rh, img, Math.round( -rx + sc * source.regX - pad ), Math.round( -ry + sc * source.regY - pad ) ];
+      frames.splice(i, 1);
+      dataFrames[frame.index] = [
+        x,
+        y,
+        rw,
+        rh,
+        img,
+        Math.round(-rx + sc * source.regX - pad),
+        Math.round(-ry + sc * source.regY - pad),
+      ];
       x += rw;
     }
     return {
       w: x,
-      h: height
+      h: height,
     };
   };
 
@@ -14966,10 +15835,10 @@ this.createjs = this.createjs || {};
    * @protected
    **/
   p._endBuild = function () {
-    this.spriteSheet = new createjs.SpriteSheet( this._data );
+    this.spriteSheet = new createjs.SpriteSheet(this._data);
     this._data = null;
     this.progress = 1;
-    this.dispatchEvent( "complete" );
+    this.dispatchEvent("complete");
   };
 
   /**
@@ -14977,28 +15846,28 @@ this.createjs = this.createjs || {};
    * @protected
    **/
   p._run = function () {
-    var ts = Math.max( 0.01, Math.min( 0.99, this.timeSlice || 0.3 ) ) * 50;
-    var t = ( new Date() ).getTime() + ts;
+    var ts = Math.max(0.01, Math.min(0.99, this.timeSlice || 0.3)) * 50;
+    var t = new Date().getTime() + ts;
     var complete = false;
-    while ( t > ( new Date() ).getTime() ) {
-      if ( !this._drawNext() ) {
+    while (t > new Date().getTime()) {
+      if (!this._drawNext()) {
         complete = true;
         break;
       }
     }
-    if ( complete ) {
+    if (complete) {
       this._endBuild();
     } else {
       var _this = this;
-      this._timerID = setTimeout( function () {
+      this._timerID = setTimeout(function () {
         _this._run();
-      }, 50 - ts );
+      }, 50 - ts);
     }
-    var p = this.progress = this._index / this._frames.length;
-    if ( this.hasEventListener( "progress" ) ) {
-      var evt = new createjs.Event( "progress" );
+    var p = (this.progress = this._index / this._frames.length);
+    if (this.hasEventListener("progress")) {
+      var evt = new createjs.Event("progress");
       evt.progress = p;
-      this.dispatchEvent( evt );
+      this.dispatchEvent(evt);
     }
   };
 
@@ -15008,27 +15877,32 @@ this.createjs = this.createjs || {};
    * @return Boolean Returns false if this is the last draw.
    **/
   p._drawNext = function () {
-    var frame = this._frames[ this._index ];
+    var frame = this._frames[this._index];
     var sc = frame.scale * this._scale;
     var rect = frame.rect;
     var sourceRect = frame.sourceRect;
-    var canvas = this._data.images[ frame.img ];
-    var ctx = canvas.getContext( "2d" );
-    frame.funct && frame.funct( frame.source, frame.data );
+    var canvas = this._data.images[frame.img];
+    var ctx = canvas.getContext("2d");
+    frame.funct && frame.funct(frame.source, frame.data);
     ctx.save();
     ctx.beginPath();
-    ctx.rect( rect.x, rect.y, rect.width, rect.height );
+    ctx.rect(rect.x, rect.y, rect.width, rect.height);
     ctx.clip();
-    ctx.translate( Math.ceil( rect.x - sourceRect.x * sc ), Math.ceil( rect.y - sourceRect.y * sc ) );
-    ctx.scale( sc, sc );
-    frame.source.draw( ctx ); // display object will draw itself.
+    ctx.translate(
+      Math.ceil(rect.x - sourceRect.x * sc),
+      Math.ceil(rect.y - sourceRect.y * sc)
+    );
+    ctx.scale(sc, sc);
+    frame.source.draw(ctx); // display object will draw itself.
     ctx.restore();
-    return ( ++this._index ) < this._frames.length;
+    return ++this._index < this._frames.length;
   };
 
-
-  createjs.SpriteSheetBuilder = createjs.promote( SpriteSheetBuilder, "EventDispatcher" );
-}() );
+  createjs.SpriteSheetBuilder = createjs.promote(
+    SpriteSheetBuilder,
+    "EventDispatcher"
+  );
+})();
 
 //##############################################################################
 // DOMElement.js
@@ -15036,9 +15910,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -15077,18 +15950,22 @@ this.createjs = this.createjs || {};
    * @constructor
    * @param {HTMLElement} htmlElement A reference or id for the DOM element to manage.
    */
-  function DOMElement( htmlElement ) {
+  function DOMElement(htmlElement) {
     this.DisplayObject_constructor();
 
-    if ( typeof ( htmlElement ) == "string" ) {
-      htmlElement = document.getElementById( htmlElement );
+    if (typeof htmlElement == "string") {
+      htmlElement = document.getElementById(htmlElement);
     }
     this.mouseEnabled = false;
 
     var style = htmlElement.style;
     style.position = "absolute";
-    style.transformOrigin = style.WebkitTransformOrigin = style.msTransformOrigin = style.MozTransformOrigin = style.OTransformOrigin = "0% 0%";
-
+    style.transformOrigin =
+      style.WebkitTransformOrigin =
+      style.msTransformOrigin =
+      style.MozTransformOrigin =
+      style.OTransformOrigin =
+        "0% 0%";
 
     // public properties:
     /**
@@ -15097,7 +15974,6 @@ this.createjs = this.createjs || {};
      * @type HTMLElement
      */
     this.htmlElement = htmlElement;
-
 
     // private properties:
     /**
@@ -15122,11 +15998,10 @@ this.createjs = this.createjs || {};
      */
     this._drawAction = null;
   }
-  var p = createjs.extend( DOMElement, createjs.DisplayObject );
+  var p = createjs.extend(DOMElement, createjs.DisplayObject);
 
   // TODO: deprecated
   // p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
-
 
   // public methods:
   /**
@@ -15151,7 +16026,7 @@ this.createjs = this.createjs || {};
    * into itself).
    * @return {Boolean}
    */
-  p.draw = function ( ctx, ignoreCache ) {
+  p.draw = function (ctx, ignoreCache) {
     // this relies on the _tick method because draw isn't called if the parent is not visible.
     // the actual update happens in _handleDrawEnd
     return true;
@@ -15204,7 +16079,7 @@ this.createjs = this.createjs || {};
    * @method clone
    */
   p.clone = function () {
-    throw ( "DOMElement cannot be cloned." )
+    throw "DOMElement cannot be cloned.";
   };
 
   /**
@@ -15245,7 +16120,6 @@ this.createjs = this.createjs || {};
    * @event tick
    */
 
-
   // private methods:
   /**
    * @method _tick
@@ -15253,14 +16127,14 @@ this.createjs = this.createjs || {};
    * function.
    * @protected
    */
-  p._tick = function ( evtObj ) {
+  p._tick = function (evtObj) {
     var stage = this.stage;
-    if ( stage && stage !== this._oldStage ) {
-      this._drawAction && stage.off( "drawend", this._drawAction );
-      this._drawAction = stage.on( "drawend", this._handleDrawEnd, this );
+    if (stage && stage !== this._oldStage) {
+      this._drawAction && stage.off("drawend", this._drawAction);
+      this._drawAction = stage.on("drawend", this._handleDrawEnd, this);
       this._oldStage = stage;
     }
-    this.DisplayObject__tick( evtObj );
+    this.DisplayObject__tick(evtObj);
   };
 
   /**
@@ -15268,21 +16142,21 @@ this.createjs = this.createjs || {};
    * @param {Event} evt
    * @protected
    */
-  p._handleDrawEnd = function ( evt ) {
+  p._handleDrawEnd = function (evt) {
     var o = this.htmlElement;
-    if ( !o ) {
+    if (!o) {
       return;
     }
     var style = o.style;
 
-    var props = this.getConcatenatedDisplayProps( this._props ),
+    var props = this.getConcatenatedDisplayProps(this._props),
       mtx = props.matrix;
 
     var visibility = props.visible ? "visible" : "hidden";
-    if ( visibility != style.visibility ) {
+    if (visibility != style.visibility) {
       style.visibility = visibility;
     }
-    if ( !props.visible ) {
+    if (!props.visible) {
       return;
     }
 
@@ -15290,25 +16164,38 @@ this.createjs = this.createjs || {};
       oldMtx = oldProps && oldProps.matrix;
     var n = 10000; // precision
 
-    if ( !oldMtx || !oldMtx.equals( mtx ) ) {
-      var str = "matrix(" + ( mtx.a * n | 0 ) / n + "," + ( mtx.b * n | 0 ) / n + "," + ( mtx.c * n | 0 ) / n + "," + ( mtx.d * n | 0 ) / n + "," + ( mtx.tx + 0.5 | 0 );
-      style.transform = style.WebkitTransform = style.OTransform = style.msTransform = str + "," + ( mtx.ty + 0.5 | 0 ) + ")";
-      style.MozTransform = str + "px," + ( mtx.ty + 0.5 | 0 ) + "px)";
-      if ( !oldProps ) {
-        oldProps = this._oldProps = new createjs.DisplayProps( true, null );
+    if (!oldMtx || !oldMtx.equals(mtx)) {
+      var str =
+        "matrix(" +
+        ((mtx.a * n) | 0) / n +
+        "," +
+        ((mtx.b * n) | 0) / n +
+        "," +
+        ((mtx.c * n) | 0) / n +
+        "," +
+        ((mtx.d * n) | 0) / n +
+        "," +
+        ((mtx.tx + 0.5) | 0);
+      style.transform =
+        style.WebkitTransform =
+        style.OTransform =
+        style.msTransform =
+          str + "," + ((mtx.ty + 0.5) | 0) + ")";
+      style.MozTransform = str + "px," + ((mtx.ty + 0.5) | 0) + "px)";
+      if (!oldProps) {
+        oldProps = this._oldProps = new createjs.DisplayProps(true, null);
       }
-      oldProps.matrix.copy( mtx );
+      oldProps.matrix.copy(mtx);
     }
 
-    if ( oldProps.alpha != props.alpha ) {
-      style.opacity = "" + ( props.alpha * n | 0 ) / n;
+    if (oldProps.alpha != props.alpha) {
+      style.opacity = "" + ((props.alpha * n) | 0) / n;
       oldProps.alpha = props.alpha;
     }
   };
 
-
-  createjs.DOMElement = createjs.promote( DOMElement, "DisplayObject" );
-}() );
+  createjs.DOMElement = createjs.promote(DOMElement, "DisplayObject");
+})();
 
 //##############################################################################
 // Filter.js
@@ -15316,9 +16203,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -15397,7 +16283,7 @@ this.createjs = this.createjs || {};
    * @param {Rectangle} [rect] If specified, the provided Rectangle instance will be expanded by the padding amounts and returned.
    * @return {Rectangle} If a `rect` param was provided, it is returned. If not, either a new rectangle with the padding values, or null if no padding is required for this filter.
    **/
-  p.getBounds = function ( rect ) {
+  p.getBounds = function (rect) {
     return rect;
   };
 
@@ -15409,7 +16295,7 @@ this.createjs = this.createjs || {};
    * @param {StageGL} stage The stage instance that will be rendering.
    * @param {ShaderProgram} shaderProgram The compiled shader that is going to be used to perform the render.
    */
-  p.shaderParamSetup = function ( gl, stage, shaderProgram ) {};
+  p.shaderParamSetup = function (gl, stage, shaderProgram) {};
 
   /**
    * Applies the filter to the specified context.
@@ -15424,22 +16310,31 @@ this.createjs = this.createjs || {};
    * @param {Number} [targetY] The y position to draw the result to. Defaults to the value passed to y.
    * @return {Boolean} If the filter was applied successfully.
    **/
-  p.applyFilter = function ( ctx, x, y, width, height, targetCtx, targetX, targetY ) {
+  p.applyFilter = function (
+    ctx,
+    x,
+    y,
+    width,
+    height,
+    targetCtx,
+    targetX,
+    targetY
+  ) {
     // this is the default behaviour because most filters access pixel data. It is overridden when not needed.
     targetCtx = targetCtx || ctx;
-    if ( targetX == null ) {
+    if (targetX == null) {
       targetX = x;
     }
-    if ( targetY == null ) {
+    if (targetY == null) {
       targetY = y;
     }
     try {
-      var imageData = ctx.getImageData( x, y, width, height );
-    } catch ( e ) {
+      var imageData = ctx.getImageData(x, y, width, height);
+    } catch (e) {
       return false;
     }
-    if ( this._applyFilter( imageData ) ) {
-      targetCtx.putImageData( imageData, targetX, targetY );
+    if (this._applyFilter(imageData)) {
+      targetCtx.putImageData(imageData, targetX, targetY);
       return true;
     }
     return false;
@@ -15469,13 +16364,12 @@ this.createjs = this.createjs || {};
    * @param {ImageData} imageData Target ImageData instance.
    * @return {Boolean}
    **/
-  p._applyFilter = function ( imageData ) {
+  p._applyFilter = function (imageData) {
     return true;
   };
 
-
   createjs.Filter = Filter;
-}() );
+})();
 
 //##############################################################################
 // BitmapCache.js
@@ -15483,9 +16377,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -15495,22 +16388,21 @@ this.createjs = this.createjs || {};
    *
    * Caching in this context is purely visual, and will render the DisplayObject out into an image to be used instead
    * of the object. The actual cache itself is still stored on the target with the {{#crossLink "DisplayObject/cacheCanvas:property"}}{{/crossLink}}.
-   * Working with a singular image like a {{#crossLink "Bitmap"}}{{/crossLink}} there is little benefit to performing 
-   * a cache as it is already a single image. Caching is best done on containers containing multiple complex parts that 
-   * do not move often, so that rendering the image instead will improve overall rendering speed. A cached object will 
-   * not visually update until explicitly told to do so with a call to update, much like a Stage. If a cache is being 
+   * Working with a singular image like a {{#crossLink "Bitmap"}}{{/crossLink}} there is little benefit to performing
+   * a cache as it is already a single image. Caching is best done on containers containing multiple complex parts that
+   * do not move often, so that rendering the image instead will improve overall rendering speed. A cached object will
+   * not visually update until explicitly told to do so with a call to update, much like a Stage. If a cache is being
    * updated every frame it is likely not improving rendering performance. Cache are best used when updates will be sparse.
    *
-   * Caching is also a co-requisite for applying filters to prevent expensive filters running constantly without need, 
-   * and to physically enable some effects. The BitmapCache is also responsible for applying filters to objects and 
-   * reads each {{#crossLink "Filter"}}{{/crossLink}} due to this relationship. Real-time Filters are not recommended 
-   * performance wise when dealing with a Context2D canvas. For best performance and to still allow for some visual 
+   * Caching is also a co-requisite for applying filters to prevent expensive filters running constantly without need,
+   * and to physically enable some effects. The BitmapCache is also responsible for applying filters to objects and
+   * reads each {{#crossLink "Filter"}}{{/crossLink}} due to this relationship. Real-time Filters are not recommended
+   * performance wise when dealing with a Context2D canvas. For best performance and to still allow for some visual
    * effects use a compositeOperation when possible.
    * @class BitmapCache
    * @constructor
    **/
   function BitmapCache() {
-
     // public:
     /**
      * Width of the cache relative to the target object.
@@ -15654,29 +16546,29 @@ this.createjs = this.createjs || {};
    * @return {Rectangle} bounds object representing the bounds with filters.
    * @static
    **/
-  BitmapCache.getFilterBounds = function ( target, output ) {
-    if ( !output ) {
+  BitmapCache.getFilterBounds = function (target, output) {
+    if (!output) {
       output = new createjs.Rectangle();
     }
     var filters = target.filters;
     var filterCount = filters && filters.length;
-    if ( !!filterCount <= 0 ) {
+    if (!!filterCount <= 0) {
       return output;
     }
 
-    for ( var i = 0; i < filterCount; i++ ) {
-      var f = filters[ i ];
-      if ( !f || !f.getBounds ) {
+    for (var i = 0; i < filterCount; i++) {
+      var f = filters[i];
+      if (!f || !f.getBounds) {
         continue;
       }
       var test = f.getBounds();
-      if ( !test ) {
+      if (!test) {
         continue;
       }
-      if ( i == 0 ) {
-        output.setValues( test.x, test.y, test.width, test.height );
+      if (i == 0) {
+        output.setValues(test.x, test.y, test.width, test.height);
       } else {
-        output.extend( test.x, test.y, test.width, test.height );
+        output.extend(test.x, test.y, test.width, test.height);
       }
     }
 
@@ -15754,8 +16646,8 @@ this.createjs = this.createjs || {};
    * whether to make a new stage instance or use an existing one. See above for extensive details on use.
    * @for BitmapCache
    */
-  p.define = function ( target, x, y, width, height, scale, options ) {
-    if ( !target ) {
+  p.define = function (target, x, y, width, height, scale, options) {
+    if (!target) {
       throw "No symbol to cache";
     }
     this._options = options;
@@ -15778,18 +16670,23 @@ this.createjs = this.createjs || {};
    * @method update
    * @param {String} [compositeOperation=null] The DisplayObject this cache is linked to.
    **/
-  p.update = function ( compositeOperation ) {
-    if ( !this.target ) {
+  p.update = function (compositeOperation) {
+    if (!this.target) {
       throw "define() must be called before update()";
     }
 
-    var filterBounds = BitmapCache.getFilterBounds( this.target );
+    var filterBounds = BitmapCache.getFilterBounds(this.target);
     var surface = this.target.cacheCanvas;
 
-    this._drawWidth = Math.ceil( this.width * this.scale ) + filterBounds.width;
-    this._drawHeight = Math.ceil( this.height * this.scale ) + filterBounds.height;
+    this._drawWidth = Math.ceil(this.width * this.scale) + filterBounds.width;
+    this._drawHeight =
+      Math.ceil(this.height * this.scale) + filterBounds.height;
 
-    if ( !surface || this._drawWidth != surface.width || this._drawHeight != surface.height ) {
+    if (
+      !surface ||
+      this._drawWidth != surface.width ||
+      this._drawHeight != surface.height
+    ) {
       this._updateSurface();
     }
 
@@ -15798,7 +16695,7 @@ this.createjs = this.createjs || {};
     this.offX = this.x * this.scale + this._filterOffX;
     this.offY = this.y * this.scale + this._filterOffY;
 
-    this._drawToCache( compositeOperation );
+    this._drawToCache(compositeOperation);
 
     this.cacheID = this.cacheID ? this.cacheID + 1 : 1;
   };
@@ -15808,28 +16705,28 @@ this.createjs = this.createjs || {};
    * @method release
    **/
   p.release = function () {
-    if ( this._webGLCache ) {
+    if (this._webGLCache) {
       // if it isn't cache controlled clean up after yourself
-      if ( !this._webGLCache.isCacheControlled ) {
-        if ( this.__lastRT ) {
+      if (!this._webGLCache.isCacheControlled) {
+        if (this.__lastRT) {
           this.__lastRT = undefined;
         }
-        if ( this.__rtA ) {
-          this._webGLCache._killTextureObject( this.__rtA );
+        if (this.__rtA) {
+          this._webGLCache._killTextureObject(this.__rtA);
         }
-        if ( this.__rtB ) {
-          this._webGLCache._killTextureObject( this.__rtB );
+        if (this.__rtB) {
+          this._webGLCache._killTextureObject(this.__rtB);
         }
-        if ( this.target && this.target.cacheCanvas ) {
-          this._webGLCache._killTextureObject( this.target.cacheCanvas );
+        if (this.target && this.target.cacheCanvas) {
+          this._webGLCache._killTextureObject(this.target.cacheCanvas);
         }
       }
       // set the context to none and let the garbage collector get the rest when the canvas itself gets removed
       this._webGLCache = false;
     } else {
       var stage = this.target.stage;
-      if ( stage instanceof createjs.StageGL ) {
-        stage.releaseTexture( this.target.cacheCanvas );
+      if (stage instanceof createjs.StageGL) {
+        stage.releaseTexture(this.target.cacheCanvas);
       }
     }
 
@@ -15848,12 +16745,14 @@ this.createjs = this.createjs || {};
    **/
   p.getCacheDataURL = function () {
     var cacheCanvas = this.target && this.target.cacheCanvas;
-    if ( !cacheCanvas ) {
+    if (!cacheCanvas) {
       return null;
     }
-    if ( this.cacheID != this._cacheDataURLID ) {
+    if (this.cacheID != this._cacheDataURLID) {
       this._cacheDataURLID = this.cacheID;
-      this._cacheDataURL = cacheCanvas.toDataURL ? cacheCanvas.toDataURL() : null; // incase function is
+      this._cacheDataURL = cacheCanvas.toDataURL
+        ? cacheCanvas.toDataURL()
+        : null; // incase function is
     }
     return this._cacheDataURL;
   };
@@ -15864,13 +16763,16 @@ this.createjs = this.createjs || {};
    * @param {CanvasRenderingContext2D} ctx The context to draw into.
    * @return {Boolean} Whether the draw was handled successfully.
    **/
-  p.draw = function ( ctx ) {
-    if ( !this.target ) {
+  p.draw = function (ctx) {
+    if (!this.target) {
       return false;
     }
-    ctx.drawImage( this.target.cacheCanvas,
-      this.x + ( this._filterOffX / this.scale ), this.y + ( this._filterOffY / this.scale ),
-      this._drawWidth / this.scale, this._drawHeight / this.scale
+    ctx.drawImage(
+      this.target.cacheCanvas,
+      this.x + this._filterOffX / this.scale,
+      this.y + this._filterOffY / this.scale,
+      this._drawWidth / this.scale,
+      this._drawHeight / this.scale
     );
     return true;
   };
@@ -15884,12 +16786,14 @@ this.createjs = this.createjs || {};
    * @protected
    **/
   p._updateSurface = function () {
-    if ( !this._options || !this._options.useGL ) {
+    if (!this._options || !this._options.useGL) {
       var surface = this.target.cacheCanvas;
 
       // create it if it's missing
-      if ( !surface ) {
-        surface = this.target.cacheCanvas = createjs.createCanvas ? createjs.createCanvas() : document.createElement( "canvas" );
+      if (!surface) {
+        surface = this.target.cacheCanvas = createjs.createCanvas
+          ? createjs.createCanvas()
+          : document.createElement("canvas");
       }
 
       // now size it
@@ -15899,32 +16803,35 @@ this.createjs = this.createjs || {};
     }
 
     // create it if it's missing
-    if ( !this._webGLCache ) {
-      if ( this._options.useGL === "stage" ) {
-        if ( !( this.target.stage && this.target.stage.isWebGL ) ) {
-          var error = "Cannot use 'stage' for cache because the object's parent stage is ";
-          error += this.target.stage ? "non WebGL." : "not set, please addChild to the correct stage.";
+    if (!this._webGLCache) {
+      if (this._options.useGL === "stage") {
+        if (!(this.target.stage && this.target.stage.isWebGL)) {
+          var error =
+            "Cannot use 'stage' for cache because the object's parent stage is ";
+          error += this.target.stage
+            ? "non WebGL."
+            : "not set, please addChild to the correct stage.";
           throw error;
         }
         this.target.cacheCanvas = true; // will be replaced with RenderTexture, temporary positive value for old "isCached" checks
         this._webGLCache = this.target.stage;
-
-      } else if ( this._options.useGL === "new" ) {
-        this.target.cacheCanvas = document.createElement( "canvas" ); // we can turn off autopurge because we wont be making textures here
-        this._webGLCache = new createjs.StageGL( this.target.cacheCanvas, {
+      } else if (this._options.useGL === "new") {
+        this.target.cacheCanvas = document.createElement("canvas"); // we can turn off autopurge because we wont be making textures here
+        this._webGLCache = new createjs.StageGL(this.target.cacheCanvas, {
           antialias: true,
           transparent: true,
-          autoPurge: -1
-        } );
+          autoPurge: -1,
+        });
         this._webGLCache.isCacheControlled = true; // use this flag to control stage sizing and final output
-
-      } else if ( this._options.useGL instanceof createjs.StageGL ) {
+      } else if (this._options.useGL instanceof createjs.StageGL) {
         this.target.cacheCanvas = true; // will be replaced with RenderTexture, temporary positive value for old "isCached" checks
         this._webGLCache = this._options.useGL;
         this._webGLCache.isCacheControlled = true; // use this flag to control stage sizing and final output
-
       } else {
-        throw "Invalid option provided to useGL, expected ['stage', 'new', StageGL, undefined], got " + this._options.useGL;
+        throw (
+          "Invalid option provided to useGL, expected ['stage', 'new', StageGL, undefined], got " +
+          this._options.useGL
+        );
       }
     }
 
@@ -15933,19 +16840,31 @@ this.createjs = this.createjs || {};
     var stageGL = this._webGLCache;
 
     // if we have a dedicated stage we've gotta size it
-    if ( stageGL.isCacheControlled ) {
+    if (stageGL.isCacheControlled) {
       surface.width = this._drawWidth;
       surface.height = this._drawHeight;
-      stageGL.updateViewport( this._drawWidth, this._drawHeight );
+      stageGL.updateViewport(this._drawWidth, this._drawHeight);
     }
-    if ( this.target.filters ) {
+    if (this.target.filters) {
       // with filters we can't tell how many we'll need but the most we'll ever need is two, so make them now
-      stageGL.getTargetRenderTexture( this.target, this._drawWidth, this._drawHeight );
-      stageGL.getTargetRenderTexture( this.target, this._drawWidth, this._drawHeight );
+      stageGL.getTargetRenderTexture(
+        this.target,
+        this._drawWidth,
+        this._drawHeight
+      );
+      stageGL.getTargetRenderTexture(
+        this.target,
+        this._drawWidth,
+        this._drawHeight
+      );
     } else {
       // without filters then we only need one RenderTexture, and that's only if its not a dedicated stage
-      if ( !stageGL.isCacheControlled ) {
-        stageGL.getTargetRenderTexture( this.target, this._drawWidth, this._drawHeight );
+      if (!stageGL.isCacheControlled) {
+        stageGL.getTargetRenderTexture(
+          this.target,
+          this._drawWidth,
+          this._drawHeight
+        );
       }
     }
   };
@@ -15955,14 +16874,14 @@ this.createjs = this.createjs || {};
    * @method _drawToCache
    * @protected
    **/
-  p._drawToCache = function ( compositeOperation ) {
+  p._drawToCache = function (compositeOperation) {
     var surface = this.target.cacheCanvas;
     var target = this.target;
     var webGL = this._webGLCache;
 
-    if ( webGL ) {
+    if (webGL) {
       //TODO: auto split blur into an x/y pass
-      webGL.cacheDraw( target, target.filters, this );
+      webGL.cacheDraw(target, target.filters, this);
 
       // we may of swapped around which element the surface is, so we re-fetch it
       surface = this.target.cacheCanvas;
@@ -15970,22 +16889,28 @@ this.createjs = this.createjs || {};
       surface.width = this._drawWidth;
       surface.height = this._drawHeight;
     } else {
-      var ctx = surface.getContext( "2d" );
+      var ctx = surface.getContext("2d");
 
-      if ( !compositeOperation ) {
-        ctx.clearRect( 0, 0, this._drawWidth + 1, this._drawHeight + 1 );
+      if (!compositeOperation) {
+        ctx.clearRect(0, 0, this._drawWidth + 1, this._drawHeight + 1);
       }
 
       ctx.save();
       ctx.globalCompositeOperation = compositeOperation;
-      ctx.setTransform( this.scale, 0, 0, this.scale, -this._filterOffX, -this._filterOffY );
-      ctx.translate( -this.x, -this.y );
-      target.draw( ctx, true );
+      ctx.setTransform(
+        this.scale,
+        0,
+        0,
+        this.scale,
+        -this._filterOffX,
+        -this._filterOffY
+      );
+      ctx.translate(-this.x, -this.y);
+      target.draw(ctx, true);
       ctx.restore();
 
-
-      if ( target.filters && target.filters.length ) {
-        this._applyFilters( ctx );
+      if (target.filters && target.filters.length) {
+        this._applyFilters(ctx);
       }
     }
     surface._invalid = true;
@@ -15996,7 +16921,7 @@ this.createjs = this.createjs || {};
    * @method _applyFilters
    * @protected
    **/
-  p._applyFilters = function ( ctx ) {
+  p._applyFilters = function (ctx) {
     var filters = this.target.filters;
 
     var w = this._drawWidth;
@@ -16005,33 +16930,34 @@ this.createjs = this.createjs || {};
     var data;
 
     var i = 0,
-      filter = filters[ i ];
-    do { // this is safe because we wouldn't be in apply filters without a filter count of at least 1
-      if ( filter.usesContext ) {
-        if ( data ) {
-          ctx.putImageData( data, 0, 0 );
+      filter = filters[i];
+    do {
+      // this is safe because we wouldn't be in apply filters without a filter count of at least 1
+      if (filter.usesContext) {
+        if (data) {
+          ctx.putImageData(data, 0, 0);
           data = null;
         }
-        filter.applyFilter( ctx, 0, 0, w, h );
+        filter.applyFilter(ctx, 0, 0, w, h);
       } else {
-        if ( !data ) {
-          data = ctx.getImageData( 0, 0, w, h );
+        if (!data) {
+          data = ctx.getImageData(0, 0, w, h);
         }
-        filter._applyFilter( data );
+        filter._applyFilter(data);
       }
 
       // work through the multipass if it's there, otherwise move on
-      filter = filter._multiPass !== null ? filter._multiPass : filters[ ++i ];
-    } while ( filter );
+      filter = filter._multiPass !== null ? filter._multiPass : filters[++i];
+    } while (filter);
 
     //done
-    if ( data ) {
-      ctx.putImageData( data, 0, 0 );
+    if (data) {
+      ctx.putImageData(data, 0, 0);
     }
   };
 
   createjs.BitmapCache = BitmapCache;
-}() );
+})();
 
 //##############################################################################
 // BlurFilter.js
@@ -16039,9 +16965,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -16069,7 +16994,7 @@ this.createjs = this.createjs || {};
    * @param {Number} [blurY=0] The vertical blur radius in pixels.
    * @param {Number} [quality=1] The number of blur iterations.
    **/
-  function BlurFilter( blurX, blurY, quality ) {
+  function BlurFilter(blurX, blurY, quality) {
     this.Filter_constructor();
 
     // public properties:
@@ -16106,35 +17031,31 @@ this.createjs = this.createjs || {};
     /**
      * This is a template to generate the shader for {{#crossLink FRAG_SHADER_BODY}}{{/crossLink}}
      */
-    this.FRAG_SHADER_TEMPLATE = (
+    this.FRAG_SHADER_TEMPLATE =
       "uniform float xWeight[{{blurX}}];" +
       "uniform float yWeight[{{blurY}}];" +
       "uniform vec2 textureOffset;" +
       "void main(void) {" +
       "vec4 color = vec4(0.0);" +
-
       "float xAdj = ({{blurX}}.0-1.0)/2.0;" +
       "float yAdj = ({{blurY}}.0-1.0)/2.0;" +
       "vec2 sampleOffset;" +
-
       "for(int i=0; i<{{blurX}}; i++) {" +
       "for(int j=0; j<{{blurY}}; j++) {" +
       "sampleOffset = vRenderCoord + (textureOffset * vec2(float(i)-xAdj, float(j)-yAdj));" +
       "color += texture2D(uSampler, sampleOffset) * (xWeight[i] * yWeight[j]);" +
       "}" +
       "}" +
-
       "gl_FragColor = color.rgba;" +
-      "}"
-    );
+      "}";
 
     // update the filter using the setters
-    if ( isNaN( quality ) || quality < 1 ) {
+    if (isNaN(quality) || quality < 1) {
       quality = 1;
     }
-    this.setQuality( quality | 0 );
+    this.setQuality(quality | 0);
   }
-  var p = createjs.extend( BlurFilter, createjs.Filter );
+  var p = createjs.extend(BlurFilter, createjs.Filter);
 
   // TODO: deprecated
   // p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
@@ -16145,14 +17066,14 @@ this.createjs = this.createjs || {};
   p.getBlurY = function () {
     return this._blurY;
   };
-  p.setBlurX = function ( value ) {
-    if ( isNaN( value ) || value < 0 ) {
+  p.setBlurX = function (value) {
+    if (isNaN(value) || value < 0) {
       value = 0;
     }
     this._blurX = value;
   };
-  p.setBlurY = function ( value ) {
-    if ( isNaN( value ) || value < 0 ) {
+  p.setBlurY = function (value) {
+    if (isNaN(value) || value < 0) {
       value = 0;
     }
     this._blurY = value;
@@ -16160,8 +17081,8 @@ this.createjs = this.createjs || {};
   p.getQuality = function () {
     return this._quality;
   };
-  p.setQuality = function ( value ) {
-    if ( isNaN( value ) || value < 0 ) {
+  p.setQuality = function (value) {
+    if (isNaN(value) || value < 0) {
       value = 0;
     }
     this._quality = value | 0;
@@ -16170,12 +17091,12 @@ this.createjs = this.createjs || {};
     var xChange = this._lastBlurX !== this._blurX;
     var yChange = this._lastBlurY !== this._blurY;
     var qChange = this._lastQuality !== this._quality;
-    if ( xChange || yChange || qChange ) {
-      if ( xChange || qChange ) {
-        this._blurXTable = this._getTable( this._blurX * this._quality );
+    if (xChange || yChange || qChange) {
+      if (xChange || qChange) {
+        this._blurXTable = this._getTable(this._blurX * this._quality);
       }
-      if ( yChange || qChange ) {
-        this._blurYTable = this._getTable( this._blurY * this._quality );
+      if (yChange || qChange) {
+        this._blurYTable = this._getTable(this._blurY * this._quality);
       }
       this._updateShader();
       this._lastBlurX = this._blurX;
@@ -16190,26 +17111,26 @@ this.createjs = this.createjs || {};
   };
 
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       blurX: {
         get: p.getBlurX,
-        set: p.setBlurX
+        set: p.setBlurX,
       },
       blurY: {
         get: p.getBlurY,
-        set: p.setBlurY
+        set: p.setBlurY,
       },
       quality: {
         get: p.getQuality,
-        set: p.setQuality
+        set: p.setQuality,
       },
       _builtShader: {
         get: p._getShader,
-        set: p._setShader
-      }
-    } );
-  } catch ( e ) {
-    console.log( e );
+        set: p._setShader,
+      },
+    });
+  } catch (e) {
+    console.log(e);
   }
 
   /**
@@ -16218,26 +17139,28 @@ this.createjs = this.createjs || {};
    * @param {Number} spread How many steps in the curve.
    * @return {Array<Number>} An array with Math.ceil(spread*2) entries with appropriately distributed weights.
    */
-  p._getTable = function ( spread ) {
+  p._getTable = function (spread) {
     var EDGE = 4.2;
-    if ( spread <= 1 ) {
-      return [ 1 ];
+    if (spread <= 1) {
+      return [1];
     }
 
     var result = [];
-    var count = Math.ceil( spread * 2 );
-    count += ( count % 2 ) ? 0 : 1;
-    var adjust = ( count / 2 ) | 0;
-    for ( var i = -adjust; i <= adjust; i++ ) {
-      var x = ( i / adjust ) * EDGE;
-      result.push( 1 / Math.sqrt( 2 * Math.PI ) * Math.pow( Math.E, -( Math.pow( x, 2 ) / 4 ) ) );
+    var count = Math.ceil(spread * 2);
+    count += count % 2 ? 0 : 1;
+    var adjust = (count / 2) | 0;
+    for (var i = -adjust; i <= adjust; i++) {
+      var x = (i / adjust) * EDGE;
+      result.push(
+        (1 / Math.sqrt(2 * Math.PI)) * Math.pow(Math.E, -(Math.pow(x, 2) / 4))
+      );
     }
-    var factor = result.reduce( function ( a, b ) {
+    var factor = result.reduce(function (a, b) {
       return a + b;
-    } );
-    return result.map( function ( currentValue, index, array ) {
+    });
+    return result.map(function (currentValue, index, array) {
       return currentValue / factor;
-    } );
+    });
   };
 
   /**
@@ -16245,31 +17168,38 @@ this.createjs = this.createjs || {};
    * @method _updateShader
    */
   p._updateShader = function () {
-    if ( this._blurX === undefined || this._blurY === undefined ) {
+    if (this._blurX === undefined || this._blurY === undefined) {
       return;
     }
     var result = this.FRAG_SHADER_TEMPLATE;
-    result = result.replace( /\{\{blurX\}\}/g, ( this._blurXTable.length ).toFixed( 0 ) );
-    result = result.replace( /\{\{blurY\}\}/g, ( this._blurYTable.length ).toFixed( 0 ) );
+    result = result.replace(
+      /\{\{blurX\}\}/g,
+      this._blurXTable.length.toFixed(0)
+    );
+    result = result.replace(
+      /\{\{blurY\}\}/g,
+      this._blurYTable.length.toFixed(0)
+    );
     this.FRAG_SHADER_BODY = result;
   };
 
   /** docced in super class **/
-  p.shaderParamSetup = function ( gl, stage, shaderProgram ) {
+  p.shaderParamSetup = function (gl, stage, shaderProgram) {
     // load the normalized gaussian weight tables
     gl.uniform1fv(
-      gl.getUniformLocation( shaderProgram, "xWeight" ),
+      gl.getUniformLocation(shaderProgram, "xWeight"),
       this._blurXTable
     );
     gl.uniform1fv(
-      gl.getUniformLocation( shaderProgram, "yWeight" ),
+      gl.getUniformLocation(shaderProgram, "yWeight"),
       this._blurYTable
     );
 
     // what is the size of a single pixel in -1, 1 (webGL) space
     gl.uniform2f(
-      gl.getUniformLocation( shaderProgram, "textureOffset" ),
-      2 / ( stage._viewportWidth * this._quality ), 2 / ( stage._viewportHeight * this._quality )
+      gl.getUniformLocation(shaderProgram, "textureOffset"),
+      2 / (stage._viewportWidth * this._quality),
+      2 / (stage._viewportHeight * this._quality)
     );
   };
 
@@ -16281,7 +17211,25 @@ this.createjs = this.createjs || {};
    * @protected
    * @static
    **/
-  BlurFilter.MUL_TABLE = [ 1, 171, 205, 293, 57, 373, 79, 137, 241, 27, 391, 357, 41, 19, 283, 265, 497, 469, 443, 421, 25, 191, 365, 349, 335, 161, 155, 149, 9, 278, 269, 261, 505, 245, 475, 231, 449, 437, 213, 415, 405, 395, 193, 377, 369, 361, 353, 345, 169, 331, 325, 319, 313, 307, 301, 37, 145, 285, 281, 69, 271, 267, 263, 259, 509, 501, 493, 243, 479, 118, 465, 459, 113, 446, 55, 435, 429, 423, 209, 413, 51, 403, 199, 393, 97, 3, 379, 375, 371, 367, 363, 359, 355, 351, 347, 43, 85, 337, 333, 165, 327, 323, 5, 317, 157, 311, 77, 305, 303, 75, 297, 294, 73, 289, 287, 71, 141, 279, 277, 275, 68, 135, 67, 133, 33, 262, 260, 129, 511, 507, 503, 499, 495, 491, 61, 121, 481, 477, 237, 235, 467, 232, 115, 457, 227, 451, 7, 445, 221, 439, 218, 433, 215, 427, 425, 211, 419, 417, 207, 411, 409, 203, 202, 401, 399, 396, 197, 49, 389, 387, 385, 383, 95, 189, 47, 187, 93, 185, 23, 183, 91, 181, 45, 179, 89, 177, 11, 175, 87, 173, 345, 343, 341, 339, 337, 21, 167, 83, 331, 329, 327, 163, 81, 323, 321, 319, 159, 79, 315, 313, 39, 155, 309, 307, 153, 305, 303, 151, 75, 299, 149, 37, 295, 147, 73, 291, 145, 289, 287, 143, 285, 71, 141, 281, 35, 279, 139, 69, 275, 137, 273, 17, 271, 135, 269, 267, 133, 265, 33, 263, 131, 261, 130, 259, 129, 257, 1 ];
+  BlurFilter.MUL_TABLE = [
+    1, 171, 205, 293, 57, 373, 79, 137, 241, 27, 391, 357, 41, 19, 283, 265,
+    497, 469, 443, 421, 25, 191, 365, 349, 335, 161, 155, 149, 9, 278, 269, 261,
+    505, 245, 475, 231, 449, 437, 213, 415, 405, 395, 193, 377, 369, 361, 353,
+    345, 169, 331, 325, 319, 313, 307, 301, 37, 145, 285, 281, 69, 271, 267,
+    263, 259, 509, 501, 493, 243, 479, 118, 465, 459, 113, 446, 55, 435, 429,
+    423, 209, 413, 51, 403, 199, 393, 97, 3, 379, 375, 371, 367, 363, 359, 355,
+    351, 347, 43, 85, 337, 333, 165, 327, 323, 5, 317, 157, 311, 77, 305, 303,
+    75, 297, 294, 73, 289, 287, 71, 141, 279, 277, 275, 68, 135, 67, 133, 33,
+    262, 260, 129, 511, 507, 503, 499, 495, 491, 61, 121, 481, 477, 237, 235,
+    467, 232, 115, 457, 227, 451, 7, 445, 221, 439, 218, 433, 215, 427, 425,
+    211, 419, 417, 207, 411, 409, 203, 202, 401, 399, 396, 197, 49, 389, 387,
+    385, 383, 95, 189, 47, 187, 93, 185, 23, 183, 91, 181, 45, 179, 89, 177, 11,
+    175, 87, 173, 345, 343, 341, 339, 337, 21, 167, 83, 331, 329, 327, 163, 81,
+    323, 321, 319, 159, 79, 315, 313, 39, 155, 309, 307, 153, 305, 303, 151, 75,
+    299, 149, 37, 295, 147, 73, 291, 145, 289, 287, 143, 285, 71, 141, 281, 35,
+    279, 139, 69, 275, 137, 273, 17, 271, 135, 269, 267, 133, 265, 33, 263, 131,
+    261, 130, 259, 129, 257, 1,
+  ];
 
   /**
    * Array of shift values for blur calculations.
@@ -16290,23 +17238,43 @@ this.createjs = this.createjs || {};
    * @protected
    * @static
    **/
-  BlurFilter.SHG_TABLE = [ 0, 9, 10, 11, 9, 12, 10, 11, 12, 9, 13, 13, 10, 9, 13, 13, 14, 14, 14, 14, 10, 13, 14, 14, 14, 13, 13, 13, 9, 14, 14, 14, 15, 14, 15, 14, 15, 15, 14, 15, 15, 15, 14, 15, 15, 15, 15, 15, 14, 15, 15, 15, 15, 15, 15, 12, 14, 15, 15, 13, 15, 15, 15, 15, 16, 16, 16, 15, 16, 14, 16, 16, 14, 16, 13, 16, 16, 16, 15, 16, 13, 16, 15, 16, 14, 9, 16, 16, 16, 16, 16, 16, 16, 16, 16, 13, 14, 16, 16, 15, 16, 16, 10, 16, 15, 16, 14, 16, 16, 14, 16, 16, 14, 16, 16, 14, 15, 16, 16, 16, 14, 15, 14, 15, 13, 16, 16, 15, 17, 17, 17, 17, 17, 17, 14, 15, 17, 17, 16, 16, 17, 16, 15, 17, 16, 17, 11, 17, 16, 17, 16, 17, 16, 17, 17, 16, 17, 17, 16, 17, 17, 16, 16, 17, 17, 17, 16, 14, 17, 17, 17, 17, 15, 16, 14, 16, 15, 16, 13, 16, 15, 16, 14, 16, 15, 16, 12, 16, 15, 16, 17, 17, 17, 17, 17, 13, 16, 15, 17, 17, 17, 16, 15, 17, 17, 17, 16, 15, 17, 17, 14, 16, 17, 17, 16, 17, 17, 16, 15, 17, 16, 14, 17, 16, 15, 17, 16, 17, 17, 16, 17, 15, 16, 17, 14, 17, 16, 15, 17, 16, 17, 13, 17, 16, 17, 17, 16, 17, 14, 17, 16, 17, 16, 17, 16, 17, 9 ];
+  BlurFilter.SHG_TABLE = [
+    0, 9, 10, 11, 9, 12, 10, 11, 12, 9, 13, 13, 10, 9, 13, 13, 14, 14, 14, 14,
+    10, 13, 14, 14, 14, 13, 13, 13, 9, 14, 14, 14, 15, 14, 15, 14, 15, 15, 14,
+    15, 15, 15, 14, 15, 15, 15, 15, 15, 14, 15, 15, 15, 15, 15, 15, 12, 14, 15,
+    15, 13, 15, 15, 15, 15, 16, 16, 16, 15, 16, 14, 16, 16, 14, 16, 13, 16, 16,
+    16, 15, 16, 13, 16, 15, 16, 14, 9, 16, 16, 16, 16, 16, 16, 16, 16, 16, 13,
+    14, 16, 16, 15, 16, 16, 10, 16, 15, 16, 14, 16, 16, 14, 16, 16, 14, 16, 16,
+    14, 15, 16, 16, 16, 14, 15, 14, 15, 13, 16, 16, 15, 17, 17, 17, 17, 17, 17,
+    14, 15, 17, 17, 16, 16, 17, 16, 15, 17, 16, 17, 11, 17, 16, 17, 16, 17, 16,
+    17, 17, 16, 17, 17, 16, 17, 17, 16, 16, 17, 17, 17, 16, 14, 17, 17, 17, 17,
+    15, 16, 14, 16, 15, 16, 13, 16, 15, 16, 14, 16, 15, 16, 12, 16, 15, 16, 17,
+    17, 17, 17, 17, 13, 16, 15, 17, 17, 17, 16, 15, 17, 17, 17, 16, 15, 17, 17,
+    14, 16, 17, 17, 16, 17, 17, 16, 15, 17, 16, 14, 17, 16, 15, 17, 16, 17, 17,
+    16, 17, 15, 16, 17, 14, 17, 16, 15, 17, 16, 17, 13, 17, 16, 17, 17, 16, 17,
+    14, 17, 16, 17, 16, 17, 16, 17, 9,
+  ];
 
   // public methods:
   /** docced in super class **/
-  p.getBounds = function ( rect ) {
+  p.getBounds = function (rect) {
     var x = this.blurX | 0,
       y = this.blurY | 0;
-    if ( x <= 0 && y <= 0 ) {
+    if (x <= 0 && y <= 0) {
       return rect;
     }
-    var q = Math.pow( this.quality, 0.2 );
-    return ( rect || new createjs.Rectangle() ).pad( y * q + 1, x * q + 1, y * q + 1, x * q + 1 );
+    var q = Math.pow(this.quality, 0.2);
+    return (rect || new createjs.Rectangle()).pad(
+      y * q + 1,
+      x * q + 1,
+      y * q + 1,
+      x * q + 1
+    );
   };
 
   /** docced in super class **/
   p.clone = function () {
-    return new BlurFilter( this.blurX, this.blurY, this.quality );
+    return new BlurFilter(this.blurX, this.blurY, this.quality);
   };
 
   /** docced in super class **/
@@ -16314,22 +17282,21 @@ this.createjs = this.createjs || {};
     return "[BlurFilter]";
   };
 
-
   // private methods:
 
   /** docced in super class **/
-  p._applyFilter = function ( imageData ) {
+  p._applyFilter = function (imageData) {
     var radiusX = this._blurX >> 1;
-    if ( isNaN( radiusX ) || radiusX < 0 ) return false;
+    if (isNaN(radiusX) || radiusX < 0) return false;
     var radiusY = this._blurY >> 1;
-    if ( isNaN( radiusY ) || radiusY < 0 ) return false;
-    if ( radiusX == 0 && radiusY == 0 ) return false;
+    if (isNaN(radiusY) || radiusY < 0) return false;
+    if (radiusX == 0 && radiusY == 0) return false;
 
     var iterations = this.quality;
-    if ( isNaN( iterations ) || iterations < 1 ) iterations = 1;
+    if (isNaN(iterations) || iterations < 1) iterations = 1;
     iterations |= 0;
-    if ( iterations > 3 ) iterations = 3;
-    if ( iterations < 1 ) iterations = 1;
+    if (iterations > 3) iterations = 3;
+    if (iterations < 1) iterations = 1;
 
     var px = imageData.data;
     var x = 0,
@@ -16348,29 +17315,29 @@ this.createjs = this.createjs || {};
       pb = 0,
       pa = 0;
 
-    var divx = ( radiusX + radiusX + 1 ) | 0;
-    var divy = ( radiusY + radiusY + 1 ) | 0;
+    var divx = (radiusX + radiusX + 1) | 0;
+    var divy = (radiusY + radiusY + 1) | 0;
     var w = imageData.width | 0;
     var h = imageData.height | 0;
 
-    var w1 = ( w - 1 ) | 0;
-    var h1 = ( h - 1 ) | 0;
-    var rxp1 = ( radiusX + 1 ) | 0;
-    var ryp1 = ( radiusY + 1 ) | 0;
+    var w1 = (w - 1) | 0;
+    var h1 = (h - 1) | 0;
+    var rxp1 = (radiusX + 1) | 0;
+    var ryp1 = (radiusY + 1) | 0;
 
     var ssx = {
       r: 0,
       b: 0,
       g: 0,
-      a: 0
+      a: 0,
     };
     var sx = ssx;
-    for ( i = 1; i < divx; i++ ) {
+    for (i = 1; i < divx; i++) {
       sx = sx.n = {
         r: 0,
         b: 0,
         g: 0,
-        a: 0
+        a: 0,
       };
     }
     sx.n = ssx;
@@ -16379,41 +17346,39 @@ this.createjs = this.createjs || {};
       r: 0,
       b: 0,
       g: 0,
-      a: 0
+      a: 0,
     };
     var sy = ssy;
-    for ( i = 1; i < divy; i++ ) {
+    for (i = 1; i < divy; i++) {
       sy = sy.n = {
         r: 0,
         b: 0,
         g: 0,
-        a: 0
+        a: 0,
       };
     }
     sy.n = ssy;
 
     var si = null;
 
+    var mtx = BlurFilter.MUL_TABLE[radiusX] | 0;
+    var stx = BlurFilter.SHG_TABLE[radiusX] | 0;
+    var mty = BlurFilter.MUL_TABLE[radiusY] | 0;
+    var sty = BlurFilter.SHG_TABLE[radiusY] | 0;
 
-    var mtx = BlurFilter.MUL_TABLE[ radiusX ] | 0;
-    var stx = BlurFilter.SHG_TABLE[ radiusX ] | 0;
-    var mty = BlurFilter.MUL_TABLE[ radiusY ] | 0;
-    var sty = BlurFilter.SHG_TABLE[ radiusY ] | 0;
-
-    while ( iterations-- > 0 ) {
-
+    while (iterations-- > 0) {
       yw = yi = 0;
       var ms = mtx;
       var ss = stx;
-      for ( y = h; --y > -1; ) {
-        r = rxp1 * ( pr = px[ ( yi ) | 0 ] );
-        g = rxp1 * ( pg = px[ ( yi + 1 ) | 0 ] );
-        b = rxp1 * ( pb = px[ ( yi + 2 ) | 0 ] );
-        a = rxp1 * ( pa = px[ ( yi + 3 ) | 0 ] );
+      for (y = h; --y > -1; ) {
+        r = rxp1 * (pr = px[yi | 0]);
+        g = rxp1 * (pg = px[(yi + 1) | 0]);
+        b = rxp1 * (pb = px[(yi + 2) | 0]);
+        a = rxp1 * (pa = px[(yi + 3) | 0]);
 
         sx = ssx;
 
-        for ( i = rxp1; --i > -1; ) {
+        for (i = rxp1; --i > -1; ) {
           sx.r = pr;
           sx.g = pg;
           sx.b = pb;
@@ -16421,48 +17386,47 @@ this.createjs = this.createjs || {};
           sx = sx.n;
         }
 
-        for ( i = 1; i < rxp1; i++ ) {
-          p = ( yi + ( ( w1 < i ? w1 : i ) << 2 ) ) | 0;
-          r += ( sx.r = px[ p ] );
-          g += ( sx.g = px[ p + 1 ] );
-          b += ( sx.b = px[ p + 2 ] );
-          a += ( sx.a = px[ p + 3 ] );
+        for (i = 1; i < rxp1; i++) {
+          p = (yi + ((w1 < i ? w1 : i) << 2)) | 0;
+          r += sx.r = px[p];
+          g += sx.g = px[p + 1];
+          b += sx.b = px[p + 2];
+          a += sx.a = px[p + 3];
 
           sx = sx.n;
         }
 
         si = ssx;
-        for ( x = 0; x < w; x++ ) {
-          px[ yi++ ] = ( r * ms ) >>> ss;
-          px[ yi++ ] = ( g * ms ) >>> ss;
-          px[ yi++ ] = ( b * ms ) >>> ss;
-          px[ yi++ ] = ( a * ms ) >>> ss;
+        for (x = 0; x < w; x++) {
+          px[yi++] = (r * ms) >>> ss;
+          px[yi++] = (g * ms) >>> ss;
+          px[yi++] = (b * ms) >>> ss;
+          px[yi++] = (a * ms) >>> ss;
 
-          p = ( ( yw + ( ( p = x + radiusX + 1 ) < w1 ? p : w1 ) ) << 2 );
+          p = (yw + ((p = x + radiusX + 1) < w1 ? p : w1)) << 2;
 
-          r -= si.r - ( si.r = px[ p ] );
-          g -= si.g - ( si.g = px[ p + 1 ] );
-          b -= si.b - ( si.b = px[ p + 2 ] );
-          a -= si.a - ( si.a = px[ p + 3 ] );
+          r -= si.r - (si.r = px[p]);
+          g -= si.g - (si.g = px[p + 1]);
+          b -= si.b - (si.b = px[p + 2]);
+          a -= si.a - (si.a = px[p + 3]);
 
           si = si.n;
-
         }
         yw += w;
       }
 
       ms = mty;
       ss = sty;
-      for ( x = 0; x < w; x++ ) {
-        yi = ( x << 2 ) | 0;
+      for (x = 0; x < w; x++) {
+        yi = (x << 2) | 0;
 
-        r = ( ryp1 * ( pr = px[ yi ] ) ) | 0;
-        g = ( ryp1 * ( pg = px[ ( yi + 1 ) | 0 ] ) ) | 0;
-        b = ( ryp1 * ( pb = px[ ( yi + 2 ) | 0 ] ) ) | 0;
-        a = ( ryp1 * ( pa = px[ ( yi + 3 ) | 0 ] ) ) | 0;
+        r = (ryp1 * (pr = px[yi])) | 0;
+        g = (ryp1 * (pg = px[(yi + 1) | 0])) | 0;
+        b = (ryp1 * (pb = px[(yi + 2) | 0])) | 0;
+        a = (ryp1 * (pa = px[(yi + 3) | 0])) | 0;
 
         sy = ssy;
-        for ( i = 0; i < ryp1; i++ ) {
+        for (i = 0; i < ryp1; i++) {
           sy.r = pr;
           sy.g = pg;
           sy.b = pb;
@@ -16472,65 +17436,65 @@ this.createjs = this.createjs || {};
 
         yp = w;
 
-        for ( i = 1; i <= radiusY; i++ ) {
-          yi = ( yp + x ) << 2;
+        for (i = 1; i <= radiusY; i++) {
+          yi = (yp + x) << 2;
 
-          r += ( sy.r = px[ yi ] );
-          g += ( sy.g = px[ yi + 1 ] );
-          b += ( sy.b = px[ yi + 2 ] );
-          a += ( sy.a = px[ yi + 3 ] );
+          r += sy.r = px[yi];
+          g += sy.g = px[yi + 1];
+          b += sy.b = px[yi + 2];
+          a += sy.a = px[yi + 3];
 
           sy = sy.n;
 
-          if ( i < h1 ) {
+          if (i < h1) {
             yp += w;
           }
         }
 
         yi = x;
         si = ssy;
-        if ( iterations > 0 ) {
-          for ( y = 0; y < h; y++ ) {
+        if (iterations > 0) {
+          for (y = 0; y < h; y++) {
             p = yi << 2;
-            px[ p + 3 ] = pa = ( a * ms ) >>> ss;
-            if ( pa > 0 ) {
-              px[ p ] = ( ( r * ms ) >>> ss );
-              px[ p + 1 ] = ( ( g * ms ) >>> ss );
-              px[ p + 2 ] = ( ( b * ms ) >>> ss );
+            px[p + 3] = pa = (a * ms) >>> ss;
+            if (pa > 0) {
+              px[p] = (r * ms) >>> ss;
+              px[p + 1] = (g * ms) >>> ss;
+              px[p + 2] = (b * ms) >>> ss;
             } else {
-              px[ p ] = px[ p + 1 ] = px[ p + 2 ] = 0
+              px[p] = px[p + 1] = px[p + 2] = 0;
             }
 
-            p = ( x + ( ( ( p = y + ryp1 ) < h1 ? p : h1 ) * w ) ) << 2;
+            p = (x + ((p = y + ryp1) < h1 ? p : h1) * w) << 2;
 
-            r -= si.r - ( si.r = px[ p ] );
-            g -= si.g - ( si.g = px[ p + 1 ] );
-            b -= si.b - ( si.b = px[ p + 2 ] );
-            a -= si.a - ( si.a = px[ p + 3 ] );
+            r -= si.r - (si.r = px[p]);
+            g -= si.g - (si.g = px[p + 1]);
+            b -= si.b - (si.b = px[p + 2]);
+            a -= si.a - (si.a = px[p + 3]);
 
             si = si.n;
 
             yi += w;
           }
         } else {
-          for ( y = 0; y < h; y++ ) {
+          for (y = 0; y < h; y++) {
             p = yi << 2;
-            px[ p + 3 ] = pa = ( a * ms ) >>> ss;
-            if ( pa > 0 ) {
+            px[p + 3] = pa = (a * ms) >>> ss;
+            if (pa > 0) {
               pa = 255 / pa;
-              px[ p ] = ( ( r * ms ) >>> ss ) * pa;
-              px[ p + 1 ] = ( ( g * ms ) >>> ss ) * pa;
-              px[ p + 2 ] = ( ( b * ms ) >>> ss ) * pa;
+              px[p] = ((r * ms) >>> ss) * pa;
+              px[p + 1] = ((g * ms) >>> ss) * pa;
+              px[p + 2] = ((b * ms) >>> ss) * pa;
             } else {
-              px[ p ] = px[ p + 1 ] = px[ p + 2 ] = 0
+              px[p] = px[p + 1] = px[p + 2] = 0;
             }
 
-            p = ( x + ( ( ( p = y + ryp1 ) < h1 ? p : h1 ) * w ) ) << 2;
+            p = (x + ((p = y + ryp1) < h1 ? p : h1) * w) << 2;
 
-            r -= si.r - ( si.r = px[ p ] );
-            g -= si.g - ( si.g = px[ p + 1 ] );
-            b -= si.b - ( si.b = px[ p + 2 ] );
-            a -= si.a - ( si.a = px[ p + 3 ] );
+            r -= si.r - (si.r = px[p]);
+            g -= si.g - (si.g = px[p + 1]);
+            b -= si.b - (si.b = px[p + 2]);
+            a -= si.a - (si.a = px[p + 3]);
 
             si = si.n;
 
@@ -16538,13 +17502,12 @@ this.createjs = this.createjs || {};
           }
         }
       }
-
     }
     return true;
   };
 
-  createjs.BlurFilter = createjs.promote( BlurFilter, "Filter" );
-}() );
+  createjs.BlurFilter = createjs.promote(BlurFilter, "Filter");
+})();
 
 //##############################################################################
 // AlphaMapFilter.js
@@ -16552,9 +17515,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -16586,7 +17548,7 @@ this.createjs = this.createjs || {};
    * @param {HTMLImageElement|HTMLCanvasElement} alphaMap The greyscale image (or canvas) to use as the alpha value for the
    * result. This should be exactly the same dimensions as the target.
    **/
-  function AlphaMapFilter( alphaMap ) {
+  function AlphaMapFilter(alphaMap) {
     this.Filter_constructor();
 
     // public properties:
@@ -16597,7 +17559,6 @@ this.createjs = this.createjs || {};
      * @type HTMLImageElement|HTMLCanvasElement
      **/
     this.alphaMap = alphaMap;
-
 
     // private properties:
     /**
@@ -16615,45 +17576,46 @@ this.createjs = this.createjs || {};
     this._mapData = null;
     this._mapTexture = null;
 
-    this.FRAG_SHADER_BODY = (
+    this.FRAG_SHADER_BODY =
       "uniform sampler2D uAlphaSampler;" +
-
       "void main(void) {" +
       "vec4 color = texture2D(uSampler, vRenderCoord);" +
       "vec4 alphaMap = texture2D(uAlphaSampler, vTextureCoord);" +
-
       // some image formats can have transparent white rgba(1,1,1, 0) when put on the GPU, this means we need a slight tweak
       // using ceil ensure that the colour will be used so long as it exists but pure transparency will be treated black
       "gl_FragColor = vec4(color.rgb, color.a * (alphaMap.r * ceil(alphaMap.a)));" +
-      "}"
-    );
+      "}";
   }
-  var p = createjs.extend( AlphaMapFilter, createjs.Filter );
+  var p = createjs.extend(AlphaMapFilter, createjs.Filter);
 
   // TODO: deprecated
   // p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
 
   /** docced in super class **/
-  p.shaderParamSetup = function ( gl, stage, shaderProgram ) {
-    if ( !this._mapTexture ) {
+  p.shaderParamSetup = function (gl, stage, shaderProgram) {
+    if (!this._mapTexture) {
       this._mapTexture = gl.createTexture();
     }
 
-    gl.activeTexture( gl.TEXTURE1 );
-    gl.bindTexture( gl.TEXTURE_2D, this._mapTexture );
-    stage.setTextureParams( gl );
-    gl.texImage2D( gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.alphaMap );
-
-    gl.uniform1i(
-      gl.getUniformLocation( shaderProgram, "uAlphaSampler" ),
-      1
+    gl.activeTexture(gl.TEXTURE1);
+    gl.bindTexture(gl.TEXTURE_2D, this._mapTexture);
+    stage.setTextureParams(gl);
+    gl.texImage2D(
+      gl.TEXTURE_2D,
+      0,
+      gl.RGBA,
+      gl.RGBA,
+      gl.UNSIGNED_BYTE,
+      this.alphaMap
     );
+
+    gl.uniform1i(gl.getUniformLocation(shaderProgram, "uAlphaSampler"), 1);
   };
 
   // public methods:
   /** docced in super class **/
   p.clone = function () {
-    var o = new AlphaMapFilter( this.alphaMap );
+    var o = new AlphaMapFilter(this.alphaMap);
     o._alphaMap = this._alphaMap;
     o._mapData = this._mapData;
     return o;
@@ -16664,22 +17626,21 @@ this.createjs = this.createjs || {};
     return "[AlphaMapFilter]";
   };
 
-
   // private methods:
   /** docced in super class **/
-  p._applyFilter = function ( imageData ) {
-    if ( !this.alphaMap ) {
+  p._applyFilter = function (imageData) {
+    if (!this.alphaMap) {
       return true;
     }
-    if ( !this._prepAlphaMap() ) {
+    if (!this._prepAlphaMap()) {
       return false;
     }
 
     // TODO: update to support scenarios where the target has different dimensions.
     var data = imageData.data;
     var map = this._mapData;
-    for ( var i = 0, l = data.length; i < l; i += 4 ) {
-      data[ i + 3 ] = map[ i ] || 0;
+    for (var i = 0, l = data.length; i < l; i += 4) {
+      data[i + 3] = map[i] || 0;
     }
 
     return true;
@@ -16690,30 +17651,32 @@ this.createjs = this.createjs || {};
    * @protected
    **/
   p._prepAlphaMap = function () {
-    if ( !this.alphaMap ) {
+    if (!this.alphaMap) {
       return false;
     }
-    if ( this.alphaMap == this._alphaMap && this._mapData ) {
+    if (this.alphaMap == this._alphaMap && this._mapData) {
       return true;
     }
 
     this._mapData = null;
-    var map = this._alphaMap = this.alphaMap;
+    var map = (this._alphaMap = this.alphaMap);
     var canvas = map;
     var ctx;
-    if ( map instanceof HTMLCanvasElement ) {
-      ctx = canvas.getContext( "2d" );
+    if (map instanceof HTMLCanvasElement) {
+      ctx = canvas.getContext("2d");
     } else {
-      canvas = createjs.createCanvas ? createjs.createCanvas() : document.createElement( "canvas" );
+      canvas = createjs.createCanvas
+        ? createjs.createCanvas()
+        : document.createElement("canvas");
       canvas.width = map.width;
       canvas.height = map.height;
-      ctx = canvas.getContext( "2d" );
-      ctx.drawImage( map, 0, 0 );
+      ctx = canvas.getContext("2d");
+      ctx.drawImage(map, 0, 0);
     }
 
     try {
-      var imgData = ctx.getImageData( 0, 0, map.width, map.height );
-    } catch ( e ) {
+      var imgData = ctx.getImageData(0, 0, map.width, map.height);
+    } catch (e) {
       //if (!this.suppressCrossDomainErrors) throw new Error("unable to access local image data: " + e);
       return false;
     }
@@ -16722,9 +17685,8 @@ this.createjs = this.createjs || {};
     return true;
   };
 
-
-  createjs.AlphaMapFilter = createjs.promote( AlphaMapFilter, "Filter" );
-}() );
+  createjs.AlphaMapFilter = createjs.promote(AlphaMapFilter, "Filter");
+})();
 
 //##############################################################################
 // AlphaMaskFilter.js
@@ -16732,9 +17694,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -16765,7 +17726,7 @@ this.createjs = this.createjs || {};
    * @constructor
    * @param {HTMLImageElement|HTMLCanvasElement} mask
    **/
-  function AlphaMaskFilter( mask ) {
+  function AlphaMaskFilter(mask) {
     this.Filter_constructor();
 
     // public properties:
@@ -16779,37 +17740,38 @@ this.createjs = this.createjs || {};
     /** docced in super class **/
     this.usesContext = true;
 
-    this.FRAG_SHADER_BODY = (
+    this.FRAG_SHADER_BODY =
       "uniform sampler2D uAlphaSampler;" +
-
       "void main(void) {" +
       "vec4 color = texture2D(uSampler, vRenderCoord);" +
       "vec4 alphaMap = texture2D(uAlphaSampler, vTextureCoord);" +
-
       "gl_FragColor = vec4(color.rgb, color.a * alphaMap.a);" +
-      "}"
-    );
+      "}";
   }
-  var p = createjs.extend( AlphaMaskFilter, createjs.Filter );
+  var p = createjs.extend(AlphaMaskFilter, createjs.Filter);
 
   // TODO: deprecated
   // p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
 
   /** docced in super class **/
-  p.shaderParamSetup = function ( gl, stage, shaderProgram ) {
-    if ( !this._mapTexture ) {
+  p.shaderParamSetup = function (gl, stage, shaderProgram) {
+    if (!this._mapTexture) {
       this._mapTexture = gl.createTexture();
     }
 
-    gl.activeTexture( gl.TEXTURE1 );
-    gl.bindTexture( gl.TEXTURE_2D, this._mapTexture );
-    stage.setTextureParams( gl );
-    gl.texImage2D( gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.mask );
-
-    gl.uniform1i(
-      gl.getUniformLocation( shaderProgram, "uAlphaSampler" ),
-      1
+    gl.activeTexture(gl.TEXTURE1);
+    gl.bindTexture(gl.TEXTURE_2D, this._mapTexture);
+    stage.setTextureParams(gl);
+    gl.texImage2D(
+      gl.TEXTURE_2D,
+      0,
+      gl.RGBA,
+      gl.RGBA,
+      gl.UNSIGNED_BYTE,
+      this.mask
     );
+
+    gl.uniform1i(gl.getUniformLocation(shaderProgram, "uAlphaSampler"), 1);
   };
 
   // public methods:
@@ -16829,34 +17791,43 @@ this.createjs = this.createjs || {};
    * @param {Number} [targetY] NOT SUPPORTED IN THIS FILTER. The y position to draw the result to. Defaults to the value passed to y.
    * @return {Boolean} If the filter was applied successfully.
    **/
-  p.applyFilter = function ( ctx, x, y, width, height, targetCtx, targetX, targetY ) {
-    if ( !this.mask ) {
+  p.applyFilter = function (
+    ctx,
+    x,
+    y,
+    width,
+    height,
+    targetCtx,
+    targetX,
+    targetY
+  ) {
+    if (!this.mask) {
       return true;
     }
     targetCtx = targetCtx || ctx;
-    if ( targetX == null ) {
+    if (targetX == null) {
       targetX = x;
     }
-    if ( targetY == null ) {
+    if (targetY == null) {
       targetY = y;
     }
 
     targetCtx.save();
-    if ( ctx != targetCtx ) {
+    if (ctx != targetCtx) {
       // TODO: support targetCtx and targetX/Y
       // clearRect, then draw the ctx in?
       return false;
     }
 
     targetCtx.globalCompositeOperation = "destination-in";
-    targetCtx.drawImage( this.mask, targetX, targetY );
+    targetCtx.drawImage(this.mask, targetX, targetY);
     targetCtx.restore();
     return true;
   };
 
   /** docced in super class **/
   p.clone = function () {
-    return new AlphaMaskFilter( this.mask );
+    return new AlphaMaskFilter(this.mask);
   };
 
   /** docced in super class **/
@@ -16864,9 +17835,8 @@ this.createjs = this.createjs || {};
     return "[AlphaMaskFilter]";
   };
 
-
-  createjs.AlphaMaskFilter = createjs.promote( AlphaMaskFilter, "Filter" );
-}() );
+  createjs.AlphaMaskFilter = createjs.promote(AlphaMaskFilter, "Filter");
+})();
 
 //##############################################################################
 // ColorFilter.js
@@ -16874,9 +17844,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -16911,7 +17880,16 @@ this.createjs = this.createjs || {};
    * @constructor
    * @extends Filter
    **/
-  function ColorFilter( redMultiplier, greenMultiplier, blueMultiplier, alphaMultiplier, redOffset, greenOffset, blueOffset, alphaOffset ) {
+  function ColorFilter(
+    redMultiplier,
+    greenMultiplier,
+    blueMultiplier,
+    alphaMultiplier,
+    redOffset,
+    greenOffset,
+    blueOffset,
+    alphaOffset
+  ) {
     this.Filter_constructor();
 
     // public properties:
@@ -16971,35 +17949,36 @@ this.createjs = this.createjs || {};
      **/
     this.alphaOffset = alphaOffset || 0;
 
-    this.FRAG_SHADER_BODY = (
+    this.FRAG_SHADER_BODY =
       "uniform vec4 uColorMultiplier;" +
       "uniform vec4 uColorOffset;" +
-
       "void main(void) {" +
       "vec4 color = texture2D(uSampler, vRenderCoord);" +
-
       "gl_FragColor = (color * uColorMultiplier) + uColorOffset;" +
-      "}"
-    );
-
+      "}";
   }
-  var p = createjs.extend( ColorFilter, createjs.Filter );
+  var p = createjs.extend(ColorFilter, createjs.Filter);
 
   // TODO: deprecated
   // p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
 
-
   // public methods:
   /** docced in super class **/
-  p.shaderParamSetup = function ( gl, stage, shaderProgram ) {
+  p.shaderParamSetup = function (gl, stage, shaderProgram) {
     gl.uniform4f(
-      gl.getUniformLocation( shaderProgram, "uColorMultiplier" ),
-      this.redMultiplier, this.greenMultiplier, this.blueMultiplier, this.alphaMultiplier
+      gl.getUniformLocation(shaderProgram, "uColorMultiplier"),
+      this.redMultiplier,
+      this.greenMultiplier,
+      this.blueMultiplier,
+      this.alphaMultiplier
     );
 
     gl.uniform4f(
-      gl.getUniformLocation( shaderProgram, "uColorOffset" ),
-      this.redOffset / 255, this.greenOffset / 255, this.blueOffset / 255, this.alphaOffset / 255
+      gl.getUniformLocation(shaderProgram, "uColorOffset"),
+      this.redOffset / 255,
+      this.greenOffset / 255,
+      this.blueOffset / 255,
+      this.alphaOffset / 255
     );
   };
 
@@ -17011,28 +17990,33 @@ this.createjs = this.createjs || {};
   /** docced in super class **/
   p.clone = function () {
     return new ColorFilter(
-      this.redMultiplier, this.greenMultiplier, this.blueMultiplier, this.alphaMultiplier,
-      this.redOffset, this.greenOffset, this.blueOffset, this.alphaOffset
+      this.redMultiplier,
+      this.greenMultiplier,
+      this.blueMultiplier,
+      this.alphaMultiplier,
+      this.redOffset,
+      this.greenOffset,
+      this.blueOffset,
+      this.alphaOffset
     );
   };
 
   // private methods:
   /** docced in super class **/
-  p._applyFilter = function ( imageData ) {
+  p._applyFilter = function (imageData) {
     var data = imageData.data;
     var l = data.length;
-    for ( var i = 0; i < l; i += 4 ) {
-      data[ i ] = data[ i ] * this.redMultiplier + this.redOffset;
-      data[ i + 1 ] = data[ i + 1 ] * this.greenMultiplier + this.greenOffset;
-      data[ i + 2 ] = data[ i + 2 ] * this.blueMultiplier + this.blueOffset;
-      data[ i + 3 ] = data[ i + 3 ] * this.alphaMultiplier + this.alphaOffset;
+    for (var i = 0; i < l; i += 4) {
+      data[i] = data[i] * this.redMultiplier + this.redOffset;
+      data[i + 1] = data[i + 1] * this.greenMultiplier + this.greenOffset;
+      data[i + 2] = data[i + 2] * this.blueMultiplier + this.blueOffset;
+      data[i + 3] = data[i + 3] * this.alphaMultiplier + this.alphaOffset;
     }
     return true;
   };
 
-
-  createjs.ColorFilter = createjs.promote( ColorFilter, "Filter" );
-}() );
+  createjs.ColorFilter = createjs.promote(ColorFilter, "Filter");
+})();
 
 //##############################################################################
 // ColorMatrix.js
@@ -17040,9 +18024,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -17062,8 +18045,8 @@ this.createjs = this.createjs || {};
    * @param {Number} hue
    * @constructor
    **/
-  function ColorMatrix( brightness, contrast, saturation, hue ) {
-    this.setColor( brightness, contrast, saturation, hue );
+  function ColorMatrix(brightness, contrast, saturation, hue) {
+    this.setColor(brightness, contrast, saturation, hue);
   }
   var p = ColorMatrix.prototype;
 
@@ -17076,17 +18059,14 @@ this.createjs = this.createjs || {};
    * @static
    **/
   ColorMatrix.DELTA_INDEX = [
-    0, 0.01, 0.02, 0.04, 0.05, 0.06, 0.07, 0.08, 0.1, 0.11,
-    0.12, 0.14, 0.15, 0.16, 0.17, 0.18, 0.20, 0.21, 0.22, 0.24,
-    0.25, 0.27, 0.28, 0.30, 0.32, 0.34, 0.36, 0.38, 0.40, 0.42,
-    0.44, 0.46, 0.48, 0.5, 0.53, 0.56, 0.59, 0.62, 0.65, 0.68,
-    0.71, 0.74, 0.77, 0.80, 0.83, 0.86, 0.89, 0.92, 0.95, 0.98,
-    1.0, 1.06, 1.12, 1.18, 1.24, 1.30, 1.36, 1.42, 1.48, 1.54,
-    1.60, 1.66, 1.72, 1.78, 1.84, 1.90, 1.96, 2.0, 2.12, 2.25,
-    2.37, 2.50, 2.62, 2.75, 2.87, 3.0, 3.2, 3.4, 3.6, 3.8,
-    4.0, 4.3, 4.7, 4.9, 5.0, 5.5, 6.0, 6.5, 6.8, 7.0,
-    7.3, 7.5, 7.8, 8.0, 8.4, 8.7, 9.0, 9.4, 9.6, 9.8,
-    10.0
+    0, 0.01, 0.02, 0.04, 0.05, 0.06, 0.07, 0.08, 0.1, 0.11, 0.12, 0.14, 0.15,
+    0.16, 0.17, 0.18, 0.2, 0.21, 0.22, 0.24, 0.25, 0.27, 0.28, 0.3, 0.32, 0.34,
+    0.36, 0.38, 0.4, 0.42, 0.44, 0.46, 0.48, 0.5, 0.53, 0.56, 0.59, 0.62, 0.65,
+    0.68, 0.71, 0.74, 0.77, 0.8, 0.83, 0.86, 0.89, 0.92, 0.95, 0.98, 1.0, 1.06,
+    1.12, 1.18, 1.24, 1.3, 1.36, 1.42, 1.48, 1.54, 1.6, 1.66, 1.72, 1.78, 1.84,
+    1.9, 1.96, 2.0, 2.12, 2.25, 2.37, 2.5, 2.62, 2.75, 2.87, 3.0, 3.2, 3.4, 3.6,
+    3.8, 4.0, 4.3, 4.7, 4.9, 5.0, 5.5, 6.0, 6.5, 6.8, 7.0, 7.3, 7.5, 7.8, 8.0,
+    8.4, 8.7, 9.0, 9.4, 9.6, 9.8, 10.0,
   ];
 
   /**
@@ -17097,11 +18077,7 @@ this.createjs = this.createjs || {};
    * @static
    **/
   ColorMatrix.IDENTITY_MATRIX = [
-    1, 0, 0, 0, 0,
-    0, 1, 0, 0, 0,
-    0, 0, 1, 0, 0,
-    0, 0, 0, 1, 0,
-    0, 0, 0, 0, 1
+    1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1,
   ];
 
   /**
@@ -17112,7 +18088,6 @@ this.createjs = this.createjs || {};
    * @static
    **/
   ColorMatrix.LENGTH = ColorMatrix.IDENTITY_MATRIX.length;
-
 
   // public methods:
   /**
@@ -17125,8 +18100,8 @@ this.createjs = this.createjs || {};
    * @return {ColorMatrix} The ColorMatrix instance the method is called on (useful for chaining calls.)
    * @chainable
    */
-  p.setColor = function ( brightness, contrast, saturation, hue ) {
-    return this.reset().adjustColor( brightness, contrast, saturation, hue );
+  p.setColor = function (brightness, contrast, saturation, hue) {
+    return this.reset().adjustColor(brightness, contrast, saturation, hue);
   };
 
   /**
@@ -17136,7 +18111,7 @@ this.createjs = this.createjs || {};
    * @chainable
    */
   p.reset = function () {
-    return this.copy( ColorMatrix.IDENTITY_MATRIX );
+    return this.copy(ColorMatrix.IDENTITY_MATRIX);
   };
 
   /**
@@ -17151,11 +18126,11 @@ this.createjs = this.createjs || {};
    * @return {ColorMatrix} The ColorMatrix instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.adjustColor = function ( brightness, contrast, saturation, hue ) {
-    this.adjustHue( hue );
-    this.adjustContrast( contrast );
-    this.adjustBrightness( brightness );
-    return this.adjustSaturation( saturation );
+  p.adjustColor = function (brightness, contrast, saturation, hue) {
+    this.adjustHue(hue);
+    this.adjustContrast(contrast);
+    this.adjustBrightness(brightness);
+    return this.adjustSaturation(saturation);
   };
 
   /**
@@ -17166,18 +18141,38 @@ this.createjs = this.createjs || {};
    * @return {ColorMatrix} The ColorMatrix instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.adjustBrightness = function ( value ) {
-    if ( value == 0 || isNaN( value ) ) {
+  p.adjustBrightness = function (value) {
+    if (value == 0 || isNaN(value)) {
       return this;
     }
-    value = this._cleanValue( value, 255 );
-    this._multiplyMatrix( [
-      1, 0, 0, 0, value,
-      0, 1, 0, 0, value,
-      0, 0, 1, 0, value,
-      0, 0, 0, 1, 0,
-      0, 0, 0, 0, 1
-    ] );
+    value = this._cleanValue(value, 255);
+    this._multiplyMatrix([
+      1,
+      0,
+      0,
+      0,
+      value,
+      0,
+      1,
+      0,
+      0,
+      value,
+      0,
+      0,
+      1,
+      0,
+      value,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+    ]);
     return this;
   };
 
@@ -17189,30 +18184,52 @@ this.createjs = this.createjs || {};
    * @return {ColorMatrix} The ColorMatrix instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.adjustContrast = function ( value ) {
-    if ( value == 0 || isNaN( value ) ) {
+  p.adjustContrast = function (value) {
+    if (value == 0 || isNaN(value)) {
       return this;
     }
-    value = this._cleanValue( value, 100 );
+    value = this._cleanValue(value, 100);
     var x;
-    if ( value < 0 ) {
-      x = 127 + value / 100 * 127;
+    if (value < 0) {
+      x = 127 + (value / 100) * 127;
     } else {
       x = value % 1;
-      if ( x == 0 ) {
-        x = ColorMatrix.DELTA_INDEX[ value ];
+      if (x == 0) {
+        x = ColorMatrix.DELTA_INDEX[value];
       } else {
-        x = ColorMatrix.DELTA_INDEX[ ( value << 0 ) ] * ( 1 - x ) + ColorMatrix.DELTA_INDEX[ ( value << 0 ) + 1 ] * x; // use linear interpolation for more granularity.
+        x =
+          ColorMatrix.DELTA_INDEX[value << 0] * (1 - x) +
+          ColorMatrix.DELTA_INDEX[(value << 0) + 1] * x; // use linear interpolation for more granularity.
       }
       x = x * 127 + 127;
     }
-    this._multiplyMatrix( [
-      x / 127, 0, 0, 0, 0.5 * ( 127 - x ),
-      0, x / 127, 0, 0, 0.5 * ( 127 - x ),
-      0, 0, x / 127, 0, 0.5 * ( 127 - x ),
-      0, 0, 0, 1, 0,
-      0, 0, 0, 0, 1
-    ] );
+    this._multiplyMatrix([
+      x / 127,
+      0,
+      0,
+      0,
+      0.5 * (127 - x),
+      0,
+      x / 127,
+      0,
+      0,
+      0.5 * (127 - x),
+      0,
+      0,
+      x / 127,
+      0,
+      0.5 * (127 - x),
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+    ]);
     return this;
   };
 
@@ -17224,25 +18241,44 @@ this.createjs = this.createjs || {};
    * @return {ColorMatrix} The ColorMatrix instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.adjustSaturation = function ( value ) {
-    if ( value == 0 || isNaN( value ) ) {
+  p.adjustSaturation = function (value) {
+    if (value == 0 || isNaN(value)) {
       return this;
     }
-    value = this._cleanValue( value, 100 );
-    var x = 1 + ( ( value > 0 ) ? 3 * value / 100 : value / 100 );
+    value = this._cleanValue(value, 100);
+    var x = 1 + (value > 0 ? (3 * value) / 100 : value / 100);
     var lumR = 0.3086;
     var lumG = 0.6094;
-    var lumB = 0.0820;
-    this._multiplyMatrix( [
-      lumR * ( 1 - x ) + x, lumG * ( 1 - x ), lumB * ( 1 - x ), 0, 0,
-      lumR * ( 1 - x ), lumG * ( 1 - x ) + x, lumB * ( 1 - x ), 0, 0,
-      lumR * ( 1 - x ), lumG * ( 1 - x ), lumB * ( 1 - x ) + x, 0, 0,
-      0, 0, 0, 1, 0,
-      0, 0, 0, 0, 1
-    ] );
+    var lumB = 0.082;
+    this._multiplyMatrix([
+      lumR * (1 - x) + x,
+      lumG * (1 - x),
+      lumB * (1 - x),
+      0,
+      0,
+      lumR * (1 - x),
+      lumG * (1 - x) + x,
+      lumB * (1 - x),
+      0,
+      0,
+      lumR * (1 - x),
+      lumG * (1 - x),
+      lumB * (1 - x) + x,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+    ]);
     return this;
   };
-
 
   /**
    * Adjusts the hue of the pixel color.
@@ -17251,23 +18287,43 @@ this.createjs = this.createjs || {};
    * @return {ColorMatrix} The ColorMatrix instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.adjustHue = function ( value ) {
-    if ( value == 0 || isNaN( value ) ) {
+  p.adjustHue = function (value) {
+    if (value == 0 || isNaN(value)) {
       return this;
     }
-    value = this._cleanValue( value, 180 ) / 180 * Math.PI;
-    var cosVal = Math.cos( value );
-    var sinVal = Math.sin( value );
+    value = (this._cleanValue(value, 180) / 180) * Math.PI;
+    var cosVal = Math.cos(value);
+    var sinVal = Math.sin(value);
     var lumR = 0.213;
     var lumG = 0.715;
     var lumB = 0.072;
-    this._multiplyMatrix( [
-      lumR + cosVal * ( 1 - lumR ) + sinVal * ( -lumR ), lumG + cosVal * ( -lumG ) + sinVal * ( -lumG ), lumB + cosVal * ( -lumB ) + sinVal * ( 1 - lumB ), 0, 0,
-      lumR + cosVal * ( -lumR ) + sinVal * ( 0.143 ), lumG + cosVal * ( 1 - lumG ) + sinVal * ( 0.140 ), lumB + cosVal * ( -lumB ) + sinVal * ( -0.283 ), 0, 0,
-      lumR + cosVal * ( -lumR ) + sinVal * ( -( 1 - lumR ) ), lumG + cosVal * ( -lumG ) + sinVal * ( lumG ), lumB + cosVal * ( 1 - lumB ) + sinVal * ( lumB ), 0, 0,
-      0, 0, 0, 1, 0,
-      0, 0, 0, 0, 1
-    ] );
+    this._multiplyMatrix([
+      lumR + cosVal * (1 - lumR) + sinVal * -lumR,
+      lumG + cosVal * -lumG + sinVal * -lumG,
+      lumB + cosVal * -lumB + sinVal * (1 - lumB),
+      0,
+      0,
+      lumR + cosVal * -lumR + sinVal * 0.143,
+      lumG + cosVal * (1 - lumG) + sinVal * 0.14,
+      lumB + cosVal * -lumB + sinVal * -0.283,
+      0,
+      0,
+      lumR + cosVal * -lumR + sinVal * -(1 - lumR),
+      lumG + cosVal * -lumG + sinVal * lumG,
+      lumB + cosVal * (1 - lumB) + sinVal * lumB,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+    ]);
     return this;
   };
 
@@ -17278,12 +18334,12 @@ this.createjs = this.createjs || {};
    * @return {ColorMatrix} The ColorMatrix instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.concat = function ( matrix ) {
-    matrix = this._fixMatrix( matrix );
-    if ( matrix.length != ColorMatrix.LENGTH ) {
+  p.concat = function (matrix) {
+    matrix = this._fixMatrix(matrix);
+    if (matrix.length != ColorMatrix.LENGTH) {
       return this;
     }
-    this._multiplyMatrix( matrix );
+    this._multiplyMatrix(matrix);
     return this;
   };
 
@@ -17293,7 +18349,7 @@ this.createjs = this.createjs || {};
    * @return {ColorMatrix} A clone of this ColorMatrix.
    **/
   p.clone = function () {
-    return ( new ColorMatrix() ).copy( this );
+    return new ColorMatrix().copy(this);
   };
 
   /**
@@ -17303,8 +18359,8 @@ this.createjs = this.createjs || {};
    **/
   p.toArray = function () {
     var arr = [];
-    for ( var i = 0, l = ColorMatrix.LENGTH; i < l; i++ ) {
-      arr[ i ] = this[ i ];
+    for (var i = 0, l = ColorMatrix.LENGTH; i < l; i++) {
+      arr[i] = this[i];
     }
     return arr;
   };
@@ -17316,10 +18372,10 @@ this.createjs = this.createjs || {};
    * @return {ColorMatrix} The ColorMatrix instance the method is called on (useful for chaining calls.)
    * @chainable
    **/
-  p.copy = function ( matrix ) {
+  p.copy = function (matrix) {
     var l = ColorMatrix.LENGTH;
-    for ( var i = 0; i < l; i++ ) {
-      this[ i ] = matrix[ i ];
+    for (var i = 0; i < l; i++) {
+      this[i] = matrix[i];
     }
     return this;
   };
@@ -17333,26 +18389,28 @@ this.createjs = this.createjs || {};
     return "[ColorMatrix]";
   };
 
-
   // private methods:
   /**
    * @method _multiplyMatrix
    * @param {Array} matrix
    * @protected
    **/
-  p._multiplyMatrix = function ( matrix ) {
-    var i, j, k, col = [];
+  p._multiplyMatrix = function (matrix) {
+    var i,
+      j,
+      k,
+      col = [];
 
-    for ( i = 0; i < 5; i++ ) {
-      for ( j = 0; j < 5; j++ ) {
-        col[ j ] = this[ j + i * 5 ];
+    for (i = 0; i < 5; i++) {
+      for (j = 0; j < 5; j++) {
+        col[j] = this[j + i * 5];
       }
-      for ( j = 0; j < 5; j++ ) {
+      for (j = 0; j < 5; j++) {
         var val = 0;
-        for ( k = 0; k < 5; k++ ) {
-          val += matrix[ j + k * 5 ] * col[ k ];
+        for (k = 0; k < 5; k++) {
+          val += matrix[j + k * 5] * col[k];
         }
-        this[ j + i * 5 ] = val;
+        this[j + i * 5] = val;
       }
     }
   };
@@ -17364,8 +18422,8 @@ this.createjs = this.createjs || {};
    * @param {Number} limit The maximum that the number can be. The minimum is the limit * -1.
    * @protected
    **/
-  p._cleanValue = function ( value, limit ) {
-    return Math.min( limit, Math.max( -limit, value ) );
+  p._cleanValue = function (value, limit) {
+    return Math.min(limit, Math.max(-limit, value));
   };
 
   /**
@@ -17374,21 +18432,24 @@ this.createjs = this.createjs || {};
    * @param {Array} matrix
    * @protected
    **/
-  p._fixMatrix = function ( matrix ) {
-    if ( matrix instanceof ColorMatrix ) {
+  p._fixMatrix = function (matrix) {
+    if (matrix instanceof ColorMatrix) {
       matrix = matrix.toArray();
     }
-    if ( matrix.length < ColorMatrix.LENGTH ) {
-      matrix = matrix.slice( 0, matrix.length ).concat( ColorMatrix.IDENTITY_MATRIX.slice( matrix.length, ColorMatrix.LENGTH ) );
-    } else if ( matrix.length > ColorMatrix.LENGTH ) {
-      matrix = matrix.slice( 0, ColorMatrix.LENGTH );
+    if (matrix.length < ColorMatrix.LENGTH) {
+      matrix = matrix
+        .slice(0, matrix.length)
+        .concat(
+          ColorMatrix.IDENTITY_MATRIX.slice(matrix.length, ColorMatrix.LENGTH)
+        );
+    } else if (matrix.length > ColorMatrix.LENGTH) {
+      matrix = matrix.slice(0, ColorMatrix.LENGTH);
     }
     return matrix;
   };
 
-
   createjs.ColorMatrix = ColorMatrix;
-}() );
+})();
 
 //##############################################################################
 // ColorMatrixFilter.js
@@ -17396,9 +18457,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -17426,7 +18486,7 @@ this.createjs = this.createjs || {};
    * @param {Array | ColorMatrix} matrix A 4x5 matrix describing the color operation to perform. See also the {{#crossLink "ColorMatrix"}}{{/crossLink}}
    * class.
    **/
-  function ColorMatrixFilter( matrix ) {
+  function ColorMatrixFilter(matrix) {
     this.Filter_constructor();
 
     // public properties:
@@ -17437,46 +18497,58 @@ this.createjs = this.createjs || {};
      **/
     this.matrix = matrix;
 
-    this.FRAG_SHADER_BODY = (
+    this.FRAG_SHADER_BODY =
       "uniform mat4 uColorMatrix;" +
       "uniform vec4 uColorMatrixOffset;" +
-
       "void main(void) {" +
       "vec4 color = texture2D(uSampler, vRenderCoord);" +
-
       "mat4 m = uColorMatrix;" +
       "vec4 newColor = vec4(0,0,0,0);" +
       "newColor.r = color.r*m[0][0] + color.g*m[0][1] + color.b*m[0][2] + color.a*m[0][3];" +
       "newColor.g = color.r*m[1][0] + color.g*m[1][1] + color.b*m[1][2] + color.a*m[1][3];" +
       "newColor.b = color.r*m[2][0] + color.g*m[2][1] + color.b*m[2][2] + color.a*m[2][3];" +
       "newColor.a = color.r*m[3][0] + color.g*m[3][1] + color.b*m[3][2] + color.a*m[3][3];" +
-
       "gl_FragColor = newColor + uColorMatrixOffset;" +
-      "}"
-    );
+      "}";
   }
-  var p = createjs.extend( ColorMatrixFilter, createjs.Filter );
+  var p = createjs.extend(ColorMatrixFilter, createjs.Filter);
 
   // TODO: deprecated
   // p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
 
   /** docced in super class **/
-  p.shaderParamSetup = function ( gl, stage, shaderProgram ) {
+  p.shaderParamSetup = function (gl, stage, shaderProgram) {
     var mat = this.matrix;
-    var colorMatrix = new Float32Array( [
-      mat[ 0 ], mat[ 1 ], mat[ 2 ], mat[ 3 ],
-      mat[ 5 ], mat[ 6 ], mat[ 7 ], mat[ 8 ],
-      mat[ 10 ], mat[ 11 ], mat[ 12 ], mat[ 13 ],
-      mat[ 15 ], mat[ 16 ], mat[ 17 ], mat[ 18 ]
-    ] );
+    var colorMatrix = new Float32Array([
+      mat[0],
+      mat[1],
+      mat[2],
+      mat[3],
+      mat[5],
+      mat[6],
+      mat[7],
+      mat[8],
+      mat[10],
+      mat[11],
+      mat[12],
+      mat[13],
+      mat[15],
+      mat[16],
+      mat[17],
+      mat[18],
+    ]);
 
     gl.uniformMatrix4fv(
-      gl.getUniformLocation( shaderProgram, "uColorMatrix" ),
-      false, colorMatrix
+      gl.getUniformLocation(shaderProgram, "uColorMatrix"),
+      false,
+      colorMatrix
     );
     gl.uniform4f(
-      gl.getUniformLocation( shaderProgram, "uColorMatrixOffset" ),
-      mat[ 4 ] / 255, mat[ 9 ] / 255, mat[ 14 ] / 255, mat[ 19 ] / 255
+      gl.getUniformLocation(shaderProgram, "uColorMatrixOffset"),
+      mat[4] / 255,
+      mat[9] / 255,
+      mat[14] / 255,
+      mat[19] / 255
     );
   };
 
@@ -17488,52 +18560,52 @@ this.createjs = this.createjs || {};
 
   /** docced in super class **/
   p.clone = function () {
-    return new ColorMatrixFilter( this.matrix );
+    return new ColorMatrixFilter(this.matrix);
   };
 
   // private methods:
   /** docced in super class **/
-  p._applyFilter = function ( imageData ) {
+  p._applyFilter = function (imageData) {
     var data = imageData.data;
     var l = data.length;
     var r, g, b, a;
     var mtx = this.matrix;
-    var m0 = mtx[ 0 ],
-      m1 = mtx[ 1 ],
-      m2 = mtx[ 2 ],
-      m3 = mtx[ 3 ],
-      m4 = mtx[ 4 ];
-    var m5 = mtx[ 5 ],
-      m6 = mtx[ 6 ],
-      m7 = mtx[ 7 ],
-      m8 = mtx[ 8 ],
-      m9 = mtx[ 9 ];
-    var m10 = mtx[ 10 ],
-      m11 = mtx[ 11 ],
-      m12 = mtx[ 12 ],
-      m13 = mtx[ 13 ],
-      m14 = mtx[ 14 ];
-    var m15 = mtx[ 15 ],
-      m16 = mtx[ 16 ],
-      m17 = mtx[ 17 ],
-      m18 = mtx[ 18 ],
-      m19 = mtx[ 19 ];
+    var m0 = mtx[0],
+      m1 = mtx[1],
+      m2 = mtx[2],
+      m3 = mtx[3],
+      m4 = mtx[4];
+    var m5 = mtx[5],
+      m6 = mtx[6],
+      m7 = mtx[7],
+      m8 = mtx[8],
+      m9 = mtx[9];
+    var m10 = mtx[10],
+      m11 = mtx[11],
+      m12 = mtx[12],
+      m13 = mtx[13],
+      m14 = mtx[14];
+    var m15 = mtx[15],
+      m16 = mtx[16],
+      m17 = mtx[17],
+      m18 = mtx[18],
+      m19 = mtx[19];
 
-    for ( var i = 0; i < l; i += 4 ) {
-      r = data[ i ];
-      g = data[ i + 1 ];
-      b = data[ i + 2 ];
-      a = data[ i + 3 ];
-      data[ i ] = r * m0 + g * m1 + b * m2 + a * m3 + m4; // red
-      data[ i + 1 ] = r * m5 + g * m6 + b * m7 + a * m8 + m9; // green
-      data[ i + 2 ] = r * m10 + g * m11 + b * m12 + a * m13 + m14; // blue
-      data[ i + 3 ] = r * m15 + g * m16 + b * m17 + a * m18 + m19; // alpha
+    for (var i = 0; i < l; i += 4) {
+      r = data[i];
+      g = data[i + 1];
+      b = data[i + 2];
+      a = data[i + 3];
+      data[i] = r * m0 + g * m1 + b * m2 + a * m3 + m4; // red
+      data[i + 1] = r * m5 + g * m6 + b * m7 + a * m8 + m9; // green
+      data[i + 2] = r * m10 + g * m11 + b * m12 + a * m13 + m14; // blue
+      data[i + 3] = r * m15 + g * m16 + b * m17 + a * m18 + m19; // alpha
     }
     return true;
   };
 
-  createjs.ColorMatrixFilter = createjs.promote( ColorMatrixFilter, "Filter" );
-}() );
+  createjs.ColorMatrixFilter = createjs.promote(ColorMatrixFilter, "Filter");
+})();
 
 //##############################################################################
 // Touch.js
@@ -17541,9 +18613,8 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   // constructor:
   /**
@@ -17569,7 +18640,6 @@ this.createjs = this.createjs || {};
     throw "Touch cannot be instantiated";
   }
 
-
   // public static methods:
   /**
    * Returns `true` if touch is supported in the current browser.
@@ -17578,11 +18648,13 @@ this.createjs = this.createjs || {};
    * @static
    **/
   Touch.isSupported = function () {
-    return !!( ( 'ontouchstart' in window ) // iOS & Android
-      ||
-      ( window.navigator[ 'msPointerEnabled' ] && window.navigator[ 'msMaxTouchPoints' ] > 0 ) // IE10
-      ||
-      ( window.navigator[ 'pointerEnabled' ] && window.navigator[ 'maxTouchPoints' ] > 0 ) ); // IE11+
+    return !!(
+      "ontouchstart" in window || // iOS & Android
+      (window.navigator["msPointerEnabled"] &&
+        window.navigator["msMaxTouchPoints"] > 0) || // IE10
+      (window.navigator["pointerEnabled"] &&
+        window.navigator["maxTouchPoints"] > 0)
+    ); // IE11+
   };
 
   /**
@@ -17599,11 +18671,11 @@ this.createjs = this.createjs || {};
    * @return {Boolean} Returns `true` if touch was successfully enabled on the target stage.
    * @static
    **/
-  Touch.enable = function ( stage, singleTouch, allowDefault ) {
-    if ( !stage || !stage.canvas || !Touch.isSupported() ) {
+  Touch.enable = function (stage, singleTouch, allowDefault) {
+    if (!stage || !stage.canvas || !Touch.isSupported()) {
       return false;
     }
-    if ( stage.__touch ) {
+    if (stage.__touch) {
       return true;
     }
 
@@ -17612,15 +18684,18 @@ this.createjs = this.createjs || {};
       pointers: {},
       multitouch: !singleTouch,
       preventDefault: !allowDefault,
-      count: 0
+      count: 0,
     };
 
     // note that in the future we may need to disable the standard mouse event model before adding
     // these to prevent duplicate calls. It doesn't seem to be an issue with iOS devices though.
-    if ( 'ontouchstart' in window ) {
-      Touch._IOS_enable( stage );
-    } else if ( window.navigator[ 'msPointerEnabled' ] || window.navigator[ "pointerEnabled" ] ) {
-      Touch._IE_enable( stage );
+    if ("ontouchstart" in window) {
+      Touch._IOS_enable(stage);
+    } else if (
+      window.navigator["msPointerEnabled"] ||
+      window.navigator["pointerEnabled"]
+    ) {
+      Touch._IE_enable(stage);
     }
     return true;
   };
@@ -17631,19 +18706,21 @@ this.createjs = this.createjs || {};
    * @param {Stage} stage The {{#crossLink "Stage"}}{{/crossLink}} to disable touch on.
    * @static
    **/
-  Touch.disable = function ( stage ) {
-    if ( !stage ) {
+  Touch.disable = function (stage) {
+    if (!stage) {
       return;
     }
-    if ( 'ontouchstart' in window ) {
-      Touch._IOS_disable( stage );
-    } else if ( window.navigator[ 'msPointerEnabled' ] || window.navigator[ "pointerEnabled" ] ) {
-      Touch._IE_disable( stage );
+    if ("ontouchstart" in window) {
+      Touch._IOS_disable(stage);
+    } else if (
+      window.navigator["msPointerEnabled"] ||
+      window.navigator["pointerEnabled"]
+    ) {
+      Touch._IE_disable(stage);
     }
 
     delete stage.__touch;
   };
-
 
   // Private static methods:
   /**
@@ -17652,15 +18729,15 @@ this.createjs = this.createjs || {};
    * @param {Stage} stage
    * @static
    **/
-  Touch._IOS_enable = function ( stage ) {
+  Touch._IOS_enable = function (stage) {
     var canvas = stage.canvas;
-    var f = stage.__touch.f = function ( e ) {
-      Touch._IOS_handleEvent( stage, e );
-    };
-    canvas.addEventListener( "touchstart", f, false );
-    canvas.addEventListener( "touchmove", f, false );
-    canvas.addEventListener( "touchend", f, false );
-    canvas.addEventListener( "touchcancel", f, false );
+    var f = (stage.__touch.f = function (e) {
+      Touch._IOS_handleEvent(stage, e);
+    });
+    canvas.addEventListener("touchstart", f, false);
+    canvas.addEventListener("touchmove", f, false);
+    canvas.addEventListener("touchend", f, false);
+    canvas.addEventListener("touchcancel", f, false);
   };
 
   /**
@@ -17669,16 +18746,16 @@ this.createjs = this.createjs || {};
    * @param {Stage} stage
    * @static
    **/
-  Touch._IOS_disable = function ( stage ) {
+  Touch._IOS_disable = function (stage) {
     var canvas = stage.canvas;
-    if ( !canvas ) {
+    if (!canvas) {
       return;
     }
     var f = stage.__touch.f;
-    canvas.removeEventListener( "touchstart", f, false );
-    canvas.removeEventListener( "touchmove", f, false );
-    canvas.removeEventListener( "touchend", f, false );
-    canvas.removeEventListener( "touchcancel", f, false );
+    canvas.removeEventListener("touchstart", f, false);
+    canvas.removeEventListener("touchmove", f, false);
+    canvas.removeEventListener("touchend", f, false);
+    canvas.removeEventListener("touchcancel", f, false);
   };
 
   /**
@@ -17688,28 +18765,28 @@ this.createjs = this.createjs || {};
    * @protected
    * @static
    **/
-  Touch._IOS_handleEvent = function ( stage, e ) {
-    if ( !stage ) {
+  Touch._IOS_handleEvent = function (stage, e) {
+    if (!stage) {
       return;
     }
-    if ( stage.__touch.preventDefault ) {
+    if (stage.__touch.preventDefault) {
       e.preventDefault && e.preventDefault();
     }
     var touches = e.changedTouches;
     var type = e.type;
-    for ( var i = 0, l = touches.length; i < l; i++ ) {
-      var touch = touches[ i ];
+    for (var i = 0, l = touches.length; i < l; i++) {
+      var touch = touches[i];
       var id = touch.identifier;
-      if ( touch.target != stage.canvas ) {
+      if (touch.target != stage.canvas) {
         continue;
       }
 
-      if ( type == "touchstart" ) {
-        this._handleStart( stage, id, e, touch.pageX, touch.pageY );
-      } else if ( type == "touchmove" ) {
-        this._handleMove( stage, id, e, touch.pageX, touch.pageY );
-      } else if ( type == "touchend" || type == "touchcancel" ) {
-        this._handleEnd( stage, id, e );
+      if (type == "touchstart") {
+        this._handleStart(stage, id, e, touch.pageX, touch.pageY);
+      } else if (type == "touchmove") {
+        this._handleMove(stage, id, e, touch.pageX, touch.pageY);
+      } else if (type == "touchend" || type == "touchcancel") {
+        this._handleEnd(stage, id, e);
       }
     }
   };
@@ -17720,29 +18797,28 @@ this.createjs = this.createjs || {};
    * @param {Stage} stage
    * @static
    **/
-  Touch._IE_enable = function ( stage ) {
+  Touch._IE_enable = function (stage) {
     var canvas = stage.canvas;
-    var f = stage.__touch.f = function ( e ) {
-      Touch._IE_handleEvent( stage, e );
-    };
+    var f = (stage.__touch.f = function (e) {
+      Touch._IE_handleEvent(stage, e);
+    });
 
-    if ( window.navigator[ "pointerEnabled" ] === undefined ) {
-      canvas.addEventListener( "MSPointerDown", f, false );
-      window.addEventListener( "MSPointerMove", f, false );
-      window.addEventListener( "MSPointerUp", f, false );
-      window.addEventListener( "MSPointerCancel", f, false );
-      if ( stage.__touch.preventDefault ) {
+    if (window.navigator["pointerEnabled"] === undefined) {
+      canvas.addEventListener("MSPointerDown", f, false);
+      window.addEventListener("MSPointerMove", f, false);
+      window.addEventListener("MSPointerUp", f, false);
+      window.addEventListener("MSPointerCancel", f, false);
+      if (stage.__touch.preventDefault) {
         canvas.style.msTouchAction = "none";
       }
     } else {
-      canvas.addEventListener( "pointerdown", f, false );
-      window.addEventListener( "pointermove", f, false );
-      window.addEventListener( "pointerup", f, false );
-      window.addEventListener( "pointercancel", f, false );
-      if ( stage.__touch.preventDefault ) {
+      canvas.addEventListener("pointerdown", f, false);
+      window.addEventListener("pointermove", f, false);
+      window.addEventListener("pointerup", f, false);
+      window.addEventListener("pointercancel", f, false);
+      if (stage.__touch.preventDefault) {
         canvas.style.touchAction = "none";
       }
-
     }
     stage.__touch.activeIDs = {};
   };
@@ -17753,22 +18829,22 @@ this.createjs = this.createjs || {};
    * @param {Stage} stage
    * @static
    **/
-  Touch._IE_disable = function ( stage ) {
+  Touch._IE_disable = function (stage) {
     var f = stage.__touch.f;
 
-    if ( window.navigator[ "pointerEnabled" ] === undefined ) {
-      window.removeEventListener( "MSPointerMove", f, false );
-      window.removeEventListener( "MSPointerUp", f, false );
-      window.removeEventListener( "MSPointerCancel", f, false );
-      if ( stage.canvas ) {
-        stage.canvas.removeEventListener( "MSPointerDown", f, false );
+    if (window.navigator["pointerEnabled"] === undefined) {
+      window.removeEventListener("MSPointerMove", f, false);
+      window.removeEventListener("MSPointerUp", f, false);
+      window.removeEventListener("MSPointerCancel", f, false);
+      if (stage.canvas) {
+        stage.canvas.removeEventListener("MSPointerDown", f, false);
       }
     } else {
-      window.removeEventListener( "pointermove", f, false );
-      window.removeEventListener( "pointerup", f, false );
-      window.removeEventListener( "pointercancel", f, false );
-      if ( stage.canvas ) {
-        stage.canvas.removeEventListener( "pointerdown", f, false );
+      window.removeEventListener("pointermove", f, false);
+      window.removeEventListener("pointerup", f, false);
+      window.removeEventListener("pointercancel", f, false);
+      if (stage.canvas) {
+        stage.canvas.removeEventListener("pointerdown", f, false);
       }
     }
   };
@@ -17780,30 +18856,35 @@ this.createjs = this.createjs || {};
    * @protected
    * @static
    **/
-  Touch._IE_handleEvent = function ( stage, e ) {
-    if ( !stage ) {
+  Touch._IE_handleEvent = function (stage, e) {
+    if (!stage) {
       return;
     }
-    if ( stage.__touch.preventDefault ) {
+    if (stage.__touch.preventDefault) {
       e.preventDefault && e.preventDefault();
     }
     var type = e.type;
     var id = e.pointerId;
     var ids = stage.__touch.activeIDs;
 
-    if ( type == "MSPointerDown" || type == "pointerdown" ) {
-      if ( e.srcElement != stage.canvas ) {
+    if (type == "MSPointerDown" || type == "pointerdown") {
+      if (e.srcElement != stage.canvas) {
         return;
       }
-      ids[ id ] = true;
-      this._handleStart( stage, id, e, e.pageX, e.pageY );
-    } else if ( ids[ id ] ) { // it's an id we're watching
-      if ( type == "MSPointerMove" || type == "pointermove" ) {
-        this._handleMove( stage, id, e, e.pageX, e.pageY );
-      } else if ( type == "MSPointerUp" || type == "MSPointerCancel" ||
-        type == "pointerup" || type == "pointercancel" ) {
-        delete( ids[ id ] );
-        this._handleEnd( stage, id, e );
+      ids[id] = true;
+      this._handleStart(stage, id, e, e.pageX, e.pageY);
+    } else if (ids[id]) {
+      // it's an id we're watching
+      if (type == "MSPointerMove" || type == "pointermove") {
+        this._handleMove(stage, id, e, e.pageX, e.pageY);
+      } else if (
+        type == "MSPointerUp" ||
+        type == "MSPointerCancel" ||
+        type == "pointerup" ||
+        type == "pointercancel"
+      ) {
+        delete ids[id];
+        this._handleEnd(stage, id, e);
       }
     }
   };
@@ -17817,18 +18898,18 @@ this.createjs = this.createjs || {};
    * @param {Number} y
    * @protected
    **/
-  Touch._handleStart = function ( stage, id, e, x, y ) {
+  Touch._handleStart = function (stage, id, e, x, y) {
     var props = stage.__touch;
-    if ( !props.multitouch && props.count ) {
+    if (!props.multitouch && props.count) {
       return;
     }
     var ids = props.pointers;
-    if ( ids[ id ] ) {
+    if (ids[id]) {
       return;
     }
-    ids[ id ] = true;
+    ids[id] = true;
     props.count++;
-    stage._handlePointerDown( id, e, x, y );
+    stage._handlePointerDown(id, e, x, y);
   };
 
   /**
@@ -17840,11 +18921,11 @@ this.createjs = this.createjs || {};
    * @param {Number} y
    * @protected
    **/
-  Touch._handleMove = function ( stage, id, e, x, y ) {
-    if ( !stage.__touch.pointers[ id ] ) {
+  Touch._handleMove = function (stage, id, e, x, y) {
+    if (!stage.__touch.pointers[id]) {
       return;
     }
-    stage._handlePointerMove( id, e, x, y );
+    stage._handlePointerMove(id, e, x, y);
   };
 
   /**
@@ -17854,21 +18935,20 @@ this.createjs = this.createjs || {};
    * @param {Object} e
    * @protected
    **/
-  Touch._handleEnd = function ( stage, id, e ) {
+  Touch._handleEnd = function (stage, id, e) {
     // TODO: cancel should be handled differently for proper UI (ex. an up would trigger a click, a cancel would more closely resemble an out).
     var props = stage.__touch;
     var ids = props.pointers;
-    if ( !ids[ id ] ) {
+    if (!ids[id]) {
       return;
     }
     props.count--;
-    stage._handlePointerUp( id, e, true );
-    delete( ids[ id ] );
+    stage._handlePointerUp(id, e, true);
+    delete ids[id];
   };
 
-
   createjs.Touch = Touch;
-}() );
+})();
 
 //##############################################################################
 // version.js
@@ -17876,7 +18956,7 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
 
   /**
@@ -17884,7 +18964,7 @@ this.createjs = this.createjs || {};
    * the library.
    * @class EaselJS
    **/
-  var s = createjs.EaselJS = createjs.EaselJS || {};
+  var s = (createjs.EaselJS = createjs.EaselJS || {});
 
   /**
    * The version string for this release.
@@ -17901,5 +18981,4 @@ this.createjs = this.createjs || {};
    * @static
    **/
   s.buildDate = /*=date*/ "Thu, 14 Sep 2017 19:47:53 GMT"; // injected by build process
-
-} )();
+})();

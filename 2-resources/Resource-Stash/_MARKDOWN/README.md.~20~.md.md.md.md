@@ -26,9 +26,8 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
-
-1) Express has a similar middleware functionality like Redux, where Express automatically figures out the order in which it goes and knows specifically which function to invoke when next() iss called
-2) I learned how to break our backend application into smaller chunks with Express Routes, which also makes the application easier to read and maintain
+1. Express has a similar middleware functionality like Redux, where Express automatically figures out the order in which it goes and knows specifically which function to invoke when next() iss called
+2. I learned how to break our backend application into smaller chunks with Express Routes, which also makes the application easier to read and maintain
 
 - [ ] Describe Middleware?
 
@@ -40,7 +39,7 @@ The data that server posses, I believe. For example could be a list of hobits re
 
 - [ ] What can the API return to help clients know if a request was successful?
 
-It can return a success code 2xx where xx are different numbers. For example 200 means that something was successfully created on the server. 
+It can return a success code 2xx where xx are different numbers. For example 200 means that something was successfully created on the server.
 
 - [ ] How can we partition our application into sub-applications?
 

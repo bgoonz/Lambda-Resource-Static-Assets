@@ -1,98 +1,318 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>README</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-</head>
-<body>
-<h1>
-<img alt="vscode-js-debug" src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/logo-with-text.png" width="500"> <br> <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly" alt="Click to visit marketplace"> <img src="https://vsmarketplacebadge.apphb.com/version-short/ms-vscode.js-debug-nightly.svg"> <img src="https://vsmarketplacebadge.apphb.com/rating-star/ms-vscode.js-debug-nightly.svg"> </a>
-</h1>
-<p>This is a <a href="https://microsoft.github.io/debug-adapter-protocol/">DAP</a>-based JavaScript debugger. It debugs Node.js, Chrome, Edge, WebView2, VS Code extensions, and more. It has been the default JavaScript debugger in Visual Studio Code since 1.46, and is gradually rolling out in Visual Studio proper.</p>
-<h3 id="nightly-extension">Nightly Extension</h3>
-<p>The shipped version of VS Code includes the js-debug version at the time of its release, however you may want to install our nightly build to get the latest fixes and features. The nightly build runs at 5PM PST on each day that there are changes (<a href="https://dev.azure.com/vscode/VS%20Code%20debug%20adapters/_build?definitionId=28">see pipeline</a>). To get the build:</p>
-<ol type="1">
-<li>Open the extensions view (ctrl+shift+x) and search for <code>@builtin @id:ms-vscode.js-debug</code></li>
-<li>Right click on the <code>JavaScript Debugger</code> extension and <code>Disable</code> it.</li>
-<li>Search for <code>@id:ms-vscode.js-debug-nightly</code> in the extensions view.</li>
-<li>Install that extension.</li>
-</ol>
-<h2 id="whats-new">What’s new?</h2>
-<p>In <code>js-debug</code> we aim to provide rich debugging for modern applications, with no or minimal configuration required. Here are a few new features that js-debug brings:</p>
-<h3 id="debug-child-process-and-workers">Debug child process and workers</h3>
-<p>In Node.js, child processes will automatically be debugged. In browsers, service workers, webworkers, and iframes will be debugged as well.</p>
-<p><img src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/web-worker.png" width="302"></p>
-<p>While debugging workers, you can also step through <code>postMessage()</code> calls.</p>
-<h3 id="debug-node.js-processes-in-the-terminal">Debug Node.js processes in the terminal</h3>
-<p>You can debug any Node.js process you run in the terminal with our revamped Auto Attach. If auto attach isn’t on, you can run the command <code>Debug: Toggle Auto Attach</code> to turn it on. Next time you run a command like <code>npm start</code>, we’ll debug it.</p>
-<p><img src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/auto-attach.png" width="554"></p>
-<p>Once enabled, you can toggle Auto Attach by clicking the <code>Auto Attach: On/Off</code> button in the status bar on the bottom of your screen.</p>
-<p>You can also create a one-off terminal for debugging via the <code>Debug: Create JavaScript Debug Terminal</code> command.</p>
-<p>In the previous debugger, you had to remember to add the <code>--inspect</code> flag when you ran a command, and couldn’t hit breakpoints early in the program since attachment was asynchronous.</p>
-<h3 id="profiling-support">Profiling Support</h3>
-<p>You can capture and view performance profiles natively in VS Code, by clicking on the ⚪ button in the Call Stack view, or through the <code>Debug: Take Performance Profile</code> command. The profile information collected through VS Code is sourcemap-aware.</p>
-<p><img src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/flame-chart.png" width="845"></p>
-<h3 id="easy-npm-script-debugging">Easy npm script debugging</h3>
-<p>You can debug npm scripts by clicking the code lens shown in the package.json, or by running the <code>Debug: Debug NPM Script</code> command/</p>
-<p><img src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/npm-code-lens.png" width="306"></p>
-<p>You can configure where and if the code lens is displayed in the <code>debug.javascript.codelens.npmScripts</code> setting.</p>
-<h3 id="automatic-browser-debugging">Automatic browser debugging</h3>
-<p>By default, any links you click through the JavaScript debug terminal (<code>Debug: Create JavaScript Debug Terminal</code> command) will open in debug mode. If you’d like, you can enable this for all terminals, or disable it, by setting <code>debug.javascript.debugByLinkOptions</code> to <code>always</code> or <code>off</code>, respectively.</p>
-<p><img src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/link-debugging.gif"></p>
-<h3 id="instrumentation-breakpoints">Instrumentation breakpoints</h3>
-<p>When debugging web apps, you can configure instrumentation breakpoints from VS Code in the “Browser Breakpoints” view.</p>
-<p><img src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/instrumentation-breakpoints.png" width="367"> <img src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/instrumentation-breakpoints2.png" width="602"></p>
-<h3 id="better-autocompletion-in-debug-console">Better autocompletion in debug console</h3>
-<p>Autocomplete in the debug console has been significantly improved. You can expect better suggestions for more complex expressions than VS Code was able to handle before.</p>
-<p><img src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/repl-improvements.png" width="507"></p>
-<h3 id="return-value-interception">Return value interception</h3>
-<p>On a function’s return statement, you can use, inspect, and modify the <code>$returnValue</code>.</p>
-<p><img src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/returnvalue.png"></p>
-<p>Note that you can use and modify properties on the <code>$returnValue</code>, but not assign it to–it is effectively a <code>const</code> variable.</p>
-<h3 id="top-level-await">Top-Level <code>await</code></h3>
-<p>You can use <code>await</code> at the top level in the debug console.</p>
-<p><img src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/top-level-await.png" width="861"></p>
-<p>However, like the Chrome devtools, if you use <code>await</code> while paused on a breakpoint, you’ll only get a pending <code>Promise</code> back. This is because the JavaScript event loop is paused while on a breakpoint.</p>
-<h3 id="pretty-print-minified-sources">Pretty-print minified sources</h3>
-<p>The debugger can now pretty print files, especially useful when dealing with minified sources. It will show a prompt when you step into or open a file that looks minified, and you can also trigger pretty printing manually via the <code>Debug: Pretty print for debugging</code> command.</p>
-<p><a href="https://code.visualstudio.com/assets/updates/1_43/js-debug-pretty-printing.gif">Click to view gif</a></p>
-<p>You can turn off the suggestion prompt by selecting Never, or changing the setting debug.javascript.suggestPrettyPrinting to false.</p>
-<h3 id="support-for-microsoft-edge-and-webview2">Support for Microsoft Edge and WebView2</h3>
-<p>We support launching the <a href="https://www.microsoft.com/edge">new Microsoft Edge browser</a>, via the <code>pwa-msedge</code> debug type. It supports all the same configuration settings as <code>chrome</code> does.</p>
-<p><img src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/webview2.png" width="584"></p>
-<p>With this comes support for the <a href="https://docs.microsoft.com/microsoft-edge/hosting/webview2">WebView2</a> control in desktop Windows applications. Check out our <a href="https://github.com/microsoft/vscode-js-debug/tree/main/demos/webview">webview demo</a> to learn how to set this up.</p>
-<h3 id="better-sourcemap-and-breakpoint-behavior">Better sourcemap and breakpoint behavior</h3>
-<p>Js-debug has a rewritten suite of sourcemap handling and breakpoint resolution logic. This results in more reliable breakpoint behavior in more cases. For example:</p>
-<ul>
-<li>We are guaranteed to set breakpoints before hitting them, where there were previously scenarios where this did not happen.</li>
-<li>We can handle sources present in multiple compiled files. This is common when dealing with split bundles in web apps.</li>
-<li>We now support in-place transpilation (such as <code>ts-node</code> and <code>@babel/register</code>).</li>
-</ul>
-<h3 id="copy-values-in-call-stack-view">Copy values in call stack view</h3>
-<p>VS Code has long had an action to “Copy Value” from the Variables view. However, previously this was truncated for object or long values. Changes in VS Code and js-debug allow us to losslessly copy the full expressions as JSON.</p>
-<h3 id="other-small-things">Other small things</h3>
-<p>js-debug is a cleanroom rewrite of a JavaScript debugger, so there are a large number of small improvements. Here are some more that are unworthy of their own heading:</p>
-<ul>
-<li>Console output is now improved. Promises, ArrayViews/ArrayBuffers, and other complex data structures are better supported.</li>
-<li>Logpoint breakpoints now support complex expressions and statements. Errors thrown will be printed, rather than silently eaten.</li>
-<li>You can now specify partial versions in the Node.js <code>runtimeVersion</code>. Previously you needed to specify the full version, such as <code>12.3.4</code>. Now, you can specify <code>12</code> and we’ll use the most recent <code>12.*</code> installed on the system.</li>
-<li>Sourcemaps are now supported when attaching via the <code>Attach to Node.js Process</code> command.</li>
-<li>Several improvements have been made for faster performance and better out-of-the-box behavior in monorepos and multi-part applications.</li>
-<li>The <code>console.group()</code> set of APIs are now supported.</li>
-<li>You can pass <code>stable</code>, <code>canary</code>, or <code>dev</code> as <code>runtimeExecutable</code>s when launching browsers. We’ll do our best to discover and use the specified version on your machine.</li>
-<li>You can now set the Node.js <code>program</code> to files with other or no extensions without workarounds.</li>
-<li>Restart frame requests are now supported.</li>
-<li>Command line APIs like <code>inspect()</code> and <code>copy()</code> are now available.</li>
-</ul>
-<h3 id="options">Options</h3>
-<p>See <a href="https://github.com/Microsoft/vscode-pwa/blob/master/./OPTIONS.md">OPTIONS.md</a></p>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+      <img
+        alt="vscode-js-debug"
+        src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/logo-with-text.png"
+        width="500"
+      />
+      <br />
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly"
+        alt="Click to visit marketplace"
+      >
+        <img
+          src="https://vsmarketplacebadge.apphb.com/version-short/ms-vscode.js-debug-nightly.svg"
+        />
+        <img
+          src="https://vsmarketplacebadge.apphb.com/rating-star/ms-vscode.js-debug-nightly.svg"
+        />
+      </a>
+    </h1>
+    <p>
+      This is a <a href="https://microsoft.github.io/debug-adapter-protocol/">DAP</a>-based
+      JavaScript debugger. It debugs Node.js, Chrome, Edge, WebView2, VS Code extensions, and more.
+      It has been the default JavaScript debugger in Visual Studio Code since 1.46, and is gradually
+      rolling out in Visual Studio proper.
+    </p>
+    <h3 id="nightly-extension">Nightly Extension</h3>
+    <p>
+      The shipped version of VS Code includes the js-debug version at the time of its release,
+      however you may want to install our nightly build to get the latest fixes and features. The
+      nightly build runs at 5PM PST on each day that there are changes (<a
+        href="https://dev.azure.com/vscode/VS%20Code%20debug%20adapters/_build?definitionId=28"
+        >see pipeline</a
+      >). To get the build:
+    </p>
+    <ol type="1">
+      <li>
+        Open the extensions view (ctrl+shift+x) and search for
+        <code>@builtin @id:ms-vscode.js-debug</code>
+      </li>
+      <li>
+        Right click on the <code>JavaScript Debugger</code> extension and <code>Disable</code> it.
+      </li>
+      <li>Search for <code>@id:ms-vscode.js-debug-nightly</code> in the extensions view.</li>
+      <li>Install that extension.</li>
+    </ol>
+    <h2 id="whats-new">What’s new?</h2>
+    <p>
+      In <code>js-debug</code> we aim to provide rich debugging for modern applications, with no or
+      minimal configuration required. Here are a few new features that js-debug brings:
+    </p>
+    <h3 id="debug-child-process-and-workers">Debug child process and workers</h3>
+    <p>
+      In Node.js, child processes will automatically be debugged. In browsers, service workers,
+      webworkers, and iframes will be debugged as well.
+    </p>
+    <p>
+      <img
+        src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/web-worker.png"
+        width="302"
+      />
+    </p>
+    <p>While debugging workers, you can also step through <code>postMessage()</code> calls.</p>
+    <h3 id="debug-node.js-processes-in-the-terminal">Debug Node.js processes in the terminal</h3>
+    <p>
+      You can debug any Node.js process you run in the terminal with our revamped Auto Attach. If
+      auto attach isn’t on, you can run the command <code>Debug: Toggle Auto Attach</code> to turn
+      it on. Next time you run a command like <code>npm start</code>, we’ll debug it.
+    </p>
+    <p>
+      <img
+        src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/auto-attach.png"
+        width="554"
+      />
+    </p>
+    <p>
+      Once enabled, you can toggle Auto Attach by clicking the
+      <code>Auto Attach: On/Off</code> button in the status bar on the bottom of your screen.
+    </p>
+    <p>
+      You can also create a one-off terminal for debugging via the
+      <code>Debug: Create JavaScript Debug Terminal</code> command.
+    </p>
+    <p>
+      In the previous debugger, you had to remember to add the <code>--inspect</code> flag when you
+      ran a command, and couldn’t hit breakpoints early in the program since attachment was
+      asynchronous.
+    </p>
+    <h3 id="profiling-support">Profiling Support</h3>
+    <p>
+      You can capture and view performance profiles natively in VS Code, by clicking on the ⚪
+      button in the Call Stack view, or through the
+      <code>Debug: Take Performance Profile</code> command. The profile information collected
+      through VS Code is sourcemap-aware.
+    </p>
+    <p>
+      <img
+        src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/flame-chart.png"
+        width="845"
+      />
+    </p>
+    <h3 id="easy-npm-script-debugging">Easy npm script debugging</h3>
+    <p>
+      You can debug npm scripts by clicking the code lens shown in the package.json, or by running
+      the <code>Debug: Debug NPM Script</code> command/
+    </p>
+    <p>
+      <img
+        src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/npm-code-lens.png"
+        width="306"
+      />
+    </p>
+    <p>
+      You can configure where and if the code lens is displayed in the
+      <code>debug.javascript.codelens.npmScripts</code> setting.
+    </p>
+    <h3 id="automatic-browser-debugging">Automatic browser debugging</h3>
+    <p>
+      By default, any links you click through the JavaScript debug terminal (<code
+        >Debug: Create JavaScript Debug Terminal</code
+      >
+      command) will open in debug mode. If you’d like, you can enable this for all terminals, or
+      disable it, by setting <code>debug.javascript.debugByLinkOptions</code> to
+      <code>always</code> or <code>off</code>, respectively.
+    </p>
+    <p>
+      <img
+        src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/link-debugging.gif"
+      />
+    </p>
+    <h3 id="instrumentation-breakpoints">Instrumentation breakpoints</h3>
+    <p>
+      When debugging web apps, you can configure instrumentation breakpoints from VS Code in the
+      “Browser Breakpoints” view.
+    </p>
+    <p>
+      <img
+        src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/instrumentation-breakpoints.png"
+        width="367"
+      />
+      <img
+        src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/instrumentation-breakpoints2.png"
+        width="602"
+      />
+    </p>
+    <h3 id="better-autocompletion-in-debug-console">Better autocompletion in debug console</h3>
+    <p>
+      Autocomplete in the debug console has been significantly improved. You can expect better
+      suggestions for more complex expressions than VS Code was able to handle before.
+    </p>
+    <p>
+      <img
+        src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/repl-improvements.png"
+        width="507"
+      />
+    </p>
+    <h3 id="return-value-interception">Return value interception</h3>
+    <p>
+      On a function’s return statement, you can use, inspect, and modify the
+      <code>$returnValue</code>.
+    </p>
+    <p>
+      <img
+        src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/returnvalue.png"
+      />
+    </p>
+    <p>
+      Note that you can use and modify properties on the <code>$returnValue</code>, but not assign
+      it to–it is effectively a <code>const</code> variable.
+    </p>
+    <h3 id="top-level-await">Top-Level <code>await</code></h3>
+    <p>You can use <code>await</code> at the top level in the debug console.</p>
+    <p>
+      <img
+        src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/top-level-await.png"
+        width="861"
+      />
+    </p>
+    <p>
+      However, like the Chrome devtools, if you use <code>await</code> while paused on a breakpoint,
+      you’ll only get a pending <code>Promise</code> back. This is because the JavaScript event loop
+      is paused while on a breakpoint.
+    </p>
+    <h3 id="pretty-print-minified-sources">Pretty-print minified sources</h3>
+    <p>
+      The debugger can now pretty print files, especially useful when dealing with minified sources.
+      It will show a prompt when you step into or open a file that looks minified, and you can also
+      trigger pretty printing manually via the
+      <code>Debug: Pretty print for debugging</code> command.
+    </p>
+    <p>
+      <a href="https://code.visualstudio.com/assets/updates/1_43/js-debug-pretty-printing.gif"
+        >Click to view gif</a
+      >
+    </p>
+    <p>
+      You can turn off the suggestion prompt by selecting Never, or changing the setting
+      debug.javascript.suggestPrettyPrinting to false.
+    </p>
+    <h3 id="support-for-microsoft-edge-and-webview2">Support for Microsoft Edge and WebView2</h3>
+    <p>
+      We support launching the
+      <a href="https://www.microsoft.com/edge">new Microsoft Edge browser</a>, via the
+      <code>pwa-msedge</code> debug type. It supports all the same configuration settings as
+      <code>chrome</code> does.
+    </p>
+    <p>
+      <img
+        src="https://github.com/Microsoft/vscode-pwa/raw/master/resources/readme/webview2.png"
+        width="584"
+      />
+    </p>
+    <p>
+      With this comes support for the
+      <a href="https://docs.microsoft.com/microsoft-edge/hosting/webview2">WebView2</a> control in
+      desktop Windows applications. Check out our
+      <a href="https://github.com/microsoft/vscode-js-debug/tree/main/demos/webview"
+        >webview demo</a
+      >
+      to learn how to set this up.
+    </p>
+    <h3 id="better-sourcemap-and-breakpoint-behavior">Better sourcemap and breakpoint behavior</h3>
+    <p>
+      Js-debug has a rewritten suite of sourcemap handling and breakpoint resolution logic. This
+      results in more reliable breakpoint behavior in more cases. For example:
+    </p>
+    <ul>
+      <li>
+        We are guaranteed to set breakpoints before hitting them, where there were previously
+        scenarios where this did not happen.
+      </li>
+      <li>
+        We can handle sources present in multiple compiled files. This is common when dealing with
+        split bundles in web apps.
+      </li>
+      <li>
+        We now support in-place transpilation (such as <code>ts-node</code> and
+        <code>@babel/register</code>).
+      </li>
+    </ul>
+    <h3 id="copy-values-in-call-stack-view">Copy values in call stack view</h3>
+    <p>
+      VS Code has long had an action to “Copy Value” from the Variables view. However, previously
+      this was truncated for object or long values. Changes in VS Code and js-debug allow us to
+      losslessly copy the full expressions as JSON.
+    </p>
+    <h3 id="other-small-things">Other small things</h3>
+    <p>
+      js-debug is a cleanroom rewrite of a JavaScript debugger, so there are a large number of small
+      improvements. Here are some more that are unworthy of their own heading:
+    </p>
+    <ul>
+      <li>
+        Console output is now improved. Promises, ArrayViews/ArrayBuffers, and other complex data
+        structures are better supported.
+      </li>
+      <li>
+        Logpoint breakpoints now support complex expressions and statements. Errors thrown will be
+        printed, rather than silently eaten.
+      </li>
+      <li>
+        You can now specify partial versions in the Node.js <code>runtimeVersion</code>. Previously
+        you needed to specify the full version, such as <code>12.3.4</code>. Now, you can specify
+        <code>12</code> and we’ll use the most recent <code>12.*</code> installed on the system.
+      </li>
+      <li>
+        Sourcemaps are now supported when attaching via the
+        <code>Attach to Node.js Process</code> command.
+      </li>
+      <li>
+        Several improvements have been made for faster performance and better out-of-the-box
+        behavior in monorepos and multi-part applications.
+      </li>
+      <li>The <code>console.group()</code> set of APIs are now supported.</li>
+      <li>
+        You can pass <code>stable</code>, <code>canary</code>, or <code>dev</code> as
+        <code>runtimeExecutable</code>s when launching browsers. We’ll do our best to discover and
+        use the specified version on your machine.
+      </li>
+      <li>
+        You can now set the Node.js <code>program</code> to files with other or no extensions
+        without workarounds.
+      </li>
+      <li>Restart frame requests are now supported.</li>
+      <li>
+        Command line APIs like <code>inspect()</code> and <code>copy()</code> are now available.
+      </li>
+    </ul>
+    <h3 id="options">Options</h3>
+    <p>
+      See <a href="https://github.com/Microsoft/vscode-pwa/blob/master/./OPTIONS.md">OPTIONS.md</a>
+    </p>
+  </body>
 </html>

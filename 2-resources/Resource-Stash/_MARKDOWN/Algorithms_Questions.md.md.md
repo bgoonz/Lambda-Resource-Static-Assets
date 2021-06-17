@@ -11,7 +11,6 @@ a)  a = 0
       a = a + n * n
 ```
 
-
 ```
 b)  sum = 0
     for i in range(n):

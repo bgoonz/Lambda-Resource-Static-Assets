@@ -1,4 +1,5 @@
 # REST API Review - Node/Express
+
 ### Section 3
 
 ## Restricts Users Route
@@ -8,32 +9,31 @@
 Now we're going to prepare a function to check for and verify a JSON web token.
 
 - [ ] In the root directory, add another directory named `auth`
-	- [ ] Add `restricion.js` to your new `auth` directory.
+  - [ ] Add `restricion.js` to your new `auth` directory.
 
 _auth/restriction.js_
 
 ```javascript
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
-
   const token = req.headers.authorization;
 
   if (token) {
-    const secret = process.env.JWT_SECRET || "Let me tell you a myth about secrets..";
+    const secret =
+      process.env.JWT_SECRET || "Let me tell you a myth about secrets..";
 
     jwt.verify(token, secret, (err, decodedToken) => {
       if (err) {
-        res.status(401).json({ message: 'Invalid Credentials' });
+        res.status(401).json({ message: "Invalid Credentials" });
       } else {
         req.decodedJwt = decodedToken;
         next();
       }
     });
   } else {
-    res.status(400).json({ message: 'No credentials provided' });
+    res.status(400).json({ message: "No credentials provided" });
   }
-
 };
 ```
 
@@ -48,7 +48,7 @@ router.get('/', restricted, (req, res) => {
   Users.find()
   	...
   	...
-}  	
+}
 ```
 
 - [ ] Test out this restriction by trying to `GET /api/users` in Insomnia or Postman and looking for the relevant error.
@@ -62,75 +62,70 @@ router.get('/', restricted, (req, res) => {
 ## Adds Login and Register endpoints
 
 - [ ] In `auth/` create 3 files
-	- [ ] auth-helpers.js
-	- [ ] login-router.js
-	- [ ] register-router.js
-
-	
+  - [ ] auth-helpers.js
+  - [ ] login-router.js
+  - [ ] register-router.js
 - [ ] First write a helper function to get the JSON Web Token
 
 _auth/auth-helpers.js_
 
 ```javascript
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 module.exports = {
-  getJwt
-}
+  getJwt,
+};
 
 function getJwt(username) {
   const payload = {
-    username
+    username,
   };
 
-  const secret = process.env.JWT_SECRET || "Let me tell you a myth about secrets..";
+  const secret =
+    process.env.JWT_SECRET || "Let me tell you a myth about secrets..";
 
   const options = {
-    expiresIn: '1d'
+    expiresIn: "1d",
   };
 
-  return jwt.sign(payload, secret, options)
+  return jwt.sign(payload, secret, options);
 }
-``` 
+```
 
 - [ ] Then write a route for logging in, using our new `getJWT()` function
 
 _auth/login-router.js_
 
 ```javascript
-const router = require('express').Router();
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const router = require("express").Router();
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
-const Users = require('../users/user-model');
-const Token = require('./auth-helpers.js');
+const Users = require("../users/user-model");
+const Token = require("./auth-helpers.js");
 
-router.post('/', (req, res) => {
-  
+router.post("/", (req, res) => {
   let { username, password } = req.body;
 
   Users.findBy({ username })
     .first()
-    .then(user => {
-
+    .then((user) => {
       if (user && bcrypt.compareSync(password, user.password)) {
-        
         const token = Token.getJwt(user.username);
 
         res.status(200).json({
           id: user.id,
           username: user.username,
-          token
+          token,
         });
       } else {
-        res.status(401).json({ message: 'Invalid credentials' });
+        res.status(401).json({ message: "Invalid credentials" });
       }
     })
-    .catch(error => {
+    .catch((error) => {
       res.status(500).json(error);
     });
-})
-
+});
 
 module.exports = router;
 ```
@@ -140,42 +135,40 @@ module.exports = router;
 _auth/register-router.js_
 
 ```javascript
-const router = require('express').Router();
-const bcrypt = require('bcryptjs');
+const router = require("express").Router();
+const bcrypt = require("bcryptjs");
 
-const Users = require('../users/user-model.js');
-const Token = require('./auth-helpers.js');
-const { validateUser } = require('../users/user-helpers.js');
+const Users = require("../users/user-model.js");
+const Token = require("./auth-helpers.js");
+const { validateUser } = require("../users/user-helpers.js");
 
-router.post('/', (req, res) => {
-
+router.post("/", (req, res) => {
   let user = req.body;
 
   const validateResult = validateUser(user);
 
   if (validateResult.isSuccessful === true) {
-    
     const hash = bcrypt.hashSync(user.password, 10);
     user.password = hash;
 
     const token = Token.getJwt(user.username);
 
     Users.add(user)
-      .then(saved => {
-        res.status(201).json({ id: saved.id, username: saved.username, token: token });
+      .then((saved) => {
+        res
+          .status(201)
+          .json({ id: saved.id, username: saved.username, token: token });
       })
-      .catch(error => {
+      .catch((error) => {
         res.status(500).json(error);
-      })
-
+      });
   } else {
-
     res.status(400).json({
-      message: 'Invalid user info, see errors',
-      errors: validateResult.errors
+      message: "Invalid user info, see errors",
+      errors: validateResult.errors,
     });
   }
-})
+});
 
 module.exports = router;
 ```
@@ -185,11 +178,11 @@ module.exports = router;
 - [ ] Now go into your server and `.use` these new routes
 
 ```javascript
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
+const express = require("express");
+const cors = require("cors");
+const helmet = require("helmet");
 
-const logger = require('../middleware/logger');
+const logger = require("../middleware/logger");
 
 const usersRouter = require("../users/user-router");
 const loginRouter = require("../auth/login-router.js");
@@ -206,9 +199,9 @@ server.use("/api/login", loginRouter);
 server.use("/api/register", registerRouter);
 server.use("/api/users", usersRouter);
 
-server.get('/', (req, res) => {
-  res.send('<h1>🎣</h1>');
-})
+server.get("/", (req, res) => {
+  res.send("<h1>🎣</h1>");
+});
 
 module.exports = server;
 ```
@@ -217,7 +210,7 @@ module.exports = server;
 
 ## Updates documentation
 
-- [ ] On a new branch, make sure that each of your `/api/...` endpoints are documented well, including any body data they require, filtering they may offer, validation included, and what data each endpoint returns. Document this clearly and concisely, so that it is very easy to browse. 
+- [ ] On a new branch, make sure that each of your `/api/...` endpoints are documented well, including any body data they require, filtering they may offer, validation included, and what data each endpoint returns. Document this clearly and concisely, so that it is very easy to browse.
 
 - [ ] Commit and push these changes
 
@@ -252,8 +245,8 @@ Once the Postgres DB is added, you'll be able to navigate to `Settings` in your 
 - [ ] Using Postman or Insomnia, register a new user at the URL of your deployed app (`/api/register`)
 - [ ] Using Postman or Insomnia, try to access `/api/users` with the token that is returned from `register` as an `authorization` header
 - [ ] Once this staging application is running as expected, go into your `production` application and:
-	- [ ] Provision a Postgres DB
-	- [ ] Add `DB_ENV` and `JWT_SECRET` Config Vars
-	- [ ] Manually deploy from `master`
-	- [ ] Run your migrations
-	- [ ] Test out production
+  - [ ] Provision a Postgres DB
+  - [ ] Add `DB_ENV` and `JWT_SECRET` Config Vars
+  - [ ] Manually deploy from `master`
+  - [ ] Run your migrations
+  - [ ] Test out production

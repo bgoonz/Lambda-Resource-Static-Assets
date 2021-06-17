@@ -26,4 +26,4 @@ Solve this problem with a hash table.
 
 Limits:
 
-* The input list can contain approximately 5,000,000 elements.
+- The input list can contain approximately 5,000,000 elements.

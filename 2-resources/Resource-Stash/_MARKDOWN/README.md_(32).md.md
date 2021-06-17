@@ -1,21 +1,19 @@
 # Algorithms
 
-Each directory contains a separate problem that you'll be tasked with solving.  Inside each directory, you'll find instructions for that problem, along with a test file as well as an empty skeleton file. 
+Each directory contains a separate problem that you'll be tasked with solving. Inside each directory, you'll find instructions for that problem, along with a test file as well as an empty skeleton file.
 
 There isn't an official prescribed order for tackling the problems, though a subjective ranking of the given problems from easiest to hardest might go something like this:
 
-- [X] `single_number`
-- [X] `moving_zeroes`
-- [X] `product_of_array_except_self`
-- [X] `sliding_window_max`
-- [X] `stock_prices`
-- [X] `recipe_batches`
-- [X] `eating_cookies`
-- [X] [Stretch Problem] `rock_paper_scissors`
-- [X] [Stretch Problem] `making_change`
+- [x] `single_number`
+- [x] `moving_zeroes`
+- [x] `product_of_array_except_self`
+- [x] `sliding_window_max`
+- [x] `stock_prices`
+- [x] `recipe_batches`
+- [x] `eating_cookies`
+- [x] [Stretch Problem] `rock_paper_scissors`
+- [x] [Stretch Problem] `making_change`
 - [ ] [Stretch Problem] `knapsack`
-
-
 
 For each problem, `cd` into the directory, read the instructions for the
 problem, implement your solution in the skeleton file, then test it using the

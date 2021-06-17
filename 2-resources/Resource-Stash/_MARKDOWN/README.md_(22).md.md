@@ -19,8 +19,7 @@ Expected output array state: [4, 2, 1, 5]
 Can you do this in a single pass through the input array with `O(1)` space?
 
 ## Testing
+
 Run the test file by executing `python test_moving_zeroes.py`.
 
 You can also test your implementation manually by executing `python moving_zeroes.py [integers_separated_by_a_single_space]`.
-
-

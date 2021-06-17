@@ -26,16 +26,14 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
 //##############################################################################
 // SpriteContainer.js
 //##############################################################################
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
-
 
   /**
    * A SpriteContainer is a nestable display list that enables aggressively optimized rendering of bitmap content.
@@ -65,9 +63,8 @@ this.createjs = this.createjs || {};
    * @constructor
    * @param {SpriteSheet} [spriteSheet] The spriteSheet to use for this SpriteContainer and its children.
    **/
-  function SpriteContainer( spriteSheet ) {
+  function SpriteContainer(spriteSheet) {
     this.Container_constructor();
-
 
     // public properties:
     /**
@@ -78,7 +75,7 @@ this.createjs = this.createjs || {};
      **/
     this.spriteSheet = spriteSheet;
   }
-  var p = createjs.extend( SpriteContainer, createjs.Container );
+  var p = createjs.extend(SpriteContainer, createjs.Container);
 
   /**
    * <strong>REMOVED</strong>. Removed in favor of using `MySuperClass_constructor`.
@@ -92,7 +89,6 @@ this.createjs = this.createjs || {};
    * @deprecated
    */
   // p.initialize = function() {}; // searchable for devs wondering where it is.
-
 
   // public methods:
   /**
@@ -112,14 +108,17 @@ this.createjs = this.createjs || {};
    * @param {DisplayObject} child The display object to add.
    * @return {DisplayObject} The child that was added, or the last child if multiple children were added.
    **/
-  p.addChild = function ( child ) {
-    if ( child == null ) {
+  p.addChild = function (child) {
+    if (child == null) {
       return child;
     }
-    if ( arguments.length > 1 ) {
-      return this.addChildAt.apply( this, Array.prototype.slice.call( arguments ).concat( [ this.children.length ] ) );
+    if (arguments.length > 1) {
+      return this.addChildAt.apply(
+        this,
+        Array.prototype.slice.call(arguments).concat([this.children.length])
+      );
     } else {
-      return this.addChildAt( child, this.children.length );
+      return this.addChildAt(child, this.children.length);
     }
   };
 
@@ -149,37 +148,52 @@ this.createjs = this.createjs || {};
    * @param {Number} index The index to add the child at.
    * @return {DisplayObject} Returns the last child that was added, or the last child if multiple children were added.
    **/
-  p.addChildAt = function ( child, index ) {
+  p.addChildAt = function (child, index) {
     var l = arguments.length;
-    var indx = arguments[ l - 1 ]; // can't use the same name as the index param or it replaces arguments[1]
-    if ( indx < 0 || indx > this.children.length ) {
-      return arguments[ l - 2 ];
+    var indx = arguments[l - 1]; // can't use the same name as the index param or it replaces arguments[1]
+    if (indx < 0 || indx > this.children.length) {
+      return arguments[l - 2];
     }
-    if ( l > 2 ) {
-      for ( var i = 0; i < l - 1; i++ ) {
-        this.addChildAt( arguments[ i ], indx + i );
+    if (l > 2) {
+      for (var i = 0; i < l - 1; i++) {
+        this.addChildAt(arguments[i], indx + i);
       }
-      return arguments[ l - 2 ];
+      return arguments[l - 2];
     }
-    if ( child._spritestage_compatibility >= 1 ) {
+    if (child._spritestage_compatibility >= 1) {
       // The child is compatible with SpriteStage/SpriteContainer.
     } else {
-      console && console.log( "Error: You can only add children of type SpriteContainer, Sprite, BitmapText, or DOMElement [" + child.toString() + "]" );
+      console &&
+        console.log(
+          "Error: You can only add children of type SpriteContainer, Sprite, BitmapText, or DOMElement [" +
+            child.toString() +
+            "]"
+        );
       return child;
     }
-    if ( child._spritestage_compatibility <= 4 ) {
+    if (child._spritestage_compatibility <= 4) {
       var spriteSheet = child.spriteSheet;
-      if ( ( !spriteSheet || !spriteSheet._images || spriteSheet._images.length > 1 ) || ( this.spriteSheet && this.spriteSheet !== spriteSheet ) ) {
-        console && console.log( "Error: A child's spriteSheet must be equal to its parent spriteSheet and only use one image. [" + child.toString() + "]" );
+      if (
+        !spriteSheet ||
+        !spriteSheet._images ||
+        spriteSheet._images.length > 1 ||
+        (this.spriteSheet && this.spriteSheet !== spriteSheet)
+      ) {
+        console &&
+          console.log(
+            "Error: A child's spriteSheet must be equal to its parent spriteSheet and only use one image. [" +
+              child.toString() +
+              "]"
+          );
         return child;
       }
       this.spriteSheet = spriteSheet;
     }
-    if ( child.parent ) {
-      child.parent.removeChild( child );
+    if (child.parent) {
+      child.parent.removeChild(child);
     }
     child.parent = this;
-    this.children.splice( index, 0, child );
+    this.children.splice(index, 0, child);
     return child;
   };
 
@@ -192,9 +206,8 @@ this.createjs = this.createjs || {};
     return "[SpriteContainer (name=" + this.name + ")]";
   };
 
-
-  createjs.SpriteContainer = createjs.promote( SpriteContainer, "Container" );
-}() );
+  createjs.SpriteContainer = createjs.promote(SpriteContainer, "Container");
+})();
 
 //##############################################################################
 // SpriteStage.js
@@ -202,17 +215,21 @@ this.createjs = this.createjs || {};
 
 this.createjs = this.createjs || {};
 
-( function () {
+(function () {
   "use strict";
 
-
   // Set which classes are compatible with SpriteStage.
-  // The order is important!!! If it's changed/appended, make sure that any logic that 
+  // The order is important!!! If it's changed/appended, make sure that any logic that
   // checks _spritestage_compatibility accounts for it!
-  [ createjs.SpriteContainer, createjs.Sprite, createjs.BitmapText, createjs.Bitmap, createjs.DOMElement ].forEach( function ( _class, index ) {
+  [
+    createjs.SpriteContainer,
+    createjs.Sprite,
+    createjs.BitmapText,
+    createjs.Bitmap,
+    createjs.DOMElement,
+  ].forEach(function (_class, index) {
     _class.prototype._spritestage_compatibility = index + 1;
-  } );
-
+  });
 
   // constructor:
   /**
@@ -249,9 +266,8 @@ this.createjs = this.createjs || {};
    * @param {Boolean} preserveDrawingBuffer If true, the canvas is NOT auto-cleared by WebGL (spec discourages true). Useful if you want to use p.autoClear = false.
    * @param {Boolean} antialias Specifies whether or not the browser's WebGL implementation should try to perform antialiasing.
    **/
-  function SpriteStage( canvas, preserveDrawingBuffer, antialias ) {
-    this.Stage_constructor( canvas );
-
+  function SpriteStage(canvas, preserveDrawingBuffer, antialias) {
+    this.Stage_constructor(canvas);
 
     // private properties:
     /**
@@ -428,15 +444,13 @@ this.createjs = this.createjs || {};
      **/
     this._drawTexture = null;
 
-
     // setup:
     this._initializeWebGL();
   }
-  var p = createjs.extend( SpriteStage, createjs.Stage );
+  var p = createjs.extend(SpriteStage, createjs.Stage);
 
   // TODO: deprecated
   // p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
-
 
   // constants:
   /**
@@ -468,7 +482,8 @@ this.createjs = this.createjs || {};
    * @type {Number}
    * @readonly
    **/
-  SpriteStage.NUM_VERTEX_PROPERTIES_PER_BOX = SpriteStage.POINTS_PER_BOX * SpriteStage.NUM_VERTEX_PROPERTIES;
+  SpriteStage.NUM_VERTEX_PROPERTIES_PER_BOX =
+    SpriteStage.POINTS_PER_BOX * SpriteStage.NUM_VERTEX_PROPERTIES;
 
   /**
    * The number of indices needed to define a box using triangles.
@@ -489,7 +504,7 @@ this.createjs = this.createjs || {};
    * @type {Number}
    * @readonly
    **/
-  SpriteStage.MAX_INDEX_SIZE = Math.pow( 2, 16 );
+  SpriteStage.MAX_INDEX_SIZE = Math.pow(2, 16);
 
   /**
    * The amount used to increment p._maxBoxesPointsPerDraw when the maximum has been reached.
@@ -505,7 +520,6 @@ this.createjs = this.createjs || {};
    **/
   SpriteStage.MAX_BOXES_POINTS_INCREMENT = SpriteStage.MAX_INDEX_SIZE / 4;
 
-
   // getter / setters:
   /**
    * Indicates whether WebGL is being used for rendering. For example, this would be false if WebGL is not
@@ -519,13 +533,12 @@ this.createjs = this.createjs || {};
   };
 
   try {
-    Object.defineProperties( p, {
+    Object.defineProperties(p, {
       isWebGL: {
-        get: p._get_isWebGL
-      }
-    } );
-  } catch ( e ) {} // TODO: use Log
-
+        get: p._get_isWebGL,
+      },
+    });
+  } catch (e) {} // TODO: use Log
 
   // public methods:
   /**
@@ -544,14 +557,17 @@ this.createjs = this.createjs || {};
    * @param {DisplayObject} child The display object to add.
    * @return {DisplayObject} The child that was added, or the last child if multiple children were added.
    **/
-  p.addChild = function ( child ) {
-    if ( child == null ) {
+  p.addChild = function (child) {
+    if (child == null) {
       return child;
     }
-    if ( arguments.length > 1 ) {
-      return this.addChildAt.apply( this, Array.prototype.slice.call( arguments ).concat( [ this.children.length ] ) );
+    if (arguments.length > 1) {
+      return this.addChildAt.apply(
+        this,
+        Array.prototype.slice.call(arguments).concat([this.children.length])
+      );
     } else {
-      return this.addChildAt( child, this.children.length );
+      return this.addChildAt(child, this.children.length);
     }
   };
 
@@ -560,7 +576,7 @@ this.createjs = this.createjs || {};
    * setting its parent to this Container.
    * Only children of type SpriteContainer, Sprite, Bitmap, BitmapText, or DOMElement are allowed.
    * Children also MUST have either an image or spriteSheet defined on them (unless it's a DOMElement).
-   * 
+   *
    * <h4>Example</h4>
    *
    *      addChildAt(child1, index);
@@ -581,61 +597,75 @@ this.createjs = this.createjs || {};
    * @param {Number} index The index to add the child at.
    * @return {DisplayObject} Returns the last child that was added, or the last child if multiple children were added.
    **/
-  p.addChildAt = function ( child, index ) {
+  p.addChildAt = function (child, index) {
     var l = arguments.length;
-    var indx = arguments[ l - 1 ]; // can't use the same name as the index param or it replaces arguments[1]
-    if ( indx < 0 || indx > this.children.length ) {
-      return arguments[ l - 2 ];
+    var indx = arguments[l - 1]; // can't use the same name as the index param or it replaces arguments[1]
+    if (indx < 0 || indx > this.children.length) {
+      return arguments[l - 2];
     }
-    if ( l > 2 ) {
-      for ( var i = 0; i < l - 1; i++ ) {
-        this.addChildAt( arguments[ i ], indx + i );
+    if (l > 2) {
+      for (var i = 0; i < l - 1; i++) {
+        this.addChildAt(arguments[i], indx + i);
       }
-      return arguments[ l - 2 ];
+      return arguments[l - 2];
     }
-    if ( child._spritestage_compatibility >= 1 ) {
+    if (child._spritestage_compatibility >= 1) {
       // The child is compatible with SpriteStage.
     } else {
-      console && console.log( "Error: You can only add children of type SpriteContainer, Sprite, Bitmap, BitmapText, or DOMElement. [" + child.toString() + "]" );
+      console &&
+        console.log(
+          "Error: You can only add children of type SpriteContainer, Sprite, Bitmap, BitmapText, or DOMElement. [" +
+            child.toString() +
+            "]"
+        );
       return child;
     }
-    if ( !child.image && !child.spriteSheet && child._spritestage_compatibility <= 4 ) {
-      console && console.log( "Error: You can only add children that have an image or spriteSheet defined on them. [" + child.toString() + "]" );
+    if (
+      !child.image &&
+      !child.spriteSheet &&
+      child._spritestage_compatibility <= 4
+    ) {
+      console &&
+        console.log(
+          "Error: You can only add children that have an image or spriteSheet defined on them. [" +
+            child.toString() +
+            "]"
+        );
       return child;
     }
-    if ( child.parent ) {
-      child.parent.removeChild( child );
+    if (child.parent) {
+      child.parent.removeChild(child);
     }
     child.parent = this;
-    this.children.splice( index, 0, child );
+    this.children.splice(index, 0, child);
     return child;
   };
 
   /** docced in super class **/
-  p.update = function ( props ) {
-    if ( !this.canvas ) {
+  p.update = function (props) {
+    if (!this.canvas) {
       return;
     }
-    if ( this.tickOnUpdate ) {
-      this.tick( props );
+    if (this.tickOnUpdate) {
+      this.tick(props);
     }
-    this.dispatchEvent( "drawstart" ); // TODO: make cancellable?
-    if ( this.autoClear ) {
+    this.dispatchEvent("drawstart"); // TODO: make cancellable?
+    if (this.autoClear) {
       this.clear();
     }
     var ctx = this._setWebGLContext();
-    if ( ctx ) {
+    if (ctx) {
       // Use WebGL.
-      this.draw( ctx, false );
+      this.draw(ctx, false);
     } else {
       // Use 2D.
-      ctx = this.canvas.getContext( "2d" );
+      ctx = this.canvas.getContext("2d");
       ctx.save();
-      this.updateContext( ctx );
-      this.draw( ctx, false );
+      this.updateContext(ctx);
+      this.draw(ctx, false);
       ctx.restore();
     }
-    this.dispatchEvent( "drawend" );
+    this.dispatchEvent("drawend");
   };
 
   /**
@@ -643,18 +673,18 @@ this.createjs = this.createjs || {};
    * @method clear
    **/
   p.clear = function () {
-    if ( !this.canvas ) {
+    if (!this.canvas) {
       return;
     }
     var ctx = this._setWebGLContext();
-    if ( ctx ) {
+    if (ctx) {
       // Use WebGL.
-      ctx.clear( ctx.COLOR_BUFFER_BIT );
+      ctx.clear(ctx.COLOR_BUFFER_BIT);
     } else {
       // Use 2D.
-      ctx = this.canvas.getContext( "2d" );
-      ctx.setTransform( 1, 0, 0, 1, 0, 0 );
-      ctx.clearRect( 0, 0, this.canvas.width + 1, this.canvas.height + 1 );
+      ctx = this.canvas.getContext("2d");
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, this.canvas.width + 1, this.canvas.height + 1);
     }
   };
 
@@ -670,12 +700,15 @@ this.createjs = this.createjs || {};
    * For example, used for drawing the cache (to prevent it from simply drawing an existing cache back
    * into itself).
    **/
-  p.draw = function ( ctx, ignoreCache ) {
-    if ( typeof WebGLRenderingContext !== 'undefined' && ( ctx === this._webGLContext || ctx instanceof WebGLRenderingContext ) ) {
-      this._drawWebGLKids( this.children, ctx );
+  p.draw = function (ctx, ignoreCache) {
+    if (
+      typeof WebGLRenderingContext !== "undefined" &&
+      (ctx === this._webGLContext || ctx instanceof WebGLRenderingContext)
+    ) {
+      this._drawWebGLKids(this.children, ctx);
       return true;
     } else {
-      return this.Stage_draw( ctx, ignoreCache );
+      return this.Stage_draw(ctx, ignoreCache);
     }
   };
 
@@ -685,18 +718,23 @@ this.createjs = this.createjs || {};
    * @param {Number} width
    * @param {Number} height
    **/
-  p.updateViewport = function ( width, height ) {
+  p.updateViewport = function (width, height) {
     this._viewportWidth = width;
     this._viewportHeight = height;
 
-    if ( this._webGLContext ) {
-      this._webGLContext.viewport( 0, 0, this._viewportWidth, this._viewportHeight );
+    if (this._webGLContext) {
+      this._webGLContext.viewport(
+        0,
+        0,
+        this._viewportWidth,
+        this._viewportHeight
+      );
 
-      if ( !this._projectionMatrix ) {
-        this._projectionMatrix = new Float32Array( [ 0, 0, 0, 0, 0, 1, -1, 1, 1 ] );
+      if (!this._projectionMatrix) {
+        this._projectionMatrix = new Float32Array([0, 0, 0, 0, 0, 1, -1, 1, 1]);
       }
-      this._projectionMatrix[ 0 ] = 2 / width;
-      this._projectionMatrix[ 4 ] = -2 / height;
+      this._projectionMatrix[0] = 2 / width;
+      this._projectionMatrix[4] = -2 / height;
     }
   };
 
@@ -705,7 +743,7 @@ this.createjs = this.createjs || {};
    * @method clearImageTexture
    * @param  {HTMLImageElement} image
    **/
-  p.clearImageTexture = function ( image ) {
+  p.clearImageTexture = function (image) {
     image.__easeljs_texture = null;
   };
 
@@ -730,7 +768,7 @@ this.createjs = this.createjs || {};
       r: 0.0,
       g: 0.0,
       b: 0.0,
-      a: 0.0
+      a: 0.0,
     };
 
     this._setWebGLContext();
@@ -743,8 +781,8 @@ this.createjs = this.createjs || {};
    * @protected
    **/
   p._setWebGLContext = function () {
-    if ( this.canvas ) {
-      if ( !this._webGLContext || this._webGLContext.canvas !== this.canvas ) {
+    if (this.canvas) {
+      if (!this._webGLContext || this._webGLContext.canvas !== this.canvas) {
         // A context hasn't been defined yet,
         // OR the defined context belongs to a different canvas, so reinitialize.
         this._initializeWebGLContext();
@@ -766,11 +804,13 @@ this.createjs = this.createjs || {};
       alpha: true, // Make the canvas background transparent.
       preserveDrawingBuffer: this._preserveDrawingBuffer,
       antialias: this._antialias,
-      premultipliedAlpha: true // Assume the drawing buffer contains colors with premultiplied alpha.
+      premultipliedAlpha: true, // Assume the drawing buffer contains colors with premultiplied alpha.
     };
-    var ctx = this._webGLContext = this.canvas.getContext( "webgl", options ) || this.canvas.getContext( "experimental-webgl", options );
+    var ctx = (this._webGLContext =
+      this.canvas.getContext("webgl", options) ||
+      this.canvas.getContext("experimental-webgl", options));
 
-    if ( !ctx ) {
+    if (!ctx) {
       // WebGL is not supported in this browser.
       return;
     }
@@ -779,29 +819,42 @@ this.createjs = this.createjs || {};
     this._maxTexturesPerDraw = 1; // ctx.getParameter(ctx.MAX_TEXTURE_IMAGE_UNITS);
 
     // Set the default color the canvas should render when clearing:
-    this._setClearColor( this._clearColor.r, this._clearColor.g, this._clearColor.b, this._clearColor.a );
+    this._setClearColor(
+      this._clearColor.r,
+      this._clearColor.g,
+      this._clearColor.b,
+      this._clearColor.a
+    );
 
     // Enable blending and set the blending functions that work with the premultiplied alpha settings:
-    ctx.enable( ctx.BLEND );
-    ctx.blendFuncSeparate( ctx.SRC_ALPHA, ctx.ONE_MINUS_SRC_ALPHA, ctx.ONE, ctx.ONE_MINUS_SRC_ALPHA );
+    ctx.enable(ctx.BLEND);
+    ctx.blendFuncSeparate(
+      ctx.SRC_ALPHA,
+      ctx.ONE_MINUS_SRC_ALPHA,
+      ctx.ONE,
+      ctx.ONE_MINUS_SRC_ALPHA
+    );
 
     // Do not premultiply textures' alpha channels when loading them in:
-    ctx.pixelStorei( ctx.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false );
+    ctx.pixelStorei(ctx.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
 
     // Create the shader program that will be used for drawing:
-    this._createShaderProgram( ctx );
+    this._createShaderProgram(ctx);
 
-    if ( this._webGLErrorDetected ) {
+    if (this._webGLErrorDetected) {
       // Error detected during this._createShaderProgram().
       this._webGLContext = null;
       return;
     }
 
     // Create the vertices and indices buffers.
-    this._createBuffers( ctx );
+    this._createBuffers(ctx);
 
     // Update the viewport with the initial canvas dimensions:
-    this.updateViewport( this._viewportWidth || this.canvas.width || 0, this._viewportHeight || this.canvas.height || 0 );
+    this.updateViewport(
+      this._viewportWidth || this.canvas.width || 0,
+      this._viewportHeight || this.canvas.height || 0
+    );
   };
 
   /**
@@ -813,14 +866,14 @@ this.createjs = this.createjs || {};
    * @param {Number} a A number between 0 and 1.
    * @protected
    **/
-  p._setClearColor = function ( r, g, b, a ) {
+  p._setClearColor = function (r, g, b, a) {
     this._clearColor.r = r;
     this._clearColor.g = g;
     this._clearColor.b = b;
     this._clearColor.a = a;
 
-    if ( this._webGLContext ) {
-      this._webGLContext.clearColor( r, g, b, a );
+    if (this._webGLContext) {
+      this._webGLContext.clearColor(r, g, b, a);
     }
   };
 
@@ -830,63 +883,64 @@ this.createjs = this.createjs || {};
    * @param {WebGLRenderingContext} ctx
    * @protected
    **/
-  p._createShaderProgram = function ( ctx ) {
-
-
-    var fragmentShader = this._createShader( ctx, ctx.FRAGMENT_SHADER,
+  p._createShaderProgram = function (ctx) {
+    var fragmentShader = this._createShader(
+      ctx,
+      ctx.FRAGMENT_SHADER,
       "precision mediump float;" +
-
-      "uniform sampler2D uSampler0;" +
-
-      "varying vec3 vTextureCoord;" +
-
-      "void main(void) {" +
-      "vec4 color = texture2D(uSampler0, vTextureCoord.st);" +
-      "gl_FragColor = vec4(color.rgb, color.a * vTextureCoord.z);" +
-      "}"
+        "uniform sampler2D uSampler0;" +
+        "varying vec3 vTextureCoord;" +
+        "void main(void) {" +
+        "vec4 color = texture2D(uSampler0, vTextureCoord.st);" +
+        "gl_FragColor = vec4(color.rgb, color.a * vTextureCoord.z);" +
+        "}"
     );
 
-    var vertexShader = this._createShader( ctx, ctx.VERTEX_SHADER,
+    var vertexShader = this._createShader(
+      ctx,
+      ctx.VERTEX_SHADER,
       "attribute vec2 aVertexPosition;" +
-      "attribute vec3 aTextureCoord;" +
-
-      "uniform mat3 uPMatrix;" +
-
-      "varying vec3 vTextureCoord;" +
-
-      "void main(void) {" +
-      "vTextureCoord = aTextureCoord;" +
-
-      "gl_Position = vec4((uPMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);" +
-      "}"
+        "attribute vec3 aTextureCoord;" +
+        "uniform mat3 uPMatrix;" +
+        "varying vec3 vTextureCoord;" +
+        "void main(void) {" +
+        "vTextureCoord = aTextureCoord;" +
+        "gl_Position = vec4((uPMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);" +
+        "}"
     );
 
-    if ( this._webGLErrorDetected || !fragmentShader || !vertexShader ) {
+    if (this._webGLErrorDetected || !fragmentShader || !vertexShader) {
       return;
     }
 
     var program = ctx.createProgram();
-    ctx.attachShader( program, fragmentShader );
-    ctx.attachShader( program, vertexShader );
-    ctx.linkProgram( program );
+    ctx.attachShader(program, fragmentShader);
+    ctx.attachShader(program, vertexShader);
+    ctx.linkProgram(program);
 
-    if ( !ctx.getProgramParameter( program, ctx.LINK_STATUS ) ) {
+    if (!ctx.getProgramParameter(program, ctx.LINK_STATUS)) {
       // alert("Could not link program. " + ctx.getProgramInfoLog(program));
       this._webGLErrorDetected = true;
       return;
     }
 
-    program.vertexPositionAttribute = ctx.getAttribLocation( program, "aVertexPosition" );
-    program.textureCoordAttribute = ctx.getAttribLocation( program, "aTextureCoord" );
+    program.vertexPositionAttribute = ctx.getAttribLocation(
+      program,
+      "aVertexPosition"
+    );
+    program.textureCoordAttribute = ctx.getAttribLocation(
+      program,
+      "aTextureCoord"
+    );
 
-    program.sampler0uniform = ctx.getUniformLocation( program, "uSampler0" );
+    program.sampler0uniform = ctx.getUniformLocation(program, "uSampler0");
 
-    ctx.enableVertexAttribArray( program.vertexPositionAttribute );
-    ctx.enableVertexAttribArray( program.textureCoordAttribute );
+    ctx.enableVertexAttribArray(program.vertexPositionAttribute);
+    ctx.enableVertexAttribArray(program.textureCoordAttribute);
 
-    program.pMatrixUniform = ctx.getUniformLocation( program, "uPMatrix" );
+    program.pMatrixUniform = ctx.getUniformLocation(program, "uPMatrix");
 
-    ctx.useProgram( program );
+    ctx.useProgram(program);
 
     this._shaderProgram = program;
   };
@@ -900,12 +954,12 @@ this.createjs = this.createjs || {};
    * @return {WebGLShader}
    * @protected
    **/
-  p._createShader = function ( ctx, type, str ) {
-    var shader = ctx.createShader( type );
-    ctx.shaderSource( shader, str );
-    ctx.compileShader( shader );
+  p._createShader = function (ctx, type, str) {
+    var shader = ctx.createShader(type);
+    ctx.shaderSource(shader, str);
+    ctx.compileShader(shader);
 
-    if ( !ctx.getShaderParameter( shader, ctx.COMPILE_STATUS ) ) {
+    if (!ctx.getShaderParameter(shader, ctx.COMPILE_STATUS)) {
       // alert("Could not compile shader. " + ctx.getShaderInfoLog(shader));
       this._webGLErrorDetected = true;
       return null;
@@ -920,17 +974,31 @@ this.createjs = this.createjs || {};
    * @param {WebGLRenderingContext} ctx
    * @protected
    **/
-  p._createBuffers = function ( ctx ) {
+  p._createBuffers = function (ctx) {
     this._verticesBuffer = ctx.createBuffer();
-    ctx.bindBuffer( ctx.ARRAY_BUFFER, this._verticesBuffer );
+    ctx.bindBuffer(ctx.ARRAY_BUFFER, this._verticesBuffer);
 
     var byteCount = SpriteStage.NUM_VERTEX_PROPERTIES * 4; // ctx.FLOAT = 4 bytes
-    ctx.vertexAttribPointer( this._shaderProgram.vertexPositionAttribute, 2, ctx.FLOAT, ctx.FALSE, byteCount, 0 );
-    ctx.vertexAttribPointer( this._shaderProgram.textureCoordAttribute, 3, ctx.FLOAT, ctx.FALSE, byteCount, 2 * 4 );
+    ctx.vertexAttribPointer(
+      this._shaderProgram.vertexPositionAttribute,
+      2,
+      ctx.FLOAT,
+      ctx.FALSE,
+      byteCount,
+      0
+    );
+    ctx.vertexAttribPointer(
+      this._shaderProgram.textureCoordAttribute,
+      3,
+      ctx.FLOAT,
+      ctx.FALSE,
+      byteCount,
+      2 * 4
+    );
 
     this._indicesBuffer = ctx.createBuffer();
 
-    this._setMaxBoxesPoints( ctx, SpriteStage.MAX_BOXES_POINTS_INCREMENT );
+    this._setMaxBoxesPoints(ctx, SpriteStage.MAX_BOXES_POINTS_INCREMENT);
   };
 
   /**
@@ -941,30 +1009,38 @@ this.createjs = this.createjs || {};
    * @param {Number} value              The new this._maxBoxesPointsPerDraw value.
    * @protected
    **/
-  p._setMaxBoxesPoints = function ( ctx, value ) {
+  p._setMaxBoxesPoints = function (ctx, value) {
     this._maxBoxesPointsPerDraw = value;
-    this._maxBoxesPerDraw = ( this._maxBoxesPointsPerDraw / SpriteStage.POINTS_PER_BOX ) | 0;
-    this._maxIndicesPerDraw = this._maxBoxesPerDraw * SpriteStage.INDICES_PER_BOX;
+    this._maxBoxesPerDraw =
+      (this._maxBoxesPointsPerDraw / SpriteStage.POINTS_PER_BOX) | 0;
+    this._maxIndicesPerDraw =
+      this._maxBoxesPerDraw * SpriteStage.INDICES_PER_BOX;
 
-    ctx.bindBuffer( ctx.ARRAY_BUFFER, this._verticesBuffer );
-    this._vertices = new Float32Array( this._maxBoxesPerDraw * SpriteStage.NUM_VERTEX_PROPERTIES_PER_BOX );
-    ctx.bufferData( ctx.ARRAY_BUFFER, this._vertices, ctx.DYNAMIC_DRAW );
+    ctx.bindBuffer(ctx.ARRAY_BUFFER, this._verticesBuffer);
+    this._vertices = new Float32Array(
+      this._maxBoxesPerDraw * SpriteStage.NUM_VERTEX_PROPERTIES_PER_BOX
+    );
+    ctx.bufferData(ctx.ARRAY_BUFFER, this._vertices, ctx.DYNAMIC_DRAW);
 
     // Set up indices for multiple boxes:
-    this._indices = new Uint16Array( this._maxIndicesPerDraw ); // Indices are set once and reused.
-    for ( var i = 0, l = this._indices.length; i < l; i += SpriteStage.INDICES_PER_BOX ) {
-      var j = i * SpriteStage.POINTS_PER_BOX / SpriteStage.INDICES_PER_BOX;
+    this._indices = new Uint16Array(this._maxIndicesPerDraw); // Indices are set once and reused.
+    for (
+      var i = 0, l = this._indices.length;
+      i < l;
+      i += SpriteStage.INDICES_PER_BOX
+    ) {
+      var j = (i * SpriteStage.POINTS_PER_BOX) / SpriteStage.INDICES_PER_BOX;
 
       // Indices for the 2 triangles that make the box:
-      this._indices[ i ] = j;
-      this._indices[ i + 1 ] = j + 1;
-      this._indices[ i + 2 ] = j + 2;
-      this._indices[ i + 3 ] = j;
-      this._indices[ i + 4 ] = j + 2;
-      this._indices[ i + 5 ] = j + 3;
+      this._indices[i] = j;
+      this._indices[i + 1] = j + 1;
+      this._indices[i + 2] = j + 2;
+      this._indices[i + 3] = j;
+      this._indices[i + 4] = j + 2;
+      this._indices[i + 5] = j + 3;
     }
-    ctx.bindBuffer( ctx.ELEMENT_ARRAY_BUFFER, this._indicesBuffer );
-    ctx.bufferData( ctx.ELEMENT_ARRAY_BUFFER, this._indices, ctx.STATIC_DRAW );
+    ctx.bindBuffer(ctx.ELEMENT_ARRAY_BUFFER, this._indicesBuffer);
+    ctx.bufferData(ctx.ELEMENT_ARRAY_BUFFER, this._indices, ctx.STATIC_DRAW);
   };
 
   /**
@@ -975,18 +1051,36 @@ this.createjs = this.createjs || {};
    * @return {WebGLTexture}
    * @protected
    **/
-  p._setupImageTexture = function ( ctx, image ) {
-    if ( image && ( image.naturalWidth || image.getContext || image.readyState >= 2 ) ) {
+  p._setupImageTexture = function (ctx, image) {
+    if (
+      image &&
+      (image.naturalWidth || image.getContext || image.readyState >= 2)
+    ) {
       // Create and use a new texture for this image if it doesn't already have one:
       var texture = image.__easeljs_texture;
-      if ( !texture ) {
+      if (!texture) {
         texture = image.__easeljs_texture = ctx.createTexture();
-        ctx.bindTexture( ctx.TEXTURE_2D, texture );
-        ctx.texImage2D( ctx.TEXTURE_2D, 0, ctx.RGBA, ctx.RGBA, ctx.UNSIGNED_BYTE, image );
-        ctx.texParameteri( ctx.TEXTURE_2D, ctx.TEXTURE_MIN_FILTER, ctx.NEAREST );
-        ctx.texParameteri( ctx.TEXTURE_2D, ctx.TEXTURE_MAG_FILTER, ctx.LINEAR );
-        ctx.texParameteri( ctx.TEXTURE_2D, ctx.TEXTURE_WRAP_S, ctx.CLAMP_TO_EDGE );
-        ctx.texParameteri( ctx.TEXTURE_2D, ctx.TEXTURE_WRAP_T, ctx.CLAMP_TO_EDGE );
+        ctx.bindTexture(ctx.TEXTURE_2D, texture);
+        ctx.texImage2D(
+          ctx.TEXTURE_2D,
+          0,
+          ctx.RGBA,
+          ctx.RGBA,
+          ctx.UNSIGNED_BYTE,
+          image
+        );
+        ctx.texParameteri(ctx.TEXTURE_2D, ctx.TEXTURE_MIN_FILTER, ctx.NEAREST);
+        ctx.texParameteri(ctx.TEXTURE_2D, ctx.TEXTURE_MAG_FILTER, ctx.LINEAR);
+        ctx.texParameteri(
+          ctx.TEXTURE_2D,
+          ctx.TEXTURE_WRAP_S,
+          ctx.CLAMP_TO_EDGE
+        );
+        ctx.texParameteri(
+          ctx.TEXTURE_2D,
+          ctx.TEXTURE_WRAP_T,
+          ctx.CLAMP_TO_EDGE
+        );
       }
       return texture;
     }
@@ -1000,8 +1094,9 @@ this.createjs = this.createjs || {};
    * @param {Matrix2D} parentMVMatrix   The parent's global transformation matrix.
    * @protected
    **/
-  p._drawWebGLKids = function ( kids, ctx, parentMVMatrix ) {
-    var kid, mtx,
+  p._drawWebGLKids = function (kids, ctx, parentMVMatrix) {
+    var kid,
+      mtx,
       snapToPixelEnabled = this.snapToPixelEnabled,
       image = null,
       leftSide = 0,
@@ -1013,26 +1108,38 @@ this.createjs = this.createjs || {};
       maxIndexSize = SpriteStage.MAX_INDEX_SIZE,
       maxBoxIndex = this._maxBoxesPerDraw - 1;
 
-    for ( var i = 0, l = kids.length; i < l; i++ ) {
-      kid = kids[ i ];
-      if ( !kid.isVisible() ) {
+    for (var i = 0, l = kids.length; i < l; i++) {
+      kid = kids[i];
+      if (!kid.isVisible()) {
         continue;
       }
 
       // Get the texture for this display branch:
-      var image = kid.image || ( kid.spriteSheet && kid.spriteSheet._images[ 0 ] );
-      if ( !image ) {
+      var image = kid.image || (kid.spriteSheet && kid.spriteSheet._images[0]);
+      if (!image) {
         continue;
       } // kid that doesn't have image (ex. DOMElement).
       var texture = image.__easeljs_texture;
-      if ( !texture && !( texture = this._setupImageTexture( ctx, image ) ) ) {
+      if (!texture && !(texture = this._setupImageTexture(ctx, image))) {
         continue;
       } // no texture available (ex. may not be loaded yet).
 
       mtx = kid._props.matrix;
 
       // Get the kid's global matrix (relative to the stage):
-      mtx = ( parentMVMatrix ? mtx.copy( parentMVMatrix ) : mtx.identity() ).appendTransform( kid.x, kid.y, kid.scaleX, kid.scaleY, kid.rotation, kid.skewX, kid.skewY, kid.regX, kid.regY );
+      mtx = (
+        parentMVMatrix ? mtx.copy(parentMVMatrix) : mtx.identity()
+      ).appendTransform(
+        kid.x,
+        kid.y,
+        kid.scaleX,
+        kid.scaleY,
+        kid.rotation,
+        kid.skewX,
+        kid.skewY,
+        kid.regX,
+        kid.regY
+      );
 
       // Set default texture coordinates:
       var uStart = 0,
@@ -1041,13 +1148,13 @@ this.createjs = this.createjs || {};
         vEnd = 1;
 
       // Define the untransformed bounding box sides and get the kid's image to use for textures:
-      if ( kid._spritestage_compatibility === 4 ) {
+      if (kid._spritestage_compatibility === 4) {
         leftSide = 0;
         topSide = 0;
         rightSide = image.width;
         bottomSide = image.height;
-      } else if ( kid._spritestage_compatibility === 2 ) {
-        var frame = kid.spriteSheet.getFrame( kid.currentFrame ),
+      } else if (kid._spritestage_compatibility === 2) {
+        var frame = kid.spriteSheet.getFrame(kid.currentFrame),
           rect = frame.rect;
 
         leftSide = -frame.regX;
@@ -1057,26 +1164,30 @@ this.createjs = this.createjs || {};
 
         uStart = rect.x / image.width;
         vStart = rect.y / image.height;
-        uEnd = uStart + ( rect.width / image.width );
-        vEnd = vStart + ( rect.height / image.height );
+        uEnd = uStart + rect.width / image.width;
+        vEnd = vStart + rect.height / image.height;
       } else {
         image = null;
 
         // Update BitmapText instances:
-        if ( kid._spritestage_compatibility === 3 ) {
+        if (kid._spritestage_compatibility === 3) {
           // TODO: this might change in the future to use a more general approach.
           kid._updateText();
         }
       }
 
       // Detect if this kid is a new display branch:
-      if ( !parentMVMatrix && kid._spritestage_compatibility <= 4 && texture !== this._drawTexture ) {
+      if (
+        !parentMVMatrix &&
+        kid._spritestage_compatibility <= 4 &&
+        texture !== this._drawTexture
+      ) {
         // Draw to the GPU if a texture is already in use:
-        this._drawToGPU( ctx );
+        this._drawToGPU(ctx);
         this._drawTexture = texture;
       }
 
-      if ( image !== null ) {
+      if (image !== null) {
         // Set vertices' data:
 
         var offset = ++this._currentBoxIndex * numVertexPropertiesPerBox,
@@ -1087,53 +1198,61 @@ this.createjs = this.createjs || {};
           tx = mtx.tx,
           ty = mtx.ty;
 
-        if ( snapToPixelEnabled && kid.snapToPixel ) {
-          tx = tx + ( tx < 0 ? -0.5 : 0.5 ) | 0;
-          ty = ty + ( ty < 0 ? -0.5 : 0.5 ) | 0;
+        if (snapToPixelEnabled && kid.snapToPixel) {
+          tx = (tx + (tx < 0 ? -0.5 : 0.5)) | 0;
+          ty = (ty + (ty < 0 ? -0.5 : 0.5)) | 0;
         }
 
         // Positions (calculations taken from Matrix2D.transformPoint):
-        vertices[ offset ] = leftSide * a + topSide * c + tx;
-        vertices[ offset + 1 ] = leftSide * b + topSide * d + ty;
-        vertices[ offset + 5 ] = leftSide * a + bottomSide * c + tx;
-        vertices[ offset + 6 ] = leftSide * b + bottomSide * d + ty;
-        vertices[ offset + 10 ] = rightSide * a + bottomSide * c + tx;
-        vertices[ offset + 11 ] = rightSide * b + bottomSide * d + ty;
-        vertices[ offset + 15 ] = rightSide * a + topSide * c + tx;
-        vertices[ offset + 16 ] = rightSide * b + topSide * d + ty;
+        vertices[offset] = leftSide * a + topSide * c + tx;
+        vertices[offset + 1] = leftSide * b + topSide * d + ty;
+        vertices[offset + 5] = leftSide * a + bottomSide * c + tx;
+        vertices[offset + 6] = leftSide * b + bottomSide * d + ty;
+        vertices[offset + 10] = rightSide * a + bottomSide * c + tx;
+        vertices[offset + 11] = rightSide * b + bottomSide * d + ty;
+        vertices[offset + 15] = rightSide * a + topSide * c + tx;
+        vertices[offset + 16] = rightSide * b + topSide * d + ty;
 
         // Texture coordinates:
-        vertices[ offset + 2 ] = vertices[ offset + 7 ] = uStart;
-        vertices[ offset + 12 ] = vertices[ offset + 17 ] = uEnd;
-        vertices[ offset + 3 ] = vertices[ offset + 18 ] = vStart;
-        vertices[ offset + 8 ] = vertices[ offset + 13 ] = vEnd;
+        vertices[offset + 2] = vertices[offset + 7] = uStart;
+        vertices[offset + 12] = vertices[offset + 17] = uEnd;
+        vertices[offset + 3] = vertices[offset + 18] = vStart;
+        vertices[offset + 8] = vertices[offset + 13] = vEnd;
 
         // Alphas:
-        vertices[ offset + 4 ] = vertices[ offset + 9 ] = vertices[ offset + 14 ] = vertices[ offset + 19 ] = kid.alpha;
+        vertices[offset + 4] =
+          vertices[offset + 9] =
+          vertices[offset + 14] =
+          vertices[offset + 19] =
+            kid.alpha;
 
         // Draw to the GPU if the maximum number of boxes per a draw has been reached:
-        if ( this._currentBoxIndex === maxBoxIndex ) {
-          this._drawToGPU( ctx );
+        if (this._currentBoxIndex === maxBoxIndex) {
+          this._drawToGPU(ctx);
           this._drawTexture = texture;
 
           // If possible, increase the amount of boxes that can be used per draw call:
-          if ( this._maxBoxesPointsPerDraw < maxIndexSize ) {
-            this._setMaxBoxesPoints( ctx, this._maxBoxesPointsPerDraw + SpriteStage.MAX_BOXES_POINTS_INCREMENT );
+          if (this._maxBoxesPointsPerDraw < maxIndexSize) {
+            this._setMaxBoxesPoints(
+              ctx,
+              this._maxBoxesPointsPerDraw +
+                SpriteStage.MAX_BOXES_POINTS_INCREMENT
+            );
             maxBoxIndex = this._maxBoxesPerDraw - 1;
           }
         }
       }
 
       // Draw children:
-      if ( kid.children ) {
-        this._drawWebGLKids( kid.children, ctx, mtx );
+      if (kid.children) {
+        this._drawWebGLKids(kid.children, ctx, mtx);
         maxBoxIndex = this._maxBoxesPerDraw - 1;
       }
     }
 
     // draw anything remaining, if this is the stage:
-    if ( !parentMVMatrix ) {
-      this._drawToGPU( ctx );
+    if (!parentMVMatrix) {
+      this._drawToGPU(ctx);
     }
   };
 
@@ -1143,28 +1262,36 @@ this.createjs = this.createjs || {};
    * @param {WebGLRenderingContext} ctx The canvas WebGL context object to draw into.
    * @protected
    **/
-  p._drawToGPU = function ( ctx ) {
-    if ( !this._drawTexture ) {
+  p._drawToGPU = function (ctx) {
+    if (!this._drawTexture) {
       return;
     }
     var numBoxes = this._currentBoxIndex + 1;
 
-    ctx.activeTexture( ctx.TEXTURE0 );
-    ctx.bindTexture( ctx.TEXTURE_2D, this._drawTexture );
-    ctx.uniform1i( this._shaderProgram.sampler0uniform, 0 );
+    ctx.activeTexture(ctx.TEXTURE0);
+    ctx.bindTexture(ctx.TEXTURE_2D, this._drawTexture);
+    ctx.uniform1i(this._shaderProgram.sampler0uniform, 0);
 
-    ctx.bindBuffer( ctx.ARRAY_BUFFER, this._verticesBuffer );
+    ctx.bindBuffer(ctx.ARRAY_BUFFER, this._verticesBuffer);
 
-    ctx.bindBuffer( ctx.ELEMENT_ARRAY_BUFFER, this._indicesBuffer );
-    ctx.uniformMatrix3fv( this._shaderProgram.pMatrixUniform, false, this._projectionMatrix );
-    ctx.bufferSubData( ctx.ARRAY_BUFFER, 0, this._vertices );
-    ctx.drawElements( ctx.TRIANGLES, numBoxes * SpriteStage.INDICES_PER_BOX, ctx.UNSIGNED_SHORT, 0 );
+    ctx.bindBuffer(ctx.ELEMENT_ARRAY_BUFFER, this._indicesBuffer);
+    ctx.uniformMatrix3fv(
+      this._shaderProgram.pMatrixUniform,
+      false,
+      this._projectionMatrix
+    );
+    ctx.bufferSubData(ctx.ARRAY_BUFFER, 0, this._vertices);
+    ctx.drawElements(
+      ctx.TRIANGLES,
+      numBoxes * SpriteStage.INDICES_PER_BOX,
+      ctx.UNSIGNED_SHORT,
+      0
+    );
 
     // Reset draw vars:
     this._currentBoxIndex = -1;
     this._drawTexture = null;
   };
 
-
-  createjs.SpriteStage = createjs.promote( SpriteStage, "Stage" );
-}() );
+  createjs.SpriteStage = createjs.promote(SpriteStage, "Stage");
+})();

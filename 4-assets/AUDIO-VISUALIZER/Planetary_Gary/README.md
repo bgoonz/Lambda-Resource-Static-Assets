@@ -1,16 +1,14 @@
-Planetary Gary
-=======
+# Planetary Gary
 
 Full featured CreateJS game example.
 
-
-
 Important notes:
+
 - due to security restrictions on local content, you must run this example from a web server.
 - iOS Safari has a major bug which currently results in very poor performance. Apple has been made aware of this issue, and I am attempting to isolate it.
 
-
 Demonstrates a variety of advanced concepts including:
+
 - preloading with progress UI & multiple parallel loads
 - using an external manifest to load sounds
 - managing assets as they load

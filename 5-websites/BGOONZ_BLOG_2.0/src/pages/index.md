@@ -36,7 +36,7 @@ sections:
           ******![](/images/important-tiger.png)
         actions:
           - label: Navigate to showcase
-            url: 'https://project-showcase-bgoonz.netlify.app/'
+            url: "https://project-showcase-bgoonz.netlify.app/"
             style: link
       - title: Long Term Asperations
         content: >
@@ -103,7 +103,7 @@ sections:
   - section_id: text-img
     type: section_content
     image_position: left
-    title: 'Music, Engineering & Lifelong Pursuit of Knowledge'
+    title: "Music, Engineering & Lifelong Pursuit of Knowledge"
     content: |
       https://www.youtube.com/watch?v=xGZSWvFess8
     actions: []
@@ -161,26 +161,26 @@ seo:
   title: Stackbit Libris Theme
   description: The preview of the Libris theme
   extra:
-    - name: 'og:type'
+    - name: "og:type"
       value: website
       keyName: property
-    - name: 'og:title'
+    - name: "og:title"
       value: Stackbit Libris Theme
       keyName: property
-    - name: 'og:description'
+    - name: "og:description"
       value: The preview of the Libris theme
       keyName: property
-    - name: 'og:image'
+    - name: "og:image"
       value: images/4.jpg
       keyName: property
       relativeUrl: true
-    - name: 'twitter:card'
+    - name: "twitter:card"
       value: summary_large_image
-    - name: 'twitter:title'
+    - name: "twitter:title"
       value: Stackbit Libris Theme
-    - name: 'twitter:description'
+    - name: "twitter:description"
       value: The preview of the Libris theme
-    - name: 'twitter:image'
+    - name: "twitter:image"
       value: images/4.jpg
       relativeUrl: true
 template: advanced

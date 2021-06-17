@@ -1,184 +1,395 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <meta name="dcterms.date" content="2019-05-27" />
-  <title>Python For Javascript Developers</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-</head>
-<body>
-<header id="title-block-header">
-<h1 class="title">Python For Javascript Developers</h1>
-<p class="date">2019-05-27</p>
-</header>
-<h1 id="python-study-guide-for-a-javascript-programmer">Python Study Guide for a JavaScript Programmer
-</h1>
-<p><img src="https://miro.medium.com/max/1970/1*3V9VOfPk_hrFdbEAd3j-QQ.png" /><img src="https://miro.medium.com/max/52/0*eC4EvZcv6hhH88jX.png?q=20" /><img src="https://miro.medium.com/max/647/0*eC4EvZcv6hhH88jX.png" /><img src="https://miro.medium.com/max/60/0*Ez_1PZ93N4FfvkRr.png?q=20" /><img src="https://miro.medium.com/max/608/0*Ez_1PZ93N4FfvkRr.png" /><img src="https://miro.medium.com/max/60/0*eE3E5H0AoqkhqK1z.png?q=20" /><img src="https://miro.medium.com/max/1648/0*eE3E5H0AoqkhqK1z.png" /><img src="https://miro.medium.com/max/60/0*Q0CMqFd4PozLDFPB.png?q=20" /><img src="https://miro.medium.com/max/1638/0*Q0CMqFd4PozLDFPB.png" /><img src="https://miro.medium.com/max/3216/0*HQpndNhm1Z_xSoHb.png" /><img src="https://miro.medium.com/max/60/0*qHzGRLTOMTf30miT.png?q=20" /><img src="https://miro.medium.com/max/1614/0*qHzGRLTOMTf30miT.png" />[</p>
-<p>](https://github.com/bgoonz)</p>
-<h1 id="applications-of-tutorial-cheat-sheet-respectivley-at-bottom-of-tutorial">Applications of Tutorial &amp; Cheat Sheet Respectivley (At Bottom Of Tutorial):</h1>
-<h1 id="basics">Basics</h1>
-<ul>
-<li><p><strong>PEP8</strong> : Python Enhancement Proposals, style-guide for Python.</p></li>
-<li><p>print is the equivalent of console.log.</p></li>
-</ul>
-<blockquote>
-<p>‘print() == console.log()’</p>
-</blockquote>
-<h1 id="is-used-to-make-comments-in-your-code."># is used to make comments in your code.</h1>
-<blockquote>
-<p><em>Python has a built in help function that let’s you see a description of the source code without having to navigate to it… “-SickNasty … Autor Unknown”</em></p>
-</blockquote>
-<h1 id="numbers">Numbers</h1>
-<ul>
-<li>Python has three types of numbers:</li>
-</ul>
-<ol type="1">
-<li><p><strong>Integer</strong></p></li>
-<li><p><strong>Positive and Negative Counting Numbers.</strong></p></li>
-</ol>
-<p>No Decimal Point</p>
-<blockquote>
-<p>Created by a literal non-decimal point number … <strong>or</strong> … with the <em>int()</em> constructor.</p>
-</blockquote>
-<p><strong>3. Complex Numbers</strong></p>
-<blockquote>
-<p>Consist of a real part and imaginary part.</p>
-</blockquote>
-<h2 id="boolean-is-a-subtype-of-integer-in-python.️">Boolean is a subtype of integer in Python.🤷‍♂️</h2>
-<blockquote>
-<p>If you came from a background in JavaScript and learned to accept the premise(s) of the following meme…</p>
-</blockquote>
-<blockquote>
-<p>Than I am sure you will find the means to suspend your disbelief.</p>
-</blockquote>
-<h1 id="keep-in-mind">KEEP IN MIND:</h1>
-<blockquote>
-<p><strong>The i is switched to a j in programming.</strong></p>
-</blockquote>
-<p>T*his is because the letter i is common place as the de facto index for any and all enumerable entities so it just makes sense not to compete for name-**space *<em>when there’s another 25 letters that don’t get used for every loop under the sun. My most medium apologies to Leonhard Euler.</em></p>
-<ul>
-<li><strong>Type Casting</strong> : The process of converting one number to another.</li>
-</ul>
-<p><strong>The arithmetic operators are the same between JS and Python, with two additions:</strong></p>
-<ul>
-<li><p><em>“**” : Double asterisk for exponent.</em></p></li>
-<li><p><em>“//” : Integer Division.</em></p></li>
-<li><p><strong>There are no spaces between math operations in Python.</strong></p></li>
-<li><p><strong>Integer Division gives the other part of the number from Module; it is a way to do round down numbers replacing Math.floor() in JS.</strong></p></li>
-<li><p><strong>There are no ++ and – in Python, the only shorthand operators are:</strong></p></li>
-</ul>
-<h1 id="strings">Strings</h1>
-<ul>
-<li><p>Python uses both single and double quotes.</p></li>
-<li><p>You can escape strings like so ‘Jodi asked, "What\’s up, Sam?"’</p></li>
-<li><p>Multiline strings use triple quotes.</p></li>
-</ul>
-<p><strong>Use the len() function to get the length of a string.</strong></p>
-<h1 id="python-uses-zero-based-indexing"><strong>Python uses zero-based indexing</strong></h1>
-<h2 id="python-allows-negative-indexing-thank-god">Python allows negative indexing (thank god!)</h2>
-<ul>
-<li>Python let’s you use ranges</li>
-</ul>
-<p>You can think of this as roughly equivalent to the slice method called on a JavaScript object or string… <em>(mind you that in JS … strings are wrapped in an object (under the hood)… upon which the string methods are actually called. As a immutable privative type <strong>by textbook definition</strong>, a string literal could not hope to invoke most of it’s methods without violating the state it was bound to on initialization if it were not for this bit of syntactic sugar.)</em></p>
-<ul>
-<li>The end range is exclusive just like slice in JS.</li>
-</ul>
-<!---->
-<ul>
-<li>The index string function is the equiv. of indexOf() in JS</li>
-</ul>
-<!---->
-<ul>
-<li>The count function finds out how many times a substring appears in a string… pretty nifty for a hard coded feature of the language.</li>
-</ul>
-<!---->
-<ul>
-<li><p><strong>You can use + to concatenate strings, just like in JS.</strong></p></li>
-<li><p><strong>You can also use “*” to repeat strings or multiply strings.</strong></p></li>
-<li><p><strong>Use the format() function to use placeholders in a string to input values later on.</strong></p></li>
-</ul>
-<!---->
-<ul>
-<li>*Shorthand way to use format function is: *print(f’Your name is {first_name} {last_name}’)</li>
-</ul>
-<h2 id="some-useful-string-methods.">Some useful string methods.</h2>
-<ul>
-<li><strong>Note that in JS join is used on an Array, in Python it is used on String.</strong></li>
-</ul>
-<!---->
-<ul>
-<li>There are also many handy testing methods.</li>
-</ul>
-<h1 id="variables-and-expressions">Variables and Expressions</h1>
-<ul>
-<li><p><strong>Duck-Typing</strong> : Programming Style which avoids checking an object’s type to figure out what it can do.</p></li>
-<li><p>Duck Typing is the fundamental approach of Python.</p></li>
-<li><p>Assignment of a value automatically declares a variable.</p></li>
-</ul>
-<!---->
-<ul>
-<li><strong><em>You can chain variable assignments to give multiple var names the same value.</em></strong></li>
-</ul>
-<h2 id="use-with-caution-as-this-is-highly-unreadable">Use with caution as this is highly unreadable</h2>
-<h2 id="the-value-and-type-of-a-variable-can-be-re-assigned-at-any-time.">The value and type of a variable can be re-assigned at any time.</h2>
-<ul>
-<li><p><em>NaN does not exist in Python, but you can ‘create’ it like so: <strong>print(float(“nan”))</strong></em></p></li>
-<li><p><em>Python replaces null with none.</em></p></li>
-<li><p><em><strong>none is an object</strong> and can be directly assigned to a variable.</em></p></li>
-</ul>
-<blockquote>
-<p>Using none is a convenient way to check to see why an action may not be operating correctly in your program.</p>
-</blockquote>
-<h1 id="boolean-data-type">Boolean Data Type</h1>
-<ul>
-<li>One of the biggest benefits of Python is that it reads more like English than JS does.</li>
-</ul>
-<!---->
-<ul>
-<li><p>By default, Python considers an object to be true UNLESS it is one of the following:</p></li>
-<li><p>Constant None or False</p></li>
-<li><p>Zero of any numeric type.</p></li>
-<li><p>Empty Sequence or Collection.</p></li>
-<li><p>True and False must be capitalized</p></li>
-</ul>
-<h1 id="comparison-operators">Comparison Operators</h1>
-<ul>
-<li><p>Python uses all the same equality operators as JS.</p></li>
-<li><p>In Python, equality operators are processed from left to right.</p></li>
-<li><p>Logical operators are processed in this order:</p></li>
-</ul>
-<ol type="1">
-<li><p><strong>NOT</strong></p></li>
-<li><p><strong>AND</strong></p></li>
-<li><p><strong>OR</strong></p></li>
-</ol>
-<blockquote>
-<p>Just like in JS, you can use parentheses to change the inherent order of operations.</p>
-<p><strong>Short Circuit</strong> : Stopping a program when a true or false has been reached.</p>
-</blockquote>
-<h1 id="identity-vs-equality">Identity vs Equality</h1>
-<ul>
-<li>In the Python community it is better to use is and is not over == or !=</li>
-</ul>
-<h1 id="if-statements">If Statements</h1>
-<blockquote>
-<p>Remember the order of elif statements matter.</p>
-</blockquote>
-<h1 id="while-statements">While Statements</h1>
-<ul>
-<li>Break statement also exists in Python.</li>
-</ul>
-<!---->
-<ul>
-<li>As are continue statements</li>
-</ul>
-<h1 id="tbc">TBC</h1>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="dcterms.date" content="2019-05-27" />
+    <title>Python For Javascript Developers</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <header id="title-block-header">
+      <h1 class="title">Python For Javascript Developers</h1>
+      <p class="date">2019-05-27</p>
+    </header>
+    <h1 id="python-study-guide-for-a-javascript-programmer">
+      Python Study Guide for a JavaScript Programmer
+    </h1>
+    <p>
+      <img
+        src="https://miro.medium.com/max/1970/1*3V9VOfPk_hrFdbEAd3j-QQ.png"
+      /><img
+        src="https://miro.medium.com/max/52/0*eC4EvZcv6hhH88jX.png?q=20"
+      /><img src="https://miro.medium.com/max/647/0*eC4EvZcv6hhH88jX.png" /><img
+        src="https://miro.medium.com/max/60/0*Ez_1PZ93N4FfvkRr.png?q=20"
+      /><img src="https://miro.medium.com/max/608/0*Ez_1PZ93N4FfvkRr.png" /><img
+        src="https://miro.medium.com/max/60/0*eE3E5H0AoqkhqK1z.png?q=20"
+      /><img
+        src="https://miro.medium.com/max/1648/0*eE3E5H0AoqkhqK1z.png"
+      /><img
+        src="https://miro.medium.com/max/60/0*Q0CMqFd4PozLDFPB.png?q=20"
+      /><img
+        src="https://miro.medium.com/max/1638/0*Q0CMqFd4PozLDFPB.png"
+      /><img
+        src="https://miro.medium.com/max/3216/0*HQpndNhm1Z_xSoHb.png"
+      /><img
+        src="https://miro.medium.com/max/60/0*qHzGRLTOMTf30miT.png?q=20"
+      /><img src="https://miro.medium.com/max/1614/0*qHzGRLTOMTf30miT.png" />[
+    </p>
+    <p>](https://github.com/bgoonz)</p>
+    <h1
+      id="applications-of-tutorial-cheat-sheet-respectivley-at-bottom-of-tutorial"
+    >
+      Applications of Tutorial &amp; Cheat Sheet Respectivley (At Bottom Of
+      Tutorial):
+    </h1>
+    <h1 id="basics">Basics</h1>
+    <ul>
+      <li>
+        <p>
+          <strong>PEP8</strong> : Python Enhancement Proposals, style-guide for
+          Python.
+        </p>
+      </li>
+      <li><p>print is the equivalent of console.log.</p></li>
+    </ul>
+    <blockquote>
+      <p>‘print() == console.log()’</p>
+    </blockquote>
+    <h1 id="is-used-to-make-comments-in-your-code.">
+      # is used to make comments in your code.
+    </h1>
+    <blockquote>
+      <p>
+        <em
+          >Python has a built in help function that let’s you see a description
+          of the source code without having to navigate to it… “-SickNasty …
+          Autor Unknown”</em
+        >
+      </p>
+    </blockquote>
+    <h1 id="numbers">Numbers</h1>
+    <ul>
+      <li>Python has three types of numbers:</li>
+    </ul>
+    <ol type="1">
+      <li>
+        <p><strong>Integer</strong></p>
+      </li>
+      <li>
+        <p><strong>Positive and Negative Counting Numbers.</strong></p>
+      </li>
+    </ol>
+    <p>No Decimal Point</p>
+    <blockquote>
+      <p>
+        Created by a literal non-decimal point number … <strong>or</strong> …
+        with the <em>int()</em> constructor.
+      </p>
+    </blockquote>
+    <p><strong>3. Complex Numbers</strong></p>
+    <blockquote>
+      <p>Consist of a real part and imaginary part.</p>
+    </blockquote>
+    <h2 id="boolean-is-a-subtype-of-integer-in-python.️">
+      Boolean is a subtype of integer in Python.🤷‍♂️
+    </h2>
+    <blockquote>
+      <p>
+        If you came from a background in JavaScript and learned to accept the
+        premise(s) of the following meme…
+      </p>
+    </blockquote>
+    <blockquote>
+      <p>Than I am sure you will find the means to suspend your disbelief.</p>
+    </blockquote>
+    <h1 id="keep-in-mind">KEEP IN MIND:</h1>
+    <blockquote>
+      <p><strong>The i is switched to a j in programming.</strong></p>
+    </blockquote>
+    <p>
+      T*his is because the letter i is common place as the de facto index for
+      any and all enumerable entities so it just makes sense not to compete for
+      name-**space *<em
+        >when there’s another 25 letters that don’t get used for every loop
+        under the sun. My most medium apologies to Leonhard Euler.</em
+      >
+    </p>
+    <ul>
+      <li>
+        <strong>Type Casting</strong> : The process of converting one number to
+        another.
+      </li>
+    </ul>
+    <p>
+      <strong
+        >The arithmetic operators are the same between JS and Python, with two
+        additions:</strong
+      >
+    </p>
+    <ul>
+      <li>
+        <p><em>“**” : Double asterisk for exponent.</em></p>
+      </li>
+      <li>
+        <p><em>“//” : Integer Division.</em></p>
+      </li>
+      <li>
+        <p>
+          <strong
+            >There are no spaces between math operations in Python.</strong
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong
+            >Integer Division gives the other part of the number from Module; it
+            is a way to do round down numbers replacing Math.floor() in
+            JS.</strong
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong
+            >There are no ++ and – in Python, the only shorthand operators
+            are:</strong
+          >
+        </p>
+      </li>
+    </ul>
+    <h1 id="strings">Strings</h1>
+    <ul>
+      <li><p>Python uses both single and double quotes.</p></li>
+      <li>
+        <p>You can escape strings like so ‘Jodi asked, "What\’s up, Sam?"’</p>
+      </li>
+      <li><p>Multiline strings use triple quotes.</p></li>
+    </ul>
+    <p>
+      <strong>Use the len() function to get the length of a string.</strong>
+    </p>
+    <h1 id="python-uses-zero-based-indexing">
+      <strong>Python uses zero-based indexing</strong>
+    </h1>
+    <h2 id="python-allows-negative-indexing-thank-god">
+      Python allows negative indexing (thank god!)
+    </h2>
+    <ul>
+      <li>Python let’s you use ranges</li>
+    </ul>
+    <p>
+      You can think of this as roughly equivalent to the slice method called on
+      a JavaScript object or string… <em
+        >(mind you that in JS … strings are wrapped in an object (under the
+        hood)… upon which the string methods are actually called. As a immutable
+        privative type <strong>by textbook definition</strong>, a string literal
+        could not hope to invoke most of it’s methods without violating the
+        state it was bound to on initialization if it were not for this bit of
+        syntactic sugar.)</em
+      >
+    </p>
+    <ul>
+      <li>The end range is exclusive just like slice in JS.</li>
+    </ul>
+    <!---->
+    <ul>
+      <li>The index string function is the equiv. of indexOf() in JS</li>
+    </ul>
+    <!---->
+    <ul>
+      <li>
+        The count function finds out how many times a substring appears in a
+        string… pretty nifty for a hard coded feature of the language.
+      </li>
+    </ul>
+    <!---->
+    <ul>
+      <li>
+        <p>
+          <strong
+            >You can use + to concatenate strings, just like in JS.</strong
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong
+            >You can also use “*” to repeat strings or multiply strings.</strong
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong
+            >Use the format() function to use placeholders in a string to input
+            values later on.</strong
+          >
+        </p>
+      </li>
+    </ul>
+    <!---->
+    <ul>
+      <li>
+        *Shorthand way to use format function is: *print(f’Your name is
+        {first_name} {last_name}’)
+      </li>
+    </ul>
+    <h2 id="some-useful-string-methods.">Some useful string methods.</h2>
+    <ul>
+      <li>
+        <strong
+          >Note that in JS join is used on an Array, in Python it is used on
+          String.</strong
+        >
+      </li>
+    </ul>
+    <!---->
+    <ul>
+      <li>There are also many handy testing methods.</li>
+    </ul>
+    <h1 id="variables-and-expressions">Variables and Expressions</h1>
+    <ul>
+      <li>
+        <p>
+          <strong>Duck-Typing</strong> : Programming Style which avoids checking
+          an object’s type to figure out what it can do.
+        </p>
+      </li>
+      <li><p>Duck Typing is the fundamental approach of Python.</p></li>
+      <li><p>Assignment of a value automatically declares a variable.</p></li>
+    </ul>
+    <!---->
+    <ul>
+      <li>
+        <strong
+          ><em
+            >You can chain variable assignments to give multiple var names the
+            same value.</em
+          ></strong
+        >
+      </li>
+    </ul>
+    <h2 id="use-with-caution-as-this-is-highly-unreadable">
+      Use with caution as this is highly unreadable
+    </h2>
+    <h2 id="the-value-and-type-of-a-variable-can-be-re-assigned-at-any-time.">
+      The value and type of a variable can be re-assigned at any time.
+    </h2>
+    <ul>
+      <li>
+        <p>
+          <em
+            >NaN does not exist in Python, but you can ‘create’ it like so:
+            <strong>print(float(“nan”))</strong></em
+          >
+        </p>
+      </li>
+      <li>
+        <p><em>Python replaces null with none.</em></p>
+      </li>
+      <li>
+        <p>
+          <em
+            ><strong>none is an object</strong> and can be directly assigned to
+            a variable.</em
+          >
+        </p>
+      </li>
+    </ul>
+    <blockquote>
+      <p>
+        Using none is a convenient way to check to see why an action may not be
+        operating correctly in your program.
+      </p>
+    </blockquote>
+    <h1 id="boolean-data-type">Boolean Data Type</h1>
+    <ul>
+      <li>
+        One of the biggest benefits of Python is that it reads more like English
+        than JS does.
+      </li>
+    </ul>
+    <!---->
+    <ul>
+      <li>
+        <p>
+          By default, Python considers an object to be true UNLESS it is one of
+          the following:
+        </p>
+      </li>
+      <li><p>Constant None or False</p></li>
+      <li><p>Zero of any numeric type.</p></li>
+      <li><p>Empty Sequence or Collection.</p></li>
+      <li><p>True and False must be capitalized</p></li>
+    </ul>
+    <h1 id="comparison-operators">Comparison Operators</h1>
+    <ul>
+      <li><p>Python uses all the same equality operators as JS.</p></li>
+      <li>
+        <p>In Python, equality operators are processed from left to right.</p>
+      </li>
+      <li><p>Logical operators are processed in this order:</p></li>
+    </ul>
+    <ol type="1">
+      <li>
+        <p><strong>NOT</strong></p>
+      </li>
+      <li>
+        <p><strong>AND</strong></p>
+      </li>
+      <li>
+        <p><strong>OR</strong></p>
+      </li>
+    </ol>
+    <blockquote>
+      <p>
+        Just like in JS, you can use parentheses to change the inherent order of
+        operations.
+      </p>
+      <p>
+        <strong>Short Circuit</strong> : Stopping a program when
+        a true or false has been reached.
+      </p>
+    </blockquote>
+    <h1 id="identity-vs-equality">Identity vs Equality</h1>
+    <ul>
+      <li>
+        In the Python community it is better to use is and is not over == or !=
+      </li>
+    </ul>
+    <h1 id="if-statements">If Statements</h1>
+    <blockquote>
+      <p>Remember the order of elif statements matter.</p>
+    </blockquote>
+    <h1 id="while-statements">While Statements</h1>
+    <ul>
+      <li>Break statement also exists in Python.</li>
+    </ul>
+    <!---->
+    <ul>
+      <li>As are continue statements</li>
+    </ul>
+    <h1 id="tbc">TBC</h1>
+  </body>
 </html>

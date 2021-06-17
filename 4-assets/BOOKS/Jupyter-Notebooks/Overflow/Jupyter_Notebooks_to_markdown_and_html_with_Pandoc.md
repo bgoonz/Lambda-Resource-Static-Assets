@@ -138,6 +138,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /\* Warn
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -188,6 +189,5 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /\* Warn
 </div>
 </body>
 </html>
-
 
 [Source](https://predictablynoisy.com/posts/2019/2019-11-11-ipynb_pandoc/)

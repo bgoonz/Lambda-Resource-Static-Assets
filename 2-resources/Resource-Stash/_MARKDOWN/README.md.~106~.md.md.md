@@ -22,44 +22,45 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit the `ANSWERS.md` file to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
-- [X] Why would you use class component over function components (removing hooks from the question)?
-    see Answers.md
-- [X] Name three lifecycle methods and their purposes.
-    see Answers.md
-- [X] What is the purpose of a custom hook?
-    see Answers.md
-- [X] Why is it important to test our apps?
-    see Answers.md
+- [x] Why would you use class component over function components (removing hooks from the question)?
+      see Answers.md
+- [x] Name three lifecycle methods and their purposes.
+      see Answers.md
+- [x] What is the purpose of a custom hook?
+      see Answers.md
+- [x] Why is it important to test our apps?
+      see Answers.md
+
 ## Project Set Up
 
 Follow these steps to set up and work on your project:
 
-- [X] Create a forked copy of this project.
-- [X] Add TL as collaborator on Github.
-- [X] Clone your OWN version of Repo. **(Not Lambda's by mistake!)**
-- [X] Create a new Branch locally: `git checkout -b <firstName-lastName>`.
-- [X] Run `yarn` to download dependencies.
-- [X] Run the server using `yarn start` or `node server.js`.
-- [X] In a separate terminal cd into the `client` folder and run `yarn install` to download dependencies.
-- [X] Still inside the `client` folder run `yarn start` to run the client application.
-- [X] Implement the project on this Branch, **committing progress & changes often.**
-- [X] Push commits: `git push origin <firstName-lastName>`.
+- [x] Create a forked copy of this project.
+- [x] Add TL as collaborator on Github.
+- [x] Clone your OWN version of Repo. **(Not Lambda's by mistake!)**
+- [x] Create a new Branch locally: `git checkout -b <firstName-lastName>`.
+- [x] Run `yarn` to download dependencies.
+- [x] Run the server using `yarn start` or `node server.js`.
+- [x] In a separate terminal cd into the `client` folder and run `yarn install` to download dependencies.
+- [x] Still inside the `client` folder run `yarn start` to run the client application.
+- [x] Implement the project on this Branch, **committing progress & changes often.**
+- [x] Push commits: `git push origin <firstName-lastName>`.
 
 Follow these steps for completing your project:
 
-- [X] Submit a Pull-Request to merge <firstName-lastName> Branch into master (student's  Repo).
-- [X] Add your Project Manager as a Reviewer on the Pull-request.
+- [x] Submit a Pull-Request to merge <firstName-lastName> Branch into master (student's Repo).
+- [x] Add your Project Manager as a Reviewer on the Pull-request.
 - [ ] PM then will count the HW as done by merging the branch back into master.
 
 ## Minimum Viable Product
 
 Your finished project must include all of the following requirements:
 
-- [X] Class component that fetches data from the server you now have running - the data can be fetched from `http://localhost:5000/api/players`
-- [X] Display the player data you receive from the API
-- [X] Build a custom hook and use it in your app - this can be a localStorage hook, a fetch hook, a dark mode hook, or any other hook you would like
+- [x] Class component that fetches data from the server you now have running - the data can be fetched from `http://localhost:5000/api/players`
+- [x] Display the player data you receive from the API
+- [x] Build a custom hook and use it in your app - this can be a localStorage hook, a fetch hook, a dark mode hook, or any other hook you would like
 
 ## Stretch Problems
 
-- [X] Implement another custom hook
+- [x] Implement another custom hook
 - [ ] Use a graphing library to graph the data you received from the API

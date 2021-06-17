@@ -1,1 +1,1 @@
-module.exports = require('../../scripts/webpack.client')(__dirname);
+module.exports = require("../../scripts/webpack.client")(__dirname);

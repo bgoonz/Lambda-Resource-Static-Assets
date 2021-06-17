@@ -2,10 +2,10 @@
 
 A student that completes this project shows that they can:
 
-* Perform CRUD operations on an RDBMS using JPA and Hibernate (reading)
-* Implement seed data using SQL statements
-* Explain and use Spring Data Relationships
-* Use the JsonIgnoreProperties annotation to prevent infinite loops
+- Perform CRUD operations on an RDBMS using JPA and Hibernate (reading)
+- Implement seed data using SQL statements
+- Explain and use Spring Data Relationships
+- Use the JsonIgnoreProperties annotation to prevent infinite loops
 
 ## Introduction
 
@@ -17,54 +17,59 @@ The table layouts are as follows
 
 ![Image of Database Layout](java-orders-db.png)
 
-* AGENTS
-  * AGENTCODE primary key, not null Long
-  * AGENTNAME string
-  * WORKINGAREA string
-  * COMMISSION double
-  * PHONE string
-  * COUNTRY string
+- AGENTS
 
-* CUSTOMERS
-  * CUSTCODE primary key, not null Long
-  * CUSTNAME String, not null
-  * CUSTCITY String
-  * WORKINGAREA String
-  * CUSTCOUNTRY String
-  * GRADE String
-  * OPENINGAMT double
-  * RECEIVEAMT double
-  * PAYMENTAMT double
-  * OUTSTANDINGAMT double
-  * PHONE String
-  * AGENTCODE Long foreign key (one agent to many customers) not null
+  - AGENTCODE primary key, not null Long
+  - AGENTNAME string
+  - WORKINGAREA string
+  - COMMISSION double
+  - PHONE string
+  - COUNTRY string
 
-* ORDERS
-  * ORDNUM primary key, not null Long
-  * ORDAMOUNT double
-  * ADVANCEAMOUNT double
-  * CUSTCODE Long foreign key (one customer to many orders) not null
-  * ORDERDESCRIPTION String
+- CUSTOMERS
 
-* PAYMENTS
-  * PAYMENTID primary key, not null long
-  * TYPE String not null
-  
-* ORDERSPAYMENTS (join table)
-  * ORDERNUM foreign key to ORDERS
-  * PAYMENTID foreign key to PAYMENTS.
+  - CUSTCODE primary key, not null Long
+  - CUSTNAME String, not null
+  - CUSTCITY String
+  - WORKINGAREA String
+  - CUSTCOUNTRY String
+  - GRADE String
+  - OPENINGAMT double
+  - RECEIVEAMT double
+  - PAYMENTAMT double
+  - OUTSTANDINGAMT double
+  - PHONE String
+  - AGENTCODE Long foreign key (one agent to many customers) not null
 
-* Customers has a foreign key to Agents (AGENTCODE) this means:
-  * Customers has a Many to One relationship to Agents and
-  * Agents has a One to Many relationship to Customers
+- ORDERS
 
-* Orders has a foreign key to Customers (CUSTCODE)
-  * Orders has a Many to One relationship to Customers and
-  * Customers has a One to Many relationship to Orders
+  - ORDNUM primary key, not null Long
+  - ORDAMOUNT double
+  - ADVANCEAMOUNT double
+  - CUSTCODE Long foreign key (one customer to many orders) not null
+  - ORDERDESCRIPTION String
 
-* Orders has a many to many relationship with payments
-  * multiple orders can use the same payment type and an order can have multiple payment types.
-  * For example you can use both gift card and credit card to pay for an order.
+- PAYMENTS
+  - PAYMENTID primary key, not null long
+  - TYPE String not null
+- ORDERSPAYMENTS (join table)
+
+  - ORDERNUM foreign key to ORDERS
+  - PAYMENTID foreign key to PAYMENTS.
+
+- Customers has a foreign key to Agents (AGENTCODE) this means:
+
+  - Customers has a Many to One relationship to Agents and
+  - Agents has a One to Many relationship to Customers
+
+- Orders has a foreign key to Customers (CUSTCODE)
+
+  - Orders has a Many to One relationship to Customers and
+  - Customers has a One to Many relationship to Orders
+
+- Orders has a many to many relationship with payments
+  - multiple orders can use the same payment type and an order can have multiple payment types.
+  - For example you can use both gift card and credit card to pay for an order.
 
 Using the provided seed data, a successful application will return the follow data based on the given endpoint. Expand the section of the endpoint to see the data that is returned.
 
@@ -1294,18 +1299,18 @@ Using the provided seed data, a successful application will return the follow da
 
 ## Instructions
 
-* [X] Please fork and clone this repository. This repository does not have a starter project, so create one inside of the cloned repository folder. Regularly commit and push your code as appropriate.
-* [X] Create the entities needed to store this data.
-* [X] A data.sql file has been provided with seed data. You can use this class directly or modify it to fit your models. However, the data found in the file is the seed data to use!
+- [x] Please fork and clone this repository. This repository does not have a starter project, so create one inside of the cloned repository folder. Regularly commit and push your code as appropriate.
+- [x] Create the entities needed to store this data.
+- [x] A data.sql file has been provided with seed data. You can use this class directly or modify it to fit your models. However, the data found in the file is the seed data to use!
 
 Expose the following endpoints
 
-* [X]  GET /agents/agent/{id} - Returns the agent and their customers with the given agent id
-* [X]  GET /orders/order/{id} - Returns the order and its customer with the given order number
-* [X]  GET /customers/orders - Returns all customers with their orders
-* [X]  GET /customers/customer/{id} - Returns the customer and their orders with the given customer id
-* [X]  GET /customers/namelike/{likename} - Returns all customers and their orders with a customer name containing the given substring
+- [x] GET /agents/agent/{id} - Returns the agent and their customers with the given agent id
+- [x] GET /orders/order/{id} - Returns the order and its customer with the given order number
+- [x] GET /customers/orders - Returns all customers with their orders
+- [x] GET /customers/customer/{id} - Returns the customer and their orders with the given customer id
+- [x] GET /customers/namelike/{likename} - Returns all customers and their orders with a customer name containing the given substring
 
 ### Stretch Goal
 
-* [X] GET /orders/advanceamount - returns all orders with their customers that have an advanceamount greater than 0.
+- [x] GET /orders/advanceamount - returns all orders with their customers that have an advanceamount greater than 0.

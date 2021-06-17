@@ -2,9 +2,9 @@
 
 A student that completes this project shows that they can:
 
-* use Maven including reading and modifying the pom.xml.
-* use Spring and Spring Boot to build a REST API service.
-* use Tomcat.
+- use Maven including reading and modifying the pom.xml.
+- use Spring and Spring Boot to build a REST API service.
+- use Tomcat.
 
 ## Introduction
 
@@ -21,10 +21,10 @@ The countries of the world have many different defining attributes including lan
 
 Some Important Notes That Might help:
 
-* [ ] The country in suggested layout is found at the end of this document
-* [ ] The sort method must work with `int` - so not `long`. the solution - type casting! See the code snippet below:  
-      `.sort((c1, c2) -> (int)(c1.getPopulation() - c2.getPopulation()))`
-* [ ] To calculate median for stretch goals - if the list contains an odd number of items, pick the the middle one. If the list contains an even number of items, pick either of the two items that lie in the middle.
+- [ ] The country in suggested layout is found at the end of this document
+- [ ] The sort method must work with `int` - so not `long`. the solution - type casting! See the code snippet below:  
+       `.sort((c1, c2) -> (int)(c1.getPopulation() - c2.getPopulation()))`
+- [ ] To calculate median for stretch goals - if the list contains an odd number of items, pick the the middle one. If the list contains an even number of items, pick either of the two items that lie in the middle.
 
 Using the data at the end of this document, the endpoints will produce the following outputs. Expand to see the suggested outputs!
 
@@ -2636,27 +2636,27 @@ Using the data at the end of this document, the endpoints will produce the follo
 
 The following URLs should return the requested data given the parameters
 
-* [X] /names/all - return the names of all the countries alphabetically
-* [X] /names/start/{letter} - return the countries alphabetically that begin with the given letter
-* [X] /names/size/{number} - return the countries alphabetically that have a name equal to or longer than the given length
+- [x] /names/all - return the names of all the countries alphabetically
+- [x] /names/start/{letter} - return the countries alphabetically that begin with the given letter
+- [x] /names/size/{number} - return the countries alphabetically that have a name equal to or longer than the given length
 
-* [ ] /population/size/{people} - return the countries that have a population equal to or greater than the given population
-* [ ] /population/min - return the country with the smallest population
-* [ ] /population/max - return the country with the largest population
+- [ ] /population/size/{people} - return the countries that have a population equal to or greater than the given population
+- [ ] /population/min - return the country with the smallest population
+- [ ] /population/max - return the country with the largest population
 
-* [ ] /age/age/{age} - return the countries that have a median age equal to or greater than the given age
-* [ ] /age/min - return the country with the smallest median age
-* [ ] /age/max - return the country the the greatest median age  
+- [ ] /age/age/{age} - return the countries that have a median age equal to or greater than the given age
+- [ ] /age/min - return the country with the smallest median age
+- [ ] /age/max - return the country the the greatest median age
 
 ### Stretch Goal
 
-* [ ] /population/median - return the country with the median population
+- [ ] /population/median - return the country with the median population
 
-* [ ] /age/median - return the country with the median median age
+- [ ] /age/median - return the country with the median median age
 
 ## The Data
 
-I know this is much data, but it is real data and feel free to copy and paste the data into your code at the appropriate spot! 
+I know this is much data, but it is real data and feel free to copy and paste the data into your code at the appropriate spot!
 
 The parameters are listed in this order Name, Population, Land Mass in Km2, Median Age
 

@@ -1,5 +1,4 @@
-EaselJS & Box2dWeb
-=======
+# EaselJS & Box2dWeb
 
 Simple demo showing how to integrate the Box2dWeb physics engine with EaselJS graphics & SoundJS audio.
 

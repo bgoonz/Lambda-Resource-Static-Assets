@@ -5,20 +5,20 @@ seo:
   title: Starter Theme
   description: This is the starter theme page
   extra:
-    - name: 'og:type'
+    - name: "og:type"
       value: website
       keyName: property
-    - name: 'og:title'
+    - name: "og:title"
       value: Starter Theme
       keyName: property
-    - name: 'og:description'
+    - name: "og:description"
       value: This is the starter theme page
       keyName: property
-    - name: 'twitter:card'
+    - name: "twitter:card"
       value: summary
-    - name: 'twitter:title'
+    - name: "twitter:title"
       value: Starter Theme
-    - name: 'twitter:description'
+    - name: "twitter:description"
       value: This is the starter theme page
 template: docs
 ---

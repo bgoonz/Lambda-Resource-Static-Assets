@@ -1,4 +1,5 @@
 # Sprint Challenge: Single Page Applications
+
 ## Rick & Morty Edition
 
 This challenge allows you to practice the concepts and techniques learned over the past Sprint and apply them in a concrete project. This Sprint explored Single Page Applications, React Router I - II, and React Forms.
@@ -9,7 +10,7 @@ This challenge allows you to practice the concepts and techniques learned over t
 
 This is an individual assessment. All work must be your own. Your challenge score is a measure of your ability to work independently using the material covered through this sprint. You need to demonstrate proficiency in the concepts and objectives introduced and practiced in preceding days.
 
-You are not allowed to collaborate with students during the Sprint Challenge. However, you are encouraged to follow the twenty-minute rule and seek support by reaching out through DM to your TL. 
+You are not allowed to collaborate with students during the Sprint Challenge. However, you are encouraged to follow the twenty-minute rule and seek support by reaching out through DM to your TL.
 You have **three hours to complete** this challenge. **Plan your time accordingly.**
 
 ## Commits
@@ -25,11 +26,11 @@ In this challenge, you will create a Single Page Application complete with Clien
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question.
 
 - [ ] Explain benefit(s) using `client-side routing`?
-> Answer: JS manages the data for application within its own memore, if additional data is needed a call to a simple JSON-returning API will be made. Doesn't refresh the page between routes and it is way faster when commuting between routes.
+  > Answer: JS manages the data for application within its own memore, if additional data is needed a call to a simple JSON-returning API will be made. Doesn't refresh the page between routes and it is way faster when commuting between routes.
 - [ ] What does AJAX stand for?
-> Answer: Asynchronous JavaScript and XML
+  > Answer: Asynchronous JavaScript and XML
 - [ ] What are `controlled components` in React?
-> Answer: The React component that renders a form also controls what happens in that form on subsequent user input
+  > Answer: The React component that renders a form also controls what happens in that form on subsequent user input
 
 ## Project Set Up
 
@@ -45,7 +46,6 @@ Follow these steps to set up and work on your project:
 - [ ] **RUN** `yarn install` or `npm install` to retrieve the client-side dependencies.
 - [ ] **RUN** `yarn start` or `npm start` to fire up your React application.
 
-
 #### Exceeded rate limits?
 
 <details>
@@ -56,8 +56,8 @@ If the [main API service](https://rickandmortyapi.com/documentation) goes down, 
 [**Backup URL:**](https://rick-api.herokuapp.com/api/) `https://rick-api.herokuapp.com/api/`
 
 You can still be locked out - watch your [chrome devtools' network panel](https://developers.google.com/web/tools/chrome-devtools/network/reference) to make sure you aren't making too many requests.
-</details>
 
+</details>
 
 [Instructions to completing](#completing)
 
@@ -66,8 +66,8 @@ You can still be locked out - watch your [chrome devtools' network panel](https:
 > The MVP of this project is broken up between a couple parts.
 
 1. Plan: Divide your allowed time, use either 15, 30 or 60 minute intervals.
-    1. Plan estimated targets or waypoints ("By the '1 hour' mark I'll have 1 component functionally completed & styled"). **This is mostly about time-boxing.**
-    1. If you get stuck - maximize your time: try building another part, going back to previous working commit, or asking your TL for help.
+   1. Plan estimated targets or waypoints ("By the '1 hour' mark I'll have 1 component functionally completed & styled"). **This is mostly about time-boxing.**
+   1. If you get stuck - maximize your time: try building another part, going back to previous working commit, or asking your TL for help.
 1. Follow [each part](#part-1).
 1. Find design resources OR use your design skills make the application look professional.
 
@@ -116,26 +116,22 @@ Add a Router to this application using [React Router](https://reacttraining.com/
 
 > 💡**Reminder:** `git commit -am 'MVP Completed'`
 
-
----------------------------------------------------------
-
+---
 
 > 🚀 **Pro Tip: Complete as many stretch goals as possible!** Even after the Sprint Challenge! You'll get a head start on important upcoming concepts!
 
-
 ## STRETCH GOALS 💪
-
 
 There's a range of difficulty in the options below. 😈
 
 _Note:_ The most difficult stretch goal(s) could take an expert an hour or more.
 
 Start with the most _familiar (or fun) sounding_ stretch goal.
-  Complete search component to your list views.
- - [ ] Add the `<SearchForm />` component (see `./components/SearchForm.js`).
- - [ ] Wire up the `onSearch(name)` callback prop to support [querying the API](https://rickandmortyapi.com/documentation/#filter-characters). (To search for `rick`, you would request `/api/character/?name=rick`.)
-- [ ] _Remember:_ `useEffect` must reference any state on which it _depends_.
+Complete search component to your list views.
 
+- [ ] Add the `<SearchForm />` component (see `./components/SearchForm.js`).
+- [ ] Wire up the `onSearch(name)` callback prop to support [querying the API](https://rickandmortyapi.com/documentation/#filter-characters). (To search for `rick`, you would request `/api/character/?name=rick`.)
+- [ ] _Remember:_ `useEffect` must reference any state on which it _depends_.
 
 - [ ] Animate page transition and/or card loading.
 - [ ] Persist search form field(s) by using the custom hook `useLocalStorage`.
@@ -157,10 +153,8 @@ Start with the most _familiar (or fun) sounding_ stretch goal.
 - [ ] Add your TL as a Reviewer on the Pull Request.
 - [ ] TL then will count the HW as done by merging the branch into master.
 
-
 <!-- TLs: NOTE: use resources to coach, or share over zoom - avoid sharing entire solution folder. Share preview links if available. -->
 
 > **Note:** AFTER Sprint Challenge: [Solutions to many stretch goals](https://github.com/LambdaSchool/Sprint-Challenge-Single-Page-Apps-Solution/pulls) (and live demo URLs) are available from TLs (or GitHub admins.)
 
 There are many ways to implement each of these requirements!
-

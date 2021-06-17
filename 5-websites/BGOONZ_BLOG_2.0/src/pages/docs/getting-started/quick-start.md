@@ -5,23 +5,24 @@ seo:
   title: Quick Start
   description: This is the quick start page
   extra:
-    - name: 'og:type'
+    - name: "og:type"
       value: website
       keyName: property
-    - name: 'og:title'
+    - name: "og:title"
       value: Quick Start
       keyName: property
-    - name: 'og:description'
+    - name: "og:description"
       value: This is the quick start page
       keyName: property
-    - name: 'twitter:card'
+    - name: "twitter:card"
       value: summary
-    - name: 'twitter:title'
+    - name: "twitter:title"
       value: Quick Start
-    - name: 'twitter:description'
+    - name: "twitter:description"
       value: This is the quick start page
 template: docs
 ---
+
 **# Web-Development-Resources-Part-3**
 **# Web Development Resources Part 3**
 I'm the psychological equivalent of a physical hoarder only instead of empty soda cans and dead racoons it's lists of links and resources.
@@ -56,5 +57,3 @@ I'm the psychological equivalent of a physical hoarder only instead of
 \*\*\[bgoonz's gists\*\*\*Instantly share code, notes, and snippets. Web Developer, Electrical Engineer JavaScript | CSS | Bootstrap | Python |…\*gist.github.com]\(https://gist.github.com/bgoonz)
 \*\*\[bgoonz — Overview\*\*\*Web Developer, Electrical Engineer JavaScript | CSS | Bootstrap | Python | React | Node.js | Express | Sequelize…\*github.com]\(https://github.com/bgoonz)
 **### Or Checkout my personal Resource Site:**
-
-

@@ -22,31 +22,31 @@ In this project you will build out a calculator using React. You have been given
 
 This project was put together using create-react-app (CRA). You will not need to install CRA in order to make this project work. Follow the steps below to setup the project with the proper dependencies.
 
-- [X] Create a forked copy of this project.
-- [X] Add your team lead as collaborator on Github.
-- [X] Clone your OWN version of the repository in your terminal
-- [X] CD into the project base directory `cd lambda-calculator`
-- [X] Download project dependencies by running one of these two commands `yarn` or `npm install`
-- [X] Using the same command tool (yarn or npm) start up the app using `yarn start` or `npm start`
-- [X] Create a new branch: git checkout -b `<firstName-lastName>`.
+- [x] Create a forked copy of this project.
+- [x] Add your team lead as collaborator on Github.
+- [x] Clone your OWN version of the repository in your terminal
+- [x] CD into the project base directory `cd lambda-calculator`
+- [x] Download project dependencies by running one of these two commands `yarn` or `npm install`
+- [x] Using the same command tool (yarn or npm) start up the app using `yarn start` or `npm start`
+- [x] Create a new branch: git checkout -b `<firstName-lastName>`.
       Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly.
-- [X] Push commits: git push origin `<firstName-lastName>`.
+- [x] Push commits: git push origin `<firstName-lastName>`.
 
 Follow these steps for completing your project.
 
 - [ ] Submit a Pull-Request to merge Branch into master (student's Repository). **Please don't merge your own pull request**
 - [ ] Add your team lead as a reviewer on the pull-request
 - [ ] Your team lead will count the project as complete by merging the branch back into master.
-- [X] Do your magic!
+- [x] Do your magic!
 
 # _Project - Lambda Calculator_
 
 **A job just came down from the Big Boss!**
 
-- [X] A prospective client has tasked you with building a calculator app. They need you to build the app using the file structure and component wire frame provided.
-- [X] Get all necessary files connected and either taking in or sending out data.
-- [X] The design file should be followed as close as possible but doesn't have to be pixel perfect - budget your time wisely.
-- [X] The client will provide their own proprietary calculator software so your app only needs basic functionality, enough for a demo.
+- [x] A prospective client has tasked you with building a calculator app. They need you to build the app using the file structure and component wire frame provided.
+- [x] Get all necessary files connected and either taking in or sending out data.
+- [x] The design file should be followed as close as possible but doesn't have to be pixel perfect - budget your time wisely.
+- [x] The client will provide their own proprietary calculator software so your app only needs basic functionality, enough for a demo.
 
 ## Directions
 
@@ -72,19 +72,19 @@ const [numberState, setNumberState] = useState(numbers);
 
 **Step 3**
 
-- [X] Map over the data and dynamically render components for each piece of data in the arrays.
-- [X] You will need to import the component that you'll render in the map function.
+- [x] Map over the data and dynamically render components for each piece of data in the arrays.
+- [x] You will need to import the component that you'll render in the map function.
 
 **STEP 4**
 
-- [X] Import the wrapper button components into `App.js`
-- [X] Import the display components into `App.js` as well
-- [X] Compose all the components inside the `App` component to get your calculator rendering on the DOM
-
+- [x] Import the wrapper button components into `App.js`
+- [x] Import the display components into `App.js` as well
+- [x] Compose all the components inside the `App` component to get your calculator rendering on the DOM
 
 **STEP 5 - (STRETCH)**
-- [X] In each component, start designing things to match the design file
-- [X] Style your project using any of the techniques from the module
+
+- [x] In each component, start designing things to match the design file
+- [x] Style your project using any of the techniques from the module
 - [ ] Don't forget about className vs class on your JSX elements!!
 
 It's time to start thinking about functionality. Before getting into this, let's try and plan out all the moving pieces you'll need.
@@ -99,8 +99,8 @@ This is where you're JavaScript skills are really going to be stretched. Remembe
 
 ## _MVP Requirements:_
 
-- [X] Get at least one set of buttons(numbers, operators, or special buttons) to reflect the design spec.
-- [X] Use the state hook function to get the app to display some data.
+- [x] Get at least one set of buttons(numbers, operators, or special buttons) to reflect the design spec.
+- [x] Use the state hook function to get the app to display some data.
 
 **Here is your design spec:**
 
@@ -119,8 +119,8 @@ This is where you're JavaScript skills are really going to be stretched. Remembe
 
 Do not attempt stretch problems until MVP has been reached and a final commit has been made.
 
-- [X] STEP 5 from above
+- [x] STEP 5 from above
 - [ ] Finish the logic so the calculator is fully functional. Feel free to change the array data, or lose it entirely, as you see fit.
-- [X] Finish styling all of the buttons and get your calculator to closely resemble the given design spec. 
+- [x] Finish styling all of the buttons and get your calculator to closely resemble the given design spec.
 - [ ] Add some icons to improve the operator characters aesthetics. Research any icon/font library and implement it into your project.
 - [ ] Convert your CSS styling to use Sass/Scss

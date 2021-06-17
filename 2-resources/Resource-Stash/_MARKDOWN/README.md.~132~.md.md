@@ -27,13 +27,13 @@ Please follow along as the instructor uses Knex migrations and seeding to create
 
 ## Components
 
-- entities (resources):  nouns --> tables
+- entities (resources): nouns --> tables
 - properties (column, fields, attributes) --> columns
 - relationships --> foreign keys
 
 ## Workflow
 
-- identify entities (resources):  nouns --> tables
+- identify entities (resources): nouns --> tables
 - identify relationships --> foreign keys
 - identify properties (column, fields, attributes) --> columns
 

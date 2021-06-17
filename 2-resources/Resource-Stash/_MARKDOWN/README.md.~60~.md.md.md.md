@@ -40,7 +40,7 @@ Follow these steps for completing your project.
 - [ ] Compose your two new hooks together to be able to set and persist your user's dark mode preference in your app
 <!--
 - [ ] Write tests that use mocks and spies to handle dependencies in your components
--->
+      -->
 
 ## STEP 1 - useLocalStorage
 
@@ -89,7 +89,7 @@ export const useLocalStorage = (key, initialValue) => {
   - `setValue` should look something like this:
 
 ```js
-const setValue = value => {
+const setValue = (value) => {
   // Save state
   setStoredValue(value);
   // Save to local storage

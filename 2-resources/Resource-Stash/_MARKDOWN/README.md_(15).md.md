@@ -8,7 +8,6 @@ exercise laid out in the README, implement your solution in the `.py`
 skeleton file, then make sure your code passes the tests by running the
 test script with `-v`.
 
-
 ## Hint
 
 Remember: the hashtable key should be the thing you want to search

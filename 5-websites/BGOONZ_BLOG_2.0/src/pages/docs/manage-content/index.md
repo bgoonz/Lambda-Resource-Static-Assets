@@ -7,23 +7,24 @@ seo:
   title: Manage Content
   description: This is the manage content page
   extra:
-    - name: 'og:type'
+    - name: "og:type"
       value: website
       keyName: property
-    - name: 'og:title'
+    - name: "og:title"
       value: Manage Content
       keyName: property
-    - name: 'og:description'
+    - name: "og:description"
       value: This is the manage content page
       keyName: property
-    - name: 'twitter:card'
+    - name: "twitter:card"
       value: summary
-    - name: 'twitter:title'
+    - name: "twitter:title"
       value: Manage Content
-    - name: 'twitter:description'
+    - name: "twitter:description"
       value: This is the manage content page
 template: docs
 ---
+
 \<div class="note">
 \<iframe width="560" height="315" src="https://www.youtube.com/embed/xGZSWvFess8?start=2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 \</div>
@@ -79,17 +80,20 @@ The rendered output looks like this:
 body {
   background: #fff;
   color: #666;
-  line-height: 1.66667; }
+  line-height: 1.66667;
+}
 
 a {
   color: #d4a259;
   text-decoration: underline;
-  -webkit-transition: background .3s ease, color .3s ease;
-  transition: background .3s ease, color .3s ease; }
+  -webkit-transition: background 0.3s ease, color 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease;
+}
 
 a:hover {
   color: #1d1d1d;
-  text-decoration: none; }
+  text-decoration: none;
+}
 ```
 
 ## Callouts
@@ -114,6 +118,6 @@ There are two types of callouts available in this theme, **important** and **not
 You can build tables with markdown to help you organize information. To add a table, use three or more hyphens (---) to create each column’s header, and use pipes (|) to separate each column like in the example below.
 
 | Title | Title |
-| ------| ----- |
+| ----- | ----- | ---------------------------------------------- |
 | Text  | Text  |
-| Text  | Text  |![](https://www.youtube.com/embed/xGZSWvFess8)
+| Text  | Text  | ![](https://www.youtube.com/embed/xGZSWvFess8) |

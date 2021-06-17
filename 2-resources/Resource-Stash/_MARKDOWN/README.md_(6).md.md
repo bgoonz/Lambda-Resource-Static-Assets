@@ -1,2 +1,3 @@
 # LambdaSchool
+
 notes and progress

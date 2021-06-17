@@ -1,19 +1,18 @@
+Lecture 1: [Linked Lists](Linked_Lists/1_linked_lists.md)
 
-Lecture 1: [Linked Lists](Linked_Lists/1_linked_lists.md)  
+Lecture 2: [Implementing a Doubly Linked List](Doubly_Linked_List/2_doubly_linked_list.md)
 
-Lecture 2: [Implementing a Doubly Linked List](Doubly_Linked_List/2_doubly_linked_list.md)  
+Lecture 3: [BST and Heaps](BST_and_Heaps/bst_heaps.md)
 
-Lecture 3: [BST and Heaps](BST_and_Heaps/bst_heaps.md)   
-
-Lecture 4: [Heaps & Interview Practice](Interview_Problems/Heaps_and_Interview.md) 
-
-<br>
-
-[Data Structures in TK](https://learn.lambdaschool.com/cs/sprint/recR4gHcvD21ziR9a)  
+Lecture 4: [Heaps & Interview Practice](Interview_Problems/Heaps_and_Interview.md)
 
 <br>
 
-If you found these notes helpful and want to show appreciation to the author, [coffee donations](https://www.buymeacoffee.com/G1stPBuYU) are much loved. 
+[Data Structures in TK](https://learn.lambdaschool.com/cs/sprint/recR4gHcvD21ziR9a)
+
+<br>
+
+If you found these notes helpful and want to show appreciation to the author, [coffee donations](https://www.buymeacoffee.com/G1stPBuYU) are much loved.
 
 <br>
 <br>
@@ -28,13 +27,13 @@ Just because something _can_ get the job done, doesn't mean it will do it effici
 
 Some types have more use cases than others, even if they are rarer in real life implementation (heaps v arrays and hash tables).
 
-In interviews, it's common to be asked about more niche implementations of data structures or accurately choosing the most efficient data structure to solve an algorithm. 
+In interviews, it's common to be asked about more niche implementations of data structures or accurately choosing the most efficient data structure to solve an algorithm.
 
 <br>
 
 # What is a data structure?
 
-An optimized way of storing data sets. 
+An optimized way of storing data sets.
 
 Outside of programming, we use storage structures like cabinets and drawers. Some are more appropriate for certain types of items versus others. While a cabinet is great for plates or glasses, it might not be great for storing piles of papers.
 

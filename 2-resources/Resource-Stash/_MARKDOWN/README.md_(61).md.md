@@ -20,8 +20,8 @@ As you begin interviewing for jobs, you will often be expected to be able to imp
 
 ## Instructions and/or completion requirements
 
-- [X] Open up the [iterative_sorting](src/iterative_sorting) directory
-- [X] Read through the descriptions of the `bubble_sort` and `selection_sort` algorithms
+- [x] Open up the [iterative_sorting](src/iterative_sorting) directory
+- [x] Read through the descriptions of the `bubble_sort` and `selection_sort` algorithms
 - [ ] Implement `bubble_sort` and `selection_sort` in [iterative_sorting.py](src/iterative_sorting/iterative_sorting.py)
 - [ ] Test your implementation by running `test_iterative.py`
 - [ ] Implement all the methods in the [searching.py](src/searching/searching.py) file in the [searching](src/searching) directory.
@@ -161,7 +161,7 @@ So the total space complexity for this algorithm is:
 Again, compare to the `O(1)` space complexity of the initial iterative solution.
 
 In some languages, notably
-[Lisp](https://en.wikipedia.org/wiki/Lisp_(programming_language)) and other
+[Lisp](<https://en.wikipedia.org/wiki/Lisp_(programming_language)>) and other
 [functional programming
 languages](https://en.wikipedia.org/wiki/Functional_programming), you can write
 recursive solutions with `O(1)` space complexity. These languages take advantage

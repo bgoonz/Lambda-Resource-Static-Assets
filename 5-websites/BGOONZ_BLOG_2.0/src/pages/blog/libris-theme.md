@@ -3,8 +3,8 @@ title: How Did I Get Here
 excerpt: >-
   Vis accumsan feugiat adipiscing nisl amet adipiscing accumsan blandit accumsan
   sapien blandit ac amet faucibus aliquet placerat commodo. Antealiquet commodo
-  accumsan vis phasellus adipiscing. 
-date: '2019-04-24'
+  accumsan vis phasellus adipiscing.
+date: "2019-04-24"
 thumb_image: images/3.jpg
 image: images/10.jpg
 seo:
@@ -13,42 +13,42 @@ seo:
     Vis accumsan feugiat adipiscing nisl amet adipiscing accumsan blandit
     accumsan
   extra:
-    - name: 'og:type'
+    - name: "og:type"
       value: article
       keyName: property
-    - name: 'og:title'
+    - name: "og:title"
       value: Introducing The Libris Theme
       keyName: property
-    - name: 'og:description'
+    - name: "og:description"
       value: >-
         Vis accumsan feugiat adipiscing nisl amet adipiscing accumsan blandit
         accumsan
       keyName: property
-    - name: 'og:image'
+    - name: "og:image"
       value: images/3.jpg
       keyName: property
       relativeUrl: true
-    - name: 'twitter:card'
+    - name: "twitter:card"
       value: summary_large_image
-    - name: 'twitter:title'
+    - name: "twitter:title"
       value: Introducing The Libris Theme
-    - name: 'twitter:description'
+    - name: "twitter:description"
       value: >-
         Vis accumsan feugiat adipiscing nisl amet adipiscing accumsan blandit
         accumsan
-    - name: 'twitter:image'
+    - name: "twitter:image"
       value: images/3.jpg
       relativeUrl: true
 template: post
 ---
 
-**Vis accumsan feugiat** adipiscing nisl amet adipiscing accumsan blandit accumsan sapien blandit ac amet faucibus aliquet placerat commodo. Interdum ante aliquet commodo accumsan vis phasellus adipiscing. Ornare a in lacinia. Vestibulum accumsan ac metus massa tempor. 
+**Vis accumsan feugiat** adipiscing nisl amet adipiscing accumsan blandit accumsan sapien blandit ac amet faucibus aliquet placerat commodo. Interdum ante aliquet commodo accumsan vis phasellus adipiscing. Ornare a in lacinia. Vestibulum accumsan ac metus massa tempor.
 
 Accumsan in lacinia ornare massa amet. Ac interdum ac non praesent. Cubilia lacinia interdum massa faucibus blandit nullam. Accumsan phasellus nunc integer. Accumsan euismod nunc adipiscing lacinia erat ut sit. Arcu amet. Id massa aliquet arcu accumsan lorem amet accumsan.
 
 ```javascript
 switch (type) {
-  case 'Object':
+  case "Object":
     id = _.util.objId(o);
     if (visited[id]) {
       return visited[id];

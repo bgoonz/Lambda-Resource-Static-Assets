@@ -19,10 +19,10 @@ When you begin interviewing for jobs, you will often encounter problems that hav
 
 ## Instructions and/or completion requirements
 
-- [X] Read through the descriptions of the `merge_sort` algorithm in [Training Kit](https://learn.lambdaschool.com/cs/module/reccRh9h6ccXghfA4/).
-- [X] Implement `merge_sort` in [recursive_sorting.py](src/recursive_sorting/recursive_sorting.py)
-- [X] Implement an in-place version of `merge_sort` that does not allocate any additional memory. In other words, the space complexity for this function should be O(1).
-- [X] Test your implementation by running `test_recursive.py`
+- [x] Read through the descriptions of the `merge_sort` algorithm in [Training Kit](https://learn.lambdaschool.com/cs/module/reccRh9h6ccXghfA4/).
+- [x] Implement `merge_sort` in [recursive_sorting.py](src/recursive_sorting/recursive_sorting.py)
+- [x] Implement an in-place version of `merge_sort` that does not allocate any additional memory. In other words, the space complexity for this function should be O(1).
+- [x] Test your implementation by running `test_recursive.py`
 
 ## Stretch goals
 
@@ -62,8 +62,8 @@ to complete the algorithm grows proportionately.
 But the _space_ complexity is `O(1)`. The additional space required to complete
 the algorithm was:
 
-* `result`: `O(1)`
-* `v`: `O(1)`
+- `result`: `O(1)`
+- `v`: `O(1)`
 
 And neither of those change in size regardless of how big list `data` is. `data`
 could have a zillion elements, and the algorithm would still only require space
@@ -85,9 +85,9 @@ def alg(data):
 
 Here we have more space allocated.
 
-* `result`: `O(1)`
-* `v`: `O(1)`
-* `new_data`: `O(n)`
+- `result`: `O(1)`
+- `v`: `O(1)`
+- `new_data`: `O(n)`
 
 `new_data` gets bigger as `data` gets bigger, so it's `O(n)`. So we have:
 
@@ -156,7 +156,7 @@ So the total space complexity for this algorithm is:
 Again, compare to the `O(1)` space complexity of the initial iterative solution.
 
 In some languages, notably
-[Lisp](https://en.wikipedia.org/wiki/Lisp_(programming_language)) and other
+[Lisp](<https://en.wikipedia.org/wiki/Lisp_(programming_language)>) and other
 [functional programming
 languages](https://en.wikipedia.org/wiki/Functional_programming), you can write
 recursive solutions with `O(1)` space complexity. These languages take advantage

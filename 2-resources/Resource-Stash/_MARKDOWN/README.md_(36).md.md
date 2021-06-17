@@ -75,7 +75,9 @@ Sorting: artngvirf zvtug uryc jurer `erirefr` jba'g.
 
 Printing: lbh pna cevag n inevnoyr svryq jvqgu va na s-fgevat jvgu
 arfgrq oenprf, yvxr fb `{k:{l}}`
+
 # you can print a variable field width in an f-string with
+
 nested braces, like so `{x:{y}}`
 
 (The hints are encrypted with ROT13. Google for `rot13 decoder` to see

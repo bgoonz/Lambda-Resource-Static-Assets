@@ -7,20 +7,20 @@ seo:
   title: FAQ
   description: This is the faq page
   extra:
-    - name: 'og:type'
+    - name: "og:type"
       value: website
       keyName: property
-    - name: 'og:title'
+    - name: "og:title"
       value: FAQ
       keyName: property
-    - name: 'og:description'
+    - name: "og:description"
       value: This is the faq page
       keyName: property
-    - name: 'twitter:card'
+    - name: "twitter:card"
       value: summary
-    - name: 'twitter:title'
+    - name: "twitter:title"
       value: FAQ
-    - name: 'twitter:description'
+    - name: "twitter:description"
       value: This is the faq page
 template: docs
 ---

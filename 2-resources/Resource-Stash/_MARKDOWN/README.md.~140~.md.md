@@ -13,17 +13,17 @@ In this project we'll implement a full authentication workflow (register/login/l
 
 ### Download Project Files
 
-- [X] **Fork** and **Clone** this repository.
-- [X] **CD into the folder** where you cloned the repository.
+- [x] **Fork** and **Clone** this repository.
+- [x] **CD into the folder** where you cloned the repository.
 - Do your magic!
 
 ## Assignment
 
-- [X] Use Node.js, Express and Knex to build an API that provides _Authentication_ functionality using SQLite to store _User_ information.
+- [x] Use Node.js, Express and Knex to build an API that provides _Authentication_ functionality using SQLite to store _User_ information.
 
-- [X] The user schema should include: `username`, `password` and `department`. The `department` should be a string used to group the users. No need for a `departments` table or setting up relationships.
+- [x] The user schema should include: `username`, `password` and `department`. The `department` should be a string used to group the users. No need for a `departments` table or setting up relationships.
 
-- [X] Use **JSON Web Tokens** to keep users authenticated across requests.
+- [x] Use **JSON Web Tokens** to keep users authenticated across requests.
 
 ### Design and build the following endpoints.
 
@@ -35,7 +35,7 @@ In this project we'll implement a full authentication workflow (register/login/l
 
 ## Stretch Problem
 
-- [X] add the code necessary so that when a client makes a `GET` request to `/api/users` the server only returns documents with the `same department` as the logged in user. For example if the logged in user belongs to the finance department, then only users with the _finance_ department should be returned; if the logged in user is in _sales_ only users on the sales department should be returned.
+- [x] add the code necessary so that when a client makes a `GET` request to `/api/users` the server only returns documents with the `same department` as the logged in user. For example if the logged in user belongs to the finance department, then only users with the _finance_ department should be returned; if the logged in user is in _sales_ only users on the sales department should be returned.
 - [ ] implement a React client:
   - [ ] use `create-react-app` to generate a application to server as the client for the Web API.
   - [ ] inside the React application add **client-side routes** and components for `signup`, `signin` and showing the `list of users` stored in the database.
@@ -44,4 +44,3 @@ In this project we'll implement a full authentication workflow (register/login/l
   - [ ] the `/users` route should read the token from local storage and make a `GET` request to the `/api/users` route on the API attaching the token as the value of the `Authorization` header.
   - [ ] provide a button to `sign out` that will remove the token from local storage.
 - [ ] add any extra functionality to make the application more user friendly like showing a message and redirecting to `/signin` if an unauthenticated user tries to access the list of users in the `/users` route.
-
