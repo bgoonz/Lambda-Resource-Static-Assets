@@ -1,1 +1,0 @@
-# gs-sample-database
