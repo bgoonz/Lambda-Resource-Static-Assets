@@ -1,2 +1,0 @@
-window.alert("HELLO WORLD")
-
