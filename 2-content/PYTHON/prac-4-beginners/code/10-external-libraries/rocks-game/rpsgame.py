@@ -83,7 +83,7 @@ def play_game(player_1, player_2):
             print(msg)
             log(msg)
         else:
-            msg = f'{winner} takes the round!'
+            msg = f"{winner} takes the round!"
             fore = Fore.GREEN if winner == player_1 else Fore.LIGHTRED_EX
             print(fore + msg + Fore.WHITE)
             log(msg)
@@ -117,16 +117,16 @@ def check_for_winning_throw(player_1, player_2, roll1, roll2):
         print("The play was tied!")
 
     outcome = rolls.get(roll1, {})
-    if roll2 in outcome.get('defeats'):
+    if roll2 in outcome.get("defeats"):
         return player_1
-    elif roll2 in outcome.get('defeated_by'):
+    elif roll2 in outcome.get("defeated_by"):
         return player_2
 
     return winner
 
 
 def get_roll(player_name, roll_names):
-    if os.environ.get('PYCHARM_HOSTED') == "1":
+    if os.environ.get("PYCHARM_HOSTED") == "1":
         print(Fore.LIGHTRED_EX + "Warning: Cannot use fancy prompt dialog in PyCharm.")
         print(Fore.LIGHTRED_EX + "Run this app outside of PyCharm to see it in action.")
         val = input(Fore.LIGHTYELLOW_EX + "What is your roll: ")
@@ -162,13 +162,14 @@ def get_roll(player_name, roll_names):
 #     return roll_names[selected_index]
 #
 
+
 def load_rolls():
     global rolls
 
     directory = os.path.dirname(__file__)
-    filename = os.path.join(directory, 'rolls.json')
+    filename = os.path.join(directory, "rolls.json")
 
-    with open(filename, 'r', encoding='utf-8') as fin:
+    with open(filename, "r", encoding="utf-8") as fin:
         rolls = json.load(fin)
 
     log(f"Loaded rolls: {list(rolls.keys())} from {os.path.basename(filename)}.")
@@ -176,12 +177,12 @@ def load_rolls():
 
 def load_leaders():
     directory = os.path.dirname(__file__)
-    filename = os.path.join(directory, 'leaderboard.json')
+    filename = os.path.join(directory, "leaderboard.json")
 
     if not os.path.exists(filename):
         return {}
 
-    with open(filename, 'r', encoding='utf-8') as fin:
+    with open(filename, "r", encoding="utf-8") as fin:
         return json.load(fin)
 
 
@@ -194,28 +195,27 @@ def record_win(winner_name):
         leaders[winner_name] = 1
 
     directory = os.path.dirname(__file__)
-    filename = os.path.join(directory, 'leaderboard.json')
+    filename = os.path.join(directory, "leaderboard.json")
 
-    with open(filename, 'w', encoding='utf-8') as fout:
+    with open(filename, "w", encoding="utf-8") as fout:
         json.dump(leaders, fout)
 
 
 def log(msg):
     directory = os.path.dirname(__file__)
-    filename = os.path.join(directory, 'rps.log')
+    filename = os.path.join(directory, "rps.log")
 
-    with open(filename, 'a', encoding='utf-8') as fout:
+    with open(filename, "a", encoding="utf-8") as fout:
         fout.write(f"[{datetime.datetime.now().date().isoformat()}] ")
         fout.write(msg)
-        fout.write('\n')
+        fout.write("\n")
 
 
 class PlayComplete(Completer):
-
     def get_completions(self, document, complete_event):
         roll_names = list(rolls.keys())
         word = document.get_word_before_cursor()
-        complete_all = not word if not word.strip() else word == '.'
+        complete_all = not word if not word.strip() else word == "."
         completions = []
 
         for roll in roll_names:
@@ -226,12 +226,13 @@ class PlayComplete(Completer):
                     roll,
                     start_position=-len(word),
                     style="fg:white bg:darkgreen",
-                    selected_style="fg:yellow bg:green")
+                    selected_style="fg:yellow bg:green",
+                )
 
                 completions.append(completion)
 
         return completions
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

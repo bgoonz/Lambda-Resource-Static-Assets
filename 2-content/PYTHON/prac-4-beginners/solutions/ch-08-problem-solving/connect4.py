@@ -79,10 +79,7 @@ def choose_location(board, symbol, is_computer):
 
 
 def find_bottom_row(board: List[List[str]], column: int) -> Optional[int]:
-    col_cells = [
-        board[n][column]
-        for n in range(0, len(board))
-    ]
+    col_cells = [board[n][column] for n in range(0, len(board))]
 
     last_empty = None
     for idx, cell in enumerate(col_cells):
@@ -94,10 +91,10 @@ def find_bottom_row(board: List[List[str]], column: int) -> Optional[int]:
 
 def show_board(board):
     for row_idx, row in enumerate(board, start=1):
-        print("| ", end='')
+        print("| ", end="")
         for col_idx, cell in enumerate(row, start=1):
             empty_text = f"({row_idx}, {col_idx})"
-            symbol = f'  {cell}   ' if cell is not None else empty_text
+            symbol = f"  {cell}   " if cell is not None else empty_text
             print(symbol, end=" | ")
         print()
 
@@ -162,33 +159,59 @@ def get_winning_sequences(board):
     # solution. But I'm afraid it will be too confusing for lots of us.
     # So I'll just do it long-hand down here.
     diagonals = [
-
         # Down to the right diagonals
         [board[5][0]],  # Not really used, too short, but here for building the pattern
-        [board[4][0], board[5][1]],  # Not really used, too short, but here for building the pattern
-        [board[3][0], board[4][1], board[5][2]],  # Not really used, too short, but here for building the pattern
+        [
+            board[4][0],
+            board[5][1],
+        ],  # Not really used, too short, but here for building the pattern
+        [
+            board[3][0],
+            board[4][1],
+            board[5][2],
+        ],  # Not really used, too short, but here for building the pattern
         [board[2][0], board[3][1], board[4][2], board[5][3]],
         [board[1][0], board[2][1], board[3][2], board[4][3], board[5][4]],
         [board[0][0], board[1][1], board[2][2], board[3][3], board[4][4], board[5][5]],
         [board[0][1], board[1][2], board[2][3], board[3][4], board[4][5], board[5][6]],
         [board[0][2], board[1][3], board[2][4], board[3][5], board[4][6]],
         [board[0][3], board[1][4], board[2][5], board[3][6]],
-        [board[0][4], board[1][5], board[2][6]],  # Not really used, too short, but here for building the pattern
-        [board[0][5], board[1][6]],  # Not really used, too short, but here for building the pattern
+        [
+            board[0][4],
+            board[1][5],
+            board[2][6],
+        ],  # Not really used, too short, but here for building the pattern
+        [
+            board[0][5],
+            board[1][6],
+        ],  # Not really used, too short, but here for building the pattern
         [board[0][6]],  # Not really used, too short, but here for building the pattern
-
         # Down to the left diagonals
         [board[0][0]],  # Not really used, too short, but here for building the pattern
-        [board[0][1], board[1][0]],  # Not really used, too short, but here for building the pattern
-        [board[2][0], board[1][1], board[0][2]],  # Not really used, too short, but here for building the pattern
+        [
+            board[0][1],
+            board[1][0],
+        ],  # Not really used, too short, but here for building the pattern
+        [
+            board[2][0],
+            board[1][1],
+            board[0][2],
+        ],  # Not really used, too short, but here for building the pattern
         [board[0][3], board[1][2], board[2][1], board[3][0]],
         [board[0][4], board[1][3], board[2][2], board[3][1], board[4][0]],
         [board[0][5], board[1][4], board[2][3], board[3][2], board[4][1], board[5][0]],
         [board[0][6], board[1][5], board[2][4], board[3][3], board[4][2], board[5][1]],
         [board[1][6], board[2][5], board[3][4], board[4][3], board[5][2]],
         [board[2][6], board[3][5], board[4][4], board[5][3]],
-        [board[3][6], board[4][5], board[5][4]],  # Not really used, too short, but here for building the pattern
-        [board[4][6], board[5][5]],  # Not really used, too short, but here for building the pattern
+        [
+            board[3][6],
+            board[4][5],
+            board[5][4],
+        ],  # Not really used, too short, but here for building the pattern
+        [
+            board[4][6],
+            board[5][5],
+        ],  # Not really used, too short, but here for building the pattern
         [board[5][6]],  # Not really used, too short, but here for building the pattern
     ]
     for diag in diagonals:
@@ -201,12 +224,12 @@ def get_winning_sequences(board):
 def find_sequences_of_four_cells_in_a_row(cells: List[str]) -> List[List[str]]:
     sequences = []
     for n in range(0, len(cells) - 3):
-        candidate = cells[n:n + 4]
+        candidate = cells[n : n + 4]
         if len(candidate) == 4:
             sequences.append(candidate)
 
     return sequences
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

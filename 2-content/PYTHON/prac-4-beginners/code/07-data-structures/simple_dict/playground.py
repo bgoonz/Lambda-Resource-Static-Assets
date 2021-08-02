@@ -22,18 +22,17 @@ print(st)
 
 # Dictionaries
 d = {
-    'bob': 0,
-    'sarah': 0,
-    'defeated_by': {'paper', 'wolf'},
-    'defeats': {'scissors', 'sponge'}
+    "bob": 0,
+    "sarah": 0,
+    "defeated_by": {"paper", "wolf"},
+    "defeats": {"scissors", "sponge"},
 }
 
-print(d['bob'])
-d['bob'] += 1
-print(d['bob'])
+print(d["bob"])
+d["bob"] += 1
+print(d["bob"])
 print(d)
-d['michael'] = 7
+d["michael"] = 7
 print(d)
 print(f"You are defeated by {d['defeated_by']}")
-print(d.get('other', 42))
-
+print(d.get("other", 42))

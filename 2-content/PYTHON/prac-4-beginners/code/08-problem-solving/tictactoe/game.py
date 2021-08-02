@@ -17,11 +17,7 @@ def main():
     # CREATE THE BOARD:
     # Board is a list of rows
     # Rows are a list of cells
-    board = [
-        [None, None, None],
-        [None, None, None],
-        [None, None, None],
-    ]
+    board = [[None, None, None], [None, None, None], [None, None, None]]
 
     # CHOOSE INITIAL PLAYER
     active_player_index = 0
@@ -71,7 +67,7 @@ def choose_location(board, symbol):
 
 def show_board(board):
     for row in board:
-        print("| ", end='')
+        print("| ", end="")
         for cell in row:
             symbol = cell if cell is not None else "_"
             print(symbol, end=" | ")
@@ -104,11 +100,7 @@ def get_winning_sequences(board):
 
     # Win by columns
     for col_idx in range(0, 3):
-        col = [
-            board[0][col_idx],
-            board[1][col_idx],
-            board[2][col_idx],
-        ]
+        col = [board[0][col_idx], board[1][col_idx], board[2][col_idx]]
         sequences.append(col)
 
     # Win by diagonals
@@ -121,5 +113,5 @@ def get_winning_sequences(board):
     return sequences
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -48,5 +48,5 @@ def play_game():
     print(f"Bye, you're done in {attempts} attempts!")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

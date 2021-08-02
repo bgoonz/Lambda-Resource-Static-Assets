@@ -18,7 +18,7 @@ def play_game(player_1, player_2):
     wins_p1 = 0
     wins_p2 = 0
 
-    rolls = ['rock', 'paper', 'scissors']
+    rolls = ["rock", "paper", "scissors"]
 
     while wins_p1 < rounds and wins_p2 < rounds:
         roll1 = get_roll(player_1, rolls)
@@ -36,7 +36,7 @@ def play_game(player_1, player_2):
         if winner is None:
             print("This round was a tie!")
         else:
-            print(f'{winner} takes the round!')
+            print(f"{winner} takes the round!")
             if winner == player_1:
                 wins_p1 += 1
             elif winner == player_2:
@@ -69,20 +69,20 @@ def check_for_winning_throw(player_1, player_2, roll1, roll2):
     winner = None
     if roll1 == roll2:
         print("The play was tied!")
-    elif roll1 == 'rock':
-        if roll2 == 'paper':
+    elif roll1 == "rock":
+        if roll2 == "paper":
             winner = player_2
-        elif roll2 == 'scissors':
+        elif roll2 == "scissors":
             winner = player_1
-    elif roll1 == 'paper':
-        if roll2 == 'scissors':
+    elif roll1 == "paper":
+        if roll2 == "scissors":
             winner = player_2
-        elif roll2 == 'rock':
+        elif roll2 == "rock":
             winner = player_1
-    elif roll1 == 'scissors':
-        if roll2 == 'rock':
+    elif roll1 == "scissors":
+        if roll2 == "rock":
             winner = player_2
-        elif roll2 == 'paper':
+        elif roll2 == "paper":
             winner = player_1
     return winner
 
@@ -102,5 +102,5 @@ def get_roll(player_name, rolls):
     return rolls[selected_index]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

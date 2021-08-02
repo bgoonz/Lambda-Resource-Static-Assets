@@ -1,18 +1,9 @@
 import random
 
 rolls = {
-    'rock': {
-        'defeats': ['scissors'],
-        'defeated_by': ['paper']
-    },
-    'paper': {
-        'defeats': ['rock'],
-        'defeated_by': ['scissors']
-    },
-    'scissors': {
-        'defeats': ['paper'],
-        'defeated_by': ['rock']
-    },
+    "rock": {"defeats": ["scissors"], "defeated_by": ["paper"]},
+    "paper": {"defeats": ["rock"], "defeated_by": ["scissors"]},
+    "scissors": {"defeats": ["paper"], "defeated_by": ["rock"]},
 }
 
 
@@ -48,12 +39,14 @@ def play_game(player_1, player_2):
         if winner is None:
             print("This round was a tie!")
         else:
-            print(f'{winner} takes the round!')
+            print(f"{winner} takes the round!")
             wins[winner] += 1
 
         # print(f"Current win status: {wins}")
 
-        print(f"Score is {player_1}: {wins[player_1]} and {player_2}: {wins[player_2]}.")
+        print(
+            f"Score is {player_1}: {wins[player_1]} and {player_2}: {wins[player_2]}."
+        )
         print()
 
     overall_winner = find_winner(wins, wins.keys())
@@ -75,9 +68,9 @@ def check_for_winning_throw(player_1, player_2, roll1, roll2):
         print("The play was tied!")
 
     outcome = rolls.get(roll1, {})
-    if roll2 in outcome.get('defeats'):
+    if roll2 in outcome.get("defeats"):
         return player_1
-    elif roll2 in outcome.get('defeated_by'):
+    elif roll2 in outcome.get("defeated_by"):
         return player_2
 
     return winner
@@ -98,5 +91,5 @@ def get_roll(player_name, roll_names):
     return roll_names[selected_index]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
