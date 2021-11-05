@@ -1,0 +1,48 @@
+{
+  "name": "04-configure-jest-for-javascript-applications",
+  "version": "1.0.0",
+  "description": "1. [Install and run Jest](./01-install-and-run-jest.test.js)",
+  "main": "01-transpile-modules-with-babel-in-jest-tests.test.js",
+  "scripts": {
+    "lint": "jest --config test/jest.lint.js",
+    "test": "is-ci 'test:coverage' 'test:watch'",
+    "test:coverage": "jest --coverage",
+    "test:debug": "node --inspect $(npm bin)/jest --runInBand",
+    "test:watch": "jest --watch",
+    "precommit": "lint-staged"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "7.1.5",
+    "@babel/plugin-proposal-class-properties": "7.1.0",
+    "@babel/preset-env": "7.1.0",
+    "@babel/preset-react": "7.0.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-plugin-dynamic-import-node": "2.2.0",
+    "babel-plugin-emotion": "9.2.11",
+    "emotion-theming": "9.2.9",
+    "eslint": "5.9.0",
+    "eslint-config-kentcdodds": "^14.0.0",
+    "eslint-import-resolver-jest": "^2.1.1",
+    "husky": "1.1.4",
+    "identity-obj-proxy": "3.0.0",
+    "is-ci-cli": "1.1.1",
+    "jest": "23.6.0",
+    "jest-emotion": "9.2.11",
+    "jest-runner-eslint": "0.7.1",
+    "jest-watch-select-projects": "0.1.1",
+    "jest-watch-typeahead": "0.2.0",
+    "lint-staged": "8.0.4",
+    "react-testing-library": "5.2.3"
+  },
+  "dependencies": {
+    "emotion": "9.2.12",
+    "prop-types": "15.6.2",
+    "react": "16.6.1",
+    "react-dom": "16.6.1",
+    "react-emotion": "9.2.12",
+    "react-loadable": "5.5.0",
+    "react-point": "3.0.1"
+  }
+}
