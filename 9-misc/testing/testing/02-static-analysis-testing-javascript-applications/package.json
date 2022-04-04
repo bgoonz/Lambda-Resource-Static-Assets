@@ -1,0 +1,37 @@
+{
+  "name": "02-static-analysis-testing-javascript-applications",
+  "version": "1.0.0",
+  "description": "",
+  "main": "01-configuring-eslint.js",
+  "scripts": {
+    "lint": "eslint src",
+    "prettier": "prettier \"**/*.+(js|json|yml|yaml|css|scss|ts|tsx|md|mdx|graphql)\"",
+    "format": "npm run prettier -- --write",
+    "validate": "npm run prettier -- --list-different && npm run flow",
+    "flow": "flow",
+    "precommit": "lint-staged"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-eslint": "10.0.1",
+    "eslint": "5.7.0",
+    "flow-bin": "0.84.0",
+    "husky": "1.1.2",
+    "lint-staged": "7.3.0",
+    "prettier": "1.14.3"
+  },
+  "dependencies": {
+    "eslint-config-prettier": "3.1.0"
+  },
+  "lint-staged": {
+    "*.--write": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}

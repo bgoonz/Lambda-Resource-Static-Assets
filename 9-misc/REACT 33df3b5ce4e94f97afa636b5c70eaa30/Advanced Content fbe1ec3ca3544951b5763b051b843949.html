@@ -1,0 +1,1724 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Advanced Content</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="fbe1ec3c-a354-4951-b576-3b051b843949" class="page serif"><header><h1 class="page-title">Advanced Content</h1></header><div class="page-body"><div><h1 id="61cb3d9c-62b6-4916-8754-0cdb83fec3b5" class=""><strong>Accessibility</strong></h1><h1 id="7fcbf919-fc4d-4a92-bcfc-fe5ca39aa3da" class="">Why Accessibility?</h1><p id="ce095602-42e6-4824-b076-1bbd7366cd88" class="">Web accessibility (also referred to as <a href="https://en.wiktionary.org/wiki/a11y"><strong>a11y</strong></a>) is the design and creation of websites that can be used by everyone. Accessibility support is necessary to allow assistive technology to interpret web pages.</p><p id="c7258993-ad82-49b6-8cc2-63d4642cf06a" class="">React fully supports building accessible websites, often by using standard HTML techniques.</p><h1 id="4999a27e-428e-488e-8dc2-421068c1d39c" class="">Standards and Guidelines</h1><h1 id="c2fa2334-7940-457a-ba41-f7e596cf9bcb" class="">WCAG</h1><p id="018432f8-fd91-4c08-a92d-d56212e43bb1" class="">The <a href="https://www.w3.org/WAI/intro/wcag">Web Content Accessibility Guidelines</a> provides guidelines for creating accessible web sites.</p><p id="6f1d591d-c353-4f67-9cdd-343807ab1006" class="">The following WCAG checklists provide an overview:</p><ul id="f15f6a00-efdd-4d7d-aff8-847e1d299f3f" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.wuhcag.com/wcag-checklist/">WCAG checklist from Wuhcag</a></li></ul><ul id="d0ba73c8-a34b-423c-9270-c01fbb294222" class="bulleted-list"><li style="list-style-type:disc"><a href="https://webaim.org/standards/wcag/checklist">WCAG checklist from WebAIM</a></li></ul><ul id="8e5d38dd-89d3-44c7-ab51-a767c6867963" class="bulleted-list"><li style="list-style-type:disc"><a href="https://a11yproject.com/checklist.html">Checklist from The A11Y Project</a></li></ul><h1 id="1e439501-10d6-41cc-b6f6-b68ba88875e9" class="">WAI-ARIA</h1><p id="757f9f07-b985-47ad-bf54-be5fdddd49c1" class="">The <a href="https://www.w3.org/WAI/intro/aria">Web Accessibility Initiative - Accessible Rich Internet Applications</a> document contains techniques for building fully accessible JavaScript widgets.</p><p id="84b28925-105a-4b58-bd86-e32a7f47771e" class="">Note that all <code>aria-*</code> HTML attributes are fully supported in JSX. Whereas most DOM properties and attributes in React are camelCased, these attributes should be hyphen-cased (also known as kebab-case, lisp-case, etc) as they are in plain HTML:</p><p id="7dbd0321-205e-4578-9cf0-bfd9949f7465" class=""><code>&lt;input
+  type=&quot;text&quot;  aria-label={labelText}  aria-required=&quot;true&quot;  onChange={onchangeHandler}value={inputValue}name=&quot;name&quot;/&gt;</code></p><h1 id="fee52d16-e6b4-4900-9795-8425937c4e25" class="">Semantic HTML</h1><p id="deb3a7e7-6217-4592-a7ae-ea376c7b8c46" class="">Semantic HTML is the foundation of accessibility in a web application. Using the various HTML elements to reinforce the meaning of information in our websites will often give us accessibility for free.</p><ul id="fb9b27b0-852a-4b48-ad6d-a0865d42d714" class="bulleted-list"><li style="list-style-type:disc"><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">MDN HTML elements reference</a></li></ul><p id="4b264d6c-4be1-49a4-a415-3b643184b2bf" class="">Sometimes we break HTML semantics when we add <code>&lt;div&gt;</code> elements to our JSX to make our React code work, especially when working with lists (<code>&lt;ol&gt;</code>, <code>&lt;ul&gt;</code> and <code>&lt;dl&gt;</code>) and the HTML <code>&lt;table&gt;</code>. In these cases we should rather use <a href="https://reactjs.org/docs/fragments.html">React Fragments</a> to group together multiple elements.</p><p id="526c5d1d-859b-4ca2-a02e-f54f325f1179" class="">For example,</p><p id="94c2c8ed-5f3d-41db-898c-70cac43288f5" class=""><code>import React, { Fragment } from &#x27;react&#x27;;function ListItem({ item }) {
+  return (
+    &lt;Fragment&gt;      &lt;dt&gt;{item.term}&lt;/dt&gt;      &lt;dd&gt;{item.description}&lt;/dd&gt;    &lt;/Fragment&gt;  );
+}
+
+function Glossary(props) {
+  return (
+    &lt;dl&gt;      {props.items.map(item =&gt; (
+        &lt;ListItem item={item} key={item.id} /&gt;))}
+    &lt;/dl&gt;);
+}</code></p><p id="f1b2f1b3-fce4-457d-89ce-20eaf68302a0" class="">You can map a collection of items to an array of fragments as you would any other type of element as well:</p><p id="18365026-430b-4d61-8930-94fac14accc1" class=""><code>function Glossary(props) {
+  return (
+    &lt;dl&gt;      {props.items.map(item =&gt; (
+        // Fragments should also have a `key` prop when mapping collections
+        &lt;Fragment key={item.id}&gt;          &lt;dt&gt;{item.term}&lt;/dt&gt;          &lt;dd&gt;{item.description}&lt;/dd&gt;        &lt;/Fragment&gt;      ))}
+    &lt;/dl&gt;);
+}</code></p><p id="38177ae1-ef6b-46f5-ad60-f38a0ff004a8" class="">When you don’t need any props on the Fragment tag you can use the <a href="https://reactjs.org/docs/fragments.html#short-syntax">short syntax</a>, if your tooling supports it:</p><p id="cd02181a-1e18-42c3-ab8a-4a3a39dd4314" class=""><code>function ListItem({ item }) {
+  return (
+    &lt;&gt;      &lt;dt&gt;{item.term}&lt;/dt&gt;      &lt;dd&gt;{item.description}&lt;/dd&gt;    &lt;/&gt;  );
+}</code></p><p id="bd2b24f3-1a2d-4b40-ad2d-22a2f87898c7" class="">For more info, see <a href="https://reactjs.org/docs/fragments.html">the Fragments documentation</a>.</p><h1 id="1025c5c3-db95-486f-8dd4-42de7c5b71e9" class="">Accessible Forms</h1><h1 id="5ea0f5d4-bada-47a9-a84e-31b520b710b5" class="">Labeling</h1><p id="7c58c1f3-27bb-49dd-be88-0632b7dab990" class="">Every HTML form control, such as <code>&lt;input&gt;</code> and <code>&lt;textarea&gt;</code>, needs to be labeled accessibly. We need to provide descriptive labels that are also exposed to screen readers.</p><p id="702637e9-2887-488e-96be-4a85e901f917" class="">The following resources show us how to do this:</p><ul id="f265c276-2574-46d5-8400-2f8864b1a621" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.w3.org/WAI/tutorials/forms/labels/">The W3C shows us how to label elements</a></li></ul><ul id="01c93cd8-e826-46c4-97c4-aafbfc756d34" class="bulleted-list"><li style="list-style-type:disc"><a href="https://webaim.org/techniques/forms/controls">WebAIM shows us how to label elements</a></li></ul><ul id="e6f57951-e460-47a4-a846-68fdbce01662" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.paciellogroup.com/blog/2017/04/what-is-an-accessible-name/">The Paciello Group explains accessible names</a></li></ul><p id="d535501a-7e60-4b18-a963-b0c5e9078bd6" class="">Although these standard HTML practices can be directly used in React, note that the <code>for</code> attribute is written as <code>htmlFor</code> in JSX:</p><p id="0907e37f-5398-4e05-adb0-a68ceb3fadfa" class=""><code>&lt;label htmlFor=&quot;namedInput&quot;&gt;Name:&lt;/label&gt;&lt;input id=&quot;namedInput&quot; type=&quot;text&quot; name=&quot;name&quot;/&gt;</code></p><h1 id="8eeeb250-f0eb-4d0b-8a3d-952f9d64b48e" class="">Notifying the user of errors</h1><p id="06f851c8-a4e7-4dca-a125-4684c0071fcd" class="">Error situations need to be understood by all users. The following link shows us how to expose error texts to screen readers as well:</p><ul id="d5388b98-a7c1-4069-ab8f-ec9489ad5069" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.w3.org/WAI/tutorials/forms/notifications/">The W3C demonstrates user notifications</a></li></ul><ul id="611e60b0-8382-40dd-8972-424107de7245" class="bulleted-list"><li style="list-style-type:disc"><a href="https://webaim.org/techniques/formvalidation/">WebAIM looks at form validation</a></li></ul><h1 id="8dba249b-3eba-4c12-84bf-a521236ffc47" class="">Focus Control</h1><p id="a91d73bf-57a3-44fb-a639-4359013f14f1" class="">Ensure that your web application can be fully operated with the keyboard only:</p><ul id="34d896f4-439e-4bd3-8ac5-0a838c6ad7d5" class="bulleted-list"><li style="list-style-type:disc"><a href="https://webaim.org/techniques/keyboard/">WebAIM talks about keyboard accessibility</a></li></ul><h1 id="f99d796f-3cec-41e5-a0ef-8ff2726d41a6" class="">Keyboard focus and focus outline</h1><p id="ee56e945-10db-4093-a6df-e6a7530ecdfc" class="">Keyboard focus refers to the current element in the DOM that is selected to accept input from the keyboard. We see it everywhere as a focus outline similar to that shown in the following image:</p><figure id="dcf20f98-5074-4c1f-b5d3-fee3bce70094" class="image"><a href="https://reactjs.org/static/dec0e6bcc1f882baf76ebc860d4f04e5/4fcfe/keyboard-focus.png"><img style="width:480px" src="https://reactjs.org/static/dec0e6bcc1f882baf76ebc860d4f04e5/4fcfe/keyboard-focus.png"/></a></figure><p id="6af2d949-6d6b-4675-80a2-c6c6fd87dd0e" class="">Only ever use CSS that removes this outline, for example by setting <code>outline: 0</code>, if you are replacing it with another focus outline implementation.</p><h1 id="8bdae804-3670-45b7-8754-c7242fc40663" class="">Mechanisms to skip to desired content</h1><p id="552896e1-d233-4220-b758-7edaa9f492c1" class="">Provide a mechanism to allow users to skip past navigation sections in your application as this assists and speeds up keyboard navigation.</p><p id="7ef77263-a8af-4d6d-9cd9-5f0dbf37b57f" class="">Skiplinks or Skip Navigation Links are hidden navigation links that only become visible when keyboard users interact with the page. They are very easy to implement with internal page anchors and some styling:</p><ul id="aa4a90e5-bcac-467b-989d-c11b9ffe73c0" class="bulleted-list"><li style="list-style-type:disc"><a href="https://webaim.org/techniques/skipnav/">WebAIM - Skip Navigation Links</a></li></ul><p id="4aa2ec11-1c94-47b1-aa9f-539ce721afac" class="">Also use landmark elements and roles, such as <code>&lt;main&gt;</code> and <code>&lt;aside&gt;</code>, to demarcate page regions as assistive technology allow the user to quickly navigate to these sections.</p><p id="e1b16058-29cf-4162-8b2e-7b29dc03e4b4" class="">Read more about the use of these elements to enhance accessibility here:</p><ul id="b11d2660-a7f0-4a37-9a04-f4dbd0f14065" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.scottohara.me/blog/2018/03/03/landmarks.html">Accessible Landmarks</a></li></ul><h1 id="1f517102-3397-4747-b3a4-e0bae1726c80" class="">Programmatically managing focus</h1><p id="03a024e0-9dc6-4a10-a0a1-92e1ee143288" class="">Our React applications continuously modify the HTML DOM during runtime, sometimes leading to keyboard focus being lost or set to an unexpected element. In order to repair this, we need to programmatically nudge the keyboard focus in the right direction. For example, by resetting keyboard focus to a button that opened a modal window after that modal window is closed.</p><p id="4e69d236-36aa-48ba-b8a1-640f6f70ef8e" class="">MDN Web Docs takes a look at this and describes how we can build <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets">keyboard-navigable JavaScript widgets</a>.</p><p id="0867a1f0-f434-4fcd-8e82-547fcbffd13e" class="">To set focus in React, we can use <a href="https://reactjs.org/docs/refs-and-the-dom.html">Refs to DOM elements</a>.</p><p id="a1ee57df-f0ee-4346-a6e0-9a8ea20a3528" class="">Using this, we first create a ref to an element in the JSX of a component class:</p><p id="6778959d-6d5b-4b09-8e45-e3bc5fd8bb44" class=""><code>class CustomTextInput extends React.Component {
+  constructor(props) {
+    super(props);
+    // Create a ref to store the textInput DOM element    this.textInput = React.createRef();  }
+  render() {
+  // Use the `ref` callback to store a reference to the text input DOM  // element in an instance field (for example, this.textInput).    return (
+      &lt;input
+        type=&quot;text&quot;        ref={this.textInput}      /&gt;);
+  }
+}</code></p><p id="1f4fd921-4848-4bbd-963b-d228c6fe7e72" class="">Then we can focus it elsewhere in our component when needed:</p><p id="f7fb4194-8595-4101-a9ef-fe376bb6682f" class=""><code>focus() {
+  // Explicitly focus the text input using the raw DOM API
+  // Note: we&#x27;re accessing &quot;current&quot; to get the DOM node
+  this.textInput.current.focus();
+}</code></p><p id="1d6d286f-9b5e-446f-8927-d51eb88d3940" class="">Sometimes a parent component needs to set focus to an element in a child component. We can do this by <a href="https://reactjs.org/docs/refs-and-the-dom.html#exposing-dom-refs-to-parent-components">exposing DOM refs to parent components</a> through a special prop on the child component that forwards the parent’s ref to the child’s DOM node.</p><p id="cde998ae-5317-492b-87ad-2868069702fc" class=""><code>function CustomTextInput(props) {
+  return (
+    &lt;div&gt;      &lt;input ref={props.inputRef} /&gt;    &lt;/div&gt;);
+}
+
+class Parent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.inputElement = React.createRef();  }
+  render() {
+    return (
+      &lt;CustomTextInput inputRef={this.inputElement} /&gt;    );
+  }
+}
+
+// Now you can set focus when required.
+this.inputElement.current.focus();</code></p><p id="ea5209ad-a810-4993-ac02-baa61d0b4cd9" class="">When using a HOC to extend components, it is recommended to <a href="https://reactjs.org/docs/forwarding-refs.html">forward the ref</a> to the wrapped component using the <code>forwardRef</code> function of React. If a third party HOC does not implement ref forwarding, the above pattern can still be used as a fallback.</p><p id="309dfe43-9e70-4b6c-b880-fc6e494721f3" class="">A great focus management example is the <a href="https://github.com/davidtheclark/react-aria-modal">react-aria-modal</a>. This is a relatively rare example of a fully accessible modal window. Not only does it set initial focus on the cancel button (preventing the keyboard user from accidentally activating the success action) and trap keyboard focus inside the modal, it also resets focus back to the element that initially triggered the modal.</p><blockquote id="43b873ff-8510-4117-b57c-1579f7876232" class="">Note:While this is a very important accessibility feature, it is also a technique that should be used judiciously. Use it to repair the keyboard focus flow when it is disturbed, not to try and anticipate how users want to use applications.</blockquote><h1 id="ea618990-3877-4530-bab4-fbfc52bb8e07" class="">Mouse and pointer events</h1><p id="bc1abcf2-ac1f-406c-8f86-a66726b438e3" class="">Ensure that all functionality exposed through a mouse or pointer event can also be accessed using the keyboard alone. Depending only on the pointer device will lead to many cases where keyboard users cannot use your application.</p><p id="f296d933-db91-4579-8406-b5b21431be35" class="">To illustrate this, let’s look at a prolific example of broken accessibility caused by click events. This is the outside click pattern, where a user can disable an opened popover by clicking outside the element.</p><figure id="a8f2067b-faf7-431a-bd5d-0d7704c574d6" class="image"><a href="https://reactjs.org/5523b05b22210c5a2fa0bd1f01339cb3/outerclick-with-mouse.gif"><img src="https://reactjs.org/5523b05b22210c5a2fa0bd1f01339cb3/outerclick-with-mouse.gif"/></a></figure><p id="53adbe1f-53f0-43a1-b5b4-d80dcf03dafd" class="">This is typically implemented by attaching a <code>click</code> event to the <code>window</code> object that closes the popover:</p><p id="6ca97482-a147-4923-a6eb-bd1b9b62af0f" class=""><code>class OuterClickExample extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { isOpen: false };
+    this.toggleContainer = React.createRef();
+
+    this.onClickHandler = this.onClickHandler.bind(this);
+    this.onClickOutsideHandler = this.onClickOutsideHandler.bind(this);
+  }
+
+  componentDidMount() {    window.addEventListener(&#x27;click&#x27;, this.onClickOutsideHandler);  }componentWillUnmount() {
+    window.removeEventListener(&#x27;click&#x27;, this.onClickOutsideHandler);
+  }
+
+  onClickHandler() {
+    this.setState(currentState =&gt; ({
+      isOpen: !currentState.isOpen
+    }));
+  }
+
+  onClickOutsideHandler(event) {    if (this.state.isOpen &amp;&amp; !this.toggleContainer.current.contains(event.target)) {      this.setState({ isOpen: false });    }  }render() {
+    return (
+      &lt;div ref={this.toggleContainer}&gt;        &lt;button onClick={this.onClickHandler}&gt;Select an option&lt;/button&gt;        {this.state.isOpen &amp;&amp; (
+          &lt;ul&gt;            &lt;li&gt;Option 1&lt;/li&gt;            &lt;li&gt;Option 2&lt;/li&gt;            &lt;li&gt;Option 3&lt;/li&gt;          &lt;/ul&gt;)}
+      &lt;/div&gt;);
+  }
+}</code></p><p id="9206a556-319b-4f56-ac4d-52e15927bc31" class="">This may work fine for users with pointer devices, such as a mouse, but operating this with the keyboard alone leads to broken functionality when tabbing to the next element as the <code>window</code> object never receives a <code>click</code> event. This can lead to obscured functionality which blocks users from using your application.</p><figure id="efc87b33-4211-4e23-a9e1-d2b160eac73b" class="image"><a href="https://reactjs.org/eca0ca825c8c5e2aa609cee72ef47e27/outerclick-with-keyboard.gif"><img src="https://reactjs.org/eca0ca825c8c5e2aa609cee72ef47e27/outerclick-with-keyboard.gif"/></a></figure><p id="4ea5d6f2-3da8-41ae-b1d1-e03be8745ab1" class="">The same functionality can be achieved by using appropriate event handlers instead, such as <code>onBlur</code> and <code>onFocus</code>:</p><p id="a0d586e7-0e94-4101-a5c7-de25d23fb656" class=""><code>class BlurExample extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { isOpen: false };
+    this.timeOutId = null;
+
+    this.onClickHandler = this.onClickHandler.bind(this);
+    this.onBlurHandler = this.onBlurHandler.bind(this);
+    this.onFocusHandler = this.onFocusHandler.bind(this);
+  }
+
+  onClickHandler() {
+    this.setState(currentState =&gt; ({
+      isOpen: !currentState.isOpen
+    }));
+  }
+
+  // We close the popover on the next tick by using setTimeout.  // This is necessary because we need to first check if  // another child of the element has received focus as  // the blur event fires prior to the new focus event.  onBlurHandler() {    this.timeOutId = setTimeout(() =&gt; {      this.setState({        isOpen: false      });    });  }  // If a child receives focus, do not close the popover.  onFocusHandler() {    clearTimeout(this.timeOutId);  }render() {
+    // React assists us by bubbling the blur and    // focus events to the parent.    return (
+      &lt;div onBlur={this.onBlurHandler}           onFocus={this.onFocusHandler}&gt;        &lt;button onClick={this.onClickHandler}aria-haspopup=&quot;true&quot;aria-expanded={this.state.isOpen}&gt;          Select an option
+        &lt;/button&gt;        {this.state.isOpen &amp;&amp; (
+          &lt;ul&gt;            &lt;li&gt;Option 1&lt;/li&gt;            &lt;li&gt;Option 2&lt;/li&gt;            &lt;li&gt;Option 3&lt;/li&gt;          &lt;/ul&gt;)}
+      &lt;/div&gt;);
+  }
+}</code></p><p id="783d1c55-abd4-4bc0-80b3-95dd9ccbef9d" class="">This code exposes the functionality to both pointer device and keyboard users. Also note the added <code>aria-*</code> props to support screen-reader users. For simplicity’s sake the keyboard events to enable <code>arrow key</code> interaction of the popover options have not been implemented.</p><figure id="a77ccab1-2228-4631-b4a8-8aca28209e96" class="image"><a href="https://reactjs.org/28ce2067489843caf05fe7ce22494542/blur-popover-close.gif"><img src="https://reactjs.org/28ce2067489843caf05fe7ce22494542/blur-popover-close.gif"/></a></figure><p id="f595b4d9-302c-471c-97c9-c5c6a0a88d94" class="">This is one example of many cases where depending on only pointer and mouse events will break functionality for keyboard users. Always testing with the keyboard will immediately highlight the problem areas which can then be fixed by using keyboard aware event handlers.</p><h1 id="5f94e21c-cd29-4739-ba20-fa6ecaa4a2b8" class="">More Complex Widgets</h1><p id="2f962f91-24cd-476c-ac9e-01d594917c9a" class="">A more complex user experience should not mean a less accessible one. Whereas accessibility is most easily achieved by coding as close to HTML as possible, even the most complex widget can be coded accessibly.</p><p id="d4986427-208b-4c39-ae42-8da017173a80" class="">Here we require knowledge of <a href="https://www.w3.org/TR/wai-aria/#roles">ARIA Roles</a> as well as <a href="https://www.w3.org/TR/wai-aria/#states_and_properties">ARIA States and Properties</a>. These are toolboxes filled with HTML attributes that are fully supported in JSX and enable us to construct fully accessible, highly functional React components.</p><p id="79c37340-540f-4caa-838b-267b5db6a008" class="">Each type of widget has a specific design pattern and is expected to function in a certain way by users and user agents alike:</p><ul id="f707e32c-dd5b-47b8-a9e1-a47756e87fab" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.w3.org/TR/wai-aria-practices/#aria_ex">WAI-ARIA Authoring Practices - Design Patterns and Widgets</a></li></ul><ul id="00dc6c4d-48cd-4b24-ba4c-276f2d684923" class="bulleted-list"><li style="list-style-type:disc"><a href="https://heydonworks.com/article/practical-aria-examples/">Heydon Pickering - ARIA Examples</a></li></ul><ul id="9fa145b2-c7a1-42ab-97df-2e28c796cd5e" class="bulleted-list"><li style="list-style-type:disc"><a href="https://inclusive-components.design/">Inclusive Components</a></li></ul><h1 id="409ca031-7a80-4f10-b934-dafb7d47925e" class="">Other Points for Consideration</h1><h1 id="38e35aea-bd80-4643-b195-8a0f2d5d0aa9" class="">Setting the language</h1><p id="bef2c1d3-190f-4853-8472-b43c771ccf78" class="">Indicate the human language of page texts as screen reader software uses this to select the correct voice settings:</p><ul id="2e931e4d-9a3a-460b-9726-fad7bf26e327" class="bulleted-list"><li style="list-style-type:disc"><a href="https://webaim.org/techniques/screenreader/#language">WebAIM - Document Language</a></li></ul><h1 id="418ef557-5735-4f42-b44d-af5ff7458cf9" class="">Setting the document title</h1><p id="0359487f-2c97-4f63-9031-f92207e4798e" class="">Set the document <code>&lt;title&gt;</code> to correctly describe the current page content as this ensures that the user remains aware of the current page context:</p><ul id="8b8ce25c-43f7-47c2-9bd4-694e540e3119" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-title.html">WCAG - Understanding the Document Title Requirement</a></li></ul><p id="0d4e8757-3744-4296-b47a-6292bc5a3626" class="">We can set this in React using the <a href="https://github.com/gaearon/react-document-title">React Document Title Component</a>.</p><h1 id="c13feabc-40ed-40bf-980d-642f71c18b63" class="">Color contrast</h1><p id="aad3223d-4ceb-472d-8683-f4aaeae9bb75" class="">Ensure that all readable text on your website has sufficient color contrast to remain maximally readable by users with low vision:</p><ul id="3b5dd105-999d-4150-8677-f2db6f6543a3" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html">WCAG - Understanding the Color Contrast Requirement</a></li></ul><ul id="d6260d82-17bf-4941-adca-73f9b8e60ac4" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.smashingmagazine.com/2014/10/color-contrast-tips-and-tools-for-accessibility/">Everything About Color Contrast And Why You Should Rethink It</a></li></ul><ul id="b8903e66-526c-46ee-8e6e-e8b34b17fba5" class="bulleted-list"><li style="list-style-type:disc"><a href="https://a11yproject.com/posts/what-is-color-contrast/">A11yProject - What is Color Contrast</a></li></ul><p id="7377cf9f-b220-4156-adc8-857e85f0389b" class="">It can be tedious to manually calculate the proper color combinations for all cases in your website so instead, you can <a href="https://jxnblk.com/colorable/">calculate an entire accessible color palette with Colorable</a>.</p><p id="1133426a-4db8-42fe-9149-7f59f3ed922f" class="">Both the aXe and WAVE tools mentioned below also include color contrast tests and will report on contrast errors.</p><p id="67f1a570-6143-434a-ad2f-5a4660363e3f" class="">If you want to extend your contrast testing abilities you can use these tools:</p><ul id="d21e821c-09ed-4896-926e-20859e0c92e9" class="bulleted-list"><li style="list-style-type:disc"><a href="https://webaim.org/resources/contrastchecker/">WebAIM - Color Contrast Checker</a></li></ul><ul id="0c5871cc-2586-4334-bfc6-a8cb9821200c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.paciellogroup.com/resources/contrastanalyser/">The Paciello Group - Color Contrast Analyzer</a></li></ul><h1 id="be09aecf-ef90-4cd1-afac-cee1080d21df" class="">Development and Testing Tools</h1><p id="c38abd10-6b28-40df-bd08-b504e1a3dc6d" class="">There are a number of tools we can use to assist in the creation of accessible web applications.</p><h1 id="0baf7fd0-28ec-4a61-a082-8ff14c4c1c8e" class="">The keyboard</h1><p id="b736b16d-2b6e-4170-806a-1f82aa2ec8ae" class="">By far the easiest and also one of the most important checks is to test if your entire website can be reached and used with the keyboard alone. Do this by:</p><ol type="1" id="a4d7e7ee-8446-430e-84df-255f68e8f586" class="numbered-list" start="1"><li>Disconnecting your mouse.</li></ol><ol type="1" id="24419e69-818c-411c-96e5-d0e584bee288" class="numbered-list" start="2"><li>Using <code>Tab</code> and <code>Shift+Tab</code> to browse.</li></ol><ol type="1" id="6ff28971-464f-4347-9ed3-2a4853ec4284" class="numbered-list" start="3"><li>Using <code>Enter</code> to activate elements.</li></ol><ol type="1" id="6468b082-5950-4c46-b156-e6aef71035e4" class="numbered-list" start="4"><li>Where required, using your keyboard arrow keys to interact with some elements, such as menus and dropdowns.</li></ol><h1 id="98a2df2c-dc86-44b8-a33e-dafb0cbdfed7" class="">Development assistance</h1><p id="db4f1438-bff3-4f8a-a946-3c55c2585fb7" class="">We can check some accessibility features directly in our JSX code. Often intellisense checks are already provided in JSX aware IDE’s for the ARIA roles, states and properties. We also have access to the following tool:</p><h3 id="0bd4475d-6cde-47e8-b015-0191ae90ee3b" class="">eslint-plugin-jsx-a11y</h3><p id="dd24836c-e84a-4f3b-b92e-8c330cbbc7a4" class="">The <a href="https://github.com/evcohen/eslint-plugin-jsx-a11y">eslint-plugin-jsx-a11y</a> plugin for ESLint provides AST linting feedback regarding accessibility issues in your JSX. Many IDE’s allow you to integrate these findings directly into code analysis and source code windows.</p><p id="f0b1aefe-ffe7-4d5f-9d31-6145c40d2a0a" class=""><a href="https://github.com/facebookincubator/create-react-app">Create React App</a> has this plugin with a subset of rules activated. If you want to enable even more accessibility rules, you can create an <code>.eslintrc</code> file in the root of your project with this content:</p><pre id="c5d62b65-58ff-4d4f-baac-309a7bb77080" class="code"><code>{
+  &quot;extends&quot;: [&quot;react-app&quot;, &quot;plugin:jsx-a11y/recommended&quot;],
+  &quot;plugins&quot;: [&quot;jsx-a11y&quot;]
+}</code></pre><h1 id="d73bd0be-6d38-4cea-a750-60a09be90039" class="">Testing accessibility in the browser</h1><p id="5070ee18-4b43-47fd-b2bc-aa187a359984" class="">A number of tools exist that can run accessibility audits on web pages in your browser. Please use them in combination with other accessibility checks mentioned here as they can only test the technical accessibility of your HTML.</p><h3 id="08e9f073-c86a-4871-aecc-c7d57a3c1f88" class="">aXe, aXe-core and react-axe</h3><p id="c8497594-d7c4-4622-97fa-33c6dc8039e3" class="">Deque Systems offers <a href="https://github.com/dequelabs/axe-core">aXe-core</a> for automated and end-to-end accessibility tests of your applications. This module includes integrations for Selenium.</p><p id="63d767f3-7480-48ac-993f-c2a473879096" class=""><a href="https://www.deque.com/products/axe/">The Accessibility Engine</a> or aXe, is an accessibility inspector browser extension built on <code>aXe-core</code>.</p><p id="bc383bc1-d924-429c-ae15-1e8e044388b4" class="">You can also use the <a href="https://github.com/dylanb/react-axe">react-axe</a> module to report these accessibility findings directly to the console while developing and debugging.</p><h3 id="54d99ce1-28a0-47ce-97de-d0d9e8b72a71" class="">WebAIM WAVE</h3><p id="2eb63a35-4f2e-4d26-b0f0-f58a258194e2" class="">The <a href="https://wave.webaim.org/extension/">Web Accessibility Evaluation Tool</a> is another accessibility browser extension.</p><h3 id="58f02230-e64b-4c76-8f46-2a338b0623b3" class="">Accessibility inspectors and the Accessibility Tree</h3><p id="37b470fe-65cc-4ec6-a982-c10f1fe03cda" class=""><a href="https://www.paciellogroup.com/blog/2015/01/the-browser-accessibility-tree/">The Accessibility Tree</a> is a subset of the DOM tree that contains accessible objects for every DOM element that should be exposed to assistive technology, such as screen readers.</p><p id="a76bf68f-fcd6-4aac-9fae-9b32502fbc3a" class="">In some browsers we can easily view the accessibility information for each element in the accessibility tree:</p><ul id="b155e6f5-e19b-48fd-b6cb-1aef99f2ba50" class="bulleted-list"><li style="list-style-type:disc"><a href="https://developer.mozilla.org/en-US/docs/Tools/Accessibility_inspector">Using the Accessibility Inspector in Firefox</a></li></ul><ul id="7bc60502-f969-4cc4-b5c7-38ad1474d2a0" class="bulleted-list"><li style="list-style-type:disc"><a href="https://developers.google.com/web/tools/chrome-devtools/accessibility/reference#pane">Using the Accessibility Inspector in Chrome</a></li></ul><ul id="5570c29a-50dd-43fb-b92d-4fe2175f3835" class="bulleted-list"><li style="list-style-type:disc"><a href="https://developer.apple.com/library/content/documentation/Accessibility/Conceptual/AccessibilityMacOSX/OSXAXTestingApps.html">Using the Accessibility Inspector in OS X Safari</a></li></ul><h1 id="cf866ec4-1064-447e-b7e1-8b2502f7c482" class="">Screen readers</h1><p id="0331d034-db00-4a36-8d71-e38f42b48dee" class="">Testing with a screen reader should form part of your accessibility tests.</p><p id="57068286-a70c-4ab1-98f7-af0ac2ee61e2" class="">Please note that browser / screen reader combinations matter. It is recommended that you test your application in the browser best suited to your screen reader of choice.</p><h1 id="2c86f813-a6ca-4410-b2d0-57ac7ae33936" class="">Commonly Used Screen Readers</h1><h3 id="0551f6a7-cc5b-4efe-b83f-5488de707f22" class="">NVDA in Firefox</h3><p id="97d5c7ee-3f6a-4ffd-9f06-4baebd958b86" class=""><a href="https://www.nvaccess.org/">NonVisual Desktop Access</a> or NVDA is an open source Windows screen reader that is widely used.</p><p id="881d602a-f012-4e59-97b9-23cb31a9f8f5" class="">Refer to the following guides on how to best use NVDA:</p><ul id="607e00e1-acc8-4c8e-b51a-0fe58afc88d8" class="bulleted-list"><li style="list-style-type:disc"><a href="https://webaim.org/articles/nvda/">WebAIM - Using NVDA to Evaluate Web Accessibility</a></li></ul><ul id="85c5ed8f-add3-465b-ba03-576a5e4808c4" class="bulleted-list"><li style="list-style-type:disc"><a href="https://dequeuniversity.com/screenreaders/nvda-keyboard-shortcuts">Deque - NVDA Keyboard Shortcuts</a></li></ul><h3 id="73fab441-27a3-4c27-8bc2-80d5f2958db2" class="">VoiceOver in Safari</h3><p id="14066ac5-2ac5-4e6f-9363-2c13d7ebe119" class="">VoiceOver is an integrated screen reader on Apple devices.</p><p id="a488f1fb-564b-4eb2-95e5-4500dca9b9eb" class="">Refer to the following guides on how to activate and use VoiceOver:</p><ul id="d5b3ab19-66e9-4ce3-b5f5-bfbb80962059" class="bulleted-list"><li style="list-style-type:disc"><a href="https://webaim.org/articles/voiceover/">WebAIM - Using VoiceOver to Evaluate Web Accessibility</a></li></ul><ul id="2c6bc5cd-3cdf-4257-87ab-bc39732267db" class="bulleted-list"><li style="list-style-type:disc"><a href="https://dequeuniversity.com/screenreaders/voiceover-keyboard-shortcuts">Deque - VoiceOver for OS X Keyboard Shortcuts</a></li></ul><ul id="5d4af4b8-de6b-4731-bf0e-cf7e1b511d31" class="bulleted-list"><li style="list-style-type:disc"><a href="https://dequeuniversity.com/screenreaders/voiceover-ios-shortcuts">Deque - VoiceOver for iOS Shortcuts</a></li></ul><h3 id="789f2a94-cefb-4352-a133-557ba015abb2" class="">JAWS in Internet Explorer</h3><p id="ac682727-c08e-4697-9e52-4bfda15340d6" class=""><a href="https://www.freedomscientific.com/Products/software/JAWS/">Job Access With Speech</a> or JAWS, is a prolifically used screen reader on Windows.</p><p id="9d3025da-7766-48e9-ac7b-8bc1bd912244" class="">Refer to the following guides on how to best use JAWS:</p><ul id="9e3cc872-f3ba-4a2a-aa40-0af42418708f" class="bulleted-list"><li style="list-style-type:disc"><a href="https://webaim.org/articles/jaws/">WebAIM - Using JAWS to Evaluate Web Accessibility</a></li></ul><ul id="4fab4e5a-a7c3-40f5-88ef-796e289168e0" class="bulleted-list"><li style="list-style-type:disc"><a href="https://dequeuniversity.com/screenreaders/jaws-keyboard-shortcuts">Deque - JAWS Keyboard Shortcuts</a></li></ul><h1 id="dbca9c2a-4319-4d0a-848c-2cabda3b65c3" class="">Other Screen Readers</h1><h3 id="4cde15b5-8304-4f79-b68c-9095e82c75fb" class="">ChromeVox in Google Chrome</h3><p id="53525fc4-a071-44d5-9c36-9e8dce0f9578" class=""><a href="https://www.chromevox.com/">ChromeVox</a> is an integrated screen reader on Chromebooks and is available <a href="https://chrome.google.com/webstore/detail/chromevox/kgejglhpjiefppelpmljglcjbhoiplfn?hl=en">as an extension</a> for Google Chrome.</p><p id="1adb9fd4-5eb9-470b-ab6e-1d45c3f00c3c" class="">Refer to the following guides on how best to use ChromeVox:</p><ul id="7bbe070e-2955-4c34-8ede-68226c39b431" class="bulleted-list"><li style="list-style-type:disc"><a href="https://support.google.com/chromebook/answer/7031755?hl=en">Google Chromebook Help - Use the Built-in Screen Reader</a></li></ul><ul id="e742f869-50f8-4f95-ad4c-a2aa1e606b5d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.chromevox.com/keyboard_shortcuts.html">ChromeVox Classic Keyboard Shortcuts Reference</a></li></ul></div><div><h1 id="31491300-d585-401b-bd4b-8d20aafe4fa2" class=""><strong>Code-Splitting</strong></h1><h1 id="51d41447-75d0-4f6d-8051-b4a3e968d03f" class="">Bundling</h1><p id="2771bed7-a96b-4432-9406-408933addbff" class="">Most React apps will have their files “bundled” using tools like <a href="https://webpack.js.org/">Webpack</a>, <a href="https://rollupjs.org/">Rollup</a> or <a href="http://browserify.org/">Browserify</a>. Bundling is the process of following imported files and merging them into a single file: a “bundle”. This bundle can then be included on a webpage to load an entire app at once.</p><h3 id="8944dd79-b867-4884-94f4-b7cf4d892372" class="">Example</h3><p id="f077a85e-32e9-463a-b272-3962f069707b" class=""><strong>App:</strong></p><pre id="e3d7cb25-78b1-4185-8299-8e8571163a86" class="code"><code>// app.js
+import { add } from &#x27;./math.js&#x27;;
+
+console.log(add(16, 26)); // 42</code></pre><pre id="bd98577b-9bc4-4cef-89fb-c51c680ae17d" class="code"><code>// math.js
+export function add(a, b) {
+  return a + b;
+}</code></pre><p id="8745a91b-4a34-414b-81c0-ddc3d287e15d" class=""><strong>Bundle:</strong></p><pre id="817643d6-3449-4223-8e51-bd455abfd115" class="code"><code>function add(a, b) {
+  return a + b;
+}
+
+console.log(add(16, 26)); // 42</code></pre><blockquote id="327b4b96-1cad-4f83-878a-0b11fc44adc7" class="">Note:Your bundles will end up looking a lot different than this.</blockquote><p id="cf32d9f7-ea3e-4ddd-8043-09a13678518a" class="">If you’re using <a href="https://create-react-app.dev/">Create React App</a>, <a href="https://nextjs.org/">Next.js</a>, <a href="https://www.gatsbyjs.org/">Gatsby</a>, or a similar tool, you will have a Webpack setup out of the box to bundle your app.</p><p id="dbf10777-b89e-4fb8-94cb-2863538322b5" class="">If you aren’t, you’ll need to set up bundling yourself. For example, see the <a href="https://webpack.js.org/guides/installation/">Installation</a> and <a href="https://webpack.js.org/guides/getting-started/">Getting Started</a> guides on the Webpack docs.</p><h1 id="f9e0fc98-ba3e-4795-8b8a-a094a46e4723" class="">Code Splitting</h1><p id="c26908be-7bf0-4b3f-b4b5-e356bfdc56a3" class="">Bundling is great, but as your app grows, your bundle will grow too. Especially if you are including large third-party libraries. You need to keep an eye on the code you are including in your bundle so that you don’t accidentally make it so large that your app takes a long time to load.</p><p id="0830b45e-8193-4914-adb2-15683ad7ce8a" class="">To avoid winding up with a large bundle, it’s good to get ahead of the problem and start “splitting” your bundle. Code-Splitting is a feature supported by bundlers like <a href="https://webpack.js.org/guides/code-splitting/">Webpack</a>, <a href="https://rollupjs.org/guide/en/#code-splitting">Rollup</a> and Browserify (via <a href="https://github.com/browserify/factor-bundle">factor-bundle</a>) which can create multiple bundles that can be dynamically loaded at runtime.</p><p id="545ba91d-0cd1-4545-8a2d-b39a371e1995" class="">Code-splitting your app can help you “lazy-load” just the things that are currently needed by the user, which can dramatically improve the performance of your app. While you haven’t reduced the overall amount of code in your app, you’ve avoided loading code that the user may never need, and reduced the amount of code needed during the initial load.</p><h1 id="afd32b51-d59e-41df-b1c6-fe2d5e516b9f" class=""><code>import()</code></h1><p id="7bd6532b-bf1f-44fd-aa03-ca4dfe58fcdd" class="">The best way to introduce code-splitting into your app is through the dynamic <code>import()</code> syntax.</p><p id="48811c8b-df28-4125-b8c3-6ee33f81d5c8" class=""><strong>Before:</strong></p><pre id="8cffe794-8e0f-4b24-b0c3-6d6e718c0e21" class="code"><code>import { add } from &#x27;./math&#x27;;
+
+console.log(add(16, 26));</code></pre><p id="2ff480b1-b44e-4b38-9b10-7934752a619d" class=""><strong>After:</strong></p><pre id="09c29fb0-858c-4d27-a1c3-719c687a6278" class="code"><code>import(&quot;./math&quot;).then(math =&gt; {
+  console.log(math.add(16, 26));
+});</code></pre><p id="706f0767-4118-4113-9321-d3a90c553b38" class="">When Webpack comes across this syntax, it automatically starts code-splitting your app. If you’re using Create React App, this is already configured for you and you can <a href="https://create-react-app.dev/docs/code-splitting/">start using it</a> immediately. It’s also supported out of the box in <a href="https://nextjs.org/docs/advanced-features/dynamic-import">Next.js</a>.</p><p id="b21cc9a3-1e78-4984-b0dc-401ca9e1ce14" class="">If you’re setting up Webpack yourself, you’ll probably want to read Webpack’s <a href="https://webpack.js.org/guides/code-splitting/">guide on code splitting</a>. Your Webpack config should look vaguely <a href="https://www.notion.so/ca6e803f5c604d37468b0091d9959269">like this</a>.</p><p id="037b69e1-5e13-42a6-beec-378b7a1a8cc0" class="">When using <a href="https://babeljs.io/">Babel</a>, you’ll need to make sure that Babel can parse the dynamic import syntax but is not transforming it. For that you will need <a href="https://classic.yarnpkg.com/en/package/@babel/plugin-syntax-dynamic-import">@babel/plugin-syntax-dynamic-import</a>.</p><h1 id="e5a48b4e-9f40-4c8e-a23b-194fd28bcd1c" class=""><code>React.lazy</code></h1><blockquote id="60179e7d-a47b-4fbd-b5e8-7a747a879875" class="">Note:React.lazy and Suspense are not yet available for server-side rendering. If you want to do code-splitting in a server rendered app, we recommend Loadable Components. It has a nice guide for bundle splitting with server-side rendering.</blockquote><p id="79b340db-0c1e-450d-a962-1964d2020db0" class="">The <code>React.lazy</code> function lets you render a dynamic import as a regular component.</p><p id="698ccd30-6c1c-40e3-9256-218dde1e8360" class=""><strong>Before:</strong></p><pre id="18c6760a-5f56-462c-a509-2e3f107b0973" class="code"><code>import OtherComponent from &#x27;./OtherComponent&#x27;;</code></pre><p id="40dced6d-2223-49c9-a65b-36cc03515378" class=""><strong>After:</strong></p><pre id="e1c7f273-8073-4626-8699-333b91f36840" class="code"><code>const OtherComponent = React.lazy(() =&gt; import(&#x27;./OtherComponent&#x27;));</code></pre><p id="e4bdaf53-e80d-4e0f-bf24-ed5863836418" class="">This will automatically load the bundle containing the <code>OtherComponent</code> when this component is first rendered.</p><p id="0d86aced-2297-4340-862b-7baf1d2ed391" class=""><code>React.lazy</code> takes a function that must call a dynamic <code>import()</code>. This must return a <code>Promise</code> which resolves to a module with a <code>default</code> export containing a React component.</p><p id="43dd9d6e-32be-45d0-857b-8408cb20be65" class="">The lazy component should then be rendered inside a <code>Suspense</code> component, which allows us to show some fallback content (such as a loading indicator) while we’re waiting for the lazy component to load.</p><pre id="3ac9b76d-2a18-443c-9b3d-7a06d3326775" class="code"><code>import React, { Suspense } from &#x27;react&#x27;;
+
+const OtherComponent = React.lazy(() =&gt; import(&#x27;./OtherComponent&#x27;));
+
+function MyComponent() {
+  return (
+    &lt;div&gt;
+      &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+        &lt;OtherComponent /&gt;
+      &lt;/Suspense&gt;
+    &lt;/div&gt;);
+}</code></pre><p id="48463641-da75-4337-a360-5c7a4830e089" class="">The <code>fallback</code> prop accepts any React elements that you want to render while waiting for the component to load. You can place the <code>Suspense</code> component anywhere above the lazy component. You can even wrap multiple lazy components with a single <code>Suspense</code> component.</p><pre id="1bc2f0e0-4581-43cc-af57-6cb78f1fa957" class="code"><code>import React, { Suspense } from &#x27;react&#x27;;
+
+const OtherComponent = React.lazy(() =&gt; import(&#x27;./OtherComponent&#x27;));
+const AnotherComponent = React.lazy(() =&gt; import(&#x27;./AnotherComponent&#x27;));
+
+function MyComponent() {
+  return (
+    &lt;div&gt;
+      &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+        &lt;section&gt;
+          &lt;OtherComponent /&gt;
+          &lt;AnotherComponent /&gt;
+        &lt;/section&gt;
+      &lt;/Suspense&gt;
+    &lt;/div&gt;);
+}</code></pre><h1 id="426fe7e6-70b7-4f6e-8692-9501b48245e2" class="">Error boundaries</h1><p id="52585f8b-99a0-4255-9606-f9c2fac539af" class="">If the other module fails to load (for example, due to network failure), it will trigger an error. You can handle these errors to show a nice user experience and manage recovery with <a href="https://reactjs.org/docs/error-boundaries.html">Error Boundaries</a>. Once you’ve created your Error Boundary, you can use it anywhere above your lazy components to display an error state when there’s a network error.</p><pre id="e6afd207-ca24-4b31-bfda-29154c72ce54" class="code"><code>import React, { Suspense } from &#x27;react&#x27;;
+import MyErrorBoundary from &#x27;./MyErrorBoundary&#x27;;
+
+const OtherComponent = React.lazy(() =&gt; import(&#x27;./OtherComponent&#x27;));
+const AnotherComponent = React.lazy(() =&gt; import(&#x27;./AnotherComponent&#x27;));
+
+const MyComponent = () =&gt; (
+  &lt;div&gt;
+    &lt;MyErrorBoundary&gt;
+      &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+        &lt;section&gt;
+          &lt;OtherComponent /&gt;
+          &lt;AnotherComponent /&gt;
+        &lt;/section&gt;
+      &lt;/Suspense&gt;
+    &lt;/MyErrorBoundary&gt;
+  &lt;/div&gt;);</code></pre><h1 id="817f851e-2455-4966-b403-9d896143c20c" class="">Route-based code splitting</h1><p id="93e09ddb-877f-4879-8907-bf6e3fa6499c" class="">Deciding where in your app to introduce code splitting can be a bit tricky. You want to make sure you choose places that will split bundles evenly, but won’t disrupt the user experience.</p><p id="f0bd7a37-daad-44ad-a166-4de35f8ca0d8" class="">A good place to start is with routes. Most people on the web are used to page transitions taking some amount of time to load. You also tend to be re-rendering the entire page at once so your users are unlikely to be interacting with other elements on the page at the same time.</p><p id="225f58de-d911-40b8-a904-556c31020ba0" class="">Here’s an example of how to setup route-based code splitting into your app using libraries like <a href="https://reacttraining.com/react-router/">React Router</a> with <code>React.lazy</code>.</p><pre id="6cbdd8b7-ca4c-4922-8fec-f853eac479eb" class="code"><code>import React, { Suspense, lazy } from &#x27;react&#x27;;
+import { BrowserRouter as Router, Route, Switch } from &#x27;react-router-dom&#x27;;
+
+const Home = lazy(() =&gt; import(&#x27;./routes/Home&#x27;));
+const About = lazy(() =&gt; import(&#x27;./routes/About&#x27;));
+
+const App = () =&gt; (
+  &lt;Router&gt;
+    &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+      &lt;Switch&gt;
+        &lt;Route exact path=&quot;/&quot; component={Home}/&gt;
+        &lt;Route path=&quot;/about&quot; component={About}/&gt;
+      &lt;/Switch&gt;
+    &lt;/Suspense&gt;
+  &lt;/Router&gt;);</code></pre><h1 id="b8271ae8-172b-4a40-8bc7-4a431052b69e" class="">Named Exports</h1><p id="23f5129f-ba85-4c4b-95ca-4de7df765d93" class=""><code>React.lazy</code> currently only supports default exports. If the module you want to import uses named exports, you can create an intermediate module that reexports it as the default. This ensures that tree shaking keeps working and that you don’t pull in unused components.</p><pre id="8758dc48-881c-4b20-9d8c-3991827db2b8" class="code"><code>// ManyComponents.js
+export const MyComponent = /* ... */;
+export const MyUnusedComponent = /* ... */;</code></pre><pre id="472d9587-e5aa-4b11-9a4f-04a2312d4efc" class="code"><code>// MyComponent.js
+export { MyComponent as default } from &quot;./ManyComponents.js&quot;;</code></pre><pre id="5153d290-cb21-4830-be42-db624afb49a4" class="code"><code>// MyApp.js
+import React, { lazy } from &#x27;react&#x27;;
+const MyComponent = lazy(() =&gt; import(&quot;./MyComponent.js&quot;));</code></pre><h1 id="d939a513-ef8d-43c0-926a-aa915ae7f211" class=""><strong>Context</strong></h1><h1 id="79a3f087-4319-43d6-abd0-c93de025fbfa" class="">Context provides a way to pass data through the component tree without having to pass props down manually at every level.</h1><p id="aa7155e0-f1f7-4b0d-a754-617853de79e8" class="">In a typical React application, data is passed top-down (parent to child) via props, but such usage can be cumbersome for certain types of props (e.g. locale preference, UI theme) that are required by many components within an application. Context provides a way to share values like these between components without having to explicitly pass a prop through every level of the tree.</p><ul id="700e1361-04f7-451e-aa9c-b7b597710f0b" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/context.html#when-to-use-context">When to Use Context</a></li></ul><ul id="4af587f0-eab5-4abc-962b-7d70c82e580a" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/context.html#before-you-use-context">Before You Use Context</a></li></ul><ul id="1068431c-605f-4a2a-8819-c6d9aa4cf27f" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/context.html#api">API</a><ul id="14192a2c-4663-4cf7-b43c-49c04beeed3a" class="bulleted-list"><li style="list-style-type:circle"><a href="https://reactjs.org/docs/context.html#reactcreatecontext">React.createContext</a></li></ul><ul id="2ac67bd2-3ccb-4703-9550-7e5394ca5483" class="bulleted-list"><li style="list-style-type:circle"><a href="https://reactjs.org/docs/context.html#contextprovider">Context.Provider</a></li></ul><ul id="172c9c65-ab0d-4ffb-b485-566301d0d95b" class="bulleted-list"><li style="list-style-type:circle"><a href="https://reactjs.org/docs/context.html#classcontexttype">Class.contextType</a></li></ul><ul id="0feaf89e-28c3-4218-a9a7-0ab158c13292" class="bulleted-list"><li style="list-style-type:circle"><a href="https://reactjs.org/docs/context.html#contextconsumer">Context.Consumer</a></li></ul><ul id="166ec0f1-b31d-47d4-bfc1-53bddb988120" class="bulleted-list"><li style="list-style-type:circle"><a href="https://reactjs.org/docs/context.html#contextdisplayname">Context.displayName</a></li></ul></li></ul><ul id="2c8b202b-027f-4ff8-9641-b3ecca7785f3" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/context.html#examples">Examples</a><ul id="452412b3-97e2-45ba-a5a7-31dff1e8c4db" class="bulleted-list"><li style="list-style-type:circle"><a href="https://reactjs.org/docs/context.html#dynamic-context">Dynamic Context</a></li></ul><ul id="b6318ab2-e4e6-4f62-b40d-03b40e8e21a3" class="bulleted-list"><li style="list-style-type:circle"><a href="https://reactjs.org/docs/context.html#updating-context-from-a-nested-component">Updating Context from a Nested Component</a></li></ul><ul id="9bf45fb6-55e0-44f0-b8c2-ff4c80db52a2" class="bulleted-list"><li style="list-style-type:circle"><a href="https://reactjs.org/docs/context.html#consuming-multiple-contexts">Consuming Multiple Contexts</a></li></ul></li></ul><ul id="a101addd-887d-492f-81ce-889a4e9f150e" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/context.html#caveats">Caveats</a></li></ul><ul id="50a5907a-42ed-40e7-a1a9-4516824dfb1c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/context.html#legacy-api">Legacy API</a></li></ul><h1 id="bf4159b8-e0a6-4bc0-a4d8-19c3e7d9c0a0" class="">When to Use Context</h1><p id="fb66dfb1-d722-499d-aaad-8de4aaefc705" class="">Context is designed to share data that can be considered “global” for a tree of React components, such as the current authenticated user, theme, or preferred language. For example, in the code below we manually thread through a “theme” prop in order to style the Button component:</p><pre id="fe3b8c6f-b167-401a-b913-ae21f14cede0" class="code"><code>class App extends React.Component {
+  render() {
+    return &lt;Toolbar theme=&quot;dark&quot; /&gt;;
+  }
+}
+
+function Toolbar(props) {
+  // The Toolbar component must take an extra &quot;theme&quot; prop  // and pass it to the ThemedButton. This can become painful  // if every single button in the app needs to know the theme  // because it would have to be passed through all components.  return (
+    &lt;div&gt;      &lt;ThemedButton theme={props.theme} /&gt;    &lt;/div&gt;);
+}
+
+class ThemedButton extends React.Component {
+  render() {
+    return &lt;Button theme={this.props.theme} /&gt;;
+  }
+}</code></pre><p id="39b687f6-0d47-4a03-be70-32adbb77c813" class="">Using context, we can avoid passing props through intermediate elements:</p><pre id="e396ab03-d56c-491d-9739-b8394e8405c4" class="code"><code>// Context lets us pass a value deep into the component tree// without explicitly threading it through every component.// Create a context for the current theme (with &quot;light&quot; as the default).const ThemeContext = React.createContext(&#x27;light&#x27;);class App extends React.Component {
+  render() {
+    // Use a Provider to pass the current theme to the tree below.    // Any component can read it, no matter how deep it is.    // In this example, we&#x27;re passing &quot;dark&quot; as the current value.    return (
+      &lt;ThemeContext.Provider value=&quot;dark&quot;&gt;        &lt;Toolbar /&gt;      &lt;/ThemeContext.Provider&gt;);
+  }
+}
+
+// A component in the middle doesn&#x27;t have to// pass the theme down explicitly anymore.function Toolbar() {
+  return (
+    &lt;div&gt;      &lt;ThemedButton /&gt;    &lt;/div&gt;);
+}
+
+class ThemedButton extends React.Component {
+  // Assign a contextType to read the current theme context.  // React will find the closest theme Provider above and use its value.  // In this example, the current theme is &quot;dark&quot;.  static contextType = ThemeContext;
+  render() {
+    return &lt;Button theme={this.context} /&gt;;  }
+}</code></pre><h1 id="6f2ba0f1-065f-4e09-81b7-d4987bfa0e17" class="">Before You Use Context</h1><p id="e48667a2-f5f1-4fff-9246-9d0c02ce3f84" class="">Context is primarily used when some data needs to be accessible by <em>many</em> components at different nesting levels. Apply it sparingly because it makes component reuse more difficult.</p><p id="db3944ec-efba-42fe-a00b-38a6a87356bb" class=""><strong>If you only want to avoid passing some props through many levels, </strong><a href="https://reactjs.org/docs/composition-vs-inheritance.html"><strong>component composition</strong></a><strong> is often a simpler solution than context.</strong></p><p id="175433c5-e7ef-42b3-a0a0-dca996da3b0b" class="">For example, consider a <code>Page</code> component that passes a <code>user</code> and <code>avatarSize</code> prop several levels down so that deeply nested <code>Link</code> and <code>Avatar</code> components can read it:</p><pre id="91137f41-4469-4c88-8deb-af843be80062" class="code"><code>&lt;Page user={user} avatarSize={avatarSize} /&gt;// ... which renders ...
+&lt;PageLayout user={user} avatarSize={avatarSize} /&gt;// ... which renders ...
+&lt;NavigationBar user={user} avatarSize={avatarSize} /&gt;// ... which renders ...
+&lt;Link href={user.permalink}&gt;
+  &lt;Avatar user={user} size={avatarSize} /&gt;
+&lt;/Link&gt;</code></pre><p id="c04cce5b-fa69-4071-bbdc-1a9401ec2031" class="">It might feel redundant to pass down the <code>user</code> and <code>avatarSize</code> props through many levels if in the end only the <code>Avatar</code> component really needs it. It’s also annoying that whenever the <code>Avatar</code> component needs more props from the top, you have to add them at all the intermediate levels too.</p><p id="0e53de70-bbf4-468f-b9a4-4a4524ca2553" class="">One way to solve this issue <strong>without context</strong> is to <a href="https://reactjs.org/docs/composition-vs-inheritance.html#containment">pass down the </a><a href="https://reactjs.org/docs/composition-vs-inheritance.html#containment"><code>Avatar</code></a><a href="https://reactjs.org/docs/composition-vs-inheritance.html#containment"> component itself</a> so that the intermediate components don’t need to know about the <code>user</code> or <code>avatarSize</code> props:</p><pre id="092b57c0-a118-4cb2-8086-c502e80b6e6e" class="code"><code>function Page(props) {
+  const user = props.user;
+  const userLink = (
+    &lt;Link href={user.permalink}&gt;
+      &lt;Avatar user={user} size={props.avatarSize} /&gt;
+    &lt;/Link&gt;);
+  return &lt;PageLayout userLink={userLink} /&gt;;
+}
+
+// Now, we have:
+&lt;Page user={user} avatarSize={avatarSize} /&gt;// ... which renders ...
+&lt;PageLayout userLink={...} /&gt;// ... which renders ...
+&lt;NavigationBar userLink={...} /&gt;// ... which renders ...
+{props.userLink}</code></pre><p id="e4fa7491-2964-438f-8827-d5a0df5a2a9f" class="">With this change, only the top-most Page component needs to know about the <code>Link</code> and <code>Avatar</code> components’ use of <code>user</code> and <code>avatarSize</code>.</p><p id="9ca64325-673b-4dc8-bf84-cb55d36fe8ca" class="">This <em>inversion of control</em> can make your code cleaner in many cases by reducing the amount of props you need to pass through your application and giving more control to the root components. Such inversion, however, isn’t the right choice in every case; moving more complexity higher in the tree makes those higher-level components more complicated and forces the lower-level components to be more flexible than you may want.</p><p id="a480565a-469b-44de-9da1-5b57df386e9d" class="">You’re not limited to a single child for a component. You may pass multiple children, or even have multiple separate “slots” for children, <a href="https://reactjs.org/docs/composition-vs-inheritance.html#containment">as documented here</a>:</p><pre id="6c84ba0c-ce14-4054-89ad-a5f058b7bfcc" class="code"><code>function Page(props) {
+  const user = props.user;
+  const content = &lt;Feed user={user} /&gt;;
+  const topBar = (
+    &lt;NavigationBar&gt;
+      &lt;Link href={user.permalink}&gt;
+        &lt;Avatar user={user} size={props.avatarSize} /&gt;
+      &lt;/Link&gt;
+    &lt;/NavigationBar&gt;);
+  return (
+    &lt;PageLayouttopBar={topBar}content={content}/&gt;);
+}</code></pre><p id="e7581aec-cc78-4a69-8658-faec1f32ed95" class="">This pattern is sufficient for many cases when you need to decouple a child from its immediate parents. You can take it even further with <a href="https://reactjs.org/docs/render-props.html">render props</a> if the child needs to communicate with the parent before rendering.</p><p id="e7685dc9-8039-4cb0-b6f6-22a97ac1ec88" class="">However, sometimes the same data needs to be accessible by many components in the tree, and at different nesting levels. Context lets you “broadcast” such data, and changes to it, to all components below. Common examples where using context might be simpler than the alternatives include managing the current locale, theme, or a data cache.</p><h1 id="b0ffad4b-f069-43f7-bb5b-5b89d3e12b99" class="">API</h1><h1 id="c8d64f34-72bf-4b16-b5d8-143509d55b59" class=""><code>React.createContext</code></h1><pre id="31451fed-a004-4a0a-97de-566dc41378f9" class="code"><code>const MyContext = React.createContext(defaultValue);</code></pre><p id="35a26f1f-3c6e-4aaf-8fbf-91cc41fabba8" class="">Creates a Context object. When React renders a component that subscribes to this Context object it will read the current context value from the closest matching <code>Provider</code> above it in the tree.</p><p id="d4d3be44-d998-43c7-8edc-e20f63faba15" class="">The <code>defaultValue</code> argument is <strong>only</strong> used when a component does not have a matching Provider above it in the tree. This default value can be helpful for testing components in isolation without wrapping them. Note: passing <code>undefined</code> as a Provider value does not cause consuming components to use <code>defaultValue</code>.</p><h1 id="9c2d0078-17b4-466d-a2f6-32c91553294e" class=""><code>Context.Provider</code></h1><pre id="f4b3ff90-c003-475c-b476-fc8c0f91e40f" class="code"><code>&lt;MyContext.Provider value={/* some value */}&gt;</code></pre><p id="054f17d6-29e0-4950-b936-91edf53f8549" class="">Every Context object comes with a Provider React component that allows consuming components to subscribe to context changes.</p><p id="bf68be51-5b1d-48f5-b3db-57bfca24e712" class="">The Provider component accepts a <code>value</code> prop to be passed to consuming components that are descendants of this Provider. One Provider can be connected to many consumers. Providers can be nested to override values deeper within the tree.</p><p id="2e093b24-d1c3-426d-9ef1-9fd8141105c0" class="">All consumers that are descendants of a Provider will re-render whenever the Provider’s <code>value</code> prop changes. The propagation from Provider to its descendant consumers (including <a href="https://reactjs.org/docs/context.html#classcontexttype"><code>.contextType</code></a> and <a href="https://reactjs.org/docs/hooks-reference.html#usecontext"><code>useContext</code></a>) is not subject to the <code>shouldComponentUpdate</code> method, so the consumer is updated even when an ancestor component skips an update.</p><p id="9f6979a3-069e-4da0-9da6-d1f2b96c4418" class="">Changes are determined by comparing the new and old values using the same algorithm as <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Description"><code>Object.is</code></a>.</p><blockquote id="dbacd7ef-6d8e-470e-8bad-be17e861fcd5" class="">NoteThe way changes are determined can cause some issues when passing objects as value: see Caveats.</blockquote><h1 id="1e5be92d-4ba6-4a4c-8b06-2cde99cf0c16" class=""><code>Class.contextType</code></h1><pre id="d4f18398-6fd4-49be-bcf1-8032fedac50a" class="code"><code>class MyClass extends React.Component {
+  componentDidMount() {
+    let value = this.context;
+    /* perform a side-effect at mount using the value of MyContext */
+  }
+  componentDidUpdate() {
+    let value = this.context;
+    /* ... */
+  }
+  componentWillUnmount() {
+    let value = this.context;
+    /* ... */
+  }
+  render() {
+    let value = this.context;
+    /* render something based on the value of MyContext */
+  }
+}
+MyClass.contextType = MyContext;</code></pre><p id="8adff40c-bc5f-4581-a660-af77bd0aafc3" class="">The <code>contextType</code> property on a class can be assigned a Context object created by <a href="https://reactjs.org/docs/context.html#reactcreatecontext"><code>React.createContext()</code></a>. Using this property lets you consume the nearest current value of that Context type using <code>this.context</code>. You can reference this in any of the lifecycle methods including the render function.</p><blockquote id="d0859dae-25b1-4bc3-a9ca-f672bd67a72b" class="">Note:You can only subscribe to a single context using this API. If you need to read more than one see Consuming Multiple Contexts.If you are using the experimental public class fields syntax, you can use a static class field to initialize your contextType.</blockquote><pre id="ff54dd0a-bb15-4e11-aaa8-0d5312cfc412" class="code"><code>class MyClass extends React.Component {
+  static contextType = MyContext;
+  render() {
+    let value = this.context;
+    /* render something based on the value */
+  }
+}</code></pre><h1 id="1dc11f64-9976-42e0-9e98-f5ae467bc56d" class=""><code>Context.Consumer</code></h1><pre id="c592e032-f008-4461-9a75-dfa18253f0b4" class="code"><code>&lt;MyContext.Consumer&gt;
+  {value =&gt; /* render something based on the context value */}
+&lt;/MyContext.Consumer&gt;</code></pre><p id="f8114271-b31b-4d65-8c26-69155e3a9c14" class="">A React component that subscribes to context changes. Using this component lets you subscribe to a context within a <a href="https://reactjs.org/docs/components-and-props.html#function-and-class-components">function component</a>.</p><p id="d5cb9bd8-99cb-4c05-9c06-8b08aa9881ea" class="">Requires a <a href="https://reactjs.org/docs/render-props.html#using-props-other-than-render">function as a child</a>. The function receives the current context value and returns a React node. The <code>value</code> argument passed to the function will be equal to the <code>value</code> prop of the closest Provider for this context above in the tree. If there is no Provider for this context above, the <code>value</code> argument will be equal to the <code>defaultValue</code> that was passed to <code>createContext()</code>.</p><blockquote id="561cde00-74ef-4cac-9401-8db335b0a825" class="">NoteFor more information about the ‘function as a child’ pattern, see render props.</blockquote><h1 id="0c62920e-5fa1-4cba-8fa1-dd8c7efb1c69" class=""><code>Context.displayName</code></h1><p id="8b336a19-23bb-4d26-b336-fea9a96f4375" class="">Context object accepts a <code>displayName</code> string property. React DevTools uses this string to determine what to display for the context.</p><p id="99230647-bea9-472e-9f56-afb8f6d9c7ac" class="">For example, the following component will appear as MyDisplayName in the DevTools:</p><pre id="8d008876-c23f-4ea6-a6fd-a38d10433d6b" class="code"><code>const MyContext = React.createContext(/* some value */);
+MyContext.displayName = &#x27;MyDisplayName&#x27;;&lt;MyContext.Provider&gt; // &quot;MyDisplayName.Provider&quot; in DevTools
+&lt;MyContext.Consumer&gt; // &quot;MyDisplayName.Consumer&quot; in DevTools</code></pre><h1 id="e8f4d9d1-a904-44df-a110-fc34e467f4d8" class="">Examples</h1><h1 id="dfb70c75-d5f2-4abb-84a8-d6fc8e303018" class="">Dynamic Context</h1><p id="9aa3bd04-c5b5-468e-bc32-de7362e29327" class="">A more complex example with dynamic values for the theme:</p><p id="ed433b62-a0f2-4e6b-b9f3-f812ade5f6b4" class=""><strong>theme-context.js</strong></p><pre id="b4efa6ae-6dcb-4c59-8b23-dff6597de546" class="code"><code>export const themes = {
+  light: {
+    foreground: &#x27;#000000&#x27;,
+    background: &#x27;#eeeeee&#x27;,
+  },
+  dark: {
+    foreground: &#x27;#ffffff&#x27;,
+    background: &#x27;#222222&#x27;,
+  },
+};
+
+export const ThemeContext = React.createContext(  themes.dark // default value);</code></pre><p id="171449da-5cc0-45cf-966a-450178ab1e28" class=""><strong>themed-button.js</strong></p><pre id="14546de6-8776-4e33-92a1-09596fe55731" class="code"><code>import {ThemeContext} from &#x27;./theme-context&#x27;;
+
+class ThemedButton extends React.Component {
+  render() {
+    let props = this.props;
+    let theme = this.context;    return (
+      &lt;button
+        {...props}style={{backgroundColor: theme.background}}/&gt;);
+  }
+}
+ThemedButton.contextType = ThemeContext;export default ThemedButton;</code></pre><p id="003bf988-d817-437c-99d9-c3af93cd1ade" class=""><strong>app.js</strong></p><pre id="8cfd57d5-5190-4acc-9eaa-ba02df70c94e" class="code"><code>import {ThemeContext, themes} from &#x27;./theme-context&#x27;;
+import ThemedButton from &#x27;./themed-button&#x27;;
+
+// An intermediate component that uses the ThemedButton
+function Toolbar(props) {
+  return (
+    &lt;ThemedButton onClick={props.changeTheme}&gt;      Change Theme
+    &lt;/ThemedButton&gt;);
+}
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      theme: themes.light,
+    };
+
+    this.toggleTheme = () =&gt; {
+      this.setState(state =&gt; ({
+        theme:
+          state.theme === themes.dark
+            ? themes.light
+            : themes.dark,
+      }));
+    };
+  }
+
+  render() {
+    // The ThemedButton button inside the ThemeProvider    // uses the theme from state while the one outside uses    // the default dark theme    return (
+      &lt;Page&gt;        &lt;ThemeContext.Provider value={this.state.theme}&gt;          &lt;Toolbar changeTheme={this.toggleTheme} /&gt;        &lt;/ThemeContext.Provider&gt;        &lt;Section&gt;          &lt;ThemedButton /&gt;        &lt;/Section&gt;      &lt;/Page&gt;);
+  }
+}
+
+ReactDOM.render(&lt;App /&gt;, document.root);</code></pre></div><div><h1 id="e6740042-11bd-46b2-94dd-26e063441da1" class="">Updating Context from a Nested Component</h1><p id="df797891-a13a-4bd0-b9f7-e567e9921aef" class="">It is often necessary to update the context from a component that is nested somewhere deeply in the component tree. In this case you can pass a function down through the context to allow consumers to update the context:</p><p id="72a33c56-1f5a-420b-add6-f35bb94f4bad" class=""><strong>theme-context.js</strong></p><pre id="7d825810-c3bf-43d8-bf84-8777c26ea79f" class="code"><code>// Make sure the shape of the default value passed to
+// createContext matches the shape that the consumers expect!
+export const ThemeContext = React.createContext({
+  theme: themes.dark,  toggleTheme: () =&gt; {},});</code></pre><p id="0440aa72-9e49-4d4a-a6b2-e84c6b304860" class=""><strong>theme-toggler-button.js</strong></p><pre id="6bad8dda-ca02-4b85-920f-c5c8d52989da" class="code"><code>import {ThemeContext} from &#x27;./theme-context&#x27;;
+
+function ThemeTogglerButton() {
+  // The Theme Toggler Button receives not only the theme  // but also a toggleTheme function from the context  return (
+    &lt;ThemeContext.Consumer&gt;      {({theme, toggleTheme}) =&gt; (        &lt;button
+          onClick={toggleTheme}style={{backgroundColor: theme.background}}&gt;          Toggle Theme
+        &lt;/button&gt;)}
+    &lt;/ThemeContext.Consumer&gt;);
+}
+
+export default ThemeTogglerButton;</code></pre><p id="417c64b1-6eb0-4de3-b410-e3bcb3ca1f7a" class=""><strong>app.js</strong></p><pre id="aaceb9a9-eef1-493f-81fe-19f5f86f7b40" class="code"><code>import {ThemeContext, themes} from &#x27;./theme-context&#x27;;
+import ThemeTogglerButton from &#x27;./theme-toggler-button&#x27;;
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.toggleTheme = () =&gt; {
+      this.setState(state =&gt; ({
+        theme:
+          state.theme === themes.dark
+            ? themes.light
+            : themes.dark,
+      }));
+    };
+
+    // State also contains the updater function so it will    // be passed down into the context provider    this.state = {
+      theme: themes.light,
+      toggleTheme: this.toggleTheme,    };
+  }
+
+  render() {
+    // The entire state is passed to the provider    return (
+      &lt;ThemeContext.Provider value={this.state}&gt;        &lt;Content /&gt;      &lt;/ThemeContext.Provider&gt;);
+  }
+}
+
+function Content() {
+  return (
+    &lt;div&gt;      &lt;ThemeTogglerButton /&gt;    &lt;/div&gt;);
+}
+
+ReactDOM.render(&lt;App /&gt;, document.root);</code></pre><h1 id="430722b4-da7f-46be-8fd3-9f591451530e" class="">Consuming Multiple Contexts</h1><p id="8cc4c132-aad5-4ea9-b1c5-51b74765bd44" class="">To keep context re-rendering fast, React needs to make each context consumer a separate node in the tree.</p><pre id="b959dbad-c0fc-4a14-856e-d3d92ae474c3" class="code"><code>// Theme context, default to light theme
+const ThemeContext = React.createContext(&#x27;light&#x27;);
+
+// Signed-in user context
+const UserContext = React.createContext({
+  name: &#x27;Guest&#x27;,
+});
+
+class App extends React.Component {
+  render() {
+    const {signedInUser, theme} = this.props;
+
+    // App component that provides initial context values
+    return (
+      &lt;ThemeContext.Provider value={theme}&gt;        &lt;UserContext.Provider value={signedInUser}&gt;          &lt;Layout /&gt;        &lt;/UserContext.Provider&gt;      &lt;/ThemeContext.Provider&gt;    );
+  }
+}
+
+function Layout() {
+  return (
+    &lt;div&gt;      &lt;Sidebar /&gt;      &lt;Content /&gt;    &lt;/div&gt;);
+}
+
+// A component may consume multiple contexts
+function Content() {
+  return (
+    &lt;ThemeContext.Consumer&gt;      {theme =&gt; (        &lt;UserContext.Consumer&gt;          {user =&gt; (            &lt;ProfilePage user={user} theme={theme} /&gt;          )}        &lt;/UserContext.Consumer&gt;      )}    &lt;/ThemeContext.Consumer&gt;  );
+}</code></pre><p id="ab5a5c9b-f02c-41ea-8b43-88e172bfcc5a" class="">If two or more context values are often used together, you might want to consider creating your own render prop component that provides both.</p><h1 id="d5e209af-de90-4c56-908e-1ec3f92ee458" class="">Caveats</h1><p id="80ad57b8-9f49-4c8c-8e87-e9d2eaa1563e" class="">Because context uses reference identity to determine when to re-render, there are some gotchas that could trigger unintentional renders in consumers when a provider’s parent re-renders. For example, the code below will re-render all consumers every time the Provider re-renders because a new object is always created for <code>value</code>:</p><pre id="d55278ae-b38d-498c-80ca-a1cd70f9ff70" class="code"><code>class App extends React.Component {
+  render() {
+    return (
+      &lt;MyContext.Provider value={{something: &#x27;something&#x27;}}&gt;        &lt;Toolbar /&gt;      &lt;/MyContext.Provider&gt;);
+  }
+}</code></pre><p id="2553e638-66da-4277-af89-dd85cd1434ed" class="">To get around this, lift the value into the parent’s state:</p><pre id="22c6641d-f1a0-4af0-8e68-fc6d98d49ec9" class="code"><code>class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: {something: &#x27;something&#x27;},    };
+  }
+
+  render() {
+    return (
+      &lt;MyContext.Provider value={this.state.value}&gt;        &lt;Toolbar /&gt;      &lt;/MyContext.Provider&gt;);
+  }
+}</code></pre><h1 id="63855a0e-6ba1-48e4-80ab-a6df0303f23e" class="">Legacy API</h1><blockquote id="8ebf8761-1ff1-4811-8f24-d3a6dd3f6701" class="">NoteReact previously shipped with an experimental context API. The old API will be supported in all 16.x releases, but applications using it should migrate to the new version. The legacy API will be removed in a future major React version. Read the legacy context docs here.</blockquote><h1 id="17a92f5b-9fec-4353-8573-3e67536a9b28" class=""><strong>Fragments</strong></h1><h1 id="9d1cdf16-be2b-481e-955b-61410255315f" class="">A common pattern in React is for a component to return multiple elements. Fragments let you group a list of children without adding extra nodes to the DOM.</h1><pre id="88610a96-7c44-4878-949a-5b233260dd3f" class="code"><code>render() {
+  return (
+    &lt;React.Fragment&gt;
+      &lt;ChildA /&gt;
+      &lt;ChildB /&gt;
+      &lt;ChildC /&gt;
+    &lt;/React.Fragment&gt;);
+}</code></pre><p id="0031f4a8-81dc-4ab9-96c0-2498391b80a4" class="">There is also a new <a href="https://reactjs.org/docs/fragments.html#short-syntax">short syntax</a> for declaring them.</p><h1 id="c7f3cf94-fe9f-4505-a168-92b6d6e1504d" class="">Motivation</h1><p id="69fc27a7-a7ce-419d-a45e-02f52195f2e5" class="">A common pattern is for a component to return a list of children. Take this example React snippet:</p><pre id="b2a36dec-33b9-4849-9c2d-87f00bb2765b" class="code"><code>class Table extends React.Component {
+  render() {
+    return (
+      &lt;table&gt;
+        &lt;tr&gt;
+          &lt;Columns /&gt;
+        &lt;/tr&gt;
+      &lt;/table&gt;);
+  }
+}</code></pre><p id="38356db4-d6b0-4c4a-be35-a5e5fca4d997" class=""><code>&lt;Columns /&gt;</code> would need to return multiple <code>&lt;td&gt;</code> elements in order for the rendered HTML to be valid. If a parent div was used inside the <code>render()</code> of <code>&lt;Columns /&gt;</code>, then the resulting HTML will be invalid.</p><pre id="d0d696e2-98d5-42cb-aa1f-c6598f0562a2" class="code"><code>class Columns extends React.Component {
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;td&gt;Hello&lt;/td&gt;
+        &lt;td&gt;World&lt;/td&gt;
+      &lt;/div&gt;);
+  }
+}</code></pre><p id="0ef8aaf7-5186-499e-b65d-fdaadfff8969" class="">results in a <code>&lt;Table /&gt;</code> output of:</p><pre id="8746ddca-400e-45e9-87d3-cb29839a4165" class="code"><code>&lt;table&gt;
+  &lt;tr&gt;
+    &lt;div&gt;
+      &lt;td&gt;Hello&lt;/td&gt;
+      &lt;td&gt;World&lt;/td&gt;
+    &lt;/div&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre><p id="692df6da-7d77-4158-81eb-016265b893a9" class="">Fragments solve this problem.</p><h1 id="e916de44-8d13-4e6a-96fd-e8437de51c64" class="">Usage</h1><pre id="72cf40fa-368a-4e28-9b1e-5e2ed03492c2" class="code"><code>class Columns extends React.Component {
+  render() {
+    return (
+      &lt;React.Fragment&gt;        &lt;td&gt;Hello&lt;/td&gt;        &lt;td&gt;World&lt;/td&gt;      &lt;/React.Fragment&gt;    );
+  }
+}</code></pre><p id="fad5f2fe-b790-4fff-91cd-84358b7051b5" class="">which results in a correct <code>&lt;Table /&gt;</code> output of:</p><pre id="6eea04ff-d9cd-4b83-9d69-e1226d3bbde8" class="code"><code>&lt;table&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Hello&lt;/td&gt;
+    &lt;td&gt;World&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre><h1 id="4a4fca95-b2d7-439c-98c0-ee4afaf39059" class="">Short Syntax</h1><p id="bda9b70b-ea16-4afe-b526-5563b2f0a2a0" class="">There is a new, shorter syntax you can use for declaring fragments. It looks like empty tags:</p><pre id="f59b2d78-b6d4-4e56-a314-a050fbe8519e" class="code"><code>class Columns extends React.Component {
+  render() {
+    return (
+      &lt;&gt;        &lt;td&gt;Hello&lt;/td&gt;        &lt;td&gt;World&lt;/td&gt;      &lt;/&gt;    );
+  }
+}</code></pre><p id="0add62a0-dd6c-4a69-9da2-1e5767cb5ee8" class="">You can use <code>&lt;&gt;&lt;/&gt;</code> the same way you’d use any other element except that it doesn’t support keys or attributes.</p><h1 id="a9298daa-e1a7-441c-8d6e-681aa51c8ae0" class="">Keyed Fragments</h1><p id="ea180fca-6b24-4e64-a117-2bd20fdafd53" class="">Fragments declared with the explicit <code>&lt;React.Fragment&gt;</code> syntax may have keys. A use case for this is mapping a collection to an array of fragments — for example, to create a description list:</p><pre id="4bb0121b-7204-4f80-816a-e610a633807a" class="code"><code>function Glossary(props) {
+  return (
+    &lt;dl&gt;
+      {props.items.map(item =&gt; (
+        // Without the `key`, React will fire a key warning
+        &lt;React.Fragment key={item.id}&gt;
+          &lt;dt&gt;{item.term}&lt;/dt&gt;
+          &lt;dd&gt;{item.description}&lt;/dd&gt;
+        &lt;/React.Fragment&gt;))}
+    &lt;/dl&gt;);
+}</code></pre><p id="fe230a61-8faa-4aac-b216-17cba1d996f6" class=""><code>key</code> is the only attribute that can be passed to <code>Fragment</code>. In the future, we may add support for additional attributes, such as event handlers.</p><h1 id="e0cc1ae3-0939-4f81-8f34-4bd5252a224b" class="">Live Demo</h1><p id="4e8c4384-cfe2-4ca6-b01f-2f9f893cb771" class="">You can try out the new JSX fragment syntax with this <a href="https://codepen.io/reactjs/pen/VrEbjE?editors=1000">CodePen</a>.</p><h1 id="9577c074-4e7a-4ba4-b4d9-d20a6133a739" class=""><strong>Higher-Order Components</strong></h1><h1 id="5ea985e0-bee6-47e0-9e1f-61439d6d3c6e" class="">A higher-order component (HOC) is an advanced technique in React for reusing component logic. HOCs are not part of the React API, per se. They are a pattern that emerges from React’s compositional nature.</h1><p id="5ee3d3c7-1376-4425-9c8c-dabb2c9a75cf" class="">Concretely, <strong>a higher-order component is a function that takes a component and returns a new component.</strong></p><p id="5bd54b7a-2567-4311-9329-f048ec472325" class=""><code>const EnhancedComponent = higherOrderComponent(WrappedComponent);</code></p><p id="386aee05-0ca2-473f-9a61-d4a61fd1e312" class="">Whereas a component transforms props into UI, a higher-order component transforms a component into another component.</p><p id="aa807ceb-9762-4799-a73c-6715313c9451" class="">HOCs are common in third-party React libraries, such as Redux’s <a href="https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#connect"><code>connect</code></a> and Relay’s <a href="https://relay.dev/docs/v10.1.3/fragment-container/#createfragmentcontainer"><code>createFragmentContainer</code></a>.</p><p id="1e95d09d-05dc-4323-83b4-be5e99881161" class="">In this document, we’ll discuss why higher-order components are useful, and how to write your own.</p><h1 id="cb1a227c-a1c8-469e-9cb9-bfb67a200a03" class="">Use HOCs For Cross-Cutting Concerns</h1><blockquote id="0eeb4d99-6d23-4ab9-8be2-e404668cfbce" class="">NoteWe previously recommended mixins as a way to handle cross-cutting concerns. We’ve since realized that mixins create more trouble than they are worth. Read more about why we’ve moved away from mixins and how you can transition your existing components.</blockquote><p id="dc8347db-ffc3-4be6-901f-8b5c81f273bb" class="">Components are the primary unit of code reuse in React. However, you’ll find that some patterns aren’t a straightforward fit for traditional components.</p><p id="45ebd1cf-095d-4377-9d52-7194c790acd3" class="">For example, say you have a <code>CommentList</code> component that subscribes to an external data source to render a list of comments:</p><pre id="5db31bdc-d9f4-4333-a1ee-67ed919a90b1" class="code"><code>class CommentList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      // &quot;DataSource&quot; is some global data source
+      comments: DataSource.getComments()
+    };
+  }
+
+  componentDidMount() {
+    // Subscribe to changes
+    DataSource.addChangeListener(this.handleChange);
+  }
+
+  componentWillUnmount() {
+    // Clean up listener
+    DataSource.removeChangeListener(this.handleChange);
+  }
+
+  handleChange() {
+    // Update component state whenever the data source changes
+    this.setState({
+      comments: DataSource.getComments()
+    });
+  }
+
+  render() {
+    return (
+      &lt;div&gt;
+        {this.state.comments.map((comment) =&gt; (
+          &lt;Comment comment={comment} key={comment.id} /&gt;))}
+      &lt;/div&gt;);
+  }
+}</code></pre><p id="88d9b80c-497e-40a9-9900-377ffa8d1776" class="">Later, you write a component for subscribing to a single blog post, which follows a similar pattern:</p><pre id="568b0737-b906-445a-a820-76fc4b72a473" class="code"><code>class BlogPost extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      blogPost: DataSource.getBlogPost(props.id)
+    };
+  }
+
+  componentDidMount() {
+    DataSource.addChangeListener(this.handleChange);
+  }
+
+  componentWillUnmount() {
+    DataSource.removeChangeListener(this.handleChange);
+  }
+
+  handleChange() {
+    this.setState({
+      blogPost: DataSource.getBlogPost(this.props.id)
+    });
+  }
+
+  render() {
+    return &lt;TextBlock text={this.state.blogPost} /&gt;;
+  }
+}</code></pre><p id="b61d74a3-2f1b-4fe5-8dd9-99e5b5320a78" class=""><code>CommentList</code> and <code>BlogPost</code> aren’t identical — they call different methods on <code>DataSource</code>, and they render different output. But much of their implementation is the same:</p><ul id="a247ec2b-b722-463f-8c1d-e0cf11032355" class="bulleted-list"><li style="list-style-type:disc">On mount, add a change listener to <code>DataSource</code>.</li></ul><ul id="a11d331e-6cdf-4230-8484-a3ed6e69f13b" class="bulleted-list"><li style="list-style-type:disc">Inside the listener, call <code>setState</code> whenever the data source changes.</li></ul><ul id="df3547eb-05c3-471e-9a53-4f8808321627" class="bulleted-list"><li style="list-style-type:disc">On unmount, remove the change listener.</li></ul><p id="5c0ab707-b530-4cbf-a446-2e59772b8ce8" class="">You can imagine that in a large app, this same pattern of subscribing to <code>DataSource</code> and calling <code>setState</code> will occur over and over again. We want an abstraction that allows us to define this logic in a single place and share it across many components. This is where higher-order components excel.</p><p id="4bde3f88-0d3a-4a2a-9c4c-cd6f3adf0eea" class="">We can write a function that creates components, like <code>CommentList</code> and <code>BlogPost</code>, that subscribe to <code>DataSource</code>. The function will accept as one of its arguments a child component that receives the subscribed data as a prop. Let’s call the function <code>withSubscription</code>:</p><pre id="cd62c78a-0e97-42c3-8f67-f47714d0a35e" class="code"><code>const CommentListWithSubscription = withSubscription(
+  CommentList,
+  (DataSource) =&gt; DataSource.getComments()
+);
+
+const BlogPostWithSubscription = withSubscription(
+  BlogPost,
+  (DataSource, props) =&gt; DataSource.getBlogPost(props.id)
+);</code></pre><p id="eec503da-b3a9-4b03-ba2c-f388136faaf0" class="">The first parameter is the wrapped component. The second parameter retrieves the data we’re interested in, given a <code>DataSource</code> and the current props.</p><p id="b4944233-3423-47c4-baf0-d3e320f3d950" class="">When <code>CommentListWithSubscription</code> and <code>BlogPostWithSubscription</code> are rendered, <code>CommentList</code> and <code>BlogPost</code> will be passed a <code>data</code> prop with the most current data retrieved from <code>DataSource</code>:</p><pre id="e9df6880-e140-4da1-8dae-602b606f837d" class="code"><code>// This function takes a component...
+function withSubscription(WrappedComponent, selectData) {
+  // ...and returns another component...
+  return class extends React.Component {
+    constructor(props) {
+      super(props);
+      this.handleChange = this.handleChange.bind(this);
+      this.state = {
+        data: selectData(DataSource, props)
+      };
+    }
+
+    componentDidMount() {
+      // ... that takes care of the subscription...
+      DataSource.addChangeListener(this.handleChange);
+    }
+
+    componentWillUnmount() {
+      DataSource.removeChangeListener(this.handleChange);
+    }
+
+    handleChange() {
+      this.setState({
+        data: selectData(DataSource, this.props)
+      });
+    }
+
+    render() {
+      // ... and renders the wrapped component with the fresh data!
+      // Notice that we pass through any additional props
+      return &lt;WrappedComponent data={this.state.data} {...this.props} /&gt;;
+    }
+  };
+}</code></pre><p id="445a28e6-b408-4169-a5c2-872ab48f46b9" class="">Note that a HOC doesn’t modify the input component, nor does it use inheritance to copy its behavior. Rather, a HOC <em>composes</em> the original component by <em>wrapping</em> it in a container component. A HOC is a pure function with zero side-effects.</p><p id="a3c208b0-78e4-44aa-bb0b-4a34f22bb7ad" class="">And that’s it! The wrapped component receives all the props of the container, along with a new prop, <code>data</code>, which it uses to render its output. The HOC isn’t concerned with how or why the data is used, and the wrapped component isn’t concerned with where the data came from.</p><p id="41d9eb65-0e57-4b60-a61b-e6e618c85645" class="">Because <code>withSubscription</code> is a normal function, you can add as many or as few arguments as you like. For example, you may want to make the name of the <code>data</code> prop configurable, to further isolate the HOC from the wrapped component. Or you could accept an argument that configures <code>shouldComponentUpdate</code>, or one that configures the data source. These are all possible because the HOC has full control over how the component is defined.</p><p id="d8f9e017-6499-463b-9b70-b7261922d87e" class="">Like components, the contract between <code>withSubscription</code> and the wrapped component is entirely props-based. This makes it easy to swap one HOC for a different one, as long as they provide the same props to the wrapped component. This may be useful if you change data-fetching libraries, for example.</p><h1 id="d8db0fc7-b97d-4b80-97ec-8d2f9502ae4c" class="">Don’t Mutate the Original Component. Use Composition.</h1><p id="39fe3cfa-4d49-4104-a84e-bd1492d4c9f3" class="">Resist the temptation to modify a component’s prototype (or otherwise mutate it) inside a HOC.</p><pre id="1260da17-ab48-45ba-80d3-c8d2d8033683" class="code"><code>function logProps(InputComponent) {
+  InputComponent.prototype.componentDidUpdate = function(prevProps) {
+    console.log(&#x27;Current props: &#x27;, this.props);
+    console.log(&#x27;Previous props: &#x27;, prevProps);
+  };
+  // The fact that we&#x27;re returning the original input is a hint that it has
+  // been mutated.
+  return InputComponent;
+}
+
+// EnhancedComponent will log whenever props are received
+const EnhancedComponent = logProps(InputComponent);</code></pre><p id="41bc3083-0983-48fe-8095-8fc6ef003482" class="">There are a few problems with this. One is that the input component cannot be reused separately from the enhanced component. More crucially, if you apply another HOC to <code>EnhancedComponent</code> that <em>also</em> mutates <code>componentDidUpdate</code>, the first HOC’s functionality will be overridden! This HOC also won’t work with function components, which do not have lifecycle methods.</p><p id="e6fc6873-7cc2-4605-bd4a-63044f57c1cd" class="">Mutating HOCs are a leaky abstraction—the consumer must know how they are implemented in order to avoid conflicts with other HOCs.</p><p id="93938391-4bf1-4816-99f3-e037dbd0a3b6" class="">Instead of mutation, HOCs should use composition, by wrapping the input component in a container component:</p><pre id="9420309b-f33f-4725-a5fb-391481121f35" class="code"><code>function logProps(WrappedComponent) {
+  return class extends React.Component {
+    componentDidUpdate(prevProps) {
+      console.log(&#x27;Current props: &#x27;, this.props);
+      console.log(&#x27;Previous props: &#x27;, prevProps);
+    }
+    render() {
+      // Wraps the input component in a container, without mutating it. Good!
+      return &lt;WrappedComponent {...this.props} /&gt;;
+    }
+  }
+}</code></pre><p id="e347835f-dd1a-4a0f-940f-4d9b3368dec3" class="">This HOC has the same functionality as the mutating version while avoiding the potential for clashes. It works equally well with class and function components. And because it’s a pure function, it’s composable with other HOCs, or even with itself.</p><p id="0e25b652-f24d-40e1-9609-384514de0f5b" class="">You may have noticed similarities between HOCs and a pattern called <strong>container components</strong>. Container components are part of a strategy of separating responsibility between high-level and low-level concerns. Containers manage things like subscriptions and state, and pass props to components that handle things like rendering UI. HOCs use containers as part of their implementation. You can think of HOCs as parameterized container component definitions.</p><h1 id="ac6f1a96-de71-4894-9bbf-337edc7f0156" class="">Convention: Pass Unrelated Props Through to the Wrapped Component</h1><p id="51f5cf8c-9261-446b-a72c-fd062b27919b" class="">HOCs add features to a component. They shouldn’t drastically alter its contract. It’s expected that the component returned from a HOC has a similar interface to the wrapped component.</p><p id="479abeb8-4368-4914-86be-793a8b97a304" class="">HOCs should pass through props that are unrelated to its specific concern. Most HOCs contain a render method that looks something like this:</p><pre id="e7717bfd-78ba-4fd0-8801-4cb83fb0e582" class="code"><code>render() {
+  // Filter out extra props that are specific to this HOC and shouldn&#x27;t be
+  // passed through
+  const { extraProp, ...passThroughProps } = this.props;
+
+  // Inject props into the wrapped component. These are usually state values or
+  // instance methods.
+  const injectedProp = someStateOrInstanceMethod;
+
+  // Pass props to wrapped component
+  return (
+    &lt;WrappedComponentinjectedProp={injectedProp}{...passThroughProps}/&gt;);
+}</code></pre><p id="096f4fde-3dbc-4de3-8fb3-48a2ddfcd11d" class="">This convention helps ensure that HOCs are as flexible and reusable as possible.</p><h1 id="7564e4ce-f6a8-4f72-9566-219a9044bafb" class="">Convention: Maximizing Composability</h1><p id="42db05e8-6d3a-4637-9f45-c7ad32d925d1" class="">Not all HOCs look the same. Sometimes they accept only a single argument, the wrapped component:</p><pre id="ffebdd74-eb2e-4e74-868b-daded740dc28" class="code"><code>const NavbarWithRouter = withRouter(Navbar);</code></pre><p id="3b606e11-ed33-4786-9827-18e0392fee6b" class="">Usually, HOCs accept additional arguments. In this example from Relay, a config object is used to specify a component’s data dependencies:</p><pre id="471679a7-87ae-4014-91bb-cecaf94c1e55" class="code"><code>const CommentWithRelay = Relay.createContainer(Comment, config);</code></pre><p id="f691cd6f-f7b3-4b30-a68d-b646ee59511f" class="">The most common signature for HOCs looks like this:</p><pre id="04093199-7d75-4ec5-a95b-e9973bbc9303" class="code"><code>// React Redux&#x27;s `connect`
+const ConnectedComment = connect(commentSelector, commentActions)(CommentList);</code></pre><p id="c640ff0d-657d-4c39-bef0-6c076ac3ba30" class=""><em>What?!</em> If you break it apart, it’s easier to see what’s going on.</p><pre id="4f60a531-4018-47b9-b1ae-208ec5fbf53b" class="code"><code>// connect is a function that returns another function
+const enhance = connect(commentListSelector, commentListActions);
+// The returned function is a HOC, which returns a component that is connected
+// to the Redux store
+const ConnectedComment = enhance(CommentList);</code></pre><p id="4fe06b57-f6cb-46e8-ba6d-0337fc5056b2" class="">In other words, <code>connect</code> is a higher-order function that returns a higher-order component!</p><p id="e40e1d3a-1d24-468e-823a-86781cd35aa7" class="">This form may seem confusing or unnecessary, but it has a useful property. Single-argument HOCs like the one returned by the <code>connect</code> function have the signature <code>Component =&gt; Component</code>. Functions whose output type is the same as its input type are really easy to compose together.</p><pre id="b0302669-7754-4338-9786-9d810d296e5d" class="code"><code>// Instead of doing this...
+const EnhancedComponent = withRouter(connect(commentSelector)(WrappedComponent))
+
+// ... you can use a function composition utility
+// compose(f, g, h) is the same as (...args) =&gt; f(g(h(...args)))
+const enhance = compose(
+  // These are both single-argument HOCs
+  withRouter,
+  connect(commentSelector)
+)
+const EnhancedComponent = enhance(WrappedComponent)</code></pre><p id="73f3a7a4-91d9-4575-88a7-e42080865a06" class="">(This same property also allows <code>connect</code> and other enhancer-style HOCs to be used as decorators, an experimental JavaScript proposal.)</p><p id="507b0b98-8898-45ca-b14f-a50b0caaed03" class="">The <code>compose</code> utility function is provided by many third-party libraries including lodash (as <a href="https://lodash.com/docs/#flowRight"><code>lodash.flowRight</code></a>), <a href="https://redux.js.org/api/compose">Redux</a>, and <a href="https://ramdajs.com/docs/#compose">Ramda</a>.</p><h1 id="83ae70b4-5d0c-4d0b-8939-0ea11731e492" class="">Convention: Wrap the Display Name for Easy Debugging</h1><p id="a041c56c-d266-474b-905f-4dd2078a962d" class="">The container components created by HOCs show up in the <a href="https://github.com/facebook/react/tree/main/packages/react-devtools">React Developer Tools</a> like any other component. To ease debugging, choose a display name that communicates that it’s the result of a HOC.</p><p id="ff1b76cb-fc64-4b46-afee-008353bb138f" class="">The most common technique is to wrap the display name of the wrapped component. So if your higher-order component is named <code>withSubscription</code>, and the wrapped component’s display name is <code>CommentList</code>, use the display name <code>WithSubscription(CommentList)</code>:</p><pre id="7f3ffe15-a931-4b8b-8810-1ba0de544901" class="code"><code>function withSubscription(WrappedComponent) {
+  class WithSubscription extends React.Component {/* ... */}
+  WithSubscription.displayName = `WithSubscription(${getDisplayName(WrappedComponent)})`;
+  return WithSubscription;
+}
+
+function getDisplayName(WrappedComponent) {
+  return WrappedComponent.displayName || WrappedComponent.name || &#x27;Component&#x27;;
+}</code></pre><h1 id="df6897d9-e60e-4426-814d-f714c2ccafde" class="">Caveats</h1><p id="284e9052-8b19-4434-a617-8f427ba4f970" class="">Higher-order components come with a few caveats that aren’t immediately obvious if you’re new to React.</p><h1 id="2335bfe5-fb5b-462d-8a8f-6511eaa0cf7d" class="">Don’t Use HOCs Inside the render Method</h1><p id="81785634-2b48-45ad-a69a-f4872256b3ad" class="">React’s diffing algorithm (called <a href="https://reactjs.org/docs/reconciliation.html">Reconciliation</a>) uses component identity to determine whether it should update the existing subtree or throw it away and mount a new one. If the component returned from <code>render</code> is identical (<code>===</code>) to the component from the previous render, React recursively updates the subtree by diffing it with the new one. If they’re not equal, the previous subtree is unmounted completely.</p><p id="4d215d5c-c3ab-4fc5-87b0-fb8058141752" class="">Normally, you shouldn’t need to think about this. But it matters for HOCs because it means you can’t apply a HOC to a component within the render method of a component:</p><pre id="44b4f5ad-00b0-4d24-bf9e-86e224667b8e" class="code"><code>render() {
+  // A new version of EnhancedComponent is created on every render
+  // EnhancedComponent1 !== EnhancedComponent2
+  const EnhancedComponent = enhance(MyComponent);
+  // That causes the entire subtree to unmount/remount each time!
+  return &lt;EnhancedComponent /&gt;;
+}</code></pre><p id="9bb96314-e38b-41ef-9dab-705305d0ff5b" class="">The problem here isn’t just about performance — remounting a component causes the state of that component and all of its children to be lost.</p><p id="f9948e2d-b543-4f3d-8c72-6a9833c62238" class="">Instead, apply HOCs outside the component definition so that the resulting component is created only once. Then, its identity will be consistent across renders. This is usually what you want, anyway.</p><p id="aacc5278-3949-4240-84ac-6e0afee715f0" class="">In those rare cases where you need to apply a HOC dynamically, you can also do it inside a component’s lifecycle methods or its constructor.</p></div><div><h1 id="0b739730-2d19-4207-a3bf-412e15c67ae9" class="">Static Methods Must Be Copied Over</h1><p id="581fbcb7-ecf9-4a3a-852d-bab9a7afc968" class="">Sometimes it’s useful to define a static method on a React component. For example, Relay containers expose a static method <code>getFragment</code> to facilitate the composition of GraphQL fragments.</p><p id="36aaf037-835f-4b75-b913-aaf3c620694b" class="">When you apply a HOC to a component, though, the original component is wrapped with a container component. That means the new component does not have any of the static methods of the original component.</p><pre id="b2f4225f-9857-4bac-9d2e-98e794b337cd" class="code"><code>// Define a static method
+WrappedComponent.staticMethod = function() {/*...*/}
+// Now apply a HOC
+const EnhancedComponent = enhance(WrappedComponent);
+
+// The enhanced component has no static method
+typeof EnhancedComponent.staticMethod === &#x27;undefined&#x27; // true</code></pre><p id="4755cc6d-af07-4118-ab20-b79e559e1767" class="">To solve this, you could copy the methods onto the container before returning it:</p><pre id="5492a4c3-ced4-4f0a-a7f8-fae001264d50" class="code"><code>function enhance(WrappedComponent) {
+  class Enhance extends React.Component {/*...*/}
+  // Must know exactly which method(s) to copy :(
+  Enhance.staticMethod = WrappedComponent.staticMethod;
+  return Enhance;
+}</code></pre><p id="a9e1cc55-6209-4149-95d8-7426c7c4ef11" class="">However, this requires you to know exactly which methods need to be copied. You can use <a href="https://github.com/mridgway/hoist-non-react-statics">hoist-non-react-statics</a> to automatically copy all non-React static methods:</p><pre id="369e6fdb-25c6-4223-a717-80539a16dc11" class="code"><code>import hoistNonReactStatic from &#x27;hoist-non-react-statics&#x27;;
+function enhance(WrappedComponent) {
+  class Enhance extends React.Component {/*...*/}
+  hoistNonReactStatic(Enhance, WrappedComponent);
+  return Enhance;
+}</code></pre><p id="f6d9ac24-b989-47ff-89c4-8a33ea35b328" class="">Another possible solution is to export the static method separately from the component itself.</p><pre id="22f9f357-7354-4798-a30e-4f931b58b934" class="code"><code>// Instead of...
+MyComponent.someFunction = someFunction;
+export default MyComponent;
+
+// ...export the method separately...
+export { someFunction };
+
+// ...and in the consuming module, import both
+import MyComponent, { someFunction } from &#x27;./MyComponent.js&#x27;;</code></pre><h1 id="529e1e27-3e01-4bc8-ab80-d6e701576115" class="">Refs Aren’t Passed Through</h1><p id="628b819b-0d00-4c1c-a28d-9922c5f6adcd" class="">While the convention for higher-order components is to pass through all props to the wrapped component, this does not work for refs. That’s because <code>ref</code> is not really a prop — like <code>key</code>, it’s handled specially by React. If you add a ref to an element whose component is the result of a HOC, the ref refers to an instance of the outermost container component, not the wrapped component.</p><p id="6f14bd8a-9c11-41b4-ad18-e259aed512fd" class="">The solution for this problem is to use the <code>React.forwardRef</code> API (introduced with React 16.3). <a href="https://reactjs.org/docs/forwarding-refs.html">Learn more about it in the forwarding refs section</a>.</p><h1 id="64b8af1a-81ee-424f-bbbb-41f30d1364a1" class=""><strong>JSX In Depth</strong></h1><h1 id="c9feac8e-2bf8-4cd2-aee1-c3f9f272b551" class="">Fundamentally, JSX just provides syntactic sugar for the <code>React.createElement(component, props, ...children)</code> function. The JSX code:</h1><pre id="f8de0617-ef4b-45a9-80d6-d4061d321cc5" class="code"><code>&lt;MyButton color=&quot;blue&quot; shadowSize={2}&gt;
+  Click Me
+&lt;/MyButton&gt;</code></pre><p id="c20400f1-4ebe-4287-a87b-2bef554f6828" class="">compiles into:</p><pre id="3f212276-2907-4487-b2e5-2671beb19655" class="code"><code>React.createElement(
+  MyButton,
+  {color: &#x27;blue&#x27;, shadowSize: 2},
+  &#x27;Click Me&#x27;
+)</code></pre><p id="01f0d4e1-c60e-4a8b-9ba9-e0f53ecde5eb" class="">You can also use the self-closing form of the tag if there are no children. So:</p><pre id="2337f9c5-6032-4eb6-85a7-5f197dd819a9" class="code"><code>&lt;div className=&quot;sidebar&quot; /&gt;</code></pre><p id="f183a216-f2f1-445e-bf87-7b783082179b" class="">compiles into:</p><pre id="6480e0cd-b51a-440b-8436-bf66b054fa74" class="code"><code>React.createElement(
+  &#x27;div&#x27;,
+  {className: &#x27;sidebar&#x27;}
+)</code></pre><p id="46973880-bfd6-4d7b-ba03-647417df0a1f" class="">If you want to test out how some specific JSX is converted into JavaScript, you can try out <a href="https://babeljs.io/repl/#?presets=react&amp;code_lz=GYVwdgxgLglg9mABACwKYBt1wBQEpEDeAUIogE6pQhlIA8AJjAG4B8AEhlogO5xnr0AhLQD0jVgG4iAXyJA">the online Babel compiler</a>.</p><h1 id="30fab96c-6584-4235-8649-d59e819f0e77" class="">Specifying The React Element Type</h1><p id="99a685d8-b03b-44fc-a6d5-dc32ff90b969" class="">The first part of a JSX tag determines the type of the React element.</p><p id="2dac43e3-1c73-4622-a9a4-d4b013c6ff04" class="">Capitalized types indicate that the JSX tag is referring to a React component. These tags get compiled into a direct reference to the named variable, so if you use the JSX <code>&lt;Foo /&gt;</code> expression, <code>Foo</code> must be in scope.</p><h1 id="0e1ee880-671d-4f44-8809-ab12134d988f" class="">React Must Be in Scope</h1><p id="0c75daa5-1b68-4ef0-9507-8c36d1274b05" class="">Since JSX compiles into calls to <code>React.createElement</code>, the <code>React</code> library must also always be in scope from your JSX code.</p><p id="f233ec53-6163-4764-93af-2261bdfffd95" class="">For example, both of the imports are necessary in this code, even though <code>React</code> and <code>CustomButton</code> are not directly referenced from JavaScript:</p><pre id="5e8af684-7e47-4677-a7b0-0c1cd8310c39" class="code"><code>import React from &#x27;react&#x27;;import CustomButton from &#x27;./CustomButton&#x27;;function WarningButton() {
+  // return React.createElement(CustomButton, {color: &#x27;red&#x27;}, null);  return &lt;CustomButton color=&quot;red&quot; /&gt;;
+}</code></pre><p id="417ddac9-ada8-4222-b85b-73262aafa03d" class="">If you don’t use a JavaScript bundler and loaded React from a <code>&lt;script&gt;</code> tag, it is already in scope as the <code>React</code> global.</p><h1 id="84f9e5c7-13b7-4219-9db4-f5982f59ed4a" class="">Using Dot Notation for JSX Type</h1><p id="725f1e3b-d9f4-47c9-bfe9-92528b24523f" class="">You can also refer to a React component using dot-notation from within JSX. This is convenient if you have a single module that exports many React components. For example, if <code>MyComponents.DatePicker</code> is a component, you can use it directly from JSX with:</p><pre id="13342810-c347-4900-ac93-a84dc065864e" class="code"><code>import React from &#x27;react&#x27;;
+
+const MyComponents = {
+  DatePicker: function DatePicker(props) {
+    return &lt;div&gt;Imagine a {props.color} datepicker here.&lt;/div&gt;;
+  }
+}
+
+function BlueDatePicker() {
+  return &lt;MyComponents.DatePicker color=&quot;blue&quot; /&gt;;}</code></pre><h1 id="91ee51d3-31c8-495b-a992-f45409279c0c" class="">User-Defined Components Must Be Capitalized</h1><p id="4c0cfc43-bd0e-4a07-b6d1-556edf94592e" class="">When an element type starts with a lowercase letter, it refers to a built-in component like <code>&lt;div&gt;</code> or <code>&lt;span&gt;</code> and results in a string <code>&#x27;div&#x27;</code> or <code>&#x27;span&#x27;</code> passed to <code>React.createElement</code>. Types that start with a capital letter like <code>&lt;Foo /&gt;</code> compile to <code>React.createElement(Foo)</code> and correspond to a component defined or imported in your JavaScript file.</p><p id="cc95cb1a-9180-4739-8df2-4b8fc292f5c7" class="">We recommend naming components with a capital letter. If you do have a component that starts with a lowercase letter, assign it to a capitalized variable before using it in JSX.</p><p id="67b11847-af33-4446-8045-7cc9349ac9a1" class="">For example, this code will not run as expected:</p><pre id="00a99591-149f-47d9-bfcd-7d9482a27d4d" class="code"><code>import React from &#x27;react&#x27;;
+
+// Wrong! This is a component and should have been capitalized:function hello(props) {  // Correct! This use of &lt;div&gt; is legitimate because div is a valid HTML tag:
+  return &lt;div&gt;Hello {props.toWhat}&lt;/div&gt;;
+}
+
+function HelloWorld() {
+  // Wrong! React thinks &lt;hello /&gt; is an HTML tag because it&#x27;s not capitalized:  return &lt;hello toWhat=&quot;World&quot; /&gt;;}</code></pre><p id="e4e3b760-1953-4338-843b-021a39b56eb6" class="">To fix this, we will rename <code>hello</code> to <code>Hello</code> and use <code>&lt;Hello /&gt;</code> when referring to it:</p><pre id="c73d0301-697e-41a0-8d42-faceed2ab9ca" class="code"><code>import React from &#x27;react&#x27;;
+
+// Correct! This is a component and should be capitalized:function Hello(props) {  // Correct! This use of &lt;div&gt; is legitimate because div is a valid HTML tag:
+  return &lt;div&gt;Hello {props.toWhat}&lt;/div&gt;;
+}
+
+function HelloWorld() {
+  // Correct! React knows &lt;Hello /&gt; is a component because it&#x27;s capitalized.  return &lt;Hello toWhat=&quot;World&quot; /&gt;;}</code></pre><h1 id="7b8e65a8-f7d2-4748-8284-deb9580e1d24" class="">Choosing the Type at Runtime</h1><p id="b0467a87-9232-436a-bea8-95e9519e7d9f" class="">You cannot use a general expression as the React element type. If you do want to use a general expression to indicate the type of the element, just assign it to a capitalized variable first. This often comes up when you want to render a different component based on a prop:</p><pre id="5165eb8e-45ca-41f9-b00c-b917f6101edb" class="code"><code>import React from &#x27;react&#x27;;
+import { PhotoStory, VideoStory } from &#x27;./stories&#x27;;
+
+const components = {
+  photo: PhotoStory,
+  video: VideoStory
+};
+
+function Story(props) {
+  // Wrong! JSX type can&#x27;t be an expression.  return &lt;components[props.storyType] story={props.story} /&gt;;}</code></pre><p id="05719e76-3522-49eb-8391-014ce32ee741" class="">To fix this, we will assign the type to a capitalized variable first:</p><pre id="c70a5ca8-3c3f-4b94-972e-12815d6d8f34" class="code"><code>import React from &#x27;react&#x27;;
+import { PhotoStory, VideoStory } from &#x27;./stories&#x27;;
+
+const components = {
+  photo: PhotoStory,
+  video: VideoStory
+};
+
+function Story(props) {
+  // Correct! JSX type can be a capitalized variable.  const SpecificStory = components[props.storyType];  return &lt;SpecificStory story={props.story} /&gt;;}</code></pre><h1 id="da3c868c-5849-466e-a498-cc1c3d009c6f" class="">Props in JSX</h1><p id="197199e6-3863-4738-a55b-e5b6b2a273db" class="">There are several different ways to specify props in JSX.</p><h1 id="7a3bb146-1581-4b79-b080-394a8c52af17" class="">JavaScript Expressions as Props</h1><p id="b3696291-d85c-498b-a759-ee6f90a76cb4" class="">You can pass any JavaScript expression as a prop, by surrounding it with <code>{}</code>. For example, in this JSX:</p><p id="e6447a6b-74a1-41e4-930c-080f2471ee5b" class=""><code>&lt;MyComponent foo={1 + 2 + 3 + 4} /&gt;</code></p><p id="3dc620a2-e34f-4c9e-9bef-6480877f09af" class="">For <code>MyComponent</code>, the value of <code>props.foo</code> will be <code>10</code> because the expression <code>1 + 2 + 3 + 4</code> gets evaluated.</p><p id="4f526e4a-93e9-425b-9144-462d369e2cb8" class=""><code>if</code> statements and <code>for</code> loops are not expressions in JavaScript, so they can’t be used in JSX directly. Instead, you can put these in the surrounding code. For example:</p><pre id="12560a56-7291-4320-9cee-5c978a6d4cbe" class="code"><code>function NumberDescriber(props) {
+  let description;
+  if (props.number % 2 == 0) {    description = &lt;strong&gt;even&lt;/strong&gt;;  } else {    description = &lt;i&gt;odd&lt;/i&gt;;  }  return &lt;div&gt;{props.number} is an {description} number&lt;/div&gt;;
+}</code></pre><p id="060f231e-b0b6-43ea-873f-4bebf102ae32" class="">You can learn more about <a href="https://reactjs.org/docs/conditional-rendering.html">conditional rendering</a> and <a href="https://reactjs.org/docs/lists-and-keys.html">loops</a> in the corresponding sections.</p><h1 id="6f39c02d-3d29-45c8-b2de-3f109b948c43" class="">String Literals</h1><p id="b745d322-1db5-4960-b2ac-0dc190593dd1" class="">You can pass a string literal as a prop. These two JSX expressions are equivalent:</p><p id="13fa28dd-6fb5-4255-a05b-eed710b99ff2" class=""><code>&lt;MyComponent message=&quot;hello world&quot; /&gt;&lt;MyComponent message={&#x27;hello world&#x27;} /&gt;</code></p><p id="7c815274-9649-43e2-ad51-7cb12a903ff9" class="">When you pass a string literal, its value is HTML-unescaped. So these two JSX expressions are equivalent:</p><p id="1ebb0dbd-1547-47f3-90fe-300b36dfaa42" class=""><code>&lt;MyComponent message=&quot;&amp;lt;3&quot; /&gt;&lt;MyComponent message={&#x27;&lt;3&#x27;} /&gt;</code></p><p id="bda1000c-095d-4630-bcfc-2a7ecf0624a9" class="">This behavior is usually not relevant. It’s only mentioned here for completeness.</p><h1 id="65ed2d0b-2ddf-41fd-8933-248a457d63b4" class="">Props Default to “True”</h1><p id="cedf5245-958a-43b1-8604-fa2855ddb7b9" class="">If you pass no value for a prop, it defaults to <code>true</code>. These two JSX expressions are equivalent:</p><p id="83bc7d94-039f-4dd7-be9d-cc0bb1e0a4d3" class=""><code>&lt;MyTextBox autocomplete /&gt;&lt;MyTextBox autocomplete={true} /&gt;</code></p><p id="881cbdb9-813b-43a0-91db-1f414d4d46f7" class="">In general, we don’t recommend <em>not</em> passing a value for a prop, because it can be confused with the <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer#New_notations_in_ECMAScript_2015">ES6 object shorthand</a> <code>{foo}</code> which is short for <code>{foo: foo}</code> rather than <code>{foo: true}</code>. This behavior is just there so that it matches the behavior of HTML.</p><h1 id="24104493-3abd-4910-af55-93f6c036ce63" class="">Spread Attributes</h1><p id="a58743f2-72c2-4303-9b4f-284af226b718" class="">If you already have <code>props</code> as an object, and you want to pass it in JSX, you can use <code>...</code> as a “spread” operator to pass the whole props object. These two components are equivalent:</p><pre id="5834bde0-c3fb-47cf-9490-54eae5d43d0c" class="code"><code>function App1() {
+  return &lt;Greeting firstName=&quot;Ben&quot; lastName=&quot;Hector&quot; /&gt;;
+}
+
+function App2() {
+  const props = {firstName: &#x27;Ben&#x27;, lastName: &#x27;Hector&#x27;};
+  return &lt;Greeting {...props} /&gt;;}</code></pre><p id="c4269cc5-1971-4f59-bee1-8c783facf25a" class="">You can also pick specific props that your component will consume while passing all other props using the spread operator.</p><pre id="ca7f0db0-4a72-4588-a9af-1dfbf5ceedba" class="code"><code>const Button = props =&gt; {
+  const { kind, ...other } = props;  const className = kind === &quot;primary&quot; ? &quot;PrimaryButton&quot; : &quot;SecondaryButton&quot;;
+  return &lt;button className={className} {...other} /&gt;;
+};
+
+const App = () =&gt; {
+  return (
+    &lt;div&gt;      &lt;Button kind=&quot;primary&quot; onClick={() =&gt; console.log(&quot;clicked!&quot;)}&gt;        Hello World!
+      &lt;/Button&gt;    &lt;/div&gt;);
+};</code></pre><p id="4455540e-63e1-44e8-b157-8b955b916f62" class="">In the example above, the <code>kind</code> prop is safely consumed and <em>is not</em> passed on to the <code>&lt;button&gt;</code> element in the DOM. All other props are passed via the <code>...other</code> object making this component really flexible. You can see that it passes an <code>onClick</code> and <code>children</code> props.</p><p id="5b1523f5-be88-4609-8bdf-be5d88fad7fa" class="">Spread attributes can be useful but they also make it easy to pass unnecessary props to components that don’t care about them or to pass invalid HTML attributes to the DOM. We recommend using this syntax sparingly.</p><h1 id="eb31ae4d-238a-4488-8861-5a47726ed245" class="">Children in JSX</h1><p id="361ffbff-5a31-4f3c-869e-ac6f411aa163" class="">In JSX expressions that contain both an opening tag and a closing tag, the content between those tags is passed as a special prop: <code>props.children</code>. There are several different ways to pass children:</p><h1 id="f916cb61-321b-463b-bb56-c954be8c3a54" class="">String Literals</h1><p id="eae3fd94-bf3a-4dce-8e8a-08eade4613c2" class="">You can put a string between the opening and closing tags and <code>props.children</code> will just be that string. This is useful for many of the built-in HTML elements. For example:</p><p id="64197d32-92d7-4041-9e44-a2104e3aec29" class=""><code>&lt;MyComponent&gt;Hello world!&lt;/MyComponent&gt;</code></p><p id="f86edc98-d64a-4b3e-b90d-a9de8a1678d9" class="">This is valid JSX, and <code>props.children</code> in <code>MyComponent</code> will simply be the string <code>&quot;Hello world!&quot;</code>. HTML is unescaped, so you can generally write JSX just like you would write HTML in this way:</p><p id="b55c8570-cf24-48cc-8fae-21473860b286" class=""><code>&lt;div&gt;This is valid HTML &amp;amp; JSX at the same time.&lt;/div&gt;</code></p><p id="7a1d645a-eab8-468e-8d19-5efc7da8d367" class="">JSX removes whitespace at the beginning and ending of a line. It also removes blank lines. New lines adjacent to tags are removed; new lines that occur in the middle of string literals are condensed into a single space. So these all render to the same thing:</p><pre id="90f28235-490e-49c3-a8f5-e380028f0ea0" class="code"><code>&lt;div&gt;Hello World&lt;/div&gt;&lt;div&gt;
+  Hello World
+&lt;/div&gt;&lt;div&gt;
+  Hello
+  World
+&lt;/div&gt;&lt;div&gt;
+
+  Hello World
+&lt;/div&gt;</code></pre><h1 id="873c4c8a-52fd-42c2-bf8b-7488912dbfbc" class="">JSX Children</h1><p id="39a69bad-e0f8-49c6-b27f-af75c351db47" class="">You can provide more JSX elements as the children. This is useful for displaying nested components:</p><pre id="3abb9886-9fda-4386-89d4-4ec14fd893ec" class="code"><code>&lt;MyContainer&gt;
+  &lt;MyFirstComponent /&gt;
+  &lt;MySecondComponent /&gt;
+&lt;/MyContainer&gt;</code></pre><p id="d822885c-ed2e-4873-bc06-b217a5843e4e" class="">You can mix together different types of children, so you can use string literals together with JSX children. This is another way in which JSX is like HTML, so that this is both valid JSX and valid HTML:</p><pre id="c3af19d5-89c1-4572-aa9c-18da7fb8c138" class="code"><code>&lt;div&gt;
+  Here is a list:
+  &lt;ul&gt;&lt;li&gt;Item 1&lt;/li&gt;&lt;li&gt;Item 2&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;</code></pre><p id="30daaaa5-d69a-4dd9-adaf-73af5a8fd475" class="">A React component can also return an array of elements:</p><p id="57f17862-6667-46f1-bcc4-b20cdf0ade66" class=""><code>render() {
+  // No need to wrap list items in an extra element!
+  return [
+    // Don&#x27;t forget the keys :)
+    &lt;li key=&quot;A&quot;&gt;First item&lt;/li&gt;,
+    &lt;li key=&quot;B&quot;&gt;Second item&lt;/li&gt;,
+    &lt;li key=&quot;C&quot;&gt;Third item&lt;/li&gt;,
+  ];
+}</code></p><h1 id="cf10a4cb-6c13-4896-a137-8bfb2ebec353" class="">JavaScript Expressions as Children</h1><p id="0ff6c435-89d9-4270-8a7c-9e2ddeae73df" class="">You can pass any JavaScript expression as children, by enclosing it within <code>{}</code>. For example, these expressions are equivalent:</p><p id="e67917ab-bde8-4e7e-a0c1-5aac25db3dc4" class=""><code>&lt;MyComponent&gt;foo&lt;/MyComponent&gt;&lt;MyComponent&gt;{&#x27;foo&#x27;}&lt;/MyComponent&gt;</code></p><p id="68661c39-a772-4bd1-8122-03b71d6ce594" class="">This is often useful for rendering a list of JSX expressions of arbitrary length. For example, this renders an HTML list:</p><pre id="0dfa8f15-cdc5-4a9a-b183-1562f09d56cc" class="code"><code>function Item(props) {
+  return &lt;li&gt;{props.message}&lt;/li&gt;;}
+
+function TodoList() {
+  const todos = [&#x27;finish doc&#x27;, &#x27;submit pr&#x27;, &#x27;nag dan to review&#x27;];
+  return (
+    &lt;ul&gt;      {todos.map((message) =&gt; &lt;Item key={message} message={message} /&gt;)}    &lt;/ul&gt;);
+}</code></pre><p id="dc87900e-c923-40b0-9a12-8f23abacd79a" class="">JavaScript expressions can be mixed with other types of children. This is often useful in lieu of string templates:</p><pre id="ca00016f-66fd-4b7d-98ef-d7563190e6b2" class="code"><code>function Hello(props) {
+  return &lt;div&gt;Hello {props.addressee}!&lt;/div&gt;;}</code></pre><h1 id="59821be1-e8d8-4748-b18e-013269a944fa" class="">Functions as Children</h1><p id="1e6ca91f-2fd7-4f06-ace1-6e45db703d77" class="">Normally, JavaScript expressions inserted in JSX will evaluate to a string, a React element, or a list of those things. However, <code>props.children</code> works just like any other prop in that it can pass any sort of data, not just the sorts that React knows how to render. For example, if you have a custom component, you could have it take a callback as <code>props.children</code>:</p><pre id="39544f58-5d0a-4867-b97c-737cd28f03f7" class="code"><code>// Calls the children callback numTimes to produce a repeated component
+function Repeat(props) {
+  let items = [];
+  for (let i = 0; i &lt; props.numTimes; i++) {    items.push(props.children(i));
+  }
+  return &lt;div&gt;{items}&lt;/div&gt;;
+}
+
+function ListOfTenThings() {
+  return (
+    &lt;Repeat numTimes={10}&gt;      {(index) =&gt; &lt;div key={index}&gt;This is item {index} in the list&lt;/div&gt;}    &lt;/Repeat&gt;);
+}</code></pre><p id="550edc71-0bf6-4c8d-8411-44ffebbe50c8" class="">Children passed to a custom component can be anything, as long as that component transforms them into something React can understand before rendering. This usage is not common, but it works if you want to stretch what JSX is capable of.</p><h1 id="9531e7ee-4756-4bd7-9cbe-6046de9c889f" class="">Booleans, Null, and Undefined Are Ignored</h1><p id="3b3967d3-a62b-448f-95f5-9c7e98d0dc75" class=""><code>false</code>, <code>null</code>, <code>undefined</code>, and <code>true</code> are valid children. They simply don’t render. These JSX expressions will all render to the same thing:</p><pre id="b2c3898d-bc93-446c-9b68-fc12f0230138" class="code"><code>&lt;div /&gt;&lt;div&gt;&lt;/div&gt;&lt;div&gt;{false}&lt;/div&gt;&lt;div&gt;{null}&lt;/div&gt;&lt;div&gt;{undefined}&lt;/div&gt;&lt;div&gt;{true}&lt;/div&gt;</code></pre><p id="feed700d-9643-4160-98bd-33c05304f646" class="">This can be useful to conditionally render React elements. This JSX renders the <code>&lt;Header /&gt;</code> component only if <code>showHeader</code> is <code>true</code>:</p><pre id="200c8670-167b-4495-9509-f4da169e13f6" class="code"><code>&lt;div&gt;  {showHeader &amp;&amp; &lt;Header /&gt;}  &lt;Content /&gt;&lt;/div&gt;</code></pre><p id="4e27fa4d-1fa6-402f-8b71-06104139986a" class="">One caveat is that some <a href="https://developer.mozilla.org/en-US/docs/Glossary/Falsy">“falsy” values</a>, such as the <code>0</code> number, are still rendered by React. For example, this code will not behave as you might expect because <code>0</code> will be printed when <code>props.messages</code> is an empty array:</p><pre id="dc652bd7-7406-4f2c-a6ef-565528ebde38" class="code"><code>&lt;div&gt;  {props.messages.length &amp;&amp;    &lt;MessageList messages={props.messages} /&gt;}
+&lt;/div&gt;</code></pre><p id="14680161-ad66-4899-aab4-f137ef167174" class="">To fix this, make sure that the expression before <code>&amp;&amp;</code> is always boolean:</p><pre id="3f945833-1a47-4610-89af-307a9c9eb612" class="code"><code>&lt;div&gt;  {props.messages.length &gt; 0 &amp;&amp;    &lt;MessageList messages={props.messages} /&gt;}
+&lt;/div&gt;</code></pre><p id="1f736bd0-17c1-4eed-b24a-04fd7c0de42e" class="">Conversely, if you want a value like <code>false</code>, <code>true</code>, <code>null</code>, or <code>undefined</code> to appear in the output, you have to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#String_conversion">convert it to a string</a> first:</p><pre id="6917b598-252a-4a20-888d-a0b0a8bfb8d0" class="code"><code>&lt;div&gt;  My JavaScript variable is {String(myVariable)}.&lt;/div&gt;</code></pre><h1 id="67e68eee-275a-45ab-907e-a709bdaeb6cb" class=""><strong>Optimizing Performance</strong></h1><h1 id="7eafa77e-de6a-492f-a5cb-811f312bbdd4" class="">Internally, React uses several clever techniques to minimize the number of costly DOM operations required to update the UI. For many applications, using React will lead to a fast user interface without doing much work to specifically optimize for performance. Nevertheless, there are several ways you can speed up your React application.</h1><h1 id="582e4dbc-5c39-45f5-8c59-a0691bfab6b2" class="">Use the Production Build</h1><p id="6d56cdf5-d231-4cdf-adfd-2fa00b2a680f" class="">If you’re benchmarking or experiencing performance problems in your React apps, make sure you’re testing with the minified production build.</p><p id="f8e3e601-f1a9-43be-9f1e-045ffa424d54" class="">By default, React includes many helpful warnings. These warnings are very useful in development. However, they make React larger and slower so you should make sure to use the production version when you deploy the app.</p><p id="1bce1f37-2887-4b83-baba-f7babf398f15" class="">If you aren’t sure whether your build process is set up correctly, you can check it by installing <a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi">React Developer Tools for Chrome</a>. If you visit a site with React in production mode, the icon will have a dark background:</p><figure id="458b28f5-19e6-43cc-8fd1-09bb057221c6" class="image"><a href="https://reactjs.org/static/d0f767f80866431ccdec18f200ca58f1/0a47e/devtools-prod.png"><img src="https://reactjs.org/static/d0f767f80866431ccdec18f200ca58f1/0a47e/devtools-prod.png"/></a></figure><p id="6cc3a359-2c74-44a4-8dda-0abc932ea67e" class="">If you visit a site with React in development mode, the icon will have a red background:</p><figure id="9c2235be-7faf-45c3-b54e-b7a0a2c5dbc5" class="image"><a href="https://reactjs.org/static/e434ce2f7e64f63e597edf03f4465694/0a47e/devtools-dev.png"><img src="https://reactjs.org/static/e434ce2f7e64f63e597edf03f4465694/0a47e/devtools-dev.png"/></a></figure><p id="7f8f2a58-1770-440a-9088-510026c85773" class="">It is expected that you use the development mode when working on your app, and the production mode when deploying your app to the users.</p><p id="40234032-5ae1-4d88-a24e-e8e85b65858c" class="">You can find instructions for building your app for production below.</p><h1 id="9a20c675-d250-4822-bc24-4c09ff7ded5f" class="">Create React App</h1><p id="063a2922-e097-4d7b-a281-d9c334df9759" class="">If your project is built with <a href="https://github.com/facebookincubator/create-react-app">Create React App</a>, run:</p><pre id="d99f2b5c-8b5f-454f-a12c-76d984a6c7df" class="code"><code>npm run build</code></pre><p id="a408add0-bb12-4bf1-8dc4-7c6d95bc6e15" class="">This will create a production build of your app in the <code>build/</code> folder of your project.</p><p id="3b697a19-c025-4dd2-80d6-e53d35ec59a8" class="">Remember that this is only necessary before deploying to production. For normal development, use <code>npm start</code>.</p><h1 id="3c9024c9-9dfe-4d47-b144-3e29b34af226" class="">Single-File Builds</h1><p id="79bd0387-6db1-42b1-b412-2874ee1ce82c" class="">We offer production-ready versions of React and React DOM as single files:</p><pre id="bac8edeb-c709-4db3-a746-3eca3aa3ec46" class="code"><code>&lt;script src=&quot;https://unpkg.com/react@17/umd/react.production.min.js&quot;&gt;&lt;/script&gt;&lt;script src=&quot;https://unpkg.com/react-dom@17/umd/react-dom.production.min.js&quot;&gt;&lt;/script&gt;</code></pre><p id="ebb28d1b-90d6-4578-a9a3-5aac5c895c99" class="">Remember that only React files ending with <code>.production.min.js</code> are suitable for production.</p><h1 id="9fd98232-9c46-4cb8-ae5b-f87dca887a5c" class="">Brunch</h1><p id="d35c8d2e-32cb-46d1-8577-fd3e489670bb" class="">For the most efficient Brunch production build, install the <a href="https://github.com/brunch/terser-brunch"><code>terser-brunch</code></a> plugin:</p><pre id="9eced860-dacd-49fa-8e33-23cac847fdad" class="code"><code># If you use npm
+npm install --save-dev terser-brunch
+
+# If you use Yarn
+yarn add --dev terser-brunch</code></pre><p id="ebf9d49a-539e-46e9-a16a-ccfe53f50d6a" class="">Then, to create a production build, add the <code>-p</code> flag to the <code>build</code> command:</p><pre id="9996a8c8-10a3-4db7-8aa0-25be9398fcd4" class="code"><code>brunch build -p</code></pre><p id="cc52b418-705c-4878-a22f-515e66ea8e4c" class="">Remember that you only need to do this for production builds. You shouldn’t pass the <code>-p</code> flag or apply this plugin in development, because it will hide useful React warnings and make the builds much slower.</p><h1 id="a4a8cd30-2073-44e5-b853-57a6d4de50dd" class="">Browserify</h1><p id="b863fe76-72bc-4579-aab2-2b8f7b296023" class="">For the most efficient Browserify production build, install a few plugins:</p><pre id="a0a927b5-e40d-4a96-878d-80df729aa152" class="code"><code># If you use npm
+npm install --save-dev envify terser uglifyify
+
+# If you use Yarn
+yarn add --dev envify terser uglifyify</code></pre><p id="da9d93f2-e236-4220-a2d7-13aa5b101cb4" class="">To create a production build, make sure that you add these transforms <strong>(the order matters)</strong>:</p><ul id="6f65b415-3dc7-4185-8e63-bdf1bbc228e7" class="bulleted-list"><li style="list-style-type:disc">The <a href="https://github.com/hughsk/envify"><code>envify</code></a> transform ensures the right build environment is set. Make it global (<code>g</code>).</li></ul><ul id="deba615f-178f-4142-9ba1-50f054487f10" class="bulleted-list"><li style="list-style-type:disc">The <a href="https://github.com/hughsk/uglifyify"><code>uglifyify</code></a> transform removes development imports. Make it global too (<code>g</code>).</li></ul><ul id="62327614-50d2-434d-be6b-c6d7c1ef4c5f" class="bulleted-list"><li style="list-style-type:disc">Finally, the resulting bundle is piped to <a href="https://github.com/terser-js/terser"><code>terser</code></a> for mangling (<a href="https://github.com/hughsk/uglifyify#motivationusage">read why</a>).</li></ul><p id="feeff315-6703-458c-9e6c-8ba9c8c54561" class="">For example:</p><pre id="44c905b1-137b-4f0d-8a3f-9f21885c6478" class="code"><code>browserify ./index.js \
+  -g [ envify --NODE_ENV production ] \
+  -g uglifyify \
+  | terser --compress --mangle &gt; ./bundle.js</code></pre><p id="559c05b0-1086-4bba-b9aa-eff42a37b6e1" class="">Remember that you only need to do this for production builds. You shouldn’t apply these plugins in development because they will hide useful React warnings, and make the builds much slower.</p><h1 id="1311fd0f-4060-430a-8498-bdfa48acf45d" class="">Rollup</h1><p id="c3d6dc54-d696-40e0-9e4f-3f887da53fa0" class="">For the most efficient Rollup production build, install a few plugins:</p><pre id="06e3a746-a081-4479-ac76-e1240db71e47" class="code"><code># If you use npm
+npm install --save-dev rollup-plugin-commonjs rollup-plugin-replace rollup-plugin-terser
+
+# If you use Yarn
+yarn add --dev rollup-plugin-commonjs rollup-plugin-replace rollup-plugin-terser</code></pre><p id="73fbdccc-a360-4cea-a054-e1f28e70ad95" class="">To create a production build, make sure that you add these plugins <strong>(the order matters)</strong>:</p><ul id="5ad786ee-ded1-48a9-a0c3-aa5e759e5fc2" class="bulleted-list"><li style="list-style-type:disc">The <a href="https://github.com/rollup/rollup-plugin-replace"><code>replace</code></a> plugin ensures the right build environment is set.</li></ul><ul id="0d4562d2-6f7b-471a-9685-62290fd6e27b" class="bulleted-list"><li style="list-style-type:disc">The <a href="https://github.com/rollup/rollup-plugin-commonjs"><code>commonjs</code></a> plugin provides support for CommonJS in Rollup.</li></ul><ul id="b39c8763-4e45-4816-a765-baae5ebcdfe9" class="bulleted-list"><li style="list-style-type:disc">The <a href="https://github.com/TrySound/rollup-plugin-terser"><code>terser</code></a> plugin compresses and mangles the final bundle.</li></ul><pre id="e1713c83-f774-4a4d-a26d-9d7f329555cb" class="code"><code>plugins: [
+  // ...
+  require(&#x27;rollup-plugin-replace&#x27;)({
+    &#x27;process.env.NODE_ENV&#x27;: JSON.stringify(&#x27;production&#x27;)
+  }),
+  require(&#x27;rollup-plugin-commonjs&#x27;)(),
+  require(&#x27;rollup-plugin-terser&#x27;)(),
+  // ...
+]</code></pre><p id="3e4411d1-e92e-4d98-9a80-93d7cbc64d15" class="">For a complete setup example <a href="https://www.notion.so/cb14f4bc0670c47d00d191565be36bf0">see this gist</a>.</p><p id="f7860b00-4bcd-4a97-9480-29a8072e612a" class="">Remember that you only need to do this for production builds. You shouldn’t apply the <code>terser</code> plugin or the <code>replace</code> plugin with <code>&#x27;production&#x27;</code> value in development because they will hide useful React warnings, and make the builds much slower.</p><h1 id="5a7c40e6-640a-4dcf-9783-3f68b0d03612" class="">webpack</h1><blockquote id="46d4eefa-a6a2-4f54-80b6-3ecdfcd533b2" class="">Note:If you’re using Create React App, please follow the instructions above.This section is only relevant if you configure webpack directly.</blockquote><p id="a20724d3-c672-4f10-b32d-5cba9c2c460f" class="">Webpack v4+ will minify your code by default in production mode.</p><pre id="3521e38b-3f05-4b0b-a2db-ece4a49bd749" class="code"><code>const TerserPlugin = require(&#x27;terser-webpack-plugin&#x27;);
+
+module.exports = {
+  mode: &#x27;production&#x27;,
+  optimization: {
+    minimizer: [new TerserPlugin({ /* additional options here */ })],
+  },
+};</code></pre><p id="8ced9ecd-c073-49f0-994b-4c5bf6939362" class="">You can learn more about this in <a href="https://webpack.js.org/guides/production/">webpack documentation</a>.</p><p id="0a2faa24-3819-42f7-8516-89aa45b9382b" class="">Remember that you only need to do this for production builds. You shouldn’t apply <code>TerserPlugin</code> in development because it will hide useful React warnings, and make the builds much slower.</p><h1 id="ee1c205d-718d-459a-81ea-e39c10fb1a2e" class="">Profiling Components with the DevTools Profiler</h1><p id="cead0330-0774-46ca-bed4-45c95ad5edd6" class=""><code>react-dom</code> 16.5+ and <code>react-native</code> 0.57+ provide enhanced profiling capabilities in DEV mode with the React DevTools Profiler. An overview of the Profiler can be found in the blog post <a href="https://reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html">“Introducing the React Profiler”</a>. A video walkthrough of the profiler is also <a href="https://www.youtube.com/watch?v=nySib7ipZdk">available on YouTube</a>.</p><p id="dd4724a2-0a15-43b7-8458-23c266924e1c" class="">If you haven’t yet installed the React DevTools, you can find them here:</p><ul id="97675d3c-ea29-4fd4-ae12-4e2b678eb451" class="bulleted-list"><li style="list-style-type:disc"><a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en">Chrome Browser Extension</a></li></ul><ul id="b96c4b57-49b7-4755-a96c-17c0113567fa" class="bulleted-list"><li style="list-style-type:disc"><a href="https://addons.mozilla.org/en-GB/firefox/addon/react-devtools/">Firefox Browser Extension</a></li></ul><ul id="8dac3583-7e3c-4728-a9b8-250cd196444f" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.npmjs.com/package/react-devtools">Standalone Node Package</a></li></ul><blockquote id="0dce7104-e3e6-4728-9c8d-52d4d9e1fa3b" class="">NoteA production profiling bundle of react-dom is also available as react-dom/profiling. Read more about how to use this bundle at fb.me/react-profiling</blockquote><blockquote id="4966e723-0d23-4d6e-9cf2-84676340fed1" class="">NoteBefore React 17, we use the standard User Timing API to profile components with the chrome performance tab. For a more detailed walkthrough, check out this article by Ben Schwarz.</blockquote><h1 id="7670c3c4-d20a-44e9-b6a9-f63b326c5347" class="">Virtualize Long Lists</h1><p id="1701e13c-6ece-4be6-960e-3b1b5cc2b054" class="">If your application renders long lists of data (hundreds or thousands of rows), we recommend using a technique known as “windowing”. This technique only renders a small subset of your rows at any given time, and can dramatically reduce the time it takes to re-render the components as well as the number of DOM nodes created.</p><p id="b52c2d78-cbad-48f3-b0d2-c55be88206cd" class=""><a href="https://react-window.now.sh/">react-window</a> and <a href="https://bvaughn.github.io/react-virtualized/">react-virtualized</a> are popular windowing libraries. They provide several reusable components for displaying lists, grids, and tabular data. You can also create your own windowing component, like <a href="https://medium.com/@paularmstrong/twitter-lite-and-high-performance-react-progressive-web-apps-at-scale-d28a00e780a3">Twitter did</a>, if you want something more tailored to your application’s specific use case.</p><h1 id="0ab43321-1e01-49c8-9243-8edddb498f60" class="">Avoid Reconciliation</h1><p id="e9210fc4-c9aa-4144-976c-516d52296157" class="">React builds and maintains an internal representation of the rendered UI. It includes the React elements you return from your components. This representation lets React avoid creating DOM nodes and accessing existing ones beyond necessity, as that can be slower than operations on JavaScript objects. Sometimes it is referred to as a “virtual DOM”, but it works the same way on React Native.</p><p id="c5a89e0b-07f6-4c66-b710-1e97214c09f5" class="">When a component’s props or state change, React decides whether an actual DOM update is necessary by comparing the newly returned element with the previously rendered one. When they are not equal, React will update the DOM.</p><p id="83f7e475-86b0-4d90-8141-3862e94dff6c" class="">Even though React only updates the changed DOM nodes, re-rendering still takes some time. In many cases it’s not a problem, but if the slowdown is noticeable, you can speed all of this up by overriding the lifecycle function <code>shouldComponentUpdate</code>, which is triggered before the re-rendering process starts. The default implementation of this function returns <code>true</code>, leaving React to perform the update:</p><pre id="052d9556-6337-4ace-b46a-7b131fa4cce4" class="code"><code>shouldComponentUpdate(nextProps, nextState) {
+  return true;
+}</code></pre><p id="b2accf46-1af6-4e08-b1aa-5d2966659537" class="">If you know that in some situations your component doesn’t need to update, you can return <code>false</code> from <code>shouldComponentUpdate</code> instead, to skip the whole rendering process, including calling <code>render()</code> on this component and below.</p><p id="f6c5de61-fc32-41ad-97d3-78dce8734721" class="">In most cases, instead of writing <code>shouldComponentUpdate()</code> by hand, you can inherit from <a href="https://reactjs.org/docs/react-api.html#reactpurecomponent"><code>React.PureComponent</code></a>. It is equivalent to implementing <code>shouldComponentUpdate()</code> with a shallow comparison of current and previous props and state.</p><h1 id="1575182b-7458-49cb-a709-24ce4eb22756" class="">shouldComponentUpdate In Action</h1><p id="7f13075f-4956-4b14-b005-4221ef048706" class="">Here’s a subtree of components. For each one, <code>SCU</code> indicates what <code>shouldComponentUpdate</code> returned, and <code>vDOMEq</code> indicates whether the rendered React elements were equivalent. Finally, the circle’s color indicates whether the component had to be reconciled or not.</p><figure id="e14f59ef-700f-4fb7-89f3-9fa1d2f40067" class="image"><a href="https://reactjs.org/static/5ee1bdf4779af06072a17b7a0654f6db/cd039/should-component-update.png"><img src="https://reactjs.org/static/5ee1bdf4779af06072a17b7a0654f6db/cd039/should-component-update.png"/></a></figure><p id="1d3d8dbe-8138-4b42-8134-db60bdc1cf7d" class="">Since <code>shouldComponentUpdate</code> returned <code>false</code> for the subtree rooted at C2, React did not attempt to render C2, and thus didn’t even have to invoke <code>shouldComponentUpdate</code> on C4 and C5.</p><p id="f68800bb-0d90-43fe-be47-da7caced02c0" class="">For C1 and C3, <code>shouldComponentUpdate</code> returned <code>true</code>, so React had to go down to the leaves and check them. For C6 <code>shouldComponentUpdate</code> returned <code>true</code>, and since the rendered elements weren’t equivalent React had to update the DOM.</p><p id="425ddb08-0e9f-4735-8968-2c54dec7f08d" class="">The last interesting case is C8. React had to render this component, but since the React elements it returned were equal to the previously rendered ones, it didn’t have to update the DOM.</p><p id="0c8688ac-5526-49ad-90b6-cabf51037803" class="">Note that React only had to do DOM mutations for C6, which was inevitable. For C8, it bailed out by comparing the rendered React elements, and for C2’s subtree and C7, it didn’t even have to compare the elements as we bailed out on <code>shouldComponentUpdate</code>, and <code>render</code> was not called.</p><h1 id="106572e2-b9e2-49fc-8cfd-227ae6498269" class="">Examples</h1><p id="995a45e5-b6a5-4d14-bdcb-97a033c41c72" class="">If the only way your component ever changes is when the <code>props.color</code> or the <code>state.count</code> variable changes, you could have <code>shouldComponentUpdate</code> check that:</p><pre id="bc07065d-e509-43ac-b77f-cadb093125bb" class="code"><code>class CounterButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {count: 1};
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.color !== nextProps.color) {
+      return true;
+    }
+    if (this.state.count !== nextState.count) {
+      return true;
+    }
+    return false;
+  }
+
+  render() {
+    return (
+      &lt;button
+        color={this.props.color}onClick={() =&gt; this.setState(state =&gt; ({count: state.count + 1}))}&gt;
+        Count: {this.state.count}
+      &lt;/button&gt;);
+  }
+}</code></pre><p id="33d5cca9-0535-40bc-b9d5-1560a237dc56" class="">In this code, <code>shouldComponentUpdate</code> is just checking if there is any change in <code>props.color</code> or <code>state.count</code>. If those values don’t change, the component doesn’t update. If your component got more complex, you could use a similar pattern of doing a “shallow comparison” between all the fields of <code>props</code> and <code>state</code> to determine if the component should update. This pattern is common enough that React provides a helper to use this logic - just inherit from <code>React.PureComponent</code>. So this code is a simpler way to achieve the same thing:</p><pre id="872fc047-b14e-4ab7-970f-127422aebf08" class="code"><code>class CounterButton extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {count: 1};
+  }
+
+  render() {
+    return (
+      &lt;button
+        color={this.props.color}onClick={() =&gt; this.setState(state =&gt; ({count: state.count + 1}))}&gt;
+        Count: {this.state.count}
+      &lt;/button&gt;);
+  }
+}</code></pre><p id="f422ab15-32a5-4967-9003-40d207309581" class="">Most of the time, you can use <code>React.PureComponent</code> instead of writing your own <code>shouldComponentUpdate</code>. It only does a shallow comparison, so you can’t use it if the props or state may have been mutated in a way that a shallow comparison would miss.</p><p id="97499772-a5cb-4d2a-8655-358fbdd878e8" class="">This can be a problem with more complex data structures. For example, let’s say you want a <code>ListOfWords</code> component to render a comma-separated list of words, with a parent <code>WordAdder</code> component that lets you click a button to add a word to the list. This code does <em>not</em> work correctly:</p><pre id="22d34757-5e5f-432e-be8f-e236c10a727c" class="code"><code>class ListOfWords extends React.PureComponent {
+  render() {
+    return &lt;div&gt;{this.props.words.join(&#x27;,&#x27;)}&lt;/div&gt;;
+  }
+}
+
+class WordAdder extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      words: [&#x27;marklar&#x27;]
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    // This section is bad style and causes a bug
+    const words = this.state.words;
+    words.push(&#x27;marklar&#x27;);
+    this.setState({words: words});
+  }
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;button onClick={this.handleClick} /&gt;
+        &lt;ListOfWords words={this.state.words} /&gt;
+      &lt;/div&gt;);
+  }
+}</code></pre><p id="40df95d6-553d-4d0e-86ed-f957d81d4f13" class="">The problem is that <code>PureComponent</code> will do a simple comparison between the old and new values of <code>this.props.words</code>. Since this code mutates the <code>words</code> array in the <code>handleClick</code> method of <code>WordAdder</code>, the old and new values of <code>this.props.words</code> will compare as equal, even though the actual words in the array have changed. The <code>ListOfWords</code> will thus not update even though it has new words that should be rendered.</p></div><div><h1 id="164a48f1-81ff-48f0-b9bd-266de95d381e" class="">The Power Of Not Mutating Data</h1><p id="c6046db4-5c39-4f93-90d5-018dea3ba068" class="">The simplest way to avoid this problem is to avoid mutating values that you are using as props or state. For example, the <code>handleClick</code> method above could be rewritten using <code>concat</code> as:</p><pre id="9e59cf54-bbc4-4953-a19b-86cd89746050" class="code"><code>handleClick() {
+  this.setState(state =&gt; ({
+    words: state.words.concat([&#x27;marklar&#x27;])
+  }));
+}</code></pre><p id="6f72b75b-8611-4f46-9601-5bacc9a70d45" class="">ES6 supports a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator">spread syntax</a> for arrays which can make this easier. If you’re using Create React App, this syntax is available by default.</p><pre id="f2f50d87-c97e-47d9-97c9-d24bf158feea" class="code"><code>handleClick() {
+  this.setState(state =&gt; ({
+    words: [...state.words, &#x27;marklar&#x27;],
+  }));
+};</code></pre><p id="3d090c73-257b-41df-bec7-f21f0b2c0e39" class="">You can also rewrite code that mutates objects to avoid mutation, in a similar way. For example, let’s say we have an object named <code>colormap</code> and we want to write a function that changes <code>colormap.right</code> to be <code>&#x27;blue&#x27;</code>. We could write:</p><p id="732c2747-63cf-4248-9623-a0aea2cdf1db" class=""><code>function updateColorMap(colormap) {
+  colormap.right = &#x27;blue&#x27;;
+}</code></p><p id="0547efff-1d31-42fc-b895-05c4a5ccd03b" class="">To write this without mutating the original object, we can use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">Object.assign</a> method:</p><pre id="0abe6336-29df-4ed0-8580-6b08e241eefc" class="code"><code>function updateColorMap(colormap) {
+  return Object.assign({}, colormap, {right: &#x27;blue&#x27;});
+}</code></pre><p id="a4435f52-83d0-4c39-ab58-2172fd49b937" class=""><code>updateColorMap</code> now returns a new object, rather than mutating the old one. <code>Object.assign</code> is in ES6 and requires a polyfill.</p><p id="458aebb6-10af-44e1-be8c-ee4dde838731" class=""><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax">Object spread syntax</a> makes it easier to update objects without mutation as well:</p><pre id="e4a8694f-c1e6-45fe-884c-4d96f4c404fc" class="code"><code>function updateColorMap(colormap) {
+  return {...colormap, right: &#x27;blue&#x27;};
+}</code></pre><p id="574de790-ef97-4b6e-bb42-e7bc11ba5fb0" class="">This feature was added to JavaScript in ES2018.</p><p id="1bb688cc-94f8-4c52-805c-20b941ddd17f" class="">If you’re using Create React App, both <code>Object.assign</code> and the object spread syntax are available by default.</p><p id="98582746-3dbd-4664-8b05-3f20433af23f" class="">When you deal with deeply nested objects, updating them in an immutable way can feel convoluted. If you run into this problem, check out <a href="https://github.com/mweststrate/immer">Immer</a> or <a href="https://github.com/kolodny/immutability-helper">immutability-helper</a>. These libraries let you write highly readable code without losing the benefits of immutability.</p><p id="df6b833b-335d-409f-a543-e0492d826b1f" class="">Is this page useful?<a href="https://github.com/reactjs/reactjs.org/tree/main/content/docs/optimizing-performance.md">Edit this page</a></p><h1 id="5c4172c2-5ee6-4949-8c21-58ad11ec7e32" class=""><strong>Render Props</strong></h1><h1 id="35796611-3465-46d0-9884-de6b81c4c3c7" class="">The term <a href="https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce">“render prop”</a> refers to a technique for sharing code between React components using a prop whose value is a function.</h1><p id="e0d3acdb-2ab5-4184-ac87-3babee5a7424" class="">A component with a render prop takes a function that returns a React element and calls it instead of implementing its own render logic.</p><pre id="30791989-364c-4802-bb86-d20e6ecb822d" class="code"><code>&lt;DataProvider render={data =&gt; (
+  &lt;h1&gt;Hello {data.target}&lt;/h1&gt;)}/&gt;</code></pre><p id="b3b605f2-a5c3-4bf0-a926-90140229975c" class="">Libraries that use render props include <a href="https://reacttraining.com/react-router/web/api/Route/render-func">React Router</a>, <a href="https://github.com/paypal/downshift">Downshift</a> and <a href="https://github.com/jaredpalmer/formik">Formik</a>.</p><p id="dd6bc1bd-5e81-4543-ad53-66446aa89352" class="">In this document, we’ll discuss why render props are useful, and how to write your own.</p><h1 id="68597a24-e781-4b18-930d-539ce67c6859" class="">Use Render Props for Cross-Cutting Concerns</h1><p id="91c5aa97-b5b7-4e01-bf05-7d6fafda8f79" class="">Components are the primary unit of code reuse in React, but it’s not always obvious how to share the state or behavior that one component encapsulates to other components that need that same state.</p><p id="f77e25e9-dffa-44fb-826b-78330342ab0e" class="">For example, the following component tracks the mouse position in a web app:</p><pre id="d31918d7-67c5-432c-8b5b-0360658b48a9" class="code"><code>class MouseTracker extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.state = { x: 0, y: 0 };
+  }
+
+  handleMouseMove(event) {
+    this.setState({
+      x: event.clientX,
+      y: event.clientY
+    });
+  }
+
+  render() {
+    return (
+      &lt;div style={{ height: &#x27;100vh&#x27; }} onMouseMove={this.handleMouseMove}&gt;
+        &lt;h1&gt;Move the mouse around!&lt;/h1&gt;
+        &lt;p&gt;The current mouse position is ({this.state.x}, {this.state.y})&lt;/p&gt;
+      &lt;/div&gt;);
+  }
+}</code></pre><p id="bffc42d0-663f-4c44-8421-12900685121d" class="">As the cursor moves around the screen, the component displays its (x, y) coordinates in a <code>&lt;p&gt;</code>.</p><p id="207ec285-77fb-45f7-88d7-baa7b8b5531d" class="">Now the question is: How can we reuse this behavior in another component? In other words, if another component needs to know about the cursor position, can we encapsulate that behavior so that we can easily share it with that component?</p><p id="ace09c9d-c77e-48e0-951a-7760a8906325" class="">Since components are the basic unit of code reuse in React, let’s try refactoring the code a bit to use a <code>&lt;Mouse&gt;</code> component that encapsulates the behavior we need to reuse elsewhere.</p><pre id="f7193656-a965-49e3-8db7-2af72d8f6663" class="code"><code>// The &lt;Mouse&gt; component encapsulates the behavior we need...
+class Mouse extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.state = { x: 0, y: 0 };
+  }
+
+  handleMouseMove(event) {
+    this.setState({
+      x: event.clientX,
+      y: event.clientY
+    });
+  }
+
+  render() {
+    return (
+      &lt;div style={{ height: &#x27;100vh&#x27; }} onMouseMove={this.handleMouseMove}&gt;
+
+        {/* ...but how do we render something other than a &lt;p&gt;? */}
+        &lt;p&gt;The current mouse position is ({this.state.x}, {this.state.y})&lt;/p&gt;
+      &lt;/div&gt;);
+  }
+}
+
+class MouseTracker extends React.Component {
+  render() {
+    return (
+      &lt;&gt;
+        &lt;h1&gt;Move the mouse around!&lt;/h1&gt;
+        &lt;Mouse /&gt;
+      &lt;/&gt;);
+  }
+}</code></pre><p id="3783f52a-af63-49b7-839e-8349fffb0723" class="">Now the <code>&lt;Mouse&gt;</code> component encapsulates all behavior associated with listening for <code>mousemove</code> events and storing the (x, y) position of the cursor, but it’s not yet truly reusable.</p><p id="626262b1-d895-4527-aa53-a10d2f329c2c" class="">For example, let’s say we have a <code>&lt;Cat&gt;</code> component that renders the image of a cat chasing the mouse around the screen. We might use a <code>&lt;Cat mouse={{ x, y }}&gt;</code> prop to tell the component the coordinates of the mouse so it knows where to position the image on the screen.</p><p id="47d3a633-40ca-423c-8ce2-6a29ae9b7d99" class="">As a first pass, you might try rendering the <code>&lt;Cat&gt;</code> <em>inside </em><code><em>&lt;Mouse&gt;</em></code><em>’s </em><code><em>render</em></code><em> method</em>, like this:</p><pre id="936c389d-0a8b-4b4d-97ec-43313ed43a01" class="code"><code>class Cat extends React.Component {
+  render() {
+    const mouse = this.props.mouse;
+    return (
+      &lt;img src=&quot;/cat.jpg&quot; style={{ position: &#x27;absolute&#x27;, left: mouse.x, top: mouse.y }} /&gt;);
+  }
+}
+
+class MouseWithCat extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.state = { x: 0, y: 0 };
+  }
+
+  handleMouseMove(event) {
+    this.setState({
+      x: event.clientX,
+      y: event.clientY
+    });
+  }
+
+  render() {
+    return (
+      &lt;div style={{ height: &#x27;100vh&#x27; }} onMouseMove={this.handleMouseMove}&gt;
+
+        {/*
+          We could just swap out the &lt;p&gt; for a &lt;Cat&gt; here ... but then
+          we would need to create a separate &lt;MouseWithSomethingElse&gt;
+          component every time we need to use it, so &lt;MouseWithCat&gt;
+          isn&#x27;t really reusable yet.
+        */}
+        &lt;Cat mouse={this.state} /&gt;
+      &lt;/div&gt;);
+  }
+}
+
+class MouseTracker extends React.Component {
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;Move the mouse around!&lt;/h1&gt;
+        &lt;MouseWithCat /&gt;
+      &lt;/div&gt;);
+  }
+}</code></pre><p id="474e56ec-ee55-4886-bf20-a61e271cd2ea" class="">This approach will work for our specific use case, but we haven’t achieved the objective of truly encapsulating the behavior in a reusable way. Now, every time we want the mouse position for a different use case, we have to create a new component (i.e. essentially another <code>&lt;MouseWithCat&gt;</code>) that renders something specifically for that use case.</p><p id="e8e6be41-128c-4871-9953-96b816ae5025" class="">Here’s where the render prop comes in: Instead of hard-coding a <code>&lt;Cat&gt;</code> inside a <code>&lt;Mouse&gt;</code> component, and effectively changing its rendered output, we can provide <code>&lt;Mouse&gt;</code> with a function prop that it uses to dynamically determine what to render–a render prop.</p><pre id="1fae2805-fde9-4f9e-960f-65ba06293ca8" class="code"><code>class Cat extends React.Component {
+  render() {
+    const mouse = this.props.mouse;
+    return (
+      &lt;img src=&quot;/cat.jpg&quot; style={{ position: &#x27;absolute&#x27;, left: mouse.x, top: mouse.y }} /&gt;);
+  }
+}
+
+class Mouse extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.state = { x: 0, y: 0 };
+  }
+
+  handleMouseMove(event) {
+    this.setState({
+      x: event.clientX,
+      y: event.clientY
+    });
+  }
+
+  render() {
+    return (
+      &lt;div style={{ height: &#x27;100vh&#x27; }} onMouseMove={this.handleMouseMove}&gt;
+
+        {/*
+          Instead of providing a static representation of what &lt;Mouse&gt; renders,
+          use the `render` prop to dynamically determine what to render.
+        */}
+        {this.props.render(this.state)}
+      &lt;/div&gt;);
+  }
+}
+
+class MouseTracker extends React.Component {
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;Move the mouse around!&lt;/h1&gt;
+        &lt;Mouse render={mouse =&gt; (
+          &lt;Cat mouse={mouse} /&gt;)}/&gt;
+      &lt;/div&gt;);
+  }
+}</code></pre><p id="bcf9d3cd-7491-4f20-a36e-dfda92080f48" class="">Now, instead of effectively cloning the <code>&lt;Mouse&gt;</code> component and hard-coding something else in its <code>render</code> method to solve for a specific use case, we provide a <code>render</code> prop that <code>&lt;Mouse&gt;</code> can use to dynamically determine what it renders.</p><p id="a7b2d035-180b-42ff-9cb9-205f525f44ab" class="">More concretely, <strong>a render prop is a function prop that a component uses to know what to render.</strong></p><p id="b12af048-7c30-49c4-9fd0-5755eae2a17c" class="">This technique makes the behavior that we need to share extremely portable. To get that behavior, render a <code>&lt;Mouse&gt;</code> with a <code>render</code> prop that tells it what to render with the current (x, y) of the cursor.</p><p id="63187caf-6c3a-47a8-9182-a8ff38311c0d" class="">One interesting thing to note about render props is that you can implement most <a href="https://reactjs.org/docs/higher-order-components.html">higher-order components</a> (HOC) using a regular component with a render prop. For example, if you would prefer to have a <code>withMouse</code> HOC instead of a <code>&lt;Mouse&gt;</code> component, you could easily create one using a regular <code>&lt;Mouse&gt;</code> with a render prop:</p><pre id="ee0f9f99-2b6a-44a4-b2c8-8db2f367692a" class="code"><code>// If you really want a HOC for some reason, you can easily
+// create one using a regular component with a render prop!
+function withMouse(Component) {
+  return class extends React.Component {
+    render() {
+      return (
+        &lt;Mouse render={mouse =&gt; (
+          &lt;Component {...this.props} mouse={mouse} /&gt;)}/&gt;);
+    }
+  }
+}</code></pre><p id="f71dc865-539e-4f01-950a-4046cecf9930" class="">So using a render prop makes it possible to use either pattern.</p><h1 id="507e6156-e419-4ad5-8050-0f5d2fc95963" class="">Using Props Other Than <code>render</code></h1><p id="c1885783-6648-4e6a-85c0-d8358fb2429c" class="">It’s important to remember that just because the pattern is called “render props” you don’t <em>have to use a prop named </em><code><em>render</em></code><em> to use this pattern</em>. In fact, <a href="https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce"><em>any</em></a><a href="https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce"> prop that is a function that a component uses to know what to render is technically a “render prop”</a>.</p><p id="accbd80c-754c-44f1-94bc-ba68b631d6c5" class="">Although the examples above use <code>render</code>, we could just as easily use the <code>children</code> prop!</p><pre id="73a05b63-592a-433c-b59b-76d7cf7ea6df" class="code"><code>&lt;Mouse children={mouse =&gt; (
+  &lt;p&gt;The mouse position is {mouse.x}, {mouse.y}&lt;/p&gt;)}/&gt;</code></pre><p id="267de022-2cd8-489d-826c-998d8a8a55c3" class="">And remember, the <code>children</code> prop doesn’t actually need to be named in the list of “attributes” in your JSX element. Instead, you can put it directly <em>inside</em> the element!</p><pre id="d763da9a-2e6d-4f3b-971c-1cf21921fdde" class="code"><code>&lt;Mouse&gt;
+  {mouse =&gt; (
+    &lt;p&gt;The mouse position is {mouse.x}, {mouse.y}&lt;/p&gt;)}
+&lt;/Mouse&gt;</code></pre><p id="9ff7d8c6-3bbc-4bfa-8258-c7c03c02fcb0" class="">You’ll see this technique used in the <a href="https://github.com/chenglou/react-motion">react-motion</a> API.</p><p id="0aada447-9638-47bf-8e76-a04442f18acf" class="">Since this technique is a little unusual, you’ll probably want to explicitly state that <code>children</code> should be a function in your <code>propTypes</code> when designing an API like this.</p><pre id="222fe6f4-1795-4103-9569-6ea61dee808c" class="code"><code>Mouse.propTypes = {
+  children: PropTypes.func.isRequired
+};</code></pre><h1 id="69803f59-29f4-444b-85f5-a8ebba294e75" class="">Caveats</h1><h1 id="460028ec-c4f9-4499-bec0-50dd4b766c78" class="">Be careful when using Render Props with React.PureComponent</h1><p id="00c787bd-ca6f-407e-bdb5-993573633dd5" class="">Using a render prop can negate the advantage that comes from using <a href="https://reactjs.org/docs/react-api.html#reactpurecomponent"><code>React.PureComponent</code></a> if you create the function inside a <code>render</code> method. This is because the shallow prop comparison will always return <code>false</code> for new props, and each <code>render</code> in this case will generate a new value for the render prop.</p><p id="a054f063-6135-408f-9bbc-e8f77a6167f6" class="">For example, continuing with our <code>&lt;Mouse&gt;</code> component from above, if <code>Mouse</code> were to extend <code>React.PureComponent</code> instead of <code>React.Component</code>, our example would look like this:</p><pre id="9315cb44-1939-4da7-96fe-a6b4564ec226" class="code"><code>class Mouse extends React.PureComponent {
+  // Same implementation as above...
+}
+
+class MouseTracker extends React.Component {
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;Move the mouse around!&lt;/h1&gt;
+
+        {/*
+          This is bad! The value of the `render` prop will
+          be different on each render.
+        */}
+        &lt;Mouse render={mouse =&gt; (
+          &lt;Cat mouse={mouse} /&gt;)}/&gt;
+      &lt;/div&gt;);
+  }
+}</code></pre><p id="566ac4b7-2b8e-4efd-8a5f-277b8f041719" class="">In this example, each time <code>&lt;MouseTracker&gt;</code> renders, it generates a new function as the value of the <code>&lt;Mouse render&gt;</code> prop, thus negating the effect of <code>&lt;Mouse&gt;</code> extending <code>React.PureComponent</code> in the first place!</p><p id="825e30f1-0e93-4cdb-ab4d-60651aadfcbc" class="">To get around this problem, you can sometimes define the prop as an instance method, like so:</p><pre id="f5df964a-90c2-475b-9559-79359746d045" class="code"><code>class MouseTracker extends React.Component {
+  // Defined as an instance method, `this.renderTheCat` always
+  // refers to *same* function when we use it in render
+  renderTheCat(mouse) {
+    return &lt;Cat mouse={mouse} /&gt;;
+  }
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;Move the mouse around!&lt;/h1&gt;
+        &lt;Mouse render={this.renderTheCat} /&gt;
+      &lt;/div&gt;);
+  }
+}</code></pre><p id="33d3be0a-194a-45c5-99b1-4a76af768009" class="">In cases where you cannot define the prop statically (e.g. because you need to close over the component’s props and/or state) <code>&lt;Mouse&gt;</code> should extend <code>React.Component</code> instead.</p></div></div></article></body></html>

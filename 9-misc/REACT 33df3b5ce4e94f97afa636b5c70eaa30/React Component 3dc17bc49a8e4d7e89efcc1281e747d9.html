@@ -1,0 +1,751 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>React Component</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3dc17bc4-9a8e-4d7e-89ef-cc1281e747d9" class="page serif"><header><h1 class="page-title">React Component</h1></header><div class="page-body"><h1 id="60167d5f-777c-4933-aedd-eb4ad26fa25c" class=""><strong>React.Component</strong></h1><h1 id="016f6953-84f7-4f57-8593-133d45608c20" class="">This page contains a detailed API reference for the React component class definition. It assumes you’re familiar with fundamental React concepts, such as <a href="https://reactjs.org/docs/components-and-props.html">Components and Props</a>, as well as <a href="https://reactjs.org/docs/state-and-lifecycle.html">State and Lifecycle</a>. If you’re not, read them first.</h1><h1 id="8daecb50-87f4-49d3-9279-d7590ca1b28e" class="">Overview</h1><p id="2de4ede3-fc93-479a-9255-a7c2eba161ea" class="">React lets you define components as classes or functions. Components defined as classes currently provide more features which are described in detail on this page. To define a React component class, you need to extend <code>React.Component</code>:</p><p id="f05faa70-5953-48f8-8f65-7f8a8935b1ed" class=""><code>class Welcome extends React.Component {
+  render() {
+    return &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;;
+  }
+}</code></p><p id="03ad21ac-24ae-49b5-99d4-fb7713b43547" class="">The only method you <em>must</em> define in a <code>React.Component</code> subclass is called <a href="https://reactjs.org/docs/react-component.html#render"><code>render()</code></a>. All the other methods described on this page are optional.</p><p id="cdf0dccd-9706-4ccd-a04f-834cb6baf7cc" class=""><strong>We strongly recommend against creating your own base component classes.</strong> In React components, <a href="https://reactjs.org/docs/composition-vs-inheritance.html">code reuse is primarily achieved through composition rather than inheritance</a>.</p><blockquote id="99de54c4-8a81-45db-a58d-da8a2ea78fdb" class="">Note:React doesn’t force you to use the ES6 class syntax. If you prefer to avoid it, you may use the create-react-class module or a similar custom abstraction instead. Take a look at Using React without ES6 to learn more.</blockquote><h1 id="b83b0318-b5b9-44db-bb26-b2617e203aaa" class="">The Component Lifecycle</h1><p id="5b0b8799-b428-4074-ad26-56c77f47e5ba" class="">Each component has several “lifecycle methods” that you can override to run code at particular times in the process. <strong>You can use </strong><a href="https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/"><strong>this lifecycle diagram</strong></a><strong> as a cheat sheet.</strong> In the list below, commonly used lifecycle methods are marked as <strong>bold</strong>. The rest of them exist for relatively rare use cases.</p><h3 id="1f7792dd-fed8-470b-b50f-095178dedc9b" class="">Mounting</h3><p id="45857b1f-94c3-44c0-9a46-0de1cbbebf81" class="">These methods are called in the following order when an instance of a component is being created and inserted into the DOM:</p><ul id="ccfe532b-0fd6-46eb-b634-0a9202d3ff12" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/react-component.html#constructor"><code><strong>constructor()</strong></code></a></li></ul><ul id="186cf7d3-6286-4b1e-993d-a21b7a537c5e" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/react-component.html#static-getderivedstatefromprops"><code>static getDerivedStateFromProps()</code></a></li></ul><ul id="45534ee3-e8f2-41d8-a44d-db4c963ff2e3" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/react-component.html#render"><code><strong>render()</strong></code></a></li></ul><ul id="de27c35d-b156-4ffe-86d9-97ca5216178a" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/react-component.html#componentdidmount"><code><strong>componentDidMount()</strong></code></a></li></ul><blockquote id="6d992bfd-7788-4471-b8c9-ad6ef404eef1" class="">Note:These methods are considered legacy and you should avoid them in new code:UNSAFE_componentWillMount()</blockquote><h3 id="160a201c-ab1b-4fb5-81c6-2b55b599cb99" class="">Updating</h3><p id="95d58e89-52bb-4ade-8abb-df306739e0b7" class="">An update can be caused by changes to props or state. These methods are called in the following order when a component is being re-rendered:</p><ul id="d8820dba-3923-4730-a92e-7d89f5c1ec17" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/react-component.html#static-getderivedstatefromprops"><code>static getDerivedStateFromProps()</code></a></li></ul><ul id="e5848135-9ed8-4c84-accd-029f13174ad9" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/react-component.html#shouldcomponentupdate"><code>shouldComponentUpdate()</code></a></li></ul><ul id="028ba51e-b185-4569-8089-b3b50feb9c26" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/react-component.html#render"><code><strong>render()</strong></code></a></li></ul><ul id="b732c1f1-b9e6-4947-9bc9-8998642b7b43" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/react-component.html#getsnapshotbeforeupdate"><code>getSnapshotBeforeUpdate()</code></a></li></ul><ul id="7029cbe5-15b7-47b5-a124-3bc07c8e55d1" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/react-component.html#componentdidupdate"><code><strong>componentDidUpdate()</strong></code></a></li></ul><blockquote id="33e3578b-9a3a-4f84-88aa-e33e09f9c953" class="">Note:These methods are considered legacy and you should avoid them in new code:UNSAFE_componentWillUpdate()UNSAFE_componentWillReceiveProps()</blockquote><h3 id="8f11cff5-5bd3-441d-a6b7-26583bb9f042" class="">Unmounting</h3><p id="262629ee-c926-47e8-ba14-fc404cc4ccb9" class="">This method is called when a component is being removed from the DOM:</p><ul id="787fc399-aa21-412d-a777-f06544b1f023" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/react-component.html#componentwillunmount"><code><strong>componentWillUnmount()</strong></code></a></li></ul><h3 id="e75d37cf-e660-429f-88ec-02d42adfca78" class="">Error Handling</h3><p id="d9639544-b014-42e8-a3c8-4d78e6978a73" class="">These methods are called when there is an error during rendering, in a lifecycle method, or in the constructor of any child component.</p><ul id="60e28356-79ea-4ae8-9eec-55d2ee3fa703" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/react-component.html#static-getderivedstatefromerror"><code>static getDerivedStateFromError()</code></a></li></ul><ul id="342f4883-5847-4dda-80b0-4ef0e93599d1" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/react-component.html#componentdidcatch"><code>componentDidCatch()</code></a></li></ul><h1 id="bce34f69-ec5d-44b8-9599-f6b991c938d3" class="">Other APIs</h1><p id="2841c96d-5040-46e0-9a13-da7080b544cd" class="">Each component also provides some other APIs:</p><ul id="8454c432-ee9a-4d4f-bd2f-7bd482b6f4f4" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/react-component.html#setstate"><code>setState()</code></a></li></ul><ul id="169c9083-ce60-449f-bff4-6caffaeb9ef1" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/react-component.html#forceupdate"><code>forceUpdate()</code></a></li></ul><h1 id="93aa3ebb-4117-4f0d-ac5b-519c009a9dfd" class="">Class Properties</h1><ul id="76cfc80c-5d7d-485c-8fa0-26ab99d5019d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/react-component.html#defaultprops"><code>defaultProps</code></a></li></ul><ul id="bf0d9f02-ccc9-4be8-ab46-f1072aea93e3" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/react-component.html#displayname"><code>displayName</code></a></li></ul><h1 id="d08c01a4-29ff-47c9-9be6-dccc9e72cd0e" class="">Instance Properties</h1><ul id="2ec39c71-5927-4353-a0a9-c67ca5fcd803" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/react-component.html#props"><code>props</code></a></li></ul><ul id="b3be9074-1dcf-433b-8b2e-b87bac56d307" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/react-component.html#state"><code>state</code></a></li></ul><hr id="4a424607-c1d4-4972-8767-317836bf77db"/><h1 id="b6c80cde-33d4-4c07-ab34-0848d0c173fb" class="">Reference</h1><h1 id="3f9b463c-e133-4773-b207-0f6c5fed3c5c" class="">Commonly Used Lifecycle Methods</h1><p id="ec71c157-e2f5-44f7-b6cd-d6c68d1e2af3" class="">The methods in this section cover the vast majority of use cases you’ll encounter creating React components. <strong>For a visual reference, check out </strong><a href="https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/"><strong>this lifecycle diagram</strong></a><strong>.</strong></p><h1 id="8d35df44-7907-422c-8937-91cbe21ff21e" class=""><code>render()</code></h1><p id="cd4ece76-7a66-4f4d-8e0d-70d186b55e46" class=""><code>render()</code></p><p id="edd562c4-8752-4a55-a0a8-2186abcb0c9a" class="">The <code>render()</code> method is the only required method in a class component.</p><p id="68dc81c0-21de-42c4-8a23-474efb4f43ec" class="">When called, it should examine <code>this.props</code> and <code>this.state</code> and return one of the following types:</p><ul id="f08cf4eb-239f-4b0c-a879-6be4a5d178ff" class="bulleted-list"><li style="list-style-type:disc"><strong>React elements.</strong> Typically created via <a href="https://reactjs.org/docs/introducing-jsx.html">JSX</a>. For example, <code>&lt;div /&gt;</code> and <code>&lt;MyComponent /&gt;</code> are React elements that instruct React to render a DOM node, or another user-defined component, respectively.</li></ul><ul id="be139872-dcbc-4774-804c-36a387d27526" class="bulleted-list"><li style="list-style-type:disc"><strong>Arrays and fragments.</strong> Let you return multiple elements from render. See the documentation on <a href="https://reactjs.org/docs/fragments.html">fragments</a> for more details.</li></ul><ul id="90b4dd73-0ed4-4f98-9870-7ada36fce18d" class="bulleted-list"><li style="list-style-type:disc"><strong>Portals</strong>. Let you render children into a different DOM subtree. See the documentation on <a href="https://reactjs.org/docs/portals.html">portals</a> for more details.</li></ul><ul id="f120c385-c093-4e60-8ec8-89c20d38b301" class="bulleted-list"><li style="list-style-type:disc"><strong>String and numbers.</strong> These are rendered as text nodes in the DOM.</li></ul><ul id="799a2756-428f-4c58-adcc-5447b414f226" class="bulleted-list"><li style="list-style-type:disc"><strong>Booleans or </strong><code><strong>null</strong></code>. Render nothing. (Mostly exists to support <code>return test &amp;&amp; &lt;Child /&gt;</code> pattern, where <code>test</code> is boolean.)</li></ul><p id="22c63344-31c5-4dcc-8f1d-c60e7e5f162a" class="">The <code>render()</code> function should be pure, meaning that it does not modify component state, it returns the same result each time it’s invoked, and it does not directly interact with the browser.</p><p id="2964dfbd-3a09-4618-bbbb-77b0747e375e" class="">If you need to interact with the browser, perform your work in <code>componentDidMount()</code> or the other lifecycle methods instead. Keeping <code>render()</code> pure makes components easier to think about.</p><blockquote id="093e6c96-b3ad-4b13-bb1e-4e5b36471bb1" class="">Noterender() will not be invoked if shouldComponentUpdate() returns false.</blockquote><hr id="1fee999b-4944-40b8-aedb-122f93667f22"/><h1 id="b440d9cd-ff94-4f8e-b5d8-e070635304cb" class=""><code>constructor()</code></h1><p id="0174c703-402e-43ca-b1fb-208facd8e613" class=""><code>constructor(props)</code></p><p id="fdbe9420-fdf2-4206-928f-4d71aaefa10c" class=""><strong>If you don’t initialize state and you don’t bind methods, you don’t need to implement a constructor for your React component.</strong></p><p id="25ed1186-6525-4f47-a2ee-a48b699d2022" class="">The constructor for a React component is called before it is mounted. When implementing the constructor for a <code>React.Component</code> subclass, you should call <code>super(props)</code> before any other statement. Otherwise, <code>this.props</code> will be undefined in the constructor, which can lead to bugs.</p><p id="145153be-9aec-4d97-a346-3c1c196b6852" class="">Typically, in React constructors are only used for two purposes:</p><ul id="c78d59b3-1eeb-45d4-bdaa-3b33bc739c52" class="bulleted-list"><li style="list-style-type:disc">Initializing <a href="https://reactjs.org/docs/state-and-lifecycle.html">local state</a> by assigning an object to <code>this.state</code>.</li></ul><ul id="b2dae059-2e46-415d-b54a-5b7b563078cb" class="bulleted-list"><li style="list-style-type:disc">Binding <a href="https://reactjs.org/docs/handling-events.html">event handler</a> methods to an instance.</li></ul><p id="be16e75d-6aa4-4741-be83-22bf992caec6" class="">You <strong>should not call </strong><code><strong>setState()</strong></code> in the <code>constructor()</code>. Instead, if your component needs to use local state, <strong>assign the initial state to </strong><code><strong>this.state</strong></code> directly in the constructor:</p><p id="aed62cd4-0633-4994-bf43-39a34eec0fde" class=""><code>constructor(props) {
+  super(props);
+  // Don&#x27;t call this.setState() here!
+  this.state = { counter: 0 };
+  this.handleClick = this.handleClick.bind(this);
+}</code></p><p id="95c56504-5b00-4d5a-a886-f2ea40b761e1" class="">Constructor is the only place where you should assign <code>this.state</code> directly. In all other methods, you need to use <code>this.setState()</code> instead.</p><p id="396ea570-0881-40c4-9879-253c4c2bd42e" class="">Avoid introducing any side-effects or subscriptions in the constructor. For those use cases, use <code>componentDidMount()</code> instead.</p><blockquote id="c7458ac1-958f-4798-8cac-8e740dc00920" class="">NoteAvoid copying props into state! This is a common mistake:constructor(props) {
+ super(props);
+ // Don&#x27;t do this!
+ this.state = { color: props.color };
+}The problem is that it’s both unnecessary (you can use this.props.color directly instead), and creates bugs (updates to the color prop won’t be reflected in the state).Only use this pattern if you intentionally want to ignore prop updates. In that case, it makes sense to rename the prop to be called initialColor or defaultColor. You can then force a component to “reset” its internal state by changing its key when necessary.Read our blog post on avoiding derived state to learn about what to do if you think you need some state to depend on the props.</blockquote><hr id="93b71b4a-09f0-49d5-9e5e-8466b809206f"/><h1 id="bd91b84d-979e-465c-9870-91ec00e4693d" class=""><code>componentDidMount()</code></h1><p id="93e722a5-bde5-4f18-bc63-e247dd891619" class=""><code>componentDidMount()</code></p><p id="d8a7fe02-fc8b-46fd-87a2-8791da1bcd89" class=""><code>componentDidMount()</code> is invoked immediately after a component is mounted (inserted into the tree). Initialization that requires DOM nodes should go here. If you need to load data from a remote endpoint, this is a good place to instantiate the network request.</p><p id="6583a99f-3ae7-4abb-8476-2ae6eab7db61" class="">This method is a good place to set up any subscriptions. If you do that, don’t forget to unsubscribe in <code>componentWillUnmount()</code>.</p><p id="a1ec5bc2-f1d4-48f9-8b56-458be9995aef" class="">You <strong>may call </strong><code><strong>setState()</strong></code><strong> immediately</strong> in <code>componentDidMount()</code>. It will trigger an extra rendering, but it will happen before the browser updates the screen. This guarantees that even though the <code>render()</code> will be called twice in this case, the user won’t see the intermediate state. Use this pattern with caution because it often causes performance issues. In most cases, you should be able to assign the initial state in the <code>constructor()</code> instead. It can, however, be necessary for cases like modals and tooltips when you need to measure a DOM node before rendering something that depends on its size or position.</p><hr id="87f51bbe-5d67-4366-ae60-b3857f8d845b"/><h1 id="47f5161e-0510-4f65-b576-f4c35f8d5197" class=""><code>componentDidUpdate()</code></h1><p id="4c36c7de-138d-449d-8f07-459f279bb926" class=""><code>componentDidUpdate(prevProps, prevState, snapshot)</code></p><p id="50991bbc-a72f-4796-a970-f708c0496083" class=""><code>componentDidUpdate()</code> is invoked immediately after updating occurs. This method is not called for the initial render.</p><p id="08555290-d363-4f91-8460-4e6b01f2f5aa" class="">Use this as an opportunity to operate on the DOM when the component has been updated. This is also a good place to do network requests as long as you compare the current props to previous props (e.g. a network request may not be necessary if the props have not changed).</p><p id="e295d44b-b286-48c4-836e-4d747a47b8d6" class=""><code>componentDidUpdate(prevProps) {
+  // Typical usage (don&#x27;t forget to compare props):
+  if (this.props.userID !== prevProps.userID) {
+    this.fetchData(this.props.userID);
+  }
+}</code></p><p id="120551b5-be89-4002-bbc8-9465d2a54d5b" class="">You <strong>may call </strong><code><strong>setState()</strong></code><strong> immediately</strong> in <code>componentDidUpdate()</code> but note that <strong>it must be wrapped in a condition</strong> like in the example above, or you’ll cause an infinite loop. It would also cause an extra re-rendering which, while not visible to the user, can affect the component performance. If you’re trying to “mirror” some state to a prop coming from above, consider using the prop directly instead. Read more about <a href="https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html">why copying props into state causes bugs</a>.</p><p id="a65ab4b7-51c8-4b04-ad76-27cf0eccffc7" class="">If your component implements the <code>getSnapshotBeforeUpdate()</code> lifecycle (which is rare), the value it returns will be passed as a third “snapshot” parameter to <code>componentDidUpdate()</code>. Otherwise this parameter will be undefined.</p><blockquote id="4a595624-2e04-4934-9c97-63004a748f03" class="">NotecomponentDidUpdate() will not be invoked if shouldComponentUpdate() returns false.</blockquote><hr id="09677e70-60e4-4dd0-930c-323ce0924747"/><h1 id="4b8471e6-8ad0-4089-8ba5-bf5a039c15d8" class=""><code>componentWillUnmount()</code></h1><p id="4ced36ac-fbc8-4640-8720-89ae6b2ee4f0" class=""><code>componentWillUnmount()</code></p><p id="8f5d3d4c-9b38-4216-a408-1f5574df95cf" class=""><code>componentWillUnmount()</code> is invoked immediately before a component is unmounted and destroyed. Perform any necessary cleanup in this method, such as invalidating timers, canceling network requests, or cleaning up any subscriptions that were created in <code>componentDidMount()</code>.</p><p id="7e3708bc-b090-4e75-91e2-842fc03d8e0f" class="">You <strong>should not call </strong><code><strong>setState()</strong></code> in <code>componentWillUnmount()</code> because the component will never be re-rendered. Once a component instance is unmounted, it will never be mounted again.</p><hr id="d0b292ae-8d5f-4ebe-89f2-073b6533a508"/><h1 id="9ceb7914-8eeb-4971-b2d6-248c4228757c" class="">Rarely Used Lifecycle Methods</h1><p id="dae851e7-185d-4a42-a5f2-8341fd7356bc" class="">The methods in this section correspond to uncommon use cases. They’re handy once in a while, but most of your components probably don’t need any of them. <strong>You can see most of the methods below on </strong><a href="https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/"><strong>this lifecycle diagram</strong></a><strong> if you click the “Show less common lifecycles” checkbox at the top of it.</strong></p><h1 id="a180077a-c705-4515-be5f-bcc3772dd588" class=""><code>shouldComponentUpdate()</code></h1><p id="4e22b50e-c0fc-41bb-8860-4dbd9fbc2e11" class=""><code>shouldComponentUpdate(nextProps, nextState)</code></p><p id="f529ddde-9a00-4c34-b994-f89996e5d41a" class="">Use <code>shouldComponentUpdate()</code> to let React know if a component’s output is not affected by the current change in state or props. The default behavior is to re-render on every state change, and in the vast majority of cases you should rely on the default behavior.</p><p id="3c4d41ea-921d-4bbb-8b80-abfff5cd0891" class=""><code>shouldComponentUpdate()</code> is invoked before rendering when new props or state are being received. Defaults to <code>true</code>. This method is not called for the initial render or when <code>forceUpdate()</code> is used.</p><p id="e67d9273-fde9-482a-b77b-6247f52179e5" class="">This method only exists as a <a href="https://reactjs.org/docs/optimizing-performance.html"><strong>performance optimization</strong></a><strong>.</strong> Do not rely on it to “prevent” a rendering, as this can lead to bugs. <strong>Consider using the built-in </strong><a href="https://reactjs.org/docs/react-api.html#reactpurecomponent"><code><strong>PureComponent</strong></code></a> instead of writing <code>shouldComponentUpdate()</code> by hand. <code>PureComponent</code> performs a shallow comparison of props and state, and reduces the chance that you’ll skip a necessary update.</p><p id="d571ceed-b5a0-48c6-b120-4286754fc73e" class="">If you are confident you want to write it by hand, you may compare <code>this.props</code> with <code>nextProps</code> and <code>this.state</code> with <code>nextState</code> and return <code>false</code> to tell React the update can be skipped. Note that returning <code>false</code> does not prevent child components from re-rendering when <em>their</em> state changes.</p><p id="658cddeb-e96d-48e3-bc07-243133e3b87b" class="">We do not recommend doing deep equality checks or using <code>JSON.stringify()</code> in <code>shouldComponentUpdate()</code>. It is very inefficient and will harm performance.</p><p id="6ff883aa-fc71-48a3-a5af-b7733e13014f" class="">Currently, if <code>shouldComponentUpdate()</code> returns <code>false</code>, then <a href="https://reactjs.org/docs/react-component.html#unsafe_componentwillupdate"><code>UNSAFE_componentWillUpdate()</code></a>, <a href="https://reactjs.org/docs/react-component.html#render"><code>render()</code></a>, and <a href="https://reactjs.org/docs/react-component.html#componentdidupdate"><code>componentDidUpdate()</code></a> will not be invoked. In the future React may treat <code>shouldComponentUpdate()</code> as a hint rather than a strict directive, and returning <code>false</code> may still result in a re-rendering of the component.</p><hr id="18d6975b-96ee-4c5d-8ff2-fdb3dbe6e474"/><h1 id="4469666f-3b60-4a8b-a46e-4ede1536b79d" class=""><code>static getDerivedStateFromProps()</code></h1><p id="c8392066-0354-4f99-99d7-8f648c4db5a9" class=""><code>static getDerivedStateFromProps(props, state)</code></p><p id="05f1712d-891c-41be-bcb6-73e1f9ba5611" class=""><code>getDerivedStateFromProps</code> is invoked right before calling the render method, both on the initial mount and on subsequent updates. It should return an object to update the state, or <code>null</code> to update nothing.</p><p id="133ae6c7-c89a-4464-9d24-39e6b63e98fa" class="">This method exists for <a href="https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#when-to-use-derived-state">rare use cases</a> where the state depends on changes in props over time. For example, it might be handy for implementing a <code>&lt;Transition&gt;</code> component that compares its previous and next children to decide which of them to animate in and out.</p><p id="126c0dc3-7ddb-40b0-8a46-08c21bece64a" class="">Deriving state leads to verbose code and makes your components difficult to think about. <a href="https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html">Make sure you’re familiar with simpler alternatives:</a></p><ul id="b9ed7693-21c3-43f2-a40d-63125bcaee66" class="bulleted-list"><li style="list-style-type:disc">If you need to <strong>perform a side effect</strong> (for example, data fetching or an animation) in response to a change in props, use <a href="https://reactjs.org/docs/react-component.html#componentdidupdate"><code>componentDidUpdate</code></a> lifecycle instead.</li></ul><ul id="eb153376-33be-4307-b0ea-31bbca7b7453" class="bulleted-list"><li style="list-style-type:disc">If you want to <strong>re-compute some data only when a prop changes</strong>, <a href="https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#what-about-memoization">use a memoization helper instead</a>.</li></ul><ul id="8f41af6a-0846-4b9b-8d2d-adf3f6ae2e0a" class="bulleted-list"><li style="list-style-type:disc">If you want to <strong>“reset” some state when a prop changes</strong>, consider either making a component <a href="https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-controlled-component">fully controlled</a> or <a href="https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key">fully uncontrolled with a </a><a href="https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key"><code>key</code></a> instead.</li></ul><p id="aefbcc9e-bcce-4d91-b847-288f15a6cf52" class="">This method doesn’t have access to the component instance. If you’d like, you can reuse some code between <code>getDerivedStateFromProps()</code> and the other class methods by extracting pure functions of the component props and state outside the class definition.</p><p id="27205d0e-3988-43ba-bee0-598eed80d172" class="">Note that this method is fired on <em>every</em> render, regardless of the cause. This is in contrast to <code>UNSAFE_componentWillReceiveProps</code>, which only fires when the parent causes a re-render and not as a result of a local <code>setState</code>.</p><hr id="8254b033-e16e-4780-99f4-6e674b331bca"/><h1 id="98b04509-83d3-4c70-9dc5-1678e0399444" class=""><code>getSnapshotBeforeUpdate()</code></h1><p id="7833ca20-8eeb-4637-aa3e-66f7ddef71e1" class=""><code>getSnapshotBeforeUpdate(prevProps, prevState)</code></p><p id="d118ae35-b4d8-41f7-a02b-52d56de65e65" class=""><code>getSnapshotBeforeUpdate()</code> is invoked right before the most recently rendered output is committed to e.g. the DOM. It enables your component to capture some information from the DOM (e.g. scroll position) before it is potentially changed. Any value returned by this lifecycle method will be passed as a parameter to <code>componentDidUpdate()</code>.</p><p id="160783c2-8855-4671-a7f1-5b7c566fc649" class="">This use case is not common, but it may occur in UIs like a chat thread that need to handle scroll position in a special way.</p><p id="14f27231-9710-440e-aea7-e459dffff45a" class="">A snapshot value (or <code>null</code>) should be returned.</p><p id="841a77bb-95d1-4a24-8552-9639ed66cba6" class="">For example:</p><p id="2d6fa0c0-729f-4ac7-a7f8-5ad729acf588" class=""><code>class ScrollingList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.listRef = React.createRef();
+  }
+
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    // Are we adding new items to the list?
+    // Capture the scroll position so we can adjust scroll later.
+    if (prevProps.list.length &lt; this.props.list.length) {
+      const list = this.listRef.current;
+      return list.scrollHeight - list.scrollTop;
+    }
+    return null;
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    // If we have a snapshot value, we&#x27;ve just added new items.
+    // Adjust scroll so these new items don&#x27;t push the old ones out of view.
+    // (snapshot here is the value returned from getSnapshotBeforeUpdate)
+    if (snapshot !== null) {
+      const list = this.listRef.current;
+      list.scrollTop = list.scrollHeight - snapshot;
+    }
+  }
+
+  render() {
+    return (
+      &lt;div ref={this.listRef}&gt;{/* ...contents... */}&lt;/div&gt;);
+  }
+}</code></p><p id="e7056c8f-742b-44bf-b345-02be24c43aaf" class="">In the above examples, it is important to read the <code>scrollHeight</code> property in <code>getSnapshotBeforeUpdate</code> because there may be delays between “render” phase lifecycles (like <code>render</code>) and “commit” phase lifecycles (like <code>getSnapshotBeforeUpdate</code> and <code>componentDidUpdate</code>).</p><hr id="d5bdb5a5-7bcc-49ff-bae0-bcabd074cacc"/><h1 id="7fcf8f71-768c-475e-9692-2698613e1280" class="">Error boundaries</h1><p id="e27fc5e5-d565-4301-bf4c-5d492ec0059b" class=""><a href="https://reactjs.org/docs/error-boundaries.html">Error boundaries</a> are React components that catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI instead of the component tree that crashed. Error boundaries catch errors during rendering, in lifecycle methods, and in constructors of the whole tree below them.</p><p id="d3cf91d0-669e-4462-971d-63d9fde7ea3c" class="">A class component becomes an error boundary if it defines either (or both) of the lifecycle methods <code>static getDerivedStateFromError()</code> or <code>componentDidCatch()</code>. Updating state from these lifecycles lets you capture an unhandled JavaScript error in the below tree and display a fallback UI.</p><p id="3063ba5e-968a-4e28-9b43-890e4a97e532" class="">Only use error boundaries for recovering from unexpected exceptions; <strong>don’t try to use them for control flow.</strong></p><p id="39dfad6c-d2ac-4075-8aa1-362d4210386a" class="">For more details, see <a href="https://reactjs.org/blog/2017/07/26/error-handling-in-react-16.html"><em>Error Handling in React 16</em></a>.</p><blockquote id="1989e3cc-987f-4704-b1f5-e3ef3dd8d039" class="">NoteError boundaries only catch errors in the components below them in the tree. An error boundary can’t catch an error within itself.</blockquote><h1 id="91e69a0b-ab52-4c1f-9817-b365f10c439d" class=""><code>static getDerivedStateFromError()</code></h1><p id="6ff8be90-3f9c-4919-b483-8ade8d34f77c" class=""><code>static getDerivedStateFromError(error)</code></p><p id="6f307e30-6ba6-4887-9f90-6d97643b5c78" class="">This lifecycle is invoked after an error has been thrown by a descendant component. It receives the error that was thrown as a parameter and should return a value to update state.</p><p id="1176737b-1f2e-4d82-9b05-25f38ca9b670" class=""><code>class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {    // Update state so the next render will show the fallback UI.    return { hasError: true };  }render() {
+    if (this.state.hasError) {      // You can render any custom fallback UI      return &lt;h1&gt;Something went wrong.&lt;/h1&gt;;    }return this.props.children;
+  }
+}</code></p><blockquote id="299f940f-21bc-492c-9d54-09e5264e972b" class="">NotegetDerivedStateFromError() is called during the “render” phase, so side-effects are not permitted. For those use cases, use componentDidCatch() instead.</blockquote><hr id="0ada4357-d0bc-40f1-9591-73f8f9bbffaf"/><h1 id="a08482cb-9b1f-4e87-af2e-189d0d519320" class=""><code>componentDidCatch()</code></h1><p id="9a5ea0fe-a30d-427b-97cb-5dd93446102a" class=""><code>componentDidCatch(error, info)</code></p><p id="47ce7bbd-a15c-4533-8257-8d4eb526fa95" class="">This lifecycle is invoked after an error has been thrown by a descendant component. It receives two parameters:</p><ol type="1" id="4a0e2cb0-655e-4a75-9f93-0c14c41446eb" class="numbered-list" start="1"><li><code>error</code> - The error that was thrown.</li></ol><ol type="1" id="98f76fda-efd3-49cc-bca9-de0a70296c86" class="numbered-list" start="2"><li><code>info</code> - An object with a <code>componentStack</code> key containing <a href="https://reactjs.org/docs/error-boundaries.html#component-stack-traces">information about which component threw the error</a>.</li></ol><p id="a53cdcd6-5d7e-4630-bcb7-152727841dad" class=""><code>componentDidCatch()</code> is called during the “commit” phase, so side-effects are permitted. It should be used for things like logging errors:</p><p id="9155e882-f850-4545-a6b2-5c5f0577f435" class=""><code>class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    // Update state so the next render will show the fallback UI.
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, info) {    // Example &quot;componentStack&quot;:    //   in ComponentThatThrows (created by App)    //   in ErrorBoundary (created by App)    //   in div (created by App)    //   in App    logComponentStackToMyService(info.componentStack);  }render() {
+    if (this.state.hasError) {
+      // You can render any custom fallback UI
+      return &lt;h1&gt;Something went wrong.&lt;/h1&gt;;
+    }
+
+    return this.props.children;
+  }
+}</code></p><p id="5983e89e-a8e6-4ced-8479-b533d358c7ac" class="">Production and development builds of React slightly differ in the way <code>componentDidCatch()</code> handles errors.</p><p id="b2aab3a7-7668-403f-a656-e74c9a383c33" class="">On development, the errors will bubble up to <code>window</code>, this means that any <code>window.onerror</code> or <code>window.addEventListener(&#x27;error&#x27;, callback)</code> will intercept the errors that have been caught by <code>componentDidCatch()</code>.</p><p id="3ca91e23-5445-4c4a-96bb-20b4854a1841" class="">On production, instead, the errors will not bubble up, which means any ancestor error handler will only receive errors not explicitly caught by <code>componentDidCatch()</code>.</p><blockquote id="192d5a10-beb6-438f-b61a-8673ef203f6f" class="">NoteIn the event of an error, you can render a fallback UI with componentDidCatch() by calling setState, but this will be deprecated in a future release. Use static getDerivedStateFromError() to handle fallback rendering instead.</blockquote><hr id="c8abbefe-91dc-4c30-ad04-3cb0097f98da"/><h1 id="69b0210a-ad79-4f62-bbfc-6fbd8de7b898" class="">Legacy Lifecycle Methods</h1><p id="4313320c-ba18-4596-859a-d2d94b8feb0d" class="">The lifecycle methods below are marked as “legacy”. They still work, but we don’t recommend using them in the new code. You can learn more about migrating away from legacy lifecycle methods in <a href="https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html">this blog post</a>.</p><h1 id="a492e478-0f28-4d7d-9abf-c59c482a2c07" class=""><code>UNSAFE_componentWillMount()</code></h1><p id="3426cef0-4dc3-45ad-bc20-7eb8a22b3cef" class=""><code>UNSAFE_componentWillMount()</code></p><blockquote id="67dbd41e-9cb8-49f5-a6e4-4079626b781b" class="">NoteThis lifecycle was previously named componentWillMount. That name will continue to work until version 17. Use the rename-unsafe-lifecycles codemod to automatically update your components.</blockquote><p id="c478f2d8-defc-478e-8217-5947ef6a68ce" class=""><code>UNSAFE_componentWillMount()</code> is invoked just before mounting occurs. It is called before <code>render()</code>, therefore calling <code>setState()</code> synchronously in this method will not trigger an extra rendering. Generally, we recommend using the <code>constructor()</code> instead for initializing state.</p><p id="fa1b46b4-43a7-42b6-b9cd-1d9447f28f97" class="">Avoid introducing any side-effects or subscriptions in this method. For those use cases, use <code>componentDidMount()</code> instead.</p><p id="57a88911-aada-4119-ab16-00f68c01a1ba" class="">This is the only lifecycle method called on server rendering.</p><hr id="67a99344-593a-47f2-b2f2-a5d43063c493"/><h1 id="a7a8c7cd-07b9-4460-b8e9-e0d08e7e5f04" class=""><code>UNSAFE_componentWillReceiveProps()</code></h1><p id="9a86f72a-f990-46b7-af89-31c5acaf9f49" class=""><code>UNSAFE_componentWillReceiveProps(nextProps)</code></p><blockquote id="72422f46-8f46-40c4-9b6b-f32eebfa6733" class="">NoteThis lifecycle was previously named componentWillReceiveProps. That name will continue to work until version 17. Use the rename-unsafe-lifecycles codemod to automatically update your components.</blockquote><blockquote id="7307b111-14e6-4bba-8426-717593e183c4" class="">Note:Using this lifecycle method often leads to bugs and inconsistenciesIf you need to perform a side effect (for example, data fetching or an animation) in response to a change in props, use componentDidUpdate lifecycle instead.If you used componentWillReceiveProps for re-computing some data only when a prop changes, use a memoization helper instead.If you used componentWillReceiveProps to “reset” some state when a prop changes, consider either making a component fully controlled or fully uncontrolled with a key instead.For other use cases, follow the recommendations in this blog post about derived state.</blockquote><p id="8b28364a-bb84-4918-819a-a66d7655407f" class=""><code>UNSAFE_componentWillReceiveProps()</code> is invoked before a mounted component receives new props. If you need to update the state in response to prop changes (for example, to reset it), you may compare <code>this.props</code> and <code>nextProps</code> and perform state transitions using <code>this.setState()</code> in this method.</p><p id="8c793979-20ab-4e67-bdaa-694d1af36f0f" class="">Note that if a parent component causes your component to re-render, this method will be called even if props have not changed. Make sure to compare the current and next values if you only want to handle changes.</p><p id="db22c36d-79fc-4bb6-ae4a-c21aca03c20a" class="">React doesn’t call <code>UNSAFE_componentWillReceiveProps()</code> with initial props during <a href="https://reactjs.org/docs/react-component.html#mounting">mounting</a>. It only calls this method if some of component’s props may update. Calling <code>this.setState()</code> generally doesn’t trigger <code>UNSAFE_componentWillReceiveProps()</code>.</p><hr id="cc7a79b4-f6a3-435c-add6-89839cf47f13"/><h1 id="edda5aa4-314a-4d1a-9a74-c7753d7fbe04" class=""><code>UNSAFE_componentWillUpdate()</code></h1><p id="775a6d43-c66f-4a4b-8e80-061113e1df74" class=""><code>UNSAFE_componentWillUpdate(nextProps, nextState)</code></p><blockquote id="ba089013-a2b1-40fc-b9ca-70fec2a5597d" class="">NoteThis lifecycle was previously named componentWillUpdate. That name will continue to work until version 17. Use the rename-unsafe-lifecycles codemod to automatically update your components.</blockquote><p id="30f53624-2d59-42f6-bb8b-9bd9a2cf5413" class=""><code>UNSAFE_componentWillUpdate()</code> is invoked just before rendering when new props or state are being received. Use this as an opportunity to perform preparation before an update occurs. This method is not called for the initial render.</p><p id="0e8fc439-4da2-4549-961e-93db13ec7c1c" class="">Note that you cannot call <code>this.setState()</code> here; nor should you do anything else (e.g. dispatch a Redux action) that would trigger an update to a React component before <code>UNSAFE_componentWillUpdate()</code> returns.</p><p id="cac9e9c0-c143-4425-97ac-806457da80c9" class="">Typically, this method can be replaced by <code>componentDidUpdate()</code>. If you were reading from the DOM in this method (e.g. to save a scroll position), you can move that logic to <code>getSnapshotBeforeUpdate()</code>.</p><blockquote id="08fcca70-795b-4f26-b3ff-2030bea1b358" class="">NoteUNSAFE_componentWillUpdate() will not be invoked if shouldComponentUpdate() returns false.</blockquote><hr id="050d440a-181d-4deb-a008-291e670387a7"/><h1 id="8597e842-7d69-4d34-a4dd-56c0e1b18a37" class="">Other APIs</h1><p id="8df65e26-45cc-4c7d-9999-a64e76a21c6a" class="">Unlike the lifecycle methods above (which React calls for you), the methods below are the methods <em>you</em> can call from your components.</p><p id="2030ceec-da4b-4884-a765-c14f3b9d89f6" class="">There are just two of them: <code>setState()</code> and <code>forceUpdate()</code>.</p><h1 id="44830bb4-ad38-4ff4-a469-53f36e2797a9" class=""><code>setState()</code></h1><p id="f0cb60b9-6f5c-4889-902f-78735af63c6f" class=""><code>setState(updater, [callback])</code></p><p id="3a3939a7-7739-40b9-ab3d-96269170eff5" class=""><code>setState()</code> enqueues changes to the component state and tells React that this component and its children need to be re-rendered with the updated state. This is the primary method you use to update the user interface in response to event handlers and server responses.</p><p id="c3e9dffe-747a-402b-87ff-aae146d41bab" class="">Think of <code>setState()</code> as a <em>request</em> rather than an immediate command to update the component. For better perceived performance, React may delay it, and then update several components in a single pass. React does not guarantee that the state changes are applied immediately.</p><p id="cf1c3078-5beb-4e0e-a358-598867dec8ce" class=""><code>setState()</code> does not always immediately update the component. It may batch or defer the update until later. This makes reading <code>this.state</code> right after calling <code>setState()</code> a potential pitfall. Instead, use <code>componentDidUpdate</code> or a <code>setState</code> callback (<code>setState(updater, callback)</code>), either of which are guaranteed to fire after the update has been applied. If you need to set the state based on the previous state, read about the <code>updater</code> argument below.</p><p id="6c0d8b46-3dc5-4722-bf1f-0c1f8ffcee1a" class=""><code>setState()</code> will always lead to a re-render unless <code>shouldComponentUpdate()</code> returns <code>false</code>. If mutable objects are being used and conditional rendering logic cannot be implemented in <code>shouldComponentUpdate()</code>, calling <code>setState()</code> only when the new state differs from the previous state will avoid unnecessary re-renders.</p><p id="3c4448cd-89eb-4a05-81ce-e3b998511f7c" class="">The first argument is an <code>updater</code> function with the signature:</p><p id="376fa3ab-27fa-44b6-9754-7b15c0f79d8e" class=""><code>(state, props) =&gt; stateChange</code></p><p id="652c3780-e489-4484-ba7a-20b08ca3e5a1" class=""><code>state</code> is a reference to the component state at the time the change is being applied. It should not be directly mutated. Instead, changes should be represented by building a new object based on the input from <code>state</code> and <code>props</code>. For instance, suppose we wanted to increment a value in state by <code>props.step</code>:</p><p id="0dc33f83-4d8b-4ada-81e8-4e37fef8510a" class=""><code>this.setState((state, props) =&gt; {
+  return {counter: state.counter + props.step};
+});</code></p><p id="89039a8c-db78-43df-9f1a-6324ca4fbb4a" class="">Both <code>state</code> and <code>props</code> received by the updater function are guaranteed to be up-to-date. The output of the updater is shallowly merged with <code>state</code>.</p><p id="1ea0cdeb-2529-41cc-8412-32b198b66b87" class="">The second parameter to <code>setState()</code> is an optional callback function that will be executed once <code>setState</code> is completed and the component is re-rendered. Generally we recommend using <code>componentDidUpdate()</code> for such logic instead.</p><p id="340b6c9a-f760-4ad2-bf68-f978c5127b21" class="">You may optionally pass an object as the first argument to <code>setState()</code> instead of a function:</p><p id="d45d5707-9a54-4972-8519-56f122c20c7b" class=""><code>setState(stateChange[, callback])</code></p><p id="4f29d62d-f3c9-40d0-99d4-08c9034eaf9d" class="">This performs a shallow merge of <code>stateChange</code> into the new state, e.g., to adjust a shopping cart item quantity:</p><p id="f2ca12c1-fc0b-42a3-aa51-d34fdf828f68" class=""><code>this.setState({quantity: 2})</code></p><p id="4561258e-a882-4092-a5e6-ce243f51d46e" class="">This form of <code>setState()</code> is also asynchronous, and multiple calls during the same cycle may be batched together. For example, if you attempt to increment an item quantity more than once in the same cycle, that will result in the equivalent of:</p><p id="735eec03-71f6-4328-a2b1-5c2202ae515e" class=""><code>Object.assign(
+  previousState,
+  {quantity: state.quantity + 1},
+  {quantity: state.quantity + 1},
+  ...
+)</code></p><p id="804d021e-53df-4c7a-95ad-303a1696b6c6" class="">Subsequent calls will override values from previous calls in the same cycle, so the quantity will only be incremented once. If the next state depends on the current state, we recommend using the updater function form, instead:</p><p id="5118d71f-1aaa-433b-be23-a9484d2cd445" class=""><code>this.setState((state) =&gt; {
+  return {quantity: state.quantity + 1};
+});</code></p><p id="fb2dc411-0ac0-46a4-953d-a43583c3d2ef" class="">For more detail, see:</p><ul id="4e021d19-073c-4de8-9e27-8feb72632861" class="bulleted-list"><li style="list-style-type:disc"><a href="https://reactjs.org/docs/state-and-lifecycle.html">State and Lifecycle guide</a></li></ul><ul id="22ebbe40-fd0b-4487-abc5-0bc4dc6fb369" class="bulleted-list"><li style="list-style-type:disc"><a href="https://stackoverflow.com/a/48610973/458193">In depth: When and why are </a><a href="https://stackoverflow.com/a/48610973/458193"><code>setState()</code></a><a href="https://stackoverflow.com/a/48610973/458193"> calls batched?</a></li></ul><ul id="b570e652-f316-4951-8a68-f97e9412ef22" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/facebook/react/issues/11527#issuecomment-360199710">In depth: Why isn’t </a><a href="https://github.com/facebook/react/issues/11527#issuecomment-360199710"><code>this.state</code></a><a href="https://github.com/facebook/react/issues/11527#issuecomment-360199710"> updated immediately?</a></li></ul><hr id="6351dd0f-2105-44c0-96f8-664ca33ca45c"/><h1 id="9c674d93-4cb9-4c37-a8d6-4cee0425c4c5" class=""><code>forceUpdate()</code></h1><p id="47b41093-95cf-4552-8024-bfc1a3e34bb6" class=""><code>component.forceUpdate(callback)</code></p><p id="13d92dd8-a3a8-4fd0-bd77-48ede56e09b6" class="">By default, when your component’s state or props change, your component will re-render. If your <code>render()</code> method depends on some other data, you can tell React that the component needs re-rendering by calling <code>forceUpdate()</code>.</p><p id="c8f4a7e2-26ee-4b72-bc14-1a6b35e97b5e" class="">Calling <code>forceUpdate()</code> will cause <code>render()</code> to be called on the component, skipping <code>shouldComponentUpdate()</code>. This will trigger the normal lifecycle methods for child components, including the <code>shouldComponentUpdate()</code> method of each child. React will still only update the DOM if the markup changes.</p><p id="c2a6d4af-26f7-4cd7-a404-382f412711da" class="">Normally you should try to avoid all uses of <code>forceUpdate()</code> and only read from <code>this.props</code> and <code>this.state</code> in <code>render()</code>.</p><hr id="03b7778e-b639-43b6-8565-0f399a9a1871"/><h1 id="e7e0e768-d255-49e5-a2bf-ecc5768f915d" class="">Class Properties</h1><h1 id="2701debc-db72-441f-9c07-11895932c93a" class=""><code>defaultProps</code></h1><p id="95f2771b-644a-46c0-97a4-9f4098c25c51" class=""><code>defaultProps</code> can be defined as a property on the component class itself, to set the default props for the class. This is used for <code>undefined</code> props, but not for <code>null</code> props. For example:</p><p id="54110fe4-876a-45e7-a214-614170c32e72" class=""><code>class CustomButton extends React.Component {
+  // ...
+}
+
+CustomButton.defaultProps = {
+  color: &#x27;blue&#x27;
+};</code></p><p id="038444e6-8e82-4cfc-a533-37f54d96c8a7" class="">If <code>props.color</code> is not provided, it will be set by default to <code>&#x27;blue&#x27;</code>:</p><p id="d0a9c28d-c966-4d91-af94-76ecb05bcb58" class=""><code>  render() {
+    return &lt;CustomButton /&gt; ; // props.color will be set to blue
+  }</code></p><p id="4fdc2bfe-a5ac-4a82-a782-35806476397a" class="">If <code>props.color</code> is set to <code>null</code>, it will remain <code>null</code>:</p><p id="ab2c0c83-3a4d-46ef-b5c6-d913630e4535" class=""><code>  render() {
+    return &lt;CustomButton color={null} /&gt; ; // props.color will remain null
+  }</code></p><hr id="88243793-ba1d-4c76-a55f-061ccb728895"/><h1 id="7bbe4089-d423-4811-a2b5-4bd0919ad48e" class=""><code>displayName</code></h1><p id="f13a6efe-c099-4697-b294-5be368a316a7" class="">The <code>displayName</code> string is used in debugging messages. Usually, you don’t need to set it explicitly because it’s inferred from the name of the function or class that defines the component. You might want to set it explicitly if you want to display a different name for debugging purposes or when you create a higher-order component, see <a href="https://reactjs.org/docs/higher-order-components.html#convention-wrap-the-display-name-for-easy-debugging">Wrap the Display Name for Easy Debugging</a> for details.</p><hr id="6a6e7c50-eef6-4a0a-b87d-b50af7d66bf8"/><h1 id="8eadb9ee-9482-4be8-b6cb-ed170e1690d2" class="">Instance Properties</h1><h1 id="480ed221-2b96-4691-83f4-b845718e115f" class=""><code>props</code></h1><p id="8f290181-d66a-41d6-b613-0d29032e35fc" class=""><code>this.props</code> contains the props that were defined by the caller of this component. See <a href="https://reactjs.org/docs/components-and-props.html">Components and Props</a> for an introduction to props.</p><p id="75f7112e-ad07-4e99-958f-3abc4055c86e" class="">In particular, <code>this.props.children</code> is a special prop, typically defined by the child tags in the JSX expression rather than in the tag itself.</p><h1 id="d11ff04e-5c41-4db0-a491-500c015db2ea" class=""><code>state</code></h1><p id="7ded3a88-53f7-4137-a9c8-8dcfc89b67ad" class="">The state contains data specific to this component that may change over time. The state is user-defined, and it should be a plain JavaScript object.</p><p id="177c6a6a-e279-49c5-bd20-2460a8616519" class="">If some value isn’t used for rendering or data flow (for example, a timer ID), you don’t have to put it in the state. Such values can be defined as fields on the component instance.</p><p id="e7effd32-5881-4735-860a-3042ac600367" class="">See <a href="https://reactjs.org/docs/state-and-lifecycle.html">State and Lifecycle</a> for more information about the state.</p><p id="f57168a1-0fcd-45da-841c-bdf228877ff1" class="">Never mutate <code>this.state</code> directly, as calling <code>setState()</code> afterwards may replace the mutation you made. Treat <code>this.state</code> as if it were immutable.</p></div></article></body></html>
